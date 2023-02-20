@@ -35,10 +35,13 @@
         "requirejsNamespace": "KEPLERS_LAWS",
         "simulation": true,
         "runnable": true,
-        "readmeCreatedManually": true,
         "supportedBrands": [
           "phet",
           "adapted-from-phet"
+        ],
+        "phetLibs": [
+          "bamboo",
+          "solar-system-common"
         ],
         "supportsOutputJS": true,
         "simFeatures": {
@@ -47,31 +50,33 @@
       },
       "eslintConfig": {
         "extends": "../chipper/eslint/sim_eslintrc.js",
-        "overrides": [
-          {
-            "files": [
-              "**/*.ts"
-            ],
-            "rules": {
-              "@typescript-eslint/ban-ts-comment": "error"
-            }
-          }
-        ]
+        "rules": {
+          "@typescript-eslint/no-explicit-any": "error",
+          "@typescript-eslint/ban-ts-comment": "error"
+        }
       }
     };
   window.phet.chipper.stringRepos =
     [
       {
+        "repo": "bamboo",
+        "requirejsNamespace": "BAMBOO"
+      },
+      {
         "repo": "joist",
         "requirejsNamespace": "JOIST"
+      },
+      {
+        "repo": "keplers-laws",
+        "requirejsNamespace": "KEPLERS_LAWS"
       },
       {
         "repo": "scenery-phet",
         "requirejsNamespace": "SCENERY_PHET"
       },
       {
-        "repo": "keplers-laws",
-        "requirejsNamespace": "KEPLERS_LAWS"
+        "repo": "solar-system-common",
+        "requirejsNamespace": "SOLAR_SYSTEM_COMMON"
       },
       {
         "repo": "sun",

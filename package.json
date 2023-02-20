@@ -17,6 +17,10 @@
       "phet",
       "adapted-from-phet"
     ],
+    "phetLibs": [
+      "bamboo",
+      "solar-system-common"
+    ],
     "supportsOutputJS": true,
     "simFeatures": {
       "supportsDynamicLocale": true
