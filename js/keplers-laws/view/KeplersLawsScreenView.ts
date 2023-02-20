@@ -1,65 +1,221 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2022-2023, University of Colorado Boulder
 
 /**
- * TODO Describe this class and its responsibilities.
+ * Screen view for Kepler's Laws screen
  *
  * @author Agustín Vallejo
  */
 
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import KeplersLawsConstants from '../../common/KeplersLawsConstants.js';
-import keplersLaws from '../../keplersLaws.js';
+import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
+import { AlignBox, HBox, Text, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import KeplersLawsControls from './KeplersLawsControls.js';
+import SecondLawPanels from './SecondLawPanels.js';
+import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
+import EllipticalOrbitNode from './EllipticalOrbitNode.js';
+import ThirdLawPanels from './ThirdLawPanels.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import CommonScreenView, { CommonScreenViewOptions } from '../../../../solar-system-common/js/view/CommonScreenView.js';
+import LawsButtons from './LawsButtons.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import FirstLawPanels from './FirstLawPanels.js';
+import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import OrbitalWarningMessage from './OrbitalWarningMessage.js';
+import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
+import DistancesDisplayNode from './DistancesDisplayNode.js';
 
-type SelfOptions = {
- //TODO add options that are specific to KeplersLawsScreenView here
-};
+// constants
+const MARGIN = 10;
 
-type KeplersLawsScreenViewOptions = SelfOptions & ScreenViewOptions;
+type SelfOptions = EmptySelfOptions;
 
-class KeplersLawsScreenView extends ScreenView {
+export type KeplersLawsScreenViewOptions = SelfOptions & CommonScreenViewOptions;
+
+class KeplersLawsScreenView extends CommonScreenView {
+  private readonly stopwatchNode: StopwatchNode;
 
   public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsScreenViewOptions ) {
-
-    const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-
-      //TODO add default values for optional SelfOptions here
-
-      //TODO add default values for optional ScreenViewOptions here
-    }, providedOptions );
-
-    super( options );
-
-    const resetAllButton = new ResetAllButton( {
-      listener: () => {
-        this.interruptSubtreeInput(); // cancel interactions that may be in progress
-        model.reset();
-        this.reset();
-      },
-      right: this.layoutBounds.maxX - KeplersLawsConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.maxY - KeplersLawsConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+    const options = combineOptions<CommonScreenViewOptions>( providedOptions, {
+      playingAllowedProperty: model.engine.allowedOrbitProperty
     } );
-    this.addChild( resetAllButton );
-  }
 
-  /**
-   * Resets the view.
-   */
-  public reset(): void {
-    //TODO
-  }
+    super( model, options );
 
-  /**
-   * Steps the view.
-   * @param dt - time step, in seconds
-   */
-  public override step( dt: number ): void {
-    //TODO
+    const modelDragBoundsProperty = new DerivedProperty( [
+      this.visibleBoundsProperty,
+      this.modelViewTransformProperty
+    ], ( visibleBounds, modelViewTransform ) => {
+      const viewBounds = modelViewTransform.viewToModelBounds( visibleBounds );
+
+      return viewBounds;
+    } );
+
+    const sun = model.bodies[ 0 ];
+    const body = model.bodies[ 1 ];
+    const sunNode = new BodyNode( model.bodies[ 0 ], this.modelViewTransformProperty, {
+      draggable: false
+    } );
+    const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
+      valuesVisibleProperty: model.valuesVisibleProperty,
+      mapPosition: ( point, radius ) => {
+        point = modelDragBoundsProperty.value.eroded( radius ).closestPointTo( point );
+
+        const escapeRadius = model.engine.escapeRadiusProperty.value;
+
+        if ( point.magnitude > escapeRadius ) {
+          point = point.normalized().times( escapeRadius );
+        }
+
+        return point;
+      }
+    } );
+    this.bodiesLayer.addChild( sunNode );
+    this.bodiesLayer.addChild( bodyNode );
+
+    // Draggable velocity vector
+    this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
+      zeroAllowed: false,
+      maxMagnitudeProperty: model.engine.escapeSpeedProperty,
+      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty )
+    } ) );
+
+    // Gravity force vectors
+    this.componentsLayer.addChild( new VectorNode(
+      body, this.modelViewTransformProperty, model.gravityVisibleProperty, body.forceProperty,
+      0.05, { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+    ) );
+
+    this.componentsLayer.addChild( new VectorNode(
+      sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
+      0.05, { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+    ) );
+
+    const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
+    this.bottomLayer.addChild( ellipticalOrbitNode );
+    this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
+
+    // UI ----------------------------------------------------------------------------------
+    // Second and Third Law Accordion Boxes and Zoom Buttons
+
+    this.topLayer.addChild( new OrbitalWarningMessage( model, this.modelViewTransformProperty ) );
+
+    const lawsAndZoomBoxes = new AlignBox( new HBox( {
+        children: [
+          new FirstLawPanels( model ),
+          new SecondLawPanels( model ),
+          new ThirdLawPanels( model )
+          // NOTE: CODE TEMPORARILY COMMENTED OUT, AWAITING DESIGN DECISION
+          // new MagnifyingGlassZoomButtonGroup(
+          //   model.zoomLevelProperty, {
+          //     spacing: 8,
+          //     magnifyingGlassNodeOptions: {
+          //       glassRadius: 8
+          //     },
+          //     touchAreaXDilation: 5,
+          //     touchAreaYDilation: 5
+          //   } )
+        ],
+        spacing: 10,
+        align: 'top'
+      } ),
+      {
+        alignBoundsProperty: this.availableBoundsProperty,
+        margin: MARGIN,
+        xAlign: 'left',
+        yAlign: 'top'
+      }
+    );
+
+    // Add the control panel on top of the canvases
+    // Visibility checkboxes for sim elements
+    const controlPanelAlignBox = new AlignBox(
+      new VBox( {
+        spacing: 10,
+        align: 'left',
+        children: [
+          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) ),
+          this.timeBox,
+          new AlignBox(
+            new Checkbox(
+              model.alwaysCircularProperty,
+              new Text( MySolarSystemStrings.circularOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
+              SolarSystemCommonConstants.CHECKBOX_OPTIONS ), {
+              xMargin: MARGIN / 2,
+              xAlign: 'left',
+              yAlign: 'bottom',
+              maxWidth: 150,
+              tandem: providedOptions.tandem.createTandem( 'alwaysCircularCheckbox' )
+            }
+          ),
+          new TextPushButton( MySolarSystemStrings.centerOrbitStringProperty, {
+            font: new PhetFont( 16 ),
+            maxTextWidth: 120,
+            listener: () => {
+              const offset = this.layoutBounds.center.minus( ellipticalOrbitNode.center );
+              this.orbitalCenterProperty.value = this.orbitalCenterProperty.value.plusXY( offset.x, offset.y - SolarSystemCommonConstants.GRID.spacing * 0.5 );
+            },
+            tandem: providedOptions.tandem.createTandem( 'centerSystemButton' ),
+            touchAreaXDilation: 10,
+            touchAreaYDilation: 10
+          } )
+        ]
+      } ),
+      {
+        alignBoundsProperty: this.availableBoundsProperty,
+        margin: MARGIN,
+        xAlign: 'right',
+        yAlign: 'top'
+      }
+    );
+
+    this.stopwatchNode = new StopwatchNode( model.stopwatch, {
+      dragBoundsProperty: this.visibleBoundsProperty,
+      visibleProperty: model.periodVisibleProperty,
+      // tandem: tandem.createTandem( 'stopwatchNode' ),
+      numberDisplayOptions: {
+        numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
+          bigNumberFont: 25,
+          smallNumberFont: 17
+        } )
+      }
+    } );
+
+    this.topLayer.addChild( this.stopwatchNode );
+
+    const lawsButtonsBox = new AlignBox( new HBox( {
+        children: [
+          new LawsButtons( model )
+        ],
+        spacing: 20
+      } ),
+      {
+        alignBoundsProperty: this.availableBoundsProperty,
+        margin: MARGIN,
+        xAlign: 'left',
+        yAlign: 'bottom'
+      }
+    );
+
+    const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.modelViewTransformProperty ), {
+      alignBoundsProperty: this.availableBoundsProperty,
+      margin: SolarSystemCommonConstants.MARGIN,
+      xAlign: 'center',
+      yAlign: 'top'
+    } );
+
+    // Slider that controls the bodies mass
+    this.interfaceLayer.addChild( lawsAndZoomBoxes );
+    this.interfaceLayer.addChild( controlPanelAlignBox );
+    this.interfaceLayer.addChild( lawsButtonsBox );
+    this.bottomLayer.addChild( distancesDisplayBox );
   }
 }
 
-keplersLaws.register( 'KeplersLawsScreenView', KeplersLawsScreenView );
+mySolarSystem.register( 'KeplersLawsScreenView', KeplersLawsScreenView );
 export default KeplersLawsScreenView;

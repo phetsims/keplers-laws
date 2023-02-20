@@ -19,6 +19,7 @@
     ],
     "phetLibs": [
       "bamboo",
+      "my-solar-system",
       "solar-system-common"
     ],
     "supportsOutputJS": true,
@@ -30,7 +31,8 @@
     "extends": "../chipper/eslint/sim_eslintrc.js",
     "rules": {
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/ban-ts-comment": "error"
+      "@typescript-eslint/ban-ts-comment": "error",
+      "todo-should-have-issue": "off"
     }
   }
 }

@@ -1,45 +1,36 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * TODO Describe this class and its responsibilities.
+ * Kepler's Laws Screen, where the user can learn about Kepler's Laws via an elliptical orbit
  *
  * @author Agustín Vallejo
  */
 
-import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
-import optionize from '../../../phet-core/js/optionize.js';
-import KeplersLawsColors from '../common/KeplersLawsColors.js';
-import keplersLaws from '../keplersLaws.js';
+import Screen from '../../../joist/js/Screen.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import mySolarSystem from '../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from './model/KeplersLawsModel.js';
 import KeplersLawsScreenView from './view/KeplersLawsScreenView.js';
-import KeplersLawsStrings from '../KeplersLawsStrings.js';
-
-type SelfOptions = {
-  //TODO add options that are specific to KeplersLawsScreen here
-};
-
-type KeplersLawsScreenOptions = SelfOptions & ScreenOptions;
+import KeplersLawsScreenIcon from './view/KeplersLawsScreenIcon.js';
 
 class KeplersLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
-  public constructor( providedOptions: KeplersLawsScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<KeplersLawsScreenOptions, SelfOptions, ScreenOptions>()( {
-      name: KeplersLawsStrings.screen.nameStringProperty,
-
-      //TODO add default values for optional SelfOptions here
-
-      //TODO add default values for optional ScreenOptions here
-      backgroundColorProperty: KeplersLawsColors.screenBackgroundColorProperty
-    }, providedOptions );
+    const options = {
+      homeScreenIcon: new KeplersLawsScreenIcon(),
+      backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
+      tandem: tandem
+    };
 
     super(
-      () => new KeplersLawsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
-      model => new KeplersLawsScreenView( model, { tandem: options.tandem.createTandem( 'view' ) } ),
+      () => new KeplersLawsModel( { tandem: tandem.createTandem( 'model' ) } ),
+      model => new KeplersLawsScreenView( model, { tandem: tandem.createTandem( 'view' ) } ),
       options
     );
   }
 }
 
-keplersLaws.register( 'KeplersLawsScreen', KeplersLawsScreen );
+mySolarSystem.register( 'KeplersLawsScreen', KeplersLawsScreen );
 export default KeplersLawsScreen;

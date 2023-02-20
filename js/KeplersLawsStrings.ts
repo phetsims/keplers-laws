@@ -11,9 +11,6 @@ import keplersLaws from './keplersLaws.js';
 type StringsType = {
   'keplers-laws': {
     'titleStringProperty': LinkableProperty<string>;
-  };
-  'screen': {
-    'nameStringProperty': LinkableProperty<string>;
   }
 };
 
