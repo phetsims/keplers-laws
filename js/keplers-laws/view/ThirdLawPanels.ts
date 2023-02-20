@@ -9,17 +9,19 @@
 import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { GridBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import ThirdLawGraph from './ThirdLawGraph.js';
 import ThirdLawSliderPanel from './ThirdLawSliderPanel.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -45,23 +47,36 @@ class ThirdLawMainPanel extends Panel {
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const semiMajorAxisValueRange = new RangeWithValue( 1, 10000, model.engine.a );
-    const periodValueRange = new RangeWithValue( 1, 10000, model.engine.T );
-
     const semiMajorAxisPatternStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
-      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.AUStringProperty, model.selectedAxisPowerProperty )
+      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
+      value: new DerivedProperty(
+        [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty ],
+        ( poweredSemiMajorAxis, allowedOrbit ) => {
+          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : MathSymbols.INFINITY;
+        }
+      )
     } );
 
     const periodPatternStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
-      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty )
+      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
+      value: new DerivedProperty(
+        [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
+        ( poweredPeriod, allowedOrbit ) => {
+          return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : MathSymbols.INFINITY;
+        }
+      )
     } );
+
+    const semiMajorAxisNumberDisplay = new RichText( semiMajorAxisPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
+    const periodNumberDisplay = new RichText( periodPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
 
     // TODO: Add string a=infinite. Look at FirstLawPanels.ts to be consistent. Should we change that way?
 
     super( new VBox( {
       spacing: 10,
+      align: 'left',
       children: [
         new Text( MySolarSystemStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
         new GridBox( {
@@ -118,23 +133,8 @@ class ThirdLawMainPanel extends Panel {
           ],
           spacing: 10
         } ),
-        new SolarSystemCommonTextNumberDisplay(
-          model.poweredSemiMajorAxisProperty,
-          semiMajorAxisValueRange,
-          {
-            valuePattern: semiMajorAxisPatternStringProperty,
-            align: 'left',
-            visibleProperty: model.engine.allowedOrbitProperty
-          }
-        ),
-        new SolarSystemCommonTextNumberDisplay(
-          model.poweredPeriodProperty,
-          periodValueRange,
-          {
-            valuePattern: periodPatternStringProperty,
-            align: 'left',
-            visibleProperty: model.engine.allowedOrbitProperty
-          } )
+        semiMajorAxisNumberDisplay,
+        periodNumberDisplay
       ]
     } ), options );
   }
