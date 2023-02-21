@@ -19,9 +19,9 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -53,7 +53,7 @@ class ThirdLawMainPanel extends Panel {
       value: new DerivedProperty(
         [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty ],
         ( poweredSemiMajorAxis, allowedOrbit ) => {
-          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : MathSymbols.INFINITY;
+          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
         }
       )
     } );
@@ -64,7 +64,7 @@ class ThirdLawMainPanel extends Panel {
       value: new DerivedProperty(
         [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
         ( poweredPeriod, allowedOrbit ) => {
-          return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : MathSymbols.INFINITY;
+          return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : KeplersLawsStrings.undefinedStringProperty;
         }
       )
     } );

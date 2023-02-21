@@ -11,7 +11,8 @@ import keplersLaws from './keplersLaws.js';
 type StringsType = {
   'keplers-laws': {
     'titleStringProperty': LinkableProperty<string>;
-  }
+  };
+  'undefinedStringProperty': LinkableProperty<string>;
 };
 
 const KeplersLawsStrings = getStringModule( 'KEPLERS_LAWS' ) as StringsType;

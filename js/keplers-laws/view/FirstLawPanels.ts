@@ -16,9 +16,9 @@ import FirstLawGraph from './FirstLawGraph.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -44,7 +44,7 @@ class ExcentricityPanel extends Panel {
             new Text( MySolarSystemStrings.symbols.divisionStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
             new Text( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
               SolarSystemCommonConstants.TITLE_OPTIONS, { fill: 'orange' } ) )
-            ]
+          ]
         } ),
         new FirstLawGraph( model )
       ],
@@ -59,25 +59,31 @@ class ExcentricityPanel extends Panel {
 class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
 
+    const conditionalAUStringProperty = new DerivedProperty(
+      [ MySolarSystemStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
+      ( AUString, allowedOrbit ) => {
+        return allowedOrbit ? AUString : '';
+      } );
+
     const semiMajorAxisStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: MySolarSystemStrings.symbols.semiMajorAxisStringProperty,
-      units: MySolarSystemStrings.units.AUStringProperty,
+      units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMajorAxis, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : MathSymbols.INFINITY;
+        return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
       } )
     } );
     const semiMinorAxisStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: MySolarSystemStrings.symbols.semiMinorAxisStringProperty,
-      units: MySolarSystemStrings.units.AUStringProperty,
+      units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMinorAxis, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : MathSymbols.NO_VALUE;
+        return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
       } )
     } );
     const focalDistanceStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: MySolarSystemStrings.symbols.focalDistanceStringProperty,
-      units: MySolarSystemStrings.units.AUStringProperty,
+      units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty ], ( focalDistance, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : MathSymbols.INFINITY;
+        return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : KeplersLawsStrings.undefinedStringProperty;
       } )
     } );
 

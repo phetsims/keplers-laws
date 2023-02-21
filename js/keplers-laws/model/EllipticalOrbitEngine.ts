@@ -350,6 +350,7 @@ export default class EllipticalOrbitEngine extends Engine {
     // Convert angles from foci to center to get the correct area
     startAngle = this.getMeanAnomaly( startAngle, this.e );
     endAngle = this.getMeanAnomaly( endAngle, this.e );
+    endAngle = Utils.moduloBetweenDown( endAngle, startAngle, startAngle + TWOPI );
     return Math.abs( 0.5 * this.a * this.b * ( endAngle - startAngle ) );
   }
 
@@ -452,6 +453,7 @@ export default class EllipticalOrbitEngine extends Engine {
       area.reset();
     } );
     this.calculateOrbitalDivisions( false );
+    this.changedEmitter.emit();
   }
 
   public override reset(): void {
