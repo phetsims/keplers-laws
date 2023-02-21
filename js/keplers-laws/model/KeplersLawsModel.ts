@@ -93,15 +93,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
       this.engine.resetOrbitalAreas();
     } );
 
-    this.engine.orbitalAreas.forEach( ( area, index ) => {
-      area.insideProperty.link( inside => {
-        if ( inside && this.isPlayingProperty.value && this.isSecondLawProperty.value ) {
-          const soundIndex = this.engine.retrograde ? this.periodDivisionProperty.value - index - 1 : index;
-          this.bodySoundManager.playOrbitalMetronome( soundIndex, this.engine.a, this.periodDivisionProperty.value );
-        }
-      } );
-    } );
-
     this.axisVisibleProperty.link( axisVisible => {
       this.semiaxisVisibleProperty.value = axisVisible ? this.semiaxisVisibleProperty.value : false;
       //REVIEW: commented-out code
