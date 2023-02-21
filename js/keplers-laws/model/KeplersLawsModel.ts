@@ -64,7 +64,9 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, EmptySelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
-      isLab: false
+      isLab: false,
+      timeScale: 2,
+      timeMultiplier: 1 / 12.7
     }, providedOptions );
     super( options );
 
@@ -91,15 +93,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
       this.engine.resetOrbitalAreas();
     } );
 
-    this.engine.orbitalAreas.forEach( ( area, index ) => {
-      area.insideProperty.link( inside => {
-        if ( inside && this.isPlayingProperty.value && this.isSecondLawProperty.value ) {
-          const soundIndex = this.engine.retrograde ? this.periodDivisionProperty.value - index - 1 : index;
-          this.bodySoundManager.playOrbitalMetronome( soundIndex, this.engine.a, this.periodDivisionProperty.value );
-        }
-      } );
-    } );
-
     this.axisVisibleProperty.link( axisVisible => {
       this.semiaxisVisibleProperty.value = axisVisible ? this.semiaxisVisibleProperty.value : false;
       //REVIEW: commented-out code
@@ -108,9 +101,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
     this.fociVisibleProperty.link( fociVisible => {
       this.stringsVisibleProperty.value = fociVisible ? this.stringsVisibleProperty.value : false;
     } );
-
-    this.timeScale = 2.0;
-    this.timeMultiplier = 1 / 12.7;
 
     this.velocityVisibleProperty.value = true;
     this.velocityVisibleProperty.setInitialValue( true );
