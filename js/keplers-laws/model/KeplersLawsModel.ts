@@ -64,7 +64,9 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, EmptySelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
-      isLab: false
+      isLab: false,
+      timeScale: 2,
+      timeMultiplier: 1 / 12.7
     }, providedOptions );
     super( options );
 
@@ -108,9 +110,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
     this.fociVisibleProperty.link( fociVisible => {
       this.stringsVisibleProperty.value = fociVisible ? this.stringsVisibleProperty.value : false;
     } );
-
-    this.timeScale = 2.0;
-    this.timeMultiplier = 1 / 12.7;
 
     this.velocityVisibleProperty.value = true;
     this.velocityVisibleProperty.setInitialValue( true );
