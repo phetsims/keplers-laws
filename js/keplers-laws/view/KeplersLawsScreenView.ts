@@ -22,8 +22,6 @@ import FirstLawPanels from './FirstLawPanels.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import OrbitalWarningMessage from './OrbitalWarningMessage.js';
@@ -152,18 +150,7 @@ class KeplersLawsScreenView extends CommonScreenView {
               maxWidth: 150,
               tandem: providedOptions.tandem.createTandem( 'alwaysCircularCheckbox' )
             }
-          ),
-          new TextPushButton( MySolarSystemStrings.centerOrbitStringProperty, {
-            font: new PhetFont( 16 ),
-            maxTextWidth: 120,
-            listener: () => {
-              const offset = this.layoutBounds.center.minus( ellipticalOrbitNode.center );
-              this.orbitalCenterProperty.value = this.orbitalCenterProperty.value.plusXY( offset.x, offset.y - SolarSystemCommonConstants.GRID.spacing * 0.5 );
-            },
-            tandem: providedOptions.tandem.createTandem( 'centerSystemButton' ),
-            touchAreaXDilation: 10,
-            touchAreaYDilation: 10
-          } )
+          )
         ]
       } ),
       {
