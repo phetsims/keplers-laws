@@ -45,6 +45,15 @@ class KeplersLawsScreenView extends CommonScreenView {
 
     super( model, options );
 
+    model.engine.orbitalAreas.forEach( ( area, index ) => {
+      area.insideProperty.link( inside => {
+        if ( inside && model.isPlayingProperty.value && model.isSecondLawProperty.value ) {
+          const soundIndex = model.engine.retrograde ? model.periodDivisionProperty.value - index - 1 : index;
+          this.bodySoundManager.playOrbitalMetronome( soundIndex, model.engine.a, model.periodDivisionProperty.value );
+        }
+      } );
+    } );
+
     const modelDragBoundsProperty = new DerivedProperty( [
       this.visibleBoundsProperty,
       this.modelViewTransformProperty
