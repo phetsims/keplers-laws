@@ -10,7 +10,6 @@ import Sim, { SimOptions } from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import KeplersLawsStrings from './KeplersLawsStrings.js';
-import './keplers-laws/KeplersLawsQueryParameters.js';
 import KeplersLawsScreen from './keplers-laws/KeplersLawsScreen.js';
 
 // Launch the sim. Beware that scenery Image nodes created outside simLauncher.launch() will have zero bounds
