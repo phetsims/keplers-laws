@@ -5,9 +5,9 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalArea {
   public dotPosition = Vector2.ZERO; // Position of the dot in the orbital area
@@ -37,4 +37,4 @@ export default class OrbitalArea {
   }
 }
 
-mySolarSystem.register( 'OrbitalArea', OrbitalArea );
+keplersLaws.register( 'OrbitalArea', OrbitalArea );

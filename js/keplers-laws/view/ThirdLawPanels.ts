@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { GridBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -22,6 +21,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -140,4 +140,4 @@ class ThirdLawMainPanel extends Panel {
   }
 }
 
-mySolarSystem.register( 'ThirdLawPanels', ThirdLawPanels );
+keplersLaws.register( 'ThirdLawPanels', ThirdLawPanels );

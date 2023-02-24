@@ -7,7 +7,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import { AlignBox, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -21,6 +20,7 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -121,4 +121,4 @@ export default class FirstLawGraph extends AlignBox {
   }
 }
 
-mySolarSystem.register( 'FirstLawGraph', FirstLawGraph );
+keplersLaws.register( 'FirstLawGraph', FirstLawGraph );

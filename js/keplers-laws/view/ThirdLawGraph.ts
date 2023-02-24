@@ -15,12 +15,12 @@ import Utils from '../../../../dot/js/Utils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -128,4 +128,4 @@ export default class ThirdLawGraph extends Node {
   }
 }
 
-mySolarSystem.register( 'ThirdLawGraph', ThirdLawGraph );
+keplersLaws.register( 'ThirdLawGraph', ThirdLawGraph );

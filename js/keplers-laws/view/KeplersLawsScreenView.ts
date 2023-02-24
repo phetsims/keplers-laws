@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import { AlignBox, HBox, Text, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
@@ -27,6 +26,7 @@ import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import OrbitalWarningMessage from './OrbitalWarningMessage.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
+import keplersLaws from '../../keplersLaws.js';
 
 // constants
 const MARGIN = 10;
@@ -213,5 +213,5 @@ class KeplersLawsScreenView extends CommonScreenView {
   }
 }
 
-mySolarSystem.register( 'KeplersLawsScreenView', KeplersLawsScreenView );
+keplersLaws.register( 'KeplersLawsScreenView', KeplersLawsScreenView );
 export default KeplersLawsScreenView;

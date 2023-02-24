@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import Panel from '../../../../sun/js/Panel.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonSlider from '../../../../solar-system-common/js/view/SolarSystemCommonSlider.js';
@@ -18,6 +17,7 @@ import { Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import keplersLaws from '../../keplersLaws.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
@@ -95,4 +95,4 @@ export default class ThirdLawSliderPanel extends Panel {
   }
 }
 
-mySolarSystem.register( 'ThirdLawSliderPanel', ThirdLawSliderPanel );
+keplersLaws.register( 'ThirdLawSliderPanel', ThirdLawSliderPanel );

@@ -10,12 +10,12 @@
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { Image, ImageOptions } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LawMode from '../model/LawMode.js';
 import iconFirstLaw_png from '../../../../my-solar-system/images/iconFirstLaw_png.js';
 import iconSecondLaw_png from '../../../../my-solar-system/images/iconSecondLaw_png.js';
 import iconThirdLaw_png from '../../../../my-solar-system/images/iconThirdLaw_png.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const IMAGE_OPTIONS: ImageOptions = {
   scale: 0.5
@@ -60,4 +60,4 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
   }
 }
 
-mySolarSystem.register( 'LawsButtons', LawsButtons );
+keplersLaws.register( 'LawsButtons', LawsButtons );

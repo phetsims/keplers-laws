@@ -7,7 +7,7 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitTypes extends EnumerationValue {
   public static readonly STABLE_ORBIT = new OrbitTypes();
@@ -20,4 +20,4 @@ export default class OrbitTypes extends EnumerationValue {
   } );
 }
 
-mySolarSystem.register( 'OrbitTypes', OrbitTypes );
+keplersLaws.register( 'OrbitTypes', OrbitTypes );

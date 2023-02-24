@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import CommonModel, { BodyInfo, CommonModelOptions } from '../../../../solar-system-common/js/model/CommonModel.js';
@@ -20,6 +19,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import keplersLaws from '../../keplersLaws.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -176,5 +176,5 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
   }
 }
 
-mySolarSystem.register( 'KeplersLawsModel', KeplersLawsModel );
+keplersLaws.register( 'KeplersLawsModel', KeplersLawsModel );
 export default KeplersLawsModel;

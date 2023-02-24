@@ -9,10 +9,10 @@
 import Screen from '../../../joist/js/Screen.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
-import mySolarSystem from '../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from './model/KeplersLawsModel.js';
 import KeplersLawsScreenView from './view/KeplersLawsScreenView.js';
 import KeplersLawsScreenIcon from './view/KeplersLawsScreenIcon.js';
+import keplersLaws from '../keplersLaws.js';
 
 class KeplersLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
@@ -32,5 +32,5 @@ class KeplersLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> 
   }
 }
 
-mySolarSystem.register( 'KeplersLawsScreen', KeplersLawsScreen );
+keplersLaws.register( 'KeplersLawsScreen', KeplersLawsScreen );
 export default KeplersLawsScreen;

@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import { Color, HBox, Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -26,6 +25,7 @@ import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import ArrowButton, { ArrowButtonOptions } from '../../../../sun/js/buttons/ArrowButton.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -270,4 +270,4 @@ class AreasBarPlot extends Node {
   }
 }
 
-mySolarSystem.register( 'SecondLawGraph', SecondLawGraph );
+keplersLaws.register( 'SecondLawGraph', SecondLawGraph );

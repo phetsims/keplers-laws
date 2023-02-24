@@ -10,7 +10,6 @@
  */
 
 import { HBox, Path, RichText, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
@@ -21,6 +20,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
   scale: 1.5,
@@ -155,4 +155,4 @@ export default class DistancesDisplayNode extends VBox {
   }
 }
 
-mySolarSystem.register( 'DistancesDisplayNode', DistancesDisplayNode );
+keplersLaws.register( 'DistancesDisplayNode', DistancesDisplayNode );

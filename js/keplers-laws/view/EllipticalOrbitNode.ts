@@ -5,7 +5,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import { Circle, Node, Path, RichText, Text, TextOptions } from '../../../../scenery/js/imports.js';
@@ -20,6 +19,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import keplersLaws from '../../keplersLaws.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -385,4 +385,4 @@ export default class EllipticalOrbitNode extends Path {
   }
 }
 
-mySolarSystem.register( 'EllipticalOrbitNode', EllipticalOrbitNode );
+keplersLaws.register( 'EllipticalOrbitNode', EllipticalOrbitNode );

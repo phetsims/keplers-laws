@@ -8,7 +8,6 @@
 
 import { AlignBox, HBox, HBoxOptions, Image, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
@@ -24,6 +23,7 @@ import eccentricityIcon_png from '../../../../my-solar-system/images/eccentricit
 import fociIcon_png from '../../../../my-solar-system/images/fociIcon_png.js';
 import stringsIcon_png from '../../../../my-solar-system/images/stringsIcon_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import keplersLaws from '../../keplersLaws.js';
 
 // Const
 const ICON_OPTIONS = {
@@ -189,5 +189,5 @@ class KeplersLawsOrbitalInformationBox extends VBox {
   }
 }
 
-mySolarSystem.register( 'KeplersLawsOrbitalInformationBox', KeplersLawsOrbitalInformationBox );
+keplersLaws.register( 'KeplersLawsOrbitalInformationBox', KeplersLawsOrbitalInformationBox );
 export default KeplersLawsOrbitalInformationBox;

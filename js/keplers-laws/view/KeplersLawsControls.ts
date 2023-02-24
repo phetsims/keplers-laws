@@ -13,9 +13,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
 import createVisibilityInformationCheckboxes from '../../../../solar-system-common/js/view/createVisibilityInformationCheckboxes.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
+import keplersLaws from '../../keplersLaws.js';
 
 class KeplersLawsControls extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
@@ -37,5 +37,5 @@ class KeplersLawsControls extends Panel {
   }
 }
 
-mySolarSystem.register( 'KeplersLawsControls', KeplersLawsControls );
+keplersLaws.register( 'KeplersLawsControls', KeplersLawsControls );
 export default KeplersLawsControls;

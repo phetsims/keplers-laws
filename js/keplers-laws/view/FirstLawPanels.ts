@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -19,6 +18,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -104,4 +104,4 @@ class ValuesPanel extends Panel {
   }
 }
 
-mySolarSystem.register( 'FirstLawPanels', FirstLawPanels );
+keplersLaws.register( 'FirstLawPanels', FirstLawPanels );

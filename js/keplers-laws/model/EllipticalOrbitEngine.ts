@@ -21,7 +21,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -36,6 +35,7 @@ import OrbitTypes from './OrbitTypes.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import OrbitalArea from './OrbitalArea.js';
 import Property from '../../../../axon/js/Property.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const TWOPI = 2 * Math.PI;
 
@@ -469,4 +469,4 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 }
 
-mySolarSystem.register( 'EllipticalOrbitEngine', EllipticalOrbitEngine );
+keplersLaws.register( 'EllipticalOrbitEngine', EllipticalOrbitEngine );

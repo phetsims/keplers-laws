@@ -7,7 +7,7 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class LawMode extends EnumerationValue {
   public static readonly FIRST_LAW = new LawMode();
@@ -19,5 +19,5 @@ export default class LawMode extends EnumerationValue {
   } );
 }
  
- mySolarSystem.register( 'LawMode', LawMode );
+ keplersLaws.register( 'LawMode', LawMode );
  

@@ -7,13 +7,13 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import ScreenIcon from '../../../../joist/js/ScreenIcon.js';
 import { Node, Path } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class KeplersLawsScreenIcon extends ScreenIcon {
   public constructor() {
@@ -87,4 +87,4 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
   }
 }
 
-mySolarSystem.register( 'KeplersLawsScreenIcon', KeplersLawsScreenIcon );
+keplersLaws.register( 'KeplersLawsScreenIcon', KeplersLawsScreenIcon );

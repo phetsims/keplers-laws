@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import mySolarSystem from '../../../../my-solar-system/js/mySolarSystem.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { Node, RichText } from '../../../../scenery/js/imports.js';
@@ -17,6 +16,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalWarningMessage extends Node {
 
@@ -62,4 +62,4 @@ export default class OrbitalWarningMessage extends Node {
   }
 }
 
-mySolarSystem.register( 'OrbitalWarningMessage', OrbitalWarningMessage );
+keplersLaws.register( 'OrbitalWarningMessage', OrbitalWarningMessage );
