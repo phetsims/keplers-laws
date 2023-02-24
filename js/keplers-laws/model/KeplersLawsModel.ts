@@ -76,8 +76,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
     ];
     this.loadBodyStates( this.defaultBodyState );
 
-    this.systemCenteredProperty.value = false;
-
     this.selectedLawProperty.link( law => {
       this.visibilityReset();
 
@@ -136,11 +134,6 @@ class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
     super.loadBodyStates( bodiesInfo );
 
     this.engine && this.engine.update();
-  }
-
-  public override followCenterOfMass(): void {
-    // This function is called on Common Model and shouldn't do anything in this screen
-    // no-op
   }
 
   public visibilityReset(): void {
