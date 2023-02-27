@@ -14,7 +14,7 @@ import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import CommonScreenView, { CommonScreenViewOptions } from '../../../../solar-system-common/js/view/CommonScreenView.js';
+import SolarSystemCommonScreenView, { CommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
@@ -35,7 +35,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type KeplersLawsScreenViewOptions = SelfOptions & CommonScreenViewOptions;
 
-class KeplersLawsScreenView extends CommonScreenView {
+class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly stopwatchNode: StopwatchNode;
 
   public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsScreenViewOptions ) {

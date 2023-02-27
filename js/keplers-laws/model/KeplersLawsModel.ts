@@ -8,7 +8,7 @@
 
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import CommonModel, { BodyInfo, CommonModelOptions } from '../../../../solar-system-common/js/model/CommonModel.js';
+import SolarSystemCommonModel, { BodyInfo, CommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import LawMode from './LawMode.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
@@ -25,7 +25,7 @@ type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
 type KeplersLawsModelOptions = StrictOmit<SuperTypeOptions, 'engineFactory' | 'isLab'>;
 
-class KeplersLawsModel extends CommonModel<EllipticalOrbitEngine> {
+class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty = new EnumerationProperty( LawMode.FIRST_LAW );
   public readonly alwaysCircularProperty = new BooleanProperty( false );
 
