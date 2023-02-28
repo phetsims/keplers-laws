@@ -12,7 +12,7 @@ import Range from '../../../dot/js/Range.js';
 import NumberDisplay, { NumberDisplayOptions } from '../../../scenery-phet/js/NumberDisplay.js';
 import SolarSystemCommonConstants from '../SolarSystemCommonConstants.js';
 import DerivedProperty from '../../../axon/js/DerivedProperty.js';
-import MySolarSystemStrings from '../../../my-solar-system/js/MySolarSystemStrings.js';
+import SolarSystemCommonStrings from '../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import solarSystemCommon from '../solarSystemCommon.js';
 
@@ -37,7 +37,7 @@ export default class SolarSystemCommonTextNumberDisplay extends NumberDisplay {
   }
 
   public static combinePowerString( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return new DerivedProperty( [ unitStringProperty, powerStringProperty, MySolarSystemStrings.pattern.unitsPowerStringProperty ], ( string, power, pattern ) => {
+    return new DerivedProperty( [ unitStringProperty, powerStringProperty, SolarSystemCommonStrings.pattern.unitsPowerStringProperty ], ( string, power, pattern ) => {
       if ( power === 1 ) {
         return string;
       }
