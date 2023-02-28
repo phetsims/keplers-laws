@@ -18,7 +18,7 @@ import SolarSystemCommonScreenView, { CommonScreenViewOptions } from '../../../.
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
@@ -151,7 +151,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
           new AlignBox(
             new Checkbox(
               model.alwaysCircularProperty,
-              new Text( MySolarSystemStrings.circularOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
+              new Text( KeplersLawsStrings.circularOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
               SolarSystemCommonConstants.CHECKBOX_OPTIONS ), {
               xMargin: MARGIN / 2,
               xAlign: 'left',

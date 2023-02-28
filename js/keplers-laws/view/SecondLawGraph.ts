@@ -13,7 +13,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
@@ -48,7 +48,7 @@ export default class SecondLawGraph extends Panel {
       visibleProperty: model.isSecondLawProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const title = new Text( MySolarSystemStrings.areaGraph.titleStringProperty, TITLE_OPTIONS );
+    const title = new Text( KeplersLawsStrings.areaGraph.titleStringProperty, TITLE_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,
@@ -64,9 +64,9 @@ export default class SecondLawGraph extends Panel {
     const barPlot = new AreasBarPlot( model );
     barPlot.y = -yAxisLength;
 
-    const xAxisLabel = new Text( MySolarSystemStrings.area.periodDivisionStringProperty, TITLE_OPTIONS );
+    const xAxisLabel = new Text( KeplersLawsStrings.area.periodDivisionStringProperty, TITLE_OPTIONS );
     const yAxisLabel = new RichText(
-      MySolarSystemStrings.area.areaUnitsStringProperty,
+      KeplersLawsStrings.area.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {
         x: -25, centerY: -yAxisLength * 0.5, rotation: -Math.PI / 2
       }, SolarSystemCommonConstants.TITLE_OPTIONS ) );

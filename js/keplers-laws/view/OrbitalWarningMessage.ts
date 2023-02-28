@@ -14,7 +14,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import OrbitTypes from '../model/OrbitTypes.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import keplersLaws from '../../keplersLaws.js';
 
@@ -33,9 +33,9 @@ export default class OrbitalWarningMessage extends Node {
     Multilink.multilink(
       [
         model.engine.orbitTypeProperty,
-        MySolarSystemStrings.warning.warningStringProperty,
-        MySolarSystemStrings.warning.crashOrbitStringProperty,
-        MySolarSystemStrings.warning.escapeOrbitStringProperty
+        KeplersLawsStrings.warning.warningStringProperty,
+        KeplersLawsStrings.warning.crashOrbitStringProperty,
+        KeplersLawsStrings.warning.escapeOrbitStringProperty
       ],
       ( orbitType, warningString, crashOrbitString, escapeOrbitString ) => {
         message = warningString + ': ';

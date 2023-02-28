@@ -18,7 +18,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 
 
@@ -54,7 +54,7 @@ export default class EllipticalOrbitNode extends Path {
     this.addChild( thirdLawLayer );
 
     // Text Nodes
-    const aLabelNode = new Text( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
+    const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
       visibleProperty: DerivedProperty.or(
         [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
       )
@@ -63,7 +63,7 @@ export default class EllipticalOrbitNode extends Path {
       stroke: 'orange',
       fill: 'orange'
     } ) );
-    const bLabelNode = new Text( MySolarSystemStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
+    const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: model.semiaxisVisibleProperty
       }, SolarSystemCommonConstants.TEXT_OPTIONS, {
@@ -71,7 +71,7 @@ export default class EllipticalOrbitNode extends Path {
         stroke: 'orange',
         fill: 'orange'
       } ) );
-    const cLabelNode = new Text( MySolarSystemStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
+    const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: new DerivedProperty(
           [

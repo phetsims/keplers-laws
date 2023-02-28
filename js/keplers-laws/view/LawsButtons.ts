@@ -39,7 +39,7 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
     }, providedOptions );
 
 
-    // Intentionally left without MySolarSystemStrings because this buttons will have icons
+    // Intentionally left without KeplersLawsStrings because this buttons will have icons
     super( model.selectedLawProperty, [
       {
         value: LawMode.FIRST_LAW,

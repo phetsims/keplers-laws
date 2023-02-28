@@ -15,7 +15,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 
@@ -61,7 +61,7 @@ export default class ThirdLawSliderPanel extends Panel {
     super( new VBox( {
       spacing: 10,
       children: [
-        new Text( MySolarSystemStrings.starMassStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+        new Text( KeplersLawsStrings.starMassStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
         slider
       ]
     } ), {
@@ -71,7 +71,7 @@ export default class ThirdLawSliderPanel extends Panel {
 
     // add ticks and labels
     // const defaultLabel = new Text( valueLabel, {
-    const defaultLabel = new Text( MySolarSystemStrings.ourSunStringProperty, {
+    const defaultLabel = new Text( KeplersLawsStrings.ourSunStringProperty, {
       top: 10,
       centerX: SPACING,
       font: new PhetFont( 13 ),

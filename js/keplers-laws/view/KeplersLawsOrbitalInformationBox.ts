@@ -8,7 +8,7 @@
 
 import { AlignBox, HBox, HBoxOptions, Image, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
@@ -74,14 +74,14 @@ class KeplersLawsOrbitalInformationBox extends VBox {
     const firstLawChildren = [
       createCheckbox(
         model.fociVisibleProperty,
-        MySolarSystemStrings.fociStringProperty,
+        KeplersLawsStrings.fociStringProperty,
         'fociVisibleCheckbox',
         new Image( fociIcon_png, ICON_OPTIONS )
       ),
       new AlignBox(
         createCheckbox(
           model.stringsVisibleProperty,
-          MySolarSystemStrings.stringsStringProperty,
+          KeplersLawsStrings.stringsStringProperty,
           'stringsVisibleCheckbox',
           new Image( stringsIcon_png, ICON_OPTIONS ),
           {
@@ -93,14 +93,14 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         } ),
       createCheckbox(
         model.axisVisibleProperty,
-        MySolarSystemStrings.axisStringProperty,
+        KeplersLawsStrings.axisStringProperty,
         'axisVisibleCheckbox',
         axisIconImageNode
       ),
       new AlignBox(
         createCheckbox(
           model.semiaxisVisibleProperty,
-          MySolarSystemStrings.semiaxisStringProperty,
+          KeplersLawsStrings.semiaxisStringProperty,
           'semiAxisVisibleCheckbox',
           new Image( semiaxisIcon_png, ICON_OPTIONS ),
           {
@@ -113,7 +113,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       new AlignBox(
         createCheckbox(
           model.eccentricityVisibleProperty,
-          MySolarSystemStrings.eccentricityStringProperty,
+          KeplersLawsStrings.eccentricityStringProperty,
           'eccentricityVisibleCheckbox',
           new Image( eccentricityIcon_png, ICON_OPTIONS ),
           {
@@ -128,7 +128,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
     const secondLawChildren = [
       createCheckbox(
         model.apoapsisVisibleProperty,
-        MySolarSystemStrings.apoapsisStringProperty,
+        KeplersLawsStrings.apoapsisStringProperty,
         'apoapsisVisibleCheckbox',
         new XNode( {
           fill: SolarSystemCommonColors.thirdBodyColorProperty,
@@ -142,7 +142,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       ),
       createCheckbox(
         model.periapsisVisibleProperty,
-        MySolarSystemStrings.periapsisStringProperty,
+        KeplersLawsStrings.periapsisStringProperty,
         'periapsisVisibFleCheckbox',
         new XNode( {
           fill: 'gold',
@@ -159,13 +159,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
     const thirdLawChildren = [
       createCheckbox(
         model.semiMajorAxisVisibleProperty,
-        MySolarSystemStrings.graph.aStringProperty,
+        KeplersLawsStrings.graph.aStringProperty,
         'semiMajorAxisVisibleCheckbox'
         // axisIconImageNode TODO
       ),
       createCheckbox(
         model.periodVisibleProperty,
-        MySolarSystemStrings.graph.tStringProperty,
+        KeplersLawsStrings.graph.tStringProperty,
         'periodVisibleCheckbox'
         // periodIconImageNode TODO
       )

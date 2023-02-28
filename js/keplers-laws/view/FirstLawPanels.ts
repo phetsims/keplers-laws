@@ -9,7 +9,6 @@
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import Panel from '../../../../sun/js/Panel.js';
 import FirstLawGraph from './FirstLawGraph.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -19,6 +18,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
+import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -38,11 +38,11 @@ class ExcentricityPanel extends Panel {
       children: [
         new HBox( {
           children: [
-            new Text( MySolarSystemStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
-            new Text( MySolarSystemStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
+            new Text( KeplersLawsStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+            new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
               SolarSystemCommonConstants.TITLE_OPTIONS, { fill: SolarSystemCommonColors.thirdBodyColorProperty } ) ),
-            new Text( MySolarSystemStrings.symbols.divisionStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
-            new Text( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
+            new Text( KeplersLawsStrings.symbols.divisionStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+            new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
               SolarSystemCommonConstants.TITLE_OPTIONS, { fill: 'orange' } ) )
           ]
         } ),
@@ -60,27 +60,27 @@ class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
 
     const conditionalAUStringProperty = new DerivedProperty(
-      [ MySolarSystemStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
+      [ SolarSystemCommonStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
       ( AUString, allowedOrbit ) => {
         return allowedOrbit ? AUString : '';
       } );
 
-    const semiMajorAxisStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: MySolarSystemStrings.symbols.semiMajorAxisStringProperty,
+    const semiMajorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
+      text: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMajorAxis, allowedOrbit ) => {
         return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
       } )
     } );
-    const semiMinorAxisStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: MySolarSystemStrings.symbols.semiMinorAxisStringProperty,
+    const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
+      text: KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMinorAxis, allowedOrbit ) => {
         return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
       } )
     } );
-    const focalDistanceStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: MySolarSystemStrings.symbols.focalDistanceStringProperty,
+    const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
+      text: KeplersLawsStrings.symbols.focalDistanceStringProperty,
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty ], ( focalDistance, allowedOrbit ) => {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : KeplersLawsStrings.undefinedStringProperty;

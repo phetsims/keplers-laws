@@ -17,7 +17,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -108,13 +108,13 @@ export default class DistancesDisplayNode extends VBox {
         new VBox( {
           children: [
             aLineArrowNode1,
-            new RichText( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, AXIS_LABEL_OPTIONS )
+            new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, AXIS_LABEL_OPTIONS )
           ]
         } ),
         new VBox( {
           children: [
             aLineArrowNode2,
-            new RichText( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, AXIS_LABEL_OPTIONS )
+            new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, AXIS_LABEL_OPTIONS )
           ]
         } )
       ]

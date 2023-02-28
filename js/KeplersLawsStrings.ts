@@ -13,6 +13,44 @@ type StringsType = {
     'titleStringProperty': LinkableProperty<string>;
   };
   'undefinedStringProperty': LinkableProperty<string>;
+  'circularOrbitStringProperty': LinkableProperty<string>;
+  'axisStringProperty': LinkableProperty<string>;
+  'fociStringProperty': LinkableProperty<string>;
+  'stringsStringProperty': LinkableProperty<string>;
+  'semiaxisStringProperty': LinkableProperty<string>;
+  'eccentricityStringProperty': LinkableProperty<string>;
+  'eccentricityEquationStringProperty': LinkableProperty<string>;
+  'apoapsisStringProperty': LinkableProperty<string>;
+  'periapsisStringProperty': LinkableProperty<string>;
+  'starMassStringProperty': LinkableProperty<string>;
+  'ourSunStringProperty': LinkableProperty<string>;
+  'area': {
+    'periodDivisionStringProperty': LinkableProperty<string>;
+    'areaUnitsStringProperty': LinkableProperty<string>;
+  };
+  'areaGraph': {
+    'titleStringProperty': LinkableProperty<string>;
+  };
+  'graph': {
+    'titleStringProperty': LinkableProperty<string>;
+    'aStringProperty': LinkableProperty<string>;
+    'tStringProperty': LinkableProperty<string>;
+  };
+  'symbols': {
+    'semiMajorAxisStringProperty': LinkableProperty<string>;
+    'semiMinorAxisStringProperty': LinkableProperty<string>;
+    'focalDistanceStringProperty': LinkableProperty<string>;
+    'periodStringProperty': LinkableProperty<string>;
+    'divisionStringProperty': LinkableProperty<string>;
+  };
+  'pattern': {
+    'textEqualsValueUnitsStringProperty': LinkableProperty<string>;
+  };
+  'warning': {
+    'warningStringProperty': LinkableProperty<string>;
+    'crashOrbitStringProperty': LinkableProperty<string>;
+    'escapeOrbitStringProperty': LinkableProperty<string>;
+  }
 };
 
 const KeplersLawsStrings = getStringModule( 'KEPLERS_LAWS' ) as StringsType;

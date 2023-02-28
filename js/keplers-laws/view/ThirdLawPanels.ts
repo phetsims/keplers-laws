@@ -15,13 +15,13 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import ThirdLawGraph from './ThirdLawGraph.js';
 import ThirdLawSliderPanel from './ThirdLawSliderPanel.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
+import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -47,9 +47,9 @@ class ThirdLawMainPanel extends Panel {
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const semiMajorAxisPatternStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
-      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
+    const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
+      text: SolarSystemCommonTextNumberDisplay.combinePowerString( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
+      units: SolarSystemCommonTextNumberDisplay.combinePowerString( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
       value: new DerivedProperty(
         [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty ],
         ( poweredSemiMajorAxis, allowedOrbit ) => {
@@ -58,9 +58,9 @@ class ThirdLawMainPanel extends Panel {
       )
     } );
 
-    const periodPatternStringProperty = new PatternStringProperty( MySolarSystemStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
-      units: SolarSystemCommonTextNumberDisplay.combinePowerString( MySolarSystemStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
+    const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
+      text: SolarSystemCommonTextNumberDisplay.combinePowerString( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
+      units: SolarSystemCommonTextNumberDisplay.combinePowerString( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
       value: new DerivedProperty(
         [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
         ( poweredPeriod, allowedOrbit ) => {
@@ -78,7 +78,7 @@ class ThirdLawMainPanel extends Panel {
       spacing: 10,
       align: 'left',
       children: [
-        new Text( MySolarSystemStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+        new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
         new GridBox( {
           children: [
             // Period power buttons
@@ -87,7 +87,7 @@ class ThirdLawMainPanel extends Panel {
               [
                 {
                   value: 1,
-                  createNode: () => new RichText( MySolarSystemStrings.symbols.periodStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,
@@ -110,7 +110,7 @@ class ThirdLawMainPanel extends Panel {
               [
                 {
                   value: 1,
-                  createNode: () => new RichText( MySolarSystemStrings.symbols.semiMajorAxisStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,

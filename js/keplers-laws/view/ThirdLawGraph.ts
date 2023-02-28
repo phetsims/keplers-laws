@@ -18,7 +18,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import SolarSystemCommonTextNumberDisplay from '../../../../solar-system-common/js/view/SolarSystemCommonTextNumberDisplay.js';
-import MySolarSystemStrings from '../../../../my-solar-system/js/MySolarSystemStrings.js';
+import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../../keplersLaws.js';
 
@@ -71,12 +71,12 @@ export default class ThirdLawGraph extends Node {
     } );
 
     const xAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.combinePowerString(
-      MySolarSystemStrings.symbols.semiMajorAxisStringProperty,
+      KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       model.selectedAxisPowerProperty
     );
 
     const yAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.combinePowerString(
-      MySolarSystemStrings.symbols.periodStringProperty,
+      KeplersLawsStrings.symbols.periodStringProperty,
       model.selectedPeriodPowerProperty
     );
 
