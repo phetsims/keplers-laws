@@ -205,10 +205,19 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       yAlign: 'top'
     } );
 
+    const resetBox = new AlignBox( this.resetAllButton,
+      {
+        alignBoundsProperty: this.availableBoundsProperty,
+        margin: SolarSystemCommonConstants.MARGIN,
+        xAlign: 'right',
+        yAlign: 'bottom'
+      } );
+
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsAndZoomBoxes );
     this.interfaceLayer.addChild( controlPanelAlignBox );
     this.interfaceLayer.addChild( lawsButtonsBox );
+    this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
   }
 }
