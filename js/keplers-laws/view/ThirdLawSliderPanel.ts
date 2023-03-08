@@ -90,7 +90,7 @@ export default class ThirdLawSliderPanel extends Panel {
     const labels = [ createNumberLabel( '0.5' ), defaultLabel, createNumberLabel( '1.5' ), createNumberLabel( '2.0' ) ];
     for ( let i = 0; i < labels.length; i++ ) {
       const tickValue = ( i + 1 ) / labels.length * massRange.max;
-      slider.addMajorTick( tickValue, labels[ i ] );
+      slider.slider.addMajorTick( tickValue, labels[ i ] );
     }
   }
 }
