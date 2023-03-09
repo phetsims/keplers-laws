@@ -26,6 +26,10 @@ export default class OrbitalWarningMessage extends Node {
       center: modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -50 ) )
     };
 
+    //REVIEW: Why a local variable for this?
+    //REVIEW: Please create a DerivedProperty<string> for this, and then pass that to the RichText constructor 1st param
+    //REVIEW: instead of the multilink that is used.
+    //REVIEW: no need for `message` variable
     let message = '';
     const warningText = new RichText( message, SolarSystemCommonConstants.TITLE_OPTIONS );
 
@@ -38,6 +42,8 @@ export default class OrbitalWarningMessage extends Node {
         KeplersLawsStrings.warning.escapeOrbitStringProperty
       ],
       ( orbitType, warningString, crashOrbitString, escapeOrbitString ) => {
+        //REVIEW: I believe i18n patterns should be used for this, instead of string concatenation with a colon
+        //REVIEW: why is the colon, space, and placeholder not available in the warning.warning string?
         message = warningString + ': ';
         switch( orbitType ) {
           case OrbitTypes.CRASH_ORBIT:
@@ -51,6 +57,8 @@ export default class OrbitalWarningMessage extends Node {
         }
 
         warningText.setString( message );
+
+        //REVIEW: This would be a separate link to keep things centered
         warningText.center = options.center;
       }
     );
