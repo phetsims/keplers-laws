@@ -143,6 +143,8 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       createCheckbox(
         model.periapsisVisibleProperty,
         KeplersLawsStrings.periapsisStringProperty,
+        //REVIEW: visibFle looks like a typo introduced in https://github.com/phetsims/my-solar-system/commit/8ed18445210b1f2fbfdc88759cdb0894b8a3004a
+        //REVIEW: it should be fixed
         'periapsisVisibFleCheckbox',
         new XNode( {
           fill: 'gold',
