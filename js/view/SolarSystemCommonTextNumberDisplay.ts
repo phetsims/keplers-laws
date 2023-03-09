@@ -16,18 +16,25 @@ import SolarSystemCommonStrings from '../../../solar-system-common/js/SolarSyste
 import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import solarSystemCommon from '../solarSystemCommon.js';
 
+//REVIEW: Single usage, prefer inlining (then don't have to define the type, AND won't need the extra empty {} object
+//REVIEW: allocation that is in the optionize3 call below). Can just use optionize
 const STRING_PATTERN_OPTIONS: NumberDisplayOptions = {
   backgroundFill: null,
   backgroundStroke: null,
   textOptions: SolarSystemCommonConstants.TEXT_OPTIONS,
   decimalPlaces: 1,
   useRichText: true,
+
+  //REVIEW: layoutOptions like this should be provided at the client usage. It's not great to hardcode client uses
+  //REVIEW: in the type itself. Let's move this to the client!
   layoutOptions: {
     align: 'left'
   }
 };
 
 export default class SolarSystemCommonTextNumberDisplay extends NumberDisplay {
+  //REVIEW: Ummm... I don't see this constructor ever getting used. Can we remove it, and not extend NumberDisplay?
+  //REVIEW: Perhaps we can just move combinePowerString to somewhere else common, and remove this file?
   public constructor( numberProperty: TReadOnlyProperty<number | null>, displayRange: Range, providedOptions?: NumberDisplayOptions ) {
     super(
       numberProperty,
