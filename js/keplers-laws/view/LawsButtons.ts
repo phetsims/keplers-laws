@@ -12,9 +12,9 @@ import { Image, ImageOptions } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LawMode from '../model/LawMode.js';
-import iconFirstLaw_png from '../../../../my-solar-system/images/iconFirstLaw_png.js';
-import iconSecondLaw_png from '../../../../my-solar-system/images/iconSecondLaw_png.js';
-import iconThirdLaw_png from '../../../../my-solar-system/images/iconThirdLaw_png.js';
+import iconFirstLaw_png from '../../../images/iconFirstLaw_png.js';
+import iconSecondLaw_png from '../../../images/iconSecondLaw_png.js';
+import iconThirdLaw_png from '../../../images/iconThirdLaw_png.js';
 import keplersLaws from '../../keplersLaws.js';
 
 const IMAGE_OPTIONS: ImageOptions = {

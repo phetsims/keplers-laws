@@ -18,10 +18,10 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LinkableProperty from '../../../../axon/js/LinkableProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import semiaxisIcon_png from '../../../../my-solar-system/images/semiaxisIcon_png.js';
-import eccentricityIcon_png from '../../../../my-solar-system/images/eccentricityIcon_png.js';
-import fociIcon_png from '../../../../my-solar-system/images/fociIcon_png.js';
-import stringsIcon_png from '../../../../my-solar-system/images/stringsIcon_png.js';
+import semiaxisIcon_png from '../../../images/semiaxisIcon_png.js';
+import eccentricityIcon_png from '../../../images/eccentricityIcon_png.js';
+import fociIcon_png from '../../../images/fociIcon_png.js';
+import stringsIcon_png from '../../../images/stringsIcon_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 
