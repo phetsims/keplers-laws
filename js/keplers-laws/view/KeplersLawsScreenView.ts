@@ -87,7 +87,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     // Draggable velocity vector
     this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
-      zeroAllowed: false,
+      minimumMagnitude: 30,
+      snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
       enabledProperty: DerivedProperty.not( model.alwaysCircularProperty )
     } ) );
