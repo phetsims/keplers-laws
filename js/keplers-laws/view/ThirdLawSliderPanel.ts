@@ -33,28 +33,29 @@ export default class ThirdLawSliderPanel extends Panel {
     const massRange = new RangeWithValue( defaultLabelValue / 2, 2 * defaultLabelValue, defaultLabelValue );
     const slider = new SolarSystemCommonSlider(
       model.bodies[ 0 ].massProperty,
-      massRange,
-      {
-        trackSize: new Dimension2( WIDTH, 1 ),
-        thumbSize: THUMB_SIZE,
-        thumbTouchAreaXDilation: THUMB_SIZE.width,
-        thumbTouchAreaYDilation: THUMB_SIZE.height,
-        trackStroke: SolarSystemCommonColors.foregroundProperty,
+      massRange, {
+        sliderOptions: {
+          constrainValue: ( mass: number ) => Math.abs( mass - defaultLabelValue ) / defaultLabelValue < SNAP_TOLERANCE ? defaultLabelValue : mass,
 
-        // ticks
-        tickLabelSpacing: 3,
-        majorTickLength: 13,
-        majorTickStroke: SolarSystemCommonColors.foregroundProperty,
+          trackSize: new Dimension2( WIDTH, 1 ),
+          thumbSize: THUMB_SIZE,
+          thumbTouchAreaXDilation: THUMB_SIZE.width,
+          thumbTouchAreaYDilation: THUMB_SIZE.height,
+          trackStroke: SolarSystemCommonColors.foregroundProperty,
 
-        // custom thumb
-        thumbFill: colorProperty,
-        thumbFillHighlighted: new DerivedProperty( [ colorProperty ], color => color.colorUtilsBrighter( 0.7 ) ),
+          // ticks
+          tickLabelSpacing: 3,
+          majorTickLength: 13,
+          majorTickStroke: SolarSystemCommonColors.foregroundProperty,
 
+          // custom thumb
+          thumbFill: colorProperty,
+          thumbFillHighlighted: new DerivedProperty( [ colorProperty ], color => color.colorUtilsBrighter( 0.7 ) )
+        },
 
         // snap to default value if close
-        constrainValue: ( mass: number ) => Math.abs( mass - defaultLabelValue ) / defaultLabelValue < SNAP_TOLERANCE ? defaultLabelValue : mass,
-        startDrag: () => { model.bodies[ 0 ].userControlledMassProperty.value = true; },
-        endDrag: () => { model.bodies[ 0 ].userControlledMassProperty.value = false; }
+        startCallback: () => { model.bodies[ 0 ].userControlledMassProperty.value = true; },
+        endCallback: () => { model.bodies[ 0 ].userControlledMassProperty.value = false; }
         // tandem: tandem
       }
     );
