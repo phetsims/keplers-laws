@@ -27,6 +27,7 @@ import OrbitalWarningMessage from './OrbitalWarningMessage.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 // constants
 const MARGIN = 10;
@@ -96,12 +97,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
       body, this.modelViewTransformProperty, model.gravityVisibleProperty, body.forceProperty,
-      0.05, { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      new NumberProperty( 0 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
 
     this.componentsLayer.addChild( new VectorNode(
       sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
-      0.05, { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      new NumberProperty( 0 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
 
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
