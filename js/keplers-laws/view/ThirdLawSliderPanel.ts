@@ -8,7 +8,7 @@
 
 import Panel from '../../../../sun/js/Panel.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import SolarSystemCommonSlider from '../../../../solar-system-common/js/view/SolarSystemCommonSlider.js';
+import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -31,7 +31,7 @@ export default class ThirdLawSliderPanel extends Panel {
     const colorProperty = SolarSystemCommonColors.firstBodyColorProperty;
     const defaultLabelValue = model.bodies[ 0 ].massProperty.value;
     const massRange = new RangeWithValue( defaultLabelValue / 2, 2 * defaultLabelValue, defaultLabelValue );
-    const slider = new SolarSystemCommonSlider(
+    const slider = new SolarSystemCommonNumberControl(
       model.bodies[ 0 ].massProperty,
       massRange, {
         sliderOptions: {
