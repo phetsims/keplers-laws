@@ -17,10 +17,10 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import SolarSystemCommonTextUtils from '../../../../solar-system-common/js/view/SolarSystemCommonTextUtils.js';
 import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../../keplersLaws.js';
+import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -70,12 +70,12 @@ export default class ThirdLawGraph extends Node {
       stroke: FOREGROUND_COLOR_PROPERTY
     } );
 
-    const xAxisLabelStringProperty = SolarSystemCommonTextUtils.createPowerStringProperty(
+    const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       model.selectedAxisPowerProperty
     );
 
-    const yAxisLabelStringProperty = SolarSystemCommonTextUtils.createPowerStringProperty(
+    const yAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.periodStringProperty,
       model.selectedPeriodPowerProperty
     );

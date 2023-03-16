@@ -17,11 +17,11 @@ import ThirdLawSliderPanel from './ThirdLawSliderPanel.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import SolarSystemCommonTextUtils from '../../../../solar-system-common/js/view/SolarSystemCommonTextUtils.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
+import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -48,8 +48,8 @@ class ThirdLawMainPanel extends Panel {
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: SolarSystemCommonTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
-      units: SolarSystemCommonTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
+      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
+      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
       value: new DerivedProperty(
         [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty ],
         ( poweredSemiMajorAxis, allowedOrbit ) => {
@@ -59,8 +59,8 @@ class ThirdLawMainPanel extends Panel {
     } );
 
     const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: SolarSystemCommonTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
-      units: SolarSystemCommonTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
+      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
+      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
       value: new DerivedProperty(
         [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
         ( poweredPeriod, allowedOrbit ) => {
