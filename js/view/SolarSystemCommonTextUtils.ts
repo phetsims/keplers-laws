@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * A combination of a Rich Text node and a Number Display node.
+ * A combination of a Rich Text node and a Number Display node. Only used in Kepler's Laws.
  *
  * @author Agustín Vallejo
  */
@@ -12,7 +12,7 @@ import SolarSystemCommonStrings from '../../../solar-system-common/js/SolarSyste
 import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import solarSystemCommon from '../solarSystemCommon.js';
 
-export default class SolarSystemCommonTextNumberDisplay {
+export default class SolarSystemCommonTextUtils {
   public static createPowerStringProperty( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return new DerivedProperty( [ unitStringProperty, powerStringProperty, SolarSystemCommonStrings.pattern.unitsPowerStringProperty ], ( string, power, pattern ) => {
       if ( power === 1 ) {
@@ -28,4 +28,4 @@ export default class SolarSystemCommonTextNumberDisplay {
   }
 }
 
-solarSystemCommon.register( 'SolarSystemCommonTextNumberDisplay', SolarSystemCommonTextNumberDisplay );
+solarSystemCommon.register( 'SolarSystemCommonTextUtils', SolarSystemCommonTextUtils );
