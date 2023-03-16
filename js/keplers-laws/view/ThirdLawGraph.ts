@@ -70,12 +70,12 @@ export default class ThirdLawGraph extends Node {
       stroke: FOREGROUND_COLOR_PROPERTY
     } );
 
-    const xAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.combinePowerString(
+    const xAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.createPowerStringProperty(
       KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       model.selectedAxisPowerProperty
     );
 
-    const yAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.combinePowerString(
+    const yAxisLabelStringProperty = SolarSystemCommonTextNumberDisplay.createPowerStringProperty(
       KeplersLawsStrings.symbols.periodStringProperty,
       model.selectedPeriodPowerProperty
     );
