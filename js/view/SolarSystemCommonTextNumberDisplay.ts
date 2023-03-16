@@ -13,7 +13,7 @@ import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import solarSystemCommon from '../solarSystemCommon.js';
 
 export default class SolarSystemCommonTextNumberDisplay {
-  public static combinePowerString( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+  public static createPowerStringProperty( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return new DerivedProperty( [ unitStringProperty, powerStringProperty, SolarSystemCommonStrings.pattern.unitsPowerStringProperty ], ( string, power, pattern ) => {
       if ( power === 1 ) {
         return string;
