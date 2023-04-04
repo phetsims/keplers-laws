@@ -148,8 +148,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         spacing: 10,
         align: 'left',
         children: [
-          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) ),
           this.timeBox,
+          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) ),
           new AlignBox(
             new Checkbox(
               model.alwaysCircularProperty,
