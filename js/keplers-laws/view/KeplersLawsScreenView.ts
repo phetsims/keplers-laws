@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -18,8 +18,6 @@ import SolarSystemCommonScreenView, { CommonScreenViewOptions } from '../../../.
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
@@ -149,19 +147,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         align: 'left',
         children: [
           this.timeBox,
-          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) ),
-          new AlignBox(
-            new Checkbox(
-              model.alwaysCircularProperty,
-              new Text( KeplersLawsStrings.circularOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
-              SolarSystemCommonConstants.CHECKBOX_OPTIONS ), {
-              xMargin: MARGIN / 2,
-              xAlign: 'left',
-              yAlign: 'bottom',
-              maxWidth: 150,
-              tandem: providedOptions.tandem.createTandem( 'alwaysCircularCheckbox' )
-            }
-          )
+          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) )
         ]
       } ),
       {

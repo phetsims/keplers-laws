@@ -7,7 +7,7 @@
  * @author Agustín Vallejo
  */
 
-import { HSeparator, VBox } from '../../../../scenery/js/imports.js';
+import { HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -16,6 +16,8 @@ import createVisibilityInformationCheckboxes from '../../../../solar-system-comm
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
 import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
 
 class KeplersLawsControls extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
@@ -24,6 +26,11 @@ class KeplersLawsControls extends Panel {
         new KeplersLawsOrbitalInformationBox( model, {
           tandem: tandem
         } ),
+        new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
+        new Checkbox(
+          model.alwaysCircularProperty,
+          new Text( KeplersLawsStrings.circularOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
+          SolarSystemCommonConstants.CHECKBOX_OPTIONS ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
         ...createArrowsVisibilityCheckboxes( model, tandem ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
