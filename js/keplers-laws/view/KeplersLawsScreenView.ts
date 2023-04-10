@@ -44,6 +44,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     super( model, options );
 
+    this.orbitalCenterProperty.value = this.orbitalCenterProperty.value.plusXY( 0, 50 );
+
     model.engine.orbitalAreas.forEach( ( area, index ) => {
       area.insideProperty.link( inside => {
         if ( inside && model.isPlayingProperty.value && model.isSecondLawProperty.value ) {
