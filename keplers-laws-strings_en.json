@@ -24,7 +24,7 @@
     "value": "Eccentricity"
   },
   "eccentricityEquation": {
-    "value": "Eccentricity = "
+    "value": "Eccentricity ="
   },
   "apoapsis": {
     "value": "Apoapsis"
@@ -67,9 +67,6 @@
   },
   "symbols.period": {
     "value": "T"
-  },
-  "symbols.division": {
-    "value": "/"
   },
   "pattern.textEqualsValueUnits": {
     "value": "{{text}} = {{value}} {{units}}"

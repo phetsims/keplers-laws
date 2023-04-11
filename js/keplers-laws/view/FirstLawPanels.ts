@@ -7,7 +7,7 @@
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Line, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import Panel from '../../../../sun/js/Panel.js';
 import FirstLawGraph from './FirstLawGraph.js';
@@ -39,11 +39,19 @@ class ExcentricityPanel extends Panel {
         new HBox( {
           children: [
             new Text( KeplersLawsStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
-            new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
-              SolarSystemCommonConstants.TITLE_OPTIONS, { fill: SolarSystemCommonColors.thirdBodyColorProperty } ) ),
-            new Text( KeplersLawsStrings.symbols.divisionStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
-            new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
-              SolarSystemCommonConstants.TITLE_OPTIONS, { fill: 'orange' } ) )
+            new VBox( {
+              children: [
+                new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, {
+                  ...SolarSystemCommonConstants.TITLE_OPTIONS,
+                  fill: SolarSystemCommonColors.thirdBodyColorProperty
+                } ),
+                new Line( 0, 0, 30, 0, { stroke: 'white', lineWidth: 1.5, lineCap: 'round' } ),
+                new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, {
+                  ...SolarSystemCommonConstants.TITLE_OPTIONS,
+                  fill: 'orange'
+                } )
+              ]
+            } )
           ]
         } ),
         new FirstLawGraph( model )

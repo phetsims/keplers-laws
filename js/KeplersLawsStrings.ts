@@ -39,7 +39,6 @@ type StringsType = {
     'semiMinorAxisStringProperty': LinkableProperty<string>;
     'focalDistanceStringProperty': LinkableProperty<string>;
     'periodStringProperty': LinkableProperty<string>;
-    'divisionStringProperty': LinkableProperty<string>;
   };
   'pattern': {
     'textEqualsValueUnitsStringProperty': LinkableProperty<string>;
