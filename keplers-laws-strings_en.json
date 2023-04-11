@@ -44,7 +44,7 @@
   "area.areaUnits": {
     "value": "Area (AU<sup>2</sup>)"
   },
-  "areaGraph.title": {
+  "sweptArea": {
     "value": "Swept Area"
   },
   "graph.title": {

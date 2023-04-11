@@ -48,7 +48,7 @@ export default class SecondLawGraph extends Panel {
       visibleProperty: model.isSecondLawProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const title = new Text( KeplersLawsStrings.areaGraph.titleStringProperty, TITLE_OPTIONS );
+    const title = new Text( KeplersLawsStrings.sweptAreaStringProperty, TITLE_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,

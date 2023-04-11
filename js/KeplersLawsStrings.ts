@@ -28,9 +28,7 @@ type StringsType = {
     'periodDivisionStringProperty': LinkableProperty<string>;
     'areaUnitsStringProperty': LinkableProperty<string>;
   };
-  'areaGraph': {
-    'titleStringProperty': LinkableProperty<string>;
-  };
+  'sweptAreaStringProperty': LinkableProperty<string>;
   'graph': {
     'titleStringProperty': LinkableProperty<string>;
     'aStringProperty': LinkableProperty<string>;
