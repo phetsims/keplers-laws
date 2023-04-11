@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import { Color, HBox, Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -26,6 +25,7 @@ import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import ArrowButton, { ArrowButtonOptions } from '../../../../sun/js/buttons/ArrowButton.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -40,15 +40,15 @@ const TITLE_OPTIONS = {
   fill: FOREGROUND_COLOR_PROPERTY
 };
 
-export default class SecondLawGraph extends Panel {
+export default class SweptAreaAccordionBox extends AccordionBox {
 
-  public constructor( public model: KeplersLawsModel ) {
+  public constructor( public readonly model: KeplersLawsModel ) {
 
-    const options = combineOptions<PanelOptions>( {
-      visibleProperty: model.isSecondLawProperty
+    const options = combineOptions<AccordionBoxOptions>( {
+      visibleProperty: model.isSecondLawProperty,
+      titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, TITLE_OPTIONS ),
+      titleYMargin: 4
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
-
-    const title = new Text( KeplersLawsStrings.sweptAreaStringProperty, TITLE_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,
@@ -68,14 +68,15 @@ export default class SecondLawGraph extends Panel {
     const yAxisLabel = new RichText(
       KeplersLawsStrings.area.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {
-        x: -25, centerY: -yAxisLength * 0.5, rotation: -Math.PI / 2
-      }, SolarSystemCommonConstants.TITLE_OPTIONS ) );
+        x: -25,
+        centerY: -yAxisLength * 0.5,
+        rotation: -Math.PI / 2
+      }, SolarSystemCommonConstants.TITLE_OPTIONS )
+    );
 
-    super( new VBox(
-      {
+    super( new VBox( {
         spacing: 10,
         children: [
-          title,
           new Node( {
             children: [
               barPlot,
@@ -89,6 +90,8 @@ export default class SecondLawGraph extends Panel {
         ]
       }
     ), options );
+
+    this.expandedProperty.value = false;
   }
 }
 
@@ -248,9 +251,7 @@ class AreasBarPlot extends Node {
     // anything you want clipped goes in here
     const chartClip = new Node( {
       clipArea: chartRectangle.getShape(),
-      children: [
-        barPlot
-      ]
+      children: [ barPlot ]
     } );
 
 
@@ -269,4 +270,4 @@ class AreasBarPlot extends Node {
   }
 }
 
-keplersLaws.register( 'SecondLawGraph', SecondLawGraph );
+keplersLaws.register( 'SweptAreaAccordionBox', SweptAreaAccordionBox );
