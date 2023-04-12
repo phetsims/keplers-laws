@@ -20,12 +20,13 @@ import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
 import BarPlot from '../../../../bamboo/js/BarPlot.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
-import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
+import TickMarkSet, { TickMarkSetOptions } from '../../../../bamboo/js/TickMarkSet.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import ArrowButton, { ArrowButtonOptions } from '../../../../sun/js/buttons/ArrowButton.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -211,25 +212,49 @@ class AreasBarPlot extends Node {
     } );
 
     // y tick marks
-    // TODO: Based on this, is there an easier way to make iterable smaller (x1/10) or larger (x10) tick marks?
     const YSpacing = 2e4;
-    const YTickMarkSet = new TickMarkSet( chartTransform, Orientation.VERTICAL, YSpacing, {
-      edge: 'min',
-      stroke: FOREGROUND_COLOR_PROPERTY
-    } );
-    const YTickMarkSetSecondary = new TickMarkSet( chartTransform, Orientation.VERTICAL, YSpacing * 10, {
-      edge: 'min',
-      stroke: FOREGROUND_COLOR_PROPERTY,
-      lineWidth: 3
-    } );
+
+    const entries = [
+      { scale: 0.001 },
+      { scale: 0.01 },
+      { scale: 0.1 },
+      { scale: 1 },
+      { scale: 10 },
+      { scale: 100 },
+      { scale: 1000 } ];
+    const yTickMarkSets = entries.map( entry =>
+      new LimitedTickMarkSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+        edge: 'min',
+        stroke: FOREGROUND_COLOR_PROPERTY,
+        // The tickmarks get a little smaller as you zoom out
+        extent: 13 - 2 * Math.log10( entry.scale )
+      } ) );
+
+    const tickParentNode = new Node();
 
     const updateYRange = () => {
       modelYRange = new Range( 0, UPSCALE * this.model.engine.totalArea / 2 );
       chartTransform.setModelYRange( modelYRange );
-      const ratio = modelYRange.max / YSpacing;
-      if ( ratio > 15 ) {
-        YTickMarkSet.opacity = Math.max( 0, 1 - ( ratio - 15 ) / 20 );
-        YTickMarkSetSecondary.opacity = Math.min( 1, ( ratio - 15 ) / 20 );
+
+      const children: TickMarkSet[] = [];
+      yTickMarkSets.forEach( ( tickMarkSet, index ) => {
+        const distanceBetweenTickMarks = tickMarkSet.spacing / modelYRange.max;
+
+        // Within this range we apply a linear function for the transparency
+        const UPPER = 0.09;
+        const LOWER = 0.016;
+        if ( distanceBetweenTickMarks < UPPER && distanceBetweenTickMarks > LOWER ) {
+          const linear = Utils.linear( UPPER, LOWER, 1, 0, distanceBetweenTickMarks );
+          tickMarkSet.opacity = linear;
+          children.push( tickMarkSet );
+        }
+        else if ( distanceBetweenTickMarks > UPPER ) {
+          tickMarkSet.opacity = 1;
+          children.push( tickMarkSet );
+        }
+      } );
+      if ( !shallowCompare( tickParentNode.children, children ) ) {
+        tickParentNode.children = children;
       }
     };
 
@@ -259,8 +284,7 @@ class AreasBarPlot extends Node {
       chartRectangle,
       chartClip,
       XTickLabelSet,
-      YTickMarkSet,
-      YTickMarkSetSecondary
+      tickParentNode
     ];
 
     model.engine.changedEmitter.addListener( () => {
@@ -268,6 +292,38 @@ class AreasBarPlot extends Node {
       updateYRange();
     } );
   }
+}
+
+class LimitedTickMarkSet extends TickMarkSet {
+  public override spacing: number;
+
+  public constructor( chartTransform: ChartTransform, axisOrientation: Orientation, spacing: number,
+                      providedOptions?: TickMarkSetOptions ) {
+    super( chartTransform, axisOrientation, spacing, providedOptions );
+    this.spacing = spacing;
+  }
+
+  protected override update(): void {
+    const [ nMin, nMax ] = this.chartTransform.getSpacingBorders( this.axisOrientation, this.spacing, this.origin, this.clippingType );
+
+    if ( nMax - nMin < 100 ) {
+      super.update();
+    }
+  }
+}
+
+function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
+  if ( arr1.length !== arr2.length ) {
+    return false;
+  }
+
+  for ( let i = 0; i < arr1.length; i++ ) {
+    if ( arr1[ i ] !== arr2[ i ] ) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 keplersLaws.register( 'SweptAreaAccordionBox', SweptAreaAccordionBox );
