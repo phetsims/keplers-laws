@@ -55,8 +55,10 @@ class Ellipse {
   ) {}
 }
 
+const INITIAL_MU = 2e6;
+
 export default class EllipticalOrbitEngine extends Engine {
-  public mu = 2e6; // mu = G * Mass_sun, and G in this sim is 1e4
+  public mu = INITIAL_MU; // mu = G * Mass_sun, and G in this sim is 1e4
   public readonly sun: Body;
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
@@ -149,7 +151,7 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   public thirdLaw( a: number ): number {
-    return Math.pow( 2e6 * a * a * a / this.mu, 1 / 2 );
+    return Math.pow( INITIAL_MU * a * a * a / this.mu, 1 / 2 );
   }
 
   public override run( dt: number ): void {
@@ -228,7 +230,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.semiMajorAxisProperty.value = this.a * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.semiMinorAxisProperty.value = this.b * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.focalDistanceProperty.value = this.c * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.periodProperty.value = this.T * SolarSystemCommonConstants.TIME_MULTIPLIER / 218;
+    this.periodProperty.value = this.T * Math.pow( SolarSystemCommonConstants.POSITION_MULTIPLIER, 3 / 2 );
 
     if ( this.collidedWithSun( a, e ) ) {
       this.allowedOrbitProperty.value = false;
