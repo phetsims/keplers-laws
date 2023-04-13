@@ -25,14 +25,14 @@ export default class FirstLawPanels extends VBox {
     super( {
       margin: 5,
       children: [
-        new ExcentricityPanel( model ),
+        new EccentricityPanel( model ),
         new ValuesPanel( model )
       ]
     } );
   }
 }
 
-class ExcentricityPanel extends Panel {
+class EccentricityPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
     super( new VBox( {
       children: [
