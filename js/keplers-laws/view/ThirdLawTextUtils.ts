@@ -13,16 +13,21 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import keplersLaws from '../../keplersLaws.js';
 
 export default class ThirdLawTextUtils {
-  public static createPowerStringProperty( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return new DerivedProperty( [ unitStringProperty, powerStringProperty, SolarSystemCommonStrings.pattern.unitsPowerStringProperty ], ( string, power, pattern ) => {
-      if ( power === 1 ) {
-        return string;
+  public static createPowerStringProperty( unitStringProperty: TReadOnlyProperty<string>, powerStringProperty: TReadOnlyProperty<number>, conditionalProperty: TReadOnlyProperty<boolean> ): TReadOnlyProperty<string> {
+    return new DerivedProperty( [ unitStringProperty, powerStringProperty, SolarSystemCommonStrings.pattern.unitsPowerStringProperty, conditionalProperty ], ( string, power, pattern, conditional ) => {
+      if ( !conditional ) {
+        return '';
       }
       else {
-        return StringUtils.fillIn( pattern, {
-          units: string,
-          power: power
-        } );
+        if ( power === 1 ) {
+          return string;
+        }
+        else {
+          return StringUtils.fillIn( pattern, {
+            units: string,
+            power: power
+          } );
+        }
       }
     } );
   }

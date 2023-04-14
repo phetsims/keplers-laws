@@ -22,6 +22,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
 
 export type PanelThirdLawOptions = PanelOptions;
 
@@ -48,23 +49,23 @@ class ThirdLawMainPanel extends Panel {
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty ),
-      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty ),
+      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ),
+      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, model.engine.allowedOrbitProperty ),
       value: new DerivedProperty(
-        [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty ],
-        ( poweredSemiMajorAxis, allowedOrbit ) => {
-          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
+        [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
+        ( poweredSemiMajorAxis, allowedOrbit, undefinedMessage ) => {
+          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : undefinedMessage;
         }
       )
     } );
 
     const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty ),
-      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty ),
+      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ),
+      units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, model.engine.allowedOrbitProperty ),
       value: new DerivedProperty(
-        [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
-        ( poweredPeriod, allowedOrbit ) => {
-          return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : KeplersLawsStrings.undefinedStringProperty;
+        [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
+        ( poweredPeriod, allowedOrbit, undefinedMessage ) => {
+          return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : undefinedMessage;
         }
       )
     } );

@@ -76,22 +76,22 @@ class ValuesPanel extends Panel {
     const semiMajorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMajorAxis, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
+      value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMajorAxis, allowedOrbit, undefinedMessage ) => {
+        return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : undefinedMessage;
       } )
     } );
     const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
       units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty ], ( semiMinorAxis, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : KeplersLawsStrings.undefinedStringProperty;
+      value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMinorAxis, allowedOrbit, undefinedMessage ) => {
+        return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : undefinedMessage;
       } )
     } );
     const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: KeplersLawsStrings.symbols.focalDistanceStringProperty,
       units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty ], ( focalDistance, allowedOrbit ) => {
-        return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : KeplersLawsStrings.undefinedStringProperty;
+      value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( focalDistance, allowedOrbit, undefinedMessage ) => {
+        return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
       } )
     } );
 

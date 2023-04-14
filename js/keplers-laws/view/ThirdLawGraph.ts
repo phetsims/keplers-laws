@@ -72,12 +72,14 @@ export default class ThirdLawGraph extends Node {
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-      model.selectedAxisPowerProperty
+      model.selectedAxisPowerProperty,
+      model.engine.allowedOrbitProperty
     );
 
     const yAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.periodStringProperty,
-      model.selectedPeriodPowerProperty
+      model.selectedPeriodPowerProperty,
+      model.engine.allowedOrbitProperty
     );
 
     const xAxisLabel = new RichText(
