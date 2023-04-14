@@ -21,6 +21,7 @@ import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.j
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
   scale: 1.5,
@@ -126,18 +127,17 @@ export default class DistancesDisplayNode extends VBox {
     ];
 
     const updateDistances = () => {
-      const a = this.orbit.a;
-      const e = this.orbit.e;
-      const c = e * a;
       const scale = this.modelViewTransformProperty.value.modelToViewDeltaX( 1 );
+      const aLength = this.orbit.a * scale;
+      const d1Length = this.orbit.d1 * scale;
+      const d2Length = this.orbit.d2 * scale;
 
-      const bodyPosition = this.orbit.createPolar( -this.orbit.nu );
+      const rString = KeplersLawsStrings.symbols.radiusStringProperty.value;
+      const d1String = KeplersLawsStrings.symbols.distance1StringProperty.value;
+      const d2String = KeplersLawsStrings.symbols.distance2StringProperty.value;
 
-      const d1Length = bodyPosition.magnitude * scale;
-      const d2Length = bodyPosition.plusXY( 2 * c, 0 ).magnitude * scale;
-
-      stringLabelNode1.setString( this.orbit.eccentricityProperty.value === 0 ? 'r' : 'd<sub>1' );
-      stringLabelNode2.setString( this.orbit.eccentricityProperty.value === 0 ? 'r' : 'd<sub>2' );
+      stringLabelNode1.setString( this.orbit.isCircularProperty.value ? rString : d1String );
+      stringLabelNode2.setString( this.orbit.isCircularProperty.value ? rString : d2String );
 
       stringLabelNode1.x = -d2Length / 2;
       stringLabelNode2.x = d1Length / 2;
@@ -145,11 +145,15 @@ export default class DistancesDisplayNode extends VBox {
       d1lineArrowNode.setTailAndTip( 0, 0, d1Length, 0 );
       d2lineArrowNode.setTailAndTip( 0, 0, -d2Length, 0 );
 
-      aLineArrowNode1.setTailAndTip( 0, 0, a * scale, 0 );
-      aLineArrowNode2.setTailAndTip( 0, 0, -a * scale, 0 );
+      aLineArrowNode1.setTailAndTip( 0, 0, aLength, 0 );
+      aLineArrowNode2.setTailAndTip( 0, 0, -aLength, 0 );
     };
 
-    updateDistances();
+    Multilink.multilink( [
+      KeplersLawsStrings.symbols.radiusStringProperty,
+      KeplersLawsStrings.symbols.distance1StringProperty,
+      KeplersLawsStrings.symbols.distance2StringProperty
+    ], updateDistances );
 
     this.orbit.changedEmitter.addListener( updateDistances );
   }

@@ -63,15 +63,19 @@ export default class EllipticalOrbitEngine extends Engine {
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
   public readonly changedEmitter = new Emitter();
+  public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
   public orbitalAreas: OrbitalArea[] = [];
   public updateAllowed = true;
   public retrograde = false;
   public alwaysCircles = false;
+  public isCircularProperty = new BooleanProperty( false );
 
   public semiMajorAxisProperty = new NumberProperty( 1 );
   public semiMinorAxisProperty = new NumberProperty( 1 );
   public focalDistanceProperty = new NumberProperty( 1 );
+  public distance1Property = new NumberProperty( 1 );
+  public distance2Property = new NumberProperty( 1 );
   public periodProperty = new NumberProperty( 1 );
   public eccentricityProperty = new NumberProperty( 0 );
 
@@ -86,6 +90,8 @@ export default class EllipticalOrbitEngine extends Engine {
   public T = 1;  // period
   public nu = 0; // true anomaly
   public L = 0;  // angular momentum
+  public d1 = 0; // distance from the main focus to the body
+  public d2 = 0; // distance from the secondary focus to the body
 
   // Keeps track of the validity of the orbit. True if elliptic, false either if parabolic or collision orbit.
   public allowedOrbitProperty = new BooleanProperty( false );
@@ -184,6 +190,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.body.accelerationProperty.value = force.timesScalar( 1 / this.body.massProperty.value );
     this.sun.forceProperty.value = force.timesScalar( -1 );
   }
+
   /**
    * Based on the current position and velocity of the body
    * Updates the orbital elements of the body using Orbital Mechanics Analytic Equations
@@ -221,6 +228,9 @@ export default class EllipticalOrbitEngine extends Engine {
     this.W = W;
 
     this.nu = this.getTrueAnomaly( this.M );
+    this.bodyPolarPosition = this.createPolar( this.nu );
+    this.d1 = this.bodyPolarPosition.magnitude;
+    this.d2 = 2 * this.a - this.d1;
 
     this.T = this.thirdLaw( this.a );
 
@@ -230,6 +240,8 @@ export default class EllipticalOrbitEngine extends Engine {
     this.semiMajorAxisProperty.value = this.a * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.semiMinorAxisProperty.value = this.b * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.focalDistanceProperty.value = this.c * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+    this.distance1Property.value = this.d1 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+    this.distance2Property.value = this.d2 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.periodProperty.value = this.T * Math.pow( SolarSystemCommonConstants.POSITION_MULTIPLIER, 3 / 2 );
 
     if ( this.collidedWithSun( a, e ) ) {
@@ -249,7 +261,9 @@ export default class EllipticalOrbitEngine extends Engine {
       else {
         this.eccentricityProperty.value = e;
       }
+      this.isCircularProperty.value = this.eccentricityProperty.value === 0;
     }
+
 
     this.changedEmitter.emit();
   }
@@ -258,8 +272,7 @@ export default class EllipticalOrbitEngine extends Engine {
     // Always set the velocity to be perpendicular to the position and circular
     const direction = this.retrograde ? -1 : 1;
     this.body.velocityProperty.value =
-      position.perpendicular.normalize().
-      multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
+      position.perpendicular.normalize().multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
     // TODO: Velocity a bit over circular orbit to avoid some errors, but they shouldnt be happening
   }
 
@@ -272,6 +285,9 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   public createPolar( nu: number, w = 0 ): Vector2 {
+    // nu is the true anomaly (Angle between periapsis and the body)
+    // w is the argument of periapsis (global rotation of periapsis)
+    // When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
     return Vector2.createPolar( this.calculateR( this.a, this.e, nu ), nu + w );
   }
 

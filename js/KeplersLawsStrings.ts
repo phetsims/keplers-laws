@@ -45,6 +45,9 @@ type StringsType = {
     'semiMinorAxisStringProperty': LinkableProperty<string>;
     'focalDistanceStringProperty': LinkableProperty<string>;
     'periodStringProperty': LinkableProperty<string>;
+    'radiusStringProperty': LinkableProperty<string>;
+    'distance1StringProperty': LinkableProperty<string>;
+    'distance2StringProperty': LinkableProperty<string>;
   };
   'pattern': {
     'textEqualsValueUnitsStringProperty': LinkableProperty<string>;
