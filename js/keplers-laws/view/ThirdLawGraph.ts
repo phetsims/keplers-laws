@@ -21,6 +21,7 @@ import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.j
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../../keplersLaws.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -63,23 +64,24 @@ export default class ThirdLawGraph extends Node {
     const maxPeriod = model.engine.thirdLaw( maxSemiMajorAxis );
 
     const dataPoint = new Circle( 5, {
-      fill: 'fuchsia'
+      fill: SolarSystemCommonColors.secondBodyColorProperty
     } );
 
     const linePath = new Path( null, {
-      stroke: FOREGROUND_COLOR_PROPERTY
+      stroke: SolarSystemCommonColors.secondBodyColorProperty,
+      lineWidth: 3
     } );
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
       model.selectedAxisPowerProperty,
-      model.engine.allowedOrbitProperty
+      new TinyProperty<boolean>( true )
     );
 
     const yAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.periodStringProperty,
       model.selectedPeriodPowerProperty,
-      model.engine.allowedOrbitProperty
+      new TinyProperty<boolean>( true )
     );
 
     const xAxisLabel = new RichText(
@@ -104,8 +106,15 @@ export default class ThirdLawGraph extends Node {
       } )
     ];
 
-    let minVisitedAxis = orbit.a;
-    let maxVisitedAxis = orbit.a;
+    let minVisitedAxis: number;
+    let maxVisitedAxis: number;
+
+    const resetAxisBoundaries = () => {
+      minVisitedAxis = orbit.a;
+      maxVisitedAxis = orbit.a;
+    };
+
+    resetAxisBoundaries();
 
     const orbitUpdated = () => {
       dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
@@ -133,11 +142,15 @@ export default class ThirdLawGraph extends Node {
     Multilink.multilink(
       [
         model.selectedAxisPowerProperty,
-        model.selectedPeriodPowerProperty,
-        model.engine.sunMassProperty
+        model.selectedPeriodPowerProperty
       ], orbitUpdated );
 
+    model.engine.sunMassProperty.link( () => {
+      resetAxisBoundaries();
+    } );
+
     orbit.changedEmitter.addListener( orbitUpdated );
+    orbit.resetEmitter.addListener( resetAxisBoundaries );
   }
 }
 

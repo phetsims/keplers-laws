@@ -63,6 +63,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
   public readonly changedEmitter = new Emitter();
+  public readonly resetEmitter = new Emitter();
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
   public orbitalAreas: OrbitalArea[] = [];
@@ -484,6 +485,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.T = 1; // period
     this.nu = 0; // true anomaly
     this.update();
+    this.resetEmitter.emit();
   }
 }
 

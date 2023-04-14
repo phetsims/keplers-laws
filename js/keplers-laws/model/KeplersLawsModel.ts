@@ -171,6 +171,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.visibilityReset();
     this.engine.updateAllowed = true;
+    this.engine.reset();
     this.engine.update();
 
     this.loadBodyStates( this.defaultBodyState );
