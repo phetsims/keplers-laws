@@ -14,7 +14,7 @@ import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import SolarSystemCommonScreenView, { CommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
+import SolarSystemCommonScreenView, { SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
@@ -34,20 +34,18 @@ type SelfOptions = {
   allowLawSelection?: boolean;
 };
 
-export type KeplersLawsScreenViewOptions = SelfOptions & CommonScreenViewOptions;
+export type KeplersLawsScreenViewOptions = SelfOptions & SolarSystemCommonScreenViewOptions;
 
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly stopwatchNode: StopwatchNode;
 
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
-    const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, CommonScreenViewOptions>()( {
+    const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
       allowLawSelection: false
     }, providedOptions );
 
     super( model, options );
-
-    this.orbitalCenterProperty.value = this.orbitalCenterProperty.value.plusXY( 0, 50 );
 
     model.engine.orbitalAreas.forEach( ( area, index ) => {
       area.insideProperty.link( inside => {
