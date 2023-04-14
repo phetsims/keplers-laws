@@ -9,7 +9,7 @@
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import SolarSystemCommonModel, { BodyInfo, CommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import LawMode from './LawMode.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
@@ -23,10 +23,14 @@ import keplersLaws from '../../keplersLaws.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
-type KeplersLawsModelOptions = StrictOmit<SuperTypeOptions, 'engineFactory' | 'isLab'>;
+type SelfOptions = {
+  initialLaw?: LawMode;
+};
+
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'isLab'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
-  public readonly selectedLawProperty = new EnumerationProperty( LawMode.FIRST_LAW );
+  public readonly selectedLawProperty: EnumerationProperty<LawMode>;
   public readonly alwaysCircularProperty = new BooleanProperty( false );
 
   // Booleans to keep track of which law is selected
@@ -62,13 +66,16 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly stopwatch: Stopwatch;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
-    const options = optionize<KeplersLawsModelOptions, EmptySelfOptions, SuperTypeOptions>()( {
+    const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
       isLab: false,
       timeScale: 2,
-      timeMultiplier: 1 / 12.7
+      timeMultiplier: 1 / 12.7,
+      initialLaw: LawMode.FIRST_LAW
     }, providedOptions );
     super( options );
+
+    this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
 
     this.defaultBodyState = [
       { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
