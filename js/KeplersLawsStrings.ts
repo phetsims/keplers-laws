@@ -12,6 +12,12 @@ type StringsType = {
   'keplers-laws': {
     'titleStringProperty': LinkableProperty<string>;
   };
+  'screen': {
+    'firstLawStringProperty': LinkableProperty<string>;
+    'secondLawStringProperty': LinkableProperty<string>;
+    'thirdLawStringProperty': LinkableProperty<string>;
+    'labStringProperty': LinkableProperty<string>;
+  };
   'undefinedStringProperty': LinkableProperty<string>;
   'circularOrbitStringProperty': LinkableProperty<string>;
   'axisStringProperty': LinkableProperty<string>;

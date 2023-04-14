@@ -13,7 +13,7 @@ import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { CommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -30,17 +30,20 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 // constants
 const MARGIN = 10;
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  allowLawSelection?: boolean;
+};
 
 export type KeplersLawsScreenViewOptions = SelfOptions & CommonScreenViewOptions;
 
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly stopwatchNode: StopwatchNode;
 
-  public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsScreenViewOptions ) {
-    const options = combineOptions<CommonScreenViewOptions>( providedOptions, {
-      playingAllowedProperty: model.engine.allowedOrbitProperty
-    } );
+  public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
+    const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, CommonScreenViewOptions>()( {
+      playingAllowedProperty: model.engine.allowedOrbitProperty,
+      allowLawSelection: false
+    }, providedOptions );
 
     super( model, options );
 
@@ -150,7 +153,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         align: 'left',
         children: [
           this.timeBox,
-          new KeplersLawsControls( model, providedOptions.tandem.createTandem( 'controlPanel' ) )
+          new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) )
         ]
       } ),
       {
@@ -175,20 +178,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.topLayer.addChild( this.stopwatchNode );
 
-    const lawsButtonsBox = new AlignBox( new HBox( {
-        children: [
-          new LawsButtons( model )
-        ],
-        spacing: 20
-      } ),
-      {
-        alignBoundsProperty: this.availableBoundsProperty,
-        margin: MARGIN,
-        xAlign: 'left',
-        yAlign: 'bottom'
-      }
-    );
-
     const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.modelViewTransformProperty ), {
       alignBoundsProperty: this.availableBoundsProperty,
       margin: SolarSystemCommonConstants.MARGIN,
@@ -207,7 +196,21 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsAndZoomBoxes );
     this.interfaceLayer.addChild( controlPanelAlignBox );
-    this.interfaceLayer.addChild( lawsButtonsBox );
+    if ( options.allowLawSelection ) {
+      this.interfaceLayer.addChild( new AlignBox( new HBox( {
+          children: [
+            new LawsButtons( model )
+          ],
+          spacing: 20
+        } ),
+        {
+          alignBoundsProperty: this.availableBoundsProperty,
+          margin: MARGIN,
+          xAlign: 'left',
+          yAlign: 'bottom'
+        }
+      ) );
+    }
     this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
   }
