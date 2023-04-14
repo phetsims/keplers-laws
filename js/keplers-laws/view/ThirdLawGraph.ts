@@ -102,9 +102,30 @@ export default class ThirdLawGraph extends Node {
       } )
     ];
 
+    let minVisitedAxis = orbit.a;
+    let maxVisitedAxis = orbit.a;
+
     const orbitUpdated = () => {
       dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
+
+      if ( orbit.a < minVisitedAxis ) {
+        minVisitedAxis = orbit.a;
+      }
+
+      if ( orbit.a > maxVisitedAxis ) {
+        maxVisitedAxis = orbit.a;
+      }
+
+      const shape = new Shape();
+
+      // a is the semimajor axis
+      for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 5 ) {
+        shape.lineToPoint( semiMajorAxisToViewPoint( a ) );
+      }
+      shape.makeImmutable();
+
+      linePath.shape = shape;
     };
 
     Multilink.multilink(
@@ -112,17 +133,7 @@ export default class ThirdLawGraph extends Node {
         model.selectedAxisPowerProperty,
         model.selectedPeriodPowerProperty,
         model.engine.sunMassProperty
-      ], () => {
-      orbitUpdated();
-
-      const shape = new Shape().moveTo( 0, 0 );
-      for ( let axis = 0; axis <= maxSemiMajorAxis; axis += maxSemiMajorAxis / 100 ) {
-        shape.lineToPoint( semiMajorAxisToViewPoint( axis ) );
-      }
-      shape.makeImmutable();
-
-      linePath.shape = shape;
-    } );
+      ], orbitUpdated );
 
     orbit.changedEmitter.addListener( orbitUpdated );
   }
