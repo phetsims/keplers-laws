@@ -8,9 +8,8 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { GridBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import ThirdLawGraph from './ThirdLawGraph.js';
 import ThirdLawSliderPanel from './ThirdLawSliderPanel.js';
@@ -24,33 +23,18 @@ import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSy
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
-export default class ThirdLawAccordionBox extends AccordionBox {
-  public constructor( model: KeplersLawsModel, providedOptions?: ThirdLawAccordionBoxOptions ) {
-    const options = optionize<ThirdLawAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
-      titleNode: new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
-      visibleProperty: model.isThirdLawProperty,
-      titleYMargin: 10
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
-
-    super( new ThirdLawPanels( model ), options );
-
-    this.expandedProperty.value = false;
-  }
-}
-
-type PanelThirdLawOptions = PanelOptions;
-
-class ThirdLawPanels extends VBox {
+export default class ThirdLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
     super( {
       margin: 5,
       stretch: true,
       children: [
-        new ThirdLawMainPanel( model ),
+        new ThirdLawAccordionBox( model ),
         new ThirdLawSliderPanel( model )
       ],
       visibleProperty: model.isThirdLawProperty
@@ -58,12 +42,15 @@ class ThirdLawPanels extends VBox {
   }
 }
 
-class ThirdLawMainPanel extends Panel {
+class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
-    const options = combineOptions<PanelThirdLawOptions>( {
+    const options = combineOptions<ThirdLawAccordionBoxOptions>( {
+      titleNode: new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+      titleYMargin: 10,
       visibleProperty: model.isThirdLawProperty,
       fill: SolarSystemCommonColors.backgroundProperty,
-      stroke: SolarSystemCommonColors.gridIconStrokeColorProperty
+      stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,
+      minWidth: KeplersLawsConstants.PANELS_MIN_WIDTH
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
