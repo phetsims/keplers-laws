@@ -8,7 +8,7 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { GridBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -23,10 +23,28 @@ import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 
-export type PanelThirdLawOptions = PanelOptions;
+type SelfOptions = EmptySelfOptions;
+export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
-export default class ThirdLawPanels extends VBox {
+export default class ThirdLawAccordionBox extends AccordionBox {
+  public constructor( model: KeplersLawsModel, providedOptions?: ThirdLawAccordionBoxOptions ) {
+    const options = optionize<ThirdLawAccordionBoxOptions, SelfOptions, AccordionBoxOptions>()( {
+      titleNode: new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+      visibleProperty: model.isThirdLawProperty,
+      titleYMargin: 10
+    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
+    super( new ThirdLawPanels( model ), options );
+
+    this.expandedProperty.value = false;
+  }
+}
+
+type PanelThirdLawOptions = PanelOptions;
+
+class ThirdLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
     super( {
       margin: 5,
@@ -79,7 +97,6 @@ class ThirdLawMainPanel extends Panel {
       spacing: 10,
       align: 'left',
       children: [
-        new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
         new GridBox( {
           children: [
             // Period power buttons
