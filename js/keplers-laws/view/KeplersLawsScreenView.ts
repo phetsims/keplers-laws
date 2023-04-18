@@ -12,7 +12,7 @@ import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
-import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
+import ThirdLawPanels from './ThirdLawPanels.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsButtons from './LawsButtons.js';
@@ -121,17 +121,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         children: [
           new FirstLawPanels( model ),
           new SecondLawPanels( model ),
-          new ThirdLawAccordionBox( model )
-          // NOTE: CODE TEMPORARILY COMMENTED OUT, AWAITING DESIGN DECISION
-          // new MagnifyingGlassZoomButtonGroup(
-          //   model.zoomLevelProperty, {
-          //     spacing: 8,
-          //     magnifyingGlassNodeOptions: {
-          //       glassRadius: 8
-          //     },
-          //     touchAreaXDilation: 5,
-          //     touchAreaYDilation: 5
-          //   } )
+          new ThirdLawPanels( model )
         ],
         spacing: 10,
         align: 'top'
