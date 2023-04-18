@@ -55,7 +55,10 @@ export default class ThirdLawSliderPanel extends Panel {
 
         // snap to default value if close
         startCallback: () => { model.bodies[ 0 ].userControlledMassProperty.value = true; },
-        endCallback: () => { model.bodies[ 0 ].userControlledMassProperty.value = false; }
+        endCallback: () => {
+          model.bodies[ 0 ].userControlledMassProperty.value = false;
+          model.engine.resetEmitter.emit();
+        }
         // tandem: tandem
       }
     );

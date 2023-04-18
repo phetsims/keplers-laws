@@ -109,13 +109,6 @@ export default class ThirdLawGraph extends Node {
     let minVisitedAxis: number;
     let maxVisitedAxis: number;
 
-    const resetAxisBoundaries = () => {
-      minVisitedAxis = orbit.a;
-      maxVisitedAxis = orbit.a;
-    };
-
-    resetAxisBoundaries();
-
     const orbitUpdated = () => {
       dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
@@ -138,6 +131,16 @@ export default class ThirdLawGraph extends Node {
 
       linePath.shape = shape;
     };
+
+    const resetAxisBoundaries = () => {
+      minVisitedAxis = orbit.a;
+      maxVisitedAxis = orbit.a;
+
+      // Calling the draw function again to update (delete) the line
+      orbitUpdated();
+    };
+
+    resetAxisBoundaries();
 
     Multilink.multilink(
       [
