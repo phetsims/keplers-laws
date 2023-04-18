@@ -180,10 +180,20 @@ export default class EllipticalOrbitEngine extends Engine {
     this.body.positionProperty.value = newPosition;
     this.body.velocityProperty.value = newVelocity;
 
+    this.updateBodyDistances();
     this.updateForces( newPosition );
 
     this.calculateOrbitalDivisions( true );
     this.changedEmitter.emit();
+  }
+
+  public updateBodyDistances(): void {
+    this.bodyPolarPosition = this.createPolar( this.nu );
+    this.d1 = this.bodyPolarPosition.magnitude;
+    this.d2 = 2 * this.a - this.d1;
+
+    this.distance1Property.value = this.d1 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+    this.distance2Property.value = this.d2 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
   }
 
   public updateForces( position: Vector2 ): void {
@@ -230,20 +240,15 @@ export default class EllipticalOrbitEngine extends Engine {
     this.W = W;
     this.nu = nu;
 
-    this.bodyPolarPosition = this.createPolar( this.nu );
-    this.d1 = this.bodyPolarPosition.magnitude;
-    this.d2 = 2 * this.a - this.d1;
-
     this.T = this.thirdLaw( this.a );
 
+    this.updateBodyDistances();
     this.totalArea = Math.PI * this.a * this.b;
     this.segmentArea = this.totalArea / this.periodDivisions;
 
     this.semiMajorAxisProperty.value = this.a * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.semiMinorAxisProperty.value = this.b * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.focalDistanceProperty.value = this.c * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.distance1Property.value = this.d1 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.distance2Property.value = this.d2 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
     this.periodProperty.value = this.T * Math.pow( SolarSystemCommonConstants.POSITION_MULTIPLIER, 3 / 2 );
 
     if ( this.collidedWithSun( a, e ) ) {
