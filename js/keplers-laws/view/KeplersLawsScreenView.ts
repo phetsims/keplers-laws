@@ -73,6 +73,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
       useCueingArrows: true,
       showVelocityIndex: false,
+      soundViewNode: this,
       valuesVisibleProperty: model.valuesVisibleProperty,
       mapPosition: ( point, radius ) => {
         point = modelDragBoundsProperty.value.eroded( radius ).closestPointTo( point );
