@@ -56,7 +56,7 @@ export default class SweptAreaAccordionBox extends AccordionBox {
       stroke: FOREGROUND_COLOR_PROPERTY,
       tailWidth: 1
     } );
-    const yAxis = new ArrowNode( 0, 0, 0, -yAxisLength, {
+    const yAxis = new ArrowNode( 0, 0, 0, -yAxisLength * 1.05, {
       fill: FOREGROUND_COLOR_PROPERTY,
       stroke: FOREGROUND_COLOR_PROPERTY,
       tailWidth: 1
