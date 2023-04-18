@@ -51,7 +51,8 @@ class Ellipse {
     public e: number,
     public w: number,
     public M: number,
-    public W: number
+    public W: number,
+    public nu: number
   ) {}
 }
 
@@ -219,7 +220,7 @@ export default class EllipticalOrbitEngine extends Engine {
     const v = this.body.velocityProperty.value;
     this.L = r.crossScalar( v );
 
-    const { a, b, c, e, w, M, W } = this.calculateEllipse( r, v );
+    const { a, b, c, e, w, M, W, nu } = this.calculateEllipse( r, v );
     this.a = a;
     this.b = b;
     this.c = c;
@@ -227,8 +228,8 @@ export default class EllipticalOrbitEngine extends Engine {
     this.w = w;
     this.M = M;
     this.W = W;
+    this.nu = nu;
 
-    this.nu = this.getTrueAnomaly( this.M );
     this.bodyPolarPosition = this.createPolar( this.nu );
     this.d1 = this.bodyPolarPosition.magnitude;
     this.d2 = 2 * this.a - this.d1;
@@ -430,7 +431,7 @@ export default class EllipticalOrbitEngine extends Engine {
     // Calculate the argument of periapsis
     const w = rAngle - nu;
 
-    return [ w, M, W ];
+    return [ w, M, W, nu ];
   }
 
   private calculateEllipse( r: Vector2, v: Vector2 ): Ellipse {
@@ -438,8 +439,8 @@ export default class EllipticalOrbitEngine extends Engine {
     const e = this.calculate_e( r, v, a );
     const b = a * Math.sqrt( 1 - e * e );
     const c = a * e;
-    const [ w, M, W ] = this.calculateAngles( r, v, a, e );
-    return new Ellipse( a, b, c, e, w, M, W );
+    const [ w, M, W, nu ] = this.calculateAngles( r, v, a, e );
+    return new Ellipse( a, b, c, e, w, M, W, nu );
   }
 
   private calculateR( a: number, e: number, nu: number ): number {
