@@ -218,9 +218,14 @@ export default class EllipticalOrbitEngine extends Engine {
       this.enforceCircularOrbit( r );
     }
     else {
-      escaped = this.body.velocityProperty.value.magnitude >= this.escapeSpeedProperty.value * epsilon;
-      if ( escaped ) {
+      const realEscapeSpeed = this.escapeSpeedProperty.value;
+      const currentSpeed = this.body.velocityProperty.value.magnitude;
+      if ( currentSpeed >= realEscapeSpeed ) {
         this.enforceEscapeSpeed();
+      }
+      // Using epsilon for a lower threshold on escape orbits to avoid floating point errors, which induced some flickering on edge cases
+      escaped = currentSpeed >= ( realEscapeSpeed * epsilon );
+      if ( escaped ) {
         this.allowedOrbitProperty.value = false;
         this.orbitTypeProperty.value = OrbitTypes.ESCAPE_ORBIT;
         this.eccentricityProperty.value = 1;
