@@ -24,6 +24,7 @@ import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
@@ -134,6 +135,10 @@ class ThirdLawAccordionBox extends AccordionBox {
             new ThirdLawGraph( model, model.engine, {
               layoutOptions: { column: 1, row: 0 },
               excludeInvisibleChildrenFromBounds: true
+            } ),
+            new EraserButton( {
+              listener: () => model.engine.resetEmitter.emit(),
+              layoutOptions: { column: 0, row: 1 }
             } )
           ],
           spacing: 10

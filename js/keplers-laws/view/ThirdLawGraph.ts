@@ -68,8 +68,8 @@ export default class ThirdLawGraph extends Node {
     } );
 
     const linePath = new Path( null, {
-      stroke: SolarSystemCommonColors.secondBodyColorProperty,
-      lineWidth: 3
+      stroke: SolarSystemCommonColors.foregroundProperty,
+      lineWidth: 2
     } );
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
@@ -102,7 +102,7 @@ export default class ThirdLawGraph extends Node {
       yAxisLabel,
       new Node( {
         children: [ linePath, dataPoint ],
-        clipArea: Shape.bounds( new Bounds2( 0, -axisLength, axisLength, 0 ) )
+        clipArea: Shape.bounds( new Bounds2( -50, -axisLength, axisLength, 50 ) )
       } )
     ];
 
@@ -113,14 +113,12 @@ export default class ThirdLawGraph extends Node {
       dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
-      if ( !model.bodies[ 0 ].userControlledMassProperty.value ) {
-        if ( orbit.a < minVisitedAxis ) {
-          minVisitedAxis = orbit.a;
-        }
+      if ( orbit.a < minVisitedAxis ) {
+        minVisitedAxis = orbit.a;
+      }
 
-        if ( orbit.a > maxVisitedAxis ) {
-          maxVisitedAxis = orbit.a;
-        }
+      if ( orbit.a > maxVisitedAxis ) {
+        maxVisitedAxis = orbit.a;
       }
 
       const shape = new Shape();
@@ -150,17 +148,8 @@ export default class ThirdLawGraph extends Node {
         model.selectedPeriodPowerProperty
       ], orbitUpdated );
 
-    model.engine.sunMassProperty.link( () => {
-      resetAxisBoundaries();
-    } );
-
     orbit.changedEmitter.addListener( orbitUpdated );
     orbit.resetEmitter.addListener( resetAxisBoundaries );
-    model.bodies[ 0 ].userControlledMassProperty.link( userControlledMass => {
-      if ( !userControlledMass ) {
-        resetAxisBoundaries();
-      }
-    } );
   }
 }
 
