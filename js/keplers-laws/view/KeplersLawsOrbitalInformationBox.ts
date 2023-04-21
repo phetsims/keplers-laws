@@ -110,19 +110,12 @@ class KeplersLawsOrbitalInformationBox extends VBox {
           leftMargin: 20,
           layoutOptions: { stretch: true }
         } ),
-      new AlignBox(
-        createCheckbox(
-          model.eccentricityVisibleProperty,
-          KeplersLawsStrings.eccentricityStringProperty,
-          'eccentricityVisibleCheckbox',
-          new Image( eccentricityIcon_png, ICON_OPTIONS ),
-          {
-            enabledProperty: model.axisVisibleProperty
-          }
-        ), {
-          leftMargin: 20,
-          layoutOptions: { stretch: true }
-        } )
+      createCheckbox(
+        model.eccentricityVisibleProperty,
+        KeplersLawsStrings.eccentricityStringProperty,
+        'eccentricityVisibleCheckbox',
+        new Image( eccentricityIcon_png, ICON_OPTIONS )
+      )
     ];
 
     const secondLawChildren = [

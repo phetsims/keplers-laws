@@ -120,7 +120,7 @@ class ValuesPanel extends Panel {
       align: 'left',
       children: [
         new RichText( semiMajorAxisStringProperty, combineOptions<TextOptions>( {
-          visibleProperty: model.semiaxisVisibleProperty
+          visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
         }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
         new RichText( semiMinorAxisStringProperty, combineOptions<TextOptions>( {
           visibleProperty: model.semiaxisVisibleProperty
