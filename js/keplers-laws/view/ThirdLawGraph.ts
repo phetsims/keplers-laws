@@ -71,6 +71,11 @@ export default class ThirdLawGraph extends Node {
       stroke: SolarSystemCommonColors.foregroundProperty,
       lineWidth: 2
     } );
+    const outOfBoundsArrow = new ArrowNode( 0, 0, 1, 0, {
+      stroke: SolarSystemCommonColors.secondBodyColorProperty,
+      fill: SolarSystemCommonColors.secondBodyColorProperty,
+      lineWidth: 2
+    } );
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
       KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
@@ -101,7 +106,7 @@ export default class ThirdLawGraph extends Node {
       xAxisLabel,
       yAxisLabel,
       new Node( {
-        children: [ linePath, dataPoint ],
+        children: [ linePath, dataPoint, outOfBoundsArrow ],
         clipArea: Shape.bounds( new Bounds2( -50, -axisLength, axisLength, 50 ) )
       } )
     ];
@@ -130,6 +135,18 @@ export default class ThirdLawGraph extends Node {
       shape.makeImmutable();
 
       linePath.shape = shape;
+
+      if ( orbit.a > maxSemiMajorAxis ) {
+        const axis = maxSemiMajorAxis - 100;
+        const tail = semiMajorAxisToViewPoint( axis );
+        const tip = semiMajorAxisToViewPoint( orbit.a ).minus( tail ).setMagnitude( 20 );
+        outOfBoundsArrow.translation = tail;
+        outOfBoundsArrow.setTip( tip.x, tip.y );
+        outOfBoundsArrow.visible = true;
+      }
+      else {
+        outOfBoundsArrow.visible = false;
+      }
     };
 
     const resetAxisBoundaries = () => {
