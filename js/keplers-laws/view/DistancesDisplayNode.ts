@@ -142,11 +142,13 @@ export default class DistancesDisplayNode extends VBox {
       stringLabelNode1.x = -d2Length / 2;
       stringLabelNode2.x = d1Length / 2;
 
-      d1lineArrowNode.setTailAndTip( 0, 0, d1Length, 0 );
-      d2lineArrowNode.setTailAndTip( 0, 0, -d2Length, 0 );
+      const dx = 3; // reducing the arrow length a bit to get the proper measurable length in screen
 
-      aLineArrowNode1.setTailAndTip( 0, 0, aLength, 0 );
-      aLineArrowNode2.setTailAndTip( 0, 0, -aLength, 0 );
+      d1lineArrowNode.setTailAndTip( 0, 0, d1Length - dx, 0 );
+      d2lineArrowNode.setTailAndTip( 0, 0, -d2Length + dx, 0 );
+
+      aLineArrowNode1.setTailAndTip( 0, 0, aLength - dx, 0 );
+      aLineArrowNode2.setTailAndTip( 0, 0, -aLength + dx, 0 );
     };
 
     Multilink.multilink( [

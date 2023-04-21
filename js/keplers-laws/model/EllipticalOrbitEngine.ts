@@ -71,7 +71,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public updateAllowed = true;
   public retrograde = false;
   public alwaysCircles = false;
-  public isCircularProperty = new BooleanProperty( false );
+  public isCircularProperty = new BooleanProperty( true );
 
   public semiMajorAxisProperty = new NumberProperty( 1 );
   public semiMinorAxisProperty = new NumberProperty( 1 );
