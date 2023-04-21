@@ -94,27 +94,6 @@ class ValuesPanel extends Panel {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
       } )
     } );
-    const radiusStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.radiusStringProperty,
-      units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( radius, allowedOrbit, undefinedMessage ) => {
-        return allowedOrbit ? Utils.toFixed( radius, 2 ) : undefinedMessage;
-      } )
-    } );
-    const d1StringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.distance1StringProperty,
-      units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.distance1Property, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( distance1, allowedOrbit, undefinedMessage ) => {
-        return allowedOrbit ? Utils.toFixed( distance1, 2 ) : undefinedMessage;
-      } )
-    } );
-    const d2StringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.distance2StringProperty,
-      units: conditionalAUStringProperty,
-      value: new DerivedProperty( [ model.engine.distance2Property, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( distance2, allowedOrbit, undefinedMessage ) => {
-        return allowedOrbit ? Utils.toFixed( distance2, 2 ) : undefinedMessage;
-      } )
-    } );
 
     super( new VBox( {
       align: 'left',
@@ -127,19 +106,6 @@ class ValuesPanel extends Panel {
         }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
         new RichText( focalDistanceStringProperty, combineOptions<TextOptions>( {
           visibleProperty: model.eccentricityVisibleProperty
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
-        new RichText( radiusStringProperty, combineOptions<TextOptions>( {
-          visibleProperty: DerivedProperty.and( [ model.stringsVisibleProperty, model.engine.isCircularProperty ] )
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
-        new RichText( d1StringProperty, combineOptions<TextOptions>( {
-          visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.isCircularProperty ], ( stringsVisible, isCircular ) => {
-            return stringsVisible && !isCircular;
-          } )
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
-        new RichText( d2StringProperty, combineOptions<TextOptions>( {
-          visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.isCircularProperty ], ( stringsVisible, isCircular ) => {
-            return stringsVisible && !isCircular;
-          } )
         }, SolarSystemCommonConstants.TEXT_OPTIONS ) )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
