@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { Color, HBox, Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Color, Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -21,12 +21,10 @@ import BarPlot from '../../../../bamboo/js/BarPlot.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
 import TickMarkSet, { TickMarkSetOptions } from '../../../../bamboo/js/TickMarkSet.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
-import ArrowButton, { ArrowButtonOptions } from '../../../../sun/js/buttons/ArrowButton.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Utils from '../../../../dot/js/Utils.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -86,76 +84,12 @@ export default class SweptAreaAccordionBox extends AccordionBox {
               yAxisLabel
             ]
           } ),
-          xAxisLabel,
-          new DivisionsArrowButtonsBox( model )
+          xAxisLabel
         ]
       }
     ), options );
 
     this.expandedProperty.value = false;
-  }
-}
-
-class DivisionsArrowButtonsBox extends HBox {
-  public constructor( model: KeplersLawsModel ) {
-
-    const divisionsRange = new RangeWithValue(
-      SolarSystemCommonConstants.MIN_ORBITAL_DIVISIONS,
-      SolarSystemCommonConstants.MAX_ORBITAL_DIVISIONS,
-      4 );
-
-    const arrowButtonOptions: ArrowButtonOptions = {
-      baseColor: 'white',
-      stroke: 'black',
-      lineWidth: 1
-    };
-
-    // increment button
-    const incrementButton = new ArrowButton(
-      'right',
-      () => {
-        const numberValue = model.periodDivisionProperty.value;
-        model.periodDivisionProperty.value =
-          numberValue < divisionsRange.max ?
-          numberValue + 1 :
-          numberValue;
-      },
-      combineOptions<ArrowButtonOptions>( {
-        enabledProperty: new DerivedProperty(
-          [ model.periodDivisionProperty ],
-          periodDivisions => {
-            return periodDivisions < divisionsRange.max;
-          }
-        )
-      }, arrowButtonOptions )
-    );
-
-    // decrement button
-    const decrementButton = new ArrowButton(
-      'left',
-      () => {
-        const numberValue = model.periodDivisionProperty.value;
-        model.periodDivisionProperty.value =
-          numberValue > divisionsRange.min ?
-          numberValue - 1 :
-          numberValue;
-      },
-      combineOptions<ArrowButtonOptions>( {
-        enabledProperty: new DerivedProperty(
-          [ model.periodDivisionProperty ],
-          periodDivisions => {
-            return periodDivisions > divisionsRange.min;
-          }
-        )
-      }, arrowButtonOptions )
-    );
-
-    super( {
-      children: [
-        decrementButton,
-        incrementButton
-      ]
-    } );
   }
 }
 
@@ -262,7 +196,7 @@ class AreasBarPlot extends Node {
     this.model.periodDivisionProperty.link( periodDivision => {
       modelXRange = new Range( -1, periodDivision );
       chartTransform.setModelXRange( modelXRange );
-      barPlot.barWidth = 15 * ( SolarSystemCommonConstants.MAX_ORBITAL_DIVISIONS / periodDivision );
+      barPlot.barWidth = 15 * ( KeplersLawsConstants.MAX_ORBITAL_DIVISIONS / periodDivision );
       barPlot.update();
       XTickLabelSet.setCreateLabel( ( value: number ) => {
         return ( value >= 0 && value < periodDivision ) ?

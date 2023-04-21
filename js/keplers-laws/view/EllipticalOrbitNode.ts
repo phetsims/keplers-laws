@@ -20,6 +20,11 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Range from '../../../../dot/js/Range.js';
+import Utils from '../../../../dot/js/Utils.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -196,8 +201,12 @@ export default class EllipticalOrbitNode extends Path {
     // Arrays of orbital divisions' dots and areas
     const orbitDivisions: Circle[] = [];
     const areaPaths: Path[] = [];
+    const areaValueProperties: NumberProperty[] = [];
+    const areaValueNumberDisplays: Node[] = [];
 
-    for ( let i = 0; i < SolarSystemCommonConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
+    const areaValueRange = new Range( 0, 1 );
+
+    for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
       orbitDivisions.push( new Circle( 4, {
         fill: 'black',
         stroke: SolarSystemCommonColors.orbitColorProperty,
@@ -208,6 +217,14 @@ export default class EllipticalOrbitNode extends Path {
       areaPaths.push( new Path( null, {
         fill: SolarSystemCommonColors.orbitColorProperty
       } ) );
+      const areaValueProperty = new NumberProperty( 0 );
+      areaValueProperties.push( areaValueProperty );
+      areaValueNumberDisplays.push( new NumberDisplay( areaValueProperty, areaValueRange, {
+        scale: 0.9,
+        numberFormatter: ( value: number ) => {
+          return Utils.toFixed( value, 2 ) + 'AU²';
+        }
+      } ) );
     }
 
     // Nodes for the orbital divisions' dots and areas
@@ -216,8 +233,12 @@ export default class EllipticalOrbitNode extends Path {
     const areaPathsNode = new Node( {
       visibleProperty: model.isSecondLawProperty
     } );
+    const areaValuesNode = new Node( {
+      visibleProperty: DerivedProperty.and( [ model.isSecondLawProperty, model.areaValuesVisibleProperty ] )
+    } );
     orbitDivisions.forEach( node => { orbitDivisionsNode.addChild( node ); } );
     areaPaths.forEach( node => { areaPathsNode.addChild( node ); } );
+    areaValueNumberDisplays.forEach( node => { areaValuesNode.addChild( node ); } );
 
     // THIRD LAW: SemiMajor axis
     const semiMajorAxisPath = new Path( null, {
@@ -253,6 +274,7 @@ export default class EllipticalOrbitNode extends Path {
     secondLawLayer.addChild( periapsis );
     secondLawLayer.addChild( apoapsis );
     secondLawLayer.addChild( orbitDivisionsNode );
+    secondLawLayer.addChild( areaValuesNode );
 
     // Third Law: SemiMajor axis, and track
     thirdLawLayer.addChild( semiMajorAxisPath );
@@ -338,10 +360,12 @@ export default class EllipticalOrbitNode extends Path {
       periapsis.center = new Vector2( scale * ( a * ( 1 - e ) + c ), 0 );
       apoapsis.center = new Vector2( -scale * ( a * ( 1 + e ) - c ), 0 );
 
+
       // Drawing orbital divisions and areas
       this.orbit.orbitalAreas.forEach( ( area, i ) => {
         orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
         areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
+        areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
 
         if ( i < model.periodDivisionProperty.value ) {
           // Set the center of the orbit's divisions dot
@@ -352,6 +376,16 @@ export default class EllipticalOrbitNode extends Path {
           const end = area.endPosition.times( scale ).minus( center );
           const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
           const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
+
+          // Mean value between start and end
+          const numberDisplayPosition = start.plus( end );
+          const scaling = Utils.clamp( Utils.linear( 200, 10, 0.5, 2, numberDisplayPosition.magnitude ), 0.5, 2 );
+          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( scaling );
+          areaValueNumberDisplays[ i ].rotation = this.orbit.w;
+          const fullSegmentArea = Math.PI * this.orbit.semiMajorAxisProperty.value * this.orbit.semiMinorAxisProperty.value / model.periodDivisionProperty.value;
+          areaValueProperties[ i ].value = area.alreadyEntered ?
+                                           ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
+                                             : 0;
 
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes

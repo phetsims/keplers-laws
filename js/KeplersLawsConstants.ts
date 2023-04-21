@@ -9,7 +9,10 @@
 import keplersLaws from './keplersLaws.js';
 
 const KeplersLawsConstants = {
-  PANELS_MIN_WIDTH: 250
+  PANELS_MIN_WIDTH: 250,
+
+  MAX_ORBITAL_DIVISIONS: 6,
+  MIN_ORBITAL_DIVISIONS: 2
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );

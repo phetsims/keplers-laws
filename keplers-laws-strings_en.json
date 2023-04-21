@@ -53,6 +53,9 @@
   "area.periodDivision": {
     "value": "Period Divisions"
   },
+  "area.values": {
+    "value": "Area Values"
+  },
   "area.areaUnits": {
     "value": "Area (AU<sup>2</sup>)"
   },

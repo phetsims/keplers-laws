@@ -32,6 +32,7 @@ type StringsType = {
   'ourSunStringProperty': LinkableProperty<string>;
   'area': {
     'periodDivisionStringProperty': LinkableProperty<string>;
+    'valuesStringProperty': LinkableProperty<string>;
     'areaUnitsStringProperty': LinkableProperty<string>;
   };
   'sweptAreaStringProperty': LinkableProperty<string>;
