@@ -7,7 +7,7 @@
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { GridBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import { GridBox, RichText, VBox } from '../../../../scenery/js/imports.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -25,6 +25,7 @@ import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
@@ -46,7 +47,19 @@ export default class ThirdLawPanels extends VBox {
 class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
     const options = combineOptions<ThirdLawAccordionBoxOptions>( {
-      titleNode: new Text( KeplersLawsStrings.graph.titleStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+      titleNode: new RichText( new DerivedProperty( [
+        KeplersLawsStrings.graph.titleStringProperty,
+        model.selectedAxisPowerProperty,
+        model.selectedPeriodPowerProperty
+      ], ( stringPattern, axisPower, periodPower ) => {
+        const axisString = axisPower === 1 ? '' : `<sup>${axisPower}</sup>`;
+        const periodString = periodPower === 1 ? '' : `<sup>${periodPower}</sup>`;
+
+        return StringUtils.fillIn( stringPattern, {
+          axisPower: axisString,
+          periodPower: periodString
+        } );
+      } ), SolarSystemCommonConstants.TITLE_OPTIONS ),
       titleYMargin: 10,
       visibleProperty: model.isThirdLawProperty,
       fill: SolarSystemCommonColors.backgroundProperty,
