@@ -56,7 +56,7 @@ export default class FirstLawGraph extends AlignBox {
 
     for ( const eccentricitiesKey in eccentricities ) {
       const orbit = eccentricitiesKey;
-      // @ts-expect-error
+      // @ts-expect-error eccentricities should be changed to a Map
       const value = eccentricities[ eccentricitiesKey ];
       const title = new Text( orbit, SolarSystemCommonConstants.TEXT_OPTIONS );
       orbitAndValues.push( new HBox( {
