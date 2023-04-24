@@ -101,12 +101,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
       body, this.modelViewTransformProperty, model.gravityVisibleProperty, body.forceProperty,
-      new NumberProperty( 0 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
 
     this.componentsLayer.addChild( new VectorNode(
       sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
-      new NumberProperty( 0 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
 
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );

@@ -61,6 +61,10 @@ class ThirdLawAccordionBox extends AccordionBox {
         } );
       } ), SolarSystemCommonConstants.TITLE_OPTIONS ),
       titleYMargin: 10,
+      buttonXMargin: 10,
+      expandCollapseButtonOptions: {
+        scale: 1.5
+      },
       visibleProperty: model.isThirdLawProperty,
       fill: SolarSystemCommonColors.backgroundProperty,
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,

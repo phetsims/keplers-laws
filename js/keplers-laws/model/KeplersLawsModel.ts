@@ -142,6 +142,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       //REVIEW: commented-out code
       // tandem: tandem.createTandem( 'stopwatch' )
     } );
+
+    this.forceScaleProperty.value = 0.5;
   }
 
   public override loadBodyStates( bodiesInfo: BodyInfo[] ): void {

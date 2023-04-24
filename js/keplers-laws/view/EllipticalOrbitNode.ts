@@ -220,7 +220,8 @@ export default class EllipticalOrbitNode extends Path {
       const areaValueProperty = new NumberProperty( 0 );
       areaValueProperties.push( areaValueProperty );
       areaValueNumberDisplays.push( new NumberDisplay( areaValueProperty, areaValueRange, {
-        scale: 0.9,
+        scale: 0.7,
+        opacity: 0.8,
         numberFormatter: ( value: number ) => {
           return Utils.toFixed( value, 2 ) + 'AU²';
         }
@@ -379,7 +380,7 @@ export default class EllipticalOrbitNode extends Path {
 
           // Mean value between start and end
           const numberDisplayPosition = start.plus( end );
-          const scaling = Utils.clamp( Utils.linear( 200, 10, 0.5, 2, numberDisplayPosition.magnitude ), 0.5, 2 );
+          const scaling = Utils.clamp( Utils.linear( 200, 10, 0.3, 2, numberDisplayPosition.magnitude ), 0.3, 2 );
           areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( scaling );
           areaValueNumberDisplays[ i ].rotation = this.orbit.w;
           const fullSegmentArea = Math.PI * this.orbit.semiMajorAxisProperty.value * this.orbit.semiMinorAxisProperty.value / model.periodDivisionProperty.value;
@@ -389,7 +390,7 @@ export default class EllipticalOrbitNode extends Path {
 
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes
-          areaPaths[ i ].opacity = area.insideProperty.value ? 1 : 0.8 * area.completion;
+          areaPaths[ i ].opacity = area.alreadyEntered ? area.insideProperty.value ? 1 : 0.7 * area.completion + 0.1 : 0;
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
             0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
           ).close();

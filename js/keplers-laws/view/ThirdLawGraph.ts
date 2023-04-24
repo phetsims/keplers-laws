@@ -118,12 +118,14 @@ export default class ThirdLawGraph extends Node {
       dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
-      if ( orbit.a < minVisitedAxis ) {
-        minVisitedAxis = orbit.a;
-      }
+      if ( !model.bodies[ 0 ].userControlledMassProperty.value ) {
+        if ( orbit.a < minVisitedAxis ) {
+          minVisitedAxis = orbit.a;
+        }
 
-      if ( orbit.a > maxVisitedAxis ) {
-        maxVisitedAxis = orbit.a;
+        if ( orbit.a > maxVisitedAxis ) {
+          maxVisitedAxis = orbit.a;
+        }
       }
 
       const shape = new Shape();
@@ -137,9 +139,9 @@ export default class ThirdLawGraph extends Node {
       linePath.shape = shape;
 
       if ( orbit.a > maxSemiMajorAxis ) {
-        const axis = maxSemiMajorAxis - 100;
+        const axis = maxSemiMajorAxis - 50;
         const tail = semiMajorAxisToViewPoint( axis );
-        const tip = semiMajorAxisToViewPoint( orbit.a ).minus( tail ).setMagnitude( 20 );
+        const tip = semiMajorAxisToViewPoint( maxSemiMajorAxis ).minus( tail ).setMagnitude( 20 );
         outOfBoundsArrow.translation = tail;
         outOfBoundsArrow.setTip( tip.x, tip.y );
         outOfBoundsArrow.visible = true;
