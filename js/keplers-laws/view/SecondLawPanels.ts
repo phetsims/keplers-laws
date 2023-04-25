@@ -3,14 +3,14 @@
 /**
  * Kepler's second law panel control: Swept area
  *
- * This class is mostly empty and only has SweptAreaAccordionBox as a child to keep code consistency across the three laws.
+ * This class is mostly empty and only has SecondLawGraph as a child to keep code consistency across the three laws.
  *
  * @author Agustín Vallejo
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, Text, VBox } from '../../../../scenery/js/imports.js';
-import SweptAreaAccordionBox from './SweptAreaAccordionBox.js';
+import SecondLawGraph from './SecondLawGraph.js';
 import keplersLaws from '../../keplersLaws.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -31,7 +31,7 @@ export default class SecondLawPanels extends VBox {
       stretch: true,
       children: [
         new SecondLawPanel( model ),
-        new SweptAreaAccordionBox( model )
+        new SecondLawGraph( model )
       ],
       visibleProperty: model.isSecondLawProperty
     } );

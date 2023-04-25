@@ -39,7 +39,7 @@ const TITLE_OPTIONS = {
   fill: FOREGROUND_COLOR_PROPERTY
 };
 
-export default class SweptAreaAccordionBox extends AccordionBox {
+export default class SecondLawGraph extends AccordionBox {
 
   public constructor( public readonly model: KeplersLawsModel ) {
 
@@ -146,7 +146,7 @@ class AreasBarPlot extends Node {
     } );
 
     // y tick marks
-    const YSpacing = 2e4;
+    const YSpacing = 1e4;
 
     const entries = [
       { scale: 0.001 },
@@ -260,4 +260,4 @@ function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
   return true;
 }
 
-keplersLaws.register( 'SweptAreaAccordionBox', SweptAreaAccordionBox );
+keplersLaws.register( 'SecondLawGraph', SecondLawGraph );
