@@ -115,7 +115,8 @@ export default class ThirdLawGraph extends Node {
     let maxVisitedAxis: number;
 
     const orbitUpdated = () => {
-      dataPoint.translation = semiMajorAxisToViewPoint( orbit.a );
+      const pointPosition = semiMajorAxisToViewPoint( orbit.a );
+      dataPoint.translation = pointPosition;
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       if ( !model.bodies[ 0 ].userControlledMassProperty.value ) {
@@ -130,18 +131,29 @@ export default class ThirdLawGraph extends Node {
 
       const shape = new Shape();
 
+      const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
+      let arrowX = null;
+      const dx = 25;
+
       // a is the semimajor axis
       for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 5 ) {
-        shape.lineToPoint( semiMajorAxisToViewPoint( a ) );
+        const pointToDraw = semiMajorAxisToViewPoint( a );
+        shape.lineToPoint( pointToDraw );
+
+        if ( !arrowX && outOfBounds && pointToDraw.y < -axisLength + dx ) {
+          arrowX = a;
+        }
+        else if ( !arrowX && outOfBounds && pointToDraw.x > axisLength - dx ) {
+          arrowX = a;
+        }
       }
       shape.makeImmutable();
 
       linePath.shape = shape;
 
-      if ( orbit.a > maxSemiMajorAxis ) {
-        const axis = maxSemiMajorAxis - 50;
-        const tail = semiMajorAxisToViewPoint( axis );
-        const tip = semiMajorAxisToViewPoint( maxSemiMajorAxis ).minus( tail ).setMagnitude( 20 );
+      if ( outOfBounds && arrowX ) {
+        const tail = semiMajorAxisToViewPoint( arrowX );
+        const tip = semiMajorAxisToViewPoint( arrowX + 15 ).minus( tail ).setMagnitude( 20 );
         outOfBoundsArrow.translation = tail;
         outOfBoundsArrow.setTip( tip.x, tip.y );
         outOfBoundsArrow.visible = true;
