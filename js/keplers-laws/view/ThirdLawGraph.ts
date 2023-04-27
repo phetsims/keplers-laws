@@ -125,7 +125,7 @@ export default class ThirdLawGraph extends Node {
       dataPoint.translation = pointPosition;
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
-      if ( !model.bodies[ 0 ].userControlledMassProperty.value ) {
+      if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
         if ( orbit.a < minVisitedAxis ) {
           minVisitedAxis = orbit.a;
         }
@@ -133,6 +133,10 @@ export default class ThirdLawGraph extends Node {
         if ( orbit.a > maxVisitedAxis ) {
           maxVisitedAxis = orbit.a;
         }
+      }
+      else {
+        minVisitedAxis = orbit.a;
+        maxVisitedAxis = orbit.a;
       }
 
       const shape = new Shape();
