@@ -34,7 +34,7 @@ class KeplersLawsControls extends Panel {
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
         ...createArrowsVisibilityCheckboxes( model, tandem ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-        ...createVisibilityInformationCheckboxes( model, tandem )
+        ...createVisibilityInformationCheckboxes( model, tandem, false )
       ],
       spacing: 5,
       align: 'left',
