@@ -317,13 +317,13 @@ export default class EllipticalOrbitNode extends Path {
       // The Number Display for areas is scaled according to the orbit size
       const numberDisplayPositionScaling = ( vectorMagnitude: number ) => {
         // Scaling the vector sum of the dot positions
-        const minScaling = 1.0; // Multiply when orbit is small
-        const maxScaling = 1.3; // Multiply when orbit is big
+        const minScaling = 1.2;
+        const maxScaling = 2.0;
 
         // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
         return Math.pow( Utils.clamp(
-          Utils.linear( 50, 250, maxScaling, minScaling, vectorMagnitude ),
-          minScaling, maxScaling ), ( model.engine.e + 1 ) * ( 3 / model.periodDivisionProperty.value ) );
+          Utils.linear( 50, 200, maxScaling, minScaling, vectorMagnitude ),
+          minScaling, maxScaling ), ( 1 - model.engine.e * model.engine.e ) );
       };
 
       // FIRST LAW -------------------------------------------
@@ -380,7 +380,7 @@ export default class EllipticalOrbitNode extends Path {
         areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
 
         let numberDisplayPosition = new Vector2( 0, 0 );
-        let scaling = 1;
+        let numberDisplayScaling = 1;
 
         if ( i < model.periodDivisionProperty.value ) {
           // Set the center of the orbit's divisions dot
@@ -393,21 +393,19 @@ export default class EllipticalOrbitNode extends Path {
           const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
           const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
 
-          if ( this.orbit.periodDivisions > 2 ) {
-            // Mean value between start and end
-            const prevIndex = i > 0 ? i - 1 : this.orbit.periodDivisions - 1; // Gets the next dot position or goes back to 0
-            const nextDotPosition = this.orbit.orbitalAreas[ prevIndex ].dotPosition.times( scale ).minus( center );
-            numberDisplayPosition = dotPosition.plus( nextDotPosition );
-          }
-          else {
+          // Mean value between start and end
+          numberDisplayPosition = model.engine.createPolar( ( area.startAngle + area.endAngle ) / 2 ).times( scale ).minus( center );
+
+          if ( model.periodDivisionProperty.value === 2 ) {
             numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
           }
-          scaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
-          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( scaling );
+
+          numberDisplayScaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
+          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling );
           areaValueNumberDisplays[ i ].rotation = this.orbit.w;
 
           // Calculates the total area of the ellipse / the number of divisions
-          const fullSegmentArea = Math.PI * this.orbit.semiMajorAxisProperty.value * this.orbit.semiMinorAxisProperty.value / model.periodDivisionProperty.value;
+          const fullSegmentArea = this.orbit.segmentArea * SolarSystemCommonConstants.POSITION_MULTIPLIER * SolarSystemCommonConstants.POSITION_MULTIPLIER;
           areaValueProperties[ i ].value = area.alreadyEntered ?
                                            ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
                                                                : 0;

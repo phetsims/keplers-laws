@@ -327,6 +327,9 @@ export default class EllipticalOrbitEngine extends Engine {
         let endAngle = Utils.moduloBetweenDown( nu, startAngle, startAngle + TWOPI );
         bodyAngle = Utils.moduloBetweenDown( bodyAngle, startAngle, startAngle + TWOPI );
 
+        orbitalArea.startAngle = startAngle;
+        orbitalArea.endAngle = endAngle;
+
         if ( fillAreas ) {
           // Body inside the area
           if ( startAngle <= bodyAngle && bodyAngle < endAngle ) {
