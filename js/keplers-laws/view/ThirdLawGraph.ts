@@ -27,7 +27,11 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
 export default class ThirdLawGraph extends Node {
   public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
-    super( providedOptions );
+    const options: NodeOptions = {
+      ...providedOptions
+    };
+
+    super( options );
 
     const axisLength = 120;
 
@@ -74,7 +78,8 @@ export default class ThirdLawGraph extends Node {
     const outOfBoundsArrow = new ArrowNode( 0, 0, 1, 0, {
       stroke: SolarSystemCommonColors.secondBodyColorProperty,
       fill: SolarSystemCommonColors.secondBodyColorProperty,
-      lineWidth: 2
+      lineWidth: 2,
+      boundsMethod: 'none'
     } );
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
@@ -106,9 +111,10 @@ export default class ThirdLawGraph extends Node {
       xAxisLabel,
       yAxisLabel,
       new Node( {
-        children: [ linePath, dataPoint, outOfBoundsArrow ],
+        children: [ linePath, dataPoint ],
         clipArea: Shape.bounds( new Bounds2( -50, -axisLength, axisLength, 50 ) )
-      } )
+      } ),
+      outOfBoundsArrow
     ];
 
     let minVisitedAxis: number;
@@ -133,7 +139,7 @@ export default class ThirdLawGraph extends Node {
 
       const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
       let arrowX = null;
-      const dx = 25;
+      const dx = 5;
 
       // a is the semimajor axis
       for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 5 ) {
