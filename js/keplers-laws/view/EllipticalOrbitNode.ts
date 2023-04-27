@@ -314,6 +314,18 @@ export default class EllipticalOrbitNode extends Path {
       // Same transformations set to TopLayer because it's not directly a child of this
       applyTransformation( this.topLayer );
 
+      // The Number Display for areas is scaled according to the orbit size
+      const numberDisplayPositionScaling = ( vectorMagnitude: number ) => {
+        // Scaling the vector sum of the dot positions
+        const minScaling = 1.0; // Multiply when orbit is small
+        const maxScaling = 1.3; // Multiply when orbit is big
+
+        // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
+        return Math.pow( Utils.clamp(
+          Utils.linear( 50, 250, maxScaling, minScaling, vectorMagnitude ),
+          minScaling, maxScaling ), ( model.engine.e + 1 ) * ( 3 / model.periodDivisionProperty.value ) );
+      };
+
       // FIRST LAW -------------------------------------------
       // Axis of the ellipse
       const axis = new Shape().moveTo( -radiusX, 0 ).lineTo( radiusX, 0 );
@@ -361,16 +373,19 @@ export default class EllipticalOrbitNode extends Path {
       periapsis.center = new Vector2( scale * ( a * ( 1 - e ) + c ), 0 );
       apoapsis.center = new Vector2( -scale * ( a * ( 1 + e ) - c ), 0 );
 
-
       // Drawing orbital divisions and areas
       this.orbit.orbitalAreas.forEach( ( area, i ) => {
         orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
         areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
         areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
 
+        let numberDisplayPosition = new Vector2( 0, 0 );
+        let scaling = 1;
+
         if ( i < model.periodDivisionProperty.value ) {
           // Set the center of the orbit's divisions dot
-          orbitDivisions[ i ].center = area.dotPosition.times( scale ).minus( center );
+          const dotPosition = area.dotPosition.times( scale ).minus( center );
+          orbitDivisions[ i ].center = dotPosition;
           orbitDivisions[ i ].fill = SolarSystemCommonColors.orbitColorProperty.value.darkerColor( Math.pow( 1 - area.completion, 10 ) );
 
           const start = area.startPosition.times( scale ).minus( center );
@@ -378,15 +393,24 @@ export default class EllipticalOrbitNode extends Path {
           const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
           const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
 
-          // Mean value between start and end
-          const numberDisplayPosition = start.plus( end );
-          const scaling = Utils.clamp( Utils.linear( 200, 10, 0.3, 2, numberDisplayPosition.magnitude ), 0.3, 2 );
+          if ( this.orbit.periodDivisions > 2 ) {
+            // Mean value between start and end
+            const prevIndex = i > 0 ? i - 1 : this.orbit.periodDivisions - 1; // Gets the next dot position or goes back to 0
+            const nextDotPosition = this.orbit.orbitalAreas[ prevIndex ].dotPosition.times( scale ).minus( center );
+            numberDisplayPosition = dotPosition.plus( nextDotPosition );
+          }
+          else {
+            numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
+          }
+          scaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
           areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( scaling );
           areaValueNumberDisplays[ i ].rotation = this.orbit.w;
+
+          // Calculates the total area of the ellipse / the number of divisions
           const fullSegmentArea = Math.PI * this.orbit.semiMajorAxisProperty.value * this.orbit.semiMinorAxisProperty.value / model.periodDivisionProperty.value;
           areaValueProperties[ i ].value = area.alreadyEntered ?
                                            ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
-                                             : 0;
+                                                               : 0;
 
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes
@@ -396,6 +420,7 @@ export default class EllipticalOrbitNode extends Path {
           ).close();
         }
       } );
+
 
       // THIRD LAW -------------------------------------------
       // Semi-major axis
