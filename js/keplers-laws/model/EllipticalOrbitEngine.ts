@@ -105,6 +105,10 @@ export default class EllipticalOrbitEngine extends Engine {
   public totalArea = 1;
   public segmentArea = 1;
 
+  public tracingPathProperty = new BooleanProperty( false );
+  public periodTraceStart = 0;
+  public periodTraceEnd = 0;
+
   public constructor( bodies: ObservableArray<Body> ) {
     super( bodies );
 
@@ -157,6 +161,10 @@ export default class EllipticalOrbitEngine extends Engine {
         this.resetOrbitalAreas();
         this.update();
       } );
+
+    this.tracingPathProperty.lazyLink( () => {
+      this.periodTraceStart = this.nu;
+    } );
   }
 
   public thirdLaw( a: number ): number {
@@ -186,6 +194,10 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.calculateOrbitalDivisions( true );
     this.changedEmitter.emit();
+
+    if ( this.tracingPathProperty.value ) {
+      this.periodTraceEnd = this.nu;
+    }
   }
 
   public updateBodyDistances(): void {

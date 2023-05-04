@@ -20,6 +20,8 @@ import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import keplersLaws from '../../keplersLaws.js';
+import Range from '../../../../dot/js/Range.js';
+import Property from '../../../../axon/js/Property.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -64,14 +66,15 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly poweredSemiMajorAxisProperty: ReadOnlyProperty<number>;
   public readonly poweredPeriodProperty: ReadOnlyProperty<number>;
 
-  public readonly stopwatch: Stopwatch;
+  public readonly periodTimer: Stopwatch;
+  public beganPeriodTimerAt = 0;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
       isLab: false,
       timeScale: 2,
-      timeMultiplier: 1 / 12.7,
+      modelToViewTime: 1 / 12.7,
       initialLaw: LawMode.FIRST_LAW
     }, providedOptions );
     super( options );
@@ -133,12 +136,32 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.update();
     } );
 
-    this.stopwatch = new Stopwatch( {
+    const periodRangeProperty = new Property<Range>( new Range( 0, 1 ) );
+    this.periodTimer = new Stopwatch( {
       position: new Vector2( -50, -250 ),
       timePropertyOptions: {
-        range: Stopwatch.ZERO_TO_ALMOST_SIXTY,
+        range: periodRangeProperty,
         units: 's'
       }
+    } );
+    this.periodTimer.isRunningProperty.link( isRunning => {
+      this.isPlayingProperty.value = isRunning;
+      this.beganPeriodTimerAt = this.timeProperty.value;
+
+      this.engine.tracingPathProperty.value = isRunning;
+    } );
+
+    this.timeProperty.link( time => {
+      if ( this.beganPeriodTimerAt > time ) {
+        this.beganPeriodTimerAt = time;
+      }
+      if ( this.periodTimer.isRunningProperty.value ) {
+        this.periodTimer.setTime( time - this.beganPeriodTimerAt );
+      }
+    } );
+
+    this.engine.periodProperty.link( period => {
+      periodRangeProperty.value.max = period;
     } );
 
     this.forceScaleProperty.value = 0.5;
@@ -175,6 +198,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedAxisPowerProperty.reset();
     this.selectedPeriodPowerProperty.reset();
     this.alwaysCircularProperty.reset();
+    this.periodTimer.reset();
 
     this.visibilityReset();
     this.engine.updateAllowed = true;

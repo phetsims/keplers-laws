@@ -425,9 +425,12 @@ export default class EllipticalOrbitNode extends Path {
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
 
       bodyPosition.subtract( center );
-      const endAngle = Math.atan2( bodyPosition.y / radiusY, bodyPosition.x / radiusX );
+      const startTracePosition = this.orbit.createPolar( this.orbit.periodTraceStart ).times( scale ).minus( center );
+      const endTracePosition = this.orbit.createPolar( this.orbit.periodTraceEnd ).times( scale ).minus( center );
+      const startAngle = Math.atan2( startTracePosition.y / radiusY, startTracePosition.x / radiusX );
+      const endAngle = Math.atan2( endTracePosition.y / radiusY, endTracePosition.x / radiusX );
       // applyTransformation( trackPath );
-      const trackShape = new Shape().ellipticalArc( 0, 0, radiusX, radiusY, 0, 0, endAngle, this.orbit.retrograde );
+      const trackShape = new Shape().ellipticalArc( 0, 0, radiusX, radiusY, 0, -startAngle, -endAngle, this.orbit.retrograde );
       trackPath.shape = trackShape;
     };
 
