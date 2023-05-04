@@ -22,10 +22,10 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import OrbitalWarningMessage from './OrbitalWarningMessage.js';
-import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import PeriodTimerNode from './PeriodTimerNode.js';
 
 // constants
 const MARGIN = 10;
@@ -37,7 +37,7 @@ type SelfOptions = {
 export type KeplersLawsScreenViewOptions = SelfOptions & SolarSystemCommonScreenViewOptions;
 
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
-  private readonly stopwatchNode: StopwatchNode;
+  private readonly periodTimerNode: PeriodTimerNode;
 
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
@@ -154,19 +154,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
 
-    this.stopwatchNode = new StopwatchNode( model.stopwatch, {
+    this.periodTimerNode = new PeriodTimerNode( model.stopwatch, this.modelViewTransformProperty, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      visibleProperty: model.periodVisibleProperty,
-      // tandem: tandem.createTandem( 'stopwatchNode' ),
-      numberDisplayOptions: {
-        numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
-          bigNumberFont: 25,
-          smallNumberFont: 17
-        } )
-      }
+      visibleProperty: model.periodVisibleProperty
     } );
 
-    this.topLayer.addChild( this.stopwatchNode );
+    this.topLayer.addChild( this.periodTimerNode );
 
     const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.modelViewTransformProperty ), {
       alignBoundsProperty: this.availableBoundsProperty,

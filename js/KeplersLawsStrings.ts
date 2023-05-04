@@ -30,6 +30,7 @@ type StringsType = {
   'periapsisStringProperty': LinkableProperty<string>;
   'starMassStringProperty': LinkableProperty<string>;
   'ourSunStringProperty': LinkableProperty<string>;
+  'periodStringProperty': LinkableProperty<string>;
   'area': {
     'periodDivisionStringProperty': LinkableProperty<string>;
     'valuesStringProperty': LinkableProperty<string>;
