@@ -156,7 +156,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.periodTimerNode = new PeriodTimerNode( model.stopwatch, this.modelViewTransformProperty, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      visibleProperty: model.periodVisibleProperty
+      visibleProperty: model.periodVisibleProperty,
+      soundViewNode: this
     } );
 
     this.topLayer.addChild( this.periodTimerNode );

@@ -134,14 +134,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.stopwatch = new Stopwatch( {
-      position: new Vector2( 0, 0 ),
-      // TODO: Make this stopwatch work
+      position: new Vector2( -50, -250 ),
       timePropertyOptions: {
         range: Stopwatch.ZERO_TO_ALMOST_SIXTY,
         units: 's'
       }
-      //REVIEW: commented-out code
-      // tandem: tandem.createTandem( 'stopwatch' )
     } );
 
     this.forceScaleProperty.value = 0.5;

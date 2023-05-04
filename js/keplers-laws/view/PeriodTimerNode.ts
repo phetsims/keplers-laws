@@ -6,7 +6,7 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { AlignBox, DragListener, Image, Node, NodeOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, DragListener, Image, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
@@ -25,6 +25,11 @@ import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSy
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import soundManager from '../../../../tambo/js/soundManager.js';
+import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
+import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
+import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 
@@ -34,14 +39,21 @@ type SelfOptions = {
   dragBoundsProperty?: Property<Bounds2>;
 
   numberDisplayOptions?: NumberDisplayOptions;
+
+  // If a soundViewNode is provided, we'll hook up a soundClip to it and play sounds when it is visible
+  soundViewNode?: Node | null;
 };
 
 type PeriodTimerNodeOptions = SelfOptions & NodeOptions;
 
 export default class PeriodTimerNode extends Node {
+  private readonly disposeThis: () => void;
+  public readonly grabClip: SoundClip;
+  public readonly releaseClip: SoundClip;
+
   public constructor(
     periodTimer: Stopwatch,
-    transformProperty: TReadOnlyProperty<ModelViewTransform2>,
+    modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>,
     layoutBounds: Bounds2,
     providedOptions: PeriodTimerNodeOptions
   ) {
@@ -63,7 +75,9 @@ export default class PeriodTimerNode extends Node {
         xMargin: 4,
         yMargin: 2,
         pickable: false // allow dragging by the number display
-      }
+      },
+
+      soundViewNode: null
     }, providedOptions );
 
     super( options );
@@ -146,22 +160,63 @@ export default class PeriodTimerNode extends Node {
       alignBounds: background.bounds
     } ) );
 
-    const dragListener = new DragListener( {
-      positionProperty: periodTimer.positionProperty,
-      useParentOffset: true,
-      dragBoundsProperty: new Property( layoutBounds.erodedXY( this.width / 2, this.height / 2 ) ),
-      allowTouchSnag: false
-    } );
-    // add drag and drop events
-    this.addInputListener( dragListener );
 
-    // add update of node position
-    periodTimer.positionProperty.link( position => {
-      // Because position is initialized to be null
-      if ( position ) {
-        this.center = transformProperty.value.modelToViewPosition( position );
-      }
+    this.grabClip = new SoundClip( Grab_Sound_mp3 );
+    this.releaseClip = new SoundClip( Release_Sound_mp3 );
+
+    if ( options.soundViewNode ) {
+      soundManager.addSoundGenerator( this.grabClip, {
+        associatedViewNode: options.soundViewNode
+      } );
+      soundManager.addSoundGenerator( this.releaseClip, {
+        associatedViewNode: options.soundViewNode
+      } );
+    }
+
+    const positionMultilink = Multilink.multilink(
+      [ periodTimer.positionProperty, modelViewTransformProperty ],
+      ( position, modelViewTransform ) => {
+        this.translation = modelViewTransform.modelToViewPosition( position );
+      } );
+
+    const start = () => {
+      this.grabClip.play();
+    };
+    const end = () => {
+      this.releaseClip.play();
+    };
+
+    const bodyDragListener = new DragListener( {
+      positionProperty: periodTimer.positionProperty,
+      transform: modelViewTransformProperty,
+      start: start,
+      end: end
     } );
+    this.addInputListener( bodyDragListener );
+
+    const keyboardDragListener = new KeyboardDragListener(
+      {
+        positionProperty: periodTimer.positionProperty,
+        transform: modelViewTransformProperty,
+        dragVelocity: 450,
+        shiftDragVelocity: 100,
+        start: start,
+        end: end
+      } );
+    this.addInputListener( keyboardDragListener );
+    this.disposeEmitter.addListener( () => {
+      bodyDragListener.dispose();
+      keyboardDragListener.dispose();
+    } );
+
+    this.disposeThis = () => {
+      positionMultilink.dispose();
+    };
+  }
+
+  public override dispose(): void {
+    this.disposeThis();
+    super.dispose();
   }
 }
 
