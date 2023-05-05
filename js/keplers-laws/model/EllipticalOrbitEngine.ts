@@ -162,8 +162,14 @@ export default class EllipticalOrbitEngine extends Engine {
         this.update();
       } );
 
-    this.tracingPathProperty.lazyLink( () => {
-      this.periodTraceStart = this.nu;
+    this.tracingPathProperty.lazyLink( tracing => {
+      if ( tracing ) {
+        this.periodTraceStart = this.nu;
+      }
+      else {
+        this.periodTraceEnd = this.periodTraceStart;
+        this.changedEmitter.emit();
+      }
     } );
   }
 
@@ -475,11 +481,17 @@ export default class EllipticalOrbitEngine extends Engine {
 
   // Numerical solution to Kepler's Equations for Eccentric Anomaly (E) and then True Anomaly (nu)
   private getTrueAnomaly( M: number ): number {
-    const E1 = M + this.e * Math.sin( M );
-    const E2 = M + this.e * Math.sin( E1 );
-    const E = M + this.e * Math.sin( E2 );
-    const nu = Math.atan2( Math.pow( 1 - this.e * this.e, 0.5 ) * Math.sin( E ), Math.cos( E ) - this.e );
-    return Utils.moduloBetweenDown( nu, 0, TWOPI );
+    const tolerance = 1e-15; // set a tolerance for the solution
+    let E = M; // initial guess for E
+    let delta = 1; // initialize the change in E
+    while ( delta > tolerance ) {
+      const f = E - this.e * Math.sin( E ) - M; // Kepler's equation
+      const fprime = 1 - this.e * Math.cos( E ); // derivative of Kepler's equation
+      delta = -f / fprime; // calculate the change in E
+      E += delta; // update E
+    }
+    const nu = Math.atan2( Math.sqrt( 1 - this.e * this.e ) * Math.sin( E ), Math.cos( E ) - this.e ); // calculate true anomaly from E
+    return Utils.moduloBetweenDown( nu, 0, TWOPI ); // apply modulo and return the result
   }
 
   private getMeanAnomaly( nu: number, e: number ): number {

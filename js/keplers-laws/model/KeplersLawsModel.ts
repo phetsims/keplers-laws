@@ -145,10 +145,9 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       }
     } );
     this.periodTimer.isRunningProperty.link( isRunning => {
-      this.isPlayingProperty.value = isRunning;
-      this.beganPeriodTimerAt = this.timeProperty.value;
-
       this.engine.tracingPathProperty.value = isRunning;
+      this.beganPeriodTimerAt = this.timeProperty.value;
+      this.isPlayingProperty.value = isRunning;
     } );
 
     this.timeProperty.link( time => {
