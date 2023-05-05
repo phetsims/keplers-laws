@@ -153,6 +153,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.timeProperty.link( time => {
       if ( this.beganPeriodTimerAt > time ) {
+        // Avoid negative times by resetting the timer
         this.beganPeriodTimerAt = time;
       }
       if ( this.periodTimer.isRunningProperty.value ) {
