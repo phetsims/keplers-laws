@@ -18,7 +18,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
-  public static readonly STARTED = new TrackingState();
+  public static readonly RUNNING = new TrackingState();
   public static readonly FADING = new TrackingState();
   public static readonly INVISIBLE = new TrackingState();
 
@@ -37,11 +37,11 @@ export default class PeriodPath {
   // Fraction of the period that the line will be fading
   public readonly fadingLifetime = 1.5;
 
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( private readonly model: KeplersLawsModel ) {
     this.trackingState = TrackingState.IDLE;
 
     const periodRangeProperty = new Property<Range>( new Range( 0, 1 ) );
-    model.engine.periodProperty.link( period => {
+    this.model.engine.periodProperty.link( period => {
       periodRangeProperty.value.max = period;
     } );
 
@@ -60,24 +60,24 @@ export default class PeriodPath {
     } );
     this.periodTimer.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
-        this.trackingState = TrackingState.STARTED;
-        this.beganPeriodTimerAt = model.timeProperty.value;
-        model.engine.tracingPathProperty.value = true;
+        this.trackingState = TrackingState.RUNNING;
+        this.beganPeriodTimerAt = this.model.timeProperty.value;
+        this.model.engine.tracingPathProperty.value = true;
       }
-      model.isPlayingProperty.value = isRunning;
+      this.model.isPlayingProperty.value = isRunning;
     } );
 
     // Begging fading with a diff between start and end angles
     const begginFade = ( diff: number ) => {
       this.periodTimer.isRunningProperty.value = false;
-      model.engine.tracingPathProperty.value = false;
-      model.engine.periodTraceEnd = model.engine.periodTraceStart + 2 * Math.PI - diff;
+      this.model.engine.tracingPathProperty.value = false;
+      this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart + 2 * Math.PI - diff;
       this.trackingState = TrackingState.FADING;
       this.fadingTimer.reset();
       this.fadingTimer.isRunningProperty.value = true;
     };
 
-    model.timeProperty.link( time => {
+    this.model.timeProperty.link( time => {
       if ( this.beganPeriodTimerAt > time ) {
         // Avoid negative times by resetting the timer
         this.beganPeriodTimerAt = time;
@@ -87,22 +87,29 @@ export default class PeriodPath {
         this.periodTimer.setTime( measuredTime );
       }
 
-      if ( this.trackingState !== TrackingState.FADING ) {
+      if ( this.trackingState === TrackingState.RUNNING ) {
+        // Angular difference between the actual ending spot and the threshold for beggining to fade
         const diff = 0.01;
         if ( measuredTime >= periodRangeProperty.value.max - 0.01 ) {
           begginFade( diff );
         }
-        if ( model.engine.retrograde ) {
-          if ( model.engine.periodTraceEnd > model.engine.periodTraceStart + 2 * Math.PI - diff ) {
-            begginFade( diff );
+        if ( measuredTime > periodRangeProperty.value.max / 2 ) {
+          if ( this.model.engine.retrograde ) {
+            if ( this.model.engine.periodTraceEnd > this.model.engine.periodTraceStart + 2 * Math.PI - diff ) {
+              begginFade( diff );
+            }
           }
-        }
-        else {
-          if ( model.engine.periodTraceEnd < model.engine.periodTraceStart + diff ) {
-            begginFade( diff );
+          else {
+            if ( this.model.engine.periodTraceEnd < this.model.engine.periodTraceStart + diff ) {
+              begginFade( diff );
+            }
           }
         }
       }
+    } );
+
+    this.model.engine.resetEmitter.addListener( () => {
+      this.reset();
     } );
   }
 
@@ -111,15 +118,19 @@ export default class PeriodPath {
       this.fadingTimer.step( dt );
       this.fadingEmitter.emit();
       if ( !this.fadingTimer.isRunningProperty.value ) {
-        this.trackingState = TrackingState.IDLE;
+        this.reset();
       }
     }
   }
 
   public reset(): void {
+    this.trackingState = TrackingState.IDLE;
+    this.beganPeriodTimerAt = 0;
     this.periodTimer.reset();
     this.fadingTimer.reset();
-    this.trackingState = TrackingState.IDLE;
+    this.model.engine.tracingPathProperty.value = false;
+    this.model.engine.periodTraceStart = 0;
+    this.model.engine.periodTraceEnd = 0;
   }
 }
 
