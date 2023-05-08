@@ -47,7 +47,7 @@ export default class PeriodPathNode extends Path {
     this.radiusX = radiusX;
     this.radiusY = radiusY;
 
-    if ( this.periodPath.trackingState === TrackingState.STARTED ) {
+    if ( this.periodPath.trackingState === TrackingState.RUNNING ) {
       this.updateShape();
     }
   }

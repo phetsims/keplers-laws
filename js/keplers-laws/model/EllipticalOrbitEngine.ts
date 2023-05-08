@@ -64,8 +64,13 @@ export default class EllipticalOrbitEngine extends Engine {
   public readonly sun: Body;
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
+
+  // For changes that require changes in the shape of the orbit
   public readonly changedEmitter = new Emitter();
+
+  // For changes that mostly track the body through its orbit
   public readonly ranEmitter = new Emitter();
+
   public readonly resetEmitter = new Emitter();
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
@@ -296,6 +301,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
 
     this.changedEmitter.emit();
+    this.ranEmitter.emit();
   }
 
   private enforceCircularOrbit( position: Vector2 ): void {
@@ -402,7 +408,7 @@ export default class EllipticalOrbitEngine extends Engine {
     startAngle = this.getMeanAnomaly( startAngle, this.e );
     endAngle = this.getMeanAnomaly( endAngle, this.e );
     endAngle = Utils.moduloBetweenDown( endAngle, startAngle, startAngle + TWOPI );
-    return Math.abs( 0.5 * this.a * this.b * ( endAngle - startAngle ) );
+    return Utils.clamp( Math.abs( 0.5 * this.a * this.b * ( endAngle - startAngle ) ), 0, this.segmentArea );
   }
 
   private calculate_a( r: Vector2, v: Vector2 ): number {

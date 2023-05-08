@@ -56,7 +56,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Third law properties
   public readonly semiMajorAxisVisibleProperty = new BooleanProperty( false );
-  public readonly periodVisibleProperty = new BooleanProperty( false );
+  public readonly periodVisibleProperty = new BooleanProperty( true );
 
   public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
   public readonly selectedPeriodPowerProperty = new NumberProperty( 1 );
@@ -75,6 +75,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       initialLaw: LawMode.FIRST_LAW
     }, providedOptions );
     super( options );
+
+    this.pathVisibleProperty.value = false;
 
     this.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {

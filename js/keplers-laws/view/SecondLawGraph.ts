@@ -221,7 +221,7 @@ class AreasBarPlot extends Node {
       tickParentNode
     ];
 
-    model.engine.changedEmitter.addListener( () => {
+    model.engine.ranEmitter.addListener( () => {
       orbitChangedListener();
       updateYRange();
     } );
