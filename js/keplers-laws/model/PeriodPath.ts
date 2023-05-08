@@ -67,6 +67,16 @@ export default class PeriodPath {
       model.isPlayingProperty.value = isRunning;
     } );
 
+    // Begging fading with a diff between start and end angles
+    const begginFade = ( diff: number ) => {
+      this.periodTimer.isRunningProperty.value = false;
+      model.engine.tracingPathProperty.value = false;
+      model.engine.periodTraceEnd = model.engine.periodTraceStart + 2 * Math.PI - diff;
+      this.trackingState = TrackingState.FADING;
+      this.fadingTimer.reset();
+      this.fadingTimer.isRunningProperty.value = true;
+    };
+
     model.timeProperty.link( time => {
       if ( this.beganPeriodTimerAt > time ) {
         // Avoid negative times by resetting the timer
@@ -76,13 +86,22 @@ export default class PeriodPath {
       if ( this.periodTimer.isRunningProperty.value ) {
         this.periodTimer.setTime( measuredTime );
       }
-      if ( this.trackingState !== TrackingState.FADING && measuredTime >= periodRangeProperty.value.max - 0.01 ) {
-        model.engine.tracingPathProperty.value = false;
-        const diff = model.engine.retrograde ? 0.01 : -0.01;
-        model.engine.periodTraceEnd = model.engine.periodTraceStart + 2 * Math.PI - diff;
-        this.trackingState = TrackingState.FADING;
-        this.fadingTimer.reset();
-        this.fadingTimer.isRunningProperty.value = true;
+
+      if ( this.trackingState !== TrackingState.FADING ) {
+        const diff = 0.01;
+        if ( measuredTime >= periodRangeProperty.value.max - 0.01 ) {
+          begginFade( diff );
+        }
+        if ( model.engine.retrograde ) {
+          if ( model.engine.periodTraceEnd > model.engine.periodTraceStart + 2 * Math.PI - diff ) {
+            begginFade( diff );
+          }
+        }
+        else {
+          if ( model.engine.periodTraceEnd < model.engine.periodTraceStart + diff ) {
+            begginFade( diff );
+          }
+        }
       }
     } );
   }
