@@ -65,6 +65,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
   public readonly changedEmitter = new Emitter();
+  public readonly ranEmitter = new Emitter();
   public readonly resetEmitter = new Emitter();
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
@@ -166,10 +167,6 @@ export default class EllipticalOrbitEngine extends Engine {
       if ( tracing ) {
         this.periodTraceStart = this.nu;
       }
-      else {
-        this.periodTraceEnd = this.periodTraceStart;
-        this.changedEmitter.emit();
-      }
     } );
   }
 
@@ -199,7 +196,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.updateForces( newPosition );
 
     this.calculateOrbitalDivisions( true );
-    this.changedEmitter.emit();
+    this.ranEmitter.emit();
 
     if ( this.tracingPathProperty.value ) {
       this.periodTraceEnd = this.nu;
@@ -228,6 +225,8 @@ export default class EllipticalOrbitEngine extends Engine {
    */
   public override update(): void {
     this.resetOrbitalAreas();
+    this.periodTraceStart = 0;
+    this.periodTraceEnd = 0;
 
     const r = this.body.positionProperty.value;
     this.updateForces( r );

@@ -18,10 +18,8 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import keplersLaws from '../../keplersLaws.js';
-import Range from '../../../../dot/js/Range.js';
-import Property from '../../../../axon/js/Property.js';
+import PeriodPath from './PeriodPath.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -58,7 +56,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Third law properties
   public readonly semiMajorAxisVisibleProperty = new BooleanProperty( false );
-  public readonly periodVisibleProperty = new BooleanProperty( false );
+  public readonly periodVisibleProperty = new BooleanProperty( true );
 
   public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
   public readonly selectedPeriodPowerProperty = new NumberProperty( 1 );
@@ -66,8 +64,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly poweredSemiMajorAxisProperty: ReadOnlyProperty<number>;
   public readonly poweredPeriodProperty: ReadOnlyProperty<number>;
 
-  public readonly periodTimer: Stopwatch;
-  public beganPeriodTimerAt = 0;
+  public readonly periodPath: PeriodPath;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
@@ -136,33 +133,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.update();
     } );
 
-    const periodRangeProperty = new Property<Range>( new Range( 0, 1 ) );
-    this.periodTimer = new Stopwatch( {
-      position: new Vector2( -50, -250 ),
-      timePropertyOptions: {
-        range: periodRangeProperty,
-        units: 's'
-      }
-    } );
-    this.periodTimer.isRunningProperty.link( isRunning => {
-      this.engine.tracingPathProperty.value = isRunning;
-      this.beganPeriodTimerAt = this.timeProperty.value;
-      this.isPlayingProperty.value = isRunning;
-    } );
-
-    this.timeProperty.link( time => {
-      if ( this.beganPeriodTimerAt > time ) {
-        // Avoid negative times by resetting the timer
-        this.beganPeriodTimerAt = time;
-      }
-      if ( this.periodTimer.isRunningProperty.value ) {
-        this.periodTimer.setTime( time - this.beganPeriodTimerAt );
-      }
-    } );
-
-    this.engine.periodProperty.link( period => {
-      periodRangeProperty.value.max = period;
-    } );
+    this.periodPath = new PeriodPath( this );
 
     this.forceScaleProperty.value = 0.5;
   }
@@ -198,7 +169,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedAxisPowerProperty.reset();
     this.selectedPeriodPowerProperty.reset();
     this.alwaysCircularProperty.reset();
-    this.periodTimer.reset();
+    this.periodPath.reset();
 
     this.visibilityReset();
     this.engine.updateAllowed = true;
@@ -212,6 +183,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     if ( this.engine.updateAllowed ) {
       this.engine.update();
     }
+  }
+
+  public override step( dt: number ): void {
+    super.step( dt );
+    this.periodPath.step( dt );
   }
 }
 

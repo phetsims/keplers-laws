@@ -25,6 +25,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import PeriodPathNode from './PeriodPathNode.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -249,11 +250,7 @@ export default class EllipticalOrbitNode extends Path {
         [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
       )
     } );
-    const trackPath = new Path( null, {
-      stroke: SolarSystemCommonColors.thirdBodyColorProperty,
-      lineWidth: 5,
-      visibleProperty: model.periodVisibleProperty
-    } );
+    const periodPathNode = new PeriodPathNode( model );
 
     // Text Nodes
     labelsLayer.addChild( aLabelNode );
@@ -279,7 +276,7 @@ export default class EllipticalOrbitNode extends Path {
 
     // Third Law: SemiMajor axis, and track
     thirdLawLayer.addChild( semiMajorAxisPath );
-    thirdLawLayer.addChild( trackPath );
+    thirdLawLayer.addChild( periodPathNode );
 
     this.topLayer.addChild( foci[ 0 ] );
     this.topLayer.addChild( foci[ 1 ] );
@@ -424,17 +421,15 @@ export default class EllipticalOrbitNode extends Path {
       // Semi-major axis
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
 
-      bodyPosition.subtract( center );
-      const startTracePosition = this.orbit.createPolar( this.orbit.periodTraceStart ).times( scale ).minus( center );
-      const endTracePosition = this.orbit.createPolar( this.orbit.periodTraceEnd ).times( scale ).minus( center );
-      const startAngle = Math.atan2( startTracePosition.y / radiusY, startTracePosition.x / radiusX );
-      const endAngle = Math.atan2( endTracePosition.y / radiusY, endTracePosition.x / radiusX );
-      // applyTransformation( trackPath );
-      const trackShape = new Shape().ellipticalArc( 0, 0, radiusX, radiusY, 0, -startAngle, -endAngle, this.orbit.retrograde );
-      trackPath.shape = trackShape;
+      // Period track line
+      periodPathNode.update( scale, center, radiusX, radiusY );
     };
 
     this.orbit.changedEmitter.addListener( updatedOrbit );
+    this.orbit.ranEmitter.addListener( () => {
+      // Had to call the method here because apparently the listener is created before periodPathNode is instantiated
+      periodPathNode.updateShape();
+    } );
 
     this.shapeMultilink = Multilink.multilink(
       [
