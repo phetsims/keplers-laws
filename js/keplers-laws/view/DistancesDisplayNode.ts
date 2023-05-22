@@ -159,7 +159,7 @@ export default class DistancesDisplayNode extends VBox {
       KeplersLawsStrings.symbols.distance2StringProperty
     ], updateDistances );
 
-    this.orbit.changedEmitter.addListener( updateDistances );
+    this.orbit.ranEmitter.addListener( updateDistances );
   }
 }
 
