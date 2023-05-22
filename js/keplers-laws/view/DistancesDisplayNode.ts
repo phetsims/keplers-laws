@@ -88,6 +88,7 @@ export default class DistancesDisplayNode extends VBox {
 
 
     const focalStringsBox = new HBox( {
+      visibleProperty: model.stringsVisibleProperty,
       children: [
         new VBox( {
           children: [
@@ -105,6 +106,7 @@ export default class DistancesDisplayNode extends VBox {
     } );
 
     const majorAxisBox = new HBox( {
+      visibleProperty: model.semiaxisVisibleProperty,
       children: [
         new VBox( {
           children: [
