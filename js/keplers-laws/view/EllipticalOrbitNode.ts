@@ -106,8 +106,8 @@ export default class EllipticalOrbitNode extends Path {
         )
       }, SolarSystemCommonConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: '#ccb285',
-        fill: '#ccb285'
+        stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
+        fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
       } ) );
     const stringLabelNode2 = new RichText( 'd<sub>2', combineOptions<TextOptions>(
       {
@@ -122,8 +122,8 @@ export default class EllipticalOrbitNode extends Path {
         )
       }, SolarSystemCommonConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: '#ccb285',
-        fill: '#ccb285'
+        stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
+        fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
       } ) );
     const radiusLabelNode = new RichText( 'r', combineOptions<TextOptions>( {
       visibleProperty: new DerivedProperty(
@@ -137,8 +137,8 @@ export default class EllipticalOrbitNode extends Path {
       )
     }, SolarSystemCommonConstants.TEXT_OPTIONS, {
       scale: 1.5,
-      stroke: '#ccb285',
-      fill: '#ccb285'
+      stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
+      fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
     } ) );
 
     // FIRST LAW: Axis, foci, and Ellipse definition lines
@@ -160,14 +160,14 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: model.eccentricityVisibleProperty
     } );
     const stringsPath = new Path( null, {
-      stroke: '#ccb285',
+      stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
       lineWidth: 3,
       visibleProperty: model.stringsVisibleProperty,
       lineDash: [ 10, 2 ]
     } );
     const fociOptions = {
       fill: '#29ABE2',
-      stroke: SolarSystemCommonColors.backgroundProperty,
+      stroke: 'black',
       scale: 0.8,
       center: Vector2.ZERO,
       visibleProperty: model.fociVisibleProperty
@@ -216,7 +216,7 @@ export default class EllipticalOrbitNode extends Path {
         visible: false
       } ) );
       areaPaths.push( new Path( null, {
-        fill: SolarSystemCommonColors.orbitColorProperty
+        fill: KeplersLawsConstants.AREA_COLOR
       } ) );
       const areaValueProperty = new NumberProperty( 0 );
       areaValueProperties.push( areaValueProperty );
@@ -410,7 +410,10 @@ export default class EllipticalOrbitNode extends Path {
 
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes
-          areaPaths[ i ].opacity = area.alreadyEntered ? area.insideProperty.value ? 1 : 0.7 * area.completion + 0.1 : 0;
+          const opacity = area.alreadyEntered ? area.insideProperty.value ? 1 : 0.7 * area.completion + 0.1 : 0;
+          // const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0; // TODO: Take a design decision
+          areaPaths[ i ].opacity = opacity;
+          // areaPaths[ i ].fill = KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -0.6, 0.6, fillBrightness ) );
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
             0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
           ).close();
