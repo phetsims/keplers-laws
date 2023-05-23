@@ -37,6 +37,8 @@ class EccentricityPanel extends Panel {
     super( new VBox( {
       children: [
         new HBox( {
+          justify: 'left',
+          margin: 5,
           children: [
             new Text( KeplersLawsStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
             new VBox( {
@@ -45,7 +47,7 @@ class EccentricityPanel extends Panel {
                   ...SolarSystemCommonConstants.TITLE_OPTIONS,
                   fill: SolarSystemCommonColors.thirdBodyColorProperty
                 } ),
-                new Line( 0, 0, 30, 0, { stroke: 'white', lineWidth: 1.5, lineCap: 'round' } ),
+                new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
                 new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, {
                   ...SolarSystemCommonConstants.TITLE_OPTIONS,
                   fill: 'orange'
