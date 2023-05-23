@@ -23,6 +23,10 @@ const KeplersLawsConstants = {
   },
 
   AREA_COLOR: SolarSystemCommonColors.orbitColorProperty,
+  FOCI_COLOR_OPTIONS: {
+    fill: '#29ABE2',
+    stroke: 'black'
+  },
   DISTANCE_LABEL_COLOR: new Color( '#ccb285' )
 };
 

@@ -168,11 +168,10 @@ export default class EllipticalOrbitNode extends Path {
       lineDash: [ 10, 2 ]
     } );
     const fociOptions = {
-      fill: '#29ABE2',
-      stroke: 'black',
       scale: 0.8,
       center: Vector2.ZERO,
-      visibleProperty: model.fociVisibleProperty
+      visibleProperty: model.fociVisibleProperty,
+      ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
     };
     const foci = [
       new XNode( fociOptions ),
