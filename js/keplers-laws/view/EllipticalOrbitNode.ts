@@ -334,7 +334,7 @@ export default class EllipticalOrbitNode extends Path {
       // const semiAxis = new ArrowShape( 0, 0, -radiusX, 0, {} );
       semiAxis.moveTo( 0, 0 ).lineTo( 0, radiusY );
       semiAxisPath.shape = semiAxis;
-      aLabelNode.center = new Vector2( -radiusX / 2, 10 );
+      aLabelNode.center = new Vector2( -radiusX / 2, 15 );
       aLabelNode.rotation = this.orbit.w;
       bLabelNode.center = new Vector2( -15, radiusY / 2 );
       bLabelNode.rotation = this.orbit.w;
@@ -346,14 +346,15 @@ export default class EllipticalOrbitNode extends Path {
       // Strings of the foci
       const bodyPosition = this.orbit.createPolar( -this.orbit.nu ).times( scale );
       const stringsShape = new Shape().moveTo( -radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
-      stringsShape.moveTo( radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
+      stringsShape.lineTo( radiusC, 0 );
       stringsPath.shape = stringsShape;
 
       const labelsYPosition = bodyPosition.y / 2;
       const offsetVector = new Vector2( 0, 15 ).rotated( bodyPosition.angle );
+      const offsetVector2 = new Vector2( 0, 15 ).rotated( Math.atan2( bodyPosition.y, bodyPosition.x + 2 * radiusC ) );
       stringLabelNode1.center = new Vector2( ( bodyPosition.x / 2 + radiusC ), labelsYPosition ).add( offsetVector );
       stringLabelNode1.rotation = this.orbit.w;
-      stringLabelNode2.center = new Vector2( ( bodyPosition.x / 2 ), labelsYPosition ).add( offsetVector );
+      stringLabelNode2.center = new Vector2( ( ( bodyPosition.x - 2 * radiusC ) / 2 + radiusC ), labelsYPosition ).add( offsetVector2 );
       stringLabelNode2.rotation = this.orbit.w;
       radiusLabelNode.center = new Vector2( ( bodyPosition.x / 2 ), labelsYPosition ).add( offsetVector );
       radiusLabelNode.rotation = this.orbit.w;
