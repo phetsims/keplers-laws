@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, HBoxOptions, Image, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HBoxOptions, Image, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -78,38 +78,32 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         'fociVisibleCheckbox',
         new Image( fociIcon_png, ICON_OPTIONS )
       ),
-      new AlignBox(
-        createCheckbox(
-          model.stringsVisibleProperty,
-          KeplersLawsStrings.stringsStringProperty,
-          'stringsVisibleCheckbox',
-          new Image( stringsIcon_png, ICON_OPTIONS ),
-          {
-            enabledProperty: model.fociVisibleProperty
-          }
-        ), {
-          leftMargin: 20,
-          layoutOptions: { stretch: true }
-        } ),
+      createCheckbox(
+        model.stringsVisibleProperty,
+        KeplersLawsStrings.stringsStringProperty,
+        'stringsVisibleCheckbox',
+        new Image( stringsIcon_png, ICON_OPTIONS ),
+        {
+          enabledProperty: model.fociVisibleProperty,
+          layoutOptions: { leftMargin: 20 }
+        }
+      ),
       createCheckbox(
         model.axisVisibleProperty,
         KeplersLawsStrings.axisStringProperty,
         'axisVisibleCheckbox',
         axisIconImageNode
       ),
-      new AlignBox(
-        createCheckbox(
-          model.semiaxisVisibleProperty,
-          KeplersLawsStrings.semiaxisStringProperty,
-          'semiAxisVisibleCheckbox',
-          new Image( semiaxisIcon_png, ICON_OPTIONS ),
-          {
-            enabledProperty: model.axisVisibleProperty
-          }
-        ), {
-          leftMargin: 20,
-          layoutOptions: { stretch: true }
-        } ),
+      createCheckbox(
+        model.semiaxisVisibleProperty,
+        KeplersLawsStrings.semiaxisStringProperty,
+        'semiAxisVisibleCheckbox',
+        new Image( semiaxisIcon_png, ICON_OPTIONS ),
+        {
+          enabledProperty: model.axisVisibleProperty,
+          layoutOptions: { leftMargin: 20 }
+        }
+      ),
       createCheckbox(
         model.eccentricityVisibleProperty,
         KeplersLawsStrings.eccentricityStringProperty,
