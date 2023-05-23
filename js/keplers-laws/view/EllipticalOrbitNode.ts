@@ -412,10 +412,8 @@ export default class EllipticalOrbitNode extends Path {
 
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes
-          const opacity = area.alreadyEntered ? area.insideProperty.value ? 1 : 0.7 * area.completion + 0.1 : 0;
-          // const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0; // TODO: Take a design decision, see https://github.com/phetsims/keplers-laws/issues/38
-          areaPaths[ i ].opacity = opacity;
-          // areaPaths[ i ].fill = KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -0.6, 0.6, fillBrightness ) );
+          const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0;
+          areaPaths[ i ].fill = KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -1, 0.6, fillBrightness ) );
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
             0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
           ).close();
