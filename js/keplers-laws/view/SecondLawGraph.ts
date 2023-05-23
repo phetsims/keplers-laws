@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { Color, Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -132,9 +132,8 @@ class AreasBarPlot extends Node {
 
       activeAreas.forEach( ( area, index ) => {
         // Setting the color of the bar
-        const alpha = area.insideProperty.value ? 1 : area.completion;
         const paintableFields: PaintableOptions = {
-          fill: new Color( 'fuchsia' ).setAlpha( alpha )
+          fill: area.getColor()
         };
         barPlot.rectangles[ index ].mutate( paintableFields );
       } );

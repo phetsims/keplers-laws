@@ -413,9 +413,7 @@ export default class EllipticalOrbitNode extends Path {
                                                                : 0;
 
           // Activate area path
-          // Opacity lowered down to 0.8 for stylistic purposes
-          const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0;
-          areaPaths[ i ].fill = KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -1, 0.6, fillBrightness ) );
+          areaPaths[ i ].fill = area.getColor();
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
             0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
           ).close();
