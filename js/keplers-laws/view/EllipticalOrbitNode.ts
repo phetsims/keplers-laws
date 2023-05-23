@@ -314,13 +314,15 @@ export default class EllipticalOrbitNode extends Path {
       // The Number Display for areas is scaled according to the orbit size
       const numberDisplayPositionScaling = ( vectorMagnitude: number ) => {
         // Scaling the vector sum of the dot positions
-        const minScaling = 1.2;
-        const maxScaling = 2.0;
+        const minScaling = 0.5;
+        const maxScaling = 1.5;
 
+        // TODO: Take a design decision, see https://github.com/phetsims/keplers-laws/issues/37
         // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
-        return Math.pow( Utils.clamp(
-          Utils.linear( 50, 200, maxScaling, minScaling, vectorMagnitude ),
-          minScaling, maxScaling ), ( 1 - model.engine.e * model.engine.e ) );
+        // return Math.pow( Utils.clamp(
+        //   Utils.linear( 50, 200, maxScaling, minScaling, vectorMagnitude ),
+        //   minScaling, maxScaling ), ( 1 - model.engine.e * model.engine.e ) );
+        return vectorMagnitude < 100 ? maxScaling : minScaling;
       };
 
       // FIRST LAW -------------------------------------------
@@ -411,7 +413,7 @@ export default class EllipticalOrbitNode extends Path {
           // Activate area path
           // Opacity lowered down to 0.8 for stylistic purposes
           const opacity = area.alreadyEntered ? area.insideProperty.value ? 1 : 0.7 * area.completion + 0.1 : 0;
-          // const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0; // TODO: Take a design decision
+          // const fillBrightness = area.alreadyEntered ? area.insideProperty.value ? 1 : area.completion : 0; // TODO: Take a design decision, see https://github.com/phetsims/keplers-laws/issues/38
           areaPaths[ i ].opacity = opacity;
           // areaPaths[ i ].fill = KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -0.6, 0.6, fillBrightness ) );
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
