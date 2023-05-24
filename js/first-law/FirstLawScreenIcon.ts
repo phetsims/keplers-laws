@@ -22,8 +22,7 @@ const FOCI_SCALE = 0.25;
 
 export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
-    const constructedNode = FirstLawScreenIcon.getFullNode();
-    super( constructedNode );
+    super( FirstLawScreenIcon.getFullNode() );
   }
 
   public static getFullNode(): Node {
@@ -35,7 +34,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
     } );
   }
 
-  public static getFirstLawNode(): Node {
+  public static getFirstLawNode( planet = true ): Node {
     return new Node( {
         children: [
           new Path(
@@ -48,10 +47,6 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
             mainColor: SolarSystemCommonColors.firstBodyColorProperty,
             x: -focalPoint
           } ),
-          new ShadedSphereNode( 3, {
-            mainColor: SolarSystemCommonColors.secondBodyColorProperty,
-            x: semiMajorAxis
-          } ),
           new XNode( {
             center: new Vector2( -focalPoint, 0 ),
             scale: FOCI_SCALE,
@@ -63,7 +58,12 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
             scale: FOCI_SCALE,
             lineWidth: 1,
             ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
-          } )
+          } ),
+          planet ?
+          new ShadedSphereNode( 3, {
+            mainColor: SolarSystemCommonColors.secondBodyColorProperty,
+            x: semiMajorAxis
+          } ) : new Node()
         ]
       }
     );

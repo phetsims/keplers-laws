@@ -8,19 +8,14 @@
  */
 
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Image, ImageOptions } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LawMode from '../model/LawMode.js';
-import iconSecondLaw_png from '../../../images/iconSecondLaw_png.js';
-import iconThirdLaw_png from '../../../images/iconThirdLaw_png.js';
 import keplersLaws from '../../keplersLaws.js';
 import FirstLawScreenIcon from '../../first-law/FirstLawScreenIcon.js';
-import { Node } from '../../../../scenery/js/imports.js';
-
-const IMAGE_OPTIONS: ImageOptions = {
-  scale: 0.5
-};
+import SecondLawScreenIcon from '../../second-law/SecondLawScreenIcon.js';
+import ThirdLawScreenIcon from '../../third-law/ThirdLawScreenIcon.js';
 
 export type LawsButtonsOptions = RectangularRadioButtonGroupOptions;
 
@@ -49,12 +44,12 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
       },
       {
         value: LawMode.SECOND_LAW,
-        createNode: () => new Image( iconSecondLaw_png, IMAGE_OPTIONS ),
+        createNode: () => new Node( { children: [ SecondLawScreenIcon.getFullNode() ], scale: 2 } ),
         tandemName: 'secondLawButton'
       },
       {
         value: LawMode.THIRD_LAW,
-        createNode: () => new Image( iconThirdLaw_png, IMAGE_OPTIONS ),
+        createNode: () => new Node( { children: [ ThirdLawScreenIcon.getFullNode() ], scale: 2 } ),
         tandemName: 'thirdLawButton'
       }
     ], options );

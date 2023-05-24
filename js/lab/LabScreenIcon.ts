@@ -12,16 +12,17 @@ import KeplersLawsScreenIcon from '../keplers-laws/view/KeplersLawsScreenIcon.js
 import SecondLawScreenIcon from '../second-law/SecondLawScreenIcon.js';
 import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
 import { Node } from '../../../scenery/js/imports.js';
+import ThirdLawScreenIcon from '../third-law/ThirdLawScreenIcon.js';
 
 export default class LabScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
 
-    const commonNode = KeplersLawsScreenIcon.getCommonNode();
-    const secondLawNode = SecondLawScreenIcon.getSecondLawNode( commonNode );
-    const firstLawNode = FirstLawScreenIcon.getFirstLawNode();
+    const secondLawNode = SecondLawScreenIcon.getFullNode();
+    const firstLawNode = FirstLawScreenIcon.getFirstLawNode( false );
+    const periodTimerNode = ThirdLawScreenIcon.getPeriodTimerNode();
 
     super( new Node( {
-      children: [ secondLawNode, firstLawNode ]
+      children: [ secondLawNode, firstLawNode, periodTimerNode ]
     } ) );
   }
 }
