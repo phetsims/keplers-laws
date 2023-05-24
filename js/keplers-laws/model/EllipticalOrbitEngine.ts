@@ -324,7 +324,11 @@ export default class EllipticalOrbitEngine extends Engine {
     // nu is the true anomaly (Angle between periapsis and the body)
     // w is the argument of periapsis (global rotation of periapsis)
     // When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
-    return Vector2.createPolar( this.calculateR( this.a, this.e, nu ), nu + w );
+    return EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
+  }
+
+  public static staticCreatePolar( a: number, e: number, nu: number, w = 0 ): Vector2 {
+    return Vector2.createPolar( EllipticalOrbitEngine.calculateR( a, e, nu ), nu + w );
   }
 
   /**
@@ -480,7 +484,7 @@ export default class EllipticalOrbitEngine extends Engine {
     return new Ellipse( a, b, c, e, w, M, W, nu );
   }
 
-  private calculateR( a: number, e: number, nu: number ): number {
+  public static calculateR( a: number, e: number, nu: number ): number {
     return a * ( 1 - e * e ) / ( 1 + e * Math.cos( nu ) );
   }
 

@@ -6,8 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import { Image } from '../../../scenery/js/imports.js';
-import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Screen from '../../../joist/js/Screen.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -16,7 +14,7 @@ import LawMode from '../keplers-laws/model/LawMode.js';
 import KeplersLawsScreenView from '../keplers-laws/view/KeplersLawsScreenView.js';
 import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
-import iconSecondLaw_png from '../../images/iconSecondLaw_png.js';
+import SecondLawScreenIcon from './SecondLawScreenIcon.js';
 
 class SecondLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
@@ -24,9 +22,7 @@ class SecondLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
     const options = {
       name: KeplersLawsStrings.screen.secondLawStringProperty,
-      homeScreenIcon: new ScreenIcon( new Image( iconSecondLaw_png ), {
-        fill: SolarSystemCommonColors.backgroundProperty
-      } ),
+      homeScreenIcon: new SecondLawScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem
     };

@@ -8,62 +8,64 @@
  */
 
 import keplersLaws from '../keplersLaws.js';
-import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import { Path, Node } from '../../../scenery/js/imports.js';
+import { Node, Path } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import XNode from '../../../scenery-phet/js/XNode.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Vector2 from '../../../dot/js/Vector2.js';
+import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../keplers-laws/view/KeplersLawsScreenIcon.js';
 
 // constants
 const FOCI_SCALE = 0.25;
 
-export default class FirstLawScreenIcon extends ScreenIcon {
-  public constructor( scale = 1 ) {
+export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
+  public constructor() {
+    const constructedNode = FirstLawScreenIcon.getFullNode();
+    super( constructedNode );
+  }
 
-    // Ellipses parameters
-    // Big ellipse
-    const ellipseSemiMajorAxis = 20;
-    const ellipseSemiMinorAxis = 17;
+  public static getFullNode(): Node {
+    return new Node( {
+      children: [
+        KeplersLawsScreenIcon.getCommonNode(),
+        FirstLawScreenIcon.getFirstLawNode()
+      ]
+    } );
+  }
 
-    // calculate focal point
-    const bigEllipseFocalPoint = Math.sqrt( ellipseSemiMajorAxis * ellipseSemiMajorAxis - ellipseSemiMinorAxis * ellipseSemiMinorAxis );
-
-    super(
-      new Node( {
-        scale: scale,
+  public static getFirstLawNode(): Node {
+    return new Node( {
         children: [
           new Path(
-            new Shape().ellipse( 0, 0, ellipseSemiMajorAxis, ellipseSemiMinorAxis, 0 ),
+            new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ),
             {
               stroke: SolarSystemCommonColors.orbitColorProperty,
               lineWidth: 1
             } ),
           new ShadedSphereNode( 8, {
             mainColor: SolarSystemCommonColors.firstBodyColorProperty,
-            x: -bigEllipseFocalPoint
+            x: -focalPoint
           } ),
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,
-            x: ellipseSemiMajorAxis
+            x: semiMajorAxis
           } ),
           new XNode( {
-            center: new Vector2( -bigEllipseFocalPoint, 0 ),
+            center: new Vector2( -focalPoint, 0 ),
             scale: FOCI_SCALE,
             lineWidth: 1,
             ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
           } ),
           new XNode( {
-            center: new Vector2( bigEllipseFocalPoint, 0 ),
+            center: new Vector2( focalPoint, 0 ),
             scale: FOCI_SCALE,
             lineWidth: 1,
             ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
           } )
         ]
-      } ),
-      { fill: SolarSystemCommonColors.backgroundProperty }
+      }
     );
   }
 }

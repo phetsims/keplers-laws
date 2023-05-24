@@ -12,9 +12,9 @@ import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystem
 import KeplersLawsModel from '../keplers-laws/model/KeplersLawsModel.js';
 import LawMode from '../keplers-laws/model/LawMode.js';
 import KeplersLawsScreenView from '../keplers-laws/view/KeplersLawsScreenView.js';
-import KeplersLawsScreenIcon from '../keplers-laws/view/KeplersLawsScreenIcon.js';
 import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
+import LabScreenIcon from './LabScreenIcon.js';
 
 class LabScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
@@ -22,7 +22,7 @@ class LabScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
     const options = {
       name: KeplersLawsStrings.screen.labStringProperty,
-      homeScreenIcon: new KeplersLawsScreenIcon(),
+      homeScreenIcon: new LabScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem
     };

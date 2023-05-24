@@ -12,10 +12,11 @@ import { Image, ImageOptions } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LawMode from '../model/LawMode.js';
-import iconFirstLaw_png from '../../../images/iconFirstLaw_png.js';
 import iconSecondLaw_png from '../../../images/iconSecondLaw_png.js';
 import iconThirdLaw_png from '../../../images/iconThirdLaw_png.js';
 import keplersLaws from '../../keplersLaws.js';
+import FirstLawScreenIcon from '../../first-law/FirstLawScreenIcon.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 const IMAGE_OPTIONS: ImageOptions = {
   scale: 0.5
@@ -43,7 +44,7 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
     super( model.selectedLawProperty, [
       {
         value: LawMode.FIRST_LAW,
-        createNode: () => new Image( iconFirstLaw_png, IMAGE_OPTIONS ),
+        createNode: () => new Node( { children: [ FirstLawScreenIcon.getFullNode() ], scale: 2 } ),
         tandemName: 'firstLawButton'
       },
       {
