@@ -23,11 +23,6 @@ export const semiMinorAxis = 17;
 export const focalPoint = Math.sqrt( semiMajorAxis * semiMajorAxis - semiMinorAxis * semiMinorAxis );
 
 export default class KeplersLawsScreenIcon extends ScreenIcon {
-  protected readonly semiMajorAxis: number;
-  protected readonly semiMinorAxis: number;
-  protected readonly focalPoint: number;
-
-  protected readonly contents: Node;
 
   public constructor( contents: Node ) {
     super(
