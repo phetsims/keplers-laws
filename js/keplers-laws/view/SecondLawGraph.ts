@@ -133,7 +133,8 @@ class AreasBarPlot extends Node {
       activeAreas.forEach( ( area, index ) => {
         // Setting the color of the bar
         const paintableFields: PaintableOptions = {
-          fill: area.getColor()
+          fill: area.getColor(),
+          stroke: 'black'
         };
         barPlot.rectangles[ index ].mutate( paintableFields );
       } );

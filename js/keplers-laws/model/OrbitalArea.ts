@@ -34,8 +34,7 @@ export default class OrbitalArea {
    */
   public getColor(): Color {
     const fillBrightness = this.alreadyEntered ? this.insideProperty.value ? 1 : this.completion : 0;
-    const alpha = this.alreadyEntered ? this.insideProperty.value ? 1 : 0.7 * this.completion + 0.1 : 0;
-    return KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -1, 0.6, fillBrightness ) ).setAlpha( alpha );
+    return KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -0.6, 0.7, fillBrightness ) );
   }
 
   public reset(): void {

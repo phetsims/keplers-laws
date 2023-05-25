@@ -84,6 +84,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       }
     } );
 
+    this.bodies[ 0 ].massProperty.lazyLink( () => {
+      this.isPlayingProperty.value = false;
+    } );
+
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
 
     this.defaultBodyState = [
