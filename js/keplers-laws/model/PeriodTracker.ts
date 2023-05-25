@@ -30,6 +30,7 @@ export class TrackingState extends EnumerationValue {
 export default class PeriodTracker {
   public beganPeriodTimerAt = 0;
   public trackingState: TrackingState;
+  public afterHalfPeriod = false;
   public readonly periodTimer: Stopwatch;
   public readonly fadingTimer: Stopwatch;
   public readonly fadingEmitter = new Emitter();
@@ -62,9 +63,9 @@ export default class PeriodTracker {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
-        this.model.engine.tracingPathProperty.value = true;
       }
       this.model.isPlayingProperty.value = isRunning;
+      this.model.engine.tracingPathProperty.value = isRunning;
     } );
 
     // Begging fading with a diff between start and end angles
@@ -87,6 +88,7 @@ export default class PeriodTracker {
       if ( this.periodTimer.isRunningProperty.value ) {
         this.periodTimer.setTime( measuredTime );
       }
+      this.afterHalfPeriod = measuredTime > periodRangeProperty.value.max / 2;
 
       // TODO: Commenting this temporal solution to have consistent times...
       // if ( this.trackingState === TrackingState.RUNNING ) {
