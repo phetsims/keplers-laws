@@ -490,10 +490,24 @@ export default class EllipticalOrbitEngine extends Engine {
 
   // Numerical solution to Kepler's Equations for Eccentric Anomaly (E) and then True Anomaly (nu)
   private getTrueAnomaly( M: number ): number {
-    const E1 = M + this.e * Math.sin( M );
-    const E2 = M + this.e * Math.sin( E1 );
-    const E = M + this.e * Math.sin( E2 );
-    const nu = Math.atan2( Math.pow( 1 - this.e * this.e, 0.5 ) * Math.sin( E ), Math.cos( E ) - this.e );
+    let E = M;
+    const epsilon = 1e-1;  // Set a desired level of accuracy
+    let delta = 1;
+
+    // Newton-Raphson method to solve Kepler's equation
+    while ( Math.abs( delta ) > epsilon ) {
+      const g = E - this.e * Math.sin( E ) - M;  // g(E) = E - e*sin(E) - M
+      const g_prime = 1 - this.e * Math.cos( E );  // g'(E) = 1 - e*cos(E)
+      delta = g / g_prime;
+      E = E - delta;
+    }
+
+    // Calculate the true anomaly (nu)
+    const nu = Math.atan2(
+      Math.sqrt( 1 - this.e * this.e ) * Math.sin( E ),
+      Math.cos( E ) - this.e
+    );
+
     return Utils.moduloBetweenDown( nu, 0, TWOPI );
   }
 
