@@ -30,13 +30,13 @@ export class TrackingState extends EnumerationValue {
 export default class PeriodTracker {
   public beganPeriodTimerAt = 0;
   public trackingState: TrackingState;
-  public afterHalfPeriod = false;
+  public afterPeriodThreshold = false;
   public readonly periodTimer: Stopwatch;
   public readonly fadingTimer: Stopwatch;
   public readonly fadingEmitter = new Emitter();
 
   // Fraction of the period that the line will be fading
-  public readonly fadingLifetime = 1.5;
+  public readonly fadingLifetime = 3;
 
   public constructor( private readonly model: KeplersLawsModel ) {
     this.trackingState = TrackingState.IDLE;
@@ -64,52 +64,33 @@ export default class PeriodTracker {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
       }
-      this.model.isPlayingProperty.value = isRunning;
+      // this.model.isPlayingProperty.value = isRunning;
       this.model.engine.tracingPathProperty.value = isRunning;
     } );
 
     // Begging fading with a diff between start and end angles
-    // TODO: Commenting this temporal solution to have consistent times...
-    // const beginFade = ( diff: number ) => {
-    //   this.periodTimer.isRunningProperty.value = false;
-    //   this.model.engine.tracingPathProperty.value = false;
-    //   this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart + 2 * Math.PI - diff;
-    //   this.trackingState = TrackingState.FADING;
-    //   this.fadingTimer.reset();
-    //   this.fadingTimer.isRunningProperty.value = true;
-    // };
+    const beginFade = () => {
+      this.model.engine.tracingPathProperty.value = false;
+      this.trackingState = TrackingState.FADING;
+      this.fadingTimer.reset();
+      this.fadingTimer.isRunningProperty.value = true;
+    };
 
     this.model.timeProperty.link( time => {
-      if ( this.beganPeriodTimerAt > time ) {
-        // Avoid negative times by resetting the timer
-        this.beganPeriodTimerAt = time;
+      if ( this.trackingState === TrackingState.RUNNING ) {
+        if ( this.beganPeriodTimerAt > time ) {
+          // Avoid negative times by resetting the timer
+          this.beganPeriodTimerAt = time;
+        }
+        const measuredTime = time - this.beganPeriodTimerAt;
+        this.afterPeriodThreshold = measuredTime > periodRangeProperty.value.max * 0.8;
+        if ( this.periodTimer.isRunningProperty.value ) {
+          this.periodTimer.setTime( measuredTime );
+        }
+        if ( this.periodTimer.timeProperty.value >= periodRangeProperty.value.max ) {
+          beginFade();
+        }
       }
-      const measuredTime = time - this.beganPeriodTimerAt;
-      if ( this.periodTimer.isRunningProperty.value ) {
-        this.periodTimer.setTime( measuredTime );
-      }
-      this.afterHalfPeriod = measuredTime > periodRangeProperty.value.max / 2;
-
-      // TODO: Commenting this temporal solution to have consistent times...
-      // if ( this.trackingState === TrackingState.RUNNING ) {
-      //   // Angular difference between the actual ending spot and the threshold for beggining to fade
-      //   const diff = 0.01;
-      //   if ( measuredTime >= periodRangeProperty.value.max - 0.01 ) {
-      //     beginFade( diff );
-      //   }
-      //   if ( measuredTime > periodRangeProperty.value.max / 2 ) {
-      //     if ( this.model.engine.retrograde ) {
-      //       if ( this.model.engine.periodTraceEnd > this.model.engine.periodTraceStart + 2 * Math.PI - diff ) {
-      //         beginFade( diff );
-      //       }
-      //     }
-      //     else {
-      //       if ( this.model.engine.periodTraceEnd < this.model.engine.periodTraceStart + diff ) {
-      //         beginFade( diff );
-      //       }
-      //     }
-      //   }
-      // }
     } );
 
     this.model.engine.resetEmitter.addListener( () => {
@@ -130,8 +111,8 @@ export default class PeriodTracker {
   public reset(): void {
     this.trackingState = TrackingState.IDLE;
     this.beganPeriodTimerAt = 0;
-    this.periodTimer.reset();
     this.fadingTimer.reset();
+    this.afterPeriodThreshold = false;
     this.model.engine.tracingPathProperty.value = false;
     this.model.engine.periodTraceStart = 0;
     this.model.engine.periodTraceEnd = 0;
