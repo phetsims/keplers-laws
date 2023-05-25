@@ -27,7 +27,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
-import PeriodPathNode from './PeriodPathNode.js';
+import PeriodTrackerNode from './PeriodTrackerNode.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -251,7 +251,7 @@ export default class EllipticalOrbitNode extends Path {
         [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
       )
     } );
-    const periodPathNode = new PeriodPathNode( model );
+    const periodPathNode = new PeriodTrackerNode( model );
 
     // Text Nodes
     labelsLayer.addChild( aLabelNode );

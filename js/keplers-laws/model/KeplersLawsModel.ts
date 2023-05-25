@@ -19,7 +19,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
-import PeriodPath from './PeriodPath.js';
+import PeriodTracker from './PeriodTracker.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -64,7 +64,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly poweredSemiMajorAxisProperty: ReadOnlyProperty<number>;
   public readonly poweredPeriodProperty: ReadOnlyProperty<number>;
 
-  public readonly periodPath: PeriodPath;
+  public readonly periodPath: PeriodTracker;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
@@ -135,7 +135,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.update();
     } );
 
-    this.periodPath = new PeriodPath( this );
+    this.periodPath = new PeriodTracker( this );
 
     this.forceScaleProperty.value = 0.5;
   }

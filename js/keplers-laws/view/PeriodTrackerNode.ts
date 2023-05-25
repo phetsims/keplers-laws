@@ -10,11 +10,11 @@ import { Path } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import PeriodPath, { TrackingState } from '../model/PeriodPath.js';
+import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
-export default class PeriodPathNode extends Path {
-  private periodPath: PeriodPath;
+export default class PeriodTrackerNode extends Path {
+  private periodPath: PeriodTracker;
 
   // Initial values for the ellipse
   public orbitScale = 1;
@@ -67,4 +67,4 @@ export default class PeriodPathNode extends Path {
   }
 }
 
-keplersLaws.register( 'PeriodPathNode', PeriodPathNode );
+keplersLaws.register( 'PeriodTrackerNode', PeriodTrackerNode );

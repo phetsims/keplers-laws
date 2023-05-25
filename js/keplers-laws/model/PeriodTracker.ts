@@ -27,7 +27,7 @@ export class TrackingState extends EnumerationValue {
   } );
 }
 
-export default class PeriodPath {
+export default class PeriodTracker {
   public beganPeriodTimerAt = 0;
   public trackingState: TrackingState;
   public readonly periodTimer: Stopwatch;
@@ -68,14 +68,15 @@ export default class PeriodPath {
     } );
 
     // Begging fading with a diff between start and end angles
-    const begginFade = ( diff: number ) => {
-      this.periodTimer.isRunningProperty.value = false;
-      this.model.engine.tracingPathProperty.value = false;
-      this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart + 2 * Math.PI - diff;
-      this.trackingState = TrackingState.FADING;
-      this.fadingTimer.reset();
-      this.fadingTimer.isRunningProperty.value = true;
-    };
+    // TODO: Commenting this temporal solution to have consistent times...
+    // const beginFade = ( diff: number ) => {
+    //   this.periodTimer.isRunningProperty.value = false;
+    //   this.model.engine.tracingPathProperty.value = false;
+    //   this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart + 2 * Math.PI - diff;
+    //   this.trackingState = TrackingState.FADING;
+    //   this.fadingTimer.reset();
+    //   this.fadingTimer.isRunningProperty.value = true;
+    // };
 
     this.model.timeProperty.link( time => {
       if ( this.beganPeriodTimerAt > time ) {
@@ -87,25 +88,26 @@ export default class PeriodPath {
         this.periodTimer.setTime( measuredTime );
       }
 
-      if ( this.trackingState === TrackingState.RUNNING ) {
-        // Angular difference between the actual ending spot and the threshold for beggining to fade
-        const diff = 0.01;
-        if ( measuredTime >= periodRangeProperty.value.max - 0.01 ) {
-          begginFade( diff );
-        }
-        if ( measuredTime > periodRangeProperty.value.max / 2 ) {
-          if ( this.model.engine.retrograde ) {
-            if ( this.model.engine.periodTraceEnd > this.model.engine.periodTraceStart + 2 * Math.PI - diff ) {
-              begginFade( diff );
-            }
-          }
-          else {
-            if ( this.model.engine.periodTraceEnd < this.model.engine.periodTraceStart + diff ) {
-              begginFade( diff );
-            }
-          }
-        }
-      }
+      // TODO: Commenting this temporal solution to have consistent times...
+      // if ( this.trackingState === TrackingState.RUNNING ) {
+      //   // Angular difference between the actual ending spot and the threshold for beggining to fade
+      //   const diff = 0.01;
+      //   if ( measuredTime >= periodRangeProperty.value.max - 0.01 ) {
+      //     beginFade( diff );
+      //   }
+      //   if ( measuredTime > periodRangeProperty.value.max / 2 ) {
+      //     if ( this.model.engine.retrograde ) {
+      //       if ( this.model.engine.periodTraceEnd > this.model.engine.periodTraceStart + 2 * Math.PI - diff ) {
+      //         beginFade( diff );
+      //       }
+      //     }
+      //     else {
+      //       if ( this.model.engine.periodTraceEnd < this.model.engine.periodTraceStart + diff ) {
+      //         beginFade( diff );
+      //       }
+      //     }
+      //   }
+      // }
     } );
 
     this.model.engine.resetEmitter.addListener( () => {
@@ -134,4 +136,4 @@ export default class PeriodPath {
   }
 }
 
-keplersLaws.register( 'PeriodPath', PeriodPath );
+keplersLaws.register( 'PeriodTracker', PeriodTracker );
