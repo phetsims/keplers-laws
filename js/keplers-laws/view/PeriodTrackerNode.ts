@@ -37,6 +37,7 @@ export default class PeriodTrackerNode extends Path {
 
     this.model.engine.changedEmitter.addListener( () => {
       this.periodPath.reset();
+      this.periodPath.periodTimer.timeProperty.set( 0 );
       this.updateShape();
     } );
   }
@@ -60,7 +61,9 @@ export default class PeriodTrackerNode extends Path {
     const startAngle = -Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
     const endAngle = -Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
 
-    if ( this.periodPath.afterPeriodThreshold && ( ( retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart <= Math.PI / 10 ) || ( !retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart >= Math.PI / 10 ) ) ) {
+    if ( this.periodPath.afterPeriodThreshold && (
+      ( retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart <= Math.PI / 10 ) ||
+      ( !retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart >= Math.PI / 10 ) ) ) {
       console.log( this.periodPath.afterPeriodThreshold, retrograde, this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart );
       this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
     }
