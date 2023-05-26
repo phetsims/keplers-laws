@@ -69,16 +69,18 @@ export default class PeriodTrackerNode extends Path {
   }
 
   public updateShape(): void {
-    const retrograde = this.model.engine.retrograde;
     this.opacity = 1;
     const startTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceStart ).times( this.orbitScale ).minus( this.orbitCenter );
     const endTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceEnd ).times( this.orbitScale ).minus( this.orbitCenter );
     const startAngle = Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
     const endAngle = Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
 
+    const retrograde = this.model.engine.retrograde;
+    const angleDiff = this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart;
+    const angleThreshold = Math.PI / 10;
     if ( this.periodPath.afterPeriodThreshold && (
-      ( retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart <= Math.PI / 10 ) ||
-      ( !retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart >= Math.PI / 10 ) ) ) {
+      ( retrograde && angleDiff <= angleThreshold ) ||
+      ( !retrograde && angleDiff >= 2 * Math.PI - angleThreshold ) ) ) {
       this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
     }
     else {
@@ -89,6 +91,7 @@ export default class PeriodTrackerNode extends Path {
   }
 
   public updateFade(): void {
+    this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
     this.opacity = 1 - this.periodPath.fadingTimer.timeProperty.value / this.periodPath.fadingLifetime;
   }
 }

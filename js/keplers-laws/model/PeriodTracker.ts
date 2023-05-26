@@ -63,7 +63,7 @@ export default class PeriodTracker {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
-        // this.model.isPlayingProperty.value = true; // TODO This is just true for testing
+        this.model.isPlayingProperty.value = true; // TODO This is just true for testing
       }
       else if ( this.trackingState !== TrackingState.FADING ) {
         this.reset();
