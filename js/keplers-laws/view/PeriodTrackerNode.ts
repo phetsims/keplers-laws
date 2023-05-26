@@ -22,6 +22,8 @@ export default class PeriodTrackerNode extends Path {
   public radiusX = 1;
   public radiusY = 1;
 
+  public startCircle: Path;
+
   public constructor( private readonly model: KeplersLawsModel ) {
     super( null, {
       stroke: SolarSystemCommonColors.thirdBodyColorProperty,
@@ -35,11 +37,24 @@ export default class PeriodTrackerNode extends Path {
       this.updateFade();
     } );
 
+    this.periodPath.periodTimer.isRunningProperty.lazyLink( isRunning => {
+      if ( isRunning ) {
+        this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart;
+        this.updateShape();
+      }
+    } );
+
     this.model.engine.changedEmitter.addListener( () => {
       this.periodPath.reset();
       this.periodPath.periodTimer.timeProperty.set( 0 );
+      this.periodPath.periodTimer.isRunningProperty.value = false;
       this.updateShape();
     } );
+
+    this.startCircle = new Path( Shape.circle( 0, 0, 10 ), {
+      fill: SolarSystemCommonColors.thirdBodyColorProperty
+    } );
+    this.addChild( this.startCircle );
   }
 
   public update( orbitScale: number, orbitCenter: Vector2, radiusX: number, radiusY: number ): void {
@@ -56,20 +71,21 @@ export default class PeriodTrackerNode extends Path {
   public updateShape(): void {
     const retrograde = this.model.engine.retrograde;
     this.opacity = 1;
-    const startTracePosition = this.model.engine.createPolar( this.model.engine.periodTraceStart ).times( this.orbitScale ).minus( this.orbitCenter );
-    const endTracePosition = this.model.engine.createPolar( this.model.engine.periodTraceEnd ).times( this.orbitScale ).minus( this.orbitCenter );
-    const startAngle = -Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
-    const endAngle = -Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
+    const startTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceStart ).times( this.orbitScale ).minus( this.orbitCenter );
+    const endTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceEnd ).times( this.orbitScale ).minus( this.orbitCenter );
+    const startAngle = Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
+    const endAngle = Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
 
     if ( this.periodPath.afterPeriodThreshold && (
       ( retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart <= Math.PI / 10 ) ||
       ( !retrograde && this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart >= Math.PI / 10 ) ) ) {
-      console.log( this.periodPath.afterPeriodThreshold, retrograde, this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart );
       this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
     }
     else {
       this.shape = new Shape().ellipticalArc( 0, 0, this.radiusX, this.radiusY, 0, startAngle, endAngle, retrograde );
     }
+    this.startCircle.translation = startTracePosition;
+    this.startCircle.visible = startAngle !== endAngle || this.periodPath.periodTimer.isRunningProperty.value;
   }
 
   public updateFade(): void {

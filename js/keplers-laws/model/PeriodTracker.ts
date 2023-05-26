@@ -63,8 +63,12 @@ export default class PeriodTracker {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
+        // this.model.isPlayingProperty.value = true; // TODO This is just true for testing
       }
-      // this.model.isPlayingProperty.value = isRunning;
+      else if ( this.trackingState !== TrackingState.FADING ) {
+        this.reset();
+        this.periodTimer.timeProperty.set( 0 );
+      }
       this.model.engine.tracingPathProperty.value = isRunning;
     } );
 
@@ -85,10 +89,10 @@ export default class PeriodTracker {
         const measuredTime = time - this.beganPeriodTimerAt;
         this.afterPeriodThreshold = measuredTime > periodRangeProperty.value.max * 0.8;
         if ( this.periodTimer.isRunningProperty.value ) {
+          if ( measuredTime >= periodRangeProperty.value.max ) {
+            beginFade();
+          }
           this.periodTimer.setTime( measuredTime );
-        }
-        if ( this.periodTimer.timeProperty.value >= periodRangeProperty.value.max ) {
-          beginFade();
         }
       }
     } );
@@ -109,6 +113,7 @@ export default class PeriodTracker {
   }
 
   public reset(): void {
+    // Reset everything but the period timer. We want the time readout to stay most times
     this.trackingState = TrackingState.IDLE;
     this.beganPeriodTimerAt = 0;
     this.fadingTimer.reset();
