@@ -315,15 +315,14 @@ export default class EllipticalOrbitNode extends Path {
       // The Number Display for areas is scaled according to the orbit size
       const numberDisplayPositionScaling = ( vectorMagnitude: number ) => {
         // Scaling the vector sum of the dot positions
-        const minScaling = 0.5;
-        const maxScaling = 1.5;
+        const minScaling = 1.2;
+        const maxScaling = 2.0;
 
         // TODO: Take a design decision, see https://github.com/phetsims/keplers-laws/issues/37
         // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
-        // return Math.pow( Utils.clamp(
-        //   Utils.linear( 50, 200, maxScaling, minScaling, vectorMagnitude ),
-        //   minScaling, maxScaling ), ( 1 - model.engine.e * model.engine.e ) );
-        return vectorMagnitude < 100 ? maxScaling : minScaling;
+        return Utils.clamp(
+          Utils.linear( 10, 250, maxScaling, minScaling, vectorMagnitude ),
+          minScaling, maxScaling );
       };
 
       // FIRST LAW -------------------------------------------
