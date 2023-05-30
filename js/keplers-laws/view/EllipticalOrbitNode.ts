@@ -409,6 +409,7 @@ export default class EllipticalOrbitNode extends Path {
           areaValueProperties[ i ].value = area.alreadyEntered ?
                                            ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
                                                                : 0;
+          areaValueNumberDisplays[ i ].visible = areaValueProperties[ i ].value > 0;
 
           // Activate area path
           areaPaths[ i ].fill = area.getColor();
