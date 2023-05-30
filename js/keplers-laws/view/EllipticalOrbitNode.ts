@@ -68,16 +68,16 @@ export default class EllipticalOrbitNode extends Path {
       )
     }, SolarSystemCommonConstants.TEXT_OPTIONS, {
       scale: 1.5,
-      stroke: 'orange',
-      fill: 'orange'
+      stroke: KeplersLawsConstants.AXES_COLOR,
+      fill: KeplersLawsConstants.AXES_COLOR
     } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: model.semiaxisVisibleProperty
       }, SolarSystemCommonConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: 'orange',
-        fill: 'orange'
+        stroke: KeplersLawsConstants.AXES_COLOR,
+        fill: KeplersLawsConstants.AXES_COLOR
       } ) );
     const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
       {
@@ -152,7 +152,7 @@ export default class EllipticalOrbitNode extends Path {
       )
     } );
     const semiAxisPath = new Path( null, {
-      stroke: 'orange',
+      stroke: KeplersLawsConstants.AXES_COLOR,
       lineWidth: 3,
       visibleProperty: model.semiaxisVisibleProperty
     } );
@@ -245,7 +245,7 @@ export default class EllipticalOrbitNode extends Path {
 
     // THIRD LAW: SemiMajor axis
     const semiMajorAxisPath = new Path( null, {
-      stroke: 'orange',
+      stroke: KeplersLawsConstants.AXES_COLOR,
       lineWidth: 3,
       visibleProperty: DerivedProperty.or(
         [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]

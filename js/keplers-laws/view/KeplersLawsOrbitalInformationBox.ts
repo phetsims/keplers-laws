@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, HBoxOptions, Image, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HBoxOptions, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -17,18 +17,9 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LinkableProperty from '../../../../axon/js/LinkableProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import semiaxisIcon_png from '../../../images/semiaxisIcon_png.js';
-import eccentricityIcon_png from '../../../images/eccentricityIcon_png.js';
-import fociIcon_png from '../../../images/fociIcon_png.js';
-import stringsIcon_png from '../../../images/stringsIcon_png.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
-
-// Const
-const ICON_OPTIONS = {
-  scale: 0.38
-};
+import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -37,18 +28,6 @@ export type KeplersLawsOrbitalInformationOptions = SelfOptions & WithRequired<VB
 class KeplersLawsOrbitalInformationBox extends VBox {
 
   public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsOrbitalInformationOptions ) {
-
-    // Draw an Ellipse with minor and major axis
-    const axisShape = new Shape().moveTo( 0, 0 ).ellipse( 0, 0, 10, 5, 0 );
-    axisShape.moveTo( -10, 0 ).lineTo( 10, 0 );
-    axisShape.moveTo( 0, -5 ).lineTo( 0, 5 );
-
-    const axisIconImageNode = new Path(
-      axisShape, {
-        stroke: SolarSystemCommonColors.foregroundProperty,
-        lineWidth: 1
-      } );
-
     const getCheckboxOptions = ( name: string, options: CheckboxOptions = {} ) => {
       return combineOptions<CheckboxOptions>( options, SolarSystemCommonConstants.CHECKBOX_OPTIONS, {
         tandem: providedOptions.tandem.createTandem( name )
@@ -76,13 +55,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.fociVisibleProperty,
         KeplersLawsStrings.fociStringProperty,
         'fociVisibleCheckbox',
-        new Image( fociIcon_png, ICON_OPTIONS )
+        FirstLawCheckboxIcons.getFociIcon()
       ),
       createCheckbox(
         model.stringsVisibleProperty,
         KeplersLawsStrings.stringsStringProperty,
         'stringsVisibleCheckbox',
-        new Image( stringsIcon_png, ICON_OPTIONS ),
+        FirstLawCheckboxIcons.getStringsIcon(),
         {
           enabledProperty: model.fociVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -92,13 +71,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.axisVisibleProperty,
         KeplersLawsStrings.axisStringProperty,
         'axisVisibleCheckbox',
-        axisIconImageNode
+        FirstLawCheckboxIcons.getAxisIcon()
       ),
       createCheckbox(
         model.semiaxisVisibleProperty,
         KeplersLawsStrings.semiaxisStringProperty,
         'semiAxisVisibleCheckbox',
-        new Image( semiaxisIcon_png, ICON_OPTIONS ),
+        FirstLawCheckboxIcons.getSemiaxesIcon(),
         {
           enabledProperty: model.axisVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -108,7 +87,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.eccentricityVisibleProperty,
         KeplersLawsStrings.eccentricityStringProperty,
         'eccentricityVisibleCheckbox',
-        new Image( eccentricityIcon_png, ICON_OPTIONS )
+        FirstLawCheckboxIcons.getEccentricityIcon()
       )
     ];
 

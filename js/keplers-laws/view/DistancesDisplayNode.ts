@@ -22,6 +22,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
   scale: 1.5,
@@ -31,8 +32,8 @@ export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSyst
 
 export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
   scale: 1.5,
-  stroke: 'orange',
-  fill: 'orange'
+  stroke: KeplersLawsConstants.AXES_COLOR,
+  fill: KeplersLawsConstants.AXES_COLOR
 } );
 
 export const STRING_ARROW_OPTIONS = {
@@ -46,8 +47,8 @@ export const STRING_ARROW_OPTIONS = {
 };
 
 export const MAJOR_AXIS_ARROW_OPTIONS = {
-  stroke: 'orange',
-  fill: 'orange',
+  stroke: KeplersLawsConstants.AXES_COLOR,
+  fill: KeplersLawsConstants.AXES_COLOR,
   headHeight: 10,
   headWidth: 10,
   headLineWidth: 3,

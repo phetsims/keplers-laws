@@ -27,6 +27,7 @@ const KeplersLawsConstants = {
     fill: '#29ABE2',
     stroke: 'black'
   },
+  AXES_COLOR: 'orange',
   DISTANCE_LABEL_COLOR: new Color( '#ccb285' )
 };
 

@@ -19,6 +19,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -50,7 +51,7 @@ class EccentricityPanel extends Panel {
                 new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
                 new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, {
                   ...SolarSystemCommonConstants.TITLE_OPTIONS,
-                  fill: 'orange'
+                  fill: KeplersLawsConstants.AXES_COLOR
                 } )
               ]
             } )

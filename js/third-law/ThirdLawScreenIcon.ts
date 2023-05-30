@@ -13,7 +13,7 @@ import { Node, Path, Text } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../keplers-laws/view/KeplersLawsScreenIcon.js';
-import KeplersLawsStrings from '../KeplersLawsStrings.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
@@ -44,16 +44,11 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
           } ),
           new Path(
             new Shape().moveTo( 0, 0 ).lineTo( semiMajorAxis, 0 ), {
-              stroke: 'orange',
+              stroke: KeplersLawsConstants.AXES_COLOR,
               lineWidth: 1
             }
           ),
           ThirdLawScreenIcon.getPeriodTimerNode(),
-          new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, {
-            centerX: semiMajorAxis / 2,
-            centerY: 0.15 * semiMajorAxis,
-            fill: 'orange'
-          } ),
           planet ?
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,
