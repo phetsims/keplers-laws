@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, VBox, Node } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -14,7 +14,7 @@ import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import SolarSystemCommonScreenView, { SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
+import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsButtons from './LawsButtons.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
@@ -38,6 +38,12 @@ export type KeplersLawsScreenViewOptions = SelfOptions & SolarSystemCommonScreen
 
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly periodTimerNode: PeriodTimerNode;
+
+  private readonly keplersLawsControls: Node;
+  private readonly firstLawPanel: Node;
+  private readonly secondLawPanel: Node;
+  private readonly thirdLawPanel: Node;
+  private readonly lawsButtons?: Node;
 
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
@@ -84,6 +90,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
           point = point.normalized().times( escapeRadius );
         }
 
+        point = this.constrainBoundaryViewPoint( point, radius );
+
         return point;
       }
     } );
@@ -118,11 +126,15 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.topLayer.addChild( new OrbitalWarningMessage( model, this.modelViewTransformProperty ) );
 
+    this.firstLawPanel = new FirstLawPanels( model );
+    this.secondLawPanel = new SecondLawPanels( model );
+    this.thirdLawPanel = new ThirdLawPanels( model );
+
     const lawsAndZoomBoxes = new AlignBox( new HBox( {
         children: [
-          new FirstLawPanels( model ),
-          new SecondLawPanels( model ),
-          new ThirdLawPanels( model )
+          this.firstLawPanel,
+          this.secondLawPanel,
+          this.thirdLawPanel
         ],
         spacing: 10,
         align: 'top'
@@ -135,6 +147,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
 
+    this.keplersLawsControls = new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) );
+
     // Add the control panel on top of the canvases
     // Visibility checkboxes for sim elements
     const controlPanelAlignBox = new AlignBox(
@@ -143,7 +157,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         align: 'left',
         children: [
           this.timeBox,
-          new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) )
+          this.keplersLawsControls
         ]
       } ),
       {
@@ -177,13 +191,16 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         yAlign: 'bottom'
       } );
 
+
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsAndZoomBoxes );
     this.interfaceLayer.addChild( controlPanelAlignBox );
     if ( options.allowLawSelection ) {
+      this.lawsButtons = new LawsButtons( model );
+
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [
-            new LawsButtons( model )
+            this.lawsButtons
           ],
           spacing: 20
         } ),
@@ -197,6 +214,32 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     }
     this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
+  }
+
+  public override getBodyBoundsItems(): BodyBoundsItem[] {
+    return [
+      ...super.getBodyBoundsItems(),
+      // Top-left controls, all with individual scopes (all expanded top-left)
+      ...[ this.firstLawPanel, this.secondLawPanel, this.thirdLawPanel ].map( ( node: Node ): BodyBoundsItem => {
+        return {
+          node: node,
+          expandX: 'left',
+          expandY: 'top'
+        };
+      } ),
+      {
+        node: this.keplersLawsControls,
+        expandX: 'right',
+        expandY: 'top'
+      },
+      ...( this.lawsButtons ? [
+        {
+          node: this.lawsButtons,
+          expandX: 'left' as const,
+          expandY: 'bottom' as const
+        }
+      ] : [] )
+    ];
   }
 }
 
