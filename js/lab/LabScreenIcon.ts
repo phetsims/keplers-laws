@@ -8,7 +8,7 @@
  */
 
 import keplersLaws from '../keplersLaws.js';
-import KeplersLawsScreenIcon from '../keplers-laws/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon from '../common/view/KeplersLawsScreenIcon.js';
 import SecondLawScreenIcon from '../second-law/SecondLawScreenIcon.js';
 import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
 import { Node } from '../../../scenery/js/imports.js';

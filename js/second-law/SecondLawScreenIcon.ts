@@ -12,8 +12,8 @@ import { Shape } from '../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../keplersLaws.js';
-import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../keplers-laws/view/KeplersLawsScreenIcon.js';
-import EllipticalOrbitEngine from '../keplers-laws/model/EllipticalOrbitEngine.js';
+import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../common/view/KeplersLawsScreenIcon.js';
+import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
 
 export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {

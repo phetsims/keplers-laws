@@ -20,7 +20,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';

@@ -15,7 +15,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 

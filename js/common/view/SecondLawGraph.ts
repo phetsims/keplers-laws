@@ -12,7 +12,6 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
@@ -25,6 +24,7 @@ import keplersLaws from '../../keplersLaws.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;

@@ -15,7 +15,7 @@ import { Shape } from '../../../kite/js/imports.js';
 import XNode from '../../../scenery-phet/js/XNode.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../keplers-laws/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../common/view/KeplersLawsScreenIcon.js';
 
 // constants
 const FOCI_SCALE = 0.25;

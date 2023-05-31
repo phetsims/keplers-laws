@@ -17,7 +17,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';

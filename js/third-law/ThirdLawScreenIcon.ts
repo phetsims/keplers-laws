@@ -12,7 +12,7 @@ import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path, Text } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
-import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../keplers-laws/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {

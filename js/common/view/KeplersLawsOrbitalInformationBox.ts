@@ -8,7 +8,6 @@
 
 import { HBox, HBoxOptions, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
@@ -20,6 +19,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 

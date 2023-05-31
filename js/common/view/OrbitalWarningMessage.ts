@@ -14,7 +14,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import OrbitTypes from '../model/OrbitTypes.js';
-import KeplersLawsStrings from '../../../../keplers-laws/js/KeplersLawsStrings.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import keplersLaws from '../../keplersLaws.js';
 
