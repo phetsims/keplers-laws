@@ -25,7 +25,7 @@ export default class FirstLawCheckboxIcons {
     // no-op
   }
 
-  public static getFociIcon(): Node {
+  public static getFociCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -40,7 +40,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getStringsIcon(): Node {
+  public static getStringsCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -59,7 +59,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getSemiaxesIcon(): Node {
+  public static getSemiaxesCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -74,7 +74,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getEccentricityIcon(): Node {
+  public static getEccentricityCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -95,7 +95,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getAxisIcon(): Node {
+  public static getAxisCheckboxIcon(): Node {
     const axisShape = new Shape().moveTo( 0, 0 ).ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 );
     axisShape.moveTo( -semiMajorAxis, 0 ).lineTo( semiMajorAxis, 0 );
     axisShape.moveTo( 0, -semiMinorAxis ).lineTo( 0, semiMinorAxis );

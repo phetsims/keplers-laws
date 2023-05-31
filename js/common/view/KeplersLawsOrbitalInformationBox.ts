@@ -55,13 +55,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.fociVisibleProperty,
         KeplersLawsStrings.fociStringProperty,
         'fociVisibleCheckbox',
-        FirstLawCheckboxIcons.getFociIcon()
+        FirstLawCheckboxIcons.getFociCheckboxIcon()
       ),
       createCheckbox(
         model.stringsVisibleProperty,
         KeplersLawsStrings.stringsStringProperty,
         'stringsVisibleCheckbox',
-        FirstLawCheckboxIcons.getStringsIcon(),
+        FirstLawCheckboxIcons.getStringsCheckboxIcon(),
         {
           enabledProperty: model.fociVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -71,13 +71,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.axisVisibleProperty,
         KeplersLawsStrings.axisStringProperty,
         'axisVisibleCheckbox',
-        FirstLawCheckboxIcons.getAxisIcon()
+        FirstLawCheckboxIcons.getAxisCheckboxIcon()
       ),
       createCheckbox(
         model.semiaxisVisibleProperty,
         KeplersLawsStrings.semiaxisStringProperty,
         'semiAxisVisibleCheckbox',
-        FirstLawCheckboxIcons.getSemiaxesIcon(),
+        FirstLawCheckboxIcons.getSemiaxesCheckboxIcon(),
         {
           enabledProperty: model.axisVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -87,7 +87,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.eccentricityVisibleProperty,
         KeplersLawsStrings.eccentricityStringProperty,
         'eccentricityVisibleCheckbox',
-        FirstLawCheckboxIcons.getEccentricityIcon()
+        FirstLawCheckboxIcons.getEccentricityCheckboxIcon()
       )
     ];
 
