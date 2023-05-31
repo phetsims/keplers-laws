@@ -24,10 +24,12 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
     const options = combineOptions<LawsButtonsOptions>( {
       orientation: 'horizontal',
       radioButtonOptions: {
-        baseColor: '#555',
+        baseColor: null,
         buttonAppearanceStrategyOptions: {
           selectedStroke: '#60a9dd',
-          selectedLineWidth: 4
+          selectedLineWidth: 4,
+          deselectedStroke: '#60a9dd',
+          deselectedLineWidth: 2
         }
       },
       touchAreaXDilation: 5,
@@ -39,17 +41,17 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
     super( model.selectedLawProperty, [
       {
         value: LawMode.FIRST_LAW,
-        createNode: () => new Node( { children: [ FirstLawScreenIcon.getFullNode() ], scale: 2 } ),
+        createNode: () => new Node( { children: [ FirstLawScreenIcon.getFullNode() ], scale: 1.5 } ),
         tandemName: 'firstLawButton'
       },
       {
         value: LawMode.SECOND_LAW,
-        createNode: () => new Node( { children: [ SecondLawScreenIcon.getFullNode() ], scale: 2 } ),
+        createNode: () => new Node( { children: [ SecondLawScreenIcon.getFullNode() ], scale: 1.5 } ),
         tandemName: 'secondLawButton'
       },
       {
         value: LawMode.THIRD_LAW,
-        createNode: () => new Node( { children: [ ThirdLawScreenIcon.getFullNode() ], scale: 2 } ),
+        createNode: () => new Node( { children: [ ThirdLawScreenIcon.getFullNode() ], scale: 1.5 } ),
         tandemName: 'thirdLawButton'
       }
     ], options );
