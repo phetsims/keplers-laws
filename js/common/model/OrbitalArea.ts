@@ -25,7 +25,7 @@ export default class OrbitalArea {
   public active = false;
   public resetted = true;
 
-  public constructor() {
+  public constructor( public readonly index: number ) {
     // noop
   }
 
@@ -33,9 +33,19 @@ export default class OrbitalArea {
    * Calculates the fill color of the orbital area based on the completion fraction
    */
   public getColor(): Color {
+    // TODO: Use a color palette
+    // const colorPalette = [
+    // '#80007F',
+    //   '#A400A4',
+    //   '#C800C8',
+    //   '#FF24FF',
+    //   '#FF6DFF',
+    //   '#FF92FF',
+    // ];
     const fillBrightness = this.alreadyEntered ? this.insideProperty.value ? 1 : this.completion : 0;
-    return KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -1.0, 0.7, fillBrightness ) );
+    return KeplersLawsConstants.AREA_COLOR.value.colorUtilsBrightness( Utils.linear( 0, 1, -0.8, 0.7, fillBrightness ) ).setAlpha( this.alreadyEntered ? 1 : 0 );
   }
+
 
   public reset(): void {
     this.dotPosition = Vector2.ZERO;

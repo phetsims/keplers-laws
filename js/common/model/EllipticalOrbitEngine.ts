@@ -127,7 +127,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
-      this.orbitalAreas.push( new OrbitalArea() );
+      this.orbitalAreas.push( new OrbitalArea( i ) );
     }
 
     // Multilink to update the orbit based on the bodies position and velocity
@@ -341,6 +341,7 @@ export default class EllipticalOrbitEngine extends Engine {
     let bodyAngle = -this.nu;
 
     this.segmentArea = this.totalArea / this.periodDivisions;
+    const angularSection = TWOPI / this.periodDivisions;
 
     this.orbitalAreas.forEach( ( orbitalArea, i ) => {
       if ( i < this.periodDivisions && this.allowedOrbitProperty.value ) {
@@ -364,25 +365,20 @@ export default class EllipticalOrbitEngine extends Engine {
             orbitalArea.alreadyEntered = true;
 
             // Map opacity from 0 to 1 based on BodyAngle from startAngle to endAngle (inside area)
-            const completionRate = ( bodyAngle - startAngle ) / ( endAngle - startAngle );
             if ( this.retrograde ) {
               startAngle = bodyAngle;
-              orbitalArea.completion = ( 1 - completionRate );
             }
             else {
               endAngle = bodyAngle;
-              orbitalArea.completion = completionRate;
             }
             orbitalArea.sweptArea = this.calculateSweptArea( startAngle, endAngle );
+            orbitalArea.completion = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
           }
           // OUTSIDE THE AREA
           else {
             orbitalArea.insideProperty.value = false;
             // Map completion from 1 to 0 based on BodyAngle from startAngle to endAngle (outside area)
-            let completionFalloff = ( bodyAngle - startAngle - TWOPI ) / ( endAngle - startAngle - TWOPI );
-
-            // Correct for negative values
-            completionFalloff = Utils.moduloBetweenDown( completionFalloff, 0, 1 );
+            const completionFalloff = this.meanAnomalyDiff( bodyAngle, startAngle ) / ( TWOPI - angularSection );
 
             orbitalArea.completion = this.retrograde ? ( 1 - completionFalloff ) : completionFalloff;
           }
@@ -407,12 +403,13 @@ export default class EllipticalOrbitEngine extends Engine {
     } );
   }
 
-  private calculateSweptArea( startAngle: number, endAngle: number ): number {
+  private meanAnomalyDiff( startAngle: number, endAngle: number ): number {
     // Convert angles from foci to center to get the correct area
-    startAngle = this.getMeanAnomaly( startAngle, this.e );
-    endAngle = this.getMeanAnomaly( endAngle, this.e );
-    endAngle = Utils.moduloBetweenDown( endAngle, startAngle, startAngle + TWOPI );
-    return Utils.clamp( Math.abs( 0.5 * this.a * this.b * ( endAngle - startAngle ) ), 0, this.segmentArea );
+    return Utils.moduloBetweenDown( this.getMeanAnomaly( endAngle, this.e ) - this.getMeanAnomaly( startAngle, this.e ), 0, TWOPI );
+  }
+
+  private calculateSweptArea( startAngle: number, endAngle: number ): number {
+    return Utils.clamp( Math.abs( 0.5 * this.a * this.b * this.meanAnomalyDiff( startAngle, endAngle ) ), 0, this.segmentArea );
   }
 
   private calculate_a( r: Vector2, v: Vector2 ): number {
