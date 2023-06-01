@@ -386,7 +386,7 @@ export default class EllipticalOrbitNode extends Path {
           // Set the center of the orbit's divisions dot
           const dotPosition = area.dotPosition.times( scale ).minus( center );
           orbitDivisions[ i ].center = dotPosition;
-          orbitDivisions[ i ].fill = SolarSystemCommonColors.orbitColorProperty.value.darkerColor( Math.pow( 1 - area.completion, 10 ) );
+          orbitDivisions[ i ].fill = KeplersLawsConstants.AREA_COLOR;
 
           const start = area.startPosition.times( scale ).minus( center );
           const end = area.endPosition.times( scale ).minus( center );
@@ -412,7 +412,7 @@ export default class EllipticalOrbitNode extends Path {
           areaValueNumberDisplays[ i ].visible = areaValueProperties[ i ].value > 0;
 
           // Activate area path
-          areaPaths[ i ].fill = area.getColor();
+          areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );
           areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
             0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
           ).close();

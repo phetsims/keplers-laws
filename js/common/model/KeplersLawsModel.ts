@@ -20,6 +20,9 @@ import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import PeriodTracker from './PeriodTracker.js';
+import OrbitalArea from './OrbitalArea.js';
+import { Color } from '../../../../scenery/js/imports.js';
+import Utils from '../../../../dot/js/Utils.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -194,6 +197,50 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public override step( dt: number ): void {
     super.step( dt );
     this.periodPath.step( dt );
+  }
+
+  /**
+   * Retrieves the color of the given orbital area, based on which is active and the palette.
+   * @param area
+   */
+  public getAreaColor( area: OrbitalArea ): Color {
+    const colorPalette = [
+      '#FF92FF',
+      '#FF6DFF',
+      '#FF24FF',
+      '#C800C8',
+      '#A400A4',
+      '#80007F'
+    ];
+
+    // Easter egg color palette
+    // const colorPalette = [
+    // '#FFB3BA', // Pastel Red
+    //   '#FFDFB9', // Pastel Orange
+    //   '#FFFFB3', // Pastel Yellow
+    //   '#B5FFB3', // Pastel Green
+    //   '#B3FFFF', // Pastel Blue
+    //   '#D1B3FF'  // Pastel Purple
+    // ];
+    const numAreas = this.periodDivisionProperty.value;
+    const activeAreaIndex = this.engine.activeAreaIndex;
+
+    let colorIndex;
+
+    // Calculate the index difference and map it to color palette.
+    let indexDiff = this.engine.retrograde ? area.index - activeAreaIndex : activeAreaIndex - area.index;
+    indexDiff = Utils.moduloBetweenDown( indexDiff, 0, numAreas );
+
+    colorIndex = indexDiff;
+    if ( numAreas < colorPalette.length ) {
+      colorIndex = Math.floor( indexDiff * colorPalette.length / numAreas );
+    }
+    if ( indexDiff === numAreas - 1 ) {
+      colorIndex = colorPalette.length - 1;
+    }
+
+    return new Color( colorPalette[ colorIndex ] ).setAlpha( area.alreadyEntered ? 1 : 0 );
+
   }
 }
 

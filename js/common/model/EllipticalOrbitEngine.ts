@@ -110,6 +110,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public totalArea = 1;
   public segmentArea = 1;
+  public activeAreaIndex = 0;
 
   public tracingPathProperty = new BooleanProperty( false );
   public periodTraceStart = 0;
@@ -340,7 +341,10 @@ export default class EllipticalOrbitEngine extends Engine {
     let previousNu = 0;
     let bodyAngle = -this.nu;
 
+    // The area of one section of the ellipse
     this.segmentArea = this.totalArea / this.periodDivisions;
+
+    // The angle of one section of the ellipse
     const angularSection = TWOPI / this.periodDivisions;
 
     this.orbitalAreas.forEach( ( orbitalArea, i ) => {
@@ -363,6 +367,7 @@ export default class EllipticalOrbitEngine extends Engine {
           if ( startAngle <= bodyAngle && bodyAngle < endAngle ) {
             orbitalArea.insideProperty.value = true;
             orbitalArea.alreadyEntered = true;
+            this.activeAreaIndex = orbitalArea.index;
 
             // Map opacity from 0 to 1 based on BodyAngle from startAngle to endAngle (inside area)
             if ( this.retrograde ) {
@@ -403,8 +408,10 @@ export default class EllipticalOrbitEngine extends Engine {
     } );
   }
 
+  /**
+   * Angular difference as calculated by the mean anomaly, i.e. independent of the eccentricity.
+   */
   private meanAnomalyDiff( startAngle: number, endAngle: number ): number {
-    // Convert angles from foci to center to get the correct area
     return Utils.moduloBetweenDown( this.getMeanAnomaly( endAngle, this.e ) - this.getMeanAnomaly( startAngle, this.e ), 0, TWOPI );
   }
 
