@@ -14,7 +14,7 @@ import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
 export default class PeriodTrackerNode extends Path {
-  private periodPath: PeriodTracker;
+  private periodTracker: PeriodTracker;
 
   // Initial values for the ellipse
   public orbitScale = 1;
@@ -31,13 +31,13 @@ export default class PeriodTrackerNode extends Path {
       visibleProperty: model.periodVisibleProperty
     } );
 
-    this.periodPath = model.periodPath;
+    this.periodTracker = model.periodTracker;
 
-    this.periodPath.fadingEmitter.addListener( () => {
+    this.periodTracker.fadingEmitter.addListener( () => {
       this.updateFade();
     } );
 
-    this.periodPath.periodTimer.isRunningProperty.lazyLink( isRunning => {
+    this.periodTracker.periodTimer.isRunningProperty.lazyLink( isRunning => {
       if ( isRunning ) {
         this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart;
         this.updateShape();
@@ -45,9 +45,9 @@ export default class PeriodTrackerNode extends Path {
     } );
 
     this.model.engine.changedEmitter.addListener( () => {
-      this.periodPath.reset();
-      this.periodPath.periodTimer.timeProperty.set( 0 );
-      this.periodPath.periodTimer.isRunningProperty.value = false;
+      this.periodTracker.reset();
+      this.periodTracker.periodTimer.timeProperty.set( 0 );
+      this.periodTracker.periodTimer.isRunningProperty.value = false;
       this.updateShape();
     } );
 
@@ -63,7 +63,7 @@ export default class PeriodTrackerNode extends Path {
     this.radiusX = radiusX;
     this.radiusY = radiusY;
 
-    if ( this.periodPath.trackingState === TrackingState.RUNNING ) {
+    if ( this.periodTracker.trackingState === TrackingState.RUNNING ) {
       this.updateShape();
     }
   }
@@ -78,7 +78,7 @@ export default class PeriodTrackerNode extends Path {
     const retrograde = this.model.engine.retrograde;
     const angleDiff = this.model.engine.periodTraceEnd - this.model.engine.periodTraceStart;
     const angleThreshold = Math.PI / 10;
-    if ( this.periodPath.afterPeriodThreshold && (
+    if ( this.periodTracker.afterPeriodThreshold && (
       ( retrograde && angleDiff <= angleThreshold ) ||
       ( !retrograde && angleDiff >= 2 * Math.PI - angleThreshold ) ) ) {
       this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
@@ -87,12 +87,12 @@ export default class PeriodTrackerNode extends Path {
       this.shape = new Shape().ellipticalArc( 0, 0, this.radiusX, this.radiusY, 0, startAngle, endAngle, retrograde );
     }
     this.startCircle.translation = startTracePosition;
-    this.startCircle.visible = startAngle !== endAngle || this.periodPath.periodTimer.isRunningProperty.value;
+    this.startCircle.visible = startAngle !== endAngle || this.periodTracker.periodTimer.isRunningProperty.value;
   }
 
   public updateFade(): void {
     this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
-    this.opacity = 1 - this.periodPath.fadingTimer.timeProperty.value / this.periodPath.fadingLifetime;
+    this.opacity = 1 - this.periodTracker.fadingTimer.timeProperty.value / this.periodTracker.fadingLifetime;
   }
 }
 

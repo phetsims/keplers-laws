@@ -2,6 +2,9 @@
 
 /**
  *
+ * Class that handles the internal logic of the orbital areas.
+ * It keeps track of the position of the dot in the orbital area, the start and end positions, the angles, the completion, etc.
+ *
  * @author Agustín Vallejo
  */
 
@@ -15,12 +18,11 @@ export default class OrbitalArea {
   public endPosition = Vector2.ZERO; // End position of the orbital area
   public startAngle = 0;
   public endAngle = 0;
-  public completion = 0; // Proportional completion of the orbital area
-  public sweptArea = 0;
+  public completion = 0; // Proportional completion of the orbital area, goes up to 1
+  public sweptArea = 0; // Total area the section will have when completion = 1
   public insideProperty = new BooleanProperty( false );
   public alreadyEntered = false;
-  public active = false;
-  public resetted = true;
+  public active = false; // Whether the shown areas include this one
 
   public constructor( public readonly index: number ) {
     // noop
@@ -37,7 +39,6 @@ export default class OrbitalArea {
     this.insideProperty.reset();
     this.alreadyEntered = false;
     this.active = false;
-    this.resetted = true;
   }
 }
 

@@ -13,7 +13,6 @@ export default class OrbitTypes extends EnumerationValue {
   public static readonly STABLE_ORBIT = new OrbitTypes();
   public static readonly ESCAPE_ORBIT = new OrbitTypes();
   public static readonly CRASH_ORBIT = new OrbitTypes();
-  public static readonly TOO_BIG = new OrbitTypes();
 
   public static readonly enumeration = new Enumeration( OrbitTypes, {
     phetioDocumentation: 'The reason this orbit is unstable'

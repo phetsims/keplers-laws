@@ -1,7 +1,6 @@
 // Copyright 2023, University of Colorado Boulder
 /**
- * Model for the Third Law Screen. Keeps track of the state of the blue line tracking the body
- * when the PeriodTimerNode is set to run.
+ * Keeps track of the state of the blue line tracking the body when the PeriodTimerNode is set to run.
  *
  * @author Agustín Vallejo
  */
@@ -30,13 +29,12 @@ export class TrackingState extends EnumerationValue {
 export default class PeriodTracker {
   public beganPeriodTimerAt = 0;
   public trackingState: TrackingState;
-  public afterPeriodThreshold = false;
+  public afterPeriodThreshold = false; // Whether the body has passed some percentage of the period
   public readonly periodTimer: Stopwatch;
   public readonly fadingTimer: Stopwatch;
   public readonly fadingEmitter = new Emitter();
 
-  // Fraction of the period that the line will be fading
-  public readonly fadingLifetime = 3;
+  public readonly fadingDuration = 3;
 
   public constructor( private readonly model: KeplersLawsModel ) {
     this.trackingState = TrackingState.IDLE;
@@ -49,7 +47,7 @@ export default class PeriodTracker {
     this.fadingTimer = new Stopwatch( {
       position: Vector2.ZERO,
       timePropertyOptions: {
-        range: new Range( 0, this.fadingLifetime )
+        range: new Range( 0, this.fadingDuration )
       }
     } );
 
@@ -63,9 +61,10 @@ export default class PeriodTracker {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
-        this.model.isPlayingProperty.value = true; // TODO This is just true for testing
+        this.model.isPlayingProperty.value = true; // TODO This is only true for testing
       }
       else if ( this.trackingState !== TrackingState.FADING ) {
+        // If the period track is not fading and it's stopped, reset the period timer
         this.reset();
         this.periodTimer.timeProperty.set( 0 );
       }

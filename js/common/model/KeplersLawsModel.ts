@@ -2,6 +2,7 @@
 
 /**
  * The model in charge of the Kepler's Laws Screen components.
+ * It extends the SolarSystemCommonModel, and adds the necessary properties and logic to handle the laws functionalities.
  *
  * @author Agustín Vallejo
  */
@@ -34,6 +35,8 @@ export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions,
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
+
+  // Will enforce that the orbit is always circular
   public readonly alwaysCircularProperty = new BooleanProperty( false );
 
   // Booleans to keep track of which law is selected
@@ -61,13 +64,15 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly semiMajorAxisVisibleProperty = new BooleanProperty( false );
   public readonly periodVisibleProperty = new BooleanProperty( true );
 
+  // Graph exponents
   public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
   public readonly selectedPeriodPowerProperty = new NumberProperty( 1 );
 
   public readonly poweredSemiMajorAxisProperty: ReadOnlyProperty<number>;
   public readonly poweredPeriodProperty: ReadOnlyProperty<number>;
 
-  public readonly periodPath: PeriodTracker;
+  // The object that controls the blue path drawn when measuring the period
+  public readonly periodTracker: PeriodTracker;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
@@ -88,6 +93,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.bodies[ 0 ].massProperty.lazyLink( () => {
+      // Pause the sim when the Sun's ( id = 0 ) mass is changed
       this.isPlayingProperty.value = false;
     } );
 
@@ -116,8 +122,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.axisVisibleProperty.link( axisVisible => {
       this.semiaxisVisibleProperty.value = axisVisible ? this.semiaxisVisibleProperty.value : false;
-      //REVIEW: commented-out code
-      // this.eccentricityVisibleProperty.value = axisVisible ? this.eccentricityVisibleProperty.value : false;
     } );
     this.fociVisibleProperty.link( fociVisible => {
       this.stringsVisibleProperty.value = fociVisible ? this.stringsVisibleProperty.value : false;
@@ -142,11 +146,14 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.update();
     } );
 
-    this.periodPath = new PeriodTracker( this );
+    this.periodTracker = new PeriodTracker( this );
 
     this.forceScaleProperty.value = 0.5;
   }
 
+  /**
+   * Simpler version of loadBodyStates than the one in SolarSystemCommonModel
+   */
   public override loadBodyStates( bodiesInfo: BodyInfo[] ): void {
     super.loadBodyStates( bodiesInfo );
 
@@ -178,7 +185,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedAxisPowerProperty.reset();
     this.selectedPeriodPowerProperty.reset();
     this.alwaysCircularProperty.reset();
-    this.periodPath.reset();
+    this.periodTracker.reset();
 
     this.visibilityReset();
     this.engine.updateAllowed = true;
@@ -196,7 +203,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   public override step( dt: number ): void {
     super.step( dt );
-    this.periodPath.step( dt );
+    this.periodTracker.step( dt );
   }
 
   /**

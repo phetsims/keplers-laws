@@ -251,7 +251,7 @@ export default class EllipticalOrbitNode extends Path {
         [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
       )
     } );
-    const periodPathNode = new PeriodTrackerNode( model );
+    const periodTrackerNode = new PeriodTrackerNode( model );
 
     // Text Nodes
     labelsLayer.addChild( aLabelNode );
@@ -277,7 +277,7 @@ export default class EllipticalOrbitNode extends Path {
 
     // Third Law: SemiMajor axis, and track
     thirdLawLayer.addChild( semiMajorAxisPath );
-    thirdLawLayer.addChild( periodPathNode );
+    thirdLawLayer.addChild( periodTrackerNode );
 
     this.topLayer.addChild( foci[ 0 ] );
     this.topLayer.addChild( foci[ 1 ] );
@@ -425,15 +425,15 @@ export default class EllipticalOrbitNode extends Path {
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
 
       // Period track line
-      periodPathNode.update( scale, center, radiusX, radiusY );
+      periodTrackerNode.update( scale, center, radiusX, radiusY );
     };
 
     this.orbit.changedEmitter.addListener( updatedOrbit );
     this.orbit.ranEmitter.addListener( () => {
       updatedOrbit();
 
-      // Had to call the method here because apparently the listener is created before periodPathNode is instantiated
-      periodPathNode.updateShape();
+      // Had to call the method here because apparently the listener is created before periodTrackerNode is instantiated
+      periodTrackerNode.updateShape();
     } );
 
     this.shapeMultilink = Multilink.multilink(
