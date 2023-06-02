@@ -26,6 +26,7 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
@@ -80,7 +81,7 @@ class ThirdLawAccordionBox extends AccordionBox {
           return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : undefinedMessage;
         }
       )
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
 
     const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ),
@@ -91,7 +92,7 @@ class ThirdLawAccordionBox extends AccordionBox {
           return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : undefinedMessage;
         }
       )
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
 
     const semiMajorAxisNumberDisplay = new RichText( semiMajorAxisPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
     const periodNumberDisplay = new RichText( periodPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );

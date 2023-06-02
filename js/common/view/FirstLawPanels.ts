@@ -20,6 +20,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -82,21 +83,21 @@ class ValuesPanel extends Panel {
       value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMajorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : undefinedMessage;
       } )
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
     const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMinorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : undefinedMessage;
       } )
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
     const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
       text: KeplersLawsStrings.symbols.focalDistanceStringProperty,
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( focalDistance, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
       } )
-    } );
+    }, { tandem: Tandem.OPT_OUT } );
 
     super( new VBox( {
       align: 'left',
