@@ -58,6 +58,13 @@ type StringsType = {
     'warningStringProperty': LinkableProperty<string>;
     'crashOrbitStringProperty': LinkableProperty<string>;
     'escapeOrbitStringProperty': LinkableProperty<string>;
+  };
+  'orbit': {
+    'mercuryStringProperty': LinkableProperty<string>;
+    'earthStringProperty': LinkableProperty<string>;
+    'erisStringProperty': LinkableProperty<string>;
+    'nereidStringProperty': LinkableProperty<string>;
+    'halleyStringProperty': LinkableProperty<string>;
   }
 };
 

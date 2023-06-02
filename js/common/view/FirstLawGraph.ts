@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Panel that shows the graph of the Ecceentricity of the orbit. Compared to other
+ * Panel that shows the graph of the Eccentricity of the orbit. Compared to other
  * orbits of the Solar System.
  *
  * @author Agustín Vallejo
@@ -21,8 +21,26 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import keplersLaws from '../../keplersLaws.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
+
+class ExampleOrbit extends EnumerationValue {
+  public static readonly MERCURY = new ExampleOrbit( 0.2056, KeplersLawsStrings.orbit.mercuryStringProperty );
+  public static readonly EARTH = new ExampleOrbit( 0.0167, KeplersLawsStrings.orbit.earthStringProperty );
+  public static readonly ERIS = new ExampleOrbit( 0.44, KeplersLawsStrings.orbit.erisStringProperty );
+  public static readonly NEREID = new ExampleOrbit( 0.75, KeplersLawsStrings.orbit.nereidStringProperty );
+  public static readonly HALLEY = new ExampleOrbit( 0.967, KeplersLawsStrings.orbit.halleyStringProperty );
+
+  public static readonly enumeration = new Enumeration( ExampleOrbit );
+
+  public constructor( public readonly eccentricity: number, public readonly stringProperty: TReadOnlyProperty<string> ) {
+    super();
+  }
+}
 
 export default class FirstLawGraph extends AlignBox {
 
@@ -37,38 +55,26 @@ export default class FirstLawGraph extends AlignBox {
       stroke: FOREGROUND_COLOR_PROPERTY
     } );
 
-    const eccentricities = {
-      Mercury: 0.2056,
-      // Venus: 0.0068,
-      Earth: 0.0167,
-      // Mars: 0.0934,
-      // Jupiter: 0.0484,
-      // Saturn: 0.0542,
-      // Uranus: 0.0472,
-      // Neptune: 0.0086,
-      // Pluto: 0.2488,
-      Nereid: 0.75,
-      Eris: 0.44,
-      Halley: 0.967
-    };
+    const orbitAndValues: HBox[] = [];
 
-    const orbitAndValues = [];
-
-    for ( const eccentricitiesKey in eccentricities ) {
-      const orbit = eccentricitiesKey;
-      // @ts-expect-error eccentricities should be changed to a Map
-      const value = eccentricities[ eccentricitiesKey ];
-      const title = new Text( orbit, SolarSystemCommonConstants.TEXT_OPTIONS );
-      orbitAndValues.push( new HBox( {
-        centerY: yAxisLength * value,
-        x: -title.width - 30,
+    ExampleOrbit.enumeration.values.forEach( ( exampleOrbit: ExampleOrbit ) => {
+      const orbitNameProperty = exampleOrbit.stringProperty;
+      const eccentricity = exampleOrbit.eccentricity;
+      const title = new Text( orbitNameProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
+      const content = new HBox( {
+        centerY: yAxisLength * eccentricity,
         spacing: 5,
         children: [
           title,
           new ArrowNode( 0, 0, 20, 0, { stroke: FOREGROUND_COLOR_PROPERTY, fill: FOREGROUND_COLOR_PROPERTY, tailWidth: 1 } )
         ]
-      } ) );
-    }
+      } );
+      orbitAndValues.push( content );
+
+      orbitNameProperty.link( ( name: string ) => {
+        content.x = -title.width - 30;
+      } );
+    } );
 
     const currentEccentricityNode = new HBox( {
       x: 10,
