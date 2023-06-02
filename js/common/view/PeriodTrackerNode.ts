@@ -92,7 +92,7 @@ export default class PeriodTrackerNode extends Path {
 
   public updateFade(): void {
     this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
-    this.opacity = 1 - this.periodTracker.fadingTimer.timeProperty.value / this.periodTracker.fadingLifetime;
+    this.opacity = 1 - this.periodTracker.fadingTimer.timeProperty.value / this.periodTracker.fadingDuration;
   }
 }
 
