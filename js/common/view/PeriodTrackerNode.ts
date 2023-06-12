@@ -54,7 +54,7 @@ export default class PeriodTrackerNode extends Path {
     this.startCircle = new Path( Shape.circle( 0, 0, 10 ), {
       fill: SolarSystemCommonColors.thirdBodyColorProperty
     } );
-    this.addChild( this.startCircle );
+    // this.addChild( this.startCircle ); // TODO: Are we keeping this?
   }
 
   public update( orbitScale: number, orbitCenter: Vector2, radiusX: number, radiusY: number ): void {
