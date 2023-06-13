@@ -13,7 +13,7 @@ import { Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../.
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -27,9 +27,7 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
 export default class ThirdLawGraph extends Node {
   public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
-    const options: NodeOptions = {
-      ...providedOptions
-    };
+    const options = optionize<NodeOptions, EmptySelfOptions>()( {}, providedOptions );
 
     super( options );
 

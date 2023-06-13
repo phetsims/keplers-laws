@@ -12,10 +12,11 @@ import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
-import XNode from '../../../scenery-phet/js/XNode.js';
+import XNode, { XNodeOptions } from '../../../scenery-phet/js/XNode.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../common/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import { combineOptions } from '../../../phet-core/js/optionize.js';
 
 // constants
 const FOCI_SCALE = 0.25;
@@ -47,18 +48,16 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
             mainColor: SolarSystemCommonColors.firstBodyColorProperty,
             x: -focalPoint
           } ),
-          new XNode( {
+          new XNode( combineOptions<XNodeOptions>( {
             center: new Vector2( -focalPoint, 0 ),
             scale: FOCI_SCALE,
-            lineWidth: 1,
-            ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
-          } ),
-          new XNode( {
+            lineWidth: 1
+          }, KeplersLawsConstants.FOCI_COLOR_OPTIONS ) ),
+          new XNode( combineOptions<XNodeOptions>( {
             center: new Vector2( focalPoint, 0 ),
             scale: FOCI_SCALE,
-            lineWidth: 1,
-            ...KeplersLawsConstants.FOCI_COLOR_OPTIONS
-          } ),
+            lineWidth: 1
+          }, KeplersLawsConstants.FOCI_COLOR_OPTIONS ) ),
           planet ?
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,

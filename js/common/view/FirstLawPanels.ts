@@ -45,15 +45,15 @@ class EccentricityPanel extends Panel {
             new Text( KeplersLawsStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
             new VBox( {
               children: [
-                new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, {
-                  ...SolarSystemCommonConstants.TITLE_OPTIONS,
-                  fill: SolarSystemCommonColors.thirdBodyColorProperty
-                } ),
+                new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
+                  SolarSystemCommonConstants.TITLE_OPTIONS, {
+                    fill: SolarSystemCommonColors.thirdBodyColorProperty
+                  } ) ),
                 new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
-                new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, {
-                  ...SolarSystemCommonConstants.TITLE_OPTIONS,
-                  fill: KeplersLawsConstants.AXES_COLOR
-                } )
+                new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
+                  SolarSystemCommonConstants.TITLE_OPTIONS, {
+                    fill: KeplersLawsConstants.AXES_COLOR
+                  } ) )
               ]
             } )
           ]

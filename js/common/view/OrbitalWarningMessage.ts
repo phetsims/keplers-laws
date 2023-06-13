@@ -21,10 +21,8 @@ import keplersLaws from '../../keplersLaws.js';
 export default class OrbitalWarningMessage extends Node {
 
   public constructor( model: KeplersLawsModel, modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2> ) {
-    const options = {
-      visibleProperty: DerivedProperty.not( model.engine.allowedOrbitProperty ),
-      center: modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -50 ) )
-    };
+
+    const center = modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -50 ) );
 
     //REVIEW: Why a local variable for this?
     //REVIEW: Please create a DerivedProperty<string> for this, and then pass that to the RichText constructor 1st param
@@ -59,13 +57,14 @@ export default class OrbitalWarningMessage extends Node {
         warningText.setString( message );
 
         //REVIEW: This would be a separate link to keep things centered
-        warningText.center = options.center;
+        warningText.center = center;
       }
     );
 
     super( {
-      children: [ warningText ],
-      ...options
+      visibleProperty: DerivedProperty.not( model.engine.allowedOrbitProperty ),
+      center: center,
+      children: [ warningText ]
     } );
   }
 }
