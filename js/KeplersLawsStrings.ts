@@ -5,66 +5,66 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import LinkableProperty from '../../axon/js/LinkableProperty.js';
+import type LocalizedStringProperty from '../../chipper/js/LocalizedStringProperty.js';
 import keplersLaws from './keplersLaws.js';
 
 type StringsType = {
   'keplers-laws': {
-    'titleStringProperty': LinkableProperty<string>;
+    'titleStringProperty': LocalizedStringProperty;
   };
   'screen': {
-    'firstLawStringProperty': LinkableProperty<string>;
-    'secondLawStringProperty': LinkableProperty<string>;
-    'thirdLawStringProperty': LinkableProperty<string>;
-    'labStringProperty': LinkableProperty<string>;
+    'firstLawStringProperty': LocalizedStringProperty;
+    'secondLawStringProperty': LocalizedStringProperty;
+    'thirdLawStringProperty': LocalizedStringProperty;
+    'labStringProperty': LocalizedStringProperty;
   };
-  'undefinedStringProperty': LinkableProperty<string>;
-  'circularOrbitStringProperty': LinkableProperty<string>;
-  'axisStringProperty': LinkableProperty<string>;
-  'fociStringProperty': LinkableProperty<string>;
-  'stringsStringProperty': LinkableProperty<string>;
-  'semiaxisStringProperty': LinkableProperty<string>;
-  'eccentricityStringProperty': LinkableProperty<string>;
-  'eccentricityEquationStringProperty': LinkableProperty<string>;
-  'apoapsisStringProperty': LinkableProperty<string>;
-  'periapsisStringProperty': LinkableProperty<string>;
-  'starMassStringProperty': LinkableProperty<string>;
-  'ourSunStringProperty': LinkableProperty<string>;
-  'periodStringProperty': LinkableProperty<string>;
+  'undefinedStringProperty': LocalizedStringProperty;
+  'circularOrbitStringProperty': LocalizedStringProperty;
+  'axisStringProperty': LocalizedStringProperty;
+  'fociStringProperty': LocalizedStringProperty;
+  'stringsStringProperty': LocalizedStringProperty;
+  'semiaxisStringProperty': LocalizedStringProperty;
+  'eccentricityStringProperty': LocalizedStringProperty;
+  'eccentricityEquationStringProperty': LocalizedStringProperty;
+  'apoapsisStringProperty': LocalizedStringProperty;
+  'periapsisStringProperty': LocalizedStringProperty;
+  'starMassStringProperty': LocalizedStringProperty;
+  'ourSunStringProperty': LocalizedStringProperty;
+  'periodStringProperty': LocalizedStringProperty;
   'area': {
-    'periodDivisionStringProperty': LinkableProperty<string>;
-    'valuesStringProperty': LinkableProperty<string>;
-    'areaUnitsStringProperty': LinkableProperty<string>;
+    'periodDivisionStringProperty': LocalizedStringProperty;
+    'valuesStringProperty': LocalizedStringProperty;
+    'areaUnitsStringProperty': LocalizedStringProperty;
   };
-  'sweptAreaStringProperty': LinkableProperty<string>;
+  'sweptAreaStringProperty': LocalizedStringProperty;
   'graph': {
-    'titleStringProperty': LinkableProperty<string>;
-    'aStringProperty': LinkableProperty<string>;
-    'tStringProperty': LinkableProperty<string>;
+    'titleStringProperty': LocalizedStringProperty;
+    'aStringProperty': LocalizedStringProperty;
+    'tStringProperty': LocalizedStringProperty;
   };
   'symbols': {
-    'semiMajorAxisStringProperty': LinkableProperty<string>;
-    'semiMinorAxisStringProperty': LinkableProperty<string>;
-    'focalDistanceStringProperty': LinkableProperty<string>;
-    'periodStringProperty': LinkableProperty<string>;
-    'radiusStringProperty': LinkableProperty<string>;
-    'distance1StringProperty': LinkableProperty<string>;
-    'distance2StringProperty': LinkableProperty<string>;
+    'semiMajorAxisStringProperty': LocalizedStringProperty;
+    'semiMinorAxisStringProperty': LocalizedStringProperty;
+    'focalDistanceStringProperty': LocalizedStringProperty;
+    'periodStringProperty': LocalizedStringProperty;
+    'radiusStringProperty': LocalizedStringProperty;
+    'distance1StringProperty': LocalizedStringProperty;
+    'distance2StringProperty': LocalizedStringProperty;
   };
   'pattern': {
-    'textEqualsValueUnitsStringProperty': LinkableProperty<string>;
+    'textEqualsValueUnitsStringProperty': LocalizedStringProperty;
   };
   'warning': {
-    'warningStringProperty': LinkableProperty<string>;
-    'crashOrbitStringProperty': LinkableProperty<string>;
-    'escapeOrbitStringProperty': LinkableProperty<string>;
+    'warningStringProperty': LocalizedStringProperty;
+    'crashOrbitStringProperty': LocalizedStringProperty;
+    'escapeOrbitStringProperty': LocalizedStringProperty;
   };
   'orbit': {
-    'mercuryStringProperty': LinkableProperty<string>;
-    'earthStringProperty': LinkableProperty<string>;
-    'erisStringProperty': LinkableProperty<string>;
-    'nereidStringProperty': LinkableProperty<string>;
-    'halleyStringProperty': LinkableProperty<string>;
+    'mercuryStringProperty': LocalizedStringProperty;
+    'earthStringProperty': LocalizedStringProperty;
+    'erisStringProperty': LocalizedStringProperty;
+    'nereidStringProperty': LocalizedStringProperty;
+    'halleyStringProperty': LocalizedStringProperty;
   }
 };
 

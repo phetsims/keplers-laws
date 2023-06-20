@@ -14,7 +14,7 @@ import XNode from '../../../../scenery-phet/js/XNode.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import LinkableProperty from '../../../../axon/js/LinkableProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -35,7 +35,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
     };
 
     const createCheckbox = (
-      property: LinkableProperty<boolean>,
+      property: Property<boolean>,
       text: TReadOnlyProperty<string>,
       tandemName: string,
       icon: Node = new Node(),
