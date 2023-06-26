@@ -203,7 +203,7 @@ class AreasBarPlot extends Node {
         return ( value >= 0 && value < periodDivision ) ?
                new Text( ( value + 1 ).toString(), TITLE_OPTIONS ) : null;
       } );
-      // updateYRange();
+      orbitChangedListener();
     } );
 
     updateYRange();
