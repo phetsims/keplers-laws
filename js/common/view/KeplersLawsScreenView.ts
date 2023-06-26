@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, VBox, Node } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -26,6 +26,8 @@ import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
+import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js/view/SolarSystemCommonTimeControlNode.js';
+import Panel from '../../../../sun/js/Panel.js';
 
 // constants
 const MARGIN = 10;
@@ -156,7 +158,13 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         spacing: 10,
         align: 'left',
         children: [
-          this.timeBox,
+          new Panel( new SolarSystemCommonTimeControlNode( model,
+            {
+              enabledProperty: options.playingAllowedProperty || null,
+              restartListener: () => model.restart(),
+              stepForwardListener: () => model.stepOnce( 1 / 8 ),
+              tandem: options.tandem.createTandem( 'timeControlNode' )
+            } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ),
           this.keplersLawsControls
         ]
       } ),
