@@ -61,7 +61,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
 
   // Third law properties
-  public readonly semiMajorAxisVisibleProperty = new BooleanProperty( false );
+  public readonly semiMajorAxisVisibleProperty = new BooleanProperty( true );
   public readonly periodVisibleProperty = new BooleanProperty( false );
 
   // Graph exponents
