@@ -45,24 +45,41 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly isThirdLawProperty = new BooleanProperty( false );
   public readonly lawUpdatedEmitter = new Emitter();
 
+  // Map that relates each law with its corresponding visible boolean properties
+  public lawVisibilitiesMap = new Map<LawMode, BooleanProperty[]>();
+
   // First Law Properties
   public readonly axisVisibleProperty = new BooleanProperty( false );
   public readonly semiaxisVisibleProperty = new BooleanProperty( false );
   public readonly fociVisibleProperty = new BooleanProperty( false );
   public readonly stringsVisibleProperty = new BooleanProperty( false );
   public readonly eccentricityVisibleProperty = new BooleanProperty( false );
-
+  public readonly firstLawVisibilities: BooleanProperty[] = [
+    this.stringsVisibleProperty,
+    this.semiaxisVisibleProperty,
+    this.axisVisibleProperty,
+    this.fociVisibleProperty,
+    this.eccentricityVisibleProperty
+  ];
 
   // Second Law properties
+  public readonly periodDivisionProperty = new NumberProperty( 4 );
   public readonly apoapsisVisibleProperty = new BooleanProperty( false );
   public readonly periapsisVisibleProperty = new BooleanProperty( false );
-  public readonly periodDivisionProperty = new NumberProperty( 4 );
   public readonly areaValuesVisibleProperty = new BooleanProperty( false );
-
+  public readonly secondLawVisibilities: BooleanProperty[] = [
+    this.apoapsisVisibleProperty,
+    this.periapsisVisibleProperty,
+    this.areaValuesVisibleProperty
+  ];
 
   // Third law properties
   public readonly semiMajorAxisVisibleProperty = new BooleanProperty( true );
   public readonly periodVisibleProperty = new BooleanProperty( false );
+  public readonly thirdLawVisibilities: BooleanProperty[] = [
+    this.semiMajorAxisVisibleProperty,
+    this.periodVisibleProperty
+  ];
 
   // Graph exponents
   public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
@@ -83,6 +100,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       initialLaw: LawMode.FIRST_LAW
     }, providedOptions );
     super( options );
+
+    this.lawVisibilitiesMap.set( LawMode.FIRST_LAW, this.firstLawVisibilities );
+    this.lawVisibilitiesMap.set( LawMode.SECOND_LAW, this.secondLawVisibilities );
+    this.lawVisibilitiesMap.set( LawMode.THIRD_LAW, this.thirdLawVisibilities );
 
     this.pathVisibleProperty.value = false;
 
@@ -105,13 +126,16 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     ];
     this.loadBodyStates( this.defaultBodyState );
 
+    let lastLaw = this.selectedLawProperty.value;
     this.selectedLawProperty.link( law => {
-      this.visibilityReset();
+      this.saveAndDisableVisibilityState( lastLaw );
+      this.resetVisibilityState( law );
 
       this.isFirstLawProperty.value = law === LawMode.FIRST_LAW;
       this.isSecondLawProperty.value = law === LawMode.SECOND_LAW;
       this.isThirdLawProperty.value = law === LawMode.THIRD_LAW;
 
+      lastLaw = law;
       this.lawUpdatedEmitter.emit();
     } );
 
@@ -160,22 +184,33 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.engine && this.engine.update();
   }
 
-  public visibilityReset(): void {
-    // Calls reset only on the visibilityProperties to avoid reentries on selectedLawProperty
-    // First Law
-    this.axisVisibleProperty.reset();
-    this.semiaxisVisibleProperty.reset();
-    this.fociVisibleProperty.reset();
-    this.eccentricityVisibleProperty.reset();
-    this.stringsVisibleProperty.reset();
+  public saveAndDisableVisibilityState( law: LawMode ): void {
+    // When going from Law A to Law B, it saves the current state of Law A and sets it all to false.
+    // When going back to Law A, it will restore the state of Law A.
+    this.lawVisibilitiesMap.get( law )!.forEach( property => {
+      property.setInitialValue( property.value );
+      property.value = false;
+    } );
+  }
 
-    // Second Law
-    this.apoapsisVisibleProperty.reset();
-    this.periapsisVisibleProperty.reset();
+  public resetVisibilityState( law: LawMode ): void {
+    // Because in saveAndDisableVisibilityState, the initial values were set,
+    // this will restore the initial values.
+    this.lawVisibilitiesMap.get( law )!.forEach( property => {
+      property.reset();
+    } );
+  }
 
-    // Third Law
-    this.semiMajorAxisVisibleProperty.reset();
-    this.periodVisibleProperty.reset();
+  public hardVisibilityReset(): void {
+    this.lawVisibilitiesMap.forEach( properties => {
+      properties.forEach( property => {
+        property.setInitialValue( false );
+        property.value = false;
+      } );
+    } );
+
+    // This property is the exception as it should be set to true by default
+    this.semiMajorAxisVisibleProperty.setInitialValue( true );
   }
 
   public override reset(): void {
@@ -187,7 +222,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.alwaysCircularProperty.reset();
     this.periodTracker.reset();
 
-    this.visibilityReset();
+    this.hardVisibilityReset();
     this.engine.updateAllowed = true;
     this.engine.reset();
     this.engine.update();
