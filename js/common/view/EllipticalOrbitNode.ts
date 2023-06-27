@@ -335,7 +335,7 @@ export default class EllipticalOrbitNode extends Path {
       // const semiAxis = new ArrowShape( 0, 0, -radiusX, 0, {} );
       semiAxis.moveTo( 0, 0 ).lineTo( 0, radiusY );
       semiAxisPath.shape = semiAxis;
-      aLabelNode.center = new Vector2( -radiusX / 2, 15 );
+      aLabelNode.center = new Vector2( -radiusX / 2, -15 );
       aLabelNode.rotation = this.orbit.w;
       bLabelNode.center = new Vector2( -15, radiusY / 2 );
       bLabelNode.rotation = this.orbit.w;
