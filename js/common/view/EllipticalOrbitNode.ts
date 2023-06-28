@@ -61,11 +61,17 @@ export default class EllipticalOrbitNode extends Path {
     this.addChild( secondLawLayer );
     this.addChild( thirdLawLayer );
 
+    // This is because the semiMajorAxis can be toggled by multiple cases
+    const semiMajorAxisVisibleProperty = new DerivedProperty(
+      [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ],
+      ( semiaxisVisible, semiMajorAxisVisible, eccentricityVisible ) => {
+        return ( model.isThirdLawProperty.value && semiMajorAxisVisible ) || semiaxisVisible || eccentricityVisible;
+      }
+    );
+
     // Text Nodes
     const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
-      visibleProperty: DerivedProperty.or(
-        [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
-      )
+      visibleProperty: semiMajorAxisVisibleProperty
     }, SolarSystemCommonConstants.TEXT_OPTIONS, {
       scale: 1.5,
       stroke: KeplersLawsConstants.AXES_COLOR,
@@ -147,11 +153,19 @@ export default class EllipticalOrbitNode extends Path {
     const axisPath = new Path( null, {
       stroke: SolarSystemCommonColors.foregroundProperty,
       lineWidth: 2,
-      visibleProperty: DerivedProperty.or(
-        [ model.axisVisibleProperty, model.semiMajorAxisVisibleProperty ]
+      visibleProperty: new DerivedProperty(
+        [ model.axisVisibleProperty, model.semiMajorAxisVisibleProperty ],
+        ( axisVisible, semiMajorAxisVisible ) => {
+          return axisVisible || ( semiMajorAxisVisible && model.isThirdLawProperty.value );
+        }
       )
     } );
-    const semiAxisPath = new Path( null, {
+    const semiMajorAxisPath = new Path( null, {
+      stroke: KeplersLawsConstants.AXES_COLOR,
+      lineWidth: 3,
+      visibleProperty: semiMajorAxisVisibleProperty
+    } );
+    const semiMinorAxisPath = new Path( null, {
       stroke: KeplersLawsConstants.AXES_COLOR,
       lineWidth: 3,
       visibleProperty: model.semiaxisVisibleProperty
@@ -242,14 +256,7 @@ export default class EllipticalOrbitNode extends Path {
     areaPaths.forEach( node => { areaPathsNode.addChild( node ); } );
     areaValueNumberDisplays.forEach( node => { areaValuesNode.addChild( node ); } );
 
-    // THIRD LAW: SemiMajor axis
-    const semiMajorAxisPath = new Path( null, {
-      stroke: KeplersLawsConstants.AXES_COLOR,
-      lineWidth: 3,
-      visibleProperty: DerivedProperty.or(
-        [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ]
-      )
-    } );
+    // THIRD LAW: Period Tracker
     const periodTrackerNode = new PeriodTrackerNode( model );
 
     // Text Nodes
@@ -263,7 +270,7 @@ export default class EllipticalOrbitNode extends Path {
 
     // First Law: Axis, foci, and Ellipse definition lines
     firstLawLayer.addChild( axisPath );
-    firstLawLayer.addChild( semiAxisPath );
+    firstLawLayer.addChild( semiMinorAxisPath );
     firstLawLayer.addChild( stringsPath );
     firstLawLayer.addChild( focalDistancePath );
 
@@ -330,11 +337,12 @@ export default class EllipticalOrbitNode extends Path {
       axis.moveTo( 0, -radiusY ).lineTo( 0, radiusY );
       axisPath.shape = axis;
 
-      // Semi-axis of the ellipse
-      const semiAxis = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
-      // const semiAxis = new ArrowShape( 0, 0, -radiusX, 0, {} );
-      semiAxis.moveTo( 0, 0 ).lineTo( 0, radiusY );
-      semiAxisPath.shape = semiAxis;
+      // Semi-major axis (a)
+      semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
+
+      // Semi-minor axis (b)
+      semiMinorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( 0, radiusY );
+
       aLabelNode.center = new Vector2( -radiusX / 2, -15 );
       aLabelNode.rotation = this.orbit.w;
       bLabelNode.center = new Vector2( -15, radiusY / 2 );
@@ -420,9 +428,6 @@ export default class EllipticalOrbitNode extends Path {
 
 
       // THIRD LAW -------------------------------------------
-      // Semi-major axis
-      semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
-
       // Period track line
       periodTrackerNode.update( scale, center, radiusX, radiusY );
     };
