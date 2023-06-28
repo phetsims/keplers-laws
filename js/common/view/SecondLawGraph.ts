@@ -46,9 +46,13 @@ export default class SecondLawGraph extends AccordionBox {
 
     const options = combineOptions<AccordionBoxOptions>( {
       visibleProperty: model.isSecondLawProperty,
-      titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, TITLE_OPTIONS ),
+      titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
       titleYMargin: 4,
-      useExpandedBoundsWhenCollapsed: false
+      useExpandedBoundsWhenCollapsed: false,
+
+      expandCollapseButtonOptions: {
+        scale: 1.5
+      }
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {

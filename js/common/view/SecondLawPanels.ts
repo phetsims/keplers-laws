@@ -19,8 +19,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
@@ -41,7 +40,7 @@ export default class SecondLawPanels extends VBox {
 
 class SecondLawPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
-    const options = combineOptions<AccordionBoxOptions>( {
+    const options = combineOptions<PanelOptions>( {
       visibleProperty: model.isSecondLawProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
