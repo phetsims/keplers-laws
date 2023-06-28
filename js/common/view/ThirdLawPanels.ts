@@ -70,7 +70,9 @@ class ThirdLawAccordionBox extends AccordionBox {
       visibleProperty: model.isThirdLawProperty,
       fill: SolarSystemCommonColors.backgroundProperty,
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,
-      minWidth: KeplersLawsConstants.PANELS_MIN_WIDTH
+      minWidth: KeplersLawsConstants.PANELS_MIN_WIDTH,
+
+      useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
