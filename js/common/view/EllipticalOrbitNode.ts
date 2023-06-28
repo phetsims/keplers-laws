@@ -72,7 +72,7 @@ export default class EllipticalOrbitNode extends Path {
     // Text Nodes
     const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
       visibleProperty: semiMajorAxisVisibleProperty
-    }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+    }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
       stroke: KeplersLawsConstants.AXES_COLOR,
       fill: KeplersLawsConstants.AXES_COLOR
@@ -80,7 +80,7 @@ export default class EllipticalOrbitNode extends Path {
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: model.semiaxisVisibleProperty
-      }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+      }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsConstants.AXES_COLOR,
         fill: KeplersLawsConstants.AXES_COLOR
@@ -96,7 +96,7 @@ export default class EllipticalOrbitNode extends Path {
             return visible && ( e > 0 );
           }
         )
-      }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+      }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: SolarSystemCommonColors.thirdBodyColorProperty,
         fill: SolarSystemCommonColors.thirdBodyColorProperty
@@ -112,7 +112,7 @@ export default class EllipticalOrbitNode extends Path {
             return visible && ( e > 0 );
           }
         )
-      }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+      }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
         fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
@@ -128,12 +128,12 @@ export default class EllipticalOrbitNode extends Path {
             return visible && ( e > 0 );
           }
         )
-      }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+      }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
         fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
       } ) );
-    const radiusLabelNode = new RichText( 'r', combineOptions<TextOptions>( {
+    const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty, combineOptions<TextOptions>( {
       visibleProperty: new DerivedProperty(
         [
           model.stringsVisibleProperty,
@@ -143,7 +143,7 @@ export default class EllipticalOrbitNode extends Path {
           return visible && ( e === 0 );
         }
       )
-    }, SolarSystemCommonConstants.TEXT_OPTIONS, {
+    }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
       stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
       fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR

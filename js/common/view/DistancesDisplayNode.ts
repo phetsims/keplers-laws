@@ -15,7 +15,6 @@ import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -24,13 +23,13 @@ import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
-export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
+export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
   stroke: '#ccb285',
   fill: '#ccb285'
 } );
 
-export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
+export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
   stroke: KeplersLawsConstants.AXES_COLOR,
   fill: KeplersLawsConstants.AXES_COLOR

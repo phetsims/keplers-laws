@@ -33,7 +33,8 @@ export default class SecondLawPanels extends VBox {
         new SecondLawPanel( model ),
         new SecondLawGraph( model )
       ],
-      visibleProperty: model.isSecondLawProperty
+      visibleProperty: model.isSecondLawProperty,
+      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
     } );
   }
 }
@@ -47,9 +48,9 @@ class SecondLawPanel extends Panel {
     super( new VBox( {
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING,
       children: [
-        new Text( KeplersLawsStrings.area.periodDivisionStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
+        new Text( KeplersLawsStrings.area.periodDivisionStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
         new DivisionsArrowButtonsBox( model ),
-        new Checkbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ), SolarSystemCommonConstants.CHECKBOX_OPTIONS )
+        new Checkbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), SolarSystemCommonConstants.CHECKBOX_OPTIONS )
       ]
     } ), options );
   }

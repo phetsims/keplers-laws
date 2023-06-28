@@ -8,7 +8,6 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -22,6 +21,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import keplersLaws from '../../keplersLaws.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -96,12 +96,12 @@ export default class ThirdLawGraph extends Node {
       xAxisLabelStringProperty,
       combineOptions<RichTextOptions>( {
         x: axisLength * 0.4, y: 25
-      }, SolarSystemCommonConstants.TITLE_OPTIONS ) );
+      }, KeplersLawsConstants.TITLE_OPTIONS ) );
     const yAxisLabel = new RichText(
       yAxisLabelStringProperty,
       combineOptions<RichTextOptions>( {
         x: -25, y: -axisLength * 0.4
-      }, SolarSystemCommonConstants.TITLE_OPTIONS ) );
+      }, KeplersLawsConstants.TITLE_OPTIONS ) );
 
     this.children = [
       xAxis,

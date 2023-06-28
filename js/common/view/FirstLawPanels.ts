@@ -29,7 +29,8 @@ export default class FirstLawPanels extends VBox {
       children: [
         new EccentricityPanel( model ),
         new ValuesPanel( model )
-      ]
+      ],
+      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
     } );
   }
 }
@@ -42,16 +43,16 @@ class EccentricityPanel extends Panel {
           justify: 'left',
           margin: 5,
           children: [
-            new Text( KeplersLawsStrings.eccentricityEquationStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+            new Text( KeplersLawsStrings.eccentricityEquationStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
             new VBox( {
               children: [
                 new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
-                  SolarSystemCommonConstants.TITLE_OPTIONS, {
+                  KeplersLawsConstants.TITLE_OPTIONS, {
                     fill: SolarSystemCommonColors.thirdBodyColorProperty
                   } ) ),
                 new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
                 new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
-                  SolarSystemCommonConstants.TITLE_OPTIONS, {
+                  KeplersLawsConstants.TITLE_OPTIONS, {
                     fill: KeplersLawsConstants.AXES_COLOR
                   } ) )
               ]
@@ -104,13 +105,13 @@ class ValuesPanel extends Panel {
       children: [
         new RichText( semiMajorAxisStringProperty, combineOptions<TextOptions>( {
           visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
+        }, KeplersLawsConstants.TEXT_OPTIONS ) ),
         new RichText( semiMinorAxisStringProperty, combineOptions<TextOptions>( {
           visibleProperty: model.semiaxisVisibleProperty
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) ),
+        }, KeplersLawsConstants.TEXT_OPTIONS ) ),
         new RichText( focalDistanceStringProperty, combineOptions<TextOptions>( {
           visibleProperty: model.eccentricityVisibleProperty
-        }, SolarSystemCommonConstants.TEXT_OPTIONS ) )
+        }, KeplersLawsConstants.TEXT_OPTIONS ) )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
   }

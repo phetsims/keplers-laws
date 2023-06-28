@@ -35,6 +35,7 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const UPSCALE = 1.3;
 
 const TITLE_OPTIONS = {
+  maxWidth: 150,
   font: SolarSystemCommonConstants.TITLE_FONT,
   fill: FOREGROUND_COLOR_PROPERTY
 };
@@ -71,7 +72,7 @@ export default class SecondLawGraph extends AccordionBox {
         x: -25,
         centerY: -yAxisLength * 0.5,
         rotation: -Math.PI / 2
-      }, SolarSystemCommonConstants.TITLE_OPTIONS )
+      }, TITLE_OPTIONS )
     );
 
     super( new VBox( {

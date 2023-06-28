@@ -10,6 +10,9 @@ import keplersLaws from './keplersLaws.js';
 import PhetFont from '../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Color } from '../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../solar-system-common/js/SolarSystemCommonConstants.js';
+
+const DEFAULT_MAX_WIDTH = SolarSystemCommonConstants.TEXT_MAX_WIDTH;
 
 const KeplersLawsConstants = {
   PANELS_MIN_WIDTH: 250,
@@ -28,7 +31,19 @@ const KeplersLawsConstants = {
     stroke: 'black'
   },
   AXES_COLOR: 'orange',
-  DISTANCE_LABEL_COLOR: new Color( '#ccb285' )
+  DISTANCE_LABEL_COLOR: new Color( '#ccb285' ),
+
+  TITLE_OPTIONS: {
+    font: new PhetFont( { size: 18, weight: 'bold' } ),
+    fill: SolarSystemCommonColors.foregroundProperty,
+    maxWidth: DEFAULT_MAX_WIDTH
+  },
+  TEXT_OPTIONS: {
+    font: new PhetFont( 16 ),
+    fill: SolarSystemCommonColors.foregroundProperty,
+    lineWidth: 0.1,
+    maxWidth: DEFAULT_MAX_WIDTH
+  }
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );

@@ -40,7 +40,8 @@ export default class ThirdLawPanels extends VBox {
         new ThirdLawAccordionBox( model ),
         new ThirdLawSliderPanel( model )
       ],
-      visibleProperty: model.isThirdLawProperty
+      visibleProperty: model.isThirdLawProperty,
+      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
     } );
   }
 }
@@ -60,7 +61,7 @@ class ThirdLawAccordionBox extends AccordionBox {
           axisPower: axisString,
           periodPower: periodString
         } );
-      } ), SolarSystemCommonConstants.TITLE_OPTIONS ),
+      } ), KeplersLawsConstants.TITLE_OPTIONS ),
       titleYMargin: 10,
       buttonXMargin: 10,
       expandCollapseButtonOptions: {
@@ -94,8 +95,8 @@ class ThirdLawAccordionBox extends AccordionBox {
       )
     }, { tandem: Tandem.OPT_OUT } );
 
-    const semiMajorAxisNumberDisplay = new RichText( semiMajorAxisPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
-    const periodNumberDisplay = new RichText( periodPatternStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
+    const semiMajorAxisNumberDisplay = new RichText( semiMajorAxisPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS );
+    const periodNumberDisplay = new RichText( periodPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS );
 
     // TODO: Add string a=infinite. Look at FirstLawPanels.ts to be consistent. Should we change that way?
 
@@ -111,17 +112,17 @@ class ThirdLawAccordionBox extends AccordionBox {
               [
                 {
                   value: 1,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,
                   //REVIEW: And this should probably include string composition (e.g. combining the translated string for
                   //REVIEW: T with the superscript somehow?)
-                  createNode: () => new RichText( 'T<sup>2</sup>', SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( 'T<sup>2</sup>', KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 3,
-                  createNode: () => new RichText( 'T<sup>3</sup>', SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( 'T<sup>3</sup>', KeplersLawsConstants.TEXT_OPTIONS )
                 }
               ],
               {
@@ -134,15 +135,15 @@ class ThirdLawAccordionBox extends AccordionBox {
               [
                 {
                   value: 1,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,
-                  createNode: () => new RichText( 'a<sup>2</sup>', SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( 'a<sup>2</sup>', KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 3,
-                  createNode: () => new RichText( 'a<sup>3</sup>', SolarSystemCommonConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( 'a<sup>3</sup>', KeplersLawsConstants.TEXT_OPTIONS )
                 }
               ],
               {

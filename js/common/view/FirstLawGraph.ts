@@ -15,7 +15,6 @@ import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
 import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -25,6 +24,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -60,7 +60,7 @@ export default class FirstLawGraph extends AlignBox {
     ExampleOrbit.enumeration.values.forEach( ( exampleOrbit: ExampleOrbit ) => {
       const orbitNameProperty = exampleOrbit.stringProperty;
       const eccentricity = exampleOrbit.eccentricity;
-      const title = new Text( orbitNameProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
+      const title = new Text( orbitNameProperty, KeplersLawsConstants.TEXT_OPTIONS );
       const content = new HBox( {
         centerY: yAxisLength * eccentricity,
         spacing: 5,
@@ -82,7 +82,7 @@ export default class FirstLawGraph extends AlignBox {
         new ArrowNode( 0, 0, -20, 0, { stroke: 'fuchsia', fill: 'fuchsia', tailWidth: 1 } ),
         new NumberDisplay( model.engine.eccentricityProperty, modelYRange, {
           decimalPlaces: 2,
-          textOptions: combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TEXT_OPTIONS, {
+          textOptions: combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
             fill: 'fuchsia'
           } ),
           backgroundFill: null,

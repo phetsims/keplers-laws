@@ -14,10 +14,10 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
@@ -64,7 +64,7 @@ export default class ThirdLawSliderPanel extends Panel {
     super( new VBox( {
       spacing: 10,
       children: [
-        new Text( KeplersLawsStrings.starMassStringProperty, SolarSystemCommonConstants.TITLE_OPTIONS ),
+        new Text( KeplersLawsStrings.starMassStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
         slider
       ]
     } ), {

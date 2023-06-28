@@ -7,8 +7,7 @@
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import { Node, RichText } from '../../../../scenery/js/imports.js';
+import { Node, RichText, TextOptions } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -17,6 +16,8 @@ import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import keplersLaws from '../../keplersLaws.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class OrbitalWarningMessage extends Node {
 
@@ -29,7 +30,9 @@ export default class OrbitalWarningMessage extends Node {
     //REVIEW: instead of the multilink that is used.
     //REVIEW: no need for `message` variable
     let message = '';
-    const warningText = new RichText( message, SolarSystemCommonConstants.TITLE_OPTIONS );
+    const warningText = new RichText( message, combineOptions<TextOptions>( {
+      maxWidth: 500
+    }, SolarSystemCommonConstants.TITLE_OPTIONS ) );
 
 
     Multilink.multilink(

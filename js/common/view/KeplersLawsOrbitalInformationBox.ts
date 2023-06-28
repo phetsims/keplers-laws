@@ -20,6 +20,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,7 +44,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
     ) => {
       return new Checkbox( property, new HBox( {
         children: [
-          new Text( text, SolarSystemCommonConstants.TEXT_OPTIONS ),
+          new Text( text, KeplersLawsConstants.TEXT_OPTIONS ),
           icon
         ],
         spacing: 10
