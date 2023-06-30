@@ -76,13 +76,16 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const sun = model.bodies[ 0 ];
     const body = model.bodies[ 1 ];
     const sunNode = new BodyNode( model.bodies[ 0 ], this.modelViewTransformProperty, {
-      draggable: false
+      draggable: false,
+      focusable: false
     } );
     const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
       useCueingArrows: true,
       showVelocityIndex: false,
       soundViewNode: this,
       valuesVisibleProperty: model.valuesVisibleProperty,
+      dragVelocity: 150,
+      shiftDragVelocity: 50,
       mapPosition: ( point, radius ) => {
         point = modelDragBoundsProperty.value.eroded( radius ).closestPointTo( point );
 
@@ -105,7 +108,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       minimumMagnitude: 30,
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
-      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty )
+      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
+
+      dragVelocity: 150,
+      shiftDragVelocity: 50
     } ) );
 
     // Gravity force vectors
