@@ -29,7 +29,8 @@
       "colorProfiles": [
         "default",
         "projector"
-      ]
+      ],
+      "supportsInteractiveDescription": true
     },
     "screenNameKeys": [
       "KEPLERS_LAWS/screen.firstLaw",
