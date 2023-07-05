@@ -17,11 +17,11 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import ArrowButton, { ArrowButtonOptions } from '../../../../sun/js/buttons/ArrowButton.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 
 export default class SecondLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -49,7 +49,9 @@ class SecondLawPanel extends Panel {
       children: [
         new Text( KeplersLawsStrings.area.periodDivisionStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
         new DivisionsArrowButtonsBox( model ),
-        new Checkbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), SolarSystemCommonConstants.CHECKBOX_OPTIONS )
+        new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), {
+          accessibleName: KeplersLawsStrings.area.valuesStringProperty
+        } )
       ]
     } ), options );
   }

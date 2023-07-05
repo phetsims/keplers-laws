@@ -17,8 +17,8 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 
 class KeplersLawsControls extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
@@ -28,10 +28,12 @@ class KeplersLawsControls extends Panel {
           tandem: tandem
         } ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-        new Checkbox(
+        new SolarSystemCommonCheckbox(
           model.alwaysCircularProperty,
           new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
-          SolarSystemCommonConstants.CHECKBOX_OPTIONS ),
+          {
+            accessibleName: KeplersLawsStrings.circularOrbitStringProperty
+          } ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
         ...createArrowsVisibilityCheckboxes( model, tandem ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),

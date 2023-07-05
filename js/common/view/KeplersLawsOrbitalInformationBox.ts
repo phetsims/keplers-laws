@@ -7,7 +7,7 @@
  */
 
 import { HBox, HBoxOptions, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
@@ -21,6 +21,7 @@ import keplersLaws from '../../keplersLaws.js';
 import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -29,9 +30,10 @@ export type KeplersLawsOrbitalInformationOptions = SelfOptions & WithRequired<VB
 class KeplersLawsOrbitalInformationBox extends VBox {
 
   public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsOrbitalInformationOptions ) {
-    const getCheckboxOptions = ( name: string, options: CheckboxOptions = {} ) => {
+    const getCheckboxOptions = ( tandemName: string, accesibleName: string | TReadOnlyProperty<string>, options: CheckboxOptions = {} ) => {
       return combineOptions<CheckboxOptions>( options, SolarSystemCommonConstants.CHECKBOX_OPTIONS, {
-        tandem: providedOptions.tandem.createTandem( name )
+        tandem: providedOptions.tandem.createTandem( tandemName ),
+        accessibleName: accesibleName
       } );
     };
 
@@ -42,13 +44,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       icon: Node = new Node(),
       options?: CheckboxOptions
     ) => {
-      return new Checkbox( property, new HBox( {
+      return new SolarSystemCommonCheckbox( property, new HBox( {
         children: [
           new Text( text, KeplersLawsConstants.TEXT_OPTIONS ),
           icon
         ],
         spacing: 10
-      } ), getCheckboxOptions( tandemName, options ) );
+      } ), getCheckboxOptions( tandemName, text, options ) );
     };
 
     const firstLawChildren = [
