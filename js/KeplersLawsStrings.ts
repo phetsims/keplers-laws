@@ -70,6 +70,10 @@ type StringsType = {
     'erisStringProperty': LocalizedStringProperty;
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
+  };
+  'a11y': {
+    'decreaseDivisionsStringProperty': LocalizedStringProperty;
+    'increaseDivisionsStringProperty': LocalizedStringProperty;
   }
 };
 

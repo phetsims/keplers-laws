@@ -136,5 +136,13 @@
   },
   "orbit.halley": {
     "value": "Halley"
+  },
+  "a11y": {
+    "decreaseDivisions": {
+      "value": "Decrease divisions"
+    },
+    "increaseDivisions": {
+      "value": "Increase divisions"
+    }
   }
 }

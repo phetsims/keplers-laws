@@ -82,6 +82,7 @@ class DivisionsArrowButtonsBox extends HBox {
           numberValue;
       },
       combineOptions<ArrowButtonOptions>( {
+        accessibleName: KeplersLawsStrings.a11y.increaseDivisionsStringProperty,
         enabledProperty: new DerivedProperty(
           [ model.periodDivisionProperty ],
           periodDivisions => {
@@ -102,6 +103,7 @@ class DivisionsArrowButtonsBox extends HBox {
           numberValue;
       },
       combineOptions<ArrowButtonOptions>( {
+        accessibleName: KeplersLawsStrings.a11y.decreaseDivisionsStringProperty,
         enabledProperty: new DerivedProperty(
           [ model.periodDivisionProperty ],
           periodDivisions => {

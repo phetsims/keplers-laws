@@ -47,6 +47,7 @@ export default class SecondLawGraph extends AccordionBox {
     const options = combineOptions<AccordionBoxOptions>( {
       visibleProperty: model.isSecondLawProperty,
       titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+      accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       titleYMargin: 4,
       useExpandedBoundsWhenCollapsed: false,
 
