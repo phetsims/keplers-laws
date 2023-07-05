@@ -48,20 +48,22 @@ export default class ThirdLawPanels extends VBox {
 
 class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
-    const options = combineOptions<ThirdLawAccordionBoxOptions>( {
-      titleNode: new RichText( new DerivedProperty( [
-        KeplersLawsStrings.graph.titleStringProperty,
-        model.selectedAxisPowerProperty,
-        model.selectedPeriodPowerProperty
-      ], ( stringPattern, axisPower, periodPower ) => {
-        const axisString = axisPower === 1 ? '' : `<sup>${axisPower}</sup>`;
-        const periodString = periodPower === 1 ? '' : `<sup>${periodPower}</sup>`;
+    const titleStringProperty = new DerivedProperty( [
+      KeplersLawsStrings.graph.titleStringProperty,
+      model.selectedAxisPowerProperty,
+      model.selectedPeriodPowerProperty
+    ], ( stringPattern, axisPower, periodPower ) => {
+      const axisString = axisPower === 1 ? '' : `<sup>${axisPower}</sup>`;
+      const periodString = periodPower === 1 ? '' : `<sup>${periodPower}</sup>`;
 
-        return StringUtils.fillIn( stringPattern, {
-          axisPower: axisString,
-          periodPower: periodString
-        } );
-      } ), KeplersLawsConstants.TITLE_OPTIONS ),
+      return StringUtils.fillIn( stringPattern, {
+        axisPower: axisString,
+        periodPower: periodString
+      } );
+    } );
+    const options = combineOptions<ThirdLawAccordionBoxOptions>( {
+      titleNode: new RichText( titleStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+      accessibleName: titleStringProperty,
       titleYMargin: 10,
       buttonXMargin: 10,
       expandCollapseButtonOptions: {
@@ -114,17 +116,18 @@ class ThirdLawAccordionBox extends AccordionBox {
               [
                 {
                   value: 1,
+                  labelContent: KeplersLawsStrings.symbols.periodStringProperty,
                   createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,
-                  //REVIEW: And this should probably include string composition (e.g. combining the translated string for
-                  //REVIEW: T with the superscript somehow?)
-                  createNode: () => new RichText( 'T<sup>2</sup>', KeplersLawsConstants.TEXT_OPTIONS )
+                  labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 3,
-                  createNode: () => new RichText( 'T<sup>3</sup>', KeplersLawsConstants.TEXT_OPTIONS )
+                  labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 }
               ],
               {
@@ -137,15 +140,18 @@ class ThirdLawAccordionBox extends AccordionBox {
               [
                 {
                   value: 1,
+                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
                   createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 2,
-                  createNode: () => new RichText( 'a<sup>2</sup>', KeplersLawsConstants.TEXT_OPTIONS )
+                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 },
                 {
                   value: 3,
-                  createNode: () => new RichText( 'a<sup>3</sup>', KeplersLawsConstants.TEXT_OPTIONS )
+                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
                 }
               ],
               {
@@ -159,7 +165,8 @@ class ThirdLawAccordionBox extends AccordionBox {
             } ),
             new EraserButton( {
               listener: () => model.engine.resetEmitter.emit(),
-              layoutOptions: { column: 0, row: 1 }
+              layoutOptions: { column: 0, row: 1 },
+              accessibleName: KeplersLawsStrings.eraserStringProperty
             } )
           ],
           spacing: 10

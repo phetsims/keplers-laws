@@ -31,6 +31,7 @@ type StringsType = {
   'starMassStringProperty': LocalizedStringProperty;
   'ourSunStringProperty': LocalizedStringProperty;
   'periodStringProperty': LocalizedStringProperty;
+  'eraserStringProperty': LocalizedStringProperty;
   'area': {
     'periodDivisionStringProperty': LocalizedStringProperty;
     'valuesStringProperty': LocalizedStringProperty;
@@ -44,9 +45,13 @@ type StringsType = {
   };
   'symbols': {
     'semiMajorAxisStringProperty': LocalizedStringProperty;
+    'semiMajorAxisSquaredStringProperty': LocalizedStringProperty;
+    'semiMajorAxisCubedStringProperty': LocalizedStringProperty;
     'semiMinorAxisStringProperty': LocalizedStringProperty;
     'focalDistanceStringProperty': LocalizedStringProperty;
     'periodStringProperty': LocalizedStringProperty;
+    'periodSquaredStringProperty': LocalizedStringProperty;
+    'periodCubedStringProperty': LocalizedStringProperty;
     'radiusStringProperty': LocalizedStringProperty;
     'distance1StringProperty': LocalizedStringProperty;
     'distance2StringProperty': LocalizedStringProperty;

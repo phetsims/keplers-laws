@@ -53,6 +53,9 @@
   "period": {
     "value": "Period"
   },
+  "eraser": {
+    "value": "Eraser"
+  },
   "area.periodDivision": {
     "value": "Period Divisions"
   },
@@ -77,6 +80,12 @@
   "symbols.semiMajorAxis": {
     "value": "a"
   },
+  "symbols.semiMajorAxisSquared": {
+    "value": "a<sup>2</sup>"
+  },
+  "symbols.semiMajorAxisCubed": {
+    "value": "a<sup>3</sup>"
+  },
   "symbols.semiMinorAxis": {
     "value": "b"
   },
@@ -85,6 +94,12 @@
   },
   "symbols.period": {
     "value": "T"
+  },
+  "symbols.periodSquared": {
+    "value": "T<sup>2</sup>"
+  },
+  "symbols.periodCubed": {
+    "value": "T<sup>3</sup>"
   },
   "symbols.radius": {
     "value": "r"

@@ -433,8 +433,8 @@ export default class EllipticalOrbitEngine extends Engine {
     const vAngle = v.angle;
 
     return Math.pow(
-      1 - Math.pow( rMagnitude * vMagnitude * Math.sin( vAngle - rAngle ), 2 )
-      / ( a * this.mu ), 0.5 );
+      Math.abs( 1 - Math.pow( rMagnitude * vMagnitude * Math.sin( vAngle - rAngle ), 2 ) / ( a * this.mu ) ),
+      0.5 );
   }
 
   /**
