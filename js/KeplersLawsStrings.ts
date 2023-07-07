@@ -38,6 +38,7 @@ type StringsType = {
     'areaUnitsStringProperty': LocalizedStringProperty;
   };
   'sweptAreaStringProperty': LocalizedStringProperty;
+  'noneStringProperty': LocalizedStringProperty;
   'graph': {
     'titleStringProperty': LocalizedStringProperty;
     'aStringProperty': LocalizedStringProperty;
@@ -66,7 +67,10 @@ type StringsType = {
   };
   'orbit': {
     'mercuryStringProperty': LocalizedStringProperty;
+    'venusStringProperty': LocalizedStringProperty;
     'earthStringProperty': LocalizedStringProperty;
+    'marsStringProperty': LocalizedStringProperty;
+    'jupiterStringProperty': LocalizedStringProperty;
     'erisStringProperty': LocalizedStringProperty;
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
@@ -74,6 +78,7 @@ type StringsType = {
   'a11y': {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;
     'increaseDivisionsStringProperty': LocalizedStringProperty;
+    'targetOrbitSelectorStringProperty': LocalizedStringProperty;
   }
 };
 

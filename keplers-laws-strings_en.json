@@ -68,6 +68,9 @@
   "sweptArea": {
     "value": "Swept Area"
   },
+  "none": {
+    "value": "None"
+  },
   "graph.title": {
     "value": "a{{axisPower}} vs T{{periodPower}} Graph"
   },
@@ -125,8 +128,17 @@
   "orbit.mercury": {
     "value": "Mercury"
   },
+  "orbit.venus": {
+    "value": "Venus"
+  },
   "orbit.earth": {
     "value": "Earth"
+  },
+  "orbit.mars": {
+    "value": "Mars"
+  },
+  "orbit.jupiter": {
+    "value": "Jupiter"
   },
   "orbit.eris": {
     "value": "Eris"
@@ -143,6 +155,9 @@
     },
     "increaseDivisions": {
       "value": "Increase divisions"
+    },
+    "targetOrbitSelector": {
+      "value": "Target orbit selector"
     }
   }
 }

@@ -20,27 +20,10 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import keplersLaws from '../../keplersLaws.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import TargetOrbits from '../model/TargetOrbits.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
-
-class ExampleOrbit extends EnumerationValue {
-  public static readonly MERCURY = new ExampleOrbit( 0.2056, KeplersLawsStrings.orbit.mercuryStringProperty );
-  public static readonly EARTH = new ExampleOrbit( 0.0167, KeplersLawsStrings.orbit.earthStringProperty );
-  public static readonly ERIS = new ExampleOrbit( 0.44, KeplersLawsStrings.orbit.erisStringProperty );
-  public static readonly NEREID = new ExampleOrbit( 0.75, KeplersLawsStrings.orbit.nereidStringProperty );
-  public static readonly HALLEY = new ExampleOrbit( 0.967, KeplersLawsStrings.orbit.halleyStringProperty );
-
-  public static readonly enumeration = new Enumeration( ExampleOrbit );
-
-  public constructor( public readonly eccentricity: number, public readonly stringProperty: TReadOnlyProperty<string> ) {
-    super();
-  }
-}
 
 export default class FirstLawGraph extends AlignBox {
 
@@ -57,7 +40,15 @@ export default class FirstLawGraph extends AlignBox {
 
     const orbitAndValues: HBox[] = [];
 
-    ExampleOrbit.enumeration.values.forEach( ( exampleOrbit: ExampleOrbit ) => {
+    const shownEccentricities = [
+      TargetOrbits.MERCURY,
+      TargetOrbits.EARTH,
+      TargetOrbits.ERIS,
+      TargetOrbits.NEREID,
+      TargetOrbits.HALLEY
+    ];
+
+    shownEccentricities.forEach( ( exampleOrbit: TargetOrbits ) => {
       const orbitNameProperty = exampleOrbit.stringProperty;
       const eccentricity = exampleOrbit.eccentricity;
       const title = new Text( orbitNameProperty, KeplersLawsConstants.TEXT_OPTIONS );

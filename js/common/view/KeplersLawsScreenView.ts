@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -27,6 +27,8 @@ import keplersLaws from '../../keplersLaws.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
 import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
+import Panel from '../../../../sun/js/Panel.js';
+import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 
 // constants
 const MARGIN = 10;
@@ -156,10 +158,30 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.keplersLawsControls = new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) );
 
+    const targetOrbitsPanel = new Panel( new VBox( {
+      spacing: 5,
+      align: 'left',
+      children: [
+        new Text( 'Target Orbit:', SolarSystemCommonConstants.TEXT_OPTIONS ),
+        new TargetOrbitsComboBox( model, this.topLayer, {
+          layoutOptions: {
+            align: 'center'
+          }
+        } )
+      ]
+    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
     // Add the control panel on top of the canvases
     // Visibility checkboxes for sim elements
     const controlPanelAlignBox = new AlignBox(
-      this.keplersLawsControls,
+      new VBox( {
+        spacing: 5,
+        align: 'left',
+        children: [
+          targetOrbitsPanel,
+          this.keplersLawsControls
+        ]
+      } ),
       {
         alignBoundsProperty: this.availableBoundsProperty,
         margin: MARGIN,

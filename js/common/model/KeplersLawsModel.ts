@@ -24,6 +24,7 @@ import PeriodTracker from './PeriodTracker.js';
 import OrbitalArea from './OrbitalArea.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Utils from '../../../../dot/js/Utils.js';
+import TargetOrbits from './TargetOrbits.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -35,6 +36,8 @@ export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions,
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
+
+  public readonly targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE );
 
   // Will enforce that the orbit is always circular
   public readonly alwaysCircularProperty = new BooleanProperty( false );
