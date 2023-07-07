@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -26,8 +26,7 @@ import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
-import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js/view/SolarSystemCommonTimeControlNode.js';
-import Panel from '../../../../sun/js/Panel.js';
+import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 
 // constants
 const MARGIN = 10;
@@ -160,20 +159,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Add the control panel on top of the canvases
     // Visibility checkboxes for sim elements
     const controlPanelAlignBox = new AlignBox(
-      new VBox( {
-        spacing: 10,
-        align: 'left',
-        children: [
-          new Panel( new SolarSystemCommonTimeControlNode( model,
-            {
-              enabledProperty: options.playingAllowedProperty || null,
-              restartListener: () => model.restart(),
-              stepForwardListener: () => model.stepOnce( 1 / 8 ),
-              tandem: options.tandem.createTandem( 'timeControlNode' )
-            } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ),
-          this.keplersLawsControls
-        ]
-      } ),
+      this.keplersLawsControls,
       {
         alignBoundsProperty: this.availableBoundsProperty,
         margin: MARGIN,
@@ -205,6 +191,19 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         yAlign: 'bottom'
       } );
 
+    const timeBox = new AlignBox( new KeplersLawsTimeControlNode( model,
+      {
+        enabledProperty: options.playingAllowedProperty || null,
+        restartListener: () => model.restart(),
+        stepForwardListener: () => model.stepOnce( 1 / 8 ),
+        tandem: options.tandem.createTandem( 'timeControlNode' )
+      } ), {
+      alignBoundsProperty: this.availableBoundsProperty,
+      margin: SolarSystemCommonConstants.MARGIN,
+      xAlign: 'center',
+      yAlign: 'bottom'
+    } );
+
 
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsAndZoomBoxes );
@@ -227,6 +226,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       ) );
     }
     this.interfaceLayer.addChild( resetBox );
+    this.interfaceLayer.addChild( timeBox );
     this.bottomLayer.addChild( distancesDisplayBox );
   }
 
