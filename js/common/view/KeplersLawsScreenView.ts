@@ -247,8 +247,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         }
       ) );
     }
-    this.interfaceLayer.addChild( resetBox );
     this.interfaceLayer.addChild( timeBox );
+    this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
   }
 
