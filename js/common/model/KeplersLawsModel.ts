@@ -125,7 +125,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.defaultBodyState = [
       { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
-      { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 100 ) }
+      { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
     ];
     this.loadBodyStates( this.defaultBodyState );
 
