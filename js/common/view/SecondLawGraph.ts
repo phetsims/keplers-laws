@@ -25,6 +25,7 @@ import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionB
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -66,6 +67,12 @@ export default class SecondLawGraph extends AccordionBox {
       stroke: FOREGROUND_COLOR_PROPERTY,
       tailWidth: 1
     } );
+    const eraserButton = new EraserButton( {
+      listener: () => model.engine.resetOrbitalAreas(),
+      x: xAxisLength * 0.8,
+      y: -yAxisLength,
+      accessibleName: KeplersLawsStrings.eraserStringProperty
+    } );
 
     const barPlot = new AreasBarPlot( model );
     barPlot.y = -yAxisLength;
@@ -88,7 +95,8 @@ export default class SecondLawGraph extends AccordionBox {
               barPlot,
               xAxis,
               yAxis,
-              yAxisLabel
+              yAxisLabel,
+              eraserButton
             ]
           } ),
           xAxisLabel
