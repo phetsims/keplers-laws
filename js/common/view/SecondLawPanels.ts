@@ -51,6 +51,9 @@ class SecondLawPanel extends Panel {
         new DivisionsArrowButtonsBox( model ),
         new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), {
           accessibleName: KeplersLawsStrings.area.valuesStringProperty
+        } ),
+        new SolarSystemCommonCheckbox( model.periodValuesVisibleProperty, new Text( KeplersLawsStrings.area.periodValuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), {
+          accessibleName: KeplersLawsStrings.area.periodValuesStringProperty
         } )
       ]
     } ), options );

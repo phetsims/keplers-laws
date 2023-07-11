@@ -29,6 +29,7 @@ import PeriodTimerNode from './PeriodTimerNode.js';
 import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
+import TargetOrbitNode from './TargetOrbitNode.js';
 
 // constants
 const MARGIN = 10;
@@ -125,6 +126,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
       new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
+
+    // Target orbit node
+    const targetOrbitNode = new TargetOrbitNode( model.targetOrbitProperty, this.modelViewTransformProperty );
+    this.bottomLayer.addChild( targetOrbitNode );
 
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
     this.bottomLayer.addChild( ellipticalOrbitNode );

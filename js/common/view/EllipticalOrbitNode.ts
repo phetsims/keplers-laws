@@ -431,11 +431,13 @@ export default class EllipticalOrbitNode extends Path {
       periodTrackerNode.update( scale, center, radiusX, radiusY );
     };
 
+    updatedOrbit();
+
     this.orbit.changedEmitter.addListener( updatedOrbit );
     this.orbit.ranEmitter.addListener( () => {
       updatedOrbit();
 
-      // Had to call the method here because apparently the listener is created before periodTrackerNode is instantiated
+      // Had to call the method here because the listener is created before periodTrackerNode is instantiated
       periodTrackerNode.updateShape();
     } );
 

@@ -35,6 +35,7 @@ type StringsType = {
   'area': {
     'periodDivisionStringProperty': LocalizedStringProperty;
     'valuesStringProperty': LocalizedStringProperty;
+    'periodValuesStringProperty': LocalizedStringProperty;
     'areaUnitsStringProperty': LocalizedStringProperty;
   };
   'sweptAreaStringProperty': LocalizedStringProperty;
