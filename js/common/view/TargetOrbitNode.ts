@@ -12,6 +12,7 @@ import TargetOrbits from '../model/TargetOrbits.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class TargetOrbitNode extends Path {
   public constructor(
@@ -26,7 +27,7 @@ export default class TargetOrbitNode extends Path {
 
     super( null, options );
 
-    targetOrbitProperty.link( () => this.updateShape() );
+    Multilink.multilink( [ this.targetOrbitProperty, this.modelViewTransformProperty ], () => this.updateShape() );
   }
 
   private updateShape(): void {

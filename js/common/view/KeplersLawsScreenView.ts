@@ -30,6 +30,7 @@ import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
+import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 
 // constants
 const MARGIN = 10;
@@ -144,7 +145,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.secondLawPanel = new SecondLawPanels( model );
     this.thirdLawPanel = new ThirdLawPanels( model );
 
-    const lawsAndZoomBoxes = new AlignBox( new HBox( {
+    const lawsPanelsBox = new AlignBox( new HBox( {
         children: [
           this.firstLawPanel,
           this.secondLawPanel,
@@ -176,15 +177,34 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
+    const zoomButtons = new MagnifyingGlassZoomButtonGroup(
+      model.zoomLevelProperty,
+      {
+        orientation: 'vertical',
+        spacing: 5,
+        magnifyingGlassNodeOptions: {
+          glassRadius: 8
+        },
+        touchAreaXDilation: 5,
+        touchAreaYDilation: 5
+      } );
+
     // Add the control panel on top of the canvases
     // Visibility checkboxes for sim elements
-    const controlPanelAlignBox = new AlignBox(
-      new VBox( {
-        spacing: 5,
-        align: 'left',
+    const topRightAlignBox = new AlignBox(
+      new HBox( {
+        spacing: 10,
+        align: 'top',
         children: [
-          targetOrbitsPanel,
-          this.keplersLawsControls
+          zoomButtons,
+          new VBox( {
+            spacing: 5,
+            align: 'left',
+            children: [
+              targetOrbitsPanel,
+              this.keplersLawsControls
+            ]
+          } )
         ]
       } ),
       {
@@ -233,8 +253,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
 
     // Slider that controls the bodies mass
-    this.interfaceLayer.addChild( lawsAndZoomBoxes );
-    this.interfaceLayer.addChild( controlPanelAlignBox );
+    this.interfaceLayer.addChild( lawsPanelsBox );
+    this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
       this.lawsButtons = new LawsButtons( model );
 

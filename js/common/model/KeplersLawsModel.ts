@@ -25,6 +25,7 @@ import OrbitalArea from './OrbitalArea.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Utils from '../../../../dot/js/Utils.js';
 import TargetOrbits from './TargetOrbits.js';
+import Range from '../../../../dot/js/Range.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -178,6 +179,14 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.periodTracker = new PeriodTracker( this );
 
     this.forceScaleProperty.value = 0.5;
+
+    this.zoomLevelProperty = new NumberProperty( 2, {
+      range: new Range( 1, 2 ),
+      numberType: 'Integer'
+    } );
+    this.zoomProperty = new DerivedProperty( [ this.zoomLevelProperty ], zoomLevel => {
+      return zoomLevel / 2;
+    } );
   }
 
   /**
