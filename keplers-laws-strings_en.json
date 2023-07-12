@@ -20,6 +20,9 @@
   "circularOrbit": {
     "value": "Always circular"
   },
+  "stopwatch": {
+    "value": "Stopwatch"
+  },
   "axis": {
     "value": "Axes"
   },

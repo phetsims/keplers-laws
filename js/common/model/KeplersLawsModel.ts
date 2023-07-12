@@ -26,6 +26,7 @@ import { Color } from '../../../../scenery/js/imports.js';
 import Utils from '../../../../dot/js/Utils.js';
 import TargetOrbits from './TargetOrbits.js';
 import Range from '../../../../dot/js/Range.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -42,6 +43,14 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Will enforce that the orbit is always circular
   public readonly alwaysCircularProperty = new BooleanProperty( false );
+
+  // Stopwatch visibility
+  public readonly stopwatchVisibleProperty = new BooleanProperty( false );
+  public readonly stopwatch = new Stopwatch( {
+    timePropertyOptions: {
+      units: 'y'
+    }
+  } );
 
   // Booleans to keep track of which law is selected
   public readonly isFirstLawProperty = new BooleanProperty( false );
@@ -253,6 +262,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public override step( dt: number ): void {
     super.step( dt );
     this.periodTracker.step( dt );
+
+    if ( this.stopwatch.isRunningProperty.value && this.isPlayingProperty.value ) {
+      this.stopwatch.step( dt * this.modelToViewTime * this.timeScale );
+    }
   }
 
   /**

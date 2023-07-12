@@ -31,6 +31,7 @@ import Panel from '../../../../sun/js/Panel.js';
 import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
+import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 
 // constants
 const MARGIN = 10;
@@ -238,19 +239,35 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         yAlign: 'bottom'
       } );
 
-    const timeBox = new AlignBox( new KeplersLawsTimeControlNode( model,
+    const timeControlsNode = new KeplersLawsTimeControlNode( model,
       {
         enabledProperty: options.playingAllowedProperty || null,
         restartListener: () => model.restart(),
         stepForwardListener: () => model.stepOnce( 1 / 8 ),
         tandem: options.tandem.createTandem( 'timeControlNode' )
-      } ), {
+      } );
+    const timeBox = new AlignBox( timeControlsNode, {
       alignBoundsProperty: this.availableBoundsProperty,
       margin: SolarSystemCommonConstants.MARGIN,
       xAlign: 'center',
       yAlign: 'bottom'
     } );
 
+    model.stopwatch.positionProperty.value = timeControlsNode.center.plusXY( timeControlsNode.width / 2 + 20, -40 );
+    const stopwatchNode = new StopwatchNode(
+      model.stopwatch, {
+        dragBoundsProperty: this.visibleBoundsProperty,
+        visibleProperty: model.stopwatchVisibleProperty,
+        numberDisplayOptions: {
+          numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
+            showAsMinutesAndSeconds: false,
+            numberOfDecimalPlaces: 2,
+            units: 'y'
+          } )
+        }
+      }
+    );
+    this.topLayer.addChild( stopwatchNode );
 
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsPanelsBox );

@@ -20,6 +20,7 @@ type StringsType = {
   };
   'undefinedStringProperty': LocalizedStringProperty;
   'circularOrbitStringProperty': LocalizedStringProperty;
+  'stopwatchStringProperty': LocalizedStringProperty;
   'axisStringProperty': LocalizedStringProperty;
   'fociStringProperty': LocalizedStringProperty;
   'stringsStringProperty': LocalizedStringProperty;

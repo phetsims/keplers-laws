@@ -52,7 +52,7 @@ export default class PeriodTracker {
     } );
 
     this.periodTimer = new Stopwatch( {
-      position: new Vector2( -50, -250 ),
+      position: new Vector2( -50, 250 ),
       timePropertyOptions: {
         range: periodRangeProperty
       }
