@@ -262,7 +262,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
             showAsMinutesAndSeconds: false,
             numberOfDecimalPlaces: 2,
-            units: 'y'
+            units: 'years'
           } )
         }
       }

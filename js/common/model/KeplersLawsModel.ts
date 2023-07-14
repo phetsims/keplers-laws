@@ -48,7 +48,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly stopwatchVisibleProperty = new BooleanProperty( false );
   public readonly stopwatch = new Stopwatch( {
     timePropertyOptions: {
-      units: 'y'
+      units: 'years'
     }
   } );
 
