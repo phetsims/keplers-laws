@@ -130,7 +130,13 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     ) );
 
     // Target orbit node
-    const targetOrbitNode = new TargetOrbitNode( model.targetOrbitProperty, this.modelViewTransformProperty );
+    const targetOrbitNode = new TargetOrbitNode(
+      model.targetOrbitProperty,
+      this.modelViewTransformProperty,
+      {
+        visibleProperty: new DerivedProperty( [ model.isSolarSystemProperty, model.isSecondLawProperty ],
+          ( isSolarSystem, isSecondLaw ) => isSolarSystem && !isSecondLaw )
+      } );
     this.bottomLayer.addChild( targetOrbitNode );
 
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
@@ -166,11 +172,13 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.keplersLawsControls = new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) );
 
     const targetOrbitsPanel = new Panel( new VBox( {
+      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
       spacing: 5,
       align: 'left',
       children: [
         new Text( 'Target Orbit:', SolarSystemCommonConstants.TEXT_OPTIONS ),
         new TargetOrbitsComboBox( model, this.topLayer, {
+          enabledProperty: model.isSolarSystemProperty,
           layoutOptions: {
             align: 'center'
           }

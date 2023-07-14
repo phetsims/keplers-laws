@@ -6,24 +6,26 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import { Path, PathOptions } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class TargetOrbitNode extends Path {
   public constructor(
     private readonly targetOrbitProperty: TReadOnlyProperty<TargetOrbits>,
-    private readonly modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
-    ) {
-    const options = {
+    private readonly modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>,
+    providedOptions?: PathOptions
+  ) {
+    const options = combineOptions<PathOptions>( {
       stroke: 'gray',
       lineWidth: 3
       // lineDash: [ 5, 5 ]
-    };
+    }, providedOptions );
 
     super( null, options );
 

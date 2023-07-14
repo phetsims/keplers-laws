@@ -42,6 +42,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
 
   public readonly targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE );
+  public readonly isSolarSystemProperty: ReadOnlyProperty<boolean>;
 
   // Will enforce that the orbit is always circular
   public readonly alwaysCircularProperty = new BooleanProperty( false );
@@ -117,6 +118,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       initialLaw: LawMode.FIRST_LAW
     }, providedOptions );
     super( options );
+
+    this.isSolarSystemProperty = new DerivedProperty( [ this.bodies[ 0 ].massProperty ], sunMass => sunMass === 200 );
 
     this.lawVisibilitiesMap.set( LawMode.FIRST_LAW, this.firstLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.SECOND_LAW, this.secondLawVisibilities );
