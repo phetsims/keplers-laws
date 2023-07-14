@@ -267,6 +267,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedPeriodPowerProperty.reset();
     this.alwaysCircularProperty.reset();
     this.periodTracker.reset();
+    this.targetOrbitProperty.reset();
 
     this.hardVisibilityReset();
     this.engine.updateAllowed = true;
