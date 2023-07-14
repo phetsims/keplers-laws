@@ -27,6 +27,8 @@ import Utils from '../../../../dot/js/Utils.js';
 import TargetOrbits from './TargetOrbits.js';
 import Range from '../../../../dot/js/Range.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import Animation from '../../../../twixt/js/Animation.js';
+import Easing from '../../../../twixt/js/Easing.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -193,9 +195,30 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       range: new Range( 1, 2 ),
       numberType: 'Integer'
     } );
-    this.zoomProperty = new DerivedProperty( [ this.zoomLevelProperty ], zoomLevel => {
-      return zoomLevel / 2;
+    const animatedZoomProperty = new NumberProperty( 1 );
+    const zoomAnimationIn = new Animation( {
+      property: animatedZoomProperty,
+      duration: 0.5,
+      to: 1 / 2,
+      easing: Easing.CUBIC_IN_OUT
     } );
+    const zoomAnimationOut = new Animation( {
+      property: animatedZoomProperty,
+      duration: 0.5,
+      to: 1,
+      easing: Easing.CUBIC_IN_OUT
+    } );
+
+    this.zoomLevelProperty.link( zoomLevel => {
+      if ( zoomLevel === 1 ) {
+        zoomAnimationIn.start();
+      }
+      else {
+        zoomAnimationOut.start();
+      }
+    } );
+
+    this.zoomProperty = new DerivedProperty( [ animatedZoomProperty ], zoom => zoom );
   }
 
   /**
