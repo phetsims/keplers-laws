@@ -202,7 +202,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     const zoomAnimationIn = new Animation( {
       property: animatedZoomProperty,
       duration: 0.5,
-      to: 1 / 2,
+      to: 0.45,
       easing: Easing.CUBIC_IN_OUT
     } );
     const zoomAnimationOut = new Animation( {
