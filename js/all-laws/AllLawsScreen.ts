@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Lab Screen, where the user can learn about Kepler's Laws via an elliptical orbit
+ * AllLaws Screen, where the user can learn about Kepler's Laws via an elliptical orbit
  *
  * @author Agustín Vallejo
  */
@@ -14,15 +14,15 @@ import LawMode from '../common/model/LawMode.js';
 import KeplersLawsScreenView from '../common/view/KeplersLawsScreenView.js';
 import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
-import LabScreenIcon from './LabScreenIcon.js';
+import AllLawsScreenIcon from './AllLawsScreenIcon.js';
 
-class LabScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
+class AllLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
   public constructor( tandem: Tandem ) {
 
     const options = {
-      name: KeplersLawsStrings.screen.labStringProperty,
-      homeScreenIcon: new LabScreenIcon(),
+      name: KeplersLawsStrings.screen.allLawsStringProperty,
+      homeScreenIcon: new AllLawsScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem
     };
@@ -41,5 +41,5 @@ class LabScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
   }
 }
 
-keplersLaws.register( 'LabScreen', LabScreen );
-export default LabScreen;
+keplersLaws.register( 'AllLawsScreen', AllLawsScreen );
+export default AllLawsScreen;

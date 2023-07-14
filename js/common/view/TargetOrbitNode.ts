@@ -20,7 +20,7 @@ export default class TargetOrbitNode extends Path {
     private readonly modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
     ) {
     const options = {
-      stroke: 'white',
+      stroke: 'gray',
       lineWidth: 3
       // lineDash: [ 5, 5 ]
     };
@@ -36,7 +36,6 @@ export default class TargetOrbitNode extends Path {
       this.shape = null;
     }
     else {
-      this.stroke = targetOrbit.color;
       this.translation = this.modelViewTransformProperty.value.modelToViewPosition( Vector2.ZERO );
       const scale = this.modelViewTransformProperty.value.modelToViewDeltaX( 1 );
       const a = 100 * scale * this.targetOrbitProperty.value.semiMajorAxis;

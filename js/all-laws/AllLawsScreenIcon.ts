@@ -14,7 +14,7 @@ import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
 import { Node } from '../../../scenery/js/imports.js';
 import ThirdLawScreenIcon from '../third-law/ThirdLawScreenIcon.js';
 
-export default class LabScreenIcon extends KeplersLawsScreenIcon {
+export default class AllLawsScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
 
     const secondLawNode = SecondLawScreenIcon.getFullNode();
@@ -27,4 +27,4 @@ export default class LabScreenIcon extends KeplersLawsScreenIcon {
   }
 }
 
-keplersLaws.register( 'LabScreenIcon', LabScreenIcon );
+keplersLaws.register( 'AllLawsScreenIcon', AllLawsScreenIcon );

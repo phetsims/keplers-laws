@@ -16,7 +16,7 @@ type StringsType = {
     'firstLawStringProperty': LocalizedStringProperty;
     'secondLawStringProperty': LocalizedStringProperty;
     'thirdLawStringProperty': LocalizedStringProperty;
-    'labStringProperty': LocalizedStringProperty;
+    'allLawsStringProperty': LocalizedStringProperty;
   };
   'undefinedStringProperty': LocalizedStringProperty;
   'circularOrbitStringProperty': LocalizedStringProperty;

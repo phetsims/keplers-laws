@@ -36,7 +36,7 @@
       "KEPLERS_LAWS/screen.firstLaw",
       "KEPLERS_LAWS/screen.secondLaw",
       "KEPLERS_LAWS/screen.thirdLaw",
-      "KEPLERS_LAWS/screen.lab"
+      "KEPLERS_LAWS/screen.allLaws"
     ]
   },
   "eslintConfig": {
