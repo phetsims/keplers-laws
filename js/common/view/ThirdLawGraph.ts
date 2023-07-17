@@ -22,6 +22,7 @@ import keplersLaws from '../../keplersLaws.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import TargetOrbits from '../model/TargetOrbits.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -68,6 +69,9 @@ export default class ThirdLawGraph extends Node {
     const dataPoint = new Circle( 5, {
       fill: SolarSystemCommonColors.secondBodyColorProperty
     } );
+    const targetOrbitPoint = new Circle( 5, {
+      fill: 'gray'
+    } );
 
     const linePath = new Path( null, {
       stroke: SolarSystemCommonColors.foregroundProperty,
@@ -76,6 +80,12 @@ export default class ThirdLawGraph extends Node {
     const outOfBoundsArrow = new ArrowNode( 0, 0, 1, 0, {
       stroke: SolarSystemCommonColors.secondBodyColorProperty,
       fill: SolarSystemCommonColors.secondBodyColorProperty,
+      lineWidth: 2,
+      boundsMethod: 'none'
+    } );
+    const targetOrbitOutOfBounds = new ArrowNode( 0, 0, 1, 0, {
+      stroke: 'gray',
+      fill: 'gray',
       lineWidth: 2,
       boundsMethod: 'none'
     } );
@@ -108,8 +118,9 @@ export default class ThirdLawGraph extends Node {
       yAxis,
       xAxisLabel,
       yAxisLabel,
+      targetOrbitOutOfBounds,
       new Node( {
-        children: [ linePath, dataPoint ],
+        children: [ linePath, dataPoint, targetOrbitPoint ],
         clipArea: Shape.bounds( new Bounds2( -50, -axisLength, axisLength, 50 ) )
       } ),
       outOfBoundsArrow
@@ -122,6 +133,27 @@ export default class ThirdLawGraph extends Node {
       const pointPosition = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.translation = pointPosition;
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
+
+      const targetOrbit = model.targetOrbitProperty.value;
+      if ( targetOrbit !== TargetOrbits.NONE ) {
+        const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis * 100 );
+        if ( targetOrbitPosition.x < axisLength ) {
+          targetOrbitPoint.translation = targetOrbitPosition;
+          targetOrbitPoint.visible = true;
+          targetOrbitOutOfBounds.visible = false;
+        }
+        else {
+          targetOrbitPoint.visible = false;
+          const tail = semiMajorAxisToViewPoint( maxSemiMajorAxis - 15 );
+          const tip = semiMajorAxisToViewPoint( maxSemiMajorAxis ).minus( tail ).setMagnitude( 20 );
+          targetOrbitOutOfBounds.translation = tail;
+          targetOrbitOutOfBounds.setTip( tip.x, tip.y );
+          targetOrbitOutOfBounds.visible = true;
+        }
+      }
+      else {
+        targetOrbitPoint.visible = false;
+      }
 
       if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
         if ( orbit.a < minVisitedAxis ) {
@@ -184,7 +216,8 @@ export default class ThirdLawGraph extends Node {
     Multilink.multilink(
       [
         model.selectedAxisPowerProperty,
-        model.selectedPeriodPowerProperty
+        model.selectedPeriodPowerProperty,
+        model.targetOrbitProperty
       ], orbitUpdated );
 
     orbit.changedEmitter.addListener( orbitUpdated );
