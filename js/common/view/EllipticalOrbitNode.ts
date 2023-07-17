@@ -28,6 +28,7 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import PeriodTrackerNode from './PeriodTrackerNode.js';
+import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -217,9 +218,12 @@ export default class EllipticalOrbitNode extends Path {
     const orbitDivisions: Circle[] = [];
     const areaPaths: Path[] = [];
     const areaValueProperties: NumberProperty[] = [];
+    const timeValueProperties: NumberProperty[] = [];
     const areaValueNumberDisplays: Node[] = [];
+    const timeValueNumberDisplays: Node[] = [];
 
     const areaValueRange = new Range( 0, 1 );
+    const timeValueRange = new Range( 0, 1 );
 
     for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
       orbitDivisions.push( new Circle( 4, {
@@ -233,12 +237,22 @@ export default class EllipticalOrbitNode extends Path {
         fill: KeplersLawsConstants.AREA_COLOR
       } ) );
       const areaValueProperty = new NumberProperty( 0 );
+      const timeValueProperty = new NumberProperty( 0 );
       areaValueProperties.push( areaValueProperty );
+      timeValueProperties.push( timeValueProperty );
       areaValueNumberDisplays.push( new NumberDisplay( areaValueProperty, areaValueRange, {
         scale: 0.7,
         opacity: 0.8,
         numberFormatter: ( value: number ) => {
           return Utils.toFixed( value, 2 ) + 'AU²';
+        }
+      } ) );
+      timeValueNumberDisplays.push( new NumberDisplay( timeValueProperty, timeValueRange, {
+        scale: 0.7,
+        opacity: 0.8,
+        backgroundFill: '#aff',
+        numberFormatter: ( value: number ) => {
+          return Utils.toFixed( value, 2 ) + ' ' + SolarSystemCommonStrings.units.yearsStringProperty.value;
         }
       } ) );
     }
@@ -252,9 +266,13 @@ export default class EllipticalOrbitNode extends Path {
     const areaValuesNode = new Node( {
       visibleProperty: DerivedProperty.and( [ model.isSecondLawProperty, model.areaValuesVisibleProperty ] )
     } );
+    const timeValuesNode = new Node( {
+      visibleProperty: DerivedProperty.and( [ model.isSecondLawProperty, model.timeValuesVisibleProperty ] )
+    } );
     orbitDivisions.forEach( node => { orbitDivisionsNode.addChild( node ); } );
     areaPaths.forEach( node => { areaPathsNode.addChild( node ); } );
     areaValueNumberDisplays.forEach( node => { areaValuesNode.addChild( node ); } );
+    timeValueNumberDisplays.forEach( node => { timeValuesNode.addChild( node ); } );
 
     // THIRD LAW: Period Tracker
     const periodTrackerNode = new PeriodTrackerNode( model );
@@ -280,6 +298,7 @@ export default class EllipticalOrbitNode extends Path {
     secondLawLayer.addChild( apoapsis );
     secondLawLayer.addChild( orbitDivisionsNode );
     secondLawLayer.addChild( areaValuesNode );
+    secondLawLayer.addChild( timeValuesNode );
 
     // Third Law: SemiMajor axis, and track
     thirdLawLayer.addChild( semiMajorAxisPath );
@@ -385,6 +404,7 @@ export default class EllipticalOrbitNode extends Path {
         orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
         areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
         areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
+        timeValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
 
         let numberDisplayPosition = new Vector2( 0, 0 );
         let numberDisplayScaling = 1;
@@ -407,15 +427,22 @@ export default class EllipticalOrbitNode extends Path {
             numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
           }
 
+          const dy = 15; // Spacing between area and period values
           numberDisplayScaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
-          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling );
+          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( -dy * Math.sin( -this.orbit.w ), -dy * Math.cos( -this.orbit.w ) );
+          timeValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( dy * Math.sin( -this.orbit.w ), dy * Math.cos( -this.orbit.w ) );
           areaValueNumberDisplays[ i ].rotation = this.orbit.w;
+          timeValueNumberDisplays[ i ].rotation = this.orbit.w;
 
           // Calculates the total area of the ellipse / the number of divisions
           const fullSegmentArea = this.orbit.segmentArea * SolarSystemCommonConstants.POSITION_MULTIPLIER * SolarSystemCommonConstants.POSITION_MULTIPLIER;
           areaValueProperties[ i ].value = area.alreadyEntered ?
                                            ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
                                                                : 0;
+          const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionProperty.value;
+          timeValueProperties[ i ].value = area.alreadyEntered ?
+                                              ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
+                                                                  : 0;
 
           // Activate area path
           areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );

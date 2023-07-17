@@ -83,12 +83,12 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly apoapsisVisibleProperty = new BooleanProperty( false );
   public readonly periapsisVisibleProperty = new BooleanProperty( false );
   public readonly areaValuesVisibleProperty = new BooleanProperty( false );
-  public readonly periodValuesVisibleProperty = new BooleanProperty( false );
+  public readonly timeValuesVisibleProperty = new BooleanProperty( false );
   public readonly secondLawVisibilities: BooleanProperty[] = [
     this.apoapsisVisibleProperty,
     this.periapsisVisibleProperty,
     this.areaValuesVisibleProperty,
-    this.periodValuesVisibleProperty
+    this.timeValuesVisibleProperty
   ];
 
   // Third law properties
