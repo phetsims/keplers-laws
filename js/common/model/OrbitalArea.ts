@@ -21,14 +21,14 @@ export default class OrbitalArea {
   public completion = 0; // Proportional completion of the orbital area, goes up to 1
   public sweptArea = 0; // Total area the section will have when completion = 1
   public insideProperty = new BooleanProperty( false );
-  public alreadyEntered = false;
+  public alreadyEntered = true;
   public active = false; // Whether the shown areas include this one
 
   public constructor( public readonly index: number ) {
     // noop
   }
 
-  public reset(): void {
+  public reset( eraseAreas = false ): void {
     this.dotPosition = Vector2.ZERO;
     this.startPosition = Vector2.ZERO;
     this.endPosition = Vector2.ZERO;
@@ -37,7 +37,7 @@ export default class OrbitalArea {
     this.completion = 0;
     this.sweptArea = 0;
     this.insideProperty.reset();
-    this.alreadyEntered = false;
+    this.alreadyEntered = !eraseAreas;
     this.active = false;
   }
 }

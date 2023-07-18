@@ -130,6 +130,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
         this.userControlledProperty.value = true;
+        this.engine.resetOrbitalAreas( isPlaying );
       }
     } );
 
@@ -161,7 +162,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.periodDivisionProperty.link( divisions => {
       this.engine.periodDivisions = divisions;
-      this.engine.resetOrbitalAreas();
+      this.engine.resetOrbitalAreas( this.isPlayingProperty.value );
     } );
 
     this.axisVisibleProperty.link( axisVisible => {
@@ -336,7 +337,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       colorIndex = colorPalette.length - 1;
     }
 
-    return new Color( colorPalette[ colorIndex ] ).setAlpha( area.alreadyEntered ? 1 : 0 );
+    return new Color( colorPalette[ colorIndex ] );
 
   }
 }

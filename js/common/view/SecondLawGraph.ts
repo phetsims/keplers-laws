@@ -68,7 +68,7 @@ export default class SecondLawGraph extends AccordionBox {
       tailWidth: 1
     } );
     const eraserButton = new EraserButton( {
-      listener: () => model.engine.resetOrbitalAreas(),
+      listener: () => model.engine.resetOrbitalAreas( true ),
       x: xAxisLength * 0.8,
       y: -yAxisLength,
       accessibleName: KeplersLawsStrings.eraserStringProperty
@@ -236,10 +236,15 @@ class AreasBarPlot extends Node {
       tickParentNode
     ];
 
-    model.engine.ranEmitter.addListener( () => {
+    const updateChart = () => {
       orbitChangedListener();
       updateYRange();
-    } );
+    };
+
+    model.engine.ranEmitter.addListener( updateChart );
+    model.engine.changedEmitter.addListener( updateChart );
+
+    updateChart();
   }
 }
 
