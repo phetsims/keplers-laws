@@ -260,6 +260,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     // This property is the exception as it should be set to true by default
     this.semiMajorAxisVisibleProperty.setInitialValue( true );
+    this.semiMajorAxisVisibleProperty.value = true;
   }
 
   public override reset(): void {
