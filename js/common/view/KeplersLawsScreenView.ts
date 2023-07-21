@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -27,8 +27,6 @@ import keplersLaws from '../../keplersLaws.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
 import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
-import Panel from '../../../../sun/js/Panel.js';
-import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
@@ -169,22 +167,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
 
-    this.keplersLawsControls = new KeplersLawsControls( model, options.tandem.createTandem( 'controlPanel' ) );
-
-    const targetOrbitsPanel = new Panel( new VBox( {
-      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
-      spacing: 5,
-      align: 'left',
-      children: [
-        new Text( 'Target Orbit:', SolarSystemCommonConstants.TEXT_OPTIONS ),
-        new TargetOrbitsComboBox( model, this.topLayer, {
-          enabledProperty: model.isSolarSystemProperty,
-          layoutOptions: {
-            align: 'center'
-          }
-        } )
-      ]
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    this.keplersLawsControls = new KeplersLawsControls( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,
@@ -210,7 +193,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
             spacing: 5,
             align: 'left',
             children: [
-              targetOrbitsPanel,
               this.keplersLawsControls
             ]
           } )

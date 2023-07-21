@@ -2,12 +2,16 @@
 
 
 /**
- * Visual representation of space object's property checkbox.
+ * Node that controls the extra visual elements of the sim. Designed as follows:
+ * - The top part contains is a VBox, in it:
+ *    - The target orbit selector.
+ *    - The orbital information box. i.e. the checkboxes for each specific law
+ * - The bottom part contains the checkboxes for the arrows and the information. Universal for all laws.
  *
  * @author Agustín Vallejo
  */
 
-import { HBox, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, HSeparator, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -21,9 +25,12 @@ import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 
-class KeplersLawsControls extends Panel {
-  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+class KeplersLawsControls extends VBox {
+  public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
     const stopwatchIcon = new StopwatchNode( new Stopwatch( {
       isVisible: true,
@@ -45,39 +52,67 @@ class KeplersLawsControls extends Panel {
 
     stopwatchIcon.setScaleMagnitude( 0.3 );
 
-    super( new VBox( {
-      children: [
-        new KeplersLawsOrbitalInformationBox( model, {
-          tandem: tandem
-        } ),
-        new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-        new SolarSystemCommonCheckbox(
-          model.alwaysCircularProperty,
-          new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
-          {
-            accessibleName: KeplersLawsStrings.circularOrbitStringProperty
-          } ),
-        new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-        ...createArrowsVisibilityCheckboxes( model, tandem ),
-        new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-        ...createVisibilityInformationCheckboxes( model, tandem, false ),
-        new SolarSystemCommonCheckbox(
-          model.stopwatchVisibleProperty,
-          new HBox( {
-            children: [
-              new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
-              stopwatchIcon
-            ]
-          } ),
-          {
-            accessibleName: KeplersLawsStrings.stopwatchStringProperty
-          } )
-      ],
+    const targetOrbitsPanel = new Panel( new VBox( {
+      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
       spacing: 5,
       align: 'left',
-      stretch: true,
-      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+      children: [
+        new Text( 'Target Orbit:', SolarSystemCommonConstants.TEXT_OPTIONS ),
+        new TargetOrbitsComboBox( model, topLayer, {
+          enabledProperty: model.isSolarSystemProperty,
+          layoutOptions: {
+            align: 'center'
+          }
+        } )
+      ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
+    // Creates a custom VBox with the provided and default options
+    const createVBox = ( children: Node[], providedOptions?: VBoxOptions ) => {
+      return new VBox( combineOptions<VBoxOptions>( {
+        children: children,
+        spacing: 5,
+        align: 'left',
+        stretch: true,
+        maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+      }, providedOptions ) );
+    };
+
+    super( {
+      children: [
+        // TODO: This box should have constant height so the next panel doesn't jump around, see https://github.com/phetsims/keplers-laws/issues/62
+        createVBox( [
+          targetOrbitsPanel,
+          new Panel( new KeplersLawsOrbitalInformationBox( model, {
+            tandem: tandem
+          } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS )
+        ] ),
+        new Panel( createVBox( [
+          new SolarSystemCommonCheckbox(
+            model.alwaysCircularProperty,
+            new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+            {
+              accessibleName: KeplersLawsStrings.circularOrbitStringProperty
+            } ),
+          new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
+          ...createArrowsVisibilityCheckboxes( model, tandem ),
+          new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
+          ...createVisibilityInformationCheckboxes( model, tandem, false ),
+          new SolarSystemCommonCheckbox(
+            model.stopwatchVisibleProperty,
+            new HBox( {
+              children: [
+                new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+                stopwatchIcon
+              ]
+            } ),
+            {
+              accessibleName: KeplersLawsStrings.stopwatchStringProperty
+            } )
+        ] ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS )
+      ],
+      spacing: 5
+    } );
   }
 }
 
