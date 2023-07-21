@@ -103,8 +103,6 @@ export default class SecondLawGraph extends AccordionBox {
         ]
       }
     ), options );
-
-    this.expandedProperty.value = false;
   }
 }
 
