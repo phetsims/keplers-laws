@@ -63,14 +63,16 @@ export default class ThirdLawGraph extends Node {
       tailWidth: 1
     } );
 
-    const maxSemiMajorAxis = 500;
+    const maxSemiMajorAxis = 200;
     const maxPeriod = model.engine.thirdLaw( maxSemiMajorAxis );
 
     const dataPoint = new Circle( 5, {
       fill: SolarSystemCommonColors.secondBodyColorProperty
     } );
     const targetOrbitPoint = new Circle( 5, {
-      fill: 'gray'
+      fill: 'gray',
+      x: undefined,
+      y: undefined
     } );
 
     const linePath = new Path( null, {

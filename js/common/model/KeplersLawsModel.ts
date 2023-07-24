@@ -100,6 +100,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   ];
 
   // Graph exponents
+  public readonly correctPowersSelectedProperty: ReadOnlyProperty<boolean>;
   public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
   public readonly selectedPeriodPowerProperty = new NumberProperty( 1 );
 
@@ -184,6 +185,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.poweredPeriodProperty = new DerivedProperty(
       [ this.selectedPeriodPowerProperty, this.engine.periodProperty ],
       ( power, period ) => Math.pow( period, power )
+    );
+    this.correctPowersSelectedProperty = new DerivedProperty(
+      [ this.selectedAxisPowerProperty, this.selectedPeriodPowerProperty ],
+      ( axisPower, periodPower ) => axisPower === 3 && periodPower === 2
     );
 
     this.alwaysCircularProperty.link( alwaysCircular => {

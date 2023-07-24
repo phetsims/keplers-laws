@@ -7,7 +7,7 @@
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { GridBox, RichText, VBox } from '../../../../scenery/js/imports.js';
+import { GridBox, HBox, Line, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -27,6 +27,7 @@ import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
@@ -77,8 +78,7 @@ class ThirdLawAccordionBox extends AccordionBox {
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ),
+    const semiMajorAxisPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, model.engine.allowedOrbitProperty ),
       value: new DerivedProperty(
         [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
@@ -88,8 +88,7 @@ class ThirdLawAccordionBox extends AccordionBox {
       )
     }, { tandem: Tandem.OPT_OUT } );
 
-    const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ),
+    const periodPatternStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, model.engine.allowedOrbitProperty ),
       value: new DerivedProperty(
         [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
@@ -99,10 +98,58 @@ class ThirdLawAccordionBox extends AccordionBox {
       )
     }, { tandem: Tandem.OPT_OUT } );
 
-    const semiMajorAxisNumberDisplay = new RichText( semiMajorAxisPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS );
-    const periodNumberDisplay = new RichText( periodPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS );
+    const fractionLeft = new VBox( {
+      spacing: 5,
+      children: [
+        new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), KeplersLawsConstants.TEXT_OPTIONS ),
+        new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
+        new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), KeplersLawsConstants.TEXT_OPTIONS )
+        ]
+    } );
 
-    // TODO: Add string a=infinite. Look at FirstLawPanels.ts to be consistent. Should we change that way?
+    const fractionRight = new VBox( {
+      spacing: 5,
+      children: [
+        new RichText( semiMajorAxisPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+        new Line( 0, 0, 70, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
+        new RichText( periodPatternStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+      ]
+    } );
+
+    const fractionResult = new RichText(
+      new DerivedProperty( [ model.poweredSemiMajorAxisProperty, model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
+        ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
+          return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis / poweredPeriod, 2 ) : '';
+        }
+    ), {
+        font: new PhetFont( { weight: 'bold', size: 25 } ),
+        fill: SolarSystemCommonColors.foregroundProperty,
+        lineWidth: 0.1
+      } );
+    model.correctPowersSelectedProperty.link( correct => {
+      fractionResult.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
+    } );
+
+    const periodOverSemiMajorAxisDisplay = new HBox( {
+      spacing: 5,
+      layoutOptions: {
+        align: 'left'
+      },
+      children: [
+        fractionLeft,
+        new Text( '=', KeplersLawsConstants.TEXT_OPTIONS ),
+        fractionRight,
+        new Text( '=', combineOptions<TextOptions>( { visibleProperty: model.engine.allowedOrbitProperty }, KeplersLawsConstants.TEXT_OPTIONS ) ),
+        fractionResult
+        ]
+    } );
+
+    const BUTTON_OPTIONS = {
+      font: new PhetFont( 16 ),
+      fill: 'black',
+      lineWidth: 0.1,
+      maxWidth: 20
+    };
 
     super( new VBox( {
       spacing: 10,
@@ -117,17 +164,17 @@ class ThirdLawAccordionBox extends AccordionBox {
                 {
                   value: 1,
                   labelContent: KeplersLawsStrings.symbols.periodStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, BUTTON_OPTIONS )
                 },
                 {
                   value: 2,
                   labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, BUTTON_OPTIONS )
                 },
                 {
                   value: 3,
                   labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, BUTTON_OPTIONS )
                 }
               ],
               {
@@ -141,17 +188,17 @@ class ThirdLawAccordionBox extends AccordionBox {
                 {
                   value: 1,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, BUTTON_OPTIONS )
                 },
                 {
                   value: 2,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, BUTTON_OPTIONS )
                 },
                 {
                   value: 3,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, BUTTON_OPTIONS )
                 }
               ],
               {
@@ -171,8 +218,7 @@ class ThirdLawAccordionBox extends AccordionBox {
           ],
           spacing: 10
         } ),
-        semiMajorAxisNumberDisplay,
-        periodNumberDisplay
+        periodOverSemiMajorAxisDisplay
       ]
     } ), options );
   }
