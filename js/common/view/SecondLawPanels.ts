@@ -50,10 +50,14 @@ class SecondLawPanel extends Panel {
 
     super( new VBox( {
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING,
+      align: 'left',
       children: [
         new Text( KeplersLawsStrings.area.periodDivisionStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
         new NumberSpinner( model.periodDivisionProperty, divisionsRangeProperty, {
           arrowsPosition: 'leftRight',
+          layoutOptions: {
+            align: 'center'
+          },
           accessibleName: KeplersLawsStrings.area.periodDivisionStringProperty
           } ),
         new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), {

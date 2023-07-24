@@ -159,6 +159,7 @@ class AreasBarPlot extends Node {
     } );
 
     // y tick marks
+    // This is the default spacing between normal ticks. It's big because area values are on this same order of magnitude.
     const YSpacing = 1e4;
 
     const entries = [
@@ -179,7 +180,9 @@ class AreasBarPlot extends Node {
 
     const tickParentNode = new Node();
 
+    // For every time the vertical scale of the Second Laws Graph needs to be updated
     const updateYRange = () => {
+      // Because period divisions go down to 2, the maximum height is a bit more (const UPSCALE) than half the total area
       modelYRange = new Range( 0, UPSCALE * this.model.engine.totalArea / 2 );
       chartTransform.setModelYRange( modelYRange );
 
@@ -200,6 +203,7 @@ class AreasBarPlot extends Node {
           children.push( tickMarkSet );
         }
       } );
+      // Compare if the created children set is the same already on the tickParentNode
       if ( !shallowCompare( tickParentNode.children, children ) ) {
         tickParentNode.children = children;
       }
