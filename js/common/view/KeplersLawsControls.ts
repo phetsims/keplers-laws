@@ -11,7 +11,7 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, HSeparator, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HSeparator, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -28,6 +28,8 @@ import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
@@ -57,7 +59,16 @@ class KeplersLawsControls extends VBox {
       spacing: 5,
       align: 'left',
       children: [
-        new Text( 'Target Orbit:', SolarSystemCommonConstants.TEXT_OPTIONS ),
+        new HBox( {
+          spacing: 10,
+          children: [
+            new Text( KeplersLawsStrings.targetOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
+            new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
+              stroke: 'gray',
+              lineWidth: 2
+            } )
+          ]
+        } ),
         new TargetOrbitsComboBox( model, topLayer, {
           enabledProperty: model.isSolarSystemProperty,
           layoutOptions: {

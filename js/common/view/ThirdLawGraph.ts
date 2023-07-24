@@ -120,7 +120,7 @@ export default class ThirdLawGraph extends Node {
       yAxisLabel,
       targetOrbitOutOfBounds,
       new Node( {
-        children: [ linePath, dataPoint, targetOrbitPoint ],
+        children: [ linePath, targetOrbitPoint, dataPoint ],
         clipArea: Shape.bounds( new Bounds2( -50, -axisLength, axisLength, 50 ) )
       } ),
       outOfBoundsArrow
