@@ -26,6 +26,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -159,7 +160,7 @@ class AreasBarPlot extends Node {
     } );
 
     // y tick marks
-    // This is the default spacing between normal ticks. It's big because area values are on this same order of magnitude.
+    // This is the default spacing between normal ticks. It's big because initial area values are on this same order of magnitude.
     const YSpacing = 1e4;
 
     const entries = [
@@ -177,8 +178,13 @@ class AreasBarPlot extends Node {
         // The tickmarks get a little smaller as you zoom out
         extent: 13 - 2 * Math.log10( entry.scale )
       } ) );
+    const yGridLineSets = entries.map( entry =>
+      new LimitedGridLineSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+        stroke: FOREGROUND_COLOR_PROPERTY
+      } ) );
 
     const tickParentNode = new Node();
+    const gridLineParentNode = new Node();
 
     // For every time the vertical scale of the Second Laws Graph needs to be updated
     const updateYRange = () => {
@@ -186,9 +192,11 @@ class AreasBarPlot extends Node {
       modelYRange = new Range( 0, UPSCALE * this.model.engine.totalArea / 2 );
       chartTransform.setModelYRange( modelYRange );
 
-      const children: TickMarkSet[] = [];
+      const tickChildren: TickMarkSet[] = [];
+      const gridLineChildren: GridLineSet[] = [];
       yTickMarkSets.forEach( ( tickMarkSet, index ) => {
         const distanceBetweenTickMarks = tickMarkSet.spacing / modelYRange.max;
+        const gridLineSet = yGridLineSets[ index ];
 
         // Within this range we apply a linear function for the transparency
         const UPPER = 0.09;
@@ -196,16 +204,21 @@ class AreasBarPlot extends Node {
         if ( distanceBetweenTickMarks < UPPER && distanceBetweenTickMarks > LOWER ) {
           const linear = Utils.linear( UPPER, LOWER, 1, 0, distanceBetweenTickMarks );
           tickMarkSet.opacity = linear;
-          children.push( tickMarkSet );
+          gridLineSet.opacity = linear / 2;
+          tickChildren.push( tickMarkSet );
+          gridLineChildren.push( gridLineSet );
         }
         else if ( distanceBetweenTickMarks > UPPER ) {
           tickMarkSet.opacity = 1;
-          children.push( tickMarkSet );
+          gridLineSet.opacity = 0.5;
+          tickChildren.push( tickMarkSet );
+          gridLineChildren.push( gridLineSet );
         }
       } );
       // Compare if the created children set is the same already on the tickParentNode
-      if ( !shallowCompare( tickParentNode.children, children ) ) {
-        tickParentNode.children = children;
+      if ( !shallowCompare( tickParentNode.children, tickChildren ) ) {
+        tickParentNode.children = tickChildren;
+        gridLineParentNode.children = gridLineChildren;
       }
     };
 
@@ -232,6 +245,7 @@ class AreasBarPlot extends Node {
 
 
     this.children = [
+      gridLineParentNode,
       chartRectangle,
       chartClip,
       XTickLabelSet,
@@ -251,6 +265,24 @@ class AreasBarPlot extends Node {
 }
 
 class LimitedTickMarkSet extends TickMarkSet {
+  public override spacing: number;
+
+  public constructor( chartTransform: ChartTransform, axisOrientation: Orientation, spacing: number,
+                      providedOptions?: TickMarkSetOptions ) {
+    super( chartTransform, axisOrientation, spacing, providedOptions );
+    this.spacing = spacing;
+  }
+
+  protected override update(): void {
+    const [ nMin, nMax ] = this.chartTransform.getSpacingBorders( this.axisOrientation, this.spacing, this.origin, this.clippingType );
+
+    if ( nMax - nMin < 100 ) {
+      super.update();
+    }
+  }
+}
+
+class LimitedGridLineSet extends GridLineSet {
   public override spacing: number;
 
   public constructor( chartTransform: ChartTransform, axisOrientation: Orientation, spacing: number,
