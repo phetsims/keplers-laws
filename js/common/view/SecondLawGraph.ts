@@ -195,7 +195,7 @@ class AreasBarPlot extends Node {
       const tickChildren: TickMarkSet[] = [];
       const gridLineChildren: GridLineSet[] = [];
       yTickMarkSets.forEach( ( tickMarkSet, index ) => {
-        const distanceBetweenTickMarks = tickMarkSet.spacing / modelYRange.max;
+        const distanceBetweenTickMarks = tickMarkSet.getSpacing() / modelYRange.max;
         const gridLineSet = yGridLineSets[ index ];
 
         // Within this range we apply a linear function for the transparency
@@ -265,16 +265,9 @@ class AreasBarPlot extends Node {
 }
 
 class LimitedTickMarkSet extends TickMarkSet {
-  public override spacing: number;
-
-  public constructor( chartTransform: ChartTransform, axisOrientation: Orientation, spacing: number,
-                      providedOptions?: TickMarkSetOptions ) {
-    super( chartTransform, axisOrientation, spacing, providedOptions );
-    this.spacing = spacing;
-  }
 
   protected override update(): void {
-    const [ nMin, nMax ] = this.chartTransform.getSpacingBorders( this.axisOrientation, this.spacing, this.origin, this.clippingType );
+    const [ nMin, nMax ] = this.getSpacingBorders( );
 
     if ( nMax - nMin < 100 ) {
       super.update();
