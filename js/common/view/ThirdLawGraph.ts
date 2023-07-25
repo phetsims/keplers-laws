@@ -83,13 +83,15 @@ export default class ThirdLawGraph extends Node {
       stroke: SolarSystemCommonColors.secondBodyColorProperty,
       fill: SolarSystemCommonColors.secondBodyColorProperty,
       lineWidth: 2,
-      boundsMethod: 'none'
+      boundsMethod: 'none',
+      visible: false
     } );
     const targetOrbitOutOfBounds = new ArrowNode( 0, 0, 1, 0, {
       stroke: 'gray',
       fill: 'gray',
       lineWidth: 2,
-      boundsMethod: 'none'
+      boundsMethod: 'none',
+      visible: false
     } );
 
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
