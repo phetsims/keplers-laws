@@ -110,6 +110,9 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   // The object that controls the blue path drawn when measuring the period
   public readonly periodTracker: PeriodTracker;
 
+  // Boolean for properties to know if the change is being toggled by a reset of the model
+  public resetting = false;
+
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
@@ -200,6 +203,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.forceScaleProperty.value = 0.5;
 
+    const zoomRange = new Range( 0.45, 1 );
     this.zoomLevelProperty = new NumberProperty( 2, {
       range: new Range( 1, 2 ),
       numberType: 'Integer'
@@ -208,22 +212,25 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     const zoomAnimationIn = new Animation( {
       property: animatedZoomProperty,
       duration: 0.5,
-      to: 0.45,
+      to: zoomRange.min,
       easing: Easing.CUBIC_IN_OUT
     } );
     const zoomAnimationOut = new Animation( {
       property: animatedZoomProperty,
       duration: 0.5,
-      to: 1,
+      to: zoomRange.max,
       easing: Easing.CUBIC_IN_OUT
     } );
 
     this.zoomLevelProperty.link( zoomLevel => {
-      if ( zoomLevel === 1 ) {
+      if ( zoomLevel === 1 && !this.resetting ) {
         zoomAnimationIn.start();
       }
-      else {
+      else if ( !this.resetting ) {
         zoomAnimationOut.start();
+      }
+      else {
+        animatedZoomProperty.value = zoomRange.max;
       }
     } );
 
@@ -270,6 +277,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   }
 
   public override reset(): void {
+    this.resetting = true;
     super.reset();
     this.selectedLawProperty.reset();
     this.periodDivisionProperty.reset();
@@ -285,6 +293,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.engine.update();
 
     this.loadBodyStates( this.defaultBodyState );
+    this.resetting = false;
   }
 
   public override update(): void {
