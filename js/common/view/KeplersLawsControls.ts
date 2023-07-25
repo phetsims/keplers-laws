@@ -12,7 +12,7 @@
  */
 
 import { HBox, HSeparator, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
@@ -92,12 +92,17 @@ class KeplersLawsControls extends VBox {
     super( {
       children: [
         // TODO: This box should have constant height so the next panel doesn't jump around, see https://github.com/phetsims/keplers-laws/issues/62
+        // Target orbit and individual laws checkboxes
         createVBox( [
           targetOrbitsPanel,
           new Panel( new KeplersLawsOrbitalInformationBox( model, {
             tandem: tandem
-          } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS )
+          } ), combineOptions<PanelOptions>( {
+            minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+          }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
         ] ),
+
+        // Common checkboxes
         new Panel( createVBox( [
           new SolarSystemCommonCheckbox(
             model.alwaysCircularProperty,
