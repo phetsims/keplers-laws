@@ -30,6 +30,7 @@ import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
+import LawMode from '../model/LawMode.js';
 
 // constants
 const MARGIN = 10;
@@ -167,7 +168,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
 
+    // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
+    model.selectedLawProperty.value = LawMode.FIRST_LAW;
     this.keplersLawsControls = new KeplersLawsControls( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
+    model.selectedLawProperty.reset();
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,

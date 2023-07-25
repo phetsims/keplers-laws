@@ -90,8 +90,9 @@ class KeplersLawsControls extends VBox {
     };
 
     super( {
+      resize: false,
+      justify: 'spaceBetween',
       children: [
-        // TODO: This box should have constant height so the next panel doesn't jump around, see https://github.com/phetsims/keplers-laws/issues/62
         // Target orbit and individual laws checkboxes
         createVBox( [
           targetOrbitsPanel,
@@ -100,7 +101,7 @@ class KeplersLawsControls extends VBox {
           } ), combineOptions<PanelOptions>( {
             minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
           }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
-        ] ),
+        ], { justify: 'top' } ),
 
         // Common checkboxes
         new Panel( createVBox( [
@@ -125,7 +126,9 @@ class KeplersLawsControls extends VBox {
             {
               accessibleName: KeplersLawsStrings.stopwatchStringProperty
             } )
-        ] ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS )
+        ] ), combineOptions<PanelOptions>( {
+          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+        }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
       ],
       spacing: 5
     } );
