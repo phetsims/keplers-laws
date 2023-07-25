@@ -204,7 +204,7 @@ class AreasBarPlot extends Node {
         if ( distanceBetweenTickMarks < UPPER && distanceBetweenTickMarks > LOWER ) {
           const linear = Utils.linear( UPPER, LOWER, 1, 0, distanceBetweenTickMarks );
           tickMarkSet.opacity = linear;
-          gridLineSet.opacity = linear / 2;
+          gridLineSet.opacity = Math.pow( linear, 2 ) / 2;
           tickChildren.push( tickMarkSet );
           gridLineChildren.push( gridLineSet );
         }
