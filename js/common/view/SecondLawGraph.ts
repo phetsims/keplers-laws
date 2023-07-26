@@ -19,7 +19,7 @@ import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
 import BarPlot from '../../../../bamboo/js/BarPlot.js';
 import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
 import Orientation from '../../../../phet-core/js/Orientation.js';
-import TickMarkSet, { TickMarkSetOptions } from '../../../../bamboo/js/TickMarkSet.js';
+import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import keplersLaws from '../../keplersLaws.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -267,27 +267,22 @@ class AreasBarPlot extends Node {
 class LimitedTickMarkSet extends TickMarkSet {
 
   protected override update(): void {
-    const [ nMin, nMax ] = this.getSpacingBorders( );
+    const spacingBorders = this.getSpacingBorders( );
 
-    if ( nMax - nMin < 100 ) {
+    // Only update tick sets which have less than 100 ticks
+    if ( spacingBorders.max - spacingBorders.min < 100 ) {
       super.update();
     }
   }
 }
 
 class LimitedGridLineSet extends GridLineSet {
-  public override spacing: number;
-
-  public constructor( chartTransform: ChartTransform, axisOrientation: Orientation, spacing: number,
-                      providedOptions?: TickMarkSetOptions ) {
-    super( chartTransform, axisOrientation, spacing, providedOptions );
-    this.spacing = spacing;
-  }
 
   protected override update(): void {
-    const [ nMin, nMax ] = this.chartTransform.getSpacingBorders( this.axisOrientation, this.spacing, this.origin, this.clippingType );
+    const spacingBorders = this.getSpacingBorders( );
 
-    if ( nMax - nMin < 100 ) {
+    // Only update grid line sets which have less than 100 lines
+    if ( spacingBorders.max - spacingBorders.min < 100 ) {
       super.update();
     }
   }
