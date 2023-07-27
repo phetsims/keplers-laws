@@ -145,7 +145,7 @@ class ThirdLawAccordionBox extends AccordionBox {
     } );
 
     const BUTTON_OPTIONS = {
-      font: new PhetFont( 16 ),
+      font: new PhetFont( { size: 18, weight: 'bold' } ),
       fill: 'black',
       lineWidth: 0.1,
       maxWidth: 20
