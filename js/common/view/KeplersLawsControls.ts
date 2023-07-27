@@ -90,8 +90,6 @@ class KeplersLawsControls extends VBox {
     };
 
     super( {
-      resize: false,
-      justify: 'spaceBetween',
       children: [
         // Target orbit and individual laws checkboxes
         createVBox( [

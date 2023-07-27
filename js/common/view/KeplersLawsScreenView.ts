@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
@@ -30,7 +30,6 @@ import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import LawMode from '../model/LawMode.js';
 
 // constants
 const MARGIN = 10;
@@ -169,14 +168,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    model.selectedLawProperty.value = LawMode.FIRST_LAW;
     this.keplersLawsControls = new KeplersLawsControls( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
-    model.selectedLawProperty.reset();
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,
       {
-        orientation: 'vertical',
+        orientation: 'horizontal',
         spacing: 5,
         magnifyingGlassNodeOptions: {
           glassRadius: 8
@@ -193,13 +190,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         align: 'top',
         children: [
           zoomButtons,
-          new VBox( {
-            spacing: 5,
-            align: 'left',
-            children: [
-              this.keplersLawsControls
-            ]
-          } )
+          this.keplersLawsControls
         ]
       } ),
       {

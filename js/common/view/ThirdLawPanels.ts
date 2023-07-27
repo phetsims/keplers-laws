@@ -152,9 +152,10 @@ class ThirdLawAccordionBox extends AccordionBox {
     };
 
     super( new VBox( {
-      spacing: 10,
+      spacing: 20,
       align: 'left',
       children: [
+        periodOverSemiMajorAxisDisplay,
         new GridBox( {
           children: [
             // Period power buttons
@@ -217,8 +218,7 @@ class ThirdLawAccordionBox extends AccordionBox {
             } )
           ],
           spacing: 10
-        } ),
-        periodOverSemiMajorAxisDisplay
+        } )
       ]
     } ), options );
   }
