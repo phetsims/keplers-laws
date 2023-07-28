@@ -128,7 +128,7 @@ class KeplersLawsControls extends VBox {
           maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
         }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
       ],
-      spacing: 5
+      spacing: SolarSystemCommonConstants.CHECKBOX_SPACING
     } );
   }
 }
