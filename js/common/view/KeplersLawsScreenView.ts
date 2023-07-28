@@ -49,6 +49,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly thirdLawPanel: Node;
   private readonly lawsButtons?: Node;
 
+  private readonly playBodySounds: () => void;
+
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
@@ -104,6 +106,15 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     } );
     this.bodiesLayer.addChild( sunNode );
     this.bodiesLayer.addChild( bodyNode );
+
+    this.playBodySounds = () => {
+      if ( this.model.isPlayingProperty.value ) {
+        bodyNode.playSound();
+      }
+      else {
+        bodyNode.stopSound();
+      }
+    };
 
     // Draggable velocity vector
     this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
@@ -303,6 +314,11 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         }
       ] : [] )
     ];
+  }
+
+  public override step( dt: number ): void {
+    super.step( dt );
+    this.playBodySounds();
   }
 }
 
