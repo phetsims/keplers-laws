@@ -244,7 +244,7 @@ export default class EllipticalOrbitNode extends Path {
         scale: 0.7,
         opacity: 0.8,
         numberFormatter: ( value: number ) => {
-          return Utils.toFixed( value, 2 ) + 'AU²';
+          return Utils.toFixed( value, 2 ) + ' AU²';
         }
       } ) );
       timeValueNumberDisplays.push( new NumberDisplay( timeValueProperty, timeValueRange, {
