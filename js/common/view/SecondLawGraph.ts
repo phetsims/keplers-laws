@@ -129,6 +129,7 @@ class AreasBarPlot extends Node {
     const chartRectangle = new ChartRectangle( chartTransform );
 
     const barPlot = new BarPlot( chartTransform, dataSet );
+    barPlot.barWidth = 20;
 
     const orbitChangedListener = () => {
       const activeAreas = model.engine.orbitalAreas.filter( area => area.active );
@@ -226,7 +227,6 @@ class AreasBarPlot extends Node {
     this.model.periodDivisionProperty.link( periodDivision => {
       modelXRange = new Range( -1, periodDivision );
       chartTransform.setModelXRange( modelXRange );
-      barPlot.barWidth = 15 * ( KeplersLawsConstants.MAX_ORBITAL_DIVISIONS / periodDivision );
       barPlot.update();
       XTickLabelSet.setCreateLabel( ( value: number ) => {
         return ( value >= 0 && value < periodDivision ) ?
