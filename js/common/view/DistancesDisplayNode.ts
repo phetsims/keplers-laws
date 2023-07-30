@@ -156,7 +156,8 @@ export default class DistancesDisplayNode extends VBox {
     Multilink.multilink( [
       KeplersLawsStrings.symbols.radiusStringProperty,
       KeplersLawsStrings.symbols.distance1StringProperty,
-      KeplersLawsStrings.symbols.distance2StringProperty
+      KeplersLawsStrings.symbols.distance2StringProperty,
+      model.zoomProperty
     ], updateDistances );
 
     this.orbit.ranEmitter.addListener( updateDistances );
