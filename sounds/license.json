@@ -1,5 +1,5 @@
 {
-  "KeplersLaw_BodiesCollide.mp3": {
+  "BodiesCollide.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_PeriodDivisionSelection-2.mp3": {
+  "PeriodDivisionSelection_2.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_PeriodDivisionSelection-4.mp3": {
+  "PeriodDivisionSelection_4.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -23,7 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_PeriodDivisionSelection-6.mp3": {
+  "PeriodDivisionSelection_6.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -31,7 +31,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_ObjectWillEscapetheSystem.mp3": {
+  "ObjectWillEscapetheSystem.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -39,7 +39,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_PeriodDivisionSelection-3.mp3": {
+  "PeriodDivisionSelection_3.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -47,7 +47,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_PeriodDivisionSelection-5.mp3": {
+  "PeriodDivisionSelection_5.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],
@@ -55,7 +55,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Ashton Morris (PhET Interactive Simulations)"
   },
-  "KeplersLaw_Success.mp3": {
+  "Success.mp3": {
     "text": [
       "Copyright 2023 University of Colorado Boulder"
     ],

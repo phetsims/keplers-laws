@@ -21,6 +21,8 @@ import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/S
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Range from '../../../../dot/js/Range.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import nullSoundPlayer from '../../../../tambo/js/shared-sound-players/nullSoundPlayer.js';
+import PeriodDivisionSoundManager from './PeriodDivisionSoundManager.js';
 
 const divisionsRangeProperty = new TinyProperty( new Range(
   KeplersLawsConstants.MIN_ORBITAL_DIVISIONS,
@@ -58,6 +60,7 @@ class SecondLawPanel extends Panel {
           layoutOptions: {
             align: 'center'
           },
+          arrowsSoundPlayer: nullSoundPlayer,
           accessibleName: KeplersLawsStrings.area.periodDivisionStringProperty
           } ),
         new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, KeplersLawsConstants.TEXT_OPTIONS ), {
@@ -68,6 +71,12 @@ class SecondLawPanel extends Panel {
         } )
       ]
     } ), options );
+
+    const periodDivisionSounds = new PeriodDivisionSoundManager();
+
+    model.periodDivisionProperty.lazyLink( periodDivision => {
+      periodDivisionSounds.playPeriodDivisionSound( periodDivision );
+    } );
   }
 }
 
