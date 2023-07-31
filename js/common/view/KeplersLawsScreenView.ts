@@ -33,6 +33,9 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
 import Success_mp3 from '../../../sounds/Success_mp3.js';
+import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
+import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
+import OrbitTypes from '../model/OrbitTypes.js';
 
 // constants
 const MARGIN = 10;
@@ -119,15 +122,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     };
 
-    const correctPowersSound = new SoundClip( Success_mp3 );
-    soundManager.addSoundGenerator( correctPowersSound );
-
-    model.correctPowersSelectedProperty.lazyLink( correct => {
-      if ( correct ) {
-        correctPowersSound.play();
-      }
-    } );
-
     // Draggable velocity vector
     this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
       minimumMagnitude: 30,
@@ -163,6 +157,28 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
     this.bottomLayer.addChild( ellipticalOrbitNode );
     this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
+
+    // Sound ----------------------------------------------------------------------------------
+    const crashSound = new SoundClip( BodiesCollide_mp3 );
+    const escapeSound = new SoundClip( ObjectWillEscape_mp3 );
+    const correctPowersSound = new SoundClip( Success_mp3 );
+    soundManager.addSoundGenerator( crashSound );
+    soundManager.addSoundGenerator( escapeSound );
+    soundManager.addSoundGenerator( correctPowersSound );
+
+    model.correctPowersSelectedProperty.lazyLink( correct => {
+      if ( correct ) {
+        correctPowersSound.play();
+      }
+    } );
+    model.engine.orbitTypeProperty.lazyLink( orbitType => {
+      if ( orbitType === OrbitTypes.CRASH_ORBIT ) {
+        crashSound.play();
+      }
+      else if ( orbitType === OrbitTypes.ESCAPE_ORBIT ) {
+        escapeSound.play();
+      }
+    } );
 
     // UI ----------------------------------------------------------------------------------
     // Second and Third Law Accordion Boxes and Zoom Buttons
