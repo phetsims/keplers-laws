@@ -13,6 +13,7 @@ import PeriodDivisionSelection_3_mp3 from '../../../sounds/PeriodDivisionSelecti
 import PeriodDivisionSelection_4_mp3 from '../../../sounds/PeriodDivisionSelection_4_mp3.js';
 import PeriodDivisionSelection_5_mp3 from '../../../sounds/PeriodDivisionSelection_5_mp3.js';
 import PeriodDivisionSelection_6_mp3 from '../../../sounds/PeriodDivisionSelection_6_mp3.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
 const periodDivisionSounds = [
   PeriodDivisionSelection_2_mp3,
@@ -25,7 +26,9 @@ const periodDivisionSounds = [
 export default class PeriodDivisionSoundManager {
   private readonly periodDivisionSoundClips: SoundClip[];
   public constructor() {
-    this.periodDivisionSoundClips = periodDivisionSounds.map( sound => new SoundClip( sound ) );
+    this.periodDivisionSoundClips = periodDivisionSounds.map( sound => new SoundClip( sound, {
+      initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 3
+    } ) );
 
     this.periodDivisionSoundClips.forEach( sound => soundManager.addSoundGenerator( sound ) );
   }

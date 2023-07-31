@@ -30,6 +30,9 @@ import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
+import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
+import soundManager from '../../../../tambo/js/soundManager.js';
+import Success_mp3 from '../../../sounds/Success_mp3.js';
 
 // constants
 const MARGIN = 10;
@@ -115,6 +118,15 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         bodyNode.stopSound();
       }
     };
+
+    const correctPowersSound = new SoundClip( Success_mp3 );
+    soundManager.addSoundGenerator( correctPowersSound );
+
+    model.correctPowersSelectedProperty.lazyLink( correct => {
+      if ( correct ) {
+        correctPowersSound.play();
+      }
+    } );
 
     // Draggable velocity vector
     this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
