@@ -32,7 +32,7 @@ export default class ThirdLawGraph extends Node {
 
     super( options );
 
-    const axisLength = 120;
+    const axisLength = 150;
 
     const semiMajorAxisToViewPoint = ( semiMajorAxis: number ) => {
       const period = model.engine.thirdLaw( semiMajorAxis );
@@ -180,7 +180,7 @@ export default class ThirdLawGraph extends Node {
       const dx = 5;
 
       // a is the semimajor axis
-      for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 5 ) {
+      for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
         const pointToDraw = semiMajorAxisToViewPoint( a );
         shape.lineToPoint( pointToDraw );
 

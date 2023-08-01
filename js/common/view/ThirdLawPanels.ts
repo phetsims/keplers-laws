@@ -105,22 +105,18 @@ class ThirdLawAccordionBox extends AccordionBox {
     } );
 
     const unitsOptions = { font: new PhetFont( { size: 12 } ), fill: SolarSystemCommonColors.foregroundProperty };
-    const unitsFraction = new VBox( {
-      spacing: 2,
-      children: [
-        new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
-        new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),
-        new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
+    const createUnitsFraction = () => {
+      return new VBox( {
+        spacing: 2,
+        visible: false,
+        // visibleProperty: model.engine.allowedOrbitProperty,
+        children: [
+          new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
+          new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),
+          new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
         ]
-    } );
-    const unitsFraction2 = new VBox( {
-      spacing: 2,
-      children: [
-        new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
-        new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),
-        new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
-      ]
-    } );
+      } );
+    };
 
     const fractionResult = new RichText(
       new DerivedProperty( [ model.poweredSemiMajorAxisProperty, model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
@@ -145,10 +141,10 @@ class ThirdLawAccordionBox extends AccordionBox {
         fractionLeft,
         new Text( '=', KeplersLawsConstants.TEXT_OPTIONS ),
         fractionRight,
-        unitsFraction,
+        createUnitsFraction(),
         new Text( '=', combineOptions<TextOptions>( { visibleProperty: model.engine.allowedOrbitProperty }, KeplersLawsConstants.TEXT_OPTIONS ) ),
         fractionResult,
-        unitsFraction2
+        createUnitsFraction()
       ]
     } );
 
