@@ -75,7 +75,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
   public orbitalAreas: OrbitalArea[] = [];
-  public updateAllowed = true;
+  public updateAllowedProperty = new BooleanProperty( false );
   public retrograde = false;
   public alwaysCircles = false;
   public isCircularProperty = new BooleanProperty( true );
@@ -164,7 +164,7 @@ export default class EllipticalOrbitEngine extends Engine {
         userControlledVelocity: boolean,
         userControlledMass: boolean
       ) => {
-        this.updateAllowed = userControlledPosition || userControlledVelocity || userControlledMass;
+        this.updateAllowedProperty.value = userControlledPosition || userControlledVelocity || userControlledMass;
         this.resetOrbitalAreas();
         this.update();
       } );
@@ -182,7 +182,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public override run( dt: number ): void {
     // Prevent the orbit from updating if the body is orbiting
-    this.updateAllowed = false;
+    this.updateAllowedProperty.value = false;
 
     // Calculate the new position and velocity of the body
     this.M += dt * this.W;

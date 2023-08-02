@@ -29,6 +29,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import PeriodTrackerNode from './PeriodTrackerNode.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
+import OrbitalSound from './OrbitalSound.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -48,6 +49,18 @@ export default class EllipticalOrbitNode extends Path {
     } );
 
     this.orbit = model.engine;
+
+    const orbitalSound = new OrbitalSound( this.orbit.semiMajorAxisProperty, this.orbit.eccentricityProperty );
+
+    Multilink.multilink( [ this.orbit.allowedOrbitProperty, this.orbit.updateAllowedProperty ],
+      ( orbitAllowed, updateAllowed ) => {
+        if ( orbitAllowed && updateAllowed ) {
+          orbitalSound.playOrbitalSound();
+        }
+        else {
+          orbitalSound.stopOrbitalSound();
+        }
+      } );
 
     // Top layer is a field because it has to be accessed from the ScreenView and added as a child there
     this.topLayer = new Node( { visibleProperty: this.orbit.allowedOrbitProperty } );

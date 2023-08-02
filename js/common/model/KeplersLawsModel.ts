@@ -288,7 +288,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.targetOrbitProperty.reset();
 
     this.hardVisibilityReset();
-    this.engine.updateAllowed = true;
+    this.engine.updateAllowedProperty.value = true;
     this.engine.reset();
     this.engine.update();
 
@@ -297,7 +297,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   }
 
   public override update(): void {
-    if ( this.engine.updateAllowed ) {
+    if ( this.engine.updateAllowedProperty.value ) {
       this.engine.update();
     }
   }
