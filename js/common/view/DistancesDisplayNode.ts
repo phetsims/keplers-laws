@@ -22,17 +22,18 @@ import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsColors from '../../KeplersLawsColors.js';
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
-  stroke: '#ccb285',
-  fill: '#ccb285'
+  stroke: KeplersLawsColors.distancesColorProperty,
+  fill: KeplersLawsColors.distancesColorProperty
 } );
 
 export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
-  stroke: KeplersLawsConstants.AXES_COLOR,
-  fill: KeplersLawsConstants.AXES_COLOR
+  stroke: KeplersLawsColors.semimajorAxisColorProperty,
+  fill: KeplersLawsColors.semimajorAxisColorProperty
 } );
 
 export const STRING_ARROW_OPTIONS = {
@@ -46,8 +47,8 @@ export const STRING_ARROW_OPTIONS = {
 };
 
 export const MAJOR_AXIS_ARROW_OPTIONS = {
-  stroke: KeplersLawsConstants.AXES_COLOR,
-  fill: KeplersLawsConstants.AXES_COLOR,
+  stroke: KeplersLawsColors.semimajorAxisColorProperty,
+  fill: KeplersLawsColors.semimajorAxisColorProperty,
   headHeight: 10,
   headWidth: 10,
   headLineWidth: 3,

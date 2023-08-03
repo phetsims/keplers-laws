@@ -131,8 +131,8 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       createCheckbox(
         model.semiMajorAxisVisibleProperty,
         KeplersLawsStrings.graph.aStringProperty,
-        'semiMajorAxisVisibleCheckbox'
-        // axisIconImageNode TODO
+        'semiMajorAxisVisibleCheckbox',
+        FirstLawCheckboxIcons.getSemimajorAxisCheckboxIcon()
       ),
       createCheckbox(
         model.periodVisibleProperty,

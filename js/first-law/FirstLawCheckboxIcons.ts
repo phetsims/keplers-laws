@@ -12,6 +12,7 @@ import { Path, Node } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 // constants
 const ICON_SCALE = 1.2;
@@ -19,6 +20,10 @@ const semiMajorAxis = 9;
 const semiMinorAxis = 5;
 const focalDistance = 5;
 const fociRadius = 1.5;
+
+const axisShape = new Shape().moveTo( 0, 0 ).ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 );
+axisShape.moveTo( -semiMajorAxis, 0 ).lineTo( semiMajorAxis, 0 );
+axisShape.moveTo( 0, -semiMinorAxis ).lineTo( 0, semiMinorAxis );
 
 export default class FirstLawCheckboxIcons {
   public constructor() {
@@ -63,8 +68,11 @@ export default class FirstLawCheckboxIcons {
     return new Node( {
       scale: ICON_SCALE,
       children: [
-        new Path( new Shape().moveTo( 0, -semiMinorAxis ).lineTo( 0, 0 ).lineTo( semiMajorAxis, 0 ), {
-          stroke: KeplersLawsConstants.AXES_COLOR
+        new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
+          stroke: KeplersLawsColors.semimajorAxisColorProperty
+        } ),
+        new Path( new Shape().moveTo( 0, -semiMinorAxis ).lineTo( 0, 0 ), {
+          stroke: KeplersLawsColors.semiminorAxisColorProperty
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
             stroke: SolarSystemCommonColors.foregroundProperty
@@ -74,15 +82,31 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
+  public static getSemimajorAxisCheckboxIcon(): Node {
+    return new Node( {
+      scale: ICON_SCALE,
+      children: [
+        new Path(
+          axisShape, {
+            stroke: SolarSystemCommonColors.foregroundProperty,
+            lineWidth: 1
+          } ),
+        new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
+          stroke: KeplersLawsColors.semimajorAxisColorProperty
+        } )
+      ]
+    } );
+  }
+
   public static getEccentricityCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
         new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
-          stroke: KeplersLawsConstants.AXES_COLOR
+          stroke: KeplersLawsColors.semimajorAxisColorProperty
         } ),
         new Path( new Shape().moveTo( -focalDistance, 0 ).lineTo( 0, 0 ), {
-          stroke: SolarSystemCommonColors.thirdBodyColorProperty
+          stroke: KeplersLawsColors.focalDistanceColorProperty
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
             stroke: SolarSystemCommonColors.foregroundProperty
@@ -96,9 +120,6 @@ export default class FirstLawCheckboxIcons {
   }
 
   public static getAxisCheckboxIcon(): Node {
-    const axisShape = new Shape().moveTo( 0, 0 ).ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 );
-    axisShape.moveTo( -semiMajorAxis, 0 ).lineTo( semiMajorAxis, 0 );
-    axisShape.moveTo( 0, -semiMinorAxis ).lineTo( 0, semiMinorAxis );
 
     return new Node( {
       scale: ICON_SCALE,

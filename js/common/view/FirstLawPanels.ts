@@ -7,7 +7,7 @@
  */
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { HBox, Line, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Line, RichText, Text, TextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import Panel from '../../../../sun/js/Panel.js';
 import FirstLawGraph from './FirstLawGraph.js';
@@ -21,6 +21,9 @@ import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import KeplersLawsColors from '../../KeplersLawsColors.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -48,12 +51,12 @@ class EccentricityPanel extends Panel {
               children: [
                 new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
                   KeplersLawsConstants.TITLE_OPTIONS, {
-                    fill: SolarSystemCommonColors.thirdBodyColorProperty
+                    fill: KeplersLawsColors.focalDistanceColorProperty
                   } ) ),
                 new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
                 new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
                   KeplersLawsConstants.TITLE_OPTIONS, {
-                    fill: KeplersLawsConstants.AXES_COLOR
+                    fill: KeplersLawsColors.semimajorAxisColorProperty
                   } ) )
               ]
             } )
@@ -78,40 +81,67 @@ class ValuesPanel extends Panel {
         return allowedOrbit ? AUString : '';
       } );
 
-    const semiMajorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+    const semiMajorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMajorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : undefinedMessage;
       } )
     }, { tandem: Tandem.OPT_OUT } );
-    const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+    const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMinorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : undefinedMessage;
       } )
     }, { tandem: Tandem.OPT_OUT } );
-    const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.textEqualsValueUnitsStringProperty, {
-      text: KeplersLawsStrings.symbols.focalDistanceStringProperty,
+    const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( focalDistance, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
       } )
     }, { tandem: Tandem.OPT_OUT } );
 
+    const createCustomEquation = ( symbol: TReadOnlyProperty<string>, text: TReadOnlyProperty<string>, symbolColor: TPaint ) => {
+      return [
+        new RichText( symbol, {
+          fill: symbolColor,
+          font: new PhetFont( { size: 18, weight: 'bold' } ),
+          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+        } ),
+        new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+        new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
+      ];
+    };
+
     super( new VBox( {
       align: 'left',
       children: [
-        new RichText( semiMajorAxisStringProperty, combineOptions<TextOptions>( {
-          visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
-        }, KeplersLawsConstants.TEXT_OPTIONS ) ),
-        new RichText( semiMinorAxisStringProperty, combineOptions<TextOptions>( {
-          visibleProperty: model.semiaxisVisibleProperty
-        }, KeplersLawsConstants.TEXT_OPTIONS ) ),
-        new RichText( focalDistanceStringProperty, combineOptions<TextOptions>( {
-          visibleProperty: model.eccentricityVisibleProperty
-        }, KeplersLawsConstants.TEXT_OPTIONS ) )
+        new HBox( {
+          spacing: 2,
+          visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] ),
+          children: createCustomEquation(
+            KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+            semiMajorAxisStringProperty,
+            KeplersLawsColors.semimajorAxisColorProperty
+          )
+        } ),
+        new HBox( {
+          spacing: 2,
+          visibleProperty: model.semiaxisVisibleProperty,
+          children: createCustomEquation(
+            KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+            semiMinorAxisStringProperty,
+            KeplersLawsColors.semiminorAxisColorProperty
+          )
+        } ),
+        new HBox( {
+          spacing: 2,
+          visibleProperty: model.eccentricityVisibleProperty,
+          children: createCustomEquation(
+            KeplersLawsStrings.symbols.focalDistanceStringProperty,
+            focalDistanceStringProperty,
+            KeplersLawsColors.focalDistanceColorProperty
+          )
+        } )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
   }

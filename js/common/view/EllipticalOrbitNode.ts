@@ -30,6 +30,7 @@ import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import PeriodTrackerNode from './PeriodTrackerNode.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import OrbitalSound from './OrbitalSound.js';
+import KeplersLawsColors from '../../KeplersLawsColors.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -88,16 +89,16 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: semiMajorAxisVisibleProperty
     }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
-      stroke: KeplersLawsConstants.AXES_COLOR,
-      fill: KeplersLawsConstants.AXES_COLOR
+      stroke: KeplersLawsColors.semimajorAxisColorProperty,
+      fill: KeplersLawsColors.semimajorAxisColorProperty
     } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: model.semiaxisVisibleProperty
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: KeplersLawsConstants.AXES_COLOR,
-        fill: KeplersLawsConstants.AXES_COLOR
+        stroke: KeplersLawsColors.semiminorAxisColorProperty,
+        fill: KeplersLawsColors.semiminorAxisColorProperty
       } ) );
     const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
       {
@@ -112,8 +113,8 @@ export default class EllipticalOrbitNode extends Path {
         )
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: SolarSystemCommonColors.thirdBodyColorProperty,
-        fill: SolarSystemCommonColors.thirdBodyColorProperty
+        stroke: KeplersLawsColors.focalDistanceColorProperty,
+        fill: KeplersLawsColors.focalDistanceColorProperty
       } ) );
     const stringLabelNode1 = new RichText( 'd<sub>1', combineOptions<TextOptions>(
       {
@@ -128,8 +129,8 @@ export default class EllipticalOrbitNode extends Path {
         )
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
-        fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
+        stroke: KeplersLawsColors.distancesColorProperty,
+        fill: KeplersLawsColors.distancesColorProperty
       } ) );
     const stringLabelNode2 = new RichText( 'd<sub>2', combineOptions<TextOptions>(
       {
@@ -144,8 +145,8 @@ export default class EllipticalOrbitNode extends Path {
         )
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
-        fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
+        stroke: KeplersLawsColors.distancesColorProperty,
+        fill: KeplersLawsColors.distancesColorProperty
       } ) );
     const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty, combineOptions<TextOptions>( {
       visibleProperty: new DerivedProperty(
@@ -159,8 +160,8 @@ export default class EllipticalOrbitNode extends Path {
       )
     }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
-      stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
-      fill: KeplersLawsConstants.DISTANCE_LABEL_COLOR
+      stroke: KeplersLawsColors.distancesColorProperty,
+      fill: KeplersLawsColors.distancesColorProperty
     } ) );
 
     // FIRST LAW: Axis, foci, and Ellipse definition lines
@@ -175,17 +176,17 @@ export default class EllipticalOrbitNode extends Path {
       )
     } );
     const semiMajorAxisPath = new Path( null, {
-      stroke: KeplersLawsConstants.AXES_COLOR,
+      stroke: KeplersLawsColors.semimajorAxisColorProperty,
       lineWidth: 3,
       visibleProperty: semiMajorAxisVisibleProperty
     } );
     const semiMinorAxisPath = new Path( null, {
-      stroke: KeplersLawsConstants.AXES_COLOR,
+      stroke: KeplersLawsColors.semiminorAxisColorProperty,
       lineWidth: 3,
       visibleProperty: model.semiaxisVisibleProperty
     } );
     const focalDistancePath = new Path( null, {
-      stroke: SolarSystemCommonColors.thirdBodyColorProperty,
+      stroke: KeplersLawsColors.focalDistanceColorProperty,
       lineWidth: 3,
       visibleProperty: model.eccentricityVisibleProperty
     } );
@@ -381,7 +382,7 @@ export default class EllipticalOrbitNode extends Path {
       bLabelNode.rotation = this.orbit.w;
 
       focalDistancePath.shape = new Shape().moveTo( 0, 0 ).lineTo( e * radiusX, 0 );
-      cLabelNode.center = new Vector2( e * radiusX / 2, 10 );
+      cLabelNode.center = new Vector2( e * radiusX / 2, 15 );
       cLabelNode.rotation = this.orbit.w;
 
       // Strings of the foci
@@ -454,8 +455,8 @@ export default class EllipticalOrbitNode extends Path {
                                                                : 0;
           const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionProperty.value;
           timeValueProperties[ i ].value = area.alreadyEntered ?
-                                              ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
-                                                                  : 0;
+                                           ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
+                                                               : 0;
 
           // Activate area path
           areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );
