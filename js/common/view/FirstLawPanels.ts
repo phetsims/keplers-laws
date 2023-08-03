@@ -24,6 +24,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsColors from '../../KeplersLawsColors.js';
+import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
+import Dialog from '../../../../sun/js/Dialog.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -112,35 +114,52 @@ class ValuesPanel extends Panel {
       ];
     };
 
-    super( new VBox( {
-      align: 'left',
+    const infoDialog = new Dialog( new RichText( 'Text', { lineWrap: 600 } ), {
+      titleAlign: 'center',
+      title: new Text( 'Info', { font: new PhetFont( 32 ) } )
+    } );
+
+    super( new HBox( {
+      align: 'top',
+      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] ),
       children: [
-        new HBox( {
-          spacing: 2,
-          visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] ),
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-            semiMajorAxisStringProperty,
-            KeplersLawsColors.semimajorAxisColorProperty
-          )
+        new VBox( {
+          align: 'left',
+          children: [
+            new HBox( {
+              spacing: 2,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+                semiMajorAxisStringProperty,
+                KeplersLawsColors.semimajorAxisColorProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: model.semiaxisVisibleProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+                semiMinorAxisStringProperty,
+                KeplersLawsColors.semiminorAxisColorProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: model.eccentricityVisibleProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.focalDistanceStringProperty,
+                focalDistanceStringProperty,
+                KeplersLawsColors.focalDistanceColorProperty
+              )
+            } )
+          ]
         } ),
-        new HBox( {
-          spacing: 2,
-          visibleProperty: model.semiaxisVisibleProperty,
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
-            semiMinorAxisStringProperty,
-            KeplersLawsColors.semiminorAxisColorProperty
-          )
-        } ),
-        new HBox( {
-          spacing: 2,
-          visibleProperty: model.eccentricityVisibleProperty,
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.focalDistanceStringProperty,
-            focalDistanceStringProperty,
-            KeplersLawsColors.focalDistanceColorProperty
-          )
+        new InfoButton( {
+          accessibleName: 'accessibleName',
+          scale: 0.5,
+          iconFill: 'rgb( 41, 106, 163 )',
+          touchAreaDilation: 20,
+          listener: () => infoDialog.show()
         } )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
