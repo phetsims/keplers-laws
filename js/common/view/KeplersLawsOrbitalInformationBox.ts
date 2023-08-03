@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, HBoxOptions, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HBoxOptions, Image, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
@@ -22,6 +22,7 @@ import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
+import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -137,8 +138,10 @@ class KeplersLawsOrbitalInformationBox extends VBox {
       createCheckbox(
         model.periodVisibleProperty,
         KeplersLawsStrings.graph.tStringProperty,
-        'periodVisibleCheckbox'
-        // periodIconImageNode TODO
+        'periodVisibleCheckbox',
+        new Image( periodTimerIcon_png, {
+          scale: 0.6
+        } )
       )
     ];
 
