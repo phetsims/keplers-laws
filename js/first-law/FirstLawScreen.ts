@@ -15,6 +15,7 @@ import KeplersLawsScreenView from '../common/view/KeplersLawsScreenView.js';
 import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
 import FirstLawScreenIcon from './FirstLawScreenIcon.js';
+import KeplersLawsKeyboardHelpContent from '../common/view/KeplersLawsKeyboardHelpContent.js';
 
 class FirstLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 
@@ -24,7 +25,8 @@ class FirstLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
       name: KeplersLawsStrings.screen.firstLawStringProperty,
       homeScreenIcon: new FirstLawScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
-      tandem: tandem
+      tandem: tandem,
+      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent()
     };
 
     super(
