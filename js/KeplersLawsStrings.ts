@@ -79,6 +79,11 @@ type StringsType = {
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
   };
+  'infoDialog': {
+    'semimajorAxisStringProperty': LocalizedStringProperty;
+    'semiminorAxisStringProperty': LocalizedStringProperty;
+    'focalDistanceStringProperty': LocalizedStringProperty;
+  };
   'a11y': {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;
     'increaseDivisionsStringProperty': LocalizedStringProperty;

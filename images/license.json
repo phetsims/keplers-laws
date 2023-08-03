@@ -1,7 +1,7 @@
 {
   "periodTimerBackground.png": {
     "text": [
-      "Copyright 2017 University of Colorado Boulder"
+      "Copyright 2023 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
@@ -9,10 +9,34 @@
   },
   "periodTimerIcon.png": {
     "text": [
-      "Copyright 2017 University of Colorado Boulder"
+      "Copyright 2023 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amy Rouinfar"
+  },
+  "infoSemimajorAxis.png": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Diana Lopez"
+  },
+  "infoSemiminorAxis.png": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Diana Lopez"
+  },
+  "focalDistance.png": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Diana Lopez"
   }
 }

@@ -25,7 +25,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsColors from '../../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import Dialog from '../../../../sun/js/Dialog.js';
+import InfoDialog from './InfoDialog.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -114,10 +114,7 @@ class ValuesPanel extends Panel {
       ];
     };
 
-    const infoDialog = new Dialog( new RichText( 'Text', { lineWrap: 600 } ), {
-      titleAlign: 'center',
-      title: new Text( 'Info', { font: new PhetFont( 32 ) } )
-    } );
+    const infoDialog = new InfoDialog();
 
     super( new HBox( {
       align: 'top',
