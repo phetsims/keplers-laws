@@ -139,7 +139,7 @@ export default class ThirdLawGraph extends Node {
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       const targetOrbit = model.targetOrbitProperty.value;
-      if ( targetOrbit !== TargetOrbits.NONE ) {
+      if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
         const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis * 100 );
         if ( targetOrbitPosition.x < axisLength ) {
           targetOrbitPoint.translation = targetOrbitPosition;
@@ -157,6 +157,7 @@ export default class ThirdLawGraph extends Node {
       }
       else {
         targetOrbitPoint.visible = false;
+        targetOrbitOutOfBounds.visible = false;
       }
 
       if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
