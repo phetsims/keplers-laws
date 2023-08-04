@@ -60,7 +60,9 @@ class KeplersLawsControls extends VBox {
       align: 'left',
       children: [
         new HBox( {
-          spacing: 10,
+          layoutOptions: {
+            stretch: true
+          },
           children: [
             new Text( KeplersLawsStrings.targetOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
             new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
