@@ -83,6 +83,8 @@ type StringsType = {
     'semimajorAxisStringProperty': LocalizedStringProperty;
     'semiminorAxisStringProperty': LocalizedStringProperty;
     'focalDistanceStringProperty': LocalizedStringProperty;
+    'planetPositionStringProperty': LocalizedStringProperty;
+    'planetVelocityStringProperty': LocalizedStringProperty;
   };
   'a11y': {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;
