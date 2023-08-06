@@ -29,7 +29,8 @@ export default class OrbitalSound {
     soundManager.addSoundGenerator( this.orbitalSoundClip );
 
     Multilink.multilink( [ this.semimajorAxisProperty ], () => {
-      this.orbitalSoundClip.setPlaybackRate( Utils.linear( 0, 4, 4, 1, Math.pow( this.semimajorAxisProperty.value, 2 ) ) );
+      this.orbitalSoundClip.setPlaybackRate( Utils.clamp(
+        Utils.linear( 0, 4, 4, 1, Math.pow( this.semimajorAxisProperty.value, 2 ) ), 0.1, 4 ) );
     } );
 
     animationFrameTimer.addListener( () => {
