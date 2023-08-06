@@ -179,12 +179,20 @@ class AreasBarPlot extends Node {
         // The tickmarks get a little smaller as you zoom out
         extent: 13 - 2 * Math.log10( entry.scale )
       } ) );
+    const yTickLabelSets = entries.map( entry =>
+      new LimitedTickLabelSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+        edge: 'min',
+        createLabel: ( value: number ) => {
+          return new Text( value / 10000, { fill: SolarSystemCommonColors.foregroundProperty } );
+        }
+      } ) );
     const yGridLineSets = entries.map( entry =>
       new LimitedGridLineSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
         stroke: FOREGROUND_COLOR_PROPERTY
       } ) );
 
     const tickParentNode = new Node();
+    const tickLabelParentNode = new Node();
     const gridLineParentNode = new Node();
 
     // For every time the vertical scale of the Second Laws Graph needs to be updated
@@ -194,10 +202,12 @@ class AreasBarPlot extends Node {
       chartTransform.setModelYRange( modelYRange );
 
       const tickChildren: TickMarkSet[] = [];
+      const tickLabelChildren: TickLabelSet[] = [];
       const gridLineChildren: GridLineSet[] = [];
       yTickMarkSets.forEach( ( tickMarkSet, index ) => {
         const distanceBetweenTickMarks = tickMarkSet.getSpacing() / modelYRange.max;
         const gridLineSet = yGridLineSets[ index ];
+        const tickLabelSet = yTickLabelSets[ index ];
 
         // Within this range we apply a linear function for the transparency
         const UPPER = 0.09;
@@ -205,20 +215,27 @@ class AreasBarPlot extends Node {
         if ( distanceBetweenTickMarks < UPPER && distanceBetweenTickMarks > LOWER ) {
           const linear = Utils.linear( UPPER, LOWER, 1, 0, distanceBetweenTickMarks );
           tickMarkSet.opacity = linear;
+          tickLabelSet.opacity = Math.pow( linear, 10 );
           gridLineSet.opacity = Math.pow( linear, 2 ) / 2;
+
           tickChildren.push( tickMarkSet );
+          tickLabelChildren.push( tickLabelSet );
           gridLineChildren.push( gridLineSet );
         }
         else if ( distanceBetweenTickMarks > UPPER ) {
           tickMarkSet.opacity = 1;
+          tickLabelSet.opacity = 1;
           gridLineSet.opacity = 0.5;
+
           tickChildren.push( tickMarkSet );
+          tickLabelChildren.push( tickLabelSet );
           gridLineChildren.push( gridLineSet );
         }
       } );
       // Compare if the created children set is the same already on the tickParentNode
       if ( !shallowCompare( tickParentNode.children, tickChildren ) ) {
         tickParentNode.children = tickChildren;
+        tickLabelParentNode.children = tickLabelChildren;
         gridLineParentNode.children = gridLineChildren;
       }
     };
@@ -249,7 +266,8 @@ class AreasBarPlot extends Node {
       chartRectangle,
       chartClip,
       XTickLabelSet,
-      tickParentNode
+      tickParentNode,
+      tickLabelParentNode
     ];
 
     const updateChart = () => {
@@ -265,6 +283,18 @@ class AreasBarPlot extends Node {
 }
 
 class LimitedTickMarkSet extends TickMarkSet {
+
+  protected override update(): void {
+    const spacingBorders = this.getSpacingBorders( );
+
+    // Only update tick sets which have less than 100 ticks
+    if ( spacingBorders.max - spacingBorders.min < 100 ) {
+      super.update();
+    }
+  }
+}
+
+class LimitedTickLabelSet extends TickLabelSet {
 
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders( );
