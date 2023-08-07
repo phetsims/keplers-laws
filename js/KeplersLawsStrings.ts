@@ -57,6 +57,7 @@ type StringsType = {
     'periodSquaredStringProperty': LocalizedStringProperty;
     'periodCubedStringProperty': LocalizedStringProperty;
     'radiusStringProperty': LocalizedStringProperty;
+    'positionMagnitudeStringProperty': LocalizedStringProperty;
     'velocityMagnitudeStringProperty': LocalizedStringProperty;
     'distance1StringProperty': LocalizedStringProperty;
     'distance2StringProperty': LocalizedStringProperty;

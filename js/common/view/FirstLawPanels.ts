@@ -9,7 +9,7 @@
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, Line, RichText, Text, TextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import FirstLawGraph from './FirstLawGraph.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -26,14 +26,21 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsColors from '../../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import InfoDialog from './InfoDialog.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
+
+    const eccentricityPanel = new EccentricityPanel( model );
+    const valuesPanel = new ValuesPanel( model, {
+      minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+    } );
+
     super( {
       margin: 5,
       children: [
-        new EccentricityPanel( model ),
-        new ValuesPanel( model )
+        eccentricityPanel,
+        valuesPanel
       ],
       maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
     } );
@@ -75,7 +82,7 @@ class EccentricityPanel extends Panel {
 }
 
 class ValuesPanel extends Panel {
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
 
     const conditionalAUStringProperty = new DerivedProperty(
       [ SolarSystemCommonStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
@@ -99,6 +106,32 @@ class ValuesPanel extends Panel {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( focalDistance, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
+      } )
+    }, { tandem: Tandem.OPT_OUT } );
+
+    // Extra information: distance and velocity vector values
+    const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+      units: 'AU',
+      value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
+        return Utils.toFixed( position.magnitude / 100, 2 );
+      } )
+    }, { tandem: Tandem.OPT_OUT } );
+    const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+      units: 'km/s',
+      value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
+        return Utils.toFixed( velocity.magnitude * SolarSystemCommonConstants.VELOCITY_MULTIPLIER, 2 );
+      } )
+    }, { tandem: Tandem.OPT_OUT } );
+    const distanceAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+      units: '°',
+      value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
+        return Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
+      } )
+    }, { tandem: Tandem.OPT_OUT } );
+    const velocityAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+      units: '°',
+      value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
+        return Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
 
@@ -148,6 +181,44 @@ class ValuesPanel extends Panel {
                 focalDistanceStringProperty,
                 KeplersLawsColors.focalDistanceColorProperty
               )
+            } ),
+
+            // Extra information: distance and velocity vector values
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
+                positionMagnitudeStringProperty,
+                SolarSystemCommonColors.foregroundProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
+                velocityMagnitudeStringProperty,
+                SolarSystemCommonColors.foregroundProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.distanceAngleStringProperty,
+                distanceAngleStringProperty,
+                SolarSystemCommonColors.foregroundProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.velocityAngleStringProperty,
+                velocityAngleStringProperty,
+                SolarSystemCommonColors.foregroundProperty
+              )
             } )
           ]
         } ),
@@ -159,7 +230,7 @@ class ValuesPanel extends Panel {
           listener: () => infoDialog.show()
         } )
       ]
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    } ), combineOptions<PanelOptions>( SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions ) );
   }
 }
 

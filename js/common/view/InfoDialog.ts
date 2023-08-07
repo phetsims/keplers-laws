@@ -16,6 +16,7 @@ import planetPosition_png from '../../../images/planetPosition_png.js';
 import planetVelocity_png from '../../../images/planetVelocity_png.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
 export default class InfoDialog extends Dialog {
 
@@ -56,6 +57,7 @@ export default class InfoDialog extends Dialog {
         } ),
         new HBox( {
           spacing: spacing,
+          visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
           children: [
             new Image( planetPosition_png, { scale: 0.315 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetPositionStringProperty, infoDialogTextOptions )
@@ -63,6 +65,7 @@ export default class InfoDialog extends Dialog {
         } ),
         new HBox( {
           spacing: spacing,
+          visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
           children: [
             new Image( planetVelocity_png, { scale: 0.325 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetVelocityStringProperty, infoDialogTextOptions )
