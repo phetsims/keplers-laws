@@ -288,9 +288,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.targetOrbitProperty.reset();
 
     this.hardVisibilityReset();
-    this.engine.updateAllowedProperty.value = true;
     this.engine.reset();
-    this.engine.update();
+    this.engine.updateAllowedProperty.reset();
 
     this.loadBodyStates( this.defaultBodyState );
     this.resetting = false;
