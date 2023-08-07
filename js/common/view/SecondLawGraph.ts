@@ -27,6 +27,7 @@ import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -82,7 +83,7 @@ export default class SecondLawGraph extends AccordionBox {
     const yAxisLabel = new RichText(
       KeplersLawsStrings.area.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {
-        x: -25,
+        x: -40,
         centerY: -yAxisLength * 0.5,
         rotation: -Math.PI / 2
       }, TITLE_OPTIONS )
@@ -184,6 +185,10 @@ class AreasBarPlot extends Node {
         edge: 'min',
         createLabel: ( value: number ) => {
           return new Text( value / 10000, { fill: SolarSystemCommonColors.foregroundProperty } );
+        },
+        positionLabel: ( label: Node, tickBounds: Bounds2, axisOrientation: Orientation ) => {
+          label.rightCenter = tickBounds.leftCenter.plusXY( -5, 0 );
+          return label;
         }
       } ) );
     const yGridLineSets = entries.map( entry =>
