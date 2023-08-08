@@ -27,6 +27,7 @@ import TargetOrbits from '../model/TargetOrbits.js';
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
 export default class ThirdLawGraph extends Node {
+
   public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
     const options = optionize<NodeOptions, EmptySelfOptions>()( {}, providedOptions );
 
@@ -134,10 +135,6 @@ export default class ThirdLawGraph extends Node {
     let maxVisitedAxis: number;
 
     const orbitUpdated = () => {
-      const pointPosition = semiMajorAxisToViewPoint( orbit.a );
-      dataPoint.translation = pointPosition;
-      dataPoint.visible = orbit.a < maxSemiMajorAxis;
-
       const targetOrbit = model.targetOrbitProperty.value;
       if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
         const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis * 100 );
@@ -160,25 +157,31 @@ export default class ThirdLawGraph extends Node {
         targetOrbitOutOfBounds.visible = false;
       }
 
-      if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
-        if ( orbit.a < minVisitedAxis ) {
-          minVisitedAxis = orbit.a;
-        }
-
-        if ( orbit.a > maxVisitedAxis ) {
-          maxVisitedAxis = orbit.a;
-        }
-      }
-      else {
-        minVisitedAxis = orbit.a;
-        maxVisitedAxis = orbit.a;
-      }
-
       const shape = new Shape();
+
+      const pointPosition = semiMajorAxisToViewPoint( orbit.a );
+      dataPoint.translation = pointPosition;
+      dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
       let arrowX = null;
       const dx = 5;
+
+      if ( !outOfBounds ) {
+        if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
+          if ( orbit.a < minVisitedAxis ) {
+            minVisitedAxis = orbit.a;
+          }
+
+          if ( orbit.a > maxVisitedAxis ) {
+            maxVisitedAxis = orbit.a;
+          }
+        }
+        else {
+          minVisitedAxis = orbit.a;
+          maxVisitedAxis = orbit.a;
+        }
+      }
 
       // a is the semimajor axis
       for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
