@@ -36,7 +36,6 @@ export default class OrbitalArea {
     this.endAngle = 0;
     this.completion = 0;
     this.sweptArea = 0;
-    this.insideProperty.reset();
     this.alreadyEntered = !eraseAreas;
     this.active = false;
   }
