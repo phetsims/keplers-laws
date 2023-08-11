@@ -61,7 +61,7 @@ export default class PeriodTracker {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
-        // this.model.isPlayingProperty.value = true; // TODO This is only true for testing
+        this.model.isPlayingProperty.value = true;
       }
       else if ( this.trackingState !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, reset the period timer
@@ -94,10 +94,6 @@ export default class PeriodTracker {
           this.periodTimer.setTime( measuredTime );
         }
       }
-    } );
-
-    this.model.engine.resetEmitter.addListener( () => {
-      this.reset();
     } );
   }
 
