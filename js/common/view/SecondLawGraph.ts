@@ -110,7 +110,7 @@ export default class SecondLawGraph extends AccordionBox {
 
 class AreasBarPlot extends Node {
 
-  public constructor( public model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel ) {
     super();
 
     // -1 is so that the first bar is not inside the Y axis
@@ -141,7 +141,7 @@ class AreasBarPlot extends Node {
       activeAreas.forEach( ( area, index ) => {
         // Setting all the bar's height and pushing them to the dataSet
         const height = area.alreadyEntered && !area.insideProperty.value ? model.engine.segmentArea : area.sweptArea;
-        const realIndex = this.model.engine.retrograde ? this.model.periodDivisionProperty.value - index - 1 : index;
+        const realIndex = model.engine.retrograde ? model.periodDivisionProperty.value - index - 1 : index;
         dataSet.push( new Vector2( realIndex, height ) );
       } );
       barPlot.setDataSet( dataSet ); // BarPlot creates the rectangles here
@@ -203,7 +203,7 @@ class AreasBarPlot extends Node {
     // For every time the vertical scale of the Second Laws Graph needs to be updated
     const updateYRange = () => {
       // Because period divisions go down to 2, the maximum height is a bit more (const UPSCALE) than half the total area
-      modelYRange = new Range( 0, UPSCALE * this.model.engine.totalArea / 2 );
+      modelYRange = new Range( 0, UPSCALE * model.engine.totalArea / 2 );
       chartTransform.setModelYRange( modelYRange );
 
       const tickChildren: TickMarkSet[] = [];
@@ -246,7 +246,7 @@ class AreasBarPlot extends Node {
     };
 
     // Linking the period division to modify the chart ranges and labels
-    this.model.periodDivisionProperty.link( periodDivision => {
+    model.periodDivisionProperty.link( periodDivision => {
       modelXRange = new Range( -1, periodDivision );
       chartTransform.setModelXRange( modelXRange );
       barPlot.update();

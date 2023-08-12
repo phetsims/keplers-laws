@@ -183,7 +183,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // UI ----------------------------------------------------------------------------------
     // Second and Third Law Accordion Boxes and Zoom Buttons
 
-    this.topLayer.addChild( new OrbitalWarningMessage( model, this.modelViewTransformProperty ) );
+    this.topLayer.addChild( new OrbitalWarningMessage( model.engine.orbitTypeProperty, model.engine.allowedOrbitProperty, this.modelViewTransformProperty ) );
 
     this.firstLawPanel = new FirstLawPanels( model );
     this.secondLawPanel = new SecondLawPanels( model );
@@ -297,7 +297,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.interfaceLayer.addChild( lawsPanelsBox );
     this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
-      this.lawsButtons = new LawsButtons( model );
+      this.lawsButtons = new LawsButtons( model.selectedLawProperty );
 
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [

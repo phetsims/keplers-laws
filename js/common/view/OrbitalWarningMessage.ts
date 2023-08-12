@@ -6,7 +6,6 @@
  * @author Agustín Vallejo
  */
 
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Node, RichText, TextOptions } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -21,7 +20,9 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 export default class OrbitalWarningMessage extends Node {
 
-  public constructor( model: KeplersLawsModel, modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2> ) {
+  public constructor( orbitTypeProperty: TReadOnlyProperty<OrbitTypes>,
+                      allowedOrbitProperty: TReadOnlyProperty<boolean>,
+                      modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2> ) {
 
     const center = modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -50 ) );
 
@@ -37,7 +38,7 @@ export default class OrbitalWarningMessage extends Node {
 
     Multilink.multilink(
       [
-        model.engine.orbitTypeProperty,
+        orbitTypeProperty,
         KeplersLawsStrings.warning.warningStringProperty,
         KeplersLawsStrings.warning.crashOrbitStringProperty,
         KeplersLawsStrings.warning.escapeOrbitStringProperty
@@ -65,7 +66,7 @@ export default class OrbitalWarningMessage extends Node {
     );
 
     super( {
-      visibleProperty: DerivedProperty.not( model.engine.allowedOrbitProperty ),
+      visibleProperty: DerivedProperty.not( allowedOrbitProperty ),
       center: center,
       children: [ warningText ]
     } );

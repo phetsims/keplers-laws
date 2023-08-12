@@ -71,7 +71,7 @@ class KeplersLawsControls extends VBox {
             } )
           ]
         } ),
-        new TargetOrbitsComboBox( model, topLayer, {
+        new TargetOrbitsComboBox( model.targetOrbitProperty, topLayer, {
           enabledProperty: model.isSolarSystemProperty,
           layoutOptions: {
             align: 'center'

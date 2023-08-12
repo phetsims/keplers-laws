@@ -10,17 +10,17 @@
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import LawMode from '../model/LawMode.js';
 import keplersLaws from '../../keplersLaws.js';
 import FirstLawScreenIcon from '../../first-law/FirstLawScreenIcon.js';
 import SecondLawScreenIcon from '../../second-law/SecondLawScreenIcon.js';
 import ThirdLawScreenIcon from '../../third-law/ThirdLawScreenIcon.js';
+import Property from '../../../../axon/js/Property.js';
 
 export type LawsButtonsOptions = RectangularRadioButtonGroupOptions;
 
 export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
-  public constructor( model: KeplersLawsModel, providedOptions?: LawsButtonsOptions ) {
+  public constructor( selectedLawProperty: Property<LawMode>, providedOptions?: LawsButtonsOptions ) {
     const options = combineOptions<LawsButtonsOptions>( {
       orientation: 'horizontal',
       radioButtonOptions: {
@@ -38,7 +38,7 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
 
 
     // Intentionally left without KeplersLawsStrings because this buttons will have icons
-    super( model.selectedLawProperty, [
+    super( selectedLawProperty, [
       {
         value: LawMode.FIRST_LAW,
         createNode: () => new Node( { children: [ FirstLawScreenIcon.getFullNode() ], scale: 1.5 } ),

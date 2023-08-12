@@ -8,12 +8,12 @@
 import keplersLaws from '../../keplersLaws.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 import ComboBox, { ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import Property from '../../../../axon/js/Property.js';
 
 const targetOrbits = [
   TargetOrbits.NONE,
@@ -25,7 +25,7 @@ const targetOrbits = [
 ];
 
 export default class TargetOrbitsComboBox extends ComboBox<TargetOrbits> {
-  public constructor( model: KeplersLawsModel, listParent: Node, providedOptions: ComboBoxOptions ) {
+  public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: ComboBoxOptions ) {
     const options = combineOptions<ComboBoxOptions>( {
       buttonTouchAreaXDilation: 10,
       buttonTouchAreaYDilation: 10,
@@ -45,7 +45,7 @@ export default class TargetOrbitsComboBox extends ComboBox<TargetOrbits> {
       };
     };
 
-    super( model.targetOrbitProperty, targetOrbits.map( targetOrbit => {
+    super( targetOrbitProperty, targetOrbits.map( targetOrbit => {
       return createItem( targetOrbit, targetOrbit.stringProperty );
     } ), listParent, options );
   }
