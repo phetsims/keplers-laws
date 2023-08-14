@@ -140,8 +140,8 @@
   "pattern.valueUnits": {
     "value": "{{value}} {{units}}"
   },
-  "warning.warning": {
-    "value": "Warning"
+  "warning.warningPattern": {
+    "value": "Warning: {{message}}"
   },
   "warning.crashOrbit": {
     "value": "The body will crash into the sun"

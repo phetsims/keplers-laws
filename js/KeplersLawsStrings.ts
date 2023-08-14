@@ -69,7 +69,7 @@ type StringsType = {
     'valueUnitsStringProperty': LocalizedStringProperty;
   };
   'warning': {
-    'warningStringProperty': LocalizedStringProperty;
+    'warningPatternStringProperty': LocalizedStringProperty;
     'crashOrbitStringProperty': LocalizedStringProperty;
     'escapeOrbitStringProperty': LocalizedStringProperty;
   };
