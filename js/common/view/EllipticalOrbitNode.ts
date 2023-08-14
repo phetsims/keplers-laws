@@ -357,7 +357,6 @@ export default class EllipticalOrbitNode extends Path {
         const minScaling = 1.2;
         const maxScaling = 2.0;
 
-        // TODO: Take a design decision, see https://github.com/phetsims/keplers-laws/issues/37
         // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
         return Utils.clamp(
           Utils.linear( 10, 250, maxScaling, minScaling, vectorMagnitude ),

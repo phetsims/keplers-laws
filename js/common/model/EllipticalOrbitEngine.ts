@@ -310,7 +310,6 @@ export default class EllipticalOrbitEngine extends Engine {
     const direction = this.retrograde ? -1 : 1;
     this.body.velocityProperty.value =
       position.perpendicular.normalize().multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
-    // TODO: Velocity a bit over circular orbit to avoid some errors, but they shouldnt be happening
   }
 
   private enforceEscapeSpeed(): void {
