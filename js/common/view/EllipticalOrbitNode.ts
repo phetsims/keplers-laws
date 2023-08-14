@@ -28,9 +28,9 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import PeriodTrackerNode from './PeriodTrackerNode.js';
-import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import OrbitalSound from './OrbitalSound.js';
 import KeplersLawsColors from '../../KeplersLawsColors.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 
 export default class EllipticalOrbitNode extends Path {
@@ -258,7 +258,10 @@ export default class EllipticalOrbitNode extends Path {
         scale: 0.7,
         opacity: 0.8,
         numberFormatter: ( value: number ) => {
-          return Utils.toFixed( value, 2 ) + ' AU²';
+          return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+            value: Utils.toFixed( value, 2 ),
+            units: KeplersLawsStrings.units.AU2StringProperty
+          } );
         }
       } ) );
       timeValueNumberDisplays.push( new NumberDisplay( timeValueProperty, timeValueRange, {
@@ -266,7 +269,10 @@ export default class EllipticalOrbitNode extends Path {
         opacity: 0.8,
         backgroundFill: '#aff',
         numberFormatter: ( value: number ) => {
-          return Utils.toFixed( value, 2 ) + ' ' + SolarSystemCommonStrings.units.yearsStringProperty.value;
+          return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+            value: Utils.toFixed( value, 2 ),
+            units: KeplersLawsStrings.units.yearsStringProperty
+          } );
         }
       } ) );
     }
