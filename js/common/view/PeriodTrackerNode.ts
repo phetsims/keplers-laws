@@ -26,6 +26,7 @@ export default class PeriodTrackerNode extends Path {
 
   public constructor( private readonly model: KeplersLawsModel ) {
     super( null, {
+      isDisposable: false,
       stroke: SolarSystemCommonColors.thirdBodyColorProperty,
       lineWidth: 5,
       visibleProperty: model.periodVisibleProperty

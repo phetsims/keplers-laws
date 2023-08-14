@@ -59,6 +59,7 @@ export default class PeriodTimerNode extends Node {
   ) {
 
     const options = optionize<PeriodTimerNodeOptions, SelfOptions, NodeOptions>()( {
+      isDisposable: false,
       iconColor: '#333',
       buttonBaseColor: '#DFE0E1',
       cursor: 'pointer',

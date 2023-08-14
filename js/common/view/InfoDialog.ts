@@ -73,6 +73,7 @@ export default class InfoDialog extends Dialog {
         } )
       ]
     } ), {
+      isDisposable: false,
       titleAlign: 'center',
       title: new Text( 'Info', { font: new PhetFont( 32 ) } )
     } );

@@ -22,6 +22,7 @@ export default class TargetOrbitNode extends Path {
     providedOptions?: PathOptions
   ) {
     const options = combineOptions<PathOptions>( {
+      isDisposable: false,
       stroke: 'gray',
       lineWidth: 3
       // lineDash: [ 5, 5 ]

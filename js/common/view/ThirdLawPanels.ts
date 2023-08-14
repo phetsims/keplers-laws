@@ -73,6 +73,7 @@ class ThirdLawAccordionBox extends AccordionBox {
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,
       minWidth: KeplersLawsConstants.PANELS_MIN_WIDTH,
 
+      isDisposable: false,
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 

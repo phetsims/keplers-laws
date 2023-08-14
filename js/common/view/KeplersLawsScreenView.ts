@@ -60,7 +60,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
-      allowLawSelection: false
+      allowLawSelection: false,
+      isDisposable: false
     }, providedOptions );
 
     super( model, options );

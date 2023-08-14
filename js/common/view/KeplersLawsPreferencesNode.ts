@@ -19,6 +19,7 @@ import PreferencesDialogConstants from '../../../../joist/js/preferences/Prefere
 export default class KeplersLawsPreferencesNode extends PreferencesControl {
   public constructor() {
     super( {
+      isDisposable: false,
       labelNode: new Text( 'More Orbital Data', PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
       descriptionNode: new RichText( 'Display information about the planet\'s position and velocity vectors in the First Law Screen',
         PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS ),

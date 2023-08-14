@@ -37,6 +37,7 @@ export default class FirstLawPanels extends VBox {
     } );
 
     super( {
+      isDisposable: false,
       margin: 5,
       children: [
         eccentricityPanel,

@@ -66,6 +66,7 @@ export default class OrbitalWarningMessage extends Node {
     );
 
     super( {
+      isDisposable: false,
       visibleProperty: DerivedProperty.not( allowedOrbitProperty ),
       center: center,
       children: [ warningText ]

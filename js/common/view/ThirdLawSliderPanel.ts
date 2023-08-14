@@ -68,6 +68,7 @@ export default class ThirdLawSliderPanel extends Panel {
         slider
       ]
     } ), {
+      isDisposable: false,
       fill: SolarSystemCommonColors.controlPanelFillProperty,
       stroke: null
     } );

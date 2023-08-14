@@ -47,6 +47,7 @@ export default class SecondLawPanels extends VBox {
 class SecondLawPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
     const options = combineOptions<PanelOptions>( {
+      isDisposable: false,
       visibleProperty: model.isSecondLawProperty
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 

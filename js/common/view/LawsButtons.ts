@@ -33,7 +33,9 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
         }
       },
       touchAreaXDilation: 5,
-      touchAreaYDilation: 10
+      touchAreaYDilation: 10,
+
+      isDisposable: false
     }, providedOptions );
 
 
