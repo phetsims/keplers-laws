@@ -61,6 +61,8 @@ class SecondLawPanel extends Panel {
           layoutOptions: {
             align: 'center'
           },
+          touchAreaXDilation: 15,
+          touchAreaYDilation: 5,
           arrowsSoundPlayer: nullSoundPlayer,
           accessibleName: KeplersLawsStrings.area.periodDivisionStringProperty
           } ),

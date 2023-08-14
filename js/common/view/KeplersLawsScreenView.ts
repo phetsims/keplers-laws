@@ -88,7 +88,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const body = model.bodies[ 1 ];
     const sunNode = new BodyNode( model.bodies[ 0 ], this.modelViewTransformProperty, {
       draggable: false,
-      focusable: false
+      focusable: false,
+      pickable: false
     } );
     const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
       useCueingArrows: true,

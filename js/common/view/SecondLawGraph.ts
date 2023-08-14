@@ -74,7 +74,9 @@ export default class SecondLawGraph extends AccordionBox {
       listener: () => model.engine.resetOrbitalAreas( true ),
       x: xAxisLength * 0.8,
       y: -yAxisLength,
-      accessibleName: KeplersLawsStrings.eraserStringProperty
+      accessibleName: KeplersLawsStrings.eraserStringProperty,
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10
     } );
 
     const barPlot = new AreasBarPlot( model );

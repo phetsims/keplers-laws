@@ -109,7 +109,9 @@ export default class PeriodTimerNode extends Node {
       center: Vector2.ZERO
     } ), {
       baseColor: options.buttonBaseColor,
-      minWidth: 40
+      minWidth: 40,
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10
     } );
     playPauseButton.touchArea = playPauseButton.localBounds.dilated( 5 );
 

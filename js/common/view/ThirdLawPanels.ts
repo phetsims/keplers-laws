@@ -219,7 +219,9 @@ class ThirdLawAccordionBox extends AccordionBox {
             new EraserButton( {
               listener: () => model.engine.resetEmitter.emit(),
               layoutOptions: { column: 0, row: 1 },
-              accessibleName: KeplersLawsStrings.eraserStringProperty
+              accessibleName: KeplersLawsStrings.eraserStringProperty,
+              touchAreaXDilation: 10,
+              touchAreaYDilation: 10
             } )
           ],
           spacing: 10
