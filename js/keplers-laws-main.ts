@@ -16,6 +16,7 @@ import ThirdLawScreen from './third-law/ThirdLawScreen.js';
 import AllLawsScreen from './all-laws/AllLawsScreen.js';
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import KeplersLawsPreferencesNode from './common/view/KeplersLawsPreferencesNode.js';
+import { KeplersLawsPreferencesNode2 } from './common/view/KeplersLawsPreferencesNode.js';
 
 // Launch the sim. Beware that scenery Image nodes created outside simLauncher.launch() will have zero bounds
 // until the images are fully loaded. See https://github.com/phetsims/coulombs-law/issues/70#issuecomment-429037461
@@ -43,9 +44,10 @@ simLauncher.launch( () => {
     preferencesModel: new PreferencesModel( {
       visualOptions: {
         supportsProjectorMode: true,
-        customPreferences: [ {
-          createContent: tandem => new KeplersLawsPreferencesNode()
-        } ]
+        customPreferences: [
+          { createContent: tandem => new KeplersLawsPreferencesNode() },
+          { createContent: tandem => new KeplersLawsPreferencesNode2() }
+        ]
       }
     } )
   };

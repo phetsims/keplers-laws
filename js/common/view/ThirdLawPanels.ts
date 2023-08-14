@@ -26,6 +26,7 @@ import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
 type SelfOptions = EmptySelfOptions;
 export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
@@ -109,8 +110,7 @@ class ThirdLawAccordionBox extends AccordionBox {
     const createUnitsFraction = () => {
       return new VBox( {
         spacing: 2,
-        visible: false,
-        // visibleProperty: model.engine.allowedOrbitProperty,
+        visibleProperty: KeplersLawsPreferences.useEquationUnits,
         children: [
           new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
           new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),

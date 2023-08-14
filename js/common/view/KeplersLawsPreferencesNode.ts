@@ -28,4 +28,16 @@ export default class KeplersLawsPreferencesNode extends PreferencesControl {
   }
 }
 
+export class KeplersLawsPreferencesNode2 extends PreferencesControl {
+  public constructor() {
+    super( {
+      isDisposable: false,
+      labelNode: new Text( 'Use units on Third Law equation', PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
+      descriptionNode: new RichText( 'Display AU, years and their respective powers in the Third Law equation',
+        PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS ),
+      controlNode: new ToggleSwitch( KeplersLawsPreferences.useEquationUnits, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
+    } );
+  }
+}
+
 keplersLaws.register( 'KeplersLawsPreferencesNode', KeplersLawsPreferencesNode );
