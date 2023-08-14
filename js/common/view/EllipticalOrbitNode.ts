@@ -2,8 +2,6 @@
 /**
  * Visual Node for the Elliptical Orbit based on the Orbital Parameters
  *
- * TODO: The contents of this file should eventually be moved to individual files for each Law.
- *
  * @author Agustín Vallejo
  */
 
