@@ -36,6 +36,7 @@ import Success_mp3 from '../../../sounds/Success_mp3.js';
 import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
 import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
 import OrbitTypes from '../model/OrbitTypes.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 // constants
 const MARGIN = 10;
@@ -288,7 +289,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
             showAsMinutesAndSeconds: false,
             numberOfDecimalPlaces: 2,
-            units: 'years'
+            units: KeplersLawsStrings.units.yearsStringProperty
           } )
         }
       }

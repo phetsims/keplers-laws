@@ -119,9 +119,14 @@ export default class PeriodTimerNode extends Node {
     // Creates time text inside period timer tool.
     const readoutText = new Text( '', KeplersLawsConstants.TIMER_READOUT_OPTIONS );
     // present for the lifetime of the sim
-    periodTimer.timeProperty.link( value => {
+    Multilink.multilink(
+      [
+        periodTimer.timeProperty,
+        KeplersLawsStrings.units.yearsStringProperty
+      ],
+      ( time, units ) => {
       readoutText.string = StringUtils.fillIn( secondsPatternString, {
-        value: Utils.toFixed( value, 2 ),
+        value: Utils.toFixed( time, 2 ),
         units: SolarSystemCommonStrings.units.yearsStringProperty
       } );
     } );
