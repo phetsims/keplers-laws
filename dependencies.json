@@ -1,11 +1,11 @@
 {
-  "comment": "# keplers-laws 1.1.0-dev.2 Fri Aug 11 2023 14:52:46 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.1.0-dev.3 Tue Aug 15 2023 12:12:21 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "cc59d7f0574270924a886cb3d43a1b7507cd0553",
     "branch": "master"
   },
   "axon": {
-    "sha": "e5962f3e58a63096e2d52f19b368f91a79d6e984",
+    "sha": "192cb02fffb54fada63451c84593a374815972a6",
     "branch": "master"
   },
   "bamboo": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "keplers-laws": {
-    "sha": "111f7b06e024d788424314654f0cc2ad8115e844",
+    "sha": "7734830edebdd25e6177783a309e464898a9aeea",
     "branch": "master"
   },
   "kite": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "phet-io-sim-specific": {
-    "sha": "062f7ebd3c5c0937e4dc1883e0d2581dd9e1aa71",
+    "sha": "4cd449ab948d6f36d7a3142be3f83eab19c33deb",
     "branch": "master"
   },
   "phet-io-wrappers": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "ef286e8a8c435fe9051cb4f4aae00a7370b73c05",
+    "sha": "56031d4a215bba8ad78f3560af257823c250bd6b",
     "branch": "master"
   },
   "sherpa": {
