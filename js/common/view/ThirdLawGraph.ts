@@ -35,7 +35,7 @@ export default class ThirdLawGraph extends Node {
 
     super( options );
 
-    const axisLength = 150;
+    const axisLength = 160;
 
     const semiMajorAxisToViewPoint = ( semiMajorAxis: number ) => {
       const period = model.engine.thirdLaw( semiMajorAxis );

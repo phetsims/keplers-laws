@@ -11,8 +11,7 @@ import keplersLaws from '../../keplersLaws.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const KeplersLawsPreferences = {
-  extraOrbitalDataEnabledProperty: new BooleanProperty( false ),
-  useEquationUnits: new BooleanProperty( false )
+  extraOrbitalDataEnabledProperty: new BooleanProperty( false )
 };
 
 keplersLaws.register( 'KeplersLawsPreferences', KeplersLawsPreferences );
