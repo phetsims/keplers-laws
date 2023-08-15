@@ -18,7 +18,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
@@ -112,9 +111,9 @@ class ThirdLawAccordionBox extends AccordionBox {
         spacing: 2,
         visibleProperty: KeplersLawsPreferences.useEquationUnits,
         children: [
-          new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
+          new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
           new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),
-          new RichText( ThirdLawTextUtils.createPowerStringProperty( SolarSystemCommonStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
+          new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
         ]
       } );
     };

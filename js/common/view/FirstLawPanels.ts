@@ -18,7 +18,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -86,7 +85,7 @@ class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
 
     const conditionalAUStringProperty = new DerivedProperty(
-      [ SolarSystemCommonStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
+      [ KeplersLawsStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
       ( AUString, allowedOrbit ) => {
         return allowedOrbit ? AUString : '';
       } );

@@ -127,7 +127,7 @@ export default class PeriodTimerNode extends Node {
       ( time, units ) => {
       readoutText.string = StringUtils.fillIn( secondsPatternString, {
         value: Utils.toFixed( time, 2 ),
-        units: SolarSystemCommonStrings.units.yearsStringProperty
+        units: KeplersLawsStrings.units.yearsStringProperty
       } );
     } );
 
