@@ -27,6 +27,8 @@ const targetOrbits = [
 export default class TargetOrbitsComboBox extends ComboBox<TargetOrbits> {
   public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: ComboBoxOptions ) {
     const options = combineOptions<ComboBoxOptions>( {
+      isDisposable: false,
+      
       buttonTouchAreaXDilation: 10,
       buttonTouchAreaYDilation: 10,
 

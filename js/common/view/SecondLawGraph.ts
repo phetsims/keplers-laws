@@ -48,6 +48,7 @@ export default class SecondLawGraph extends AccordionBox {
   public constructor( public readonly model: KeplersLawsModel ) {
 
     const options = combineOptions<AccordionBoxOptions>( {
+      isDisposable: false,
       visibleProperty: model.isSecondLawProperty,
       titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
@@ -73,7 +74,9 @@ export default class SecondLawGraph extends AccordionBox {
       listener: () => model.engine.resetOrbitalAreas( true ),
       x: xAxisLength * 0.8,
       y: -yAxisLength,
-      accessibleName: KeplersLawsStrings.eraserStringProperty
+      accessibleName: KeplersLawsStrings.eraserStringProperty,
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10
     } );
 
     const barPlot = new AreasBarPlot( model );
@@ -290,7 +293,7 @@ class AreasBarPlot extends Node {
 class LimitedTickMarkSet extends TickMarkSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders( );
+    const spacingBorders = this.getSpacingBorders();
 
     // Only update tick sets which have less than 100 ticks
     if ( spacingBorders.max - spacingBorders.min < 100 ) {
@@ -302,7 +305,7 @@ class LimitedTickMarkSet extends TickMarkSet {
 class LimitedTickLabelSet extends TickLabelSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders( );
+    const spacingBorders = this.getSpacingBorders();
 
     // Only update tick sets which have less than 100 ticks
     if ( spacingBorders.max - spacingBorders.min < 100 ) {
@@ -314,7 +317,7 @@ class LimitedTickLabelSet extends TickLabelSet {
 class LimitedGridLineSet extends GridLineSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders( );
+    const spacingBorders = this.getSpacingBorders();
 
     // Only update grid line sets which have less than 100 lines
     if ( spacingBorders.max - spacingBorders.min < 100 ) {

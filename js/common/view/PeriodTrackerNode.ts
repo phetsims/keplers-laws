@@ -26,6 +26,7 @@ export default class PeriodTrackerNode extends Path {
 
   public constructor( private readonly model: KeplersLawsModel ) {
     super( null, {
+      isDisposable: false,
       stroke: SolarSystemCommonColors.thirdBodyColorProperty,
       lineWidth: 5,
       visibleProperty: model.periodVisibleProperty
@@ -51,10 +52,11 @@ export default class PeriodTrackerNode extends Path {
       this.updateShape();
     } );
 
-    this.startCircle = new Path( Shape.circle( 0, 0, 10 ), {
-      fill: SolarSystemCommonColors.thirdBodyColorProperty
+    this.startCircle = new Path( Shape.circle( 0, 0, 6 ), {
+      fill: SolarSystemCommonColors.thirdBodyColorProperty,
+      visible: false
     } );
-    this.addChild( this.startCircle ); // TODO: Are we keeping this?
+    this.addChild( this.startCircle );
   }
 
   public update( orbitScale: number, orbitCenter: Vector2, radiusX: number, radiusY: number ): void {

@@ -59,6 +59,7 @@ export default class PeriodTimerNode extends Node {
   ) {
 
     const options = optionize<PeriodTimerNodeOptions, SelfOptions, NodeOptions>()( {
+      isDisposable: false,
       iconColor: '#333',
       buttonBaseColor: '#DFE0E1',
       cursor: 'pointer',
@@ -108,7 +109,9 @@ export default class PeriodTimerNode extends Node {
       center: Vector2.ZERO
     } ), {
       baseColor: options.buttonBaseColor,
-      minWidth: 40
+      minWidth: 40,
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10
     } );
     playPauseButton.touchArea = playPauseButton.localBounds.dilated( 5 );
 
@@ -116,10 +119,15 @@ export default class PeriodTimerNode extends Node {
     // Creates time text inside period timer tool.
     const readoutText = new Text( '', KeplersLawsConstants.TIMER_READOUT_OPTIONS );
     // present for the lifetime of the sim
-    periodTimer.timeProperty.link( value => {
+    Multilink.multilink(
+      [
+        periodTimer.timeProperty,
+        KeplersLawsStrings.units.yearsStringProperty
+      ],
+      ( time, units ) => {
       readoutText.string = StringUtils.fillIn( secondsPatternString, {
-        value: Utils.toFixed( value, 2 ),
-        units: SolarSystemCommonStrings.units.yearsStringProperty
+        value: Utils.toFixed( time, 2 ),
+        units: KeplersLawsStrings.units.yearsStringProperty
       } );
     } );
 

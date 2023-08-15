@@ -104,6 +104,7 @@ export default class FirstLawGraph extends AlignBox {
     } );
 
     super( new Node( {
+      isDisposable: false,
       children: [
         ...orbitAndValues,
         yAxis,

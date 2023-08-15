@@ -68,6 +68,7 @@ export default class DistancesDisplayNode extends VBox {
     public modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
   ) {
     super( {
+      isDisposable: false,
       spacing: 10,
       visibleProperty: DerivedProperty.and( [ model.stringsVisibleProperty, model.engine.allowedOrbitProperty ] )
     } );

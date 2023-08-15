@@ -29,11 +29,13 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 export default class ThirdLawGraph extends Node {
 
   public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
-    const options = optionize<NodeOptions, EmptySelfOptions>()( {}, providedOptions );
+    const options = optionize<NodeOptions, EmptySelfOptions>()( {
+      isDisposable: false
+    }, providedOptions );
 
     super( options );
 
-    const axisLength = 150;
+    const axisLength = 160;
 
     const semiMajorAxisToViewPoint = ( semiMajorAxis: number ) => {
       const period = model.engine.thirdLaw( semiMajorAxis );

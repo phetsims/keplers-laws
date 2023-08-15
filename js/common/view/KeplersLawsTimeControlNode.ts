@@ -75,7 +75,9 @@ export default class KeplersLawsTimeControlNode extends TimeControlNode {
       speedRadioButtonGroupOptions: {
         labelOptions: KeplersLawsConstants.TEXT_OPTIONS,
         touchAreaXDilation: 10
-      }
+      },
+
+      isDisposable: false
     }, providedOptions );
 
     super( model.isPlayingProperty, options );

@@ -49,11 +49,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Stopwatch visibility
   public readonly stopwatchVisibleProperty = new BooleanProperty( false );
-  public readonly stopwatch = new Stopwatch( {
-    timePropertyOptions: {
-      units: 'years'
-    }
-  } );
+  public readonly stopwatch = new Stopwatch();
 
   // Booleans to keep track of which law is selected
   public readonly isFirstLawProperty = new BooleanProperty( false );
@@ -124,7 +120,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     super( options );
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.bodies[ 0 ].massProperty ], sunMass => sunMass === 200 );
-
     this.lawVisibilitiesMap.set( LawMode.FIRST_LAW, this.firstLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.SECOND_LAW, this.secondLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.THIRD_LAW, this.thirdLawVisibilities );

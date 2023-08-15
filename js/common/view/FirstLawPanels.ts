@@ -18,7 +18,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import KeplersLawsConstants from '../../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -37,6 +36,7 @@ export default class FirstLawPanels extends VBox {
     } );
 
     super( {
+      isDisposable: false,
       margin: 5,
       children: [
         eccentricityPanel,
@@ -85,7 +85,7 @@ class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
 
     const conditionalAUStringProperty = new DerivedProperty(
-      [ SolarSystemCommonStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
+      [ KeplersLawsStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
       ( AUString, allowedOrbit ) => {
         return allowedOrbit ? AUString : '';
       } );
@@ -111,25 +111,25 @@ class ValuesPanel extends Panel {
 
     // Extra information: distance and velocity vector values
     const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: 'AU',
+      units: KeplersLawsStrings.units.AUStringProperty,
       value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
         return Utils.toFixed( position.magnitude / 100, 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: 'km/s',
+      units: KeplersLawsStrings.units.kmsStringProperty,
       value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
         return Utils.toFixed( velocity.magnitude * SolarSystemCommonConstants.VELOCITY_MULTIPLIER, 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const distanceAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: '°',
+      units: KeplersLawsStrings.units.degreesStringProperty,
       value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
         return Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const velocityAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: '°',
+      units: KeplersLawsStrings.units.degreesStringProperty,
       value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
       } )

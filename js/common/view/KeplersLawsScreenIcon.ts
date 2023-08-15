@@ -27,7 +27,10 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
   public constructor( contents: Node ) {
     super(
       contents,
-      { fill: SolarSystemCommonColors.backgroundProperty }
+      {
+        fill: SolarSystemCommonColors.backgroundProperty,
+        isDisposable: false
+      }
     );
   }
 

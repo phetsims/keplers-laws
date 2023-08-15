@@ -36,6 +36,7 @@ import Success_mp3 from '../../../sounds/Success_mp3.js';
 import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
 import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
 import OrbitTypes from '../model/OrbitTypes.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 // constants
 const MARGIN = 10;
@@ -60,7 +61,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
-      allowLawSelection: false
+      allowLawSelection: false,
+      isDisposable: false
     }, providedOptions );
 
     super( model, options );
@@ -87,7 +89,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const body = model.bodies[ 1 ];
     const sunNode = new BodyNode( model.bodies[ 0 ], this.modelViewTransformProperty, {
       draggable: false,
-      focusable: false
+      focusable: false,
+      pickable: false
     } );
     const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
       useCueingArrows: true,
@@ -286,7 +289,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
             showAsMinutesAndSeconds: false,
             numberOfDecimalPlaces: 2,
-            units: 'years'
+            valueUnitsPattern: KeplersLawsStrings.pattern.valueUnitsStringProperty,
+            units: KeplersLawsStrings.units.yearsStringProperty
           } )
         }
       }
