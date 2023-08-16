@@ -1,18 +1,18 @@
 # Kepler's Laws Implementation Notes
 
-The Kepler's Laws PhET Simulation is built on top of the SolarSystemCommon suite, which also supports MySolarSystem. 
+The Kepler's Laws PhET Simulation is built on top of the solar-system-common repository, which also supports MySolarSystem. 
 
 `SolarSystemCommonModel` is the foundational model class that runs the model simulation, using
 `EllipticalOrbitEngine` for the orbital mechanics calculations.
 
-The main `KeplersLawsModel` keeps track of the current selected Law, the visibility properties, and specific details of each law. For example, division of areas, or the exponent of T and a.
+The main `KeplersLawsModel` keeps track of the current selected Law, the visibility Properties, and specific details of each law. For example, division of areas, or the exponent of _T_ and _a_.
 
 ## Memory Management
 
 The majority of the elements in the sim are statically allocated at startup, and exist for the lifetime of the sim, hence most uses of `link`, `addListener`, etc. do NOT need a corresponding `unlink` or `removeListener`.
 
 ## EllipticalOrbitNode
-To draw the orbit and all its components, the whole structure of shapes is being drawn on top of `EllipticalOrbitNode.ts`. This, along the engine described below, are some of the biggest and most important files in the sim.
+To draw the orbit and all its components, the whole structure of shapes is being drawn on top of `EllipticalOrbitNode.ts`. This, along with the engine described below, are some of the biggest and most important files in the sim.
 
 ## EllipticalOrbitEngine
 
@@ -39,7 +39,7 @@ Once the orbital parameters have been calculated, it's time to let the orbit run
  Then, using the polar ellipse equation, the position of the body can be obtained. From the old position and the new position, the velocity direction can be properly determined, and the magnitude is calculated from the angular momentum, so that it's always preserved.
 
 ### Orbital Areas
-Similarly to the run step, based on the `periodDivisionProperty`, we can generate a series of time steps that sum the total period. Those time steps are then used to calculate the true anomaly for each division point. And based on the real true anomaly of the body, it is determined if any area has been visited yet, if it currently holds the body, the amount of completion, and other features needed to draw the areas in Second Law. This is done in `calculateOrbitalDivisions`. 
+Similar to the run step, based on the `periodDivisionProperty`, we can generate a series of time steps that sum the total period. Those time steps are then used to calculate the true anomaly for each division point. And based on the real true anomaly of the body, it is determined if any area has been visited yet, if it currently holds the body, the amount of completion, and other features needed to draw the areas in Second Law. This is done in `calculateOrbitalDivisions`. 
 
 
 ## References
