@@ -80,6 +80,7 @@ export default class DistancesDisplayNode extends VBox {
 
     const d1lineArrowNode = new LineArrowNode( 0, 0, 0, 1, STRING_ARROW_OPTIONS );
     const d2lineArrowNode = new LineArrowNode( 0, 0, 0, 1, STRING_ARROW_OPTIONS );
+    //REVIEW the constant 5 is duplicated 8 times below. Should it be factored out?
     d1lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), STRING_ARROW_OPTIONS ) );
     d2lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), STRING_ARROW_OPTIONS ) );
 
