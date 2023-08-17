@@ -19,6 +19,7 @@ import Property from '../../../../axon/js/Property.js';
 
 export type LawsButtonsOptions = RectangularRadioButtonGroupOptions;
 
+//REVIEW rename to LawsRadioButtonGroup
 export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
   public constructor( selectedLawProperty: Property<LawMode>, providedOptions?: LawsButtonsOptions ) {
     const options = combineOptions<LawsButtonsOptions>( {
