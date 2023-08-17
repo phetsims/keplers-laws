@@ -27,8 +27,8 @@ export default class TargetOrbits extends EnumerationValue {
   public constructor(
     public readonly eccentricity: number,
     public readonly semiMajorAxis: number,
-    public readonly stringProperty: TReadOnlyProperty<string>,
-    public readonly color = 'white'
+    public readonly stringProperty: TReadOnlyProperty<string>, //REVIEW document
+    public readonly color = 'white' //REVIEW document
   ) {
     super();
   }

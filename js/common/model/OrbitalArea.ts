@@ -21,13 +21,15 @@ export default class OrbitalArea {
   public completion = 0; // Proportional completion of the orbital area, goes up to 1
   public sweptArea = 0; // Total area the section will have when completion = 1
   public insideProperty = new BooleanProperty( false );
-  public alreadyEntered = true;
+  public alreadyEntered = true; //REVIEW document
   public active = false; // Whether the shown areas include this one
 
+  //REVIEW Why is a noop constructor provided with an argument?
   public constructor( public readonly index: number ) {
     // noop
   }
 
+  //REVIEW document, including @param eraseAreas
   public reset( eraseAreas = false ): void {
     this.dotPosition = Vector2.ZERO;
     this.startPosition = Vector2.ZERO;
