@@ -15,6 +15,7 @@ export default class OrbitTypes extends EnumerationValue {
   public static readonly CRASH_ORBIT = new OrbitTypes();
 
   public static readonly enumeration = new Enumeration( OrbitTypes, {
+    //TODO https://github.com/phetsims/keplers-laws/issues/106 delete phetioDocumentation for now
     phetioDocumentation: 'The reason this orbit is unstable'
   } );
 }

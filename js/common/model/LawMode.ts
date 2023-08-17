@@ -15,6 +15,7 @@ export default class LawMode extends EnumerationValue {
   public static readonly THIRD_LAW = new LawMode();
 
   public static readonly enumeration = new Enumeration( LawMode, {
+    //TODO https://github.com/phetsims/keplers-laws/issues/106 delete phetioDocumentation for now
     phetioDocumentation: 'Whether the second or third law are selected'
   } );
 }
