@@ -11,6 +11,8 @@ import keplersLaws from '../../keplersLaws.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const KeplersLawsPreferences = {
+
+  //TODO https://github.com/phetsims/keplers-laws/issues/105 rename to moreOrbitalDataEnabledProperty, document
   extraOrbitalDataEnabledProperty: new BooleanProperty( false )
 };
 
