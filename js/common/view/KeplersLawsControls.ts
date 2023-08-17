@@ -55,7 +55,6 @@ class KeplersLawsControls extends VBox {
     stopwatchIcon.setScaleMagnitude( 0.3 );
 
     const targetOrbitsPanel = new Panel( new VBox( {
-      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
       spacing: 5,
       align: 'left',
       children: [
@@ -78,7 +77,9 @@ class KeplersLawsControls extends VBox {
           }
         } )
       ]
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    } ), combineOptions<PanelOptions>( {
+      visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
+    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
 
     // Creates a custom VBox with the provided and default options
     const createVBox = ( children: Node[], providedOptions?: VBoxOptions ) => {

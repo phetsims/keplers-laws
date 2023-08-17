@@ -75,14 +75,19 @@ class EccentricityPanel extends Panel {
       ],
       spacing: 10,
       align: 'left',
-      stretch: true,
+      stretch: true
+    } ), combineOptions<PanelOptions>( {
       visibleProperty: model.eccentricityVisibleProperty
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
   }
 }
 
 class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
+
+    const options = combineOptions<PanelOptions>( {
+      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
+    }, providedOptions );
 
     const conditionalAUStringProperty = new DerivedProperty(
       [ KeplersLawsStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
@@ -151,7 +156,6 @@ class ValuesPanel extends Panel {
 
     super( new HBox( {
       align: 'top',
-      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] ),
       children: [
         new VBox( {
           align: 'left',
@@ -230,7 +234,7 @@ class ValuesPanel extends Panel {
           listener: () => infoDialog.show()
         } )
       ]
-    } ), combineOptions<PanelOptions>( SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions ) );
+    } ), combineOptions<PanelOptions>( SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, options ) );
   }
 }
 
