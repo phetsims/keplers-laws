@@ -190,7 +190,7 @@ class ValuesPanel extends Panel {
             // Extra information: distance and velocity vector values
             new HBox( {
               spacing: 2,
-              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
                 positionMagnitudeStringProperty,
@@ -199,7 +199,7 @@ class ValuesPanel extends Panel {
             } ),
             new HBox( {
               spacing: 2,
-              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
                 velocityMagnitudeStringProperty,
@@ -208,7 +208,7 @@ class ValuesPanel extends Panel {
             } ),
             new HBox( {
               spacing: 2,
-              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.distanceAngleStringProperty,
                 distanceAngleStringProperty,
@@ -217,7 +217,7 @@ class ValuesPanel extends Panel {
             } ),
             new HBox( {
               spacing: 2,
-              visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.velocityAngleStringProperty,
                 velocityAngleStringProperty,

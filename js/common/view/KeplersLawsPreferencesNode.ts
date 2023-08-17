@@ -23,7 +23,7 @@ export default class KeplersLawsPreferencesNode extends PreferencesControl {
       labelNode: new Text( 'More Orbital Data', PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
       descriptionNode: new RichText( 'Display information about the planet\'s position and velocity vectors in the First Law Screen',
         PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS ),
-      controlNode: new ToggleSwitch( KeplersLawsPreferences.extraOrbitalDataEnabledProperty, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
+      controlNode: new ToggleSwitch( KeplersLawsPreferences.moreOrbitalDataEnabledProperty, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
     } );
   }
 }

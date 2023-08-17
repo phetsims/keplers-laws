@@ -12,8 +12,10 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const KeplersLawsPreferences = {
 
-  //TODO https://github.com/phetsims/keplers-laws/issues/105 rename to moreOrbitalDataEnabledProperty, document
-  extraOrbitalDataEnabledProperty: new BooleanProperty( false )
+  // Toggles wether the First Law panel will show extra information:
+  // Velocity magnitude and direction, as well as planet's position magnitude and direction.
+  // Those values might be useful for angular momentum calculations.
+  moreOrbitalDataEnabledProperty: new BooleanProperty( false )
 };
 
 keplersLaws.register( 'KeplersLawsPreferences', KeplersLawsPreferences );

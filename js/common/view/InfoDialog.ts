@@ -57,7 +57,7 @@ export default class InfoDialog extends Dialog {
         } ),
         new HBox( {
           spacing: spacing,
-          visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
             new Image( planetPosition_png, { scale: 0.315 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetPositionStringProperty, infoDialogTextOptions )
@@ -65,7 +65,7 @@ export default class InfoDialog extends Dialog {
         } ),
         new HBox( {
           spacing: spacing,
-          visibleProperty: KeplersLawsPreferences.extraOrbitalDataEnabledProperty,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
             new Image( planetVelocity_png, { scale: 0.325 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetVelocityStringProperty, infoDialogTextOptions )
