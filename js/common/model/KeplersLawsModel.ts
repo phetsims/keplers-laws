@@ -56,9 +56,9 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly stopwatch = new Stopwatch();
 
   // Booleans to keep track of which law is selected
-  public readonly isFirstLawProperty = new BooleanProperty( false );
-  public readonly isSecondLawProperty = new BooleanProperty( false );
-  public readonly isThirdLawProperty = new BooleanProperty( false );
+  public readonly isFirstLawProperty: ReadOnlyProperty<boolean>;
+  public readonly isSecondLawProperty: ReadOnlyProperty<boolean>;
+  public readonly isThirdLawProperty: ReadOnlyProperty<boolean>;
   public readonly lawUpdatedEmitter = new Emitter();
 
   // Map that relates each law with its corresponding visible boolean properties
@@ -153,15 +153,17 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     ];
     this.loadBodyStates( this.defaultBodyState );
 
+    this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.FIRST_LAW );
+    this.isSecondLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.SECOND_LAW );
+    this.isThirdLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.THIRD_LAW );
+
     let lastLaw = this.selectedLawProperty.value;
     this.selectedLawProperty.link( law => {
       this.saveAndDisableVisibilityState( lastLaw );
       this.resetVisibilityState( law );
-
-      this.isFirstLawProperty.value = law === LawMode.FIRST_LAW;
-      this.isSecondLawProperty.value = law === LawMode.SECOND_LAW;
-      this.isThirdLawProperty.value = law === LawMode.THIRD_LAW;
-
       lastLaw = law;
       this.lawUpdatedEmitter.emit();
     } );
