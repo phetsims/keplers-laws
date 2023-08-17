@@ -18,7 +18,7 @@ import Utils from '../../../../dot/js/Utils.js';
 
 export default class OrbitalSound {
   private readonly orbitalSoundClip: SoundClip;
-  private internalTime = 0;
+  private internalTime = 0; //REVIEW document
 
   public constructor(
     private readonly semimajorAxisProperty: TReadOnlyProperty<number>,

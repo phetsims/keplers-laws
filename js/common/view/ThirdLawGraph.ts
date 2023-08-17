@@ -138,8 +138,12 @@ export default class ThirdLawGraph extends Node {
 
     const orbitUpdated = () => {
       const targetOrbit = model.targetOrbitProperty.value;
+
+      //REVIEW document if and else blocks
       if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
         const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis * 100 );
+
+        //REVIEW document if and else blocks
         if ( targetOrbitPosition.x < axisLength ) {
           targetOrbitPoint.translation = targetOrbitPosition;
           targetOrbitPoint.visible = true;

@@ -27,6 +27,7 @@ const PUSH_BUTTON_SPACING = 8;
 
 // Restart Icon ---------------------------------------------------------------------------
 // constants
+//REVIEW constant names typically use uppercase, e.g. SCALE, V_SCALE, etc. All of these violate that naming convention.
 const scale = 0.75;
 const vscale = 1.15;
 const barWidth = 4 * scale;

@@ -29,6 +29,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
     } );
   }
 
+  //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
   public static getThirdLawNode( planet = true ): Node {
     return new Node( {
         children: [
