@@ -234,7 +234,7 @@ class ValuesPanel extends Panel {
           listener: () => infoDialog.show()
         } )
       ]
-    } ), combineOptions<PanelOptions>( SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, options ) );
+    } ), combineOptions<PanelOptions>( options, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
   }
 }
 
