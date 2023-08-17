@@ -20,7 +20,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
 

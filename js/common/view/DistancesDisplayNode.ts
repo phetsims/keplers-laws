@@ -21,8 +21,8 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
-import KeplersLawsColors from '../../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,

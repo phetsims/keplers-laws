@@ -24,10 +24,10 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import PeriodTrackerNode from './PeriodTrackerNode.js';
 import OrbitalSound from './OrbitalSound.js';
-import KeplersLawsColors from '../../KeplersLawsColors.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 

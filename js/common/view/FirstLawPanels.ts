@@ -18,11 +18,11 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import KeplersLawsColors from '../../KeplersLawsColors.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import InfoDialog from './InfoDialog.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
@@ -75,14 +75,19 @@ class EccentricityPanel extends Panel {
       ],
       spacing: 10,
       align: 'left',
-      stretch: true,
+      stretch: true
+    } ), combineOptions<PanelOptions>( {
       visibleProperty: model.eccentricityVisibleProperty
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
   }
 }
 
 class ValuesPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
+
+    const options = combineOptions<PanelOptions>( {
+      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
+    }, providedOptions );
 
     const conditionalAUStringProperty = new DerivedProperty(
       [ KeplersLawsStrings.units.AUStringProperty, model.engine.allowedOrbitProperty ],
@@ -151,7 +156,6 @@ class ValuesPanel extends Panel {
 
     super( new HBox( {
       align: 'top',
-      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] ),
       children: [
         new VBox( {
           align: 'left',
@@ -230,7 +234,7 @@ class ValuesPanel extends Panel {
           listener: () => infoDialog.show()
         } )
       ]
-    } ), combineOptions<PanelOptions>( SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions ) );
+    } ), combineOptions<PanelOptions>( options, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
   }
 }
 

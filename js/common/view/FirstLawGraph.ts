@@ -20,7 +20,7 @@ import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;

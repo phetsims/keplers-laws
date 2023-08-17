@@ -6,9 +6,9 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import { ProfileColorProperty } from '../../scenery/js/imports.js';
-import Tandem from '../../tandem/js/Tandem.js';
-import keplersLaws from './keplersLaws.js';
+import { ProfileColorProperty } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import keplersLaws from '../keplersLaws.js';
 
 const KeplersLawsColors = {
 

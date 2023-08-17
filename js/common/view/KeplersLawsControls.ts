@@ -11,7 +11,7 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, HSeparator, Node, Path, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { HBox, HSeparator, Node, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -21,15 +21,12 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
+import TargetOrbitsPanel from './TargetOrbitsPanel.js';
 
 class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
@@ -54,31 +51,7 @@ class KeplersLawsControls extends VBox {
 
     stopwatchIcon.setScaleMagnitude( 0.3 );
 
-    const targetOrbitsPanel = new Panel( new VBox( {
-      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
-      spacing: 5,
-      align: 'left',
-      children: [
-        new HBox( {
-          layoutOptions: {
-            stretch: true
-          },
-          children: [
-            new Text( KeplersLawsStrings.targetOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS ),
-            new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
-              stroke: 'gray',
-              lineWidth: 2
-            } )
-          ]
-        } ),
-        new TargetOrbitsComboBox( model.targetOrbitProperty, topLayer, {
-          enabledProperty: model.isSolarSystemProperty,
-          layoutOptions: {
-            align: 'center'
-          }
-        } )
-      ]
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    const targetOrbitsPanel = new TargetOrbitsPanel( model, topLayer );
 
     // Creates a custom VBox with the provided and default options
     const createVBox = ( children: Node[], providedOptions?: VBoxOptions ) => {

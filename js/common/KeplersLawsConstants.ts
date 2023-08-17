@@ -6,11 +6,11 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from './keplersLaws.js';
-import PhetFont from '../../scenery-phet/js/PhetFont.js';
-import SolarSystemCommonColors from '../../solar-system-common/js/SolarSystemCommonColors.js';
-import { Color } from '../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../solar-system-common/js/SolarSystemCommonConstants.js';
+import keplersLaws from '../keplersLaws.js';
+import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import { Color } from '../../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
 const DEFAULT_MAX_WIDTH = SolarSystemCommonConstants.TEXT_MAX_WIDTH;
 

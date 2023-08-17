@@ -10,7 +10,8 @@ import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
 // import saturatedSineLoopTrimmed_wav from '../../../sounds/saturatedSineLoopTrimmed_wav.js';
 // import charges_wav from '../../../sounds/charges_wav.js';
-import OrbitEccentricity_loop_v2_wav from '../../../sounds/OrbitEccentricity_loop_v2_wav.js';
+// import OrbitEccentricity_loop_v2_wav from '../../../sounds/OrbitEccentricity_loop_v2_wav.js';
+import OrbitEccentricity_loop_wav from '../../../sounds/OrbitEccentricity_loop_wav.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import animationFrameTimer from '../../../../axon/js/animationFrameTimer.js';
@@ -23,7 +24,7 @@ export default class OrbitalSound {
   public constructor(
     private readonly semimajorAxisProperty: TReadOnlyProperty<number>,
     private readonly eccentricityProperty: TReadOnlyProperty<number> ) {
-    this.orbitalSoundClip = new SoundClip( OrbitEccentricity_loop_v2_wav, {
+    this.orbitalSoundClip = new SoundClip( OrbitEccentricity_loop_wav, {
       initialOutputLevel: 0.5,
       loop: true
     } );

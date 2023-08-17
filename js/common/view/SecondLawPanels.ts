@@ -16,7 +16,7 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Range from '../../../../dot/js/Range.js';

@@ -17,7 +17,7 @@ import { Text, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;

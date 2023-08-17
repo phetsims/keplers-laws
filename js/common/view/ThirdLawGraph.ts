@@ -21,7 +21,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import keplersLaws from '../../keplersLaws.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
