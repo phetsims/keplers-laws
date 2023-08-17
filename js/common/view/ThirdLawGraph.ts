@@ -174,7 +174,7 @@ export default class ThirdLawGraph extends Node {
       const dx = 5;
 
       if ( !outOfBounds ) {
-        if ( !model.bodies[ 0 ].userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
+        if ( !model.sun.userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
           if ( orbit.a < minVisitedAxis ) {
             minVisitedAxis = orbit.a;
           }

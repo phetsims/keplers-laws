@@ -29,10 +29,10 @@ const SPACING = ( WIDTH - NUM_TICKS ) / ( NUM_TICKS - 1 );
 export default class ThirdLawSliderPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
     const colorProperty = SolarSystemCommonColors.firstBodyColorProperty;
-    const defaultLabelValue = model.bodies[ 0 ].massProperty.value;
+    const defaultLabelValue = model.sun.massProperty.value;
     const massRange = new RangeWithValue( defaultLabelValue / 2, 2 * defaultLabelValue, defaultLabelValue );
     const slider = new SolarSystemCommonNumberControl(
-      model.bodies[ 0 ].massProperty,
+      model.sun.massProperty,
       massRange, {
         sliderOptions: {
           constrainValue: ( mass: number ) => Math.abs( mass - defaultLabelValue ) / defaultLabelValue < SNAP_TOLERANCE ? defaultLabelValue : mass,
@@ -54,9 +54,9 @@ export default class ThirdLawSliderPanel extends Panel {
         },
 
         // snap to default value if close
-        startCallback: () => { model.bodies[ 0 ].userControlledMassProperty.value = true; },
+        startCallback: () => { model.sun.userControlledMassProperty.value = true; },
         endCallback: () => {
-          model.bodies[ 0 ].userControlledMassProperty.value = false;
+          model.sun.userControlledMassProperty.value = false;
         }
         // tandem: tandem
       }

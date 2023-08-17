@@ -136,7 +136,7 @@ export default class EllipticalOrbitEngine extends Engine {
       [
         this.body.positionProperty,
         this.body.velocityProperty,
-        this.bodies[ 0 ].massProperty
+        this.sun.massProperty
       ],
       (
         position: Vector2,
@@ -157,7 +157,7 @@ export default class EllipticalOrbitEngine extends Engine {
       [
         this.body.userControlledPositionProperty,
         this.body.userControlledVelocityProperty,
-        this.bodies[ 0 ].userControlledMassProperty
+        this.sun.userControlledMassProperty
       ],
       (
         userControlledPosition: boolean,
@@ -317,7 +317,7 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   private collidedWithSun( a: number, e: number ): boolean {
-    return a * ( 1 - e ) < Body.massToRadius( this.bodies[ 0 ].massProperty.value );
+    return a * ( 1 - e ) < Body.massToRadius( this.sun.massProperty.value );
   }
 
   public createPolar( nu: number, w = 0 ): Vector2 {

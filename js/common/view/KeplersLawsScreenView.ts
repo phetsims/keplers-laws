@@ -85,14 +85,14 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       return viewBounds;
     } );
 
-    const sun = model.bodies[ 0 ];
-    const body = model.bodies[ 1 ];
-    const sunNode = new BodyNode( model.bodies[ 0 ], this.modelViewTransformProperty, {
+    const sun = model.sun;
+    const planet = model.planet;
+    const sunNode = new BodyNode( model.sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
       pickable: false
     } );
-    const bodyNode = new BodyNode( body, this.modelViewTransformProperty, {
+    const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
       useCueingArrows: true,
       showVelocityIndex: false,
       soundViewNode: this,
@@ -114,19 +114,19 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     } );
     this.bodiesLayer.addChild( sunNode );
-    this.bodiesLayer.addChild( bodyNode );
+    this.bodiesLayer.addChild( planetNode );
 
     this.playBodySounds = () => {
       if ( this.model.isPlayingProperty.value ) {
-        bodyNode.playSound();
+        planetNode.playSound();
       }
       else {
-        bodyNode.stopSound();
+        planetNode.stopSound();
       }
     };
 
     // Draggable velocity vector
-    this.componentsLayer.addChild( this.createDraggableVectorNode( body, {
+    this.componentsLayer.addChild( this.createDraggableVectorNode( planet, {
       minimumMagnitude: 30,
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
@@ -138,7 +138,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
-      body, this.modelViewTransformProperty, model.gravityVisibleProperty, body.forceProperty,
+      planet, this.modelViewTransformProperty, model.gravityVisibleProperty, planet.forceProperty,
       new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
     ) );
 

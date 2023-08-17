@@ -29,6 +29,7 @@ import Range from '../../../../dot/js/Range.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
+import Body from '../../../../solar-system-common/js/model/Body.js';
 
 type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
 
@@ -39,6 +40,9 @@ type SelfOptions = {
 export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'isLab'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
+  public readonly sun: Body;
+  public readonly planet: Body;
+  
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
 
   public readonly targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE );
@@ -119,7 +123,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     }, providedOptions );
     super( options );
 
-    this.isSolarSystemProperty = new DerivedProperty( [ this.bodies[ 0 ].massProperty ], sunMass => sunMass === 200 );
+    this.sun = this.bodies[ 0 ];
+    this.planet = this.bodies[ 1 ];
+
+    this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
     this.lawVisibilitiesMap.set( LawMode.FIRST_LAW, this.firstLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.SECOND_LAW, this.secondLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.THIRD_LAW, this.thirdLawVisibilities );
@@ -133,7 +140,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       }
     } );
 
-    this.bodies[ 0 ].massProperty.lazyLink( () => {
+    this.sun.massProperty.lazyLink( () => {
       // Pause the sim when the Sun's ( id = 0 ) mass is changed
       this.isPlayingProperty.value = false;
     } );
