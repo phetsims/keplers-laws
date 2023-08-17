@@ -14,7 +14,7 @@ import { HBox, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';

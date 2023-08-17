@@ -13,7 +13,7 @@ import { Node, Path } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import XNode, { XNodeOptions } from '../../../scenery-phet/js/XNode.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../common/KeplersLawsConstants.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import { combineOptions } from '../../../phet-core/js/optionize.js';

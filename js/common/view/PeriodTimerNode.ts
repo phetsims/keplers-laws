@@ -22,7 +22,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';

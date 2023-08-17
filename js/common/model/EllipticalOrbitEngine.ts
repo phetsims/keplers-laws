@@ -36,7 +36,7 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import OrbitalArea from './OrbitalArea.js';
 import Property from '../../../../axon/js/Property.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 const TWOPI = 2 * Math.PI;
 

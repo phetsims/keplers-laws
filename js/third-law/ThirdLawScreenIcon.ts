@@ -13,7 +13,7 @@ import { Node, Path, Text } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {

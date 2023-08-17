@@ -11,8 +11,8 @@ import keplersLaws from '../keplersLaws.js';
 import { Path, Node } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../common/KeplersLawsConstants.js';
+import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 // constants
 const ICON_SCALE = 1.2;

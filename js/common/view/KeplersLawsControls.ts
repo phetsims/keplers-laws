@@ -21,7 +21,7 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';

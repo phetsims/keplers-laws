@@ -23,7 +23,7 @@ import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
 import keplersLaws from '../../keplersLaws.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Utils from '../../../../dot/js/Utils.js';
-import KeplersLawsConstants from '../../KeplersLawsConstants.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
