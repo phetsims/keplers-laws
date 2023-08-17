@@ -30,7 +30,7 @@ export default class FirstLawCheckboxIcons {
     // no-op
   }
 
-  public static getFociCheckboxIcon(): Node {
+  public static createFociCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -45,7 +45,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getStringsCheckboxIcon(): Node {
+  public static createStringsCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -64,7 +64,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getSemiaxesCheckboxIcon(): Node {
+  public static createSemiaxesCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -82,7 +82,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getSemimajorAxisCheckboxIcon(): Node {
+  public static createSemimajorAxisCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -98,7 +98,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getEccentricityCheckboxIcon(): Node {
+  public static createEccentricityCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
@@ -119,7 +119,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static getAxisCheckboxIcon(): Node {
+  public static createAxisCheckboxIcon(): Node {
 
     return new Node( {
       scale: ICON_SCALE,

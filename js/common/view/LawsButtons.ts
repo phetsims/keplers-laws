@@ -44,17 +44,17 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
     super( selectedLawProperty, [
       {
         value: LawMode.FIRST_LAW,
-        createNode: () => new Node( { children: [ FirstLawScreenIcon.getFullNode() ], scale: 1.5 } ),
+        createNode: () => new Node( { children: [ FirstLawScreenIcon.createFullNode() ], scale: 1.5 } ),
         tandemName: 'firstLawButton'
       },
       {
         value: LawMode.SECOND_LAW,
-        createNode: () => new Node( { children: [ SecondLawScreenIcon.getFullNode() ], scale: 1.5 } ),
+        createNode: () => new Node( { children: [ SecondLawScreenIcon.createFullNode() ], scale: 1.5 } ),
         tandemName: 'secondLawButton'
       },
       {
         value: LawMode.THIRD_LAW,
-        createNode: () => new Node( { children: [ ThirdLawScreenIcon.getFullNode() ], scale: 1.5 } ),
+        createNode: () => new Node( { children: [ ThirdLawScreenIcon.createFullNode() ], scale: 1.5 } ),
         tandemName: 'thirdLawButton'
       }
     ], options );

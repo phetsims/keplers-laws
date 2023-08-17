@@ -18,9 +18,9 @@ import ThirdLawScreenIcon from '../third-law/ThirdLawScreenIcon.js';
 export default class AllLawsScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
 
-    const secondLawNode = SecondLawScreenIcon.getFullNode();
-    const firstLawNode = FirstLawScreenIcon.getFirstLawNode( false );
-    const periodTimerNode = ThirdLawScreenIcon.getPeriodTimerNode();
+    const secondLawNode = SecondLawScreenIcon.createFullNode();
+    const firstLawNode = FirstLawScreenIcon.createFirstLawNode( false );
+    const periodTimerNode = ThirdLawScreenIcon.createPeriodTimerNode();
 
     super( new Node( {
       children: [ secondLawNode, firstLawNode, periodTimerNode ]

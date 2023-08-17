@@ -17,10 +17,10 @@ import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
 
 export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
-    super( SecondLawScreenIcon.getFullNode() );
+    super( SecondLawScreenIcon.createFullNode() );
   }
 
-  public static getFullNode(): Node {
+  public static createFullNode(): Node {
 
     const eccentricity = focalPoint / semiMajorAxis;
 
@@ -58,7 +58,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
     return new Node( {
       children: [
         ...areas,
-        KeplersLawsScreenIcon.getCommonNode(),
+        KeplersLawsScreenIcon.createCommonNode(),
         new ShadedSphereNode( 3, {
           mainColor: SolarSystemCommonColors.secondBodyColorProperty,
           x: bodyPosition.x + focalPoint,

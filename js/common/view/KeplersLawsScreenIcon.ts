@@ -34,7 +34,7 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
     );
   }
 
-  public static getCommonNode(): Node {
+  public static createCommonNode(): Node {
     return new Node( {
       children: [
         // All icon elements

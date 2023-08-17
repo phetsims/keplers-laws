@@ -59,13 +59,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.fociVisibleProperty,
         KeplersLawsStrings.fociStringProperty,
         'fociVisibleCheckbox',
-        FirstLawCheckboxIcons.getFociCheckboxIcon()
+        FirstLawCheckboxIcons.createFociCheckboxIcon()
       ),
       createCheckbox(
         model.stringsVisibleProperty,
         KeplersLawsStrings.stringsStringProperty,
         'stringsVisibleCheckbox',
-        FirstLawCheckboxIcons.getStringsCheckboxIcon(),
+        FirstLawCheckboxIcons.createStringsCheckboxIcon(),
         {
           enabledProperty: model.fociVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -75,13 +75,13 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.axisVisibleProperty,
         KeplersLawsStrings.axisStringProperty,
         'axisVisibleCheckbox',
-        FirstLawCheckboxIcons.getAxisCheckboxIcon()
+        FirstLawCheckboxIcons.createAxisCheckboxIcon()
       ),
       createCheckbox(
         model.semiaxisVisibleProperty,
         KeplersLawsStrings.semiaxisStringProperty,
         'semiAxisVisibleCheckbox',
-        FirstLawCheckboxIcons.getSemiaxesCheckboxIcon(),
+        FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
         {
           enabledProperty: model.axisVisibleProperty,
           layoutOptions: { leftMargin: 20 }
@@ -91,7 +91,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.eccentricityVisibleProperty,
         KeplersLawsStrings.eccentricityStringProperty,
         'eccentricityVisibleCheckbox',
-        FirstLawCheckboxIcons.getEccentricityCheckboxIcon()
+        FirstLawCheckboxIcons.createEccentricityCheckboxIcon()
       )
     ];
 
@@ -131,7 +131,7 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         model.semiMajorAxisVisibleProperty,
         KeplersLawsStrings.graph.aStringProperty,
         'semiMajorAxisVisibleCheckbox',
-        FirstLawCheckboxIcons.getSemimajorAxisCheckboxIcon()
+        FirstLawCheckboxIcons.createSemimajorAxisCheckboxIcon()
       ),
       createCheckbox(
         model.periodVisibleProperty,

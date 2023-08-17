@@ -23,20 +23,20 @@ const FOCI_SCALE = 0.25;
 
 export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
-    super( FirstLawScreenIcon.getFullNode() );
+    super( FirstLawScreenIcon.createFullNode() );
   }
 
-  public static getFullNode(): Node {
+  public static createFullNode(): Node {
     return new Node( {
       children: [
-        KeplersLawsScreenIcon.getCommonNode(),
-        FirstLawScreenIcon.getFirstLawNode()
+        KeplersLawsScreenIcon.createCommonNode(),
+        FirstLawScreenIcon.createFirstLawNode()
       ]
     } );
   }
 
   //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
-  public static getFirstLawNode( planet = true ): Node {
+  public static createFirstLawNode( planet = true ): Node {
     return new Node( {
         children: [
           new Path(

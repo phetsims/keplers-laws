@@ -17,20 +17,20 @@ import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
-    super( ThirdLawScreenIcon.getFullNode() );
+    super( ThirdLawScreenIcon.createFullNode() );
   }
 
-  public static getFullNode(): Node {
+  public static createFullNode(): Node {
     return new Node( {
       children: [
-        KeplersLawsScreenIcon.getCommonNode(),
-        ThirdLawScreenIcon.getThirdLawNode()
+        KeplersLawsScreenIcon.createCommonNode(),
+        ThirdLawScreenIcon.createThirdLawNode()
       ]
     } );
   }
 
   //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
-  public static getThirdLawNode( planet = true ): Node {
+  public static createThirdLawNode( planet = true ): Node {
     return new Node( {
         children: [
           new Path(
@@ -49,7 +49,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
               lineWidth: 1
             }
           ),
-          ThirdLawScreenIcon.getPeriodTimerNode(),
+          ThirdLawScreenIcon.createPeriodTimerNode(),
           planet ?
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,
@@ -60,7 +60,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
     );
   }
 
-  public static getPeriodTimerNode(): Node {
+  public static createPeriodTimerNode(): Node {
     const timerWidth = 50;
     const timerHeight = 20;
     const screenWidth = 40;
