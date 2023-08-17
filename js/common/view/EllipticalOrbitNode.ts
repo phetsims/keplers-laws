@@ -32,9 +32,9 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 
 export default class EllipticalOrbitNode extends Path {
-  private readonly orbit: EllipticalOrbitEngine;
+  private readonly orbit: EllipticalOrbitEngine; //REVIEW I found this name confusing. Why not orbitEngine?
   private readonly shapeMultilink: UnknownMultilink;
-  public readonly topLayer: Node;
+  public readonly topLayer: Node; //REVIEW document
 
   public constructor(
     model: KeplersLawsModel,

@@ -29,9 +29,9 @@ export default class FirstLawGraph extends AlignBox {
 
   public constructor( public model: KeplersLawsModel ) {
 
-    const yAxisLength = 180;
+    const yAxisLength = 180; //REVIEW move outside constructor as const Y_AXIS_LENGTH
 
-    const modelYRange = new Range( 0, 1 );
+    const modelYRange = new Range( 0, 1 ); //REVIEW move outside constructor as const MODEL_Y_RANGE
 
     const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, yAxisLength ), {
       fill: FOREGROUND_COLOR_PROPERTY,
