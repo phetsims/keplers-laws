@@ -189,7 +189,7 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: model.eccentricityVisibleProperty
     } );
     const stringsPath = new Path( null, {
-      stroke: KeplersLawsConstants.DISTANCE_LABEL_COLOR,
+      stroke: KeplersLawsColors.distancesColorProperty,
       lineWidth: 3,
       visibleProperty: model.stringsVisibleProperty,
       lineDash: [ 10, 2 ]
@@ -198,7 +198,7 @@ export default class EllipticalOrbitNode extends Path {
       scale: 0.8,
       center: Vector2.ZERO,
       visibleProperty: model.fociVisibleProperty
-    }, KeplersLawsConstants.FOCI_COLOR_OPTIONS );
+    }, KeplersLawsColors.fociColorProperty );
     const foci = [
       new XNode( fociOptions ),
       new XNode( fociOptions )
@@ -245,9 +245,7 @@ export default class EllipticalOrbitNode extends Path {
         center: Vector2.ZERO,
         visible: false
       } ) );
-      areaPaths.push( new Path( null, {
-        fill: KeplersLawsConstants.AREA_COLOR
-      } ) );
+      areaPaths.push( new Path( null ) );
       const areaValueProperty = new NumberProperty( 0 );
       const timeValueProperty = new NumberProperty( 0 );
       areaValueProperties.push( areaValueProperty );
@@ -430,7 +428,7 @@ export default class EllipticalOrbitNode extends Path {
           // Set the center of the orbit's divisions dot
           const dotPosition = area.dotPosition.times( scale ).minus( center );
           orbitDivisions[ i ].center = dotPosition;
-          orbitDivisions[ i ].fill = KeplersLawsConstants.AREA_COLOR;
+          orbitDivisions[ i ].fill = KeplersLawsColors.areaColorProperty;
 
           const start = area.startPosition.times( scale ).minus( center );
           const end = area.endPosition.times( scale ).minus( center );

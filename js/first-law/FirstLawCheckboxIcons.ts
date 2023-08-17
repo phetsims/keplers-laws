@@ -8,10 +8,9 @@
  */
 
 import keplersLaws from '../keplersLaws.js';
-import { Path, Node } from '../../../scenery/js/imports.js';
+import { Node, Path } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
-import KeplersLawsConstants from '../common/KeplersLawsConstants.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 // constants
@@ -39,7 +38,7 @@ export default class FirstLawCheckboxIcons {
           }
         ),
         new Path( new Shape().circle( -focalDistance, 0, fociRadius ).circle( focalDistance, 0, fociRadius ), {
-          fill: KeplersLawsConstants.FOCI_COLOR_OPTIONS.fill
+          fill: KeplersLawsColors.fociColorProperty
         } )
       ]
     } );
@@ -58,7 +57,7 @@ export default class FirstLawCheckboxIcons {
           }
         ),
         new Path( new Shape().circle( -focalDistance, 0, fociRadius ).circle( focalDistance, 0, fociRadius ), {
-          fill: KeplersLawsConstants.FOCI_COLOR_OPTIONS.fill
+          fill: KeplersLawsColors.fociColorProperty
         } )
       ]
     } );
@@ -113,7 +112,7 @@ export default class FirstLawCheckboxIcons {
           }
         ),
         new Path( new Shape().circle( -focalDistance, 0, fociRadius ), {
-          fill: KeplersLawsConstants.FOCI_COLOR_OPTIONS.fill
+          fill: KeplersLawsColors.fociColorProperty
         } )
       ]
     } );

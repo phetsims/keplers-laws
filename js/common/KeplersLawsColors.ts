@@ -8,6 +8,7 @@
 
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import keplersLaws from '../keplersLaws.js';
+import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 
 const KeplersLawsColors = {
 
@@ -16,6 +17,9 @@ const KeplersLawsColors = {
     default: 'white',
     projector: 'black'
   } ),
+
+  // Color for the base fuchsia of the areas
+  areaColorProperty: SolarSystemCommonColors.orbitColorProperty,
 
   // Semimajor axis color
   semimajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semimajorAxis', {
@@ -40,6 +44,14 @@ const KeplersLawsColors = {
   // Period color
   distancesColorProperty: new ProfileColorProperty( keplersLaws, 'distance', {
     default: '#ccb285'
+  } ),
+
+  fociColorProperty: new ProfileColorProperty( keplersLaws, 'foci', {
+    default: '#29ABE2'
+  } ),
+
+  axesColorProperty: new ProfileColorProperty( keplersLaws, 'axes', {
+    default: 'orange'
   } )
 };
 
