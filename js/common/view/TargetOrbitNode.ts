@@ -14,6 +14,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export default class TargetOrbitNode extends Path {
   public constructor(
@@ -23,7 +24,7 @@ export default class TargetOrbitNode extends Path {
   ) {
     const options = combineOptions<PathOptions>( {
       isDisposable: false,
-      stroke: 'gray',
+      stroke: KeplersLawsColors.targetOrbitColorProperty,
       lineWidth: 3
       // lineDash: [ 5, 5 ]
     }, providedOptions );

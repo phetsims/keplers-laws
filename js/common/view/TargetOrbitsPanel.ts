@@ -19,6 +19,7 @@ import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export default class TargetOrbitsPanel extends Panel {
   public constructor( model: KeplersLawsModel, topLayer: Node ) {
@@ -29,7 +30,7 @@ export default class TargetOrbitsPanel extends Panel {
     const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
 
     const targetOrbitIcon = new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
-      stroke: 'gray',
+      stroke: KeplersLawsColors.targetOrbitColorProperty,
       lineWidth: 2
     } );
 

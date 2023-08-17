@@ -206,8 +206,8 @@ export default class EllipticalOrbitNode extends Path {
 
     // SECOND LAW: Periapsis and Apoapsis
     const periapsis = new XNode( {
-      fill: 'gold',
-      stroke: SolarSystemCommonColors.foregroundProperty,
+      fill: KeplersLawsColors.periapsisColorProperty,
+      stroke: KeplersLawsColors.foregroundProperty,
       center: Vector2.ZERO,
       visibleProperty: new DerivedProperty(
         [ model.periapsisVisibleProperty, this.orbit.eccentricityProperty ],
@@ -216,8 +216,8 @@ export default class EllipticalOrbitNode extends Path {
         } )
     } );
     const apoapsis = new XNode( {
-      fill: SolarSystemCommonColors.thirdBodyColorProperty,
-      stroke: SolarSystemCommonColors.foregroundProperty,
+      fill: KeplersLawsColors.apoapsisColorProperty,
+      stroke: KeplersLawsColors.foregroundProperty,
       center: Vector2.ZERO,
       visibleProperty: new DerivedProperty(
         [ model.apoapsisVisibleProperty, this.orbit.eccentricityProperty ],

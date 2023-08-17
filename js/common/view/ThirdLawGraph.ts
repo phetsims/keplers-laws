@@ -23,6 +23,7 @@ import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -73,7 +74,7 @@ export default class ThirdLawGraph extends Node {
       fill: SolarSystemCommonColors.secondBodyColorProperty
     } );
     const targetOrbitPoint = new Circle( 5, {
-      fill: 'gray',
+      fill: KeplersLawsColors.targetOrbitColorProperty,
       x: undefined,
       y: undefined
     } );
@@ -90,8 +91,8 @@ export default class ThirdLawGraph extends Node {
       visible: false
     } );
     const targetOrbitOutOfBounds = new ArrowNode( 0, 0, 1, 0, {
-      stroke: 'gray',
-      fill: 'gray',
+      stroke: KeplersLawsColors.targetOrbitColorProperty,
+      fill: KeplersLawsColors.targetOrbitColorProperty,
       lineWidth: 2,
       boundsMethod: 'none',
       visible: false

@@ -50,8 +50,16 @@ const KeplersLawsColors = {
     default: '#29ABE2'
   } ),
 
-  axesColorProperty: new ProfileColorProperty( keplersLaws, 'axes', {
-    default: 'orange'
+  periapsisColorProperty: new ProfileColorProperty( keplersLaws, 'periapsis', {
+    default: 'gold'
+  } ),
+
+  apoapsisColorProperty: new ProfileColorProperty( keplersLaws, 'apoapsis', {
+    default: 'cyan'
+  } ),
+
+  targetOrbitColorProperty: new ProfileColorProperty( keplersLaws, 'targetOrbit', {
+    default: 'gray'
   } )
 };
 

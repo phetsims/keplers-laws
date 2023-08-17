@@ -11,7 +11,6 @@ import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import Property from '../../../../axon/js/Property.js';
@@ -23,6 +22,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -101,8 +101,8 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         KeplersLawsStrings.apoapsisStringProperty,
         'apoapsisVisibleCheckbox',
         new XNode( {
-          fill: SolarSystemCommonColors.thirdBodyColorProperty,
-          stroke: SolarSystemCommonColors.foregroundProperty,
+          fill: KeplersLawsColors.apoapsisColorProperty,
+          stroke: KeplersLawsColors.foregroundProperty,
           scale: 0.5
         } ),
         {
@@ -115,8 +115,8 @@ class KeplersLawsOrbitalInformationBox extends VBox {
         KeplersLawsStrings.periapsisStringProperty,
         'periapsisVisibleCheckbox',
         new XNode( {
-          fill: 'gold',
-          stroke: SolarSystemCommonColors.foregroundProperty,
+          fill: KeplersLawsColors.periapsisColorProperty,
+          stroke: KeplersLawsColors.foregroundProperty,
           scale: 0.5
         } ),
         {
