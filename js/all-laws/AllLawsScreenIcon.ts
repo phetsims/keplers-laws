@@ -1,5 +1,6 @@
 // Copyright 2023, University of Colorado Boulder
 
+//REVIEW bogus documentation, copy-paste from SecondLawScreenIcon
 /**
  *
  * Second Law Screen Icon: multiple elliptical segments that represent area filling
