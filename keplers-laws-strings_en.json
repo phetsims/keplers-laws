@@ -188,10 +188,10 @@
   "orbit.halley": {
     "value": "Halley"
   },
-  "infoDialog.semimajorAxis": {
+  "infoDialog.semiMajorAxis": {
     "value": "<b>Semimajor axis (a):</b> represents half of the longest diameter of the elliptical orbit."
   },
-  "infoDialog.semiminorAxis": {
+  "infoDialog.semiMinorAxis": {
     "value": "<b>Semiminor axis (b):</b> represents half of the shortest diameter of the elliptical orbit."
   },
   "infoDialog.focalDistance": {
