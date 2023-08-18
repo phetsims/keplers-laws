@@ -87,16 +87,16 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: semiMajorAxisVisibleProperty
     }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
-      stroke: KeplersLawsColors.semimajorAxisColorProperty,
-      fill: KeplersLawsColors.semimajorAxisColorProperty
+      stroke: KeplersLawsColors.semiMajorAxisColorProperty,
+      fill: KeplersLawsColors.semiMajorAxisColorProperty
     } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
         visibleProperty: model.semiaxisVisibleProperty
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
-        stroke: KeplersLawsColors.semiminorAxisColorProperty,
-        fill: KeplersLawsColors.semiminorAxisColorProperty
+        stroke: KeplersLawsColors.semiMinorAxisColorProperty,
+        fill: KeplersLawsColors.semiMinorAxisColorProperty
       } ) );
     const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
       {
@@ -174,12 +174,12 @@ export default class EllipticalOrbitNode extends Path {
       )
     } );
     const semiMajorAxisPath = new Path( null, {
-      stroke: KeplersLawsColors.semimajorAxisColorProperty,
+      stroke: KeplersLawsColors.semiMajorAxisColorProperty,
       lineWidth: 3,
       visibleProperty: semiMajorAxisVisibleProperty
     } );
     const semiMinorAxisPath = new Path( null, {
-      stroke: KeplersLawsColors.semiminorAxisColorProperty,
+      stroke: KeplersLawsColors.semiMinorAxisColorProperty,
       lineWidth: 3,
       visibleProperty: model.semiaxisVisibleProperty
     } );
@@ -360,7 +360,7 @@ export default class EllipticalOrbitNode extends Path {
         const minScaling = 1.2;
         const maxScaling = 2.0;
 
-        // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
+        // Here, a1 and a2 are the Semimajor and semiminor axes of the ellipse
         return Utils.clamp(
           Utils.linear( 10, 250, maxScaling, minScaling, vectorMagnitude ),
           minScaling, maxScaling );
@@ -372,7 +372,7 @@ export default class EllipticalOrbitNode extends Path {
       axis.moveTo( 0, -radiusY ).lineTo( 0, radiusY );
       axisPath.shape = axis;
 
-      // Semi-major axis (a)
+      // Semimajor axis (a)
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
 
       // Semi-minor axis (b)

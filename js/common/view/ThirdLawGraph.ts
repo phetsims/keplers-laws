@@ -190,7 +190,7 @@ export default class ThirdLawGraph extends Node {
         }
       }
 
-      // a is the semimajor axis
+      // a is the semiMajor axis
       for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
         const pointToDraw = semiMajorAxisToViewPoint( a );
         shape.lineToPoint( pointToDraw );

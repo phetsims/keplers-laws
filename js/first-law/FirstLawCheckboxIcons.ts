@@ -68,10 +68,10 @@ export default class FirstLawCheckboxIcons {
       scale: ICON_SCALE,
       children: [
         new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
-          stroke: KeplersLawsColors.semimajorAxisColorProperty
+          stroke: KeplersLawsColors.semiMajorAxisColorProperty
         } ),
         new Path( new Shape().moveTo( 0, -semiMinorAxis ).lineTo( 0, 0 ), {
-          stroke: KeplersLawsColors.semiminorAxisColorProperty
+          stroke: KeplersLawsColors.semiMinorAxisColorProperty
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
             stroke: SolarSystemCommonColors.foregroundProperty
@@ -91,7 +91,7 @@ export default class FirstLawCheckboxIcons {
             lineWidth: 1
           } ),
         new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
-          stroke: KeplersLawsColors.semimajorAxisColorProperty
+          stroke: KeplersLawsColors.semiMajorAxisColorProperty
         } )
       ]
     } );
@@ -102,7 +102,7 @@ export default class FirstLawCheckboxIcons {
       scale: ICON_SCALE,
       children: [
         new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
-          stroke: KeplersLawsColors.semimajorAxisColorProperty
+          stroke: KeplersLawsColors.semiMajorAxisColorProperty
         } ),
         new Path( new Shape().moveTo( -focalDistance, 0 ).lineTo( 0, 0 ), {
           stroke: KeplersLawsColors.focalDistanceColorProperty

@@ -65,7 +65,7 @@ class EccentricityPanel extends Panel {
                 new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
                 new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
                   KeplersLawsConstants.TITLE_OPTIONS, {
-                    fill: KeplersLawsColors.semimajorAxisColorProperty
+                    fill: KeplersLawsColors.semiMajorAxisColorProperty
                   } ) )
               ]
             } )
@@ -165,7 +165,7 @@ class ValuesPanel extends Panel {
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
                 semiMajorAxisStringProperty,
-                KeplersLawsColors.semimajorAxisColorProperty
+                KeplersLawsColors.semiMajorAxisColorProperty
               )
             } ),
             new HBox( {
@@ -174,7 +174,7 @@ class ValuesPanel extends Panel {
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
                 semiMinorAxisStringProperty,
-                KeplersLawsColors.semiminorAxisColorProperty
+                KeplersLawsColors.semiMinorAxisColorProperty
               )
             } ),
             new HBox( {

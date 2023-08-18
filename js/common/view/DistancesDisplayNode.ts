@@ -4,7 +4,7 @@
  * Box that shows the length of distances available in the sim:
  *  - d1 and d2: Focal strings' lengths from the sun and secondary focus to the planet
  *  - R: Distance from the sun to the planet (circular orbit)
- *  - a: Semi-major axis of the ellipse
+ *  - a: Semimajor axis of the ellipse
  *
  * @author Agustín Vallejo
  */
@@ -32,8 +32,8 @@ export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLa
 
 export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
-  stroke: KeplersLawsColors.semimajorAxisColorProperty,
-  fill: KeplersLawsColors.semimajorAxisColorProperty
+  stroke: KeplersLawsColors.semiMajorAxisColorProperty,
+  fill: KeplersLawsColors.semiMajorAxisColorProperty
 } );
 
 export const STRING_ARROW_OPTIONS = {
@@ -47,8 +47,8 @@ export const STRING_ARROW_OPTIONS = {
 };
 
 export const MAJOR_AXIS_ARROW_OPTIONS = {
-  stroke: KeplersLawsColors.semimajorAxisColorProperty,
-  fill: KeplersLawsColors.semimajorAxisColorProperty,
+  stroke: KeplersLawsColors.semiMajorAxisColorProperty,
+  fill: KeplersLawsColors.semiMajorAxisColorProperty,
   headHeight: 10,
   headWidth: 10,
   headLineWidth: 3,

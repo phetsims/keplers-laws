@@ -22,12 +22,12 @@ const KeplersLawsColors = {
   areaColorProperty: SolarSystemCommonColors.orbitColorProperty,
 
   // Semimajor axis color
-  semimajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semimajorAxis', {
+  semiMajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMajorAxis', {
     default: 'orange'
   } ),
 
   // Semiminor axis color
-  semiminorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiminorAxis', {
+  semiMinorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMinorAxis', {
     default: '#C4F566'
   } ),
 

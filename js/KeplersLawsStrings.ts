@@ -91,8 +91,8 @@ type StringsType = {
     'halleyStringProperty': LocalizedStringProperty;
   };
   'infoDialog': {
-    'semimajorAxisStringProperty': LocalizedStringProperty;
-    'semiminorAxisStringProperty': LocalizedStringProperty;
+    'semiMajorAxisStringProperty': LocalizedStringProperty;
+    'semiMinorAxisStringProperty': LocalizedStringProperty;
     'focalDistanceStringProperty': LocalizedStringProperty;
     'planetPositionStringProperty': LocalizedStringProperty;
     'planetVelocityStringProperty': LocalizedStringProperty;

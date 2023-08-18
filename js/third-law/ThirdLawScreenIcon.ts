@@ -2,7 +2,7 @@
 
 /**
  *
- * Definition of the Third Law Screen Icon: An elliptical orbit with a Sun, the orbiting body, the semimajor axis, and a timer
+ * Definition of the Third Law Screen Icon: An elliptical orbit with a Sun, the orbiting body, the semiMajor axis, and a timer
  *
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
@@ -45,7 +45,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
           } ),
           new Path(
             new Shape().moveTo( 0, 0 ).lineTo( semiMajorAxis, 0 ), {
-              stroke: KeplersLawsColors.semimajorAxisColorProperty,
+              stroke: KeplersLawsColors.semiMajorAxisColorProperty,
               lineWidth: 1
             }
           ),

@@ -22,7 +22,7 @@ export default class OrbitalSound {
   private internalTime = 0; //REVIEW document
 
   public constructor(
-    private readonly semimajorAxisProperty: TReadOnlyProperty<number>,
+    private readonly semiMajorAxisProperty: TReadOnlyProperty<number>,
     private readonly eccentricityProperty: TReadOnlyProperty<number> ) {
     this.orbitalSoundClip = new SoundClip( OrbitEccentricity_loop_wav, {
       initialOutputLevel: 0.5,
@@ -33,11 +33,11 @@ export default class OrbitalSound {
     const maxPlaybackRate = 4;
     const minPlaybackRate = 0.1;
 
-    Multilink.multilink( [ this.semimajorAxisProperty ], () => {
+    Multilink.multilink( [ this.semiMajorAxisProperty ], () => {
       const mapping = Utils.clamp(
         Utils.linear(
           minPlaybackRate, maxPlaybackRate * 0.7,
-          maxPlaybackRate, minPlaybackRate, Math.pow( this.semimajorAxisProperty.value, 0.5 ) ),
+          maxPlaybackRate, minPlaybackRate, Math.pow( this.semiMajorAxisProperty.value, 0.5 ) ),
         minPlaybackRate, maxPlaybackRate
       );
       this.orbitalSoundClip.setPlaybackRate( mapping );

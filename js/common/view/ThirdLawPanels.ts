@@ -185,7 +185,7 @@ class ThirdLawAccordionBox extends AccordionBox {
                 layoutOptions: { column: 0, row: 0 }
               }
             ),
-            // Semi-major axis power buttons
+            // Semimajor axis power buttons
             new RectangularRadioButtonGroup(
               model.selectedAxisPowerProperty,
               [

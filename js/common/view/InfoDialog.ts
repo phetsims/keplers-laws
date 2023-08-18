@@ -38,14 +38,14 @@ export default class InfoDialog extends Dialog {
           spacing: spacing,
           children: [
             new Image( infoSemimajorAxis_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.semimajorAxisStringProperty, infoDialogTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, infoDialogTextOptions )
             ]
         } ),
         new HBox( {
           spacing: spacing,
           children: [
             new Image( infoSemiminorAxis_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.semiminorAxisStringProperty, infoDialogTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, infoDialogTextOptions )
           ]
         } ),
         new HBox( {
