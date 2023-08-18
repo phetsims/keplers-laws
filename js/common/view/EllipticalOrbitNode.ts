@@ -12,7 +12,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Multilink, { UnknownMultilink } from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import XNode, { XNodeOptions } from '../../../../scenery-phet/js/XNode.js';
+import XNode from '../../../../scenery-phet/js/XNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -194,11 +194,12 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: model.stringsVisibleProperty,
       lineDash: [ 10, 2 ]
     } );
-    const fociOptions = combineOptions<XNodeOptions>( {
+    const fociOptions = {
       scale: 0.8,
       center: Vector2.ZERO,
-      visibleProperty: model.fociVisibleProperty
-    }, KeplersLawsColors.fociColorProperty );
+      visibleProperty: model.fociVisibleProperty,
+      fill: KeplersLawsColors.fociColorProperty
+    };
     const foci = [
       new XNode( fociOptions ),
       new XNode( fociOptions )

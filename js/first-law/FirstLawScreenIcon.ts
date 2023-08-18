@@ -12,10 +12,9 @@ import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
-import XNode, { XNodeOptions } from '../../../scenery-phet/js/XNode.js';
+import XNode from '../../../scenery-phet/js/XNode.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
-import { combineOptions } from '../../../phet-core/js/optionize.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 // constants
@@ -36,7 +35,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
   }
 
   //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
-  public static createFirstLawNode( planet = true ): Node {
+  public static createFirstLawNode( showPlanet = true ): Node {
     return new Node( {
         children: [
           new Path(
@@ -49,17 +48,19 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
             mainColor: SolarSystemCommonColors.firstBodyColorProperty,
             x: -focalPoint
           } ),
-          new XNode( combineOptions<XNodeOptions>( {
+          new XNode( {
             center: new Vector2( -focalPoint, 0 ),
             scale: FOCI_SCALE,
-            lineWidth: 1
-          }, KeplersLawsColors.fociColorProperty ) ),
-          new XNode( combineOptions<XNodeOptions>( {
+            lineWidth: 1,
+            fill: KeplersLawsColors.fociColorProperty
+          } ),
+          new XNode( {
             center: new Vector2( focalPoint, 0 ),
             scale: FOCI_SCALE,
-            lineWidth: 1
-          }, KeplersLawsColors.fociColorProperty ) ),
-          planet ?
+            lineWidth: 1,
+            fill: KeplersLawsColors.fociColorProperty
+          } ),
+          showPlanet ?
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,
             x: semiMajorAxis
