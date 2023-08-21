@@ -52,7 +52,7 @@ export type KeplersLawsTimeControlNodeOptions = SelfOptions & TimeControlNodeOpt
 
 export default class KeplersLawsTimeControlNode extends TimeControlNode {
   public constructor(
-    model: KeplersLawsModel,
+    model: Pick<KeplersLawsModel, 'timeSpeedProperty' | 'isPlayingProperty' | 'hasPlayedProperty' | 'restart'>,
     providedOptions: KeplersLawsTimeControlNodeOptions
   ) {
 

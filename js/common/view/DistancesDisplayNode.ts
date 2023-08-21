@@ -67,7 +67,7 @@ export default class DistancesDisplayNode extends VBox {
   public orbit: EllipticalOrbitEngine;
 
   public constructor(
-    model: KeplersLawsModel,
+    model: Pick<KeplersLawsModel, 'engine' | 'stringsVisibleProperty' | 'semiaxisVisibleProperty' | 'zoomProperty'>,
     public modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
   ) {
     super( {

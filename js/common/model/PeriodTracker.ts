@@ -38,7 +38,7 @@ export default class PeriodTracker {
 
   public readonly fadingDuration = 3;
 
-  public constructor( private readonly model: KeplersLawsModel ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty' | 'isPlayingProperty'> ) {
     this.trackingState = TrackingState.IDLE;
 
     const periodRangeProperty = new Property<Range>( new Range( 0, 1 ) );

@@ -24,7 +24,7 @@ export default class PeriodTrackerNode extends Path {
 
   public startCircle: Path;
 
-  public constructor( private readonly model: KeplersLawsModel ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodVisibleProperty' | 'periodTracker'> ) {
     super( null, {
       isDisposable: false,
       stroke: SolarSystemCommonColors.thirdBodyColorProperty,

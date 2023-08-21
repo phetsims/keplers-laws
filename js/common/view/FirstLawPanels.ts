@@ -48,7 +48,7 @@ export default class FirstLawPanels extends VBox {
 }
 
 class EccentricityPanel extends Panel {
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty' > ) {
     super( new VBox( {
       children: [
         new HBox( {
@@ -71,7 +71,7 @@ class EccentricityPanel extends Panel {
             } )
           ]
         } ),
-        new FirstLawGraph( model )
+        new FirstLawGraph( model.engine.eccentricityProperty )
       ],
       spacing: 10,
       align: 'left',
@@ -117,25 +117,25 @@ class ValuesPanel extends Panel {
     // Extra information: distance and velocity vector values
     const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.AUStringProperty,
-      value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
+      value: new DerivedProperty( [ model.planet.positionProperty ], position => {
         return Utils.toFixed( position.magnitude / 100, 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.kmsStringProperty,
-      value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
+      value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
         return Utils.toFixed( velocity.magnitude * SolarSystemCommonConstants.VELOCITY_MULTIPLIER, 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const distanceAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.degreesStringProperty,
-      value: new DerivedProperty( [ model.bodies[ 1 ].positionProperty ], position => {
+      value: new DerivedProperty( [ model.planet.positionProperty ], position => {
         return Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );
     const velocityAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.degreesStringProperty,
-      value: new DerivedProperty( [ model.bodies[ 1 ].velocityProperty ], velocity => {
+      value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
       } )
     }, { tandem: Tandem.OPT_OUT } );

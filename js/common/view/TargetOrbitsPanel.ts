@@ -22,7 +22,7 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export default class TargetOrbitsPanel extends Panel {
-  public constructor( model: KeplersLawsModel, topLayer: Node ) {
+  public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>, topLayer: Node ) {
 
     const options = combineOptions<PanelOptions>( {
       visibleProperty: DerivedProperty.not( model.isSecondLawProperty )

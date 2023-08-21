@@ -45,7 +45,7 @@ const TITLE_OPTIONS = {
 
 export default class SecondLawGraph extends AccordionBox {
 
-  public constructor( public readonly model: KeplersLawsModel ) {
+  public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor'> ) {
 
     const options = combineOptions<AccordionBoxOptions>( {
       isDisposable: false,
@@ -113,7 +113,7 @@ export default class SecondLawGraph extends AccordionBox {
 
 class AreasBarPlot extends Node {
 
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'periodDivisionProperty' | 'getAreaColor'> ) {
     super();
 
     // -1 is so that the first bar is not inside the Y axis

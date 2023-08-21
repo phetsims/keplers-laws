@@ -8,7 +8,6 @@
  */
 
 import { AlignBox, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import Range from '../../../../dot/js/Range.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
@@ -22,6 +21,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
@@ -30,7 +30,7 @@ const Y_AXIS_LENGTH = 180;
 
 export default class FirstLawGraph extends AlignBox {
 
-  public constructor( public model: KeplersLawsModel ) {
+  public constructor( eccentricityProperty: TReadOnlyProperty<number> ) {
     const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, Y_AXIS_LENGTH ), {
       fill: FOREGROUND_COLOR_PROPERTY,
       stroke: FOREGROUND_COLOR_PROPERTY
@@ -69,7 +69,7 @@ export default class FirstLawGraph extends AlignBox {
       x: 10,
       children: [
         new ArrowNode( 0, 0, -20, 0, { stroke: 'fuchsia', fill: 'fuchsia', tailWidth: 1 } ),
-        new NumberDisplay( model.engine.eccentricityProperty, MODEL_Y_RANGE, {
+        new NumberDisplay( eccentricityProperty, MODEL_Y_RANGE, {
           decimalPlaces: 2,
           textOptions: combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
             fill: 'fuchsia'
@@ -85,7 +85,7 @@ export default class FirstLawGraph extends AlignBox {
       localBounds: new Bounds2( currentEccentricityNode.left, 0, currentEccentricityNode.right, Y_AXIS_LENGTH )
     } );
 
-    model.engine.eccentricityProperty.link( ( eccentricity: number ) => {
+    eccentricityProperty.link( ( eccentricity: number ) => {
       currentEccentricityNode.centerY = Y_AXIS_LENGTH * eccentricity;
     } );
 
