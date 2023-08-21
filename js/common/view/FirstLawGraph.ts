@@ -25,15 +25,13 @@ import TargetOrbits from '../model/TargetOrbits.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
+const MODEL_Y_RANGE = new Range( 0, 1 );
+const Y_AXIS_LENGTH = 180;
+
 export default class FirstLawGraph extends AlignBox {
 
   public constructor( public model: KeplersLawsModel ) {
-
-    const yAxisLength = 180; //REVIEW move outside constructor as const Y_AXIS_LENGTH
-
-    const modelYRange = new Range( 0, 1 ); //REVIEW move outside constructor as const MODEL_Y_RANGE
-
-    const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, yAxisLength ), {
+    const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, Y_AXIS_LENGTH ), {
       fill: FOREGROUND_COLOR_PROPERTY,
       stroke: FOREGROUND_COLOR_PROPERTY
     } );
@@ -53,7 +51,7 @@ export default class FirstLawGraph extends AlignBox {
       const eccentricity = exampleOrbit.eccentricity;
       const title = new Text( orbitNameProperty, KeplersLawsConstants.TEXT_OPTIONS );
       const content = new HBox( {
-        centerY: yAxisLength * eccentricity,
+        centerY: Y_AXIS_LENGTH * eccentricity,
         spacing: 5,
         children: [
           title,
@@ -71,7 +69,7 @@ export default class FirstLawGraph extends AlignBox {
       x: 10,
       children: [
         new ArrowNode( 0, 0, -20, 0, { stroke: 'fuchsia', fill: 'fuchsia', tailWidth: 1 } ),
-        new NumberDisplay( model.engine.eccentricityProperty, modelYRange, {
+        new NumberDisplay( model.engine.eccentricityProperty, MODEL_Y_RANGE, {
           decimalPlaces: 2,
           textOptions: combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
             fill: 'fuchsia'
@@ -84,16 +82,16 @@ export default class FirstLawGraph extends AlignBox {
 
     const currentEccentricityContainer = new Node( {
       children: [ currentEccentricityNode ],
-      localBounds: new Bounds2( currentEccentricityNode.left, 0, currentEccentricityNode.right, yAxisLength )
+      localBounds: new Bounds2( currentEccentricityNode.left, 0, currentEccentricityNode.right, Y_AXIS_LENGTH )
     } );
 
     model.engine.eccentricityProperty.link( ( eccentricity: number ) => {
-      currentEccentricityNode.centerY = yAxisLength * eccentricity;
+      currentEccentricityNode.centerY = Y_AXIS_LENGTH * eccentricity;
     } );
 
     const chartTransform = new ChartTransform( {
-      viewHeight: yAxisLength,
-      modelYRange: modelYRange
+      viewHeight: Y_AXIS_LENGTH,
+      modelYRange: MODEL_Y_RANGE
     } );
 
     // y tick marks

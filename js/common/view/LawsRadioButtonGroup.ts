@@ -17,12 +17,11 @@ import SecondLawScreenIcon from '../../second-law/SecondLawScreenIcon.js';
 import ThirdLawScreenIcon from '../../third-law/ThirdLawScreenIcon.js';
 import Property from '../../../../axon/js/Property.js';
 
-export type LawsButtonsOptions = RectangularRadioButtonGroupOptions;
+export type LawsRadioButtonGroupOptions = RectangularRadioButtonGroupOptions;
 
-//REVIEW rename to LawsRadioButtonGroup
-export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
-  public constructor( selectedLawProperty: Property<LawMode>, providedOptions?: LawsButtonsOptions ) {
-    const options = combineOptions<LawsButtonsOptions>( {
+export default class LawsRadioButtonGroup extends RectangularRadioButtonGroup<LawMode> {
+  public constructor( selectedLawProperty: Property<LawMode>, providedOptions?: LawsRadioButtonGroupOptions ) {
+    const options = combineOptions<LawsRadioButtonGroupOptions>( {
       orientation: 'horizontal',
       radioButtonOptions: {
         baseColor: null,
@@ -61,4 +60,4 @@ export default class LawsButtons extends RectangularRadioButtonGroup<LawMode> {
   }
 }
 
-keplersLaws.register( 'LawsButtons', LawsButtons );
+keplersLaws.register( 'LawsRadioButtonGroup', LawsRadioButtonGroup );

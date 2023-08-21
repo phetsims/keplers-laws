@@ -32,9 +32,11 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 
 export default class EllipticalOrbitNode extends Path {
-  private readonly orbit: EllipticalOrbitEngine; //REVIEW I found this name confusing. Why not orbitEngine?
+  private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
   private readonly shapeMultilink: UnknownMultilink;
-  public readonly topLayer: Node; //REVIEW document
+
+  // This layer is displayed on top of everything inside the EllipticalOrbitNode, but keeps the same transformations.
+  public readonly topLayer: Node;
 
   public constructor(
     model: KeplersLawsModel,

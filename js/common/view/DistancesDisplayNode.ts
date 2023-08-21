@@ -24,6 +24,9 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
+// Initial length of display arrows
+const INITIAL_ARROW_LENGTH = 5;
+
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
   stroke: KeplersLawsColors.distancesColorProperty,
@@ -80,14 +83,14 @@ export default class DistancesDisplayNode extends VBox {
 
     const d1lineArrowNode = new LineArrowNode( 0, 0, 0, 1, STRING_ARROW_OPTIONS );
     const d2lineArrowNode = new LineArrowNode( 0, 0, 0, 1, STRING_ARROW_OPTIONS );
-    //REVIEW the constant 5 is duplicated 8 times below. Should it be factored out?
-    d1lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), STRING_ARROW_OPTIONS ) );
-    d2lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), STRING_ARROW_OPTIONS ) );
+
+    d1lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), STRING_ARROW_OPTIONS ) );
+    d2lineArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), STRING_ARROW_OPTIONS ) );
 
     const aLineArrowNode1 = new LineArrowNode( 0, 0, 0, 1, MAJOR_AXIS_ARROW_OPTIONS );
     const aLineArrowNode2 = new LineArrowNode( 0, 0, 0, 1, MAJOR_AXIS_ARROW_OPTIONS );
-    aLineArrowNode1.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), MAJOR_AXIS_ARROW_OPTIONS ) );
-    aLineArrowNode2.addChild( new Path( new Shape().moveTo( 0, -5 ).lineTo( 0, 5 ), MAJOR_AXIS_ARROW_OPTIONS ) );
+    aLineArrowNode1.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), MAJOR_AXIS_ARROW_OPTIONS ) );
+    aLineArrowNode2.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), MAJOR_AXIS_ARROW_OPTIONS ) );
 
 
     const focalStringsBox = new HBox( {

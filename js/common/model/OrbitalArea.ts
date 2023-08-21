@@ -21,15 +21,20 @@ export default class OrbitalArea {
   public completion = 0; // Proportional completion of the orbital area, goes up to 1
   public sweptArea = 0; // Total area the section will have when completion = 1
   public insideProperty = new BooleanProperty( false );
-  public alreadyEntered = true; //REVIEW document
+  public alreadyEntered = true; // To properly display de filling out of area, this boolean
   public active = false; // Whether the shown areas include this one
+  public readonly index: number; // Index of the orbital area
 
-  //REVIEW Why is a noop constructor provided with an argument?
-  public constructor( public readonly index: number ) {
-    // noop
+  public constructor( index: number ) {
+    this.index = index;
   }
 
-  //REVIEW document, including @param eraseAreas
+  /**
+   * There are multiple ways to reset the orbital areas,
+   * i.e. when the user clicks on the reset button or when the user changes the orbit.
+   *
+   * @param eraseAreas - determines if all the areas are going to be empty or not.
+   */
   public reset( eraseAreas = false ): void {
     this.dotPosition = Vector2.ZERO;
     this.startPosition = Vector2.ZERO;

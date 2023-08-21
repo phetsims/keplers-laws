@@ -32,7 +32,9 @@ export default class PeriodTracker {
   public afterPeriodThreshold = false; // Whether the body has passed some percentage of the period
   public readonly periodTimer: Stopwatch;
   public readonly fadingTimer: Stopwatch;
-  public readonly fadingEmitter = new Emitter(); //REVIEW document
+
+  // This emitter tells the PeriodTrackerNode when to update the fade
+  public readonly fadingEmitter = new Emitter();
 
   public readonly fadingDuration = 3;
 

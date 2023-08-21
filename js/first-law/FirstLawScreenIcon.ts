@@ -34,7 +34,6 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
     } );
   }
 
-  //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
   public static createFirstLawNode( showPlanet = true ): Node {
     return new Node( {
         children: [

@@ -27,18 +27,18 @@ const PUSH_BUTTON_SPACING = 8;
 
 // Restart Icon ---------------------------------------------------------------------------
 // constants
-//REVIEW constant names typically use uppercase, e.g. SCALE, V_SCALE, etc. All of these violate that naming convention.
-const scale = 0.75;
-const vscale = 1.15;
-const barWidth = 4 * scale;
-const barHeight = 19 * scale * vscale;
-const triangleWidth = 15 * scale;
-const triangleHeight = 19 * scale * vscale;
-const barPath = new Rectangle( 0, 0, barWidth, barHeight, { fill: 'black' } );
-const trianglePath = new Path( new Shape().moveTo( 0, triangleHeight / 2 ).lineTo( -triangleWidth, 0 ).lineTo( 0, -triangleHeight / 2 ).close(), {
+const SCALE = 0.75;
+const V_SCALE = 1.15;
+const BAR_WIDTH = 4 * SCALE;
+const BAR_HEIGHT = 19 * SCALE * V_SCALE;
+const TRIANGLE_WIDTH = 15 * SCALE;
+const TRIANGLE_HEIGHT = 19 * SCALE * V_SCALE;
+
+const barPath = new Rectangle( 0, 0, BAR_WIDTH, BAR_HEIGHT, { fill: 'black' } );
+const trianglePath = new Path( new Shape().moveTo( 0, TRIANGLE_HEIGHT / 2 ).lineTo( -TRIANGLE_WIDTH, 0 ).lineTo( 0, -TRIANGLE_HEIGHT / 2 ).close(), {
   fill: 'black'
 } );
-const trianglePath2 = new Path( new Shape().moveTo( 0, triangleHeight / 2 ).lineTo( -triangleWidth, 0 ).lineTo( 0, -triangleHeight / 2 ).close(), {
+const trianglePath2 = new Path( new Shape().moveTo( 0, TRIANGLE_HEIGHT / 2 ).lineTo( -TRIANGLE_WIDTH, 0 ).lineTo( 0, -TRIANGLE_HEIGHT / 2 ).close(), {
   fill: 'black'
 } );
 const restartIcon = new HBox( { children: [ barPath, trianglePath, trianglePath2 ], spacing: -1 } );

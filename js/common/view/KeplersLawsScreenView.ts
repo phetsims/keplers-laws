@@ -15,7 +15,7 @@ import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
-import LawsButtons from './LawsButtons.js';
+import LawsRadioButtonGroup from './LawsRadioButtonGroup.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -301,7 +301,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.interfaceLayer.addChild( lawsPanelsBox );
     this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
-      this.lawsButtons = new LawsButtons( model.selectedLawProperty );
+      this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
 
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [

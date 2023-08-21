@@ -8,9 +8,6 @@
 import keplersLaws from '../../keplersLaws.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
-// import saturatedSineLoopTrimmed_wav from '../../../sounds/saturatedSineLoopTrimmed_wav.js';
-// import charges_wav from '../../../sounds/charges_wav.js';
-// import OrbitEccentricity_loop_v2_wav from '../../../sounds/OrbitEccentricity_loop_v2_wav.js';
 import OrbitEccentricity_loop_wav from '../../../sounds/OrbitEccentricity_loop_wav.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
@@ -19,7 +16,9 @@ import Utils from '../../../../dot/js/Utils.js';
 
 export default class OrbitalSound {
   private readonly orbitalSoundClip: SoundClip;
-  private internalTime = 0; //REVIEW document
+
+  // Internal time to control the sound variations, increases during the animation stage
+  private internalTime = 0;
 
   public constructor(
     private readonly semiMajorAxisProperty: TReadOnlyProperty<number>,

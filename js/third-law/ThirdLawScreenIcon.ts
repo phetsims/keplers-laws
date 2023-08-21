@@ -29,8 +29,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
     } );
   }
 
-  //REVIEW planet is a lousy parameter name for a boolean. How about hasPlanet or showPlanet?
-  public static createThirdLawNode( planet = true ): Node {
+  public static createThirdLawNode( showPlanet = true ): Node {
     return new Node( {
         children: [
           new Path(
@@ -50,7 +49,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
             }
           ),
           ThirdLawScreenIcon.createPeriodTimerNode(),
-          planet ?
+          showPlanet ?
           new ShadedSphereNode( 3, {
             mainColor: SolarSystemCommonColors.secondBodyColorProperty,
             x: semiMajorAxis
