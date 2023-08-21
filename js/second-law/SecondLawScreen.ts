@@ -1,7 +1,9 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Second Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit
+ * Second Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit.
+ * In this screen, the orbit is divided in equal area sections, and the user can learn that
+ * to cover each of those areas, equals amounts of time are needed.
  *
  * @author Agustín Vallejo
  */

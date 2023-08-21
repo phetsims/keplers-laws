@@ -1,7 +1,9 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * AllLaws Screen, where the user can learn about Kepler's Laws via an elliptical orbit
+ * AllLaws Screen, where the user can learn about Kepler's Laws via an elliptical orbit.
+ * This screen is the combination of the three previous ones, and allows the user to select
+ * which law to visualize on the same orbit.
  *
  * @author Agustín Vallejo
  */

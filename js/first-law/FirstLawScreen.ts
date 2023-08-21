@@ -1,7 +1,8 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * First Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit
+ * First Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit.
+ * In this screen, the user can visualize some properties of the ellipse: foci, eccentricity, semimajor axis, etc.
  *
  * @author Agustín Vallejo
  */
