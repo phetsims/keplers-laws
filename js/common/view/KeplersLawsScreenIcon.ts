@@ -11,8 +11,9 @@ import keplersLaws from '../../keplersLaws.js';
 import ScreenIcon from '../../../../joist/js/ScreenIcon.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 
 // constants
 // Ellipse parameters
@@ -41,7 +42,7 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
         new Path(
           new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ),
           {
-            stroke: SolarSystemCommonColors.orbitColorProperty,
+            stroke: KeplersLawsColors.orbitColorProperty,
             lineWidth: 1
           } ),
         new ShadedSphereNode( 8, {

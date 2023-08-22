@@ -18,6 +18,8 @@ const KeplersLawsColors = {
     projector: 'black'
   } ),
 
+  orbitColorProperty: SolarSystemCommonColors.orbitColorProperty,
+
   // Color for the base fuchsia of the areas
   areaColorProperty: SolarSystemCommonColors.orbitColorProperty,
 

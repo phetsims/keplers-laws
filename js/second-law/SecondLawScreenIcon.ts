@@ -45,7 +45,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
       areas.push(
         new Path(
         new Shape().moveTo( -focalPoint, 0 ).ellipticalArc(
-          0, 0, semiMajorAxis, semiMinorAxis, 0, startAngle, endAngle, true
+          0, 0, semiMajorAxis, semiMinorAxis, 0, startAngle, endAngle, false
         ).close(),
           {
             fill: SolarSystemCommonColors.secondBodyColorProperty,

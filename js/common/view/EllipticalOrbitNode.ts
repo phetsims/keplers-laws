@@ -116,7 +116,8 @@ export default class EllipticalOrbitNode extends Path {
         stroke: KeplersLawsColors.focalDistanceColorProperty,
         fill: KeplersLawsColors.focalDistanceColorProperty
       } ) );
-    const stringLabelNode1 = new RichText( 'd<sub>1', combineOptions<TextOptions>(
+
+    const stringLabelOptions = combineOptions<TextOptions>(
       {
         visibleProperty: new DerivedProperty(
           [
@@ -131,23 +132,9 @@ export default class EllipticalOrbitNode extends Path {
         scale: 1.5,
         stroke: KeplersLawsColors.distancesColorProperty,
         fill: KeplersLawsColors.distancesColorProperty
-      } ) );
-    const stringLabelNode2 = new RichText( 'd<sub>2', combineOptions<TextOptions>(
-      {
-        visibleProperty: new DerivedProperty(
-          [
-            model.stringsVisibleProperty,
-            model.engine.eccentricityProperty
-          ],
-          ( visible, e ) => {
-            return visible && ( e > 0 );
-          }
-        )
-      }, KeplersLawsConstants.TEXT_OPTIONS, {
-        scale: 1.5,
-        stroke: KeplersLawsColors.distancesColorProperty,
-        fill: KeplersLawsColors.distancesColorProperty
-      } ) );
+      } );
+    const stringLabelNode1 = new RichText( 'd<sub>1', stringLabelOptions );
+    const stringLabelNode2 = new RichText( 'd<sub>2', stringLabelOptions );
     const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty, combineOptions<TextOptions>( {
       visibleProperty: new DerivedProperty(
         [

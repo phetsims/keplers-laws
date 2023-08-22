@@ -9,12 +9,11 @@
 
 import keplersLaws from '../keplersLaws.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import { Node, Path } from '../../../scenery/js/imports.js';
+import { Node } from '../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
-import { Shape } from '../../../kite/js/imports.js';
 import XNode from '../../../scenery-phet/js/XNode.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 // constants
@@ -37,12 +36,6 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
   public static createFirstLawNode( showPlanet = true ): Node {
     return new Node( {
         children: [
-          new Path(
-            new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ),
-            {
-              stroke: SolarSystemCommonColors.orbitColorProperty,
-              lineWidth: 1
-            } ),
           new ShadedSphereNode( 8, {
             mainColor: SolarSystemCommonColors.firstBodyColorProperty,
             x: -focalPoint
@@ -51,13 +44,15 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
             center: new Vector2( -focalPoint, 0 ),
             scale: FOCI_SCALE,
             lineWidth: 1,
-            fill: KeplersLawsColors.fociColorProperty
+            fill: KeplersLawsColors.fociColorProperty,
+            stroke: 'black'
           } ),
           new XNode( {
             center: new Vector2( focalPoint, 0 ),
             scale: FOCI_SCALE,
             lineWidth: 1,
-            fill: KeplersLawsColors.fociColorProperty
+            fill: KeplersLawsColors.fociColorProperty,
+            stroke: 'black'
           } ),
           showPlanet ?
           new ShadedSphereNode( 3, {

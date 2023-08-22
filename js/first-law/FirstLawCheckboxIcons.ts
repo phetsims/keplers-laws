@@ -9,7 +9,6 @@
 
 import keplersLaws from '../keplersLaws.js';
 import { Node, Path } from '../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
@@ -24,22 +23,27 @@ const axisShape = new Shape().moveTo( 0, 0 ).ellipse( 0, 0, semiMajorAxis, semiM
 axisShape.moveTo( -semiMajorAxis, 0 ).lineTo( semiMajorAxis, 0 );
 axisShape.moveTo( 0, -semiMinorAxis ).lineTo( 0, semiMinorAxis );
 
+const createFociPath = () => {
+  return new Path( new Shape().circle( -focalDistance, 0, fociRadius ).circle( focalDistance, 0, fociRadius ), {
+    fill: KeplersLawsColors.fociColorProperty
+  } );
+};
+
 export default class FirstLawCheckboxIcons {
   public constructor() {
     // no-op
   }
+
 
   public static createFociCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
-            stroke: SolarSystemCommonColors.foregroundProperty
+            stroke: KeplersLawsColors.foregroundProperty
           }
         ),
-        new Path( new Shape().circle( -focalDistance, 0, fociRadius ).circle( focalDistance, 0, fociRadius ), {
-          fill: KeplersLawsColors.fociColorProperty
-        } )
+        createFociPath()
       ]
     } );
   }
@@ -49,16 +53,14 @@ export default class FirstLawCheckboxIcons {
       scale: ICON_SCALE,
       children: [
         new Path( new Shape().moveTo( -focalDistance, 0 ).lineTo( 0, -0.9 * semiMinorAxis ).lineTo( focalDistance, 0 ), {
-          stroke: SolarSystemCommonColors.foregroundProperty,
+          stroke: KeplersLawsColors.foregroundProperty,
           lineWidth: 1
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
-            stroke: SolarSystemCommonColors.foregroundProperty
+            stroke: KeplersLawsColors.foregroundProperty
           }
         ),
-        new Path( new Shape().circle( -focalDistance, 0, fociRadius ).circle( focalDistance, 0, fociRadius ), {
-          fill: KeplersLawsColors.fociColorProperty
-        } )
+        createFociPath()
       ]
     } );
   }
@@ -74,7 +76,7 @@ export default class FirstLawCheckboxIcons {
           stroke: KeplersLawsColors.semiMinorAxisColorProperty
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
-            stroke: SolarSystemCommonColors.foregroundProperty
+            stroke: KeplersLawsColors.foregroundProperty
           }
         )
       ]
@@ -87,7 +89,7 @@ export default class FirstLawCheckboxIcons {
       children: [
         new Path(
           axisShape, {
-            stroke: SolarSystemCommonColors.foregroundProperty,
+            stroke: KeplersLawsColors.foregroundProperty,
             lineWidth: 1
           } ),
         new Path( new Shape().moveTo( semiMajorAxis, 0 ).lineTo( 0, 0 ), {
@@ -108,7 +110,7 @@ export default class FirstLawCheckboxIcons {
           stroke: KeplersLawsColors.focalDistanceColorProperty
         } ),
         new Path( new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ), {
-            stroke: SolarSystemCommonColors.foregroundProperty
+            stroke: KeplersLawsColors.foregroundProperty
           }
         ),
         new Path( new Shape().circle( -focalDistance, 0, fociRadius ), {
@@ -125,7 +127,7 @@ export default class FirstLawCheckboxIcons {
       children: [
         new Path(
           axisShape, {
-            stroke: SolarSystemCommonColors.foregroundProperty,
+            stroke: KeplersLawsColors.foregroundProperty,
             lineWidth: 1
           } )
       ]

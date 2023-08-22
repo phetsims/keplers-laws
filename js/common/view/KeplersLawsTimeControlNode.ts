@@ -35,13 +35,12 @@ const TRIANGLE_WIDTH = 15 * SCALE;
 const TRIANGLE_HEIGHT = 19 * SCALE * V_SCALE;
 
 const barPath = new Rectangle( 0, 0, BAR_WIDTH, BAR_HEIGHT, { fill: 'black' } );
-const trianglePath = new Path( new Shape().moveTo( 0, TRIANGLE_HEIGHT / 2 ).lineTo( -TRIANGLE_WIDTH, 0 ).lineTo( 0, -TRIANGLE_HEIGHT / 2 ).close(), {
-  fill: 'black'
-} );
-const trianglePath2 = new Path( new Shape().moveTo( 0, TRIANGLE_HEIGHT / 2 ).lineTo( -TRIANGLE_WIDTH, 0 ).lineTo( 0, -TRIANGLE_HEIGHT / 2 ).close(), {
-  fill: 'black'
-} );
-const restartIcon = new HBox( { children: [ barPath, trianglePath, trianglePath2 ], spacing: -1 } );
+const createTrianglePath = () => {
+  return new Path( new Shape().moveTo( 0, TRIANGLE_HEIGHT / 2 ).lineTo( -TRIANGLE_WIDTH, 0 ).lineTo( 0, -TRIANGLE_HEIGHT / 2 ).close(), {
+    fill: 'black'
+  } );
+};
+const restartIcon = new HBox( { children: [ barPath, createTrianglePath(), createTrianglePath() ], spacing: -1 } );
 
 type SelfOptions = {
   restartListener: () => void;
