@@ -42,6 +42,10 @@ type SelfOptions = {
 
   // If a soundViewNode is provided, we'll hook up a soundClip to it and play sounds when it is visible
   soundViewNode?: Node | null;
+
+  // accessible names for the play/pause button
+  measureAccessibleName?: TReadOnlyProperty<string> | string;
+  restartAccessibleName?: TReadOnlyProperty<string> | string;
 };
 
 type PeriodTimerNodeOptions = SelfOptions & NodeOptions;
@@ -77,6 +81,9 @@ export default class PeriodTimerNode extends Node {
         yMargin: 2,
         pickable: false // allow dragging by the number display
       },
+
+      measureAccessibleName: KeplersLawsStrings.a11y.measurePeriodStringProperty,
+      restartAccessibleName: KeplersLawsStrings.a11y.restartMeasurementStringProperty,
 
       soundViewNode: null
     }, providedOptions );
@@ -114,6 +121,12 @@ export default class PeriodTimerNode extends Node {
       touchAreaYDilation: 10
     } );
     playPauseButton.touchArea = playPauseButton.localBounds.dilated( 5 );
+
+    const isRunningListener = ( isRunning: boolean ) => {
+      // pdom - accessible name for the button
+      playPauseButton.innerContent = isRunning ? options.restartAccessibleName : options.measureAccessibleName;
+    };
+    periodTimer.isRunningProperty.link( isRunningListener );
 
 
     // Creates time text inside period timer tool.

@@ -101,6 +101,11 @@ type StringsType = {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;
     'increaseDivisionsStringProperty': LocalizedStringProperty;
     'targetOrbitSelectorStringProperty': LocalizedStringProperty;
+    'measurePeriodStringProperty': LocalizedStringProperty;
+    'restartMeasurementStringProperty': LocalizedStringProperty;
+    'firstLawStringProperty': LocalizedStringProperty;
+    'secondLawStringProperty': LocalizedStringProperty;
+    'thirdLawStringProperty': LocalizedStringProperty;
   }
 };
 

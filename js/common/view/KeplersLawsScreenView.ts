@@ -126,7 +126,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     };
 
     // Draggable velocity vector
-    this.componentsLayer.addChild( this.createDraggableVectorNode( planet, {
+    const draggableVelocityVectorNode = this.createDraggableVectorNode( planet, {
       minimumMagnitude: 30,
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
@@ -134,7 +134,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
       dragVelocity: 150,
       shiftDragVelocity: 50
-    } ) );
+    } );
+    this.componentsLayer.addChild( draggableVelocityVectorNode );
 
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
@@ -296,12 +297,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
     this.topLayer.addChild( stopwatchNode );
+    this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
 
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsPanelsBox );
     this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
-      this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
 
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [
@@ -320,6 +321,25 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.interfaceLayer.addChild( timeBox );
     this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
+
+
+    this.pdomPlayAreaNode.pdomOrder = [
+      planetNode,
+      draggableVelocityVectorNode,
+      this.periodTimerNode
+    ]; // decouple traversal order from rendering order
+
+
+    this.pdomControlAreaNode.pdomOrder = [
+      this.lawsButtons,
+      this.keplersLawsControls,
+      this.firstLawPanel,
+      this.secondLawPanel,
+      this.thirdLawPanel,
+      timeControlsNode,
+      zoomButtons,
+      this.resetAllButton
+    ]; // decouple traversal order from rendering order
   }
 
   public override getBodyBoundsItems(): BodyBoundsItem[] {

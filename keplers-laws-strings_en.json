@@ -212,6 +212,24 @@
     },
     "targetOrbitSelector": {
       "value": "Target orbit selector"
+    },
+    "measurePeriod": {
+      "value": "Measure period"
+    },
+    "restartMeasurement": {
+      "value": "Restart measurement"
+    },
+    "firstLaw": {
+      "value": "First law"
+    },
+    "secondLaw": {
+      "value": "Second law"
+    },
+    "thirdLaw": {
+      "value": "Third law"
+    },
+    "extraOrbitalInformation": {
+      "value": "Extra orbital information"
     }
   }
 }
