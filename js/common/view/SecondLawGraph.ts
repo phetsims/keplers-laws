@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+  // Copyright 2023, University of Colorado Boulder
 
 /**
  * Panel that shows the graph of the swept area under the curve of the orbit.
@@ -295,7 +295,7 @@ class LimitedTickMarkSet extends TickMarkSet {
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick sets which have less than 100 ticks
+    // Only update tick mark sets which have less than 100 ticks
     if ( spacingBorders.max - spacingBorders.min < 100 ) {
       super.update();
     }
@@ -307,7 +307,7 @@ class LimitedTickLabelSet extends TickLabelSet {
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick sets which have less than 100 ticks
+    // Only update tick label sets which have less than 100 ticks
     if ( spacingBorders.max - spacingBorders.min < 100 ) {
       super.update();
     }
