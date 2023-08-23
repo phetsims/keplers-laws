@@ -25,15 +25,15 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
     const eccentricity = focalPoint / semiMajorAxis;
 
     const divisionAngles = [
-      0,
-      1.877,
       2.807,
-      3.475,
-      -1.877
+      1.877,
+      0,
+      -1.877,
+      3.475
     ];
     const areas = [];
 
-    const bodyPosition = EllipticalOrbitEngine.staticCreatePolar( semiMajorAxis, eccentricity, divisionAngles[ divisionAngles.length - 1 ] * 0.98 );
+    const bodyPosition = EllipticalOrbitEngine.staticCreatePolar( semiMajorAxis, eccentricity, divisionAngles[ divisionAngles.length - 2 ] * 0.98 );
 
     for ( let i = 1; i < divisionAngles.length; i++ ) {
       let startAngle = divisionAngles[ i ];
