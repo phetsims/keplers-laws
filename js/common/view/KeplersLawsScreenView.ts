@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsControls from './KeplersLawsControls.js';
 import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsRadioButtonGroup from './LawsRadioButtonGroup.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -36,6 +36,7 @@ import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
 import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 
 // constants
 const MARGIN = 10;
@@ -242,6 +243,22 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         yAlign: 'top'
       }
     );
+
+    const offScaleMessage = new Text( SolarSystemCommonStrings.offscaleMessageStringProperty,
+      combineOptions<TextOptions>( {
+          visibleProperty: DerivedProperty.and( [ model.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
+          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.6
+        },
+        SolarSystemCommonConstants.TEXT_OPTIONS )
+    );
+    const topCenterButtonBox = new AlignBox( offScaleMessage, {
+      alignBoundsProperty: this.availableBoundsProperty,
+      margin: SolarSystemCommonConstants.MARGIN,
+      xAlign: 'center',
+      yAlign: 'top'
+    } );
+    this.topLayer.addChild( topCenterButtonBox );
+
 
     this.periodTimerNode = new PeriodTimerNode( model.periodTracker.periodTimer, this.modelViewTransformProperty, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
