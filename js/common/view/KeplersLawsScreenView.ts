@@ -24,7 +24,6 @@ import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import OrbitalWarningMessage from './OrbitalWarningMessage.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
 import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
@@ -140,12 +139,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
       planet, this.modelViewTransformProperty, model.gravityVisibleProperty, planet.forceProperty,
-      new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      model.forceScaleProperty, { fill: PhetColorScheme.GRAVITATIONAL_FORCE, baseMagnitude: 1000 }
     ) );
 
     this.componentsLayer.addChild( new VectorNode(
       sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
-      new NumberProperty( -0.5 ), { fill: PhetColorScheme.GRAVITATIONAL_FORCE }
+      model.forceScaleProperty, { fill: PhetColorScheme.GRAVITATIONAL_FORCE, baseMagnitude: 1000 }
     ) );
 
     // Target orbit node

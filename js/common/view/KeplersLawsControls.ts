@@ -27,6 +27,7 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import TargetOrbitsPanel from './TargetOrbitsPanel.js';
+import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
 
 class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
@@ -87,6 +88,7 @@ class KeplersLawsControls extends VBox {
             } ),
           new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
           ...createArrowsVisibilityCheckboxes( model, tandem ),
+          new GravityScaleSlider( model.forceScaleProperty, model.gravityVisibleProperty ),
           new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
           ...createVisibilityInformationCheckboxes( model, tandem, false ),
           new SolarSystemCommonCheckbox(
