@@ -163,9 +163,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
 
     // Sound ----------------------------------------------------------------------------------
-    const crashSound = new SoundClip( BodiesCollide_mp3 );
-    const escapeSound = new SoundClip( ObjectWillEscape_mp3 );
-    const correctPowersSound = new SoundClip( Success_mp3 );
+    const crashSound = new SoundClip( BodiesCollide_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
+    const escapeSound = new SoundClip( ObjectWillEscape_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
+    const correctPowersSound = new SoundClip( Success_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
     soundManager.addSoundGenerator( crashSound );
     soundManager.addSoundGenerator( escapeSound );
     soundManager.addSoundGenerator( correctPowersSound );
