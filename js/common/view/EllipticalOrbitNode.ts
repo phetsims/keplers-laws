@@ -253,7 +253,7 @@ export default class EllipticalOrbitNode extends Path {
       timeValueNumberDisplays.push( new NumberDisplay( timeValueProperty, timeValueRange, {
         scale: 0.7,
         opacity: 0.8,
-        backgroundFill: '#aff',
+        backgroundFill: KeplersLawsColors.timeDisplayBackgroundColorProperty,
         numberFormatter: ( value: number ) => {
           return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
             value: Utils.toFixed( value, 2 ),

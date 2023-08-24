@@ -62,6 +62,10 @@ const KeplersLawsColors = {
 
   targetOrbitColorProperty: new ProfileColorProperty( keplersLaws, 'targetOrbit', {
     default: 'gray'
+  } ),
+
+  timeDisplayBackgroundColorProperty: new ProfileColorProperty( keplersLaws, 'timeDisplayBackground', {
+    default: '#aff'
   } )
 };
 
