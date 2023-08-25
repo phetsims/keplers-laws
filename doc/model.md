@@ -18,9 +18,7 @@ The idea of the First Law screen is to introduce the concept of an ellipse, alon
 axes, semi major and semiminor axis, and eccentricity. All of those elements can be visualized by toggling checkboxes on
 the UI.
 
-There's also an option to see the strings: the lines that connect the planet to the foci. The strings are used to show
-that the planet is always at the same distance from the foci, and that the sum of the distances from the foci to the
-planet is constant, and it's equal to the major axis.
+There's also an option to see the strings: the lines that connect the planet to the foci. The idea behind the strings is to build the definition of an ellipse as the set of all the points for which the sum of the distances from the two foci remains constant. That constant is equal to the major axis values.
 
 When eccentricity is toggled, a panel on the left will show the orbital eccentricity compared to other orbits of the
 solar system. Such as the Earth, or Halley's comet. The eccentricity is calculated as the ratio between the distance
@@ -29,7 +27,7 @@ between the foci and the length of the major axis.
 ## Second Law
 
 **The line connecting the Sun to a planet sweeps
-equal areas in equal times.** (1)
+equal areas in equal time intervals.** (1)
 
 The Second Law screen will show a different visual of the orbit: Depending on the selected number of period divisions,
 the total area of the ellipse will be divided in N sections, which at a first glance might appear different, but are
@@ -47,7 +45,7 @@ Periapsis) and vice-versa.
 ## Third Law
 
 **The square of the orbital period of a planet is proportional
-to the cube of the mean distance from the Sun** (1)
+to the cube of the semimajor axis of its orbit.** (1)
 
 In the Third Law screen, the user will see a graph of T vs a (Period vs Semi major axis). When the user moves the planet
 around, the graph will start populating with the newly drawn orbits. The result of T/a is also displayed, varying from
