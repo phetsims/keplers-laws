@@ -1,10 +1,15 @@
 // Copyright 2023, University of Colorado Boulder
 /**
- * The Elliptical Orbit model element. Evolves the body and
- * keeps track of orbital elements.
+ * The Elliptical Orbit model element. Evolves the body and keeps track of orbital elements.
  * Serves as the Engine for the Kepler's Laws Model
  *
- * Variable definitions:
+ * UNITS:
+ * - Distance: arbitrary model units, converted to AU through SolarSystemCommonConstants.POSITION_MULTIPLIER
+ * - Time: arbitrary model units, converted to years through SolarSystemCommonConstants.POSITION_MULTIPLIER and Kepler's Third Law
+ * - Angle: radians
+ * - Mass: arbitrary model units.
+ *
+ * VARIABLE DEFINITIONS: (These don't follow usual naming conventions to better relate them to the equations)
  * r: position vector
  * v: velocity vector
  * rAngle: heading of r
@@ -44,6 +49,7 @@ const TWOPI = 2 * Math.PI;
 const epsilon = 0.99;
 
 // Creation of children classes
+// See the file documentation for description of each variable
 class Ellipse {
   public constructor(
     public a: number,
@@ -57,6 +63,7 @@ class Ellipse {
   ) {}
 }
 
+// Equal to G*M in model units.
 const INITIAL_MU = 2e6;
 
 export default class EllipticalOrbitEngine extends Engine {
@@ -75,10 +82,12 @@ export default class EllipticalOrbitEngine extends Engine {
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
   public orbitalAreas: OrbitalArea[] = [];
-  public updateAllowedProperty = new BooleanProperty( false );
   public retrograde = false;
   public alwaysCircles = false;
   public isCircularProperty = new BooleanProperty( true );
+
+  // When the sim plays, the orbit won't be constantly updating, only on user interactions
+  public updateAllowedProperty = new BooleanProperty( false );
 
   public semiMajorAxisProperty = new NumberProperty( 1 );
   public semiMinorAxisProperty = new NumberProperty( 1 );
@@ -104,7 +113,11 @@ export default class EllipticalOrbitEngine extends Engine {
 
   // Keeps track of the validity of the orbit. True if elliptic, false either if parabolic or collision orbit.
   public allowedOrbitProperty = new BooleanProperty( false );
+
+  // Stable, crash or escape orbit.
   public readonly orbitTypeProperty: EnumerationProperty<OrbitTypes>;
+
+  // Escape speed and radius
   public readonly escapeSpeedProperty = new NumberProperty( 0 );
   public readonly escapeRadiusProperty = new NumberProperty( 0 );
 
@@ -112,6 +125,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public segmentArea = 1;
   public activeAreaIndex = 0;
 
+  // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
   public tracingPathProperty = new BooleanProperty( false );
   public periodTraceStart = 0;
   public periodTraceEnd = 0;
@@ -131,7 +145,7 @@ export default class EllipticalOrbitEngine extends Engine {
       this.orbitalAreas.push( new OrbitalArea( i ) );
     }
 
-    // Multilink to update the orbit based on the bodies position and velocity
+    // Multilink to update the escape speed and distance based on the bodies position and velocity
     Multilink.multilink(
       [
         this.body.positionProperty,
@@ -171,13 +185,16 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.tracingPathProperty.lazyLink( tracing => {
       if ( tracing ) {
+        // Sets the beggining of the period trace to the planet's current angular position
         this.periodTraceStart = this.nu;
       }
     } );
   }
 
+  // Kepler's Third Law, when this.mu == INITIAL_MU (solar system), then it's T = a^(3/2)
+  // Returns the period in model units
   public thirdLaw( a: number ): number {
-    return Math.pow( INITIAL_MU * a * a * a / this.mu, 1 / 2 );
+    return Math.pow( a * a * a * INITIAL_MU / this.mu, 1 / 2 );
   }
 
   public override run( dt: number ): void {
@@ -209,6 +226,9 @@ export default class EllipticalOrbitEngine extends Engine {
     }
   }
 
+  /**
+   * Updates the distances from the foci to the body
+   */
   public updateBodyDistances(): void {
     this.bodyPolarPosition = this.createPolar( this.nu );
     this.d1 = this.bodyPolarPosition.magnitude;
@@ -242,13 +262,13 @@ export default class EllipticalOrbitEngine extends Engine {
       this.enforceCircularOrbit( r );
     }
     else {
-      const realEscapeSpeed = this.escapeSpeedProperty.value;
+      const escapeSpeed = this.escapeSpeedProperty.value;
       const currentSpeed = this.body.velocityProperty.value.magnitude;
-      if ( currentSpeed >= realEscapeSpeed ) {
+      if ( currentSpeed >= escapeSpeed ) {
         this.enforceEscapeSpeed();
       }
       // Using epsilon for a lower threshold on escape orbits to avoid floating point errors, which induced some flickering on edge cases
-      escaped = currentSpeed >= ( realEscapeSpeed * epsilon );
+      escaped = currentSpeed >= ( escapeSpeed * epsilon );
       if ( escaped ) {
         this.allowedOrbitProperty.value = false;
         this.orbitTypeProperty.value = OrbitTypes.ESCAPE_ORBIT;
@@ -257,6 +277,8 @@ export default class EllipticalOrbitEngine extends Engine {
     }
 
     const v = this.body.velocityProperty.value;
+
+    // Angular momentum
     this.L = r.crossScalar( v );
 
     const { a, b, c, e, w, M, W, nu } = this.calculateEllipse( r, v );
@@ -291,7 +313,7 @@ export default class EllipticalOrbitEngine extends Engine {
     }
 
     if ( e !== this.eccentricityProperty.value && this.orbitTypeProperty.value !== OrbitTypes.ESCAPE_ORBIT ) {
-      if ( this.alwaysCircles || this.e < 0.01 ) {
+      if ( this.alwaysCircles || e < 0.01 ) {
         this.eccentricityProperty.value = 0;
       }
       else {
@@ -305,13 +327,18 @@ export default class EllipticalOrbitEngine extends Engine {
     this.ranEmitter.emit();
   }
 
+  /**
+   * Always set the velocity to be perpendicular to the position and circular
+   */
   private enforceCircularOrbit( position: Vector2 ): void {
-    // Always set the velocity to be perpendicular to the position and circular
     const direction = this.retrograde ? -1 : 1;
     this.body.velocityProperty.value =
       position.perpendicular.normalize().multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
   }
 
+  /**
+   * Makes sure the velocity is never greater than the escape speed
+   */
   private enforceEscapeSpeed(): void {
     this.body.velocityProperty.value = this.body.velocityProperty.value.normalized().multiplyScalar( this.escapeSpeedProperty.value );
   }
@@ -320,10 +347,14 @@ export default class EllipticalOrbitEngine extends Engine {
     return a * ( 1 - e ) < Body.massToRadius( this.sun.massProperty.value );
   }
 
+  /**
+   * Creates a polar representation of the position of the body
+   * @param nu True anomaly (Angle between periapsis and the body)
+   * @param w Argument of periapsis (global rotation of periapsis)
+   *
+   * When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
+   */
   public createPolar( nu: number, w = 0 ): Vector2 {
-    // nu is the true anomaly (Angle between periapsis and the body)
-    // w is the argument of periapsis (global rotation of periapsis)
-    // When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
     return EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
   }
 
@@ -418,6 +449,9 @@ export default class EllipticalOrbitEngine extends Engine {
     return Utils.clamp( Math.abs( 0.5 * this.a * this.b * this.meanAnomalyDiff( startAngle, endAngle ) ), 0, this.segmentArea );
   }
 
+  /**
+   *  From the "vis viva" equation, calculate Semimajor Axis.
+   */
   private calculate_a( r: Vector2, v: Vector2 ): number {
     const rMagnitude = r.magnitude;
     const vMagnitude = v.magnitude;
@@ -425,6 +459,9 @@ export default class EllipticalOrbitEngine extends Engine {
     return rMagnitude * this.mu / ( 2 * this.mu - rMagnitude * vMagnitude * vMagnitude );
   }
 
+  /**
+   * obtained from the equation for the specific orbital energy
+   */
   private calculate_e( r: Vector2, v: Vector2, a: number ): number {
     const rMagnitude = r.magnitude;
     const vMagnitude = v.magnitude;
@@ -437,7 +474,11 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   /**
-   * Calculates the different angles present in the ellipse
+   * Calculates the different angles present in the ellipse.
+   *
+   * From the polar ellipse equation, the true anomaly (nu) is calculated. In this step the quadrants are also
+   * determined, as well as if the orbit is retrograde. Other angles are calculated such as the argument of periapsis (w)
+   * and the mean anomaly (M).
    */
   private calculateAngles( r: Vector2, v: Vector2, a: number, e: number ): number[] {
     const rMagnitude = r.magnitude;
