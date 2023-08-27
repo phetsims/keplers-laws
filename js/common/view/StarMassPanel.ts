@@ -26,7 +26,7 @@ const NUM_TICKS = 4;
 const WIDTH = 150;
 const SPACING = ( WIDTH - NUM_TICKS ) / ( NUM_TICKS - 1 );
 
-export default class ThirdLawSliderPanel extends Panel {
+export default class StarMassPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
     const colorProperty = SolarSystemCommonColors.firstBodyColorProperty;
     const defaultLabelValue = model.sun.massProperty.value;
@@ -99,4 +99,4 @@ export default class ThirdLawSliderPanel extends Panel {
   }
 }
 
-keplersLaws.register( 'ThirdLawSliderPanel', ThirdLawSliderPanel );
+keplersLaws.register( 'StarMassPanel', StarMassPanel );

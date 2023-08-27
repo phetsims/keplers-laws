@@ -10,7 +10,7 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, Line, RichText, Text, TextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import FirstLawGraph from './FirstLawGraph.js';
+import FirstLawGraphPanel from './FirstLawGraphPanel.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -71,7 +71,7 @@ class EccentricityPanel extends Panel {
             } )
           ]
         } ),
-        new FirstLawGraph( model.engine.eccentricityProperty )
+        new FirstLawGraphPanel( model.engine.eccentricityProperty )
       ],
       spacing: 10,
       align: 'left',

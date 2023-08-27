@@ -51,9 +51,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly periodTimerNode: PeriodTimerNode;
 
   private readonly keplersLawsControls: Node;
-  private readonly firstLawPanel: Node;
-  private readonly secondLawPanel: Node;
-  private readonly thirdLawPanel: Node;
+  private readonly firstLawPanels: Node;
+  private readonly secondLawPanels: Node;
+  private readonly thirdLawPanels: Node;
   private readonly lawsButtons?: Node;
 
   private readonly playBodySounds: () => void;
@@ -189,15 +189,15 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.topLayer.addChild( new OrbitalWarningMessage( model.engine.orbitTypeProperty, model.engine.allowedOrbitProperty, this.modelViewTransformProperty ) );
 
-    this.firstLawPanel = new FirstLawPanels( model );
-    this.secondLawPanel = new SecondLawPanels( model );
-    this.thirdLawPanel = new ThirdLawPanels( model );
+    this.firstLawPanels = new FirstLawPanels( model );
+    this.secondLawPanels = new SecondLawPanels( model );
+    this.thirdLawPanels = new ThirdLawPanels( model );
 
     const lawsPanelsBox = new AlignBox( new HBox( {
         children: [
-          this.firstLawPanel,
-          this.secondLawPanel,
-          this.thirdLawPanel
+          this.firstLawPanels,
+          this.secondLawPanels,
+          this.thirdLawPanels
         ],
         spacing: 10,
         align: 'top'
@@ -349,9 +349,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.pdomControlAreaNode.pdomOrder = [
       this.lawsButtons,
       this.keplersLawsControls,
-      this.firstLawPanel,
-      this.secondLawPanel,
-      this.thirdLawPanel,
+      this.firstLawPanels,
+      this.secondLawPanels,
+      this.thirdLawPanels,
       timeControlsNode,
       zoomButtons,
       this.resetAllButton
@@ -362,7 +362,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     return [
       ...super.getBodyBoundsItems(),
       // Top-left controls, all with individual scopes (all expanded top-left)
-      ...[ this.firstLawPanel, this.secondLawPanel, this.thirdLawPanel ].map( ( node: Node ): BodyBoundsItem => {
+      ...[ this.firstLawPanels, this.secondLawPanels, this.thirdLawPanels ].map( ( node: Node ): BodyBoundsItem => {
         return {
           node: node,
           expandX: 'left',

@@ -28,7 +28,7 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const MODEL_Y_RANGE = new Range( 0, 1 );
 const Y_AXIS_LENGTH = 180;
 
-export default class FirstLawGraph extends AlignBox {
+export default class FirstLawGraphPanel extends AlignBox {
 
   public constructor( eccentricityProperty: TReadOnlyProperty<number> ) {
     const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, Y_AXIS_LENGTH ), {
@@ -117,4 +117,4 @@ export default class FirstLawGraph extends AlignBox {
   }
 }
 
-keplersLaws.register( 'FirstLawGraph', FirstLawGraph );
+keplersLaws.register( 'FirstLawGraphPanel', FirstLawGraphPanel );

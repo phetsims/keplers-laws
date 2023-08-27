@@ -10,8 +10,8 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { GridBox, HBox, Line, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import ThirdLawGraph from './ThirdLawGraph.js';
-import ThirdLawSliderPanel from './ThirdLawSliderPanel.js';
+import ThirdLawGraphAccordionBox from './ThirdLawGraphAccordionBox.js';
+import StarMassPanel from './StarMassPanel.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -36,7 +36,7 @@ export default class ThirdLawPanels extends VBox {
       stretch: true,
       children: [
         new ThirdLawAccordionBox( model ),
-        new ThirdLawSliderPanel( model )
+        new StarMassPanel( model )
       ],
       visibleProperty: model.isThirdLawProperty,
       maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
@@ -210,7 +210,7 @@ class ThirdLawAccordionBox extends AccordionBox {
                 orientation: 'horizontal'
               }
             ),
-            new ThirdLawGraph( model, model.engine, {
+            new ThirdLawGraphAccordionBox( model, model.engine, {
               layoutOptions: { column: 1, row: 0 },
               excludeInvisibleChildrenFromBounds: true
             } ),
