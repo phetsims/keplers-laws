@@ -6,30 +6,30 @@
  * @author Agustín Vallejo
  */
 
-import { Node, PaintableOptions, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import Range from '../../../../dot/js/Range.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
-import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
-import BarPlot from '../../../../bamboo/js/BarPlot.js';
-import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
-import Orientation from '../../../../phet-core/js/Orientation.js';
-import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
-import keplersLaws from '../../keplersLaws.js';
-import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import Utils from '../../../../dot/js/Utils.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
-import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
+  import { Node, PaintableOptions, RichText, RichTextOptions, Text } from '../../../../scenery/js/imports.js';
+  import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+  import { combineOptions } from '../../../../phet-core/js/optionize.js';
+  import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+  import KeplersLawsModel from '../model/KeplersLawsModel.js';
+  import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+  import Range from '../../../../dot/js/Range.js';
+  import Vector2 from '../../../../dot/js/Vector2.js';
+  import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
+  import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
+  import BarPlot from '../../../../bamboo/js/BarPlot.js';
+  import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
+  import Orientation from '../../../../phet-core/js/Orientation.js';
+  import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
+  import keplersLaws from '../../keplersLaws.js';
+  import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+  import Utils from '../../../../dot/js/Utils.js';
+  import KeplersLawsConstants from '../KeplersLawsConstants.js';
+  import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+  import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+  import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
+  import Bounds2 from '../../../../dot/js/Bounds2.js';
 
-const xAxisLength = 180;
+  const xAxisLength = 180;
 const yAxisLength = 180;
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
@@ -70,44 +70,42 @@ export default class SecondLawGraphAccordionBox extends AccordionBox {
       stroke: FOREGROUND_COLOR_PROPERTY,
       tailWidth: 1
     } );
+
+    const barPlot = new AreasBarPlot( model );
+    barPlot.y = -yAxisLength;
+
+    const labelDistance = 40;
+    const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
+      combineOptions<RichTextOptions>( {
+        centerY: labelDistance
+      }, TITLE_OPTIONS ) );
+    const yAxisLabel = new RichText(
+      KeplersLawsStrings.area.areaUnitsStringProperty,
+      combineOptions<RichTextOptions>( {
+        x: -labelDistance,
+        centerY: -yAxisLength * 0.5,
+        rotation: -Math.PI / 2
+      }, TITLE_OPTIONS )
+    );
     const eraserButton = new EraserButton( {
       listener: () => model.engine.resetOrbitalAreas( true ),
-      x: xAxisLength * 0.8,
-      y: -yAxisLength,
+      centerX: -labelDistance,
+      centerY: labelDistance,
       accessibleName: KeplersLawsStrings.eraserStringProperty,
       touchAreaXDilation: 10,
       touchAreaYDilation: 10
     } );
 
-    const barPlot = new AreasBarPlot( model );
-    barPlot.y = -yAxisLength;
-
-    const xAxisLabel = new Text( KeplersLawsStrings.area.periodDivisionStringProperty, TITLE_OPTIONS );
-    const yAxisLabel = new RichText(
-      KeplersLawsStrings.area.areaUnitsStringProperty,
-      combineOptions<RichTextOptions>( {
-        x: -40,
-        centerY: -yAxisLength * 0.5,
-        rotation: -Math.PI / 2
-      }, TITLE_OPTIONS )
-    );
-
-    super( new VBox( {
-        spacing: 10,
-        children: [
-          new Node( {
-            children: [
-              barPlot,
-              xAxis,
-              yAxis,
-              yAxisLabel,
-              eraserButton
-            ]
-          } ),
-          xAxisLabel
-        ]
-      }
-    ), options );
+    super( new Node( {
+      children: [
+        barPlot,
+        xAxis,
+        yAxis,
+        yAxisLabel,
+        eraserButton,
+        xAxisLabel
+      ]
+    } ), options );
   }
 }
 
