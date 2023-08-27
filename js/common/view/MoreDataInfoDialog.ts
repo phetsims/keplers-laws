@@ -9,14 +9,13 @@ import keplersLaws from '../../keplersLaws.js';
 import { HBox, Image, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dialog from '../../../../sun/js/Dialog.js';
-import infoSemimajorAxis_png from '../../../images/infoSemimajorAxis_png.js';
-import infoSemiminorAxis_png from '../../../images/infoSemiminorAxis_png.js';
-import focalDistance_png from '../../../images/focalDistance_png.js';
+import planetPosition_png from '../../../images/planetPosition_png.js';
+import planetVelocity_png from '../../../images/planetVelocity_png.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
-export default class InfoDialog extends Dialog {
-
+export default class MoreDataInfoDialog extends Dialog {
   public constructor() {
 
     const infoDialogTextOptions: RichTextOptions = {
@@ -33,32 +32,27 @@ export default class InfoDialog extends Dialog {
       children: [
         new HBox( {
           spacing: spacing,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
-            new Image( infoSemimajorAxis_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, infoDialogTextOptions )
-            ]
-        } ),
-        new HBox( {
-          spacing: spacing,
-          children: [
-            new Image( infoSemiminorAxis_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, infoDialogTextOptions )
+            new Image( planetPosition_png, { scale: 0.315 } ),
+            new RichText( KeplersLawsStrings.infoDialog.planetPositionStringProperty, infoDialogTextOptions )
           ]
         } ),
         new HBox( {
           spacing: spacing,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
-            new Image( focalDistance_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.focalDistanceStringProperty, infoDialogTextOptions )
+            new Image( planetVelocity_png, { scale: 0.325 } ),
+            new RichText( KeplersLawsStrings.infoDialog.planetVelocityStringProperty, infoDialogTextOptions )
           ]
         } )
       ]
     } ), {
       isDisposable: false,
       titleAlign: 'center',
-      title: new Text( KeplersLawsStrings.a11y.orbitalInformationStringProperty, { font: new PhetFont( 32 ) } )
+      title: new Text( KeplersLawsStrings.a11y.extraOrbitalInformationStringProperty, { font: new PhetFont( 32 ) } )
     } );
   }
 }
 
-keplersLaws.register( 'InfoDialog', InfoDialog );
+keplersLaws.register( 'MoreDataInfoDialog', MoreDataInfoDialog );

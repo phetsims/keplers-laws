@@ -228,8 +228,17 @@
     "thirdLaw": {
       "value": "Third law"
     },
+    "orbitalInformation": {
+      "value": "Orbital information"
+    },
     "extraOrbitalInformation": {
       "value": "Extra orbital information"
+    },
+    "infoButton": {
+      "value": "Info button"
+    },
+    "extraInfoButton": {
+      "value": "Extra info button"
     }
   }
 }

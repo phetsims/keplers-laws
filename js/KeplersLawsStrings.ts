@@ -106,6 +106,10 @@ type StringsType = {
     'firstLawStringProperty': LocalizedStringProperty;
     'secondLawStringProperty': LocalizedStringProperty;
     'thirdLawStringProperty': LocalizedStringProperty;
+    'orbitalInformationStringProperty': LocalizedStringProperty;
+    'extraOrbitalInformationStringProperty': LocalizedStringProperty;
+    'infoButtonStringProperty': LocalizedStringProperty;
+    'extraInfoButtonStringProperty': LocalizedStringProperty;
   }
 };
 
