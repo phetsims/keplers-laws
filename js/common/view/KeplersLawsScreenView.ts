@@ -175,13 +175,19 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         correctPowersSound.play();
       }
     } );
+
+    let previousOrbitType: OrbitTypes = OrbitTypes.STABLE_ORBIT;
     model.engine.orbitTypeProperty.lazyLink( orbitType => {
-      if ( orbitType === OrbitTypes.CRASH_ORBIT ) {
-        crashSound.play();
+      if ( previousOrbitType === OrbitTypes.STABLE_ORBIT ) {
+        if ( orbitType === OrbitTypes.CRASH_ORBIT ) {
+          crashSound.play();
+        }
+        else if ( orbitType === OrbitTypes.ESCAPE_ORBIT ) {
+          escapeSound.play();
+        }
       }
-      else if ( orbitType === OrbitTypes.ESCAPE_ORBIT ) {
-        escapeSound.play();
-      }
+
+      previousOrbitType = orbitType;
     } );
 
     // UI ----------------------------------------------------------------------------------
