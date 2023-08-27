@@ -59,7 +59,9 @@ export default class PeriodDivisionsPanel extends Panel {
     const periodDivisionSounds = new PeriodDivisionSoundManager();
 
     model.periodDivisionProperty.lazyLink( periodDivision => {
-      periodDivisionSounds.playPeriodDivisionSound( periodDivision );
+      if ( !model.resetting ) {
+        periodDivisionSounds.playPeriodDivisionSound( periodDivision );
+      }
     } );
   }
 }
