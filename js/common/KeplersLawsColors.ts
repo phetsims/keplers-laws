@@ -30,12 +30,14 @@ const KeplersLawsColors = {
 
   // Semiminor axis color
   semiMinorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMinorAxis', {
-    default: '#C4F566'
+    default: '#C4F566',
+    projector: '#83B030'
   } ),
 
   // Focal distance color
   focalDistanceColorProperty: new ProfileColorProperty( keplersLaws, 'focalDistance', {
-    default: '#AFAFDA'
+    default: '#AFAFDA',
+    projector: '#8484D7'
   } ),
 
   // Period color
@@ -45,7 +47,8 @@ const KeplersLawsColors = {
 
   // Period color
   distancesColorProperty: new ProfileColorProperty( keplersLaws, 'distance', {
-    default: '#ccb285'
+    default: '#ccb285',
+    projector: '#B49C74'
   } ),
 
   fociColorProperty: new ProfileColorProperty( keplersLaws, 'foci', {
