@@ -240,4 +240,4 @@ export default class ThirdLawGraph extends Node {
   }
 }
 
-keplersLaws.register( 'ThirdLawGraphAccordionBox', ThirdLawGraph );
+keplersLaws.register( 'ThirdLawGraph', ThirdLawGraph );
