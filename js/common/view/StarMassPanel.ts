@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Slider that controls the main body mass for the Third Law.
+ * StarMassPanel contains a slider that controls the main body mass for the Third Law.
  *
  * @author Agustín Vallejo
  */
