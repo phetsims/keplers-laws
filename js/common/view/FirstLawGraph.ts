@@ -1,8 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Panel that shows the graph of the Eccentricity of the orbit. Compared to other
- * orbits of the Solar System.
+ * FirstLawGraph graphs the Eccentricity of the orbit, compared to other orbits of the Solar System.
  *
  * @author Agustín Vallejo
  */
@@ -117,4 +116,4 @@ export default class FirstLawGraph extends AlignBox {
   }
 }
 
-keplersLaws.register( 'FirstLawGraphPanel', FirstLawGraph );
+keplersLaws.register( 'FirstLawGraph', FirstLawGraph );
