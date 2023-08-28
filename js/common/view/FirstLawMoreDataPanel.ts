@@ -28,7 +28,9 @@ export default class FirstLawMoreDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
 
     const options = combineOptions<PanelOptions>( {
-      visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
+      visibleProperty: new DerivedProperty( [ KeplersLawsPreferences.moreOrbitalDataEnabledProperty, model.isFirstLawProperty ], ( moreOrbitalDataEnabled, isFirstLaw ) => {
+        return moreOrbitalDataEnabled && isFirstLaw;
+      } )
     }, providedOptions );
 
     // Extra information: distance and velocity vector values
