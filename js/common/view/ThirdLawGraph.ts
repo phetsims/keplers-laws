@@ -27,7 +27,7 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
-export default class ThirdLawGraphAccordionBox extends Node {
+export default class ThirdLawGraph extends Node {
 
   public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
     const options = optionize<NodeOptions, EmptySelfOptions>()( {
@@ -240,4 +240,4 @@ export default class ThirdLawGraphAccordionBox extends Node {
   }
 }
 
-keplersLaws.register( 'ThirdLawGraphAccordionBox', ThirdLawGraphAccordionBox );
+keplersLaws.register( 'ThirdLawGraphAccordionBox', ThirdLawGraph );
