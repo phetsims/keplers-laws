@@ -1,9 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Kepler's second law panel control: Swept area
- *
- * This class is mostly empty and only has SecondLawGraph as a child to keep code consistency across the three laws.
+ * SecondLawPanels is the set of control panels for the Second Law.
  *
  * @author Agustín Vallejo
  */
