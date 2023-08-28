@@ -37,6 +37,7 @@ import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 
 // constants
 const MARGIN = 10;
@@ -303,7 +304,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       yAlign: 'bottom'
     } );
 
-    model.stopwatch.positionProperty.value = timeControlsNode.center.plusXY( timeControlsNode.width / 2 + 20, -40 );
+    model.stopwatch.positionProperty.value = new Vector2( this.resetAllButton.left - 200, timeControlsNode.bottom - 75 );
     const stopwatchNode = new StopwatchNode(
       model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty,
