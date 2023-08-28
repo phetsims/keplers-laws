@@ -9,6 +9,7 @@
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import keplersLaws from '../keplersLaws.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 
 const KeplersLawsColors = {
 
@@ -17,6 +18,8 @@ const KeplersLawsColors = {
     default: 'white',
     projector: 'black'
   } ),
+
+  velocityColorProperty: PhetColorScheme.VELOCITY,
 
   orbitColorProperty: SolarSystemCommonColors.orbitColorProperty,
 

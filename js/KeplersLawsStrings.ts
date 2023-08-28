@@ -70,6 +70,7 @@ type StringsType = {
     'distance2StringProperty': LocalizedStringProperty;
     'distanceAngleStringProperty': LocalizedStringProperty;
     'velocityAngleStringProperty': LocalizedStringProperty;
+    'rvAngleStringProperty': LocalizedStringProperty;
   };
   'pattern': {
     'textEqualsValueUnitsStringProperty': LocalizedStringProperty;
@@ -96,6 +97,7 @@ type StringsType = {
     'focalDistanceStringProperty': LocalizedStringProperty;
     'planetPositionStringProperty': LocalizedStringProperty;
     'planetVelocityStringProperty': LocalizedStringProperty;
+    'rvAngleStringProperty': LocalizedStringProperty;
   };
   'a11y': {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;

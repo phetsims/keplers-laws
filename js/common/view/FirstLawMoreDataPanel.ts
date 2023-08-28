@@ -20,9 +20,9 @@ import { HBox, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js'
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import MoreDataInfoDialog from './MoreDataInfoDialog.js';
+import InfoDialogMoreData from './InfoDialogMoreData.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export default class FirstLawMoreDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
@@ -57,6 +57,14 @@ export default class FirstLawMoreDataPanel extends Panel {
       } )
     }, { tandem: Tandem.OPT_OUT } );
 
+    // rv angle is the angle from R to V
+    const rvAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+      units: KeplersLawsStrings.units.degreesStringProperty,
+      value: new DerivedProperty( [ model.planet.positionProperty, model.planet.velocityProperty ], ( position, velocity ) => {
+        return Utils.toFixed( Utils.toDegrees( velocity.angle - position.angle ), 2 );
+      } )
+    }, { tandem: Tandem.OPT_OUT } );
+
     const createCustomEquation = ( symbol: TReadOnlyProperty<string>, text: TReadOnlyProperty<string>, symbolColor: TPaint ) => {
       return [
         new RichText( symbol, {
@@ -69,7 +77,7 @@ export default class FirstLawMoreDataPanel extends Panel {
       ];
     };
 
-    const infoDialog = new MoreDataInfoDialog();
+    const infoDialog = new InfoDialogMoreData();
 
     super( new HBox( {
       align: 'top',
@@ -84,16 +92,7 @@ export default class FirstLawMoreDataPanel extends Panel {
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
                 positionMagnitudeStringProperty,
-                SolarSystemCommonColors.foregroundProperty
-              )
-            } ),
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
-                velocityMagnitudeStringProperty,
-                SolarSystemCommonColors.foregroundProperty
+                KeplersLawsColors.distancesColorProperty
               )
             } ),
             new HBox( {
@@ -102,7 +101,16 @@ export default class FirstLawMoreDataPanel extends Panel {
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.distanceAngleStringProperty,
                 distanceAngleStringProperty,
-                SolarSystemCommonColors.foregroundProperty
+                KeplersLawsColors.distancesColorProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
+                velocityMagnitudeStringProperty,
+                KeplersLawsColors.velocityColorProperty
               )
             } ),
             new HBox( {
@@ -111,7 +119,16 @@ export default class FirstLawMoreDataPanel extends Panel {
               children: createCustomEquation(
                 KeplersLawsStrings.symbols.velocityAngleStringProperty,
                 velocityAngleStringProperty,
-                SolarSystemCommonColors.foregroundProperty
+                KeplersLawsColors.velocityColorProperty
+              )
+            } ),
+            new HBox( {
+              spacing: 2,
+              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+              children: createCustomEquation(
+                KeplersLawsStrings.symbols.rvAngleStringProperty,
+                rvAngleStringProperty,
+                KeplersLawsColors.foregroundProperty
               )
             } )
           ]
