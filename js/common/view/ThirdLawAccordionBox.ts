@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * TODO https://github.com/phetsims/keplers-laws/issues/134
+ * ThirdLawAccordionBox contains the equation display and controls for the ThirdLawGraph class.
  *
  * @author Agustín Vallejo
  */
