@@ -1,7 +1,8 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * TODO https://github.com/phetsims/keplers-laws/issues/134
+ * Panel that displays the different possible eccentricities within 0 and 1, as well as the
+ * current orbital eccentricity and the equation e = c/a .
  *
  * @author Agustín Vallejo
  */
