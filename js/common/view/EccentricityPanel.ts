@@ -14,7 +14,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import FirstLawGraphPanel from './FirstLawGraphPanel.js';
+import FirstLawGraph from './FirstLawGraph.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import keplersLaws from '../../keplersLaws.js';
 
@@ -42,7 +42,7 @@ export default class EccentricityPanel extends Panel {
             } )
           ]
         } ),
-        new FirstLawGraphPanel( model.engine.eccentricityProperty )
+        new FirstLawGraph( model.engine.eccentricityProperty )
       ],
       spacing: 10,
       align: 'left',
