@@ -100,12 +100,6 @@ export default class KeplersLawsTimeControlNode extends TimeControlNode {
 
     this.addChild( restartButton );
     this.playPauseStepButtons.pdomOrder = [ restartButton, ...( this.playPauseStepButtons.pdomOrder ? this.playPauseStepButtons.pdomOrder : [] ) ];
-
-
-    this.speedRadioButtonGroupParent!.center = this.getPlayPauseButtonCenter().plusXY(
-      2 * PLAY_PAUSE_BUTTON_RADIUS + 2 * STEP_BUTTON_RADIUS + 4 * PUSH_BUTTON_SPACING,
-      0
-    );
   }
 }
 

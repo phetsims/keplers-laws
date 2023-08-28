@@ -290,18 +290,15 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         yAlign: 'bottom'
       } );
 
-    const timeControlsNode = new KeplersLawsTimeControlNode( model,
-      {
-        enabledProperty: options.playingAllowedProperty || null,
-        restartListener: () => model.restart(),
-        stepForwardListener: () => model.stepOnce( 1 / 8 ),
-        tandem: options.tandem.createTandem( 'timeControlNode' )
-      } );
-    const timeBox = new AlignBox( timeControlsNode, {
-      alignBoundsProperty: this.availableBoundsProperty,
-      margin: SolarSystemCommonConstants.MARGIN,
-      xAlign: 'center',
-      yAlign: 'bottom'
+    const timeControlsNode = new KeplersLawsTimeControlNode( model, {
+      enabledProperty: options.playingAllowedProperty || null,
+      restartListener: () => model.restart(),
+      stepForwardListener: () => model.stepOnce( 1 / 8 ),
+      tandem: options.tandem.createTandem( 'timeControlNode' )
+    } );
+    timeControlsNode.boundsProperty.link( bounds => {
+      timeControlsNode.centerX = this.layoutBounds.centerX;
+      timeControlsNode.bottom = this.layoutBounds.bottom - SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN;
     } );
 
     model.stopwatch.positionProperty.value = new Vector2( this.resetAllButton.left - 200, timeControlsNode.bottom - 75 );
@@ -341,7 +338,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         }
       ) );
     }
-    this.interfaceLayer.addChild( timeBox );
+    this.interfaceLayer.addChild( timeControlsNode );
     this.interfaceLayer.addChild( resetBox );
     this.bottomLayer.addChild( distancesDisplayBox );
 
