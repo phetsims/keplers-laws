@@ -43,7 +43,7 @@ const TITLE_OPTIONS = {
   fill: FOREGROUND_COLOR_PROPERTY
 };
 
-export default class SecondLawGraphAccordionBox extends AccordionBox {
+export default class SecondLawAccordionBox extends AccordionBox {
 
   public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor'> ) {
 
@@ -338,4 +338,4 @@ function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
   return true;
 }
 
-keplersLaws.register( 'SecondLawGraphAccordionBox', SecondLawGraphAccordionBox );
+keplersLaws.register( 'SecondLawGraphAccordionBox', SecondLawAccordionBox );
