@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Kepler's third law accordion box
+ * ThirdLawPanels is the set of control panels for the Third Law.
  *
  * @author Agustín Vallejo
  */

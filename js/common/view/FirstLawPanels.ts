@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * Kepler's first law panel control: eccentricity display
+ * FirstLawPanels is the set of control panels for the First Law.
  *
  * @author Agustín Vallejo
  */
