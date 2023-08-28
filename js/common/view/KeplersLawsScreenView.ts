@@ -258,14 +258,11 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         },
         SolarSystemCommonConstants.TEXT_OPTIONS )
     );
-    const topCenterButtonBox = new AlignBox( offScaleMessage, {
-      alignBoundsProperty: this.availableBoundsProperty,
-      margin: SolarSystemCommonConstants.MARGIN,
-      xAlign: 'center',
-      yAlign: 'top'
+    offScaleMessage.boundsProperty.link( bounds => {
+      offScaleMessage.centerX = this.layoutBounds.centerX;
+      offScaleMessage.top = this.layoutBounds.top + SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN;
     } );
-    this.topLayer.addChild( topCenterButtonBox );
-
+    this.topLayer.addChild( offScaleMessage );
 
     this.periodTimerNode = new PeriodTimerNode( model.periodTracker.periodTimer, this.modelViewTransformProperty, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
