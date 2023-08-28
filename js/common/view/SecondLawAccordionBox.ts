@@ -338,4 +338,4 @@ function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
   return true;
 }
 
-keplersLaws.register( 'SecondLawGraphAccordionBox', SecondLawAccordionBox );
+keplersLaws.register( 'SecondLawAccordionBox', SecondLawAccordionBox );
