@@ -1,6 +1,9 @@
 // Copyright 2023, University of Colorado Boulder
 /**
- * Object that controls the sound variations of the orbital changes.
+ * Panel that holds extra information about the orbit such as
+ * position and velocity vector values and directions.
+ *
+ * Only visibile when Preferences > Visual > More Orbital Data is turned on.
  *
  * @author Agustín Vallejo
  */
