@@ -12,7 +12,6 @@ import Dialog from '../../../../sun/js/Dialog.js';
 import infoSemimajorAxis_png from '../../../images/infoSemimajorAxis_png.js';
 import infoSemiminorAxis_png from '../../../images/infoSemiminorAxis_png.js';
 import focalDistance_png from '../../../images/focalDistance_png.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class InfoDialog extends Dialog {
@@ -22,7 +21,7 @@ export default class InfoDialog extends Dialog {
     const infoDialogTextOptions: RichTextOptions = {
       font: new PhetFont( 18 ),
       fill: 'black',
-      lineWrap: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 2
+      lineWrap: 450
     };
 
     const spacing = 10;
@@ -56,7 +55,10 @@ export default class InfoDialog extends Dialog {
     } ), {
       isDisposable: false,
       titleAlign: 'center',
-      title: new Text( KeplersLawsStrings.a11y.orbitalInformationStringProperty, { font: new PhetFont( 32 ) } )
+      title: new Text( KeplersLawsStrings.a11y.orbitalInformationStringProperty, {
+        font: new PhetFont( 32 ),
+        maxWidth: 800
+      } )
     } );
   }
 }
