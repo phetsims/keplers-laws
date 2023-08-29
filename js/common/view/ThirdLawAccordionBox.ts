@@ -27,6 +27,13 @@ import keplersLaws from '../../keplersLaws.js';
 import { ThirdLawAccordionBoxOptions } from './ThirdLawPanels.js';
 import FractionNode from './FractionNode.js';
 
+const RADIO_BUTTON_TEXT_OPTIONS = {
+  font: new PhetFont( { size: 18, weight: 'bold' } ),
+  fill: 'black',
+  lineWidth: 0.1,
+  maxWidth: 25
+};
+
 export default class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
     const titleStringProperty = new DerivedProperty( [
@@ -120,12 +127,6 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       ]
     } );
 
-    const BUTTON_OPTIONS = {
-      font: new PhetFont( { size: 18, weight: 'bold' } ),
-      fill: 'black',
-      lineWidth: 0.1
-    };
-
     super( new VBox( {
       spacing: 20,
       align: 'left',
@@ -140,17 +141,17 @@ export default class ThirdLawAccordionBox extends AccordionBox {
                 {
                   value: 1,
                   labelContent: KeplersLawsStrings.symbols.periodStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 },
                 {
                   value: 2,
                   labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 },
                 {
                   value: 3,
                   labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 }
               ],
               {
@@ -164,17 +165,17 @@ export default class ThirdLawAccordionBox extends AccordionBox {
                 {
                   value: 1,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 },
                 {
                   value: 2,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 },
                 {
                   value: 3,
                   labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, BUTTON_OPTIONS )
+                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
                 }
               ],
               {
