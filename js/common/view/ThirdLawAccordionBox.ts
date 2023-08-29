@@ -74,6 +74,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
+    // T / a
     const fractionLeftTextOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
       maxWidth: 25
     } );
@@ -99,6 +100,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       ), KeplersLawsConstants.TEXT_OPTIONS )
     );
 
+    // years / AU
     const createUnitsFraction = () => {
       return new FractionNode(
         new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), UNITS_TEXT_OPTIONS ),
