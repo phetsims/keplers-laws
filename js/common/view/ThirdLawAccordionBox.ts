@@ -123,8 +123,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     const BUTTON_OPTIONS = {
       font: new PhetFont( { size: 18, weight: 'bold' } ),
       fill: 'black',
-      lineWidth: 0.1,
-      maxWidth: 20
+      lineWidth: 0.1
     };
 
     super( new VBox( {

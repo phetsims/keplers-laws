@@ -10,7 +10,6 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import SecondLawAccordionBox from './SecondLawAccordionBox.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
 
 export default class SecondLawPanels extends VBox {
@@ -22,8 +21,7 @@ export default class SecondLawPanels extends VBox {
         new PeriodDivisionsPanel( model ),
         new SecondLawAccordionBox( model )
       ],
-      visibleProperty: model.isSecondLawProperty,
-      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
+      visibleProperty: model.isSecondLawProperty
     } );
   }
 }

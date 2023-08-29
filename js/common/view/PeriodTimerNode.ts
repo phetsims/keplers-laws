@@ -162,8 +162,7 @@ export default class PeriodTimerNode extends Node {
         } ),
         new Node( {
           children: [ textBackground, readoutText ],
-          pickable: false,
-          maxWidth: playPauseButton.width * 2.5
+          pickable: false
         } ),
         playPauseButton
       ]

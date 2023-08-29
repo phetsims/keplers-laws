@@ -33,8 +33,7 @@ export default class FirstLawPanels extends VBox {
         eccentricityPanel,
         valuesPanel,
         extraDataPanel
-      ],
-      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
+      ]
     } );
   }
 }

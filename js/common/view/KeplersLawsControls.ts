@@ -60,8 +60,7 @@ class KeplersLawsControls extends VBox {
         children: children,
         spacing: 5,
         align: 'left',
-        stretch: true,
-        maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+        stretch: true
       }, providedOptions ) );
     };
 
@@ -102,9 +101,7 @@ class KeplersLawsControls extends VBox {
             {
               accessibleName: KeplersLawsStrings.stopwatchStringProperty
             } )
-        ] ), combineOptions<PanelOptions>( {
-          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
-        }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
+        ] ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS )
       ],
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING
     } );

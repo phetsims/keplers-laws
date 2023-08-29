@@ -10,7 +10,6 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StarMassPanel from './StarMassPanel.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import keplersLaws from '../../keplersLaws.js';
 import { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
@@ -27,8 +26,7 @@ export default class ThirdLawPanels extends VBox {
         new ThirdLawAccordionBox( model ),
         new StarMassPanel( model )
       ],
-      visibleProperty: model.isThirdLawProperty,
-      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH * 1.5
+      visibleProperty: model.isThirdLawProperty
     } );
   }
 }
