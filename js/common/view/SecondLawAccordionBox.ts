@@ -75,18 +75,26 @@ export default class SecondLawAccordionBox extends AccordionBox {
     barPlot.y = -yAxisLength;
 
     const labelDistance = 40;
+
     const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
       combineOptions<RichTextOptions>( {
         centerY: labelDistance
       }, TITLE_OPTIONS ) );
+    xAxisLabel.boundsProperty.link( () => {
+      xAxisLabel.centerX = barPlot.centerX;
+    } );
+
     const yAxisLabel = new RichText(
       KeplersLawsStrings.area.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {
         x: -labelDistance,
-        centerY: -yAxisLength * 0.5,
         rotation: -Math.PI / 2
       }, TITLE_OPTIONS )
     );
+    yAxisLabel.boundsProperty.link( () => {
+      yAxisLabel.centerY = -yAxisLength * 0.5;
+    } );
+
     const eraserButton = new EraserButton( {
       listener: () => model.engine.resetOrbitalAreas( true ),
       centerX: -labelDistance,
