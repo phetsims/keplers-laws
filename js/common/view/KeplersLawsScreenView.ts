@@ -279,14 +279,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       yAlign: 'top'
     } );
 
-    const resetBox = new AlignBox( this.resetAllButton,
-      {
-        alignBoundsProperty: this.availableBoundsProperty,
-        margin: SolarSystemCommonConstants.MARGIN,
-        xAlign: 'right',
-        yAlign: 'bottom'
-      } );
-
     const timeControlsNode = new KeplersLawsTimeControlNode( model, {
       enabledProperty: options.playingAllowedProperty || null,
       restartListener: () => model.restart(),
@@ -336,7 +328,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       ) );
     }
     this.interfaceLayer.addChild( timeControlsNode );
-    this.interfaceLayer.addChild( resetBox );
+    this.interfaceLayer.addChild( this.resetAllButton );
     this.bottomLayer.addChild( distancesDisplayBox );
 
 
