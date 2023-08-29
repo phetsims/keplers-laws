@@ -26,6 +26,7 @@ import TargetOrbits from '../model/TargetOrbits.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
+const AXIS_LABEL_MAX_WIDTH = 20;
 
 export default class ThirdLawGraph extends Node {
 
@@ -110,16 +111,20 @@ export default class ThirdLawGraph extends Node {
       new TinyProperty<boolean>( true )
     );
 
-    const xAxisLabel = new RichText( xAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
-        x: axisLength * 0.4,
-        y: 25
-      } ) );
-    const yAxisLabel = new RichText( yAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
-        x: -25,
-        y: -axisLength * 0.4
-      } ) );
+    // Axis labels, dynamically positioned
+    const axisLabelOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+      maxWidth: AXIS_LABEL_MAX_WIDTH
+    } );
+    const xAxisLabel = new RichText( xAxisLabelStringProperty, axisLabelOptions );
+    xAxisLabel.boundsProperty.link( () => {
+      xAxisLabel.centerX = axisLength / 2;
+      xAxisLabel.top = 5;
+    } );
+    const yAxisLabel = new RichText( yAxisLabelStringProperty, axisLabelOptions );
+    yAxisLabel.boundsProperty.link( () => {
+      yAxisLabel.right = -8;
+      yAxisLabel.centerY = -axisLength / 2;
+    } );
 
     this.children = [
       xAxis,
