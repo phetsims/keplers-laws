@@ -9,61 +9,50 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, Node, Path, RichText, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Line, Node, RichText, RichTextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
+import LineArrowNode, { LineArrowNodeOptions } from '../../../../scenery-phet/js/LineArrowNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { Shape } from '../../../../kite/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // Initial length of display arrows
-const INITIAL_ARROW_LENGTH = 5;
 const SYMBOL_MAX_WIDTH = 20;
+const FONT = new PhetFont( 24 );
 
 // Options for the 'd1' and 'd2' labels
-export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-  scale: 1.5,
-  stroke: KeplersLawsColors.distancesColorProperty,
+export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+  font: FONT,
   fill: KeplersLawsColors.distancesColorProperty,
   maxWidth: SYMBOL_MAX_WIDTH
 } );
 
 // Options for the 'd1' and 'd2' arrows
-export const DISTANCE_ARROW_OPTIONS = {
+export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
   stroke: '#ccb285',
-  headHeight: 10,
-  headWidth: 10,
-  headLineWidth: 3,
-  tailLineWidth: 3,
-  tailLineDash: [ 10, 2 ],
-  lineWidth: 3 // See note below
+  tailLineDash: [ 10, 2 ]
 };
 
 // Options for the 'a' labels
-export const MAJOR_AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-  scale: 1.5,
-  stroke: KeplersLawsColors.semiMajorAxisColorProperty,
+export const MAJOR_AXIS_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+  font: FONT,
   fill: KeplersLawsColors.semiMajorAxisColorProperty,
   maxWidth: SYMBOL_MAX_WIDTH
 } );
 
 // Options for the 'a' arrows
-export const MAJOR_AXIS_ARROW_OPTIONS = {
-  stroke: KeplersLawsColors.semiMajorAxisColorProperty,
-  fill: KeplersLawsColors.semiMajorAxisColorProperty,
-  headHeight: 10,
-  headWidth: 10,
-  headLineWidth: 3,
-  tailLineWidth: 3,
-  lineWidth: 3 // See note below
+export const MAJOR_AXIS_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
+  stroke: KeplersLawsColors.semiMajorAxisColorProperty
 };
 
 // Note: lineWidth is not supported by LineArrowNode, but it is supported by Path.
@@ -89,10 +78,8 @@ export default class DistancesDisplayNode extends VBox {
     // |----><-----|
     const d1LabelNode = new RichText( '', DISTANCE_LABEL_OPTIONS );
     const d2LabelNode = new RichText( '', DISTANCE_LABEL_OPTIONS );
-    const d1ArrowNode = new LineArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
-    const d2ArrowNode = new LineArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
-    d1ArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), DISTANCE_ARROW_OPTIONS ) );
-    d2ArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), DISTANCE_ARROW_OPTIONS ) );
+    const d1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
+    const d2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
     const distanceArrowsNode = new HBox( {
       children: [ d1ArrowNode, d2ArrowNode ]
     } );
@@ -112,10 +99,8 @@ export default class DistancesDisplayNode extends VBox {
     //    a    a
     const a1LabelNode = new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
     const a2LabelNode = new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
-    const a1ArrowNode = new LineArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
-    const a2ArrowNode = new LineArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
-    a1ArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), MAJOR_AXIS_ARROW_OPTIONS ) );
-    a2ArrowNode.addChild( new Path( new Shape().moveTo( 0, -INITIAL_ARROW_LENGTH ).lineTo( 0, INITIAL_ARROW_LENGTH ), MAJOR_AXIS_ARROW_OPTIONS ) );
+    const a1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
+    const a2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const majorAxisArrowsNode = new HBox( {
       visibleProperty: model.stringsVisibleProperty,
       children: [ a1ArrowNode, a2ArrowNode ]
@@ -171,6 +156,46 @@ export default class DistancesDisplayNode extends VBox {
     ], updateArrowNodes );
 
     this.orbit.ranEmitter.addListener( updateArrowNodes );
+  }
+}
+
+/**
+ * DimensionalArrowNode does not yet exist in common code. So as a workaround, we add a vertical line to the
+ * origin of a LineArrowNode.
+ */
+
+type DimensionalArrowNodeSelfOptions = {
+  verticalLineWidth?: number; // lineWidth of the vertical line at the end of the dimensional arrow
+  verticalLineHeight?: number; // height of the vertical line at the end of the dimensional arrow
+};
+type DimensionalArrowNodeOptions = DimensionalArrowNodeSelfOptions &
+  PickOptional<LineArrowNodeOptions, 'tailLineDash'> &
+  PickRequired<LineArrowNodeOptions, 'stroke'>;
+
+class DimensionalArrowNode extends LineArrowNode {
+  public constructor( tailX: number, tailY: number, tipX: number, tipY: number, providedOptions?: DimensionalArrowNodeOptions ) {
+
+    const options = optionize<DimensionalArrowNodeOptions, DimensionalArrowNodeSelfOptions, LineArrowNodeOptions>()( {
+
+      // DimensionalArrowNodeSelfOptions
+      verticalLineWidth: 3,
+      verticalLineHeight: 10,
+
+      // LineArrowNodeOptions
+      headHeight: 10,
+      headWidth: 10,
+      headLineWidth: 3,
+      tailLineWidth: 3
+    }, providedOptions );
+
+    super( tailX, tailY, tipX, tipY, options );
+
+    // Add a vertical line at the origin. The LineArrowNode will grow to the left or right of the origin.
+    const verticalLine = new Line( 0, -options.verticalLineHeight / 2, 0, options.verticalLineHeight / 2, {
+      lineWidth: options.verticalLineWidth,
+      stroke: options.stroke
+    } );
+    this.addChild( verticalLine );
   }
 }
 
