@@ -4,7 +4,7 @@
  * Box that shows the length of distances available in the sim:
  *  - d1 and d2: Focal strings' lengths from the sun and secondary focus to the planet
  *  - R: Distance from the sun to the planet (circular orbit)
- *  - a: Semimajor axis of the ellipse
+ *  - a: Semi-major axis of the ellipse
  *
  * @author Agustín Vallejo
  */
