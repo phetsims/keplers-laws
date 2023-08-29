@@ -39,7 +39,7 @@ export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, Keple
 
 // Options for the 'd1' and 'd2' arrows
 export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
-  stroke: '#ccb285',
+  stroke: KeplersLawsColors.distancesColorProperty,
   tailLineDash: [ 10, 2 ]
 };
 
