@@ -123,7 +123,7 @@ export default class DistancesDisplayNode extends VBox {
       majorAxisDisplayNode
     ];
 
-    const updateArrowNodes = () => {
+    const updateDisplay = () => {
       const scale = this.modelViewTransformProperty.value.modelToViewDeltaX( 1 );
       const aLength = this.orbit.a * scale;
       const d1Length = this.orbit.d1 * scale;
@@ -153,9 +153,9 @@ export default class DistancesDisplayNode extends VBox {
       KeplersLawsStrings.symbols.distance1StringProperty,
       KeplersLawsStrings.symbols.distance2StringProperty,
       model.zoomProperty
-    ], updateArrowNodes );
+    ], updateDisplay );
 
-    this.orbit.ranEmitter.addListener( updateArrowNodes );
+    this.orbit.ranEmitter.addListener( updateDisplay );
   }
 }
 
