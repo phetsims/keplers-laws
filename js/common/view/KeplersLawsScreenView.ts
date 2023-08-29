@@ -25,7 +25,6 @@ import OrbitalWarningMessage from './OrbitalWarningMessage.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
 import PeriodTimerNode from './PeriodTimerNode.js';
-import KeplersLawsTimeControlNode from './KeplersLawsTimeControlNode.js';
 import TargetOrbitNode from './TargetOrbitNode.js';
 import MagnifyingGlassZoomButtonGroup from '../../../../scenery-phet/js/MagnifyingGlassZoomButtonGroup.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
@@ -38,6 +37,7 @@ import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js/view/SolarSystemCommonTimeControlNode.js';
 
 // constants
 const MARGIN = 10;
@@ -279,7 +279,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       yAlign: 'top'
     } );
 
-    const timeControlsNode = new KeplersLawsTimeControlNode( model, {
+    const timeControlsNode = new SolarSystemCommonTimeControlNode( model, {
       enabledProperty: options.playingAllowedProperty || null,
       restartListener: () => model.restart(),
       stepForwardListener: () => model.stepOnce( 1 / 8 ),
