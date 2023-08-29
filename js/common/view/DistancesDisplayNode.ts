@@ -30,7 +30,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 const SYMBOL_MAX_WIDTH = 20;
 const FONT = new PhetFont( 24 );
 
-// Options for the 'd1' and 'd2' labels
+// Options for the 'd1' and 'd2' labels, or 'R' for circular orbits
 export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   font: FONT,
   fill: KeplersLawsColors.distancesColorProperty,
@@ -76,8 +76,20 @@ export default class DistancesDisplayNode extends VBox {
 
     //   d1    d2
     // |----><-----|
-    const d1LabelNode = new RichText( '', DISTANCE_LABEL_OPTIONS );
-    const d2LabelNode = new RichText( '', DISTANCE_LABEL_OPTIONS );
+    const d1StringProperty = new DerivedProperty( [
+      this.orbit.isCircularProperty,
+      KeplersLawsStrings.symbols.radiusStringProperty,
+      KeplersLawsStrings.symbols.distance1StringProperty
+    ], ( orbitIsCircular, radiusString, distance1String ) =>
+      orbitIsCircular ? radiusString : distance1String );
+    const d2StringProperty = new DerivedProperty( [
+      this.orbit.isCircularProperty,
+      KeplersLawsStrings.symbols.radiusStringProperty,
+      KeplersLawsStrings.symbols.distance2StringProperty
+    ], ( orbitIsCircular, radiusString, distance2String ) =>
+      orbitIsCircular ? radiusString : distance2String );
+    const d1LabelNode = new RichText( d1StringProperty, DISTANCE_LABEL_OPTIONS );
+    const d2LabelNode = new RichText( d2StringProperty, DISTANCE_LABEL_OPTIONS );
     const d1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
     const d2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, DISTANCE_ARROW_OPTIONS );
     const distanceArrowsNode = new HBox( {
@@ -124,26 +136,17 @@ export default class DistancesDisplayNode extends VBox {
     ];
 
     const updateDisplay = () => {
+
+      // Compute the arrow lengths
       const scale = this.modelViewTransformProperty.value.modelToViewDeltaX( 1 );
-      const aLength = this.orbit.a * scale;
       const d1Length = this.orbit.d1 * scale;
       const d2Length = this.orbit.d2 * scale;
+      const aLength = this.orbit.a * scale;
 
-      const rString = KeplersLawsStrings.symbols.radiusStringProperty.value;
-      const d1String = KeplersLawsStrings.symbols.distance1StringProperty.value;
-      const d2String = KeplersLawsStrings.symbols.distance2StringProperty.value;
-
-      d1LabelNode.setString( this.orbit.isCircularProperty.value ? rString : d1String );
-      d2LabelNode.setString( this.orbit.isCircularProperty.value ? rString : d2String );
-
-      d1LabelNode.x = -d2Length / 2;
-      d2LabelNode.x = d1Length / 2;
-
+      // Update the arrows
       const dx = 3; // reducing the arrow length a bit to get the proper measurable length in screen
-
       d1ArrowNode.setTailAndTip( 0, 0, d1Length - dx, 0 );
       d2ArrowNode.setTailAndTip( 0, 0, -d2Length + dx, 0 );
-
       a1ArrowNode.setTailAndTip( 0, 0, aLength - dx, 0 );
       a2ArrowNode.setTailAndTip( 0, 0, -aLength + dx, 0 );
     };
