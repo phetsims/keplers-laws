@@ -12,7 +12,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { GridBox, HBox, Line, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -25,6 +25,7 @@ import ThirdLawGraph from './ThirdLawGraph.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import keplersLaws from '../../keplersLaws.js';
 import { ThirdLawAccordionBoxOptions } from './ThirdLawPanels.js';
+import FractionNode from './FractionNode.js';
 
 export default class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
@@ -58,45 +59,35 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const fractionLeft = new VBox( {
-      spacing: 5,
-      children: [
+    const fractionLeft = new FractionNode(
         new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), KeplersLawsConstants.TEXT_OPTIONS ),
-        new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
         new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), KeplersLawsConstants.TEXT_OPTIONS )
-      ]
-    } );
+    );
 
-    const fractionRight = new VBox( {
-      spacing: 5,
-      children: [
+    const fractionRight = new FractionNode(
         new RichText( new DerivedProperty(
           [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
           ( poweredPeriod, allowedOrbit, undefinedMessage ) => {
             return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : undefinedMessage;
           }
         ), KeplersLawsConstants.TEXT_OPTIONS ),
-        new Line( 0, 0, 70, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } ),
         new RichText( new DerivedProperty(
           [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
           ( poweredSemiMajorAxis, allowedOrbit, undefinedMessage ) => {
             return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : undefinedMessage;
           }
         ), KeplersLawsConstants.TEXT_OPTIONS )
-      ]
-    } );
+    );
 
     const unitsOptions = { font: new PhetFont( { size: 12 } ), fill: SolarSystemCommonColors.foregroundProperty };
     const createUnitsFraction = () => {
-      return new VBox( {
-        spacing: 2,
-        visibleProperty: model.engine.allowedOrbitProperty,
-        children: [
+      return new FractionNode(
           new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.yearsStringProperty, model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
-          new Line( 0, 0, 30, 0, { stroke: SolarSystemCommonColors.foregroundProperty, lineWidth: 1, lineCap: 'round' } ),
-          new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions )
-        ]
-      } );
+          new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.units.AUStringProperty, model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), unitsOptions ),
+        {
+          visibleProperty: model.engine.allowedOrbitProperty
+        }
+      );
     };
 
     const fractionResult = new RichText(
