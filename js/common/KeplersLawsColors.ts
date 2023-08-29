@@ -72,7 +72,17 @@ const KeplersLawsColors = {
 
   timeDisplayBackgroundColorProperty: new ProfileColorProperty( keplersLaws, 'timeDisplayBackground', {
     default: '#aff'
-  } )
+  } ),
+
+  // Colors used for orbital area, where index is a function of area. See KeplersLawModel getAreaColor.
+  ORBITAL_AREA_COLORS: [
+    '#FF92FF',
+    '#FF6DFF',
+    '#FF24FF',
+    '#C800C8',
+    '#A400A4',
+    '#80007F'
+  ]
 };
 
 keplersLaws.register( 'KeplersLawsColors', KeplersLawsColors );
