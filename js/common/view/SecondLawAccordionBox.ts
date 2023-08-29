@@ -76,6 +76,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
     const labelDistance = 40;
 
+    // x-axis label, dynamically centered on its axis
     const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
       combineOptions<RichTextOptions>( {
         centerY: labelDistance
@@ -84,6 +85,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
       xAxisLabel.centerX = barPlot.centerX;
     } );
 
+    // y-axis label, dynamically centered on its axis
     const yAxisLabel = new RichText(
       KeplersLawsStrings.area.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {
