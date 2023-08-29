@@ -131,10 +131,11 @@ export default class EllipticalOrbitNode extends Path {
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsColors.distancesColorProperty,
-        fill: KeplersLawsColors.distancesColorProperty
+        fill: KeplersLawsColors.distancesColorProperty,
+        maxWidth: 50
       } );
-    const stringLabelNode1 = new RichText( 'd<sub>1', stringLabelOptions );
-    const stringLabelNode2 = new RichText( 'd<sub>2', stringLabelOptions );
+    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
+    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
     const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty, combineOptions<TextOptions>( {
       visibleProperty: new DerivedProperty(
         [

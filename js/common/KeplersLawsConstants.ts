@@ -12,6 +12,7 @@ import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystem
 import SolarSystemCommonConstants from '../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
 const DEFAULT_MAX_WIDTH = SolarSystemCommonConstants.TEXT_MAX_WIDTH;
+const EQUATION_MAX_WIDTH = 100;
 
 const KeplersLawsConstants = {
   PANELS_MIN_WIDTH: 250,
@@ -40,7 +41,14 @@ const KeplersLawsConstants = {
     fill: SolarSystemCommonColors.foregroundProperty,
     lineWidth: 0.1,
     maxWidth: DEFAULT_MAX_WIDTH
-  }
+  },
+  EQUATION_TEXT_OPTIONS: {
+    font: new PhetFont( 16 ),
+    fill: SolarSystemCommonColors.foregroundProperty,
+    lineWidth: 0.1,
+    maxWidth: EQUATION_MAX_WIDTH
+  },
+  EQUATION_MAX_WIDTH: EQUATION_MAX_WIDTH
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );
