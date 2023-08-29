@@ -274,7 +274,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.modelViewTransformProperty ), {
       alignBoundsProperty: this.availableBoundsProperty,
-      margin: SolarSystemCommonConstants.MARGIN,
+      margin: SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN,
       xAlign: 'center',
       yAlign: 'top'
     } );
