@@ -73,7 +73,7 @@ export default class FirstLawMoreDataPanel extends Panel {
         new RichText( symbol, {
           fill: symbolColor,
           font: new PhetFont( { size: 18, weight: 'bold' } ),
-          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+          maxWidth: 25
         } ),
         new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
         new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
