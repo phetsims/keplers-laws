@@ -15,13 +15,14 @@ import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
 import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class KeplersLawsPreferencesNode extends PreferencesControl {
   public constructor() {
     super( {
       isDisposable: false,
-      labelNode: new Text( 'More Orbital Data', PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
-      descriptionNode: new RichText( 'Display information about the planet\'s position and velocity vectors in the First Law Screen',
+      labelNode: new Text( KeplersLawsStrings.preferences.moreOrbitalData.titleStringProperty, PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
+      descriptionNode: new RichText( KeplersLawsStrings.preferences.moreOrbitalData.descriptionStringProperty,
         PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS ),
       controlNode: new ToggleSwitch( KeplersLawsPreferences.moreOrbitalDataEnabledProperty, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
     } );

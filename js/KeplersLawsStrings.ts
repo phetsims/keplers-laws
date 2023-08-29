@@ -99,6 +99,12 @@ type StringsType = {
     'planetVelocityStringProperty': LocalizedStringProperty;
     'rvAngleStringProperty': LocalizedStringProperty;
   };
+  'preferences': {
+    'moreOrbitalData': {
+      'titleStringProperty': LocalizedStringProperty;
+      'descriptionStringProperty': LocalizedStringProperty;
+    }
+  };
   'a11y': {
     'decreaseDivisionsStringProperty': LocalizedStringProperty;
     'increaseDivisionsStringProperty': LocalizedStringProperty;
