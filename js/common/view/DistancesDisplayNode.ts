@@ -26,17 +26,20 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 
 // Initial length of display arrows
 const INITIAL_ARROW_LENGTH = 5;
+const SYMBOL_MAX_WIDTH = 20;
 
 export const DISTANCE_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
   stroke: KeplersLawsColors.distancesColorProperty,
-  fill: KeplersLawsColors.distancesColorProperty
+  fill: KeplersLawsColors.distancesColorProperty,
+  maxWidth: SYMBOL_MAX_WIDTH
 } );
 
 export const AXIS_LABEL_OPTIONS = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   scale: 1.5,
   stroke: KeplersLawsColors.semiMajorAxisColorProperty,
-  fill: KeplersLawsColors.semiMajorAxisColorProperty
+  fill: KeplersLawsColors.semiMajorAxisColorProperty,
+  maxWidth: SYMBOL_MAX_WIDTH
 } );
 
 export const STRING_ARROW_OPTIONS = {
