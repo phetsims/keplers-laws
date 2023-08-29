@@ -110,16 +110,16 @@ export default class ThirdLawGraph extends Node {
       new TinyProperty<boolean>( true )
     );
 
-    const xAxisLabel = new RichText(
-      xAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {
-        x: axisLength * 0.4, y: 25
-      }, KeplersLawsConstants.TITLE_OPTIONS ) );
-    const yAxisLabel = new RichText(
-      yAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {
-        x: -25, y: -axisLength * 0.4
-      }, KeplersLawsConstants.TITLE_OPTIONS ) );
+    const xAxisLabel = new RichText( xAxisLabelStringProperty,
+      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+        x: axisLength * 0.4,
+        y: 25
+      } ) );
+    const yAxisLabel = new RichText( yAxisLabelStringProperty,
+      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+        x: -25,
+        y: -axisLength * 0.4
+      } ) );
 
     this.children = [
       xAxis,
