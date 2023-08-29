@@ -41,6 +41,7 @@ const UNITS_TEXT_OPTIONS = {
 };
 
 export default class ThirdLawAccordionBox extends AccordionBox {
+
   public constructor( model: KeplersLawsModel ) {
 
     const titleStringProperty = new DerivedProperty( [
@@ -73,6 +74,102 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
+    // Equation at the top of the accordion box: T/a = ...
+    const equationNode = new EquationNode( model );
+
+    // Graph of a vs T
+    const graphNode = new ThirdLawGraph( model, model.engine, {
+      layoutOptions: { column: 1, row: 0 },
+      excludeInvisibleChildrenFromBounds: true
+    } );
+
+    // Radio buttons to the left of the graph
+    const periodPowerRadioButtonGroup = new RectangularRadioButtonGroup(
+      model.selectedPeriodPowerProperty,
+      [
+        {
+          value: 1,
+          labelContent: KeplersLawsStrings.symbols.periodStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        },
+        {
+          value: 2,
+          labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        },
+        {
+          value: 3,
+          labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        }
+      ],
+      {
+        layoutOptions: { column: 0, row: 0 }
+      }
+    );
+
+    // Radio buttons below the graph
+    const semiMajorAxisPowerRadioButtonGroup = new RectangularRadioButtonGroup(
+      model.selectedAxisPowerProperty,
+      [
+        {
+          value: 1,
+          labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        },
+        {
+          value: 2,
+          labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        },
+        {
+          value: 3,
+          labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+        }
+      ],
+      {
+        layoutOptions: { column: 1, row: 1 },
+        orientation: 'horizontal'
+      }
+    );
+
+    const eraserButton = new EraserButton( {
+      listener: () => model.engine.resetEmitter.emit(),
+      layoutOptions: { column: 0, row: 1 },
+      accessibleName: KeplersLawsStrings.eraserStringProperty,
+      touchAreaXDilation: 10,
+      touchAreaYDilation: 10
+    } );
+
+    // Accordion box content
+    const content = new VBox( {
+      spacing: 20,
+      align: 'left',
+      children: [
+        equationNode,
+        new GridBox( {
+          children: [
+            periodPowerRadioButtonGroup,
+            semiMajorAxisPowerRadioButtonGroup,
+            graphNode,
+            eraserButton
+          ],
+          spacing: 10
+        } )
+      ]
+    } );
+
+    super( content, options );
+  }
+}
+
+/**
+ * The equation that appears at the top of the accordion box, T/a = ...
+ */
+class EquationNode extends HBox {
+  public constructor( model: KeplersLawsModel ) {
 
     // T / a
     const fractionLeftTextOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
@@ -125,7 +222,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       fractionResult.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
     } );
 
-    const periodOverSemiMajorAxisDisplay = new HBox( {
+    super( {
       spacing: 5,
       layoutOptions: {
         align: 'left'
@@ -140,79 +237,6 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         createUnitsFraction()
       ]
     } );
-
-    super( new VBox( {
-      spacing: 20,
-      align: 'left',
-      children: [
-        periodOverSemiMajorAxisDisplay,
-        new GridBox( {
-          children: [
-            // Period power buttons
-            new RectangularRadioButtonGroup(
-              model.selectedPeriodPowerProperty,
-              [
-                {
-                  value: 1,
-                  labelContent: KeplersLawsStrings.symbols.periodStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                },
-                {
-                  value: 2,
-                  labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                },
-                {
-                  value: 3,
-                  labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                }
-              ],
-              {
-                layoutOptions: { column: 0, row: 0 }
-              }
-            ),
-            // Semimajor axis power buttons
-            new RectangularRadioButtonGroup(
-              model.selectedAxisPowerProperty,
-              [
-                {
-                  value: 1,
-                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                },
-                {
-                  value: 2,
-                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                },
-                {
-                  value: 3,
-                  labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
-                  createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
-                }
-              ],
-              {
-                layoutOptions: { column: 1, row: 1 },
-                orientation: 'horizontal'
-              }
-            ),
-            new ThirdLawGraph( model, model.engine, {
-              layoutOptions: { column: 1, row: 0 },
-              excludeInvisibleChildrenFromBounds: true
-            } ),
-            new EraserButton( {
-              listener: () => model.engine.resetEmitter.emit(),
-              layoutOptions: { column: 0, row: 1 },
-              accessibleName: KeplersLawsStrings.eraserStringProperty,
-              touchAreaXDilation: 10,
-              touchAreaYDilation: 10
-            } )
-          ],
-          spacing: 10
-        } )
-      ]
-    } ), options );
   }
 }
 
