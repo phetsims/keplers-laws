@@ -10,7 +10,7 @@
 
 import keplersLaws from '../../keplersLaws.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import { Node, HBox, Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -20,6 +20,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 export default class TargetOrbitsPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>, topLayer: Node ) {
@@ -27,7 +28,8 @@ export default class TargetOrbitsPanel extends Panel {
     const options = combineOptions<PanelOptions>( {
       visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
-    const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty, SolarSystemCommonConstants.TEXT_OPTIONS );
+    const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty, KeplersLawsConstants.PANEL_TEXT_OPTIONS
+    );
 
     const targetOrbitIcon = new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
       stroke: KeplersLawsColors.targetOrbitColorProperty,
