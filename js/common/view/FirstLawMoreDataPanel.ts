@@ -128,6 +128,7 @@ export default class FirstLawMoreDataPanel extends Panel {
     // The panel's content
     const content = new HBox( {
       align: 'top',
+      spacing: 5,
       children: [ moreInfoNode, infoButton ]
     } );
 
