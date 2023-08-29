@@ -1,7 +1,8 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * A combination of a Rich Text node and a Number Display node.
+ * Class for handling special text cases in the Third Law.
+ * i.e. for placing the correct powers on symbols and units, depending on the value of the power.
  *
  * @author Agustín Vallejo
  */
