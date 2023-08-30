@@ -22,14 +22,14 @@ import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/S
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import TargetOrbitsPanel from './TargetOrbitsPanel.js';
+import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
 
 export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
-    const targetOrbitsPanel = new TargetOrbitsPanel( model, topLayer );
+    const targetOrbitsPanel = new TargetOrbitPanel( model, topLayer );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
     const orbitalInformationPanel = new Panel( new KeplersLawsOrbitalInformationBox( model, {
