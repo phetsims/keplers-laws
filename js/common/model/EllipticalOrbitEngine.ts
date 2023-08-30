@@ -14,8 +14,8 @@
  * v: velocity vector
  * rAngle: heading of r
  * vAngle: heading of v
- * a: Semimajor axis
- * b: semiminor axis
+ * a: semi-major axis
+ * b: semi-minor axis
  * c: focal distance
  * e: eccentricity
  * nu: true anomaly ( angular position of the body seen from main focus )
@@ -98,8 +98,8 @@ export default class EllipticalOrbitEngine extends Engine {
   public eccentricityProperty = new NumberProperty( 0 );
 
   // These variable names are letters to compare and read more easily the equations they are in
-  public a = 1;  // Semimajor axis
-  public b = 0;  // semiminor axis
+  public a = 1;  // semi-major axis
+  public b = 0;  // semi-minor axis
   public c = 0;  // focal distance
   public e = 0;  // eccentricity
   public w = 0;  // argument of periapsis
@@ -450,7 +450,7 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   /**
-   *  From the "vis viva" equation, calculate Semimajor Axis.
+   * From the "vis viva" equation, calculate semi-major axis.
    */
   private calculate_a( r: Vector2, v: Vector2 ): number {
     const rMagnitude = r.magnitude;

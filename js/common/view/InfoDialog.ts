@@ -9,8 +9,8 @@ import keplersLaws from '../../keplersLaws.js';
 import { HBox, Image, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
-import infoSemimajorAxis_png from '../../../images/infoSemimajorAxis_png.js';
-import infoSemiminorAxis_png from '../../../images/infoSemiminorAxis_png.js';
+import infoSemiMajorAxis_png from '../../../images/infoSemiMajorAxis_png.js';
+import infoSemiMinorAxis_png from '../../../images/infoSemiMinorAxis_png.js';
 import focalDistance_png from '../../../images/focalDistance_png.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
@@ -43,14 +43,14 @@ export default class InfoDialog extends Dialog {
         new HBox( {
           spacing: IMAGE_TEXT_SPACING,
           children: [
-            new Image( infoSemimajorAxis_png ),
+            new Image( infoSemiMajorAxis_png ),
             new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, richTextOptions )
           ]
         } ),
         new HBox( {
           spacing: IMAGE_TEXT_SPACING,
           children: [
-            new Image( infoSemiminorAxis_png ),
+            new Image( infoSemiMinorAxis_png ),
             new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, richTextOptions )
           ]
         } ),

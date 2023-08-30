@@ -3,7 +3,7 @@
 /**
  * Third Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit.
  * In this screen, the user can learn that the square of the period of an orbit is proportional to the cube of the
- * semimajor axis of the orbit.
+ * semi-major axis of the orbit.
  *
  * For that learning goal, there's a T vs 'a' graph that shows the relationship between those two variables.
  *

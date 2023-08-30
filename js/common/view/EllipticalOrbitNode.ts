@@ -350,7 +350,7 @@ export default class EllipticalOrbitNode extends Path {
         const minScaling = 1.2;
         const maxScaling = 2.0;
 
-        // Here, a1 and a2 are the Semimajor and semiminor axes of the ellipse
+        // Here, a1 and a2 are the semi-major and semi-minor axes of the ellipse
         return Utils.clamp(
           Utils.linear( 10, 250, maxScaling, minScaling, vectorMagnitude ),
           minScaling, maxScaling );
@@ -362,7 +362,7 @@ export default class EllipticalOrbitNode extends Path {
       axis.moveTo( 0, -radiusY ).lineTo( 0, radiusY );
       axisPath.shape = axis;
 
-      // Semimajor axis (a)
+      // Semi-major axis (a)
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
 
       // Semi-minor axis (b)

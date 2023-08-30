@@ -83,7 +83,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static createSemimajorAxisCheckboxIcon(): Node {
+  public static createSemiMajorAxisCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [

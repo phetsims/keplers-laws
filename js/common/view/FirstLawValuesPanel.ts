@@ -1,6 +1,6 @@
 // Copyright 2023, University of Colorado Boulder
 /**
- * Panel with the basic orbital values: semimajor and semiminor axis and focal distance (a,b,c).
+ * Panel with the basic orbital values: semi-major and semi-minor axes and focal distance (a,b,c).
  *
  * @author Agustín Vallejo
  * @author Chris Malley (PixelZoom, Inc.)

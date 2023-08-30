@@ -26,12 +26,12 @@ const KeplersLawsColors = {
   // Color for the base fuchsia of the areas
   areaColorProperty: SolarSystemCommonColors.orbitColorProperty,
 
-  // Semimajor axis color
+  // Semi-major axis color
   semiMajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMajorAxis', {
     default: 'orange'
   } ),
 
-  // Semiminor axis color
+  // Semi-minor axis color
   semiMinorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMinorAxis', {
     default: '#C4F566',
     projector: '#83B030'
