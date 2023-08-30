@@ -129,7 +129,7 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
       new RichText( symbolStringProperty, {
         fill: symbolColor,
         font: new PhetFont( { size: 18, weight: 'bold' } ),
-        maxWidth: 25
+        maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
       } ),
       new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
       new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )

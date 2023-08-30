@@ -20,8 +20,6 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 
-const SYMBOL_MAX_WIDTH = 20; // maxWidth of symbols in equationNode
-
 export default class EccentricityPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
 
@@ -39,12 +37,12 @@ export default class EccentricityPanel extends Panel {
           new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
             KeplersLawsConstants.TITLE_OPTIONS, {
               fill: KeplersLawsColors.focalDistanceColorProperty,
-              maxWidth: SYMBOL_MAX_WIDTH
+              maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
             } ) ),
           new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
             KeplersLawsConstants.TITLE_OPTIONS, {
               fill: KeplersLawsColors.semiMajorAxisColorProperty,
-              maxWidth: SYMBOL_MAX_WIDTH
+              maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
             } ) )
         )
       ]

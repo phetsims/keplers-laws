@@ -26,15 +26,13 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-// Initial length of display arrows
-const SYMBOL_MAX_WIDTH = 20;
 const FONT = new PhetFont( 24 );
 
 // Options for the 'd1' and 'd2' labels, or 'R' for circular orbits
 export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   font: FONT,
   fill: KeplersLawsColors.distancesColorProperty,
-  maxWidth: SYMBOL_MAX_WIDTH
+  maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
 } );
 
 // Options for the 'd1' and 'd2' arrows
@@ -47,7 +45,7 @@ export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
 export const MAJOR_AXIS_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
   font: FONT,
   fill: KeplersLawsColors.semiMajorAxisColorProperty,
-  maxWidth: SYMBOL_MAX_WIDTH
+  maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
 } );
 
 // Options for the 'a' arrows

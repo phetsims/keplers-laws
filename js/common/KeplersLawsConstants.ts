@@ -48,7 +48,13 @@ const KeplersLawsConstants = {
     lineWidth: 0.1,
     maxWidth: EQUATION_MAX_WIDTH
   },
-  EQUATION_MAX_WIDTH: EQUATION_MAX_WIDTH
+  EQUATION_MAX_WIDTH: EQUATION_MAX_WIDTH,
+
+  // maxWidth for symbols like a, b, c, T, R
+  SYMBOL_MAX_WIDTH: 20,
+
+  // maxWidth for symbols that include absolute value, like |r|. A bit wider than SYMBOL_MAX_WIDTH.
+  ABSOLUTE_SYMBOL_MAX_WIDTH: 25
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );

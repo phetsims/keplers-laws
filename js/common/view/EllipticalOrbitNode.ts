@@ -30,8 +30,6 @@ import OrbitalSound from './OrbitalSound.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
-const SYMBOL_MAX_WIDTH = 20;
-
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
   private readonly shapeMultilink: UnknownMultilink;
@@ -92,7 +90,7 @@ export default class EllipticalOrbitNode extends Path {
         scale: 1.5,
         stroke: KeplersLawsColors.semiMajorAxisColorProperty,
         fill: KeplersLawsColors.semiMajorAxisColorProperty,
-        maxWidth: SYMBOL_MAX_WIDTH
+        maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
@@ -100,7 +98,7 @@ export default class EllipticalOrbitNode extends Path {
         scale: 1.5,
         stroke: KeplersLawsColors.semiMinorAxisColorProperty,
         fill: KeplersLawsColors.semiMinorAxisColorProperty,
-        maxWidth: SYMBOL_MAX_WIDTH
+        maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
     const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
@@ -109,7 +107,7 @@ export default class EllipticalOrbitNode extends Path {
         scale: 1.5,
         stroke: KeplersLawsColors.focalDistanceColorProperty,
         fill: KeplersLawsColors.focalDistanceColorProperty,
-        maxWidth: SYMBOL_MAX_WIDTH
+        maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
 
     const stringLabelOptions = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
@@ -118,7 +116,7 @@ export default class EllipticalOrbitNode extends Path {
       scale: 1.5,
       stroke: KeplersLawsColors.distancesColorProperty,
       fill: KeplersLawsColors.distancesColorProperty,
-      maxWidth: SYMBOL_MAX_WIDTH
+      maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
     } );
     const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
     const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
