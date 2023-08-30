@@ -24,6 +24,10 @@ const SYMBOL_MAX_WIDTH = 20; // maxWidth of symbols in equationNode
 export default class EccentricityPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
 
+    const options = combineOptions<PanelOptions>( {
+      visibleProperty: model.eccentricityVisibleProperty
+    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
     // Eccentricity = c / a
     const equationNode = new HBox( {
       justify: 'left',
@@ -48,14 +52,14 @@ export default class EccentricityPanel extends Panel {
     // The graph that shows the eccentricity of the orbit, compared to other orbits.
     const graphNode = new FirstLawGraph( model.engine.eccentricityProperty );
 
-    super( new VBox( {
+    const content = new VBox( {
       children: [ equationNode, graphNode ],
       spacing: 10,
       align: 'left',
       stretch: true
-    } ), combineOptions<PanelOptions>( {
-      visibleProperty: model.eccentricityVisibleProperty
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
+    } );
+
+    super( content, options );
   }
 }
 
