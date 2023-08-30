@@ -80,7 +80,7 @@ export default class StarMassPanel extends Panel {
       centerX: SPACING,
       font: new PhetFont( 13 ),
       fill: SolarSystemCommonColors.foregroundProperty,
-      maxWidth: 80
+      maxWidth: 60
     } );
 
     // create a label for the default value
