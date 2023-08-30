@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, Node, Text } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsPanels from './KeplersLawsPanels.js';
 import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsRadioButtonGroup from './LawsRadioButtonGroup.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -39,6 +39,8 @@ import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSy
 import Vector2 from '../../../../dot/js/Vector2.js';
 import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js/view/SolarSystemCommonTimeControlNode.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 
 // constants
 const MARGIN = 10;
@@ -253,13 +255,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
 
-    const offScaleMessage = new Text( SolarSystemCommonStrings.offscaleMessageStringProperty,
-      combineOptions<TextOptions>( {
-          visibleProperty: DerivedProperty.and( [ model.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
-          maxWidth: 400
-        },
-        SolarSystemCommonConstants.TEXT_OPTIONS )
-    );
+    const offScaleMessage = new Text( SolarSystemCommonStrings.offscaleMessageStringProperty, {
+      font: new PhetFont( 16 ),
+      fill: SolarSystemCommonColors.foregroundProperty,
+      visibleProperty: DerivedProperty.and( [ model.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
+      maxWidth: 400
+    } );
     offScaleMessage.boundsProperty.link( bounds => {
       offScaleMessage.centerX = this.layoutBounds.centerX;
       offScaleMessage.top = this.layoutBounds.top + SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN;

@@ -44,7 +44,7 @@ export default class KeplersLawsPanels extends VBox {
         // 'Always circular' checkbox
         new SolarSystemCommonCheckbox(
           model.alwaysCircularProperty,
-          new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+          new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
           {
             accessibleName: KeplersLawsStrings.circularOrbitStringProperty
           } ),
@@ -65,7 +65,7 @@ export default class KeplersLawsPanels extends VBox {
           model.stopwatchVisibleProperty,
           new HBox( {
             children: [
-              new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+              new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
               createStopwatchIcon()
             ]
           } ),

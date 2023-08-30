@@ -126,7 +126,8 @@ export default class EllipticalOrbitNode extends Path {
           ( visible, e ) => visible && ( e === 0 ) ),
         scale: 1.5,
         stroke: KeplersLawsColors.distancesColorProperty,
-        fill: KeplersLawsColors.distancesColorProperty
+        fill: KeplersLawsColors.distancesColorProperty,
+        maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
 
     // FIRST LAW: Axis, foci, and Ellipse definition lines

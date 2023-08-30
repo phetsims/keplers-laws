@@ -173,7 +173,7 @@ function createCheckbox( property: Property<boolean>, stringProperty: TReadOnlyP
   const content = new HBox( {
     spacing: 10,
     children: [
-      new Text( stringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
+      new Text( stringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
       icon
     ]
   } );

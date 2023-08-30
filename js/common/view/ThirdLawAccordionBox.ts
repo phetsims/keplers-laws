@@ -41,6 +41,11 @@ const UNITS_TEXT_OPTIONS = {
   maxWidth: 35
 };
 
+const EQUATION_TEXT_OPTIONS = {
+  font: new PhetFont( 16 ),
+  fill: SolarSystemCommonColors.foregroundProperty
+};
+
 export default class ThirdLawAccordionBox extends AccordionBox {
 
   public constructor( model: KeplersLawsModel ) {
@@ -173,7 +178,7 @@ class EquationNode extends HBox {
   public constructor( model: KeplersLawsModel ) {
 
     // T / a
-    const fractionLeftTextOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+    const fractionLeftTextOptions = combineOptions<RichTextOptions>( {}, EQUATION_TEXT_OPTIONS, {
       maxWidth: 25
     } );
     const fractionLeft = new FractionNode(
@@ -189,13 +194,13 @@ class EquationNode extends HBox {
         ( poweredPeriod, allowedOrbit, undefinedMessage ) => {
           return allowedOrbit ? Utils.toFixed( poweredPeriod, 2 ) : undefinedMessage;
         }
-      ), KeplersLawsConstants.TEXT_OPTIONS ),
+      ), EQUATION_TEXT_OPTIONS ),
       new RichText( new DerivedProperty(
         [ model.poweredSemiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
         ( poweredSemiMajorAxis, allowedOrbit, undefinedMessage ) => {
           return allowedOrbit ? Utils.toFixed( poweredSemiMajorAxis, 2 ) : undefinedMessage;
         }
-      ), KeplersLawsConstants.TEXT_OPTIONS )
+      ), EQUATION_TEXT_OPTIONS )
     );
 
     // years / AU
@@ -230,10 +235,12 @@ class EquationNode extends HBox {
       },
       children: [
         fractionLeft,
-        new Text( '=', KeplersLawsConstants.TEXT_OPTIONS ),
+        new Text( '=', EQUATION_TEXT_OPTIONS ),
         fractionRight,
         createUnitsFraction(),
-        new Text( '=', combineOptions<TextOptions>( { visibleProperty: model.engine.allowedOrbitProperty }, KeplersLawsConstants.TEXT_OPTIONS ) ),
+        new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
+          visibleProperty: model.engine.allowedOrbitProperty
+        } ) ),
         fractionResult,
         createUnitsFraction()
       ]
