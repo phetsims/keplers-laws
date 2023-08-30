@@ -174,4 +174,4 @@ function createCheckbox( property: Property<boolean>, text: TReadOnlyProperty<st
   return new SolarSystemCommonCheckbox( property, content, options );
 }
 
-keplersLaws.register( 'KeplersLawsOrbitalInformationBox', OrbitalInformationPanel );
+keplersLaws.register( 'OrbitalInformationPanel', OrbitalInformationPanel );
