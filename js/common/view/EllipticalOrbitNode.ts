@@ -88,7 +88,6 @@ export default class EllipticalOrbitNode extends Path {
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: semiMajorAxisVisibleProperty,
         scale: 1.5,
-        stroke: KeplersLawsColors.semiMajorAxisColorProperty,
         fill: KeplersLawsColors.semiMajorAxisColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
@@ -96,7 +95,6 @@ export default class EllipticalOrbitNode extends Path {
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: model.semiaxisVisibleProperty,
         scale: 1.5,
-        stroke: KeplersLawsColors.semiMinorAxisColorProperty,
         fill: KeplersLawsColors.semiMinorAxisColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
@@ -105,7 +103,6 @@ export default class EllipticalOrbitNode extends Path {
         visibleProperty: new DerivedProperty( [ model.eccentricityVisibleProperty, model.engine.eccentricityProperty ],
           ( visible, e ) => visible && ( e > 0 ) ),
         scale: 1.5,
-        stroke: KeplersLawsColors.focalDistanceColorProperty,
         fill: KeplersLawsColors.focalDistanceColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
@@ -114,7 +111,6 @@ export default class EllipticalOrbitNode extends Path {
       visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
         ( visible, e ) => visible && ( e > 0 ) ),
       scale: 1.5,
-      stroke: KeplersLawsColors.distancesColorProperty,
       fill: KeplersLawsColors.distancesColorProperty,
       maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
     } );
@@ -125,7 +121,6 @@ export default class EllipticalOrbitNode extends Path {
         visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
           ( visible, e ) => visible && ( e === 0 ) ),
         scale: 1.5,
-        stroke: KeplersLawsColors.distancesColorProperty,
         fill: KeplersLawsColors.distancesColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
