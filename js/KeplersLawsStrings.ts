@@ -27,7 +27,6 @@ type StringsType = {
   'stringsStringProperty': LocalizedStringProperty;
   'semiaxisStringProperty': LocalizedStringProperty;
   'eccentricityStringProperty': LocalizedStringProperty;
-  'eccentricityEquationStringProperty': LocalizedStringProperty;
   'apoapsisStringProperty': LocalizedStringProperty;
   'periapsisStringProperty': LocalizedStringProperty;
   'starMassStringProperty': LocalizedStringProperty;

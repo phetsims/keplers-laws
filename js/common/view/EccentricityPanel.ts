@@ -30,12 +30,13 @@ export default class EccentricityPanel extends Panel {
     // Eccentricity = c / a
     const equationNode = new HBox( {
       justify: 'left',
-      margin: 5,
+      spacing: 2,
       children: [
-        new Text( KeplersLawsStrings.eccentricityEquationStringProperty,
+        new Text( KeplersLawsStrings.eccentricityStringProperty,
           combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
-            maxWidth: 120
+            maxWidth: 150
           } ) ),
+        new Text( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
         new FractionNode(
           new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
             KeplersLawsConstants.TITLE_OPTIONS, {

@@ -41,9 +41,6 @@
   "eccentricity": {
     "value": "Eccentricity"
   },
-  "eccentricityEquation": {
-    "value": "Eccentricity ="
-  },
   "apoapsis": {
     "value": "Apoapsis"
   },
