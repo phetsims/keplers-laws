@@ -43,7 +43,7 @@ const KeplersLawsConstants = {
   CHECKBOX_TEXT_OPTIONS: {
     font: new PhetFont( 16 ),
     fill: SolarSystemCommonColors.foregroundProperty,
-    maxWidth: 150
+    maxWidth: SolarSystemCommonConstants.CHECKBOX_TEXT_MAX_WIDTH
   },
 
   // maxWidth for symbols like a, b, c, T, R
