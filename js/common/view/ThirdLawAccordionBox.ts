@@ -13,7 +13,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { GridBox, HBox, RichText, RichTextOptions, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -43,7 +43,8 @@ const UNITS_TEXT_OPTIONS = {
 
 const EQUATION_TEXT_OPTIONS = {
   font: new PhetFont( 16 ),
-  fill: SolarSystemCommonColors.foregroundProperty
+  fill: SolarSystemCommonColors.foregroundProperty,
+  maxWidth: 60
 };
 
 export default class ThirdLawAccordionBox extends AccordionBox {
@@ -178,14 +179,11 @@ class EquationNode extends HBox {
   public constructor( model: KeplersLawsModel ) {
 
     // T / a
-    const fractionLeftTextOptions = combineOptions<RichTextOptions>( {}, EQUATION_TEXT_OPTIONS, {
-      maxWidth: 25
-    } );
     const fractionLeft = new FractionNode(
       new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty,
-        model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), fractionLeftTextOptions ),
+        model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS ),
       new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-        model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), fractionLeftTextOptions )
+        model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS )
     );
 
     const fractionRight = new FractionNode(
