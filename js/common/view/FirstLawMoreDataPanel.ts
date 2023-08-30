@@ -122,17 +122,17 @@ export default class FirstLawMoreDataPanel extends Panel {
   }
 }
 
-function createCustomEquation( symbol: TReadOnlyProperty<string>, text: TReadOnlyProperty<string>, symbolColor: TPaint ): Node {
+function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, valueStringProperty: TReadOnlyProperty<string>, symbolColor: TPaint ): Node {
   return new HBox( {
     spacing: 2,
     children: [
-      new RichText( symbol, {
+      new RichText( symbolStringProperty, {
         fill: symbolColor,
         font: new PhetFont( { size: 18, weight: 'bold' } ),
         maxWidth: 25
       } ),
       new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-      new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
+      new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
     ]
   } );
 }
