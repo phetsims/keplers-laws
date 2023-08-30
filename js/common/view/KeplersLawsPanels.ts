@@ -8,7 +8,7 @@
  */
 
 import { HBox, HSeparator, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
@@ -21,7 +21,6 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
 
@@ -32,11 +31,8 @@ export default class KeplersLawsPanels extends VBox {
     const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
-    const orbitalInformationPanel = new Panel( new KeplersLawsOrbitalInformationBox( model, {
-      tandem: Tandem.OPT_OUT
-    } ), combineOptions<PanelOptions>( {
-      // minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
+    const orbitalInformationPanel = new KeplersLawsOrbitalInformationBox( model,
+      tandem.createTandem( 'orbitalInformationPanel' ) );
 
     // A bunch of unrelated controls, so we named the panel based on its position in the layout.
     const bottomPanel = new Panel( new VBox( {
