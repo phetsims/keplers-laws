@@ -28,18 +28,18 @@ const KeplersLawsColors = {
 
   // Semimajor axis color
   semiMajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMajorAxis', {
-    default: '#FF9500'
+    default: 'orange'
   } ),
 
   // Semiminor axis color
   semiMinorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMinorAxis', {
-    default: '#B0EE86',
+    default: '#C4F566',
     projector: '#83B030'
   } ),
 
   // Focal distance color
   focalDistanceColorProperty: new ProfileColorProperty( keplersLaws, 'focalDistance', {
-    default: '#E6C7FF',
+    default: '#AFAFDA',
     projector: '#8484D7'
   } ),
 
@@ -71,8 +71,18 @@ const KeplersLawsColors = {
   } ),
 
   timeDisplayBackgroundColorProperty: new ProfileColorProperty( keplersLaws, 'timeDisplayBackground', {
-    default: '#ADFFCD'
-  } )
+    default: '#aff'
+  } ),
+
+  // Colors used for orbital area, where index is a function of area. See KeplersLawModel getAreaColor.
+  ORBITAL_AREA_COLORS: [
+    '#FF92FF',
+    '#FF6DFF',
+    '#FF24FF',
+    '#C800C8',
+    '#A400A4',
+    '#80007F'
+  ]
 };
 
 keplersLaws.register( 'KeplersLawsColors', KeplersLawsColors );

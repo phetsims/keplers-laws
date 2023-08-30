@@ -30,9 +30,9 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 export default class FirstLawMoreDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions: PanelOptions ) {
 
-    const options = combineOptions<PanelOptions>( {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
       visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
-    }, providedOptions );
+    } );
 
     // Extra information: distance and velocity vector values
     const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
@@ -69,82 +69,70 @@ export default class FirstLawMoreDataPanel extends Panel {
     }, { tandem: Tandem.OPT_OUT } );
 
     const createCustomEquation = ( symbol: TReadOnlyProperty<string>, text: TReadOnlyProperty<string>, symbolColor: TPaint ) => {
-      return [
-        new RichText( symbol, {
-          fill: symbolColor,
-          font: new PhetFont( { size: 18, weight: 'bold' } ),
-          maxWidth: KeplersLawsConstants.EQUATION_MAX_WIDTH
-        } ),
-        new RichText( ' = ', KeplersLawsConstants.EQUATION_TEXT_OPTIONS ),
-        new RichText( text, KeplersLawsConstants.EQUATION_TEXT_OPTIONS )
-      ];
+      return new HBox( {
+        spacing: 2,
+        children: [
+          new RichText( symbol, {
+            fill: symbolColor,
+            font: new PhetFont( { size: 18, weight: 'bold' } ),
+            maxWidth: 25
+          } ),
+          new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+          new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
+        ]
+      } );
     };
 
-    const infoDialog = new InfoDialogMoreData();
-
-    super( new HBox( {
-      align: 'top',
+    // Extra information: distance and velocity vector values
+    const moreInfoNode = new VBox( {
+      align: 'left',
       children: [
-        new VBox( {
-          align: 'left',
-          children: [
-            // Extra information: distance and velocity vector values
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
-                positionMagnitudeStringProperty,
-                KeplersLawsColors.distancesColorProperty
-              )
-            } ),
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.distanceAngleStringProperty,
-                distanceAngleStringProperty,
-                KeplersLawsColors.distancesColorProperty
-              )
-            } ),
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
-                velocityMagnitudeStringProperty,
-                KeplersLawsColors.velocityColorProperty
-              )
-            } ),
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.velocityAngleStringProperty,
-                velocityAngleStringProperty,
-                KeplersLawsColors.velocityColorProperty
-              )
-            } ),
-            new HBox( {
-              spacing: 2,
-              visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
-              children: createCustomEquation(
-                KeplersLawsStrings.symbols.rvAngleStringProperty,
-                rvAngleStringProperty,
-                KeplersLawsColors.foregroundProperty
-              )
-            } )
-          ]
-        } ),
-        new InfoButton( {
-          accessibleName: KeplersLawsStrings.a11y.extraInfoButtonStringProperty,
-          scale: 0.5,
-          iconFill: 'rgb( 41, 106, 163 )',
-          touchAreaDilation: 20,
-          listener: () => infoDialog.show()
-        } )
+        createCustomEquation(
+          KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
+          positionMagnitudeStringProperty,
+          KeplersLawsColors.distancesColorProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.distanceAngleStringProperty,
+          distanceAngleStringProperty,
+          KeplersLawsColors.distancesColorProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
+          velocityMagnitudeStringProperty,
+          KeplersLawsColors.velocityColorProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.velocityAngleStringProperty,
+          velocityAngleStringProperty,
+          KeplersLawsColors.velocityColorProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.rvAngleStringProperty,
+          rvAngleStringProperty,
+          KeplersLawsColors.foregroundProperty
+        )
       ]
-    } ), combineOptions<PanelOptions>( options, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) );
+    } );
+
+    // Info button and associated dialog
+    const infoDialog = new InfoDialogMoreData();
+    const infoButton = new InfoButton( {
+      accessibleName: KeplersLawsStrings.a11y.extraInfoButtonStringProperty,
+      scale: 0.5,
+      iconFill: 'rgb( 41, 106, 163 )',
+      touchAreaDilation: 20,
+      listener: () => infoDialog.show()
+    } );
+
+    // The panel's content
+    const content = new HBox( {
+      align: 'top',
+      spacing: 5,
+      children: [ moreInfoNode, infoButton ]
+    } );
+
+    super( content, options );
   }
 }
 

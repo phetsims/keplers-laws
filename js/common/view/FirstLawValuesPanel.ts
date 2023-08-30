@@ -60,10 +60,10 @@ export default class FirstLawValuesPanel extends Panel {
         new RichText( symbol, {
           fill: symbolColor,
           font: new PhetFont( { size: 18, weight: 'bold' } ),
-          maxWidth: KeplersLawsConstants.EQUATION_MAX_WIDTH
+          maxWidth: 20
         } ),
-        new RichText( ' = ', KeplersLawsConstants.EQUATION_TEXT_OPTIONS ),
-        new RichText( text, KeplersLawsConstants.EQUATION_TEXT_OPTIONS )
+        new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+        new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
       ];
     };
 

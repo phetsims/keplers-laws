@@ -8,7 +8,7 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import { Circle, Node, NodeOptions, Path, RichText, RichTextOptions, TextOptions } from '../../../../scenery/js/imports.js';
+import { Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -26,6 +26,7 @@ import TargetOrbits from '../model/TargetOrbits.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
+const AXIS_LABEL_MAX_WIDTH = 20;
 
 export default class ThirdLawGraph extends Node {
 
@@ -110,19 +111,20 @@ export default class ThirdLawGraph extends Node {
       new TinyProperty<boolean>( true )
     );
 
-    const LABEL_TEXT_OPTIONS = combineOptions<TextOptions>(
-      {}, KeplersLawsConstants.TITLE_OPTIONS, { maxWidth: 20 }
-    );
-    const xAxisLabel = new RichText(
-      xAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {
-        x: axisLength * 0.4, y: 25
-      }, LABEL_TEXT_OPTIONS ) );
-    const yAxisLabel = new RichText(
-      yAxisLabelStringProperty,
-      combineOptions<RichTextOptions>( {
-        x: -25, y: -axisLength * 0.4
-      }, LABEL_TEXT_OPTIONS ) );
+    // Axis labels, dynamically positioned
+    const axisLabelOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+      maxWidth: AXIS_LABEL_MAX_WIDTH
+    } );
+    const xAxisLabel = new RichText( xAxisLabelStringProperty, axisLabelOptions );
+    xAxisLabel.boundsProperty.link( () => {
+      xAxisLabel.centerX = axisLength / 2;
+      xAxisLabel.top = 5;
+    } );
+    const yAxisLabel = new RichText( yAxisLabelStringProperty, axisLabelOptions );
+    yAxisLabel.boundsProperty.link( () => {
+      yAxisLabel.right = -8;
+      yAxisLabel.centerY = -axisLength / 2;
+    } );
 
     this.children = [
       xAxis,

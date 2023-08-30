@@ -19,29 +19,37 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 
+const SYMBOL_MAX_WIDTH = 20; // maxWidth of symbols in equationNode
+
 export default class EccentricityPanel extends Panel {
-  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty' > ) {
-    super( new VBox( {
+  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
+
+    // Eccentricity = c / a
+    const equationNode = new HBox( {
+      justify: 'left',
+      margin: 5,
       children: [
-        new HBox( {
-          justify: 'left',
-          margin: 5,
-          children: [
-            new Text( KeplersLawsStrings.eccentricityEquationStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
-            new FractionNode(
-                new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
-                  KeplersLawsConstants.TITLE_OPTIONS, {
-                    fill: KeplersLawsColors.focalDistanceColorProperty
-                  } ) ),
-                new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
-                  KeplersLawsConstants.TITLE_OPTIONS, {
-                    fill: KeplersLawsColors.semiMajorAxisColorProperty
-                  } ) )
-            )
-          ]
-        } ),
-        new FirstLawGraph( model.engine.eccentricityProperty )
-      ],
+        new Text( KeplersLawsStrings.eccentricityEquationStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+        new FractionNode(
+          new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
+            KeplersLawsConstants.TITLE_OPTIONS, {
+              fill: KeplersLawsColors.focalDistanceColorProperty,
+              maxWidth: SYMBOL_MAX_WIDTH
+            } ) ),
+          new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
+            KeplersLawsConstants.TITLE_OPTIONS, {
+              fill: KeplersLawsColors.semiMajorAxisColorProperty,
+              maxWidth: SYMBOL_MAX_WIDTH
+            } ) )
+        )
+      ]
+    } );
+
+    // The graph that shows the eccentricity of the orbit, compared to other orbits.
+    const graphNode = new FirstLawGraph( model.engine.eccentricityProperty );
+
+    super( new VBox( {
+      children: [ equationNode, graphNode ],
       spacing: 10,
       align: 'left',
       stretch: true
