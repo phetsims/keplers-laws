@@ -33,23 +33,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
-    const stopwatchIcon = new StopwatchNode( new Stopwatch( {
-      isVisible: true
-    } ), {
-      numberDisplayOptions: {
-        textOptions: {
-          maxWidth: 100
-        }
-      }
-    } ).rasterized( {
-      resolution: 5,
-      imageOptions: {
-        cursor: 'pointer'
-      }
-    } );
-
-    stopwatchIcon.setScaleMagnitude( 0.3 );
-
     const targetOrbitsPanel = new TargetOrbitsPanel( model, topLayer );
 
     // Creates a custom VBox with the provided and default options
@@ -93,7 +76,7 @@ class KeplersLawsControls extends VBox {
             new HBox( {
               children: [
                 new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.TEXT_OPTIONS ),
-                stopwatchIcon
+                createStopwatchIcon()
               ]
             } ),
             {
@@ -104,6 +87,25 @@ class KeplersLawsControls extends VBox {
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING
     } );
   }
+}
+
+function createStopwatchIcon(): Node {
+  const stopwatchIcon = new StopwatchNode( new Stopwatch( {
+    isVisible: true
+  } ), {
+    numberDisplayOptions: {
+      textOptions: {
+        maxWidth: 100
+      }
+    }
+  } ).rasterized( {
+    resolution: 5,
+    imageOptions: {
+      cursor: 'pointer'
+    }
+  } );
+  stopwatchIcon.setScaleMagnitude( 0.3 );
+  return stopwatchIcon;
 }
 
 keplersLaws.register( 'KeplersLawsControls', KeplersLawsControls );
