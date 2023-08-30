@@ -93,6 +93,7 @@ export default class FirstLawValuesPanel extends Panel {
     // The panel's content
     const content = new HBox( {
       align: 'top',
+      spacing: 2,
       children: [
         equationsNode,
         infoButton
