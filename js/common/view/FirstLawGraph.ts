@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import Range from '../../../../dot/js/Range.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
@@ -30,6 +30,13 @@ const Y_AXIS_LENGTH = 180;
 export default class FirstLawGraph extends AlignBox {
 
   public constructor( eccentricityProperty: TReadOnlyProperty<number> ) {
+
+    const options: AlignBoxOptions = {
+      layoutOptions: {
+        align: 'center'
+      }
+    };
+
     const yAxis = new Path( new Shape().moveTo( 0, 0 ).lineTo( 0, Y_AXIS_LENGTH ), {
       fill: FOREGROUND_COLOR_PROPERTY,
       stroke: FOREGROUND_COLOR_PROPERTY
@@ -100,7 +107,7 @@ export default class FirstLawGraph extends AlignBox {
       stroke: SolarSystemCommonColors.foregroundProperty
     } );
 
-    super( new Node( {
+    const content = new Node( {
       isDisposable: false,
       children: [
         ...orbitAndValues,
@@ -108,11 +115,9 @@ export default class FirstLawGraph extends AlignBox {
         YTickMarkSet,
         currentEccentricityContainer
       ]
-    } ), {
-      layoutOptions: {
-        align: 'center'
-      }
     } );
+
+    super( content, options );
   }
 }
 
