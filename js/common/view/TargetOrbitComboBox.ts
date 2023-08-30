@@ -24,7 +24,7 @@ const targetOrbits = [
   TargetOrbits.JUPITER
 ];
 
-export default class TargetOrbitsComboBox extends ComboBox<TargetOrbits> {
+export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
   public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: ComboBoxOptions ) {
     const options = combineOptions<ComboBoxOptions>( {
       isDisposable: false,
@@ -53,4 +53,4 @@ export default class TargetOrbitsComboBox extends ComboBox<TargetOrbits> {
   }
 }
 
-keplersLaws.register( 'TargetOrbitsComboBox', TargetOrbitsComboBox );
+keplersLaws.register( 'TargetOrbitsComboBox', TargetOrbitComboBox );

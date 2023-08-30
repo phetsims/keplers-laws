@@ -15,7 +15,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import TargetOrbitsComboBox from './TargetOrbitsComboBox.js';
+import TargetOrbitComboBox from './TargetOrbitComboBox.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
@@ -37,7 +37,7 @@ export default class TargetOrbitPanel extends Panel {
       lineWidth: 2
     } );
 
-    const comboBox = new TargetOrbitsComboBox( model.targetOrbitProperty, topLayer, {
+    const comboBox = new TargetOrbitComboBox( model.targetOrbitProperty, topLayer, {
       enabledProperty: model.isSolarSystemProperty,
       layoutOptions: {
         align: 'center'
