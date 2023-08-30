@@ -30,7 +30,7 @@ export default class InfoDialog extends Dialog {
       } )
     };
 
-    const rickTextOptions: RichTextOptions = {
+    const richTextOptions: RichTextOptions = {
       font: new PhetFont( 18 ),
       fill: 'black',
       lineWrap: 450
@@ -44,21 +44,21 @@ export default class InfoDialog extends Dialog {
           spacing: IMAGE_TEXT_SPACING,
           children: [
             new Image( infoSemimajorAxis_png ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, rickTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, richTextOptions )
           ]
         } ),
         new HBox( {
           spacing: IMAGE_TEXT_SPACING,
           children: [
             new Image( infoSemiminorAxis_png ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, rickTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, richTextOptions )
           ]
         } ),
         new HBox( {
           spacing: IMAGE_TEXT_SPACING,
           children: [
             new Image( focalDistance_png ),
-            new RichText( KeplersLawsStrings.infoDialog.focalDistanceStringProperty, rickTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.focalDistanceStringProperty, richTextOptions )
           ]
         } )
       ]
