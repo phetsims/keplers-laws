@@ -60,32 +60,23 @@ export default class FirstLawValuesPanel extends Panel {
     const equationsNode = new VBox( {
       align: 'left',
       children: [
-        new HBox( {
-          spacing: 2,
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-            semiMajorAxisStringProperty,
-            KeplersLawsColors.semiMajorAxisColorProperty
-          )
-        } ),
-        new HBox( {
-          spacing: 2,
-          visibleProperty: model.semiaxisVisibleProperty,
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
-            semiMinorAxisStringProperty,
-            KeplersLawsColors.semiMinorAxisColorProperty
-          )
-        } ),
-        new HBox( {
-          spacing: 2,
-          visibleProperty: model.eccentricityVisibleProperty,
-          children: createCustomEquation(
-            KeplersLawsStrings.symbols.focalDistanceStringProperty,
-            focalDistanceStringProperty,
-            KeplersLawsColors.focalDistanceColorProperty
-          )
-        } )
+        createCustomEquation(
+          KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+          semiMajorAxisStringProperty,
+          KeplersLawsColors.semiMajorAxisColorProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+          semiMinorAxisStringProperty,
+          KeplersLawsColors.semiMinorAxisColorProperty,
+          model.semiaxisVisibleProperty
+        ),
+        createCustomEquation(
+          KeplersLawsStrings.symbols.focalDistanceStringProperty,
+          focalDistanceStringProperty,
+          KeplersLawsColors.focalDistanceColorProperty,
+          model.eccentricityVisibleProperty
+        )
       ]
     } );
 
@@ -112,16 +103,21 @@ export default class FirstLawValuesPanel extends Panel {
   }
 }
 
-function createCustomEquation( symbol: TReadOnlyProperty<string>, text: TReadOnlyProperty<string>, symbolColor: TPaint ): Node[] {
-  return [
-    new RichText( symbol, {
-      fill: symbolColor,
-      font: new PhetFont( { size: 18, weight: 'bold' } ),
-      maxWidth: 20
-    } ),
-    new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-    new RichText( text, KeplersLawsConstants.TEXT_OPTIONS )
-  ];
+function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, valueStringProperty: TReadOnlyProperty<string>,
+                               symbolColor: TPaint, visibleProperty: TReadOnlyProperty<boolean> | null = null ): Node {
+  return new HBox( {
+    visibleProperty: visibleProperty,
+    spacing: 2,
+    children: [
+      new RichText( symbolStringProperty, {
+        fill: symbolColor,
+        font: new PhetFont( { size: 18, weight: 'bold' } ),
+        maxWidth: 20
+      } ),
+      new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+      new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+    ]
+  } );
 }
 
 keplersLaws.register( 'FirstLawValuesPanel', FirstLawValuesPanel );
