@@ -32,7 +32,10 @@ export default class EccentricityPanel extends Panel {
       justify: 'left',
       margin: 5,
       children: [
-        new Text( KeplersLawsStrings.eccentricityEquationStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+        new Text( KeplersLawsStrings.eccentricityEquationStringProperty,
+          combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+            maxWidth: 120
+          } ) ),
         new FractionNode(
           new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
             KeplersLawsConstants.TITLE_OPTIONS, {
