@@ -19,7 +19,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { HBox, Node, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
@@ -132,7 +132,9 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
         maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
       } ),
       new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-      new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+      new RichText( valueStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        maxWidth: KeplersLawsConstants.VALUE_MAX_WIDTH
+      } ) )
     ]
   } );
 }
