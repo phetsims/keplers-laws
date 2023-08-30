@@ -41,9 +41,10 @@ export default class OrbitalWarningMessage extends Node {
       }
     );
 
-    const warningText = new RichText( messageProperty, combineOptions<TextOptions>( {
-      maxWidth: 500
-    }, SolarSystemCommonConstants.TITLE_OPTIONS ) );
+    const warningText = new RichText( messageProperty,
+      combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TITLE_OPTIONS, {
+        maxWidth: 500
+      } ) );
 
     messageProperty.link( () => {
       warningText.center = center;

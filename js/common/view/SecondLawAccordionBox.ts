@@ -37,7 +37,7 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 // How much bigger is the top of the graph compared to the total area
 const UPSCALE = 1.3;
 
-const TITLE_OPTIONS = {
+const AXIS_LABEL_OPTIONS: RichTextOptions = {
   maxWidth: 150,
   font: SolarSystemCommonConstants.TITLE_FONT,
   fill: FOREGROUND_COLOR_PROPERTY
@@ -80,7 +80,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
     const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
       combineOptions<RichTextOptions>( {
         centerY: labelDistance
-      }, TITLE_OPTIONS ) );
+      }, AXIS_LABEL_OPTIONS ) );
     xAxisLabel.boundsProperty.link( () => {
       xAxisLabel.centerX = barPlot.centerX;
     } );
@@ -91,7 +91,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
       combineOptions<RichTextOptions>( {
         x: -labelDistance,
         rotation: -Math.PI / 2
-      }, TITLE_OPTIONS )
+      }, AXIS_LABEL_OPTIONS )
     );
     yAxisLabel.boundsProperty.link( () => {
       yAxisLabel.centerY = -yAxisLength * 0.5;
@@ -168,7 +168,7 @@ class AreasBarPlot extends Node {
     };
 
     // x Labels of each area bar
-    const XTickLabelSet = new TickLabelSet( chartTransform, Orientation.HORIZONTAL, 1, {
+    const xTickLabelSet = new TickLabelSet( chartTransform, Orientation.HORIZONTAL, 1, {
       edge: 'min'
     } );
 
@@ -261,9 +261,9 @@ class AreasBarPlot extends Node {
       modelXRange = new Range( -1, periodDivision );
       chartTransform.setModelXRange( modelXRange );
       barPlot.update();
-      XTickLabelSet.setCreateLabel( ( value: number ) => {
+      xTickLabelSet.setCreateLabel( ( value: number ) => {
         return ( value >= 0 && value < periodDivision ) ?
-               new Text( ( value + 1 ).toString(), TITLE_OPTIONS ) : null;
+               new Text( ( value + 1 ).toString(), AXIS_LABEL_OPTIONS ) : null;
       } );
       orbitChangedListener();
     } );
@@ -281,7 +281,7 @@ class AreasBarPlot extends Node {
       gridLineParentNode,
       chartRectangle,
       chartClip,
-      XTickLabelSet,
+      xTickLabelSet,
       tickParentNode,
       tickLabelParentNode
     ];

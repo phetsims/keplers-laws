@@ -28,8 +28,9 @@ const KeplersLawsConstants = {
   TITLE_OPTIONS: {
     font: new PhetFont( { size: 18, weight: 'bold' } ),
     fill: SolarSystemCommonColors.foregroundProperty,
-    maxWidth: DEFAULT_MAX_WIDTH
+    maxWidth: 200
   },
+
   TEXT_OPTIONS: {
     font: new PhetFont( 16 ),
     fill: SolarSystemCommonColors.foregroundProperty,
