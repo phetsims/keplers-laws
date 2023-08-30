@@ -30,6 +30,7 @@ import OrbitalSound from './OrbitalSound.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
+const SYMBOL_MAX_WIDTH = 20;
 
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
@@ -84,77 +85,51 @@ export default class EllipticalOrbitNode extends Path {
       }
     );
 
-    const LABEL_MAX_WIDTH = 20;
     // Text Nodes
-    const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
-      visibleProperty: semiMajorAxisVisibleProperty
-    }, KeplersLawsConstants.TEXT_OPTIONS, {
-      scale: 1.5,
-      stroke: KeplersLawsColors.semiMajorAxisColorProperty,
-      fill: KeplersLawsColors.semiMajorAxisColorProperty,
-      maxWidth: LABEL_MAX_WIDTH
-    } ) );
-    const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
-      {
-        visibleProperty: model.semiaxisVisibleProperty
-      }, KeplersLawsConstants.TEXT_OPTIONS, {
+    const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        visibleProperty: semiMajorAxisVisibleProperty,
+        scale: 1.5,
+        stroke: KeplersLawsColors.semiMajorAxisColorProperty,
+        fill: KeplersLawsColors.semiMajorAxisColorProperty,
+        maxWidth: SYMBOL_MAX_WIDTH
+      } ) );
+    const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        visibleProperty: model.semiaxisVisibleProperty,
         scale: 1.5,
         stroke: KeplersLawsColors.semiMinorAxisColorProperty,
         fill: KeplersLawsColors.semiMinorAxisColorProperty,
-        maxWidth: LABEL_MAX_WIDTH
+        maxWidth: SYMBOL_MAX_WIDTH
       } ) );
-    const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
-      {
-        visibleProperty: new DerivedProperty(
-          [
-            model.eccentricityVisibleProperty,
-            model.engine.eccentricityProperty
-          ],
-          ( visible, e ) => {
-            return visible && ( e > 0 );
-          }
-        )
-      }, KeplersLawsConstants.TEXT_OPTIONS, {
+    const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        visibleProperty: new DerivedProperty( [ model.eccentricityVisibleProperty, model.engine.eccentricityProperty ],
+          ( visible, e ) => visible && ( e > 0 ) ),
         scale: 1.5,
         stroke: KeplersLawsColors.focalDistanceColorProperty,
         fill: KeplersLawsColors.focalDistanceColorProperty,
-        maxWidth: LABEL_MAX_WIDTH
+        maxWidth: SYMBOL_MAX_WIDTH
       } ) );
 
-    const stringLabelOptions = combineOptions<TextOptions>(
-      {
-        visibleProperty: new DerivedProperty(
-          [
-            model.stringsVisibleProperty,
-            model.engine.eccentricityProperty
-          ],
-          ( visible, e ) => {
-            return visible && ( e > 0 );
-          }
-        )
-      }, KeplersLawsConstants.TEXT_OPTIONS, {
-        scale: 1.5,
-        stroke: KeplersLawsColors.distancesColorProperty,
-        fill: KeplersLawsColors.distancesColorProperty,
-        maxWidth: LABEL_MAX_WIDTH
-      } );
-    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
-    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
-    const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty, combineOptions<TextOptions>( {
-      visibleProperty: new DerivedProperty(
-        [
-          model.stringsVisibleProperty,
-          model.engine.eccentricityProperty
-        ],
-        ( visible, e ) => {
-          return visible && ( e === 0 );
-        }
-      )
-    }, KeplersLawsConstants.TEXT_OPTIONS, {
+    const stringLabelOptions = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+      visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
+        ( visible, e ) => visible && ( e > 0 ) ),
       scale: 1.5,
       stroke: KeplersLawsColors.distancesColorProperty,
-      fill: KeplersLawsColors.distancesColorProperty
-    } ) );
+      fill: KeplersLawsColors.distancesColorProperty,
+      maxWidth: SYMBOL_MAX_WIDTH
+    } );
+    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
+    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
+    const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
+          ( visible, e ) => visible && ( e === 0 ) ),
+        scale: 1.5,
+        stroke: KeplersLawsColors.distancesColorProperty,
+        fill: KeplersLawsColors.distancesColorProperty
+      } ) );
 
     // FIRST LAW: Axis, foci, and Ellipse definition lines
     const axisPath = new Path( null, {
@@ -206,9 +181,7 @@ export default class EllipticalOrbitNode extends Path {
       center: Vector2.ZERO,
       visibleProperty: new DerivedProperty(
         [ model.periapsisVisibleProperty, this.orbit.eccentricityProperty ],
-        ( visible, e ) => {
-          return visible && ( e > 0 );
-        } )
+        ( visible, e ) => visible && ( e > 0 ) )
     } );
     const apoapsis = new XNode( {
       fill: KeplersLawsColors.apoapsisColorProperty,
@@ -216,9 +189,7 @@ export default class EllipticalOrbitNode extends Path {
       center: Vector2.ZERO,
       visibleProperty: new DerivedProperty(
         [ model.apoapsisVisibleProperty, this.orbit.eccentricityProperty ],
-        ( visible, e ) => {
-          return visible && ( e > 0 );
-        } )
+        ( visible, e ) => visible && ( e > 0 ) )
     } );
 
     // Arrays of orbital divisions' dots and areas
@@ -295,7 +266,6 @@ export default class EllipticalOrbitNode extends Path {
     labelsLayer.addChild( stringLabelNode1 );
     labelsLayer.addChild( stringLabelNode2 );
     labelsLayer.addChild( radiusLabelNode );
-
 
     // First Law: Axis, foci, and Ellipse definition lines
     firstLawLayer.addChild( axisPath );
