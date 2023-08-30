@@ -72,8 +72,6 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       visibleProperty: model.isThirdLawProperty,
       fill: SolarSystemCommonColors.backgroundProperty,
       stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,
-      minWidth: KeplersLawsConstants.PANELS_MIN_WIDTH,
-
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );

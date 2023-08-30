@@ -11,11 +11,7 @@ import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
-const DEFAULT_MAX_WIDTH = SolarSystemCommonConstants.TEXT_MAX_WIDTH;
-const EQUATION_MAX_WIDTH = 100;
-
 const KeplersLawsConstants = {
-  PANELS_MIN_WIDTH: 250,
 
   MAX_ORBITAL_DIVISIONS: 6,
   MIN_ORBITAL_DIVISIONS: 2,
@@ -40,16 +36,8 @@ const KeplersLawsConstants = {
     font: new PhetFont( 16 ),
     fill: SolarSystemCommonColors.foregroundProperty,
     lineWidth: 0.1,
-    maxWidth: DEFAULT_MAX_WIDTH
+    maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
   },
-
-  EQUATION_TEXT_OPTIONS: {
-    font: new PhetFont( 16 ),
-    fill: SolarSystemCommonColors.foregroundProperty,
-    lineWidth: 0.1,
-    maxWidth: EQUATION_MAX_WIDTH
-  },
-  EQUATION_MAX_WIDTH: EQUATION_MAX_WIDTH,
 
   // maxWidth for symbols like a, b, c, T, R
   SYMBOL_MAX_WIDTH: 20,
