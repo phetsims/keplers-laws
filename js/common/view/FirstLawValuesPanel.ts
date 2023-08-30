@@ -3,6 +3,7 @@
  * Panel with the basic orbital values: semimajor and semiminor axis and focal distance (a,b,c).
  *
  * @author Agustín Vallejo
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import keplersLaws from '../../keplersLaws.js';

@@ -4,6 +4,7 @@
  * ThirdLawAccordionBox contains the equation display and controls for the ThirdLawGraph class.
  *
  * @author Agustín Vallejo
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import AccordionBox from '../../../../sun/js/AccordionBox.js';

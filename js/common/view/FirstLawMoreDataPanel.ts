@@ -6,6 +6,7 @@
  * Only visibile when Preferences > Visual > More Orbital Data is turned on.
  *
  * @author Agustín Vallejo
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import keplersLaws from '../../keplersLaws.js';

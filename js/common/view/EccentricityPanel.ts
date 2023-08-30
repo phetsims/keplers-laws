@@ -5,6 +5,7 @@
  * current orbital eccentricity and the equation e = c/a .
  *
  * @author Agustín Vallejo
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
