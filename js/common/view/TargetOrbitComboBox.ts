@@ -1,13 +1,14 @@
 // Copyright 2023, University of Colorado Boulder
+
 /**
- * ComboBox containing the target orbits.
+ * TargetOrbitComboBox is the combo box for selecting a target orbit.
  *
  * @author Agustín Vallejo
  */
 
 import keplersLaws from '../../keplersLaws.js';
 import TargetOrbits from '../model/TargetOrbits.js';
-import ComboBox, { ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
+import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -15,7 +16,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Property from '../../../../axon/js/Property.js';
 
-const targetOrbits = [
+const TARGET_ORBITS = [
   TargetOrbits.NONE,
   TargetOrbits.MERCURY,
   TargetOrbits.VENUS,
@@ -25,10 +26,11 @@ const targetOrbits = [
 ];
 
 export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
+
   public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: ComboBoxOptions ) {
+
     const options = combineOptions<ComboBoxOptions>( {
       isDisposable: false,
-      
       buttonTouchAreaXDilation: 10,
       buttonTouchAreaYDilation: 10,
 
@@ -36,21 +38,24 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
       accessibleName: KeplersLawsStrings.a11y.targetOrbitSelectorStringProperty
     }, providedOptions );
 
-    const createItem = ( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string> ) => {
-      return {
-        value: mode,
-        createNode: () => new Text( nameProperty, {
-          font: SolarSystemCommonConstants.PANEL_FONT,
-          maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
-        } ),
-        a11yName: nameProperty
-      };
-    };
+    const items = TARGET_ORBITS.map( targetOrbit => createItem( targetOrbit, targetOrbit.stringProperty ) );
 
-    super( targetOrbitProperty, targetOrbits.map( targetOrbit => {
-      return createItem( targetOrbit, targetOrbit.stringProperty );
-    } ), listParent, options );
+    super( targetOrbitProperty, items, listParent, options );
   }
 }
 
-keplersLaws.register( 'TargetOrbitsComboBox', TargetOrbitComboBox );
+/**
+ * Creates and item for the combo box.
+ */
+function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string> ): ComboBoxItem<TargetOrbits> {
+  return {
+    value: mode,
+    createNode: () => new Text( nameProperty, {
+      font: SolarSystemCommonConstants.PANEL_FONT,
+      maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+    } ),
+    a11yName: nameProperty
+  };
+}
+
+keplersLaws.register( 'TargetOrbitComboBox', TargetOrbitComboBox );
