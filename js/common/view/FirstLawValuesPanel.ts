@@ -16,7 +16,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { HBox, Node, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import InfoDialog from './InfoDialog.js';
@@ -25,7 +25,7 @@ import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 export default class FirstLawValuesPanel extends Panel {
-  public constructor( model: KeplersLawsModel, providedOptions: StrictOmit<PanelOptions, 'visibleProperty'> ) {
+  public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
       visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
@@ -116,7 +116,9 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
         maxWidth: 20
       } ),
       new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-      new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+      new RichText( valueStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        maxWidth: KeplersLawsConstants.VALUE_MAX_WIDTH
+      } ) )
     ]
   } );
 }

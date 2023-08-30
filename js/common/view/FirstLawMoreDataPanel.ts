@@ -19,7 +19,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Utils from '../../../../dot/js/Utils.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { HBox, Node, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
@@ -29,7 +29,7 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 export default class FirstLawMoreDataPanel extends Panel {
-  public constructor( model: KeplersLawsModel, providedOptions: StrictOmit<PanelOptions, 'visibleProperty'> ) {
+  public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
       visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
@@ -129,10 +129,12 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
       new RichText( symbolStringProperty, {
         fill: symbolColor,
         font: new PhetFont( { size: 18, weight: 'bold' } ),
-        maxWidth: 25
+        maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
       } ),
       new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-      new RichText( valueStringProperty, KeplersLawsConstants.TEXT_OPTIONS )
+      new RichText( valueStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        maxWidth: KeplersLawsConstants.VALUE_MAX_WIDTH
+      } ) )
     ]
   } );
 }

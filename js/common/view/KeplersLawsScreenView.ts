@@ -52,7 +52,7 @@ export type KeplersLawsScreenViewOptions = SelfOptions & StrictOmit<SolarSystemC
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly periodTimerNode: PeriodTimerNode;
 
-  private readonly keplersLawsControls: Node;
+  private readonly keplersLawsPanels: Node;
   private readonly firstLawPanels: Node;
   private readonly secondLawPanels: Node;
   private readonly thirdLawPanels: Node;
@@ -220,7 +220,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    this.keplersLawsControls = new KeplersLawsPanels( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
+    this.keplersLawsPanels = new KeplersLawsPanels( model, this.topLayer, options.tandem.createTandem( 'keplersLawsPanels' ) );
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,
@@ -242,7 +242,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         align: 'top',
         children: [
           zoomButtons,
-          this.keplersLawsControls
+          this.keplersLawsPanels
         ]
       } ),
       {
@@ -343,7 +343,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.pdomControlAreaNode.pdomOrder = [
       this.lawsButtons,
-      this.keplersLawsControls,
+      this.keplersLawsPanels,
       this.firstLawPanels,
       this.secondLawPanels,
       this.thirdLawPanels,
@@ -365,7 +365,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
         };
       } ),
       {
-        node: this.keplersLawsControls,
+        node: this.keplersLawsPanels,
         expandX: 'right',
         expandY: 'top'
       },

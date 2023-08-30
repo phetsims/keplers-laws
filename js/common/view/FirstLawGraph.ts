@@ -55,19 +55,21 @@ export default class FirstLawGraph extends AlignBox {
     shownEccentricities.forEach( ( exampleOrbit: TargetOrbits ) => {
       const orbitNameProperty = exampleOrbit.stringProperty;
       const eccentricity = exampleOrbit.eccentricity;
-      const title = new Text( orbitNameProperty, KeplersLawsConstants.TEXT_OPTIONS );
+      const orbitNameText = new Text( orbitNameProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        maxWidth: 120
+      } ) );
       const content = new HBox( {
         centerY: Y_AXIS_LENGTH * eccentricity,
         spacing: 5,
         children: [
-          title,
+          orbitNameText,
           new ArrowNode( 0, 0, 20, 0, { stroke: FOREGROUND_COLOR_PROPERTY, fill: FOREGROUND_COLOR_PROPERTY, tailWidth: 1 } )
         ]
       } );
       orbitAndValues.push( content );
 
-      orbitNameProperty.link( ( name: string ) => {
-        content.x = -title.width - 30;
+      orbitNameText.boundsProperty.link( () => {
+        content.x = -orbitNameText.width - 30;
       } );
     } );
 
