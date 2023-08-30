@@ -177,8 +177,9 @@ export default class ThirdLawGraph extends Node {
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
-      let arrowX = null;
-      const dx = 5;
+      const dx = 5; // Threshold for being out of bounds
+      let arrowX = maxSemiMajorAxis / 2; // X position of the out of bounds arrow
+      let arrowPositionSet = false; // Whether the out of bounds arrow position has been set or is the default
 
       if ( !outOfBounds ) {
         if ( !model.sun.userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
@@ -201,27 +202,32 @@ export default class ThirdLawGraph extends Node {
         const pointToDraw = semiMajorAxisToViewPoint( a );
         shape.lineToPoint( pointToDraw );
 
-        if ( !arrowX && outOfBounds && pointToDraw.y < -axisLength + dx ) {
-          arrowX = a;
-        }
-        else if ( !arrowX && outOfBounds && pointToDraw.x > axisLength - dx ) {
-          arrowX = a;
+        if ( minVisitedAxis < maxSemiMajorAxis - dx && !arrowPositionSet ) {
+          if ( !arrowPositionSet && outOfBounds && pointToDraw.y < -axisLength + dx ) {
+            arrowX = a;
+            arrowPositionSet = true;
+          }
+          else if ( !arrowPositionSet && outOfBounds && pointToDraw.x > axisLength - dx ) {
+            arrowX = a;
+            arrowPositionSet = true;
+          }
         }
       }
       shape.makeImmutable();
 
       linePath.shape = shape;
 
-      if ( outOfBounds && arrowX ) {
+      if ( arrowPositionSet ) {
         const tail = semiMajorAxisToViewPoint( arrowX );
         const tip = semiMajorAxisToViewPoint( arrowX + 15 ).minus( tail ).setMagnitude( 20 );
         outOfBoundsArrow.translation = tail;
         outOfBoundsArrow.setTip( tip.x, tip.y );
-        outOfBoundsArrow.visible = true;
       }
       else {
-        outOfBoundsArrow.visible = false;
+        outOfBoundsArrow.translation = new Vector2( axisLength / 2, -axisLength / 2 );
+        outOfBoundsArrow.setTip( 14, -14 ); // Components for having magnitude 20
       }
+      outOfBoundsArrow.visible = outOfBounds;
     };
 
     const resetAxisBoundaries = () => {
