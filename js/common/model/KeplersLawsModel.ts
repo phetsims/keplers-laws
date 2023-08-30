@@ -329,15 +329,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       '#80007F'
     ];
 
-    // Easter egg color palette
-    // const colorPalette = [
-    // '#FFB3BA', // Pastel Red
-    //   '#FFDFB9', // Pastel Orange
-    //   '#FFFFB3', // Pastel Yellow
-    //   '#B5FFB3', // Pastel Green
-    //   '#B3FFFF', // Pastel Blue
-    //   '#D1B3FF'  // Pastel Purple
-    // ];
     const numAreas = this.periodDivisionProperty.value;
     const activeAreaIndex = this.engine.activeAreaIndex;
 
