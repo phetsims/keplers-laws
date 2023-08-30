@@ -84,13 +84,15 @@ export default class EllipticalOrbitNode extends Path {
       }
     );
 
+    const LABEL_MAX_WIDTH = 20;
     // Text Nodes
     const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {
       visibleProperty: semiMajorAxisVisibleProperty
     }, KeplersLawsConstants.TEXT_OPTIONS, {
       scale: 1.5,
       stroke: KeplersLawsColors.semiMajorAxisColorProperty,
-      fill: KeplersLawsColors.semiMajorAxisColorProperty
+      fill: KeplersLawsColors.semiMajorAxisColorProperty,
+      maxWidth: LABEL_MAX_WIDTH
     } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty, combineOptions<TextOptions>(
       {
@@ -98,7 +100,8 @@ export default class EllipticalOrbitNode extends Path {
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsColors.semiMinorAxisColorProperty,
-        fill: KeplersLawsColors.semiMinorAxisColorProperty
+        fill: KeplersLawsColors.semiMinorAxisColorProperty,
+        maxWidth: LABEL_MAX_WIDTH
       } ) );
     const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>(
       {
@@ -114,7 +117,8 @@ export default class EllipticalOrbitNode extends Path {
       }, KeplersLawsConstants.TEXT_OPTIONS, {
         scale: 1.5,
         stroke: KeplersLawsColors.focalDistanceColorProperty,
-        fill: KeplersLawsColors.focalDistanceColorProperty
+        fill: KeplersLawsColors.focalDistanceColorProperty,
+        maxWidth: LABEL_MAX_WIDTH
       } ) );
 
     const stringLabelOptions = combineOptions<TextOptions>(
@@ -132,7 +136,7 @@ export default class EllipticalOrbitNode extends Path {
         scale: 1.5,
         stroke: KeplersLawsColors.distancesColorProperty,
         fill: KeplersLawsColors.distancesColorProperty,
-        maxWidth: 50
+        maxWidth: LABEL_MAX_WIDTH
       } );
     const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
     const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
