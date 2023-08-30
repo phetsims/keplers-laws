@@ -19,6 +19,13 @@ import FirstLawGraph from './FirstLawGraph.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+
+const EQUATION_TEXT_OPTIONS = {
+  font: new PhetFont( { size: 18, weight: 'bold' } ),
+  fill: SolarSystemCommonColors.foregroundProperty
+};
 
 export default class EccentricityPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
@@ -33,18 +40,18 @@ export default class EccentricityPanel extends Panel {
       spacing: 2,
       children: [
         new Text( KeplersLawsStrings.eccentricityStringProperty,
-          combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+          combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
             maxWidth: 150
           } ) ),
-        new Text( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+        new Text( ' = ', EQUATION_TEXT_OPTIONS ),
         new FractionNode(
-          new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty, combineOptions<TextOptions>( {},
-            KeplersLawsConstants.TITLE_OPTIONS, {
+          new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty,
+            combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
               fill: KeplersLawsColors.focalDistanceColorProperty,
               maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
             } ) ),
-          new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, combineOptions<TextOptions>( {},
-            KeplersLawsConstants.TITLE_OPTIONS, {
+          new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+            combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
               fill: KeplersLawsColors.semiMajorAxisColorProperty,
               maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
             } ) )
