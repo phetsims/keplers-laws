@@ -25,7 +25,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import TargetOrbitsPanel from './TargetOrbitsPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
 
-export default class KeplersLawsControls extends VBox {
+export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
@@ -113,4 +113,4 @@ function createStopwatchIcon(): Node {
   return stopwatchIcon;
 }
 
-keplersLaws.register( 'KeplersLawsControls', KeplersLawsControls );
+keplersLaws.register( 'KeplersLawsControls', KeplersLawsPanels );

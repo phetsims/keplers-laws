@@ -8,7 +8,7 @@
 
 import { AlignBox, HBox, Node, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import KeplersLawsControls from './KeplersLawsControls.js';
+import KeplersLawsPanels from './KeplersLawsPanels.js';
 import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
@@ -220,7 +220,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    this.keplersLawsControls = new KeplersLawsControls( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
+    this.keplersLawsControls = new KeplersLawsPanels( model, this.topLayer, options.tandem.createTandem( 'controlPanel' ) );
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,
