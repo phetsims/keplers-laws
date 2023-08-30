@@ -42,12 +42,7 @@ const KeplersLawsConstants = {
     lineWidth: 0.1,
     maxWidth: DEFAULT_MAX_WIDTH
   },
-  PANEL_TEXT_OPTIONS: {
-    font: new PhetFont( 16 ),
-    fill: SolarSystemCommonColors.foregroundProperty,
-    lineWidth: 0.1,
-    maxWidth: DEFAULT_MAX_WIDTH
-  },
+
   EQUATION_TEXT_OPTIONS: {
     font: new PhetFont( 16 ),
     fill: SolarSystemCommonColors.foregroundProperty,

@@ -10,7 +10,7 @@
 
 import keplersLaws from '../../keplersLaws.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import { HBox, Node, Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Path, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { Shape } from '../../../../kite/js/imports.js';
@@ -29,8 +29,10 @@ export default class TargetOrbitPanel extends Panel {
       visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
-    const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty, KeplersLawsConstants.PANEL_TEXT_OPTIONS
-    );
+    const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+        maxWidth: 150
+      } ) );
 
     const targetOrbitIcon = new Path( new Shape().ellipse( Vector2.ZERO, 10, 8, 0 ), {
       stroke: KeplersLawsColors.targetOrbitColorProperty,
