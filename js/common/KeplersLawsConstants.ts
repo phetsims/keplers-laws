@@ -56,7 +56,7 @@ const KeplersLawsConstants = {
   // maxWidth for symbols that include absolute value, like |r|. A bit wider than SYMBOL_MAX_WIDTH.
   ABSOLUTE_SYMBOL_MAX_WIDTH: 25,
 
-  // maxWidth for numeric values, like '1.50'
+  // maxWidth for numeric values with units, like '1.50 AU'
   VALUE_MAX_WIDTH: 100
 };
 
