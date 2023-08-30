@@ -28,6 +28,7 @@ export default class TargetOrbitsPanel extends Panel {
     const options = combineOptions<PanelOptions>( {
       visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+
     const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty, KeplersLawsConstants.PANEL_TEXT_OPTIONS
     );
 

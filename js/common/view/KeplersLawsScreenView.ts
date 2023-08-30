@@ -38,6 +38,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js/view/SolarSystemCommonTimeControlNode.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 // constants
 const MARGIN = 10;
@@ -46,7 +47,7 @@ type SelfOptions = {
   allowLawSelection?: boolean;
 };
 
-export type KeplersLawsScreenViewOptions = SelfOptions & SolarSystemCommonScreenViewOptions;
+export type KeplersLawsScreenViewOptions = SelfOptions & StrictOmit<SolarSystemCommonScreenViewOptions, 'playingAllowedProperty'>;
 
 class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly periodTimerNode: PeriodTimerNode;
@@ -60,6 +61,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   private readonly playBodySounds: () => void;
 
   public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
+
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
       allowLawSelection: false,

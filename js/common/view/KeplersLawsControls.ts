@@ -28,6 +28,7 @@ import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import TargetOrbitsPanel from './TargetOrbitsPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
@@ -52,7 +53,7 @@ class KeplersLawsControls extends VBox {
     const targetOrbitsPanel = new TargetOrbitsPanel( model, topLayer );
 
     // Creates a custom VBox with the provided and default options
-    const createVBox = ( children: Node[], providedOptions?: VBoxOptions ) => {
+    const createVBox = ( children: Node[], providedOptions?: StrictOmit<VBoxOptions, 'children'> ) => {
       return new VBox( combineOptions<VBoxOptions>( {
         children: children,
         spacing: 5,

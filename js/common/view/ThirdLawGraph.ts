@@ -24,13 +24,14 @@ import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const AXIS_LABEL_MAX_WIDTH = 20;
 
 export default class ThirdLawGraph extends Node {
 
-  public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: NodeOptions ) {
+  public constructor( model: KeplersLawsModel, orbit: EllipticalOrbitEngine, providedOptions?: StrictOmit<NodeOptions, 'children'> ) {
     const options = optionize<NodeOptions, EmptySelfOptions>()( {
       isDisposable: false
     }, providedOptions );

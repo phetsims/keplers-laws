@@ -10,11 +10,13 @@ import { Node, Line, VBox, VBoxOptions } from '../../../../scenery/js/imports.js
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 const FRACTION_LINE_MARGIN = 5;
 
 export default class FractionNode extends VBox {
-  public constructor( numeratorNode: Node, denominatorNode: Node, providedOptions?: VBoxOptions ) {
+  public constructor( numeratorNode: Node, denominatorNode: Node, providedOptions?: StrictOmit<VBoxOptions, 'children'> ) {
+
     const fractionLine = new Line( 0, 0, 1, 0, { stroke: KeplersLawsColors.foregroundProperty, lineWidth: 1.5, lineCap: 'round' } );
 
     // Dynamically size the fraction line.
