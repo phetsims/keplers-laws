@@ -14,7 +14,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { HBox, Node, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js';
@@ -43,19 +42,19 @@ export default class FirstLawValuesPanel extends Panel {
       value: new DerivedProperty( [ model.engine.semiMajorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMajorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMajorAxis, 2 ) : undefinedMessage;
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
     const semiMinorAxisStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.semiMinorAxisProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( semiMinorAxis, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( semiMinorAxis, 2 ) : undefinedMessage;
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
     const focalDistanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: conditionalAUStringProperty,
       value: new DerivedProperty( [ model.engine.focalDistanceProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ], ( focalDistance, allowedOrbit, undefinedMessage ) => {
         return allowedOrbit ? Utils.toFixed( focalDistance, 2 ) : undefinedMessage;
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
 
     // An equation for each symbol
     const equationsNode = new VBox( {

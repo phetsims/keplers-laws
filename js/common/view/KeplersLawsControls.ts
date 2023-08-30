@@ -33,20 +33,17 @@ class KeplersLawsControls extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
     const stopwatchIcon = new StopwatchNode( new Stopwatch( {
-      isVisible: true,
-      tandem: Tandem.OPT_OUT
+      isVisible: true
     } ), {
       numberDisplayOptions: {
         textOptions: {
           maxWidth: 100
         }
-      },
-      tandem: Tandem.OPT_OUT
+      }
     } ).rasterized( {
       resolution: 5,
       imageOptions: {
-        cursor: 'pointer',
-        tandem: tandem.createTandem( 'timerIcon' )
+        cursor: 'pointer'
       }
     } );
 
@@ -71,7 +68,7 @@ class KeplersLawsControls extends VBox {
         createVBox( [
           targetOrbitsPanel,
           new Panel( new KeplersLawsOrbitalInformationBox( model, {
-            tandem: tandem
+            tandem: Tandem.OPT_OUT
           } ), combineOptions<PanelOptions>( {
             minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
           }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS ) )
@@ -86,10 +83,10 @@ class KeplersLawsControls extends VBox {
               accessibleName: KeplersLawsStrings.circularOrbitStringProperty
             } ),
           new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-          ...createArrowsVisibilityCheckboxes( model, tandem ),
+          ...createArrowsVisibilityCheckboxes( model, Tandem.OPT_OUT ),
           new GravityScaleSlider( model.forceScaleProperty, model.gravityVisibleProperty ),
           new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
-          ...createVisibilityInformationCheckboxes( model, tandem, false ),
+          ...createVisibilityInformationCheckboxes( model, Tandem.OPT_OUT, false ),
           new SolarSystemCommonCheckbox(
             model.stopwatchVisibleProperty,
             new HBox( {

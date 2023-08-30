@@ -17,7 +17,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { HBox, Node, RichText, TPaint, VBox } from '../../../../scenery/js/imports.js';
@@ -42,25 +41,25 @@ export default class FirstLawMoreDataPanel extends Panel {
       value: new DerivedProperty( [ model.planet.positionProperty ], position => {
         return Utils.toFixed( position.magnitude / 100, 2 );
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.kmsStringProperty,
       value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
         return Utils.toFixed( velocity.magnitude * SolarSystemCommonConstants.VELOCITY_MULTIPLIER, 2 );
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
     const distanceAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.degreesStringProperty,
       value: new DerivedProperty( [ model.planet.positionProperty ], position => {
         return Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
     const velocityAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.degreesStringProperty,
       value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
 
     // rv angle is the angle from R to V
     const rvAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
@@ -68,7 +67,7 @@ export default class FirstLawMoreDataPanel extends Panel {
       value: new DerivedProperty( [ model.planet.positionProperty, model.planet.velocityProperty ], ( position, velocity ) => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle - position.angle ), 2 );
       } )
-    }, { tandem: Tandem.OPT_OUT } );
+    } );
 
     // Extra information: distance and velocity vector values
     const moreInfoNode = new VBox( {
