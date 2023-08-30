@@ -9,13 +9,13 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, Line, Node, RichText, RichTextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Line, Node, RichText, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import LineArrowNode, { LineArrowNodeOptions } from '../../../../scenery-phet/js/LineArrowNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -29,11 +29,11 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 const FONT = new PhetFont( 24 );
 
 // Options for the 'd1' and 'd2' labels, or 'R' for circular orbits
-export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+export const DISTANCE_LABEL_OPTIONS = {
   font: FONT,
   fill: KeplersLawsColors.distancesColorProperty,
   maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
-} );
+};
 
 // Options for the 'd1' and 'd2' arrows, or 'R' for circular orbits
 export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
@@ -42,11 +42,11 @@ export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
 };
 
 // Options for the 'a' labels
-export const MAJOR_AXIS_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+export const MAJOR_AXIS_LABEL_OPTIONS = {
   font: FONT,
   fill: KeplersLawsColors.semiMajorAxisColorProperty,
   maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
-} );
+};
 
 // Options for the 'a' arrows
 export const MAJOR_AXIS_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
