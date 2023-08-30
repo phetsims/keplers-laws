@@ -14,7 +14,7 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
 import createVisibilityInformationCheckboxes from '../../../../solar-system-common/js/view/createVisibilityInformationCheckboxes.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import KeplersLawsOrbitalInformationBox from './KeplersLawsOrbitalInformationBox.js';
+import OrbitalInformationPanel from './OrbitalInformationPanel.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -31,7 +31,7 @@ export default class KeplersLawsPanels extends VBox {
     const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
-    const orbitalInformationPanel = new KeplersLawsOrbitalInformationBox( model,
+    const orbitalInformationPanel = new OrbitalInformationPanel( model,
       tandem.createTandem( 'orbitalInformationPanel' ) );
 
     // A bunch of unrelated controls, so we named the panel based on its position in the layout.

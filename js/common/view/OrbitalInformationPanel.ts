@@ -26,7 +26,7 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-export default class KeplersLawsOrbitalInformationBox extends Panel {
+export default class OrbitalInformationPanel extends Panel {
 
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
 
@@ -174,4 +174,4 @@ function createCheckbox( property: Property<boolean>, text: TReadOnlyProperty<st
   return new SolarSystemCommonCheckbox( property, content, options );
 }
 
-keplersLaws.register( 'KeplersLawsOrbitalInformationBox', KeplersLawsOrbitalInformationBox );
+keplersLaws.register( 'KeplersLawsOrbitalInformationBox', OrbitalInformationPanel );
