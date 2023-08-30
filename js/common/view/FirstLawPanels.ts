@@ -8,7 +8,6 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import keplersLaws from '../../keplersLaws.js';
 import EccentricityPanel from './EccentricityPanel.js';
 import FirstLawValuesPanel from './FirstLawValuesPanel.js';
@@ -18,12 +17,8 @@ export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
 
     const eccentricityPanel = new EccentricityPanel( model );
-    const valuesPanel = new FirstLawValuesPanel( model, {
-      minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
-    } );
-    const extraDataPanel = new FirstLawMoreDataPanel( model, {
-      minWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
-    } );
+    const valuesPanel = new FirstLawValuesPanel( model );
+    const moreOrbitalDataPanel = new FirstLawMoreDataPanel( model );
 
     super( {
       isDisposable: false,
@@ -32,7 +27,7 @@ export default class FirstLawPanels extends VBox {
       children: [
         eccentricityPanel,
         valuesPanel,
-        extraDataPanel
+        moreOrbitalDataPanel
       ]
     } );
   }

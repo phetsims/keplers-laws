@@ -25,7 +25,7 @@ import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 export default class FirstLawValuesPanel extends Panel {
-  public constructor( model: KeplersLawsModel, providedOptions: StrictOmit<PanelOptions, 'visibleProperty'> ) {
+  public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
       visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
