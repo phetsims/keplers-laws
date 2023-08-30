@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * KeplersLawsControls is the collection of panels that appears in the upper-right corner of all screens.
+ * KeplersLawsPanels is the collection of panels that appears in the upper-right corner of all screens.
  *
  * @author Agustín Vallejo
  * @author Chris Malley (PixelZoom, Inc.)
@@ -113,4 +113,4 @@ function createStopwatchIcon(): Node {
   return stopwatchIcon;
 }
 
-keplersLaws.register( 'KeplersLawsControls', KeplersLawsPanels );
+keplersLaws.register( 'KeplersLawsPanels', KeplersLawsPanels );
