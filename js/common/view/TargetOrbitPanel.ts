@@ -60,4 +60,4 @@ export default class TargetOrbitPanel extends Panel {
   }
 }
 
-keplersLaws.register( 'TargetOrbitsPanel', TargetOrbitPanel );
+keplersLaws.register( 'TargetOrbitPanel', TargetOrbitPanel );

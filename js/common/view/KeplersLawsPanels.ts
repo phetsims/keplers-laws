@@ -29,7 +29,7 @@ export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
-    const targetOrbitsPanel = new TargetOrbitPanel( model, topLayer );
+    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
     const orbitalInformationPanel = new Panel( new KeplersLawsOrbitalInformationBox( model, {
@@ -83,7 +83,7 @@ export default class KeplersLawsPanels extends VBox {
       isDisposable: false,
       spacing: 7,
       children: [
-        targetOrbitsPanel,
+        targetOrbitPanel,
         orbitalInformationPanel,
         bottomPanel
       ]
