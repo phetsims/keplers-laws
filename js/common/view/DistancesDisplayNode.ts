@@ -35,7 +35,7 @@ export const DISTANCE_LABEL_OPTIONS = combineOptions<RichTextOptions>( {}, Keple
   maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
 } );
 
-// Options for the 'd1' and 'd2' arrows
+// Options for the 'd1' and 'd2' arrows, or 'R' for circular orbits
 export const DISTANCE_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
   stroke: KeplersLawsColors.distancesColorProperty,
   tailLineDash: [ 10, 2 ]
