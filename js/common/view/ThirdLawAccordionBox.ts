@@ -220,7 +220,7 @@ class EquationNode extends HBox {
       ), {
         font: new PhetFont( { weight: 'bold', size: 25 } ),
         fill: SolarSystemCommonColors.foregroundProperty,
-        lineWidth: 0.1
+        maxWidth: 60
       } );
     model.correctPowersSelectedProperty.link( correct => {
       fractionResult.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
