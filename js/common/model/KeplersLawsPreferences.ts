@@ -12,7 +12,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const KeplersLawsPreferences = {
 
-  // Toggles wether the First Law panel will show extra information:
+  // Toggles whether the First Law panel will show extra information:
   // Velocity magnitude and direction, as well as planet's position magnitude and direction.
   // Those values might be useful for angular momentum calculations.
   moreOrbitalDataEnabledProperty: new BooleanProperty( false )
