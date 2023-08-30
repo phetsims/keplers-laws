@@ -113,7 +113,7 @@ export default class ThirdLawGraph extends Node {
     );
 
     // Axis labels, dynamically positioned
-    const axisLabelOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+    const axisLabelOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
       maxWidth: AXIS_LABEL_MAX_WIDTH
     } );
     const xAxisLabel = new RichText( xAxisLabelStringProperty, axisLabelOptions );

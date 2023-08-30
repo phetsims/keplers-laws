@@ -1,4 +1,4 @@
-  // Copyright 2023, University of Colorado Boulder
+// Copyright 2023, University of Colorado Boulder
 
 /**
  * Panel that shows the graph of the swept area under the curve of the orbit.
@@ -6,42 +6,36 @@
  * @author Agustín Vallejo
  */
 
-  import { Node, PaintableOptions, RichText, RichTextOptions, Text } from '../../../../scenery/js/imports.js';
-  import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-  import { combineOptions } from '../../../../phet-core/js/optionize.js';
-  import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-  import KeplersLawsModel from '../model/KeplersLawsModel.js';
-  import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-  import Range from '../../../../dot/js/Range.js';
-  import Vector2 from '../../../../dot/js/Vector2.js';
-  import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
-  import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
-  import BarPlot from '../../../../bamboo/js/BarPlot.js';
-  import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
-  import Orientation from '../../../../phet-core/js/Orientation.js';
-  import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
-  import keplersLaws from '../../keplersLaws.js';
-  import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-  import Utils from '../../../../dot/js/Utils.js';
-  import KeplersLawsConstants from '../KeplersLawsConstants.js';
-  import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-  import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
-  import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
-  import Bounds2 from '../../../../dot/js/Bounds2.js';
+import { Node, PaintableOptions, RichText, RichTextOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
+import ChartRectangle from '../../../../bamboo/js/ChartRectangle.js';
+import BarPlot from '../../../../bamboo/js/BarPlot.js';
+import TickLabelSet from '../../../../bamboo/js/TickLabelSet.js';
+import Orientation from '../../../../phet-core/js/Orientation.js';
+import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
+import keplersLaws from '../../keplersLaws.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import Utils from '../../../../dot/js/Utils.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 
-  const xAxisLength = 180;
+const xAxisLength = 180;
 const yAxisLength = 180;
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 
 // How much bigger is the top of the graph compared to the total area
 const UPSCALE = 1.3;
-
-const AXIS_LABEL_OPTIONS: RichTextOptions = {
-  maxWidth: 150,
-  font: SolarSystemCommonConstants.TITLE_FONT,
-  fill: FOREGROUND_COLOR_PROPERTY
-};
 
 export default class SecondLawAccordionBox extends AccordionBox {
 
@@ -50,7 +44,10 @@ export default class SecondLawAccordionBox extends AccordionBox {
     const options = combineOptions<AccordionBoxOptions>( {
       isDisposable: false,
       visibleProperty: model.isSecondLawProperty,
-      titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+      titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty,
+        combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+          maxWidth: 200
+        } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       titleYMargin: 4,
       useExpandedBoundsWhenCollapsed: false,
@@ -78,9 +75,9 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
     // x-axis label, dynamically centered on its axis
     const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
-      combineOptions<RichTextOptions>( {
+      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
         centerY: labelDistance
-      }, AXIS_LABEL_OPTIONS ) );
+      } ) );
     xAxisLabel.boundsProperty.link( () => {
       xAxisLabel.centerX = barPlot.centerX;
     } );
@@ -88,10 +85,10 @@ export default class SecondLawAccordionBox extends AccordionBox {
     // y-axis label, dynamically centered on its axis
     const yAxisLabel = new RichText(
       KeplersLawsStrings.area.areaUnitsStringProperty,
-      combineOptions<RichTextOptions>( {
+      combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
         x: -labelDistance,
         rotation: -Math.PI / 2
-      }, AXIS_LABEL_OPTIONS )
+      } )
     );
     yAxisLabel.boundsProperty.link( () => {
       yAxisLabel.centerY = -yAxisLength * 0.5;
@@ -263,7 +260,7 @@ class AreasBarPlot extends Node {
       barPlot.update();
       xTickLabelSet.setCreateLabel( ( value: number ) => {
         return ( value >= 0 && value < periodDivision ) ?
-               new Text( ( value + 1 ).toString(), AXIS_LABEL_OPTIONS ) : null;
+               new Text( ( value + 1 ).toString(), KeplersLawsConstants.AXIS_LABEL_OPTIONS ) : null;
       } );
       orbitChangedListener();
     } );

@@ -60,7 +60,9 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     } );
 
     const options = combineOptions<ThirdLawAccordionBoxOptions>( {
-      titleNode: new RichText( titleStringProperty, KeplersLawsConstants.TITLE_OPTIONS ),
+      titleNode: new RichText( titleStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+        maxWidth: 200
+      } ) ),
       accessibleName: titleStringProperty,
       titleYMargin: 10,
       buttonXMargin: 10,

@@ -14,11 +14,12 @@ import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
@@ -33,7 +34,10 @@ export default class StarMassPanel extends Panel {
       stroke: null
     };
 
-    const titleText = new Text( KeplersLawsStrings.starMassStringProperty, KeplersLawsConstants.TITLE_OPTIONS );
+    const titleText = new Text( KeplersLawsStrings.starMassStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+        maxWidth: 200
+      } ) );
 
     const thumbFillProperty = SolarSystemCommonColors.firstBodyColorProperty;
     const ourSunTickLabelValue = model.sun.massProperty.value;
