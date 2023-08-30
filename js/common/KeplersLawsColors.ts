@@ -28,18 +28,18 @@ const KeplersLawsColors = {
 
   // Semi-major axis color
   semiMajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMajorAxis', {
-    default: 'orange'
+    default: '#FF9500'
   } ),
 
   // Semi-minor axis color
   semiMinorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMinorAxis', {
-    default: '#C4F566',
+    default: '#B0EE86',
     projector: '#83B030'
   } ),
 
   // Focal distance color
   focalDistanceColorProperty: new ProfileColorProperty( keplersLaws, 'focalDistance', {
-    default: '#AFAFDA',
+    default: '#E6C7FF',
     projector: '#8484D7'
   } ),
 
