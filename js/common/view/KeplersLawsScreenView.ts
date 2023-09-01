@@ -309,13 +309,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     );
     this.topLayer.addChild( stopwatchNode );
-    this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
 
     // Slider that controls the bodies mass
     this.interfaceLayer.addChild( lawsPanelsBox );
     this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
-
+      this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [
             this.lawsButtons
@@ -343,7 +342,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
 
     this.pdomControlAreaNode.pdomOrder = [
-      this.lawsButtons,
+      this.lawsButtons ? this.lawsButtons : null,
       this.keplersLawsPanels,
       this.firstLawPanels,
       this.secondLawPanels,
