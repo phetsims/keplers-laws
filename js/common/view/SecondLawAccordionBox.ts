@@ -49,13 +49,8 @@ export default class SecondLawAccordionBox extends AccordionBox {
           maxWidth: 200
         } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
-      titleYMargin: 4,
-      useExpandedBoundsWhenCollapsed: false,
-
-      expandCollapseButtonOptions: {
-        scale: 1.5
-      }
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+      useExpandedBoundsWhenCollapsed: false
+    }, SolarSystemCommonConstants.ACCORDION_BOX_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,

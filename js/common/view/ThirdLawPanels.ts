@@ -8,14 +8,9 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StarMassPanel from './StarMassPanel.js';
 import keplersLaws from '../../keplersLaws.js';
-import { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
-
-type SelfOptions = EmptySelfOptions;
-export type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
 export default class ThirdLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {

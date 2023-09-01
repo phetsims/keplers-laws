@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
@@ -25,7 +25,6 @@ import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularR
 import ThirdLawGraph from './ThirdLawGraph.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import keplersLaws from '../../keplersLaws.js';
-import { ThirdLawAccordionBoxOptions } from './ThirdLawPanels.js';
 import FractionNode from './FractionNode.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
@@ -46,6 +45,9 @@ const EQUATION_TEXT_OPTIONS = {
   fill: SolarSystemCommonColors.foregroundProperty,
   maxWidth: 60
 };
+
+type SelfOptions = EmptySelfOptions;
+type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
 export default class ThirdLawAccordionBox extends AccordionBox {
 
@@ -70,17 +72,10 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         maxWidth: 200
       } ) ),
       accessibleName: titleStringProperty,
-      titleYMargin: 10,
-      buttonXMargin: 10,
-      expandCollapseButtonOptions: {
-        scale: 1.5
-      },
       visibleProperty: model.isThirdLawProperty,
-      fill: SolarSystemCommonColors.backgroundProperty,
-      stroke: SolarSystemCommonColors.gridIconStrokeColorProperty,
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    }, SolarSystemCommonConstants.ACCORDION_BOX_OPTIONS );
 
     // Equation at the top of the accordion box: T/a = ...
     const equationNode = new EquationNode( model );
