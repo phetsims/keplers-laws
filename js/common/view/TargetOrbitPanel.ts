@@ -30,7 +30,7 @@ export default class TargetOrbitPanel extends Panel {
     }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
     const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty,
-      combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         maxWidth: 150
       } ) );
 
