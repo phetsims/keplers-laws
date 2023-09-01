@@ -9,7 +9,7 @@ import { Shape } from '../../../../kite/js/imports.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import { Circle, Node, Path, RichText, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Multilink, { UnknownMultilink } from '../../../../axon/js/Multilink.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
@@ -32,7 +32,6 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
-  private readonly shapeMultilink: UnknownMultilink;
 
   // This layer is displayed on top of everything inside the EllipticalOrbitNode, but keeps the same transformations.
   public readonly topLayer: Node;
@@ -452,11 +451,20 @@ export default class EllipticalOrbitNode extends Path {
       periodTrackerNode.updateShape();
     } );
 
-    this.shapeMultilink = Multilink.multilink(
+    Multilink.multilink(
       [
         modelViewTransformProperty,
         model.periodDivisionProperty,
-        model.selectedLawProperty
+        model.selectedLawProperty,
+        KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+        KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+        KeplersLawsStrings.symbols.focalDistanceStringProperty,
+        KeplersLawsStrings.symbols.distance1StringProperty,
+        KeplersLawsStrings.symbols.distance2StringProperty,
+        KeplersLawsStrings.symbols.radiusStringProperty,
+        KeplersLawsStrings.units.AU2StringProperty,
+        KeplersLawsStrings.pattern.valueUnitsStringProperty,
+        KeplersLawsStrings.units.yearsStringProperty
       ],
       () => updatedOrbit() );
   }
