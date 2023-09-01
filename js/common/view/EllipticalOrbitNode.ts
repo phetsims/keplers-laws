@@ -77,9 +77,9 @@ export default class EllipticalOrbitNode extends Path {
 
     // This is because the semiMajorAxis can be toggled by multiple cases
     const semiMajorAxisVisibleProperty = new DerivedProperty(
-      [ model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ],
-      ( semiaxisVisible, semiMajorAxisVisible, eccentricityVisible ) => {
-        return ( model.isThirdLawProperty.value && semiMajorAxisVisible ) || semiaxisVisible || eccentricityVisible;
+      [ model.isThirdLawProperty, model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ],
+      ( isThirdLaw, semiaxisVisible, semiMajorAxisVisible, eccentricityVisible ) => {
+        return ( isThirdLaw && semiMajorAxisVisible ) || semiaxisVisible || eccentricityVisible;
       }
     );
 
@@ -130,9 +130,9 @@ export default class EllipticalOrbitNode extends Path {
       stroke: SolarSystemCommonColors.foregroundProperty,
       lineWidth: 2,
       visibleProperty: new DerivedProperty(
-        [ model.axisVisibleProperty, model.semiMajorAxisVisibleProperty ],
-        ( axisVisible, semiMajorAxisVisible ) => {
-          return axisVisible || ( semiMajorAxisVisible && model.isThirdLawProperty.value );
+        [ model.axisVisibleProperty, model.semiMajorAxisVisibleProperty, model.isThirdLawProperty ],
+        ( axisVisible, semiMajorAxisVisible, isThirdLaw ) => {
+          return axisVisible || ( semiMajorAxisVisible && isThirdLaw );
         }
       )
     } );
@@ -324,7 +324,6 @@ export default class EllipticalOrbitNode extends Path {
           minScaling, maxScaling );
       };
 
-      // FIRST LAW -------------------------------------------
       // Axis of the ellipse
       const axis = new Shape().moveTo( -radiusX, 0 ).lineTo( radiusX, 0 );
       axis.moveTo( 0, -radiusY ).lineTo( 0, radiusY );
@@ -332,104 +331,115 @@ export default class EllipticalOrbitNode extends Path {
 
       // Semi-major axis (a)
       semiMajorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( -radiusX, 0 );
-
-      // Semi-minor axis (b)
-      semiMinorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( 0, radiusY );
-
       aLabelNode.center = new Vector2( -radiusX / 2, -15 );
       aLabelNode.rotation = this.orbit.w;
-      bLabelNode.center = new Vector2( -15, radiusY / 2 );
-      bLabelNode.rotation = this.orbit.w;
 
-      focalDistancePath.shape = new Shape().moveTo( 0, 0 ).lineTo( e * radiusX, 0 );
-      cLabelNode.center = new Vector2( e * radiusX / 2, 15 );
-      cLabelNode.rotation = this.orbit.w;
+      // FIRST LAW -------------------------------------------
+      if ( model.isFirstLawProperty.value ) {
+        // Semi-minor axis (b)
+        semiMinorAxisPath.shape = new Shape().moveTo( 0, 0 ).lineTo( 0, radiusY );
+        bLabelNode.center = new Vector2( -15, radiusY / 2 );
+        bLabelNode.rotation = this.orbit.w;
 
-      // Strings of the foci
-      const bodyPosition = this.orbit.createPolar( -this.orbit.nu ).times( scale );
-      const stringsShape = new Shape().moveTo( -radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
-      stringsShape.lineTo( radiusC, 0 );
-      stringsPath.shape = stringsShape;
+        focalDistancePath.shape = new Shape().moveTo( 0, 0 ).lineTo( e * radiusX, 0 );
+        cLabelNode.center = new Vector2( e * radiusX / 2, 15 );
+        cLabelNode.rotation = this.orbit.w;
 
-      const labelsYPosition = bodyPosition.y / 2;
-      const offsetVector = new Vector2( 0, 15 ).rotated( bodyPosition.angle );
-      const offsetVector2 = new Vector2( 0, 15 ).rotated( Math.atan2( bodyPosition.y, bodyPosition.x + 2 * radiusC ) );
-      stringLabelNode1.center = new Vector2( ( bodyPosition.x / 2 + radiusC ), labelsYPosition ).add( offsetVector );
-      stringLabelNode1.rotation = this.orbit.w;
-      stringLabelNode2.center = new Vector2( ( ( bodyPosition.x - 2 * radiusC ) / 2 + radiusC ), labelsYPosition ).add( offsetVector2 );
-      stringLabelNode2.rotation = this.orbit.w;
-      radiusLabelNode.center = new Vector2( ( bodyPosition.x / 2 ), labelsYPosition ).add( offsetVector );
-      radiusLabelNode.rotation = this.orbit.w;
+        // Strings of the foci
+        const bodyPosition = this.orbit.createPolar( -this.orbit.nu ).times( scale );
+        const stringsShape = new Shape().moveTo( -radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
+        stringsShape.lineTo( radiusC, 0 );
+        stringsPath.shape = stringsShape;
 
-      //Foci
-      foci[ 0 ].rotation = this.orbit.w + Math.PI / 4;
-      foci[ 0 ].center = new Vector2( -radiusC, 0 );
+        const labelsYPosition = bodyPosition.y / 2;
+        const offsetVector = new Vector2( 0, 15 ).rotated( bodyPosition.angle );
+        const offsetVector2 = new Vector2( 0, 15 ).rotated( Math.atan2( bodyPosition.y, bodyPosition.x + 2 * radiusC ) );
+        stringLabelNode1.center = new Vector2( ( bodyPosition.x / 2 + radiusC ), labelsYPosition ).add( offsetVector );
+        stringLabelNode1.rotation = this.orbit.w;
+        stringLabelNode2.center = new Vector2( ( ( bodyPosition.x - 2 * radiusC ) / 2 + radiusC ), labelsYPosition ).add( offsetVector2 );
+        stringLabelNode2.rotation = this.orbit.w;
+        radiusLabelNode.center = new Vector2( ( bodyPosition.x / 2 ), labelsYPosition ).add( offsetVector );
+        radiusLabelNode.rotation = this.orbit.w;
 
-      foci[ 1 ].rotation = this.orbit.w + Math.PI / 4;
-      foci[ 1 ].center = new Vector2( radiusC, 0 );
+        //Foci
+        foci[ 0 ].rotation = this.orbit.w + Math.PI / 4;
+        foci[ 0 ].center = new Vector2( -radiusC, 0 );
+
+        foci[ 1 ].rotation = this.orbit.w + Math.PI / 4;
+        foci[ 1 ].center = new Vector2( radiusC, 0 );
+      }
 
       // SECOND LAW -------------------------------------------
-      // Periapsis and apoapsis
-      periapsis.center = new Vector2( scale * ( a * ( 1 - e ) + c ), 0 );
-      apoapsis.center = new Vector2( -scale * ( a * ( 1 + e ) - c ), 0 );
+      if ( model.isSecondLawProperty.value ) {
+        // Periapsis and apoapsis
+        periapsis.center = new Vector2( scale * ( a * ( 1 - e ) + c ), 0 );
+        apoapsis.center = new Vector2( -scale * ( a * ( 1 + e ) - c ), 0 );
 
-      // Drawing orbital divisions and areas
-      this.orbit.orbitalAreas.forEach( ( area, i ) => {
-        orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
-        areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
-        areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
-        timeValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
+        // Drawing orbital divisions and areas
+        this.orbit.orbitalAreas.forEach( ( area, i ) => {
+          orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
+          areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
+          areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
+          timeValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
 
-        let numberDisplayPosition = new Vector2( 0, 0 );
-        let numberDisplayScaling = 1;
+          let numberDisplayPosition = new Vector2( 0, 0 );
+          let numberDisplayScaling = 1;
 
-        if ( i < model.periodDivisionProperty.value ) {
-          // Set the center of the orbit's divisions dot
-          const dotPosition = area.dotPosition.times( scale ).minus( center );
-          orbitDivisions[ i ].center = dotPosition;
-          orbitDivisions[ i ].fill = KeplersLawsColors.areaColorProperty;
+          if ( i < model.periodDivisionProperty.value ) {
+            // Set the center of the orbit's divisions dot
+            const dotPosition = area.dotPosition.times( scale ).minus( center );
+            orbitDivisions[ i ].center = dotPosition;
+            orbitDivisions[ i ].fill = KeplersLawsColors.areaColorProperty;
 
-          const start = area.startPosition.times( scale ).minus( center );
-          const end = area.endPosition.times( scale ).minus( center );
-          const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
-          const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
+            const start = area.startPosition.times( scale ).minus( center );
+            const end = area.endPosition.times( scale ).minus( center );
+            const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
+            const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
 
-          // Mean value between start and end
-          numberDisplayPosition = model.engine.createPolar( ( area.startAngle + area.endAngle ) / 2 ).times( scale ).minus( center );
+            // Mean value between start and end
+            numberDisplayPosition = model.engine.createPolar( ( area.startAngle + area.endAngle ) / 2 ).times( scale ).minus( center );
 
-          if ( model.periodDivisionProperty.value === 2 ) {
-            numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
+            if ( model.periodDivisionProperty.value === 2 ) {
+              numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
+            }
+
+            const dy = 15; // Spacing between area and period values
+            numberDisplayScaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
+            areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( -dy * Math.sin( -this.orbit.w ), -dy * Math.cos( -this.orbit.w ) );
+            timeValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( dy * Math.sin( -this.orbit.w ), dy * Math.cos( -this.orbit.w ) );
+            areaValueNumberDisplays[ i ].rotation = this.orbit.w;
+            timeValueNumberDisplays[ i ].rotation = this.orbit.w;
+
+            // Calculates the total area of the ellipse / the number of divisions
+            const fullSegmentArea = this.orbit.segmentArea * SolarSystemCommonConstants.POSITION_MULTIPLIER * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+            areaValueProperties[ i ].value = area.alreadyEntered ?
+                                             ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
+                                                                 : 0;
+            const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionProperty.value;
+            timeValueProperties[ i ].value = area.alreadyEntered ?
+                                             ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
+                                                                 : 0;
+
+            // Activate area path
+            areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );
+            areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
+              0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
+            ).close();
           }
-
-          const dy = 15; // Spacing between area and period values
-          numberDisplayScaling = numberDisplayPositionScaling( numberDisplayPosition.magnitude );
-          areaValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( -dy * Math.sin( -this.orbit.w ), -dy * Math.cos( -this.orbit.w ) );
-          timeValueNumberDisplays[ i ].center = numberDisplayPosition.times( numberDisplayScaling ).addXY( dy * Math.sin( -this.orbit.w ), dy * Math.cos( -this.orbit.w ) );
-          areaValueNumberDisplays[ i ].rotation = this.orbit.w;
-          timeValueNumberDisplays[ i ].rotation = this.orbit.w;
-
-          // Calculates the total area of the ellipse / the number of divisions
-          const fullSegmentArea = this.orbit.segmentArea * SolarSystemCommonConstants.POSITION_MULTIPLIER * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-          areaValueProperties[ i ].value = area.alreadyEntered ?
-                                           ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
-                                                               : 0;
-          const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionProperty.value;
-          timeValueProperties[ i ].value = area.alreadyEntered ?
-                                           ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
-                                                               : 0;
-
-          // Activate area path
-          areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );
-          areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
-            0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
-          ).close();
+        } );
+      }
+      else {
+        for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
+          orbitDivisions[ i ].visible = false;
+          areaPaths[ i ].visible = false;
         }
-      } );
-
+      }
 
       // THIRD LAW -------------------------------------------
-      // Period track line
-      periodTrackerNode.update( scale, center, radiusX, radiusY );
+      if ( model.isThirdLawProperty.value ) {
+        // Period track line
+        periodTrackerNode.update( scale, center, radiusX, radiusY );
+      }
     };
 
     updatedOrbit();
