@@ -19,7 +19,7 @@ type StringsType = {
     'allLawsStringProperty': LocalizedStringProperty;
   };
   'undefinedStringProperty': LocalizedStringProperty;
-  'circularOrbitStringProperty': LocalizedStringProperty;
+  'alwaysCircularStringProperty': LocalizedStringProperty;
   'targetOrbitStringProperty': LocalizedStringProperty;
   'stopwatchStringProperty': LocalizedStringProperty;
   'axisStringProperty': LocalizedStringProperty;

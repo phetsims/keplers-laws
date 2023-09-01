@@ -44,9 +44,9 @@ export default class KeplersLawsPanels extends VBox {
         // 'Always circular' checkbox
         new SolarSystemCommonCheckbox(
           model.alwaysCircularProperty,
-          new Text( KeplersLawsStrings.circularOrbitStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
+          new Text( KeplersLawsStrings.alwaysCircularStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
           {
-            accessibleName: KeplersLawsStrings.circularOrbitStringProperty
+            accessibleName: KeplersLawsStrings.alwaysCircularStringProperty
           } ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
