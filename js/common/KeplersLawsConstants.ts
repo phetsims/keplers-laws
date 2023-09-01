@@ -18,7 +18,8 @@ const KeplersLawsConstants = {
 
   TIMER_READOUT_OPTIONS: {
     font: new PhetFont( { size: 18 } ),
-    fill: 'black'
+    fill: 'black',
+    maxWidth: 100
   },
 
   TITLE_OPTIONS: {

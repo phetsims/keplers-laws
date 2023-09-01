@@ -30,6 +30,7 @@ import soundManager from '../../../../tambo/js/soundManager.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
 import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 
@@ -51,7 +52,6 @@ type SelfOptions = {
 type PeriodTimerNodeOptions = SelfOptions & NodeOptions;
 
 export default class PeriodTimerNode extends Node {
-  private readonly disposeThis: () => void;
   public readonly grabClip: SoundClip;
   public readonly releaseClip: SoundClip;
 
@@ -130,22 +130,23 @@ export default class PeriodTimerNode extends Node {
 
 
     // Creates time text inside period timer tool.
-    const readoutText = new Text( '', KeplersLawsConstants.TIMER_READOUT_OPTIONS );
-    // present for the lifetime of the sim
-    Multilink.multilink(
+    const readoutText = new Text( new DerivedProperty(
       [
         periodTimer.timeProperty,
         KeplersLawsStrings.units.yearsStringProperty
       ],
       ( time, units ) => {
-      readoutText.string = StringUtils.fillIn( secondsPatternString, {
-        value: Utils.toFixed( time, 2 ),
-        units: KeplersLawsStrings.units.yearsStringProperty
-      } );
+        return StringUtils.fillIn( secondsPatternString, {
+          value: Utils.toFixed( time, 2 ),
+          units: KeplersLawsStrings.units.yearsStringProperty
+        } );
+      } ), KeplersLawsConstants.TIMER_READOUT_OPTIONS );
+    readoutText.boundsProperty.link( bounds => {
+      readoutText.center = new Vector2( 0, 0 );
     } );
 
     // Creates white background behind the time readout text in period timer tool.
-    const textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 20, 2 ), 5, 5, {
+    const textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 18, 2 ), 5, 5, {
       fill: '#fff',
       stroke: 'rgba(0,0,0,0.5)'
     } );
@@ -193,7 +194,8 @@ export default class PeriodTimerNode extends Node {
       } );
     }
 
-    const positionMultilink = Multilink.multilink(
+    // Position multilink
+    Multilink.multilink(
       [ periodTimer.positionProperty, modelViewTransformProperty ],
       ( position, modelViewTransform ) => {
         this.translation = modelViewTransform.modelToViewPosition( position );
@@ -224,19 +226,6 @@ export default class PeriodTimerNode extends Node {
         end: end
       } );
     this.addInputListener( keyboardDragListener );
-    this.disposeEmitter.addListener( () => {
-      bodyDragListener.dispose();
-      keyboardDragListener.dispose();
-    } );
-
-    this.disposeThis = () => {
-      positionMultilink.dispose();
-    };
-  }
-
-  public override dispose(): void {
-    this.disposeThis();
-    super.dispose();
   }
 }
 
