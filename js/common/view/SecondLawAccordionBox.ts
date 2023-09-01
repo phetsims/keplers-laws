@@ -7,7 +7,6 @@
  */
 
 import { Node, PaintableOptions, RichText, RichTextOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
@@ -50,7 +49,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
         } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       useExpandedBoundsWhenCollapsed: false
-    }, SolarSystemCommonConstants.ACCORDION_BOX_OPTIONS );
+    }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,

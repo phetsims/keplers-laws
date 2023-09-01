@@ -16,7 +16,6 @@ import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optio
 import { GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -75,7 +74,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false
-    }, SolarSystemCommonConstants.ACCORDION_BOX_OPTIONS );
+    }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
 
     // Equation at the top of the accordion box: T/a = ...
     const equationNode = new EquationNode( model );

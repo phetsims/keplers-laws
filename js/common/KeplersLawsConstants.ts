@@ -47,6 +47,22 @@ const KeplersLawsConstants = {
     maxWidth: SolarSystemCommonConstants.CHECKBOX_TEXT_MAX_WIDTH
   },
 
+  ACCORDION_BOX_OPTIONS: {
+    stroke: null,
+    fill: SolarSystemCommonColors.controlPanelFillProperty,
+    cornerRadius: 5,
+    margin: 5,
+    padding: 5,
+    titleYMargin: 10,
+    buttonXMargin: 10,
+    expandCollapseButtonOptions: {
+      scale: 1.5
+    },
+    layoutOptions: {
+      stretch: true
+    }
+  },
+
   // maxWidth for symbols like a, b, c, T, R
   SYMBOL_MAX_WIDTH: 20,
 
