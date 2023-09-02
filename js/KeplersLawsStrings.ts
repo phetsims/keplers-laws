@@ -75,8 +75,8 @@ type StringsType = {
     'warningMessageStringProperty': LocalizedStringProperty;
   };
   'warning': {
-    'crashOrbitStringProperty': LocalizedStringProperty;
-    'escapeOrbitStringProperty': LocalizedStringProperty;
+    'theBodyWillCrashIntoTheSunStringProperty': LocalizedStringProperty;
+    'theBodyWillEscapeTheSystemStringProperty': LocalizedStringProperty;
   };
   'orbit': {
     'mercuryStringProperty': LocalizedStringProperty;

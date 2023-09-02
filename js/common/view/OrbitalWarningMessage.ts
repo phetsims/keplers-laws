@@ -30,8 +30,8 @@ export default class OrbitalWarningMessage extends Node {
       [
         orbitTypeProperty,
         KeplersLawsStrings.pattern.warningMessageStringProperty,
-        KeplersLawsStrings.warning.crashOrbitStringProperty,
-        KeplersLawsStrings.warning.escapeOrbitStringProperty
+        KeplersLawsStrings.warning.theBodyWillCrashIntoTheSunStringProperty,
+        KeplersLawsStrings.warning.theBodyWillEscapeTheSystemStringProperty
       ],
       ( orbitType, warningString, crashOrbitString, escapeOrbitString ) => {
         return StringUtils.fillIn( warningString, {
