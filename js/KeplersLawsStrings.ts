@@ -70,7 +70,6 @@ type StringsType = {
     'rvAngleStringProperty': LocalizedStringProperty;
   };
   'pattern': {
-    'textEqualsValueUnitsStringProperty': LocalizedStringProperty;
     'valueUnitsStringProperty': LocalizedStringProperty;
     'warningMessageStringProperty': LocalizedStringProperty;
   };
