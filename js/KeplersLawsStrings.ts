@@ -91,9 +91,9 @@ type StringsType = {
     'semiMajorAxisStringProperty': LocalizedStringProperty;
     'semiMinorAxisStringProperty': LocalizedStringProperty;
     'focalDistanceStringProperty': LocalizedStringProperty;
-    'planetPositionStringProperty': LocalizedStringProperty;
-    'planetVelocityStringProperty': LocalizedStringProperty;
-    'rvAngleStringProperty': LocalizedStringProperty;
+    'planetsPositionVectorStringProperty': LocalizedStringProperty;
+    'planetsVelocityVectorStringProperty': LocalizedStringProperty;
+    'angleBetweenVectorsStringProperty': LocalizedStringProperty;
   };
   'preferences': {
     'moreOrbitalData': {

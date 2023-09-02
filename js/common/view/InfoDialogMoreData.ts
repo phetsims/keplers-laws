@@ -36,7 +36,7 @@ export default class InfoDialogMoreData extends Dialog {
           visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
             new Image( planetPosition_png, { scale: 0.315 } ),
-            new RichText( KeplersLawsStrings.infoDialog.planetPositionStringProperty, infoDialogTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.planetsPositionVectorStringProperty, infoDialogTextOptions )
           ]
         } ),
         new HBox( {
@@ -44,7 +44,7 @@ export default class InfoDialogMoreData extends Dialog {
           visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
             new Image( planetVelocity_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.planetVelocityStringProperty, infoDialogTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.planetsVelocityVectorStringProperty, infoDialogTextOptions )
           ]
         } ),
         new HBox( {
@@ -52,7 +52,7 @@ export default class InfoDialogMoreData extends Dialog {
           visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
           children: [
             new Image( rvAngle_png, { scale: 1 } ),
-            new RichText( KeplersLawsStrings.infoDialog.rvAngleStringProperty, infoDialogTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.angleBetweenVectorsStringProperty, infoDialogTextOptions )
           ]
         } )
       ]
