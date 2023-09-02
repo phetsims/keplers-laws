@@ -68,7 +68,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
     const labelDistance = 40;
 
     // x-axis label, dynamically centered on its axis
-    const xAxisLabel = new RichText( KeplersLawsStrings.area.periodDivisionStringProperty,
+    const xAxisLabel = new RichText( KeplersLawsStrings.periodDivisionStringProperty,
       combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
         centerY: labelDistance
       } ) );

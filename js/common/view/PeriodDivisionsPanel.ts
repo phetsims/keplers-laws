@@ -40,7 +40,7 @@ export default class PeriodDivisionsPanel extends Panel {
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING,
       align: 'left',
       children: [
-        new Text( KeplersLawsStrings.area.periodDivisionStringProperty, textOptions ),
+        new Text( KeplersLawsStrings.periodDivisionStringProperty, textOptions ),
         new NumberSpinner( model.periodDivisionProperty, divisionsRangeProperty, {
           arrowsPosition: 'leftRight',
           layoutOptions: {
@@ -49,7 +49,7 @@ export default class PeriodDivisionsPanel extends Panel {
           touchAreaXDilation: 15,
           touchAreaYDilation: 5,
           arrowsSoundPlayer: nullSoundPlayer,
-          accessibleName: KeplersLawsStrings.area.periodDivisionStringProperty
+          accessibleName: KeplersLawsStrings.periodDivisionStringProperty
         } ),
         new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, textOptions ), {
           accessibleName: KeplersLawsStrings.area.valuesStringProperty

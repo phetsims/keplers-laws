@@ -33,8 +33,8 @@ type StringsType = {
   'ourSunStringProperty': LocalizedStringProperty;
   'periodStringProperty': LocalizedStringProperty;
   'eraserStringProperty': LocalizedStringProperty;
+  'periodDivisionStringProperty': LocalizedStringProperty;
   'area': {
-    'periodDivisionStringProperty': LocalizedStringProperty;
     'valuesStringProperty': LocalizedStringProperty;
     'timeValuesStringProperty': LocalizedStringProperty;
     'areaUnitsStringProperty': LocalizedStringProperty;
