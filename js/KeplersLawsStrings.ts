@@ -22,10 +22,10 @@ type StringsType = {
   'alwaysCircularStringProperty': LocalizedStringProperty;
   'targetOrbitStringProperty': LocalizedStringProperty;
   'stopwatchStringProperty': LocalizedStringProperty;
-  'axisStringProperty': LocalizedStringProperty;
+  'axesStringProperty': LocalizedStringProperty;
   'fociStringProperty': LocalizedStringProperty;
   'stringsStringProperty': LocalizedStringProperty;
-  'semiaxisStringProperty': LocalizedStringProperty;
+  'semiaxesStringProperty': LocalizedStringProperty;
   'eccentricityStringProperty': LocalizedStringProperty;
   'apoapsisStringProperty': LocalizedStringProperty;
   'periapsisStringProperty': LocalizedStringProperty;

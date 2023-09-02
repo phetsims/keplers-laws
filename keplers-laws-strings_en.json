@@ -26,7 +26,7 @@
   "stopwatch": {
     "value": "Stopwatch"
   },
-  "axis": {
+  "axes": {
     "value": "Axes"
   },
   "foci": {
@@ -35,7 +35,7 @@
   "strings": {
     "value": "String"
   },
-  "semiaxis": {
+  "semiaxes": {
     "value": "Semiaxes"
   },
   "eccentricity": {

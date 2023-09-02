@@ -60,7 +60,7 @@ export default class OrbitalInformationPanel extends Panel {
       ),
       createCheckbox(
         model.axisVisibleProperty,
-        KeplersLawsStrings.axisStringProperty,
+        KeplersLawsStrings.axesStringProperty,
         FirstLawCheckboxIcons.createAxisCheckboxIcon(),
         {
           tandem: firstLawCheckboxesTandem.createTandem( 'axisVisibleCheckbox' )
@@ -68,7 +68,7 @@ export default class OrbitalInformationPanel extends Panel {
       ),
       createCheckbox(
         model.semiaxisVisibleProperty,
-        KeplersLawsStrings.semiaxisStringProperty,
+        KeplersLawsStrings.semiaxesStringProperty,
         FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
         {
           tandem: firstLawCheckboxesTandem.createTandem( 'semiAxisVisibleCheckbox' ),
