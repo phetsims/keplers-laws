@@ -51,11 +51,11 @@ export default class PeriodDivisionsPanel extends Panel {
           arrowsSoundPlayer: nullSoundPlayer,
           accessibleName: KeplersLawsStrings.periodDivisionStringProperty
         } ),
-        new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.area.valuesStringProperty, textOptions ), {
-          accessibleName: KeplersLawsStrings.area.valuesStringProperty
+        new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.areaValuesStringProperty, textOptions ), {
+          accessibleName: KeplersLawsStrings.areaValuesStringProperty
         } ),
-        new SolarSystemCommonCheckbox( model.timeValuesVisibleProperty, new Text( KeplersLawsStrings.area.timeValuesStringProperty, textOptions ), {
-          accessibleName: KeplersLawsStrings.area.timeValuesStringProperty
+        new SolarSystemCommonCheckbox( model.timeValuesVisibleProperty, new Text( KeplersLawsStrings.timeValuesStringProperty, textOptions ), {
+          accessibleName: KeplersLawsStrings.timeValuesStringProperty
         } )
       ]
     } ), options );

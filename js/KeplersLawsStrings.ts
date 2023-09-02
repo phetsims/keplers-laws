@@ -34,11 +34,9 @@ type StringsType = {
   'periodStringProperty': LocalizedStringProperty;
   'eraserStringProperty': LocalizedStringProperty;
   'periodDivisionStringProperty': LocalizedStringProperty;
-  'area': {
-    'valuesStringProperty': LocalizedStringProperty;
-    'timeValuesStringProperty': LocalizedStringProperty;
-    'areaUnitsStringProperty': LocalizedStringProperty;
-  };
+  'areaValuesStringProperty': LocalizedStringProperty;
+  'timeValuesStringProperty': LocalizedStringProperty;
+  'areaUnitsStringProperty': LocalizedStringProperty;
   'sweptAreaStringProperty': LocalizedStringProperty;
   'noneStringProperty': LocalizedStringProperty;
   'graph': {

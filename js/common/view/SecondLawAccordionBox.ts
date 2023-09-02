@@ -78,7 +78,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
     // y-axis label, dynamically centered on its axis
     const yAxisLabel = new RichText(
-      KeplersLawsStrings.area.areaUnitsStringProperty,
+      KeplersLawsStrings.areaUnitsStringProperty,
       combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
         x: -labelDistance,
         rotation: -Math.PI / 2
