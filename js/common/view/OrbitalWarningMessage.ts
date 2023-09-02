@@ -29,7 +29,7 @@ export default class OrbitalWarningMessage extends Node {
     const messageProperty = new DerivedProperty(
       [
         orbitTypeProperty,
-        KeplersLawsStrings.warning.warningStringProperty,
+        KeplersLawsStrings.pattern.warningMessageStringProperty,
         KeplersLawsStrings.warning.crashOrbitStringProperty,
         KeplersLawsStrings.warning.escapeOrbitStringProperty
       ],

@@ -72,9 +72,9 @@ type StringsType = {
   'pattern': {
     'textEqualsValueUnitsStringProperty': LocalizedStringProperty;
     'valueUnitsStringProperty': LocalizedStringProperty;
+    'warningMessageStringProperty': LocalizedStringProperty;
   };
   'warning': {
-    'warningStringProperty': LocalizedStringProperty;
     'crashOrbitStringProperty': LocalizedStringProperty;
     'escapeOrbitStringProperty': LocalizedStringProperty;
   };
