@@ -91,18 +91,18 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbols.periodStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.periodStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.TStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbols.periodSquaredStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.periodSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.T2StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbols.periodCubedStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.periodCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.T3StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {
@@ -116,18 +116,18 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.aStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisSquaredStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.a2StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.semiMajorAxisCubedStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbols.a3StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbols.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {
@@ -174,9 +174,9 @@ class EquationNode extends HBox {
 
     // T / a
     const fractionLeft = new FractionNode(
-      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.periodStringProperty,
+      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.TStringProperty,
         model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS ),
-      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.aStringProperty,
         model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS )
     );
 

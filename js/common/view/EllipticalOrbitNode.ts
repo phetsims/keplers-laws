@@ -83,21 +83,21 @@ export default class EllipticalOrbitNode extends Path {
     );
 
     // Text Nodes
-    const aLabelNode = new Text( KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+    const aLabelNode = new Text( KeplersLawsStrings.symbols.aStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: semiMajorAxisVisibleProperty,
         scale: 1.5,
         fill: KeplersLawsColors.semiMajorAxisColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
-    const bLabelNode = new Text( KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+    const bLabelNode = new Text( KeplersLawsStrings.symbols.bStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: model.semiaxisVisibleProperty,
         scale: 1.5,
         fill: KeplersLawsColors.semiMinorAxisColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
       } ) );
-    const cLabelNode = new Text( KeplersLawsStrings.symbols.focalDistanceStringProperty,
+    const cLabelNode = new Text( KeplersLawsStrings.symbols.cStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: new DerivedProperty( [ model.eccentricityVisibleProperty, model.engine.eccentricityProperty ],
           ( visible, e ) => visible && ( e > 0 ) ),
@@ -113,9 +113,9 @@ export default class EllipticalOrbitNode extends Path {
       fill: KeplersLawsColors.distancesColorProperty,
       maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
     } );
-    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.distance1StringProperty, stringLabelOptions );
-    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.distance2StringProperty, stringLabelOptions );
-    const radiusLabelNode = new Text( KeplersLawsStrings.symbols.radiusStringProperty,
+    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbols.d1StringProperty, stringLabelOptions );
+    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.d2StringProperty, stringLabelOptions );
+    const radiusLabelNode = new Text( KeplersLawsStrings.symbols.RStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
           ( visible, e ) => visible && ( e === 0 ) ),
@@ -456,12 +456,12 @@ export default class EllipticalOrbitNode extends Path {
         modelViewTransformProperty,
         model.periodDivisionProperty,
         model.selectedLawProperty,
-        KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
-        KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
-        KeplersLawsStrings.symbols.focalDistanceStringProperty,
-        KeplersLawsStrings.symbols.distance1StringProperty,
-        KeplersLawsStrings.symbols.distance2StringProperty,
-        KeplersLawsStrings.symbols.radiusStringProperty,
+        KeplersLawsStrings.symbols.aStringProperty,
+        KeplersLawsStrings.symbols.bStringProperty,
+        KeplersLawsStrings.symbols.cStringProperty,
+        KeplersLawsStrings.symbols.d1StringProperty,
+        KeplersLawsStrings.symbols.d2StringProperty,
+        KeplersLawsStrings.symbols.RStringProperty,
         KeplersLawsStrings.units.AU2StringProperty,
         KeplersLawsStrings.pattern.valueUnitsStringProperty,
         KeplersLawsStrings.units.yearsStringProperty

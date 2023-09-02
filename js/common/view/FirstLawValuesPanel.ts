@@ -60,19 +60,25 @@ export default class FirstLawValuesPanel extends Panel {
     const equationsNode = new VBox( {
       align: 'left',
       children: [
+
+        // a =
         createCustomEquation(
-          KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+          KeplersLawsStrings.symbols.aStringProperty,
           semiMajorAxisStringProperty,
           KeplersLawsColors.semiMajorAxisColorProperty
         ),
+
+        // b =
         createCustomEquation(
-          KeplersLawsStrings.symbols.semiMinorAxisStringProperty,
+          KeplersLawsStrings.symbols.bStringProperty,
           semiMinorAxisStringProperty,
           KeplersLawsColors.semiMinorAxisColorProperty,
           model.semiaxisVisibleProperty
         ),
+
+        // c =
         createCustomEquation(
-          KeplersLawsStrings.symbols.focalDistanceStringProperty,
+          KeplersLawsStrings.symbols.cStringProperty,
           focalDistanceStringProperty,
           KeplersLawsColors.focalDistanceColorProperty,
           model.eccentricityVisibleProperty

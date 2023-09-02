@@ -76,14 +76,14 @@ export default class DistancesDisplayNode extends VBox {
     // |----><-----|
     const d1StringProperty = new DerivedProperty( [
       this.orbit.isCircularProperty,
-      KeplersLawsStrings.symbols.radiusStringProperty,
-      KeplersLawsStrings.symbols.distance1StringProperty
+      KeplersLawsStrings.symbols.RStringProperty,
+      KeplersLawsStrings.symbols.d1StringProperty
     ], ( orbitIsCircular, radiusString, distance1String ) =>
       orbitIsCircular ? radiusString : distance1String );
     const d2StringProperty = new DerivedProperty( [
       this.orbit.isCircularProperty,
-      KeplersLawsStrings.symbols.radiusStringProperty,
-      KeplersLawsStrings.symbols.distance2StringProperty
+      KeplersLawsStrings.symbols.RStringProperty,
+      KeplersLawsStrings.symbols.d2StringProperty
     ], ( orbitIsCircular, radiusString, distance2String ) =>
       orbitIsCircular ? radiusString : distance2String );
     const d1LabelNode = new RichText( d1StringProperty, DISTANCE_LABEL_OPTIONS );
@@ -107,8 +107,8 @@ export default class DistancesDisplayNode extends VBox {
 
     // |----><-----|
     //    a    a
-    const a1LabelNode = new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
-    const a2LabelNode = new RichText( KeplersLawsStrings.symbols.semiMajorAxisStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
+    const a1LabelNode = new RichText( KeplersLawsStrings.symbols.aStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
+    const a2LabelNode = new RichText( KeplersLawsStrings.symbols.aStringProperty, MAJOR_AXIS_LABEL_OPTIONS );
     const a1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const a2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const majorAxisArrowsNode = new HBox( {
@@ -150,9 +150,9 @@ export default class DistancesDisplayNode extends VBox {
     };
 
     Multilink.multilink( [
-      KeplersLawsStrings.symbols.radiusStringProperty,
-      KeplersLawsStrings.symbols.distance1StringProperty,
-      KeplersLawsStrings.symbols.distance2StringProperty,
+      KeplersLawsStrings.symbols.RStringProperty,
+      KeplersLawsStrings.symbols.d1StringProperty,
+      KeplersLawsStrings.symbols.d2StringProperty,
       model.zoomProperty
     ], updateDisplay );
 

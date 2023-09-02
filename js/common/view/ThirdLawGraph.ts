@@ -100,14 +100,16 @@ export default class ThirdLawGraph extends Node {
       visible: false
     } );
 
+    // a
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
-      KeplersLawsStrings.symbols.semiMajorAxisStringProperty,
+      KeplersLawsStrings.symbols.aStringProperty,
       model.selectedAxisPowerProperty,
       new TinyProperty<boolean>( true )
     );
 
+    // T
     const yAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
-      KeplersLawsStrings.symbols.periodStringProperty,
+      KeplersLawsStrings.symbols.TStringProperty,
       model.selectedPeriodPowerProperty,
       new TinyProperty<boolean>( true )
     );
