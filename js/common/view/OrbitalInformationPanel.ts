@@ -59,11 +59,11 @@ export default class OrbitalInformationPanel extends Panel {
         }
       ),
       createCheckbox(
-        model.axisVisibleProperty,
+        model.axesVisibleProperty,
         KeplersLawsStrings.axesStringProperty,
         FirstLawCheckboxIcons.createAxisCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'axisVisibleCheckbox' )
+          tandem: firstLawCheckboxesTandem.createTandem( 'axesVisibleCheckbox' )
         }
       ),
       createCheckbox(
@@ -72,7 +72,7 @@ export default class OrbitalInformationPanel extends Panel {
         FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
         {
           tandem: firstLawCheckboxesTandem.createTandem( 'semiAxisVisibleCheckbox' ),
-          enabledProperty: model.axisVisibleProperty,
+          enabledProperty: model.axesVisibleProperty,
           layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
         }
       ),

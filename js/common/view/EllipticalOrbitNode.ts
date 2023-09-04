@@ -129,7 +129,7 @@ export default class EllipticalOrbitNode extends Path {
       stroke: SolarSystemCommonColors.foregroundProperty,
       lineWidth: 2,
       visibleProperty: new DerivedProperty(
-        [ model.axisVisibleProperty, model.semiMajorAxisVisibleProperty, model.isThirdLawProperty ],
+        [ model.axesVisibleProperty, model.semiMajorAxisVisibleProperty, model.isThirdLawProperty ],
         ( axisVisible, semiMajorAxisVisible, isThirdLaw ) => {
           return axisVisible || ( semiMajorAxisVisible && isThirdLaw );
         }
