@@ -289,13 +289,15 @@ class AreasBarPlot extends Node {
   }
 }
 
+const DIVISION_LIMIT = 100;
+
 class LimitedTickMarkSet extends TickMarkSet {
 
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick mark sets which have less than 100 ticks
-    if ( spacingBorders.max - spacingBorders.min < 100 ) {
+    // Only update tick mark sets which have less than DIVISION_LIMIT ticks
+    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
       super.update();
     }
   }
@@ -306,8 +308,8 @@ class LimitedTickLabelSet extends TickLabelSet {
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick label sets which have less than 100 ticks
-    if ( spacingBorders.max - spacingBorders.min < 100 ) {
+    // Only update tick label sets which have less than DIVISION_LIMIT ticks
+    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
       super.update();
     }
   }
@@ -318,8 +320,8 @@ class LimitedGridLineSet extends GridLineSet {
   protected override update(): void {
     const spacingBorders = this.getSpacingBorders();
 
-    // Only update grid line sets which have less than 100 lines
-    if ( spacingBorders.max - spacingBorders.min < 100 ) {
+    // Only update grid line sets which have less than DIVISION_LIMIT lines
+    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
       super.update();
     }
   }
