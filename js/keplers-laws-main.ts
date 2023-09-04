@@ -42,7 +42,9 @@ simLauncher.launch( () => {
     },
     preferencesModel: new PreferencesModel( {
       visualOptions: {
-        supportsProjectorMode: true,
+        supportsProjectorMode: true
+      },
+      simulationOptions: {
         customPreferences: [
           { createContent: tandem => new KeplersLawsPreferencesNode() }
         ]
