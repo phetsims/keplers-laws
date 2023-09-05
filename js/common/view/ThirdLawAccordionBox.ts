@@ -180,6 +180,7 @@ class EquationNode extends HBox {
         model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS )
     );
 
+    // The value in fraction format, e.g. 1.90 / 1.54
     const fractionRight = new FractionNode(
       new RichText( new DerivedProperty(
         [ model.poweredPeriodProperty, model.engine.allowedOrbitProperty, KeplersLawsStrings.undefinedStringProperty ],
@@ -206,7 +207,8 @@ class EquationNode extends HBox {
       );
     };
 
-    const fractionResult = new RichText(
+    // The value in decimal format, e.g. 1.24
+    const decimalText = new RichText(
       new DerivedProperty( [ model.poweredSemiMajorAxisProperty, model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
         ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
           return allowedOrbit ? Utils.toFixed( poweredPeriod / poweredSemiMajorAxis, 2 ) : '';
@@ -217,7 +219,7 @@ class EquationNode extends HBox {
         maxWidth: 60
       } );
     model.correctPowersSelectedProperty.link( correct => {
-      fractionResult.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
+      decimalText.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
     } );
 
     super( {
@@ -233,7 +235,7 @@ class EquationNode extends HBox {
         new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
           visibleProperty: model.engine.allowedOrbitProperty
         } ) ),
-        fractionResult,
+        decimalText,
         createUnitsFraction()
       ]
     } );
