@@ -107,7 +107,7 @@ export default class EllipticalOrbitNode extends Path {
       } ) );
 
     const stringLabelOptions = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-      visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
+      visibleProperty: new DerivedProperty( [ model.stringVisibleProperty, model.engine.eccentricityProperty ],
         ( visible, e ) => visible && ( e > 0 ) ),
       scale: 1.5,
       fill: KeplersLawsColors.distancesColorProperty,
@@ -117,7 +117,7 @@ export default class EllipticalOrbitNode extends Path {
     const stringLabelNode2 = new RichText( KeplersLawsStrings.symbols.d2StringProperty, stringLabelOptions );
     const radiusLabelNode = new Text( KeplersLawsStrings.symbols.RStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-        visibleProperty: new DerivedProperty( [ model.stringsVisibleProperty, model.engine.eccentricityProperty ],
+        visibleProperty: new DerivedProperty( [ model.stringVisibleProperty, model.engine.eccentricityProperty ],
           ( visible, e ) => visible && ( e === 0 ) ),
         scale: 1.5,
         fill: KeplersLawsColors.distancesColorProperty,
@@ -150,10 +150,10 @@ export default class EllipticalOrbitNode extends Path {
       lineWidth: 3,
       visibleProperty: model.eccentricityVisibleProperty
     } );
-    const stringsPath = new Path( null, {
+    const stringPath = new Path( null, {
       stroke: KeplersLawsColors.distancesColorProperty,
       lineWidth: 3,
-      visibleProperty: model.stringsVisibleProperty,
+      visibleProperty: model.stringVisibleProperty,
       lineDash: [ 10, 2 ]
     } );
     const fociOptions = {
@@ -263,7 +263,7 @@ export default class EllipticalOrbitNode extends Path {
     // First Law: Axis, foci, and Ellipse definition lines
     firstLawLayer.addChild( axisPath );
     firstLawLayer.addChild( semiMinorAxisPath );
-    firstLawLayer.addChild( stringsPath );
+    firstLawLayer.addChild( stringPath );
     firstLawLayer.addChild( focalDistancePath );
 
     // Second Law: Periapsis, Apoapsis and orbital division dots and areas
@@ -346,9 +346,9 @@ export default class EllipticalOrbitNode extends Path {
 
         // Strings of the foci
         const bodyPosition = this.orbit.createPolar( -this.orbit.nu ).times( scale );
-        const stringsShape = new Shape().moveTo( -radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
-        stringsShape.lineTo( radiusC, 0 );
-        stringsPath.shape = stringsShape;
+        const stringShape = new Shape().moveTo( -radiusC, 0 ).lineTo( ( bodyPosition.x + radiusC ), bodyPosition.y );
+        stringShape.lineTo( radiusC, 0 );
+        stringPath.shape = stringShape;
 
         const labelsYPosition = bodyPosition.y / 2;
         const offsetVector = new Vector2( 0, 15 ).rotated( bodyPosition.angle );

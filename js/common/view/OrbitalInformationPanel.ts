@@ -49,11 +49,11 @@ export default class OrbitalInformationPanel extends Panel {
         }
       ),
       createCheckbox(
-        model.stringsVisibleProperty,
-        KeplersLawsStrings.stringsStringProperty,
+        model.stringVisibleProperty,
+        KeplersLawsStrings.stringStringProperty,
         FirstLawCheckboxIcons.createStringsCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'stringsVisibleCheckbox' ),
+          tandem: firstLawCheckboxesTandem.createTandem( 'stringVisibleCheckbox' ),
           enabledProperty: model.fociVisibleProperty,
           layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
         }

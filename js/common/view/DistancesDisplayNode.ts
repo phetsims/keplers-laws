@@ -2,7 +2,7 @@
 
 /**
  * Box that shows the length of distances available in the sim:
- *  - d1 and d2: Focal strings' lengths from the sun and secondary focus to the planet
+ *  - d1 and d2: Focal string lengths from the sun and secondary focus to the planet
  *  - R: Distance from the sun to the planet (circular orbit)
  *  - a: Semi-major axis of the ellipse
  *
@@ -61,13 +61,13 @@ export default class DistancesDisplayNode extends VBox {
   public orbit: EllipticalOrbitEngine;
 
   public constructor(
-    model: Pick<KeplersLawsModel, 'engine' | 'stringsVisibleProperty' | 'semiaxisVisibleProperty' | 'zoomProperty'>,
+    model: Pick<KeplersLawsModel, 'engine' | 'stringVisibleProperty' | 'semiaxisVisibleProperty' | 'zoomProperty'>,
     public modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
   ) {
     super( {
       isDisposable: false,
       spacing: 10,
-      visibleProperty: DerivedProperty.and( [ model.stringsVisibleProperty, model.engine.allowedOrbitProperty ] )
+      visibleProperty: DerivedProperty.and( [ model.stringVisibleProperty, model.engine.allowedOrbitProperty ] )
     } );
 
     this.orbit = model.engine;
@@ -112,7 +112,7 @@ export default class DistancesDisplayNode extends VBox {
     const a1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const a2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const majorAxisArrowsNode = new HBox( {
-      visibleProperty: model.stringsVisibleProperty,
+      visibleProperty: model.stringVisibleProperty,
       children: [ a1ArrowNode, a2ArrowNode ]
     } );
     const majorAxisDisplayNode = new Node( {

@@ -24,7 +24,7 @@ type StringsType = {
   'stopwatchStringProperty': LocalizedStringProperty;
   'axesStringProperty': LocalizedStringProperty;
   'fociStringProperty': LocalizedStringProperty;
-  'stringsStringProperty': LocalizedStringProperty;
+  'stringStringProperty': LocalizedStringProperty;
   'semiaxesStringProperty': LocalizedStringProperty;
   'eccentricityStringProperty': LocalizedStringProperty;
   'apoapsisStringProperty': LocalizedStringProperty;
