@@ -212,6 +212,7 @@ export default class EllipticalOrbitNode extends Path {
       areaValueNumberDisplays.push( new NumberDisplay( areaValueProperty, areaValueRange, {
         scale: 0.7,
         opacity: 0.8,
+        useRichText: true,
         numberFormatter: ( value: number ) => {
           return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
             value: Utils.toFixed( value, 2 ),
