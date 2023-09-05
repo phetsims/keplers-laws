@@ -7,21 +7,19 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { HBox, Image, RichText, RichTextOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, Image, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import infoSemiMajorAxis_png from '../../../images/infoSemiMajorAxis_png.js';
 import infoSemiMinorAxis_png from '../../../images/infoSemiMinorAxis_png.js';
 import focalDistance_png from '../../../images/focalDistance_png.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-
-// horizontal spacing between images and text
-const IMAGE_TEXT_SPACING = 10;
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 export default class OrbitalDataInfoDialog extends Dialog {
 
   public constructor() {
-    
+
     const options: DialogOptions = {
       isDisposable: false,
       titleAlign: 'center',
@@ -31,35 +29,29 @@ export default class OrbitalDataInfoDialog extends Dialog {
       } )
     };
 
-    const richTextOptions: RichTextOptions = {
-      font: new PhetFont( 18 ),
-      fill: 'black',
-      lineWrap: 450
-    };
-    
     const content = new VBox( {
       align: 'left',
       spacing: 15,
       children: [
         new HBox( {
-          spacing: IMAGE_TEXT_SPACING,
+          spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
             new Image( infoSemiMajorAxis_png ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, richTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
           ]
         } ),
         new HBox( {
-          spacing: IMAGE_TEXT_SPACING,
+          spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
             new Image( infoSemiMinorAxis_png ),
-            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, richTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
           ]
         } ),
         new HBox( {
-          spacing: IMAGE_TEXT_SPACING,
+          spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
             new Image( focalDistance_png ),
-            new RichText( KeplersLawsStrings.infoDialog.focalDistanceStringProperty, richTextOptions )
+            new RichText( KeplersLawsStrings.infoDialog.focalDistanceStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
           ]
         } )
       ]

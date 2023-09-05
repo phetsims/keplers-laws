@@ -70,7 +70,17 @@ const KeplersLawsConstants = {
   ABSOLUTE_SYMBOL_MAX_WIDTH: 25,
 
   // maxWidth for numeric values with units, like '1.50 AU'
-  VALUE_MAX_WIDTH: 100
+  VALUE_MAX_WIDTH: 100,
+
+  // horizontal spacing between images and text in Info dialogs
+  INFO_DIALOG_IMAGE_TEXT_SPACING: 10,
+
+  // options for RichText descriptions that appear in Info dialogs
+  INFO_DIALOG_RICH_TEXT_OPTIONS: {
+    font: new PhetFont( 18 ),
+    fill: 'black',
+    lineWrap: 450
+  }
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );
