@@ -294,10 +294,9 @@ const DIVISION_LIMIT = 100;
 class LimitedTickMarkSet extends TickMarkSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick mark sets which have less than DIVISION_LIMIT ticks
-    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
+    // Only update when the range is less than DIVISION_LIMIT.
+    if ( this.getSpacingBorders().getLength() < DIVISION_LIMIT ) {
       super.update();
     }
   }
@@ -306,10 +305,9 @@ class LimitedTickMarkSet extends TickMarkSet {
 class LimitedTickLabelSet extends TickLabelSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders();
 
-    // Only update tick label sets which have less than DIVISION_LIMIT ticks
-    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
+    // Only update when the range is less than DIVISION_LIMIT.
+    if ( this.getSpacingBorders().getLength() < DIVISION_LIMIT ) {
       super.update();
     }
   }
@@ -318,10 +316,9 @@ class LimitedTickLabelSet extends TickLabelSet {
 class LimitedGridLineSet extends GridLineSet {
 
   protected override update(): void {
-    const spacingBorders = this.getSpacingBorders();
 
-    // Only update grid line sets which have less than DIVISION_LIMIT lines
-    if ( spacingBorders.max - spacingBorders.min < DIVISION_LIMIT ) {
+    // Only update when the range is less than DIVISION_LIMIT.
+    if ( this.getSpacingBorders().getLength() < DIVISION_LIMIT ) {
       super.update();
     }
   }
