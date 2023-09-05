@@ -64,4 +64,4 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
   }
 }
 
-keplersLaws.register( 'InfoDialogMoreData', MoreOrbitalDataInfoDialog );
+keplersLaws.register( 'MoreOrbitalDataInfoDialog', MoreOrbitalDataInfoDialog );
