@@ -129,4 +129,4 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
   } );
 }
 
-keplersLaws.register( 'FirstLawValuesPanel', OrbitalDataPanel );
+keplersLaws.register( 'OrbitalDataPanel', OrbitalDataPanel );

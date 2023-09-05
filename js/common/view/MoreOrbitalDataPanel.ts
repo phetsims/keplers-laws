@@ -1,7 +1,6 @@
 // Copyright 2023, University of Colorado Boulder
 /**
- * Panel that holds extra information about the orbit such as
- * position and velocity vector values and directions.
+ * Panel that displays more data for the orbit, such as position and velocity vector values and directions.
  *
  * Only visibile when Preferences > Visual > More Orbital Data is turned on.
  *
@@ -140,4 +139,4 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
   } );
 }
 
-keplersLaws.register( 'FirstLawMoreDataPanel', MoreOrbitalDataPanel );
+keplersLaws.register( 'MoreOrbitalDataPanel', MoreOrbitalDataPanel );
