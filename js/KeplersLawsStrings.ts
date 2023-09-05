@@ -85,6 +85,8 @@ type StringsType = {
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
   };
+  'orbitalDataStringProperty': LocalizedStringProperty;
+  'moreOrbitalDataStringProperty': LocalizedStringProperty;
   'infoDialog': {
     'semiMajorAxisStringProperty': LocalizedStringProperty;
     'semiMinorAxisStringProperty': LocalizedStringProperty;
@@ -107,10 +109,8 @@ type StringsType = {
     'firstLawStringProperty': LocalizedStringProperty;
     'secondLawStringProperty': LocalizedStringProperty;
     'thirdLawStringProperty': LocalizedStringProperty;
-    'orbitalInformationStringProperty': LocalizedStringProperty;
-    'extraOrbitalInformationStringProperty': LocalizedStringProperty;
-    'infoButtonStringProperty': LocalizedStringProperty;
-    'extraInfoButtonStringProperty': LocalizedStringProperty;
+    'infoButtonForOrbitalDataStringProperty': LocalizedStringProperty;
+    'infoButtonForMoreOrbitalDataStringProperty': LocalizedStringProperty;
   }
 };
 

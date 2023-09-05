@@ -89,7 +89,7 @@ export default class OrbitalDataPanel extends Panel {
     // Info button and associated dialog
     const infoDialog = new OrbitalDataInfoDialog();
     const infoButton = new InfoButton( {
-      accessibleName: KeplersLawsStrings.a11y.infoButtonStringProperty,
+      accessibleName: KeplersLawsStrings.a11y.infoButtonForOrbitalDataStringProperty,
       scale: 0.5,
       iconFill: 'rgb( 41, 106, 163 )',
       touchAreaDilation: 20,

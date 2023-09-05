@@ -104,7 +104,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     // Info button and associated dialog
     const infoDialog = new MoreOrbitalDataInfoDialog();
     const infoButton = new InfoButton( {
-      accessibleName: KeplersLawsStrings.a11y.extraInfoButtonStringProperty,
+      accessibleName: KeplersLawsStrings.a11y.infoButtonForMoreOrbitalDataStringProperty,
       scale: 0.5,
       iconFill: 'rgb( 41, 106, 163 )',
       touchAreaDilation: 20,

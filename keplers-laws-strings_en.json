@@ -179,6 +179,12 @@
   "orbit.halley": {
     "value": "Halley"
   },
+  "orbitalData": {
+    "value": "Orbital Data"
+  },
+  "moreOrbitalData": {
+    "value": "More Orbital Data"
+  },
   "infoDialog.semiMajorAxis": {
     "value": "<b>Semi-major axis (a):</b> represents half of the longest diameter of the elliptical orbit."
   },
@@ -225,17 +231,11 @@
     "thirdLaw": {
       "value": "Third law"
     },
-    "orbitalInformation": {
-      "value": "Orbital information"
+    "infoButtonForOrbitalData": {
+      "value": "Info button for orbital data"
     },
-    "extraOrbitalInformation": {
-      "value": "Extra orbital information"
-    },
-    "infoButton": {
-      "value": "Info button"
-    },
-    "extraInfoButton": {
-      "value": "Extra info button"
+    "infoButtonForMoreOrbitalData": {
+      "value": "Info button for more orbital data"
     }
   }
 }

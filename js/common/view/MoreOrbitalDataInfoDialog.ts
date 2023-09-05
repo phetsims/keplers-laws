@@ -59,7 +59,7 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
     } ), {
       isDisposable: false,
       titleAlign: 'center',
-      title: new Text( KeplersLawsStrings.a11y.extraOrbitalInformationStringProperty, { font: new PhetFont( 32 ) } )
+      title: new Text( KeplersLawsStrings.moreOrbitalDataStringProperty, { font: new PhetFont( 32 ) } )
     } );
   }
 }

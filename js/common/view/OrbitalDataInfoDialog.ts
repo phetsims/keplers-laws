@@ -24,7 +24,7 @@ export default class OrbitalDataInfoDialog extends Dialog {
     const options: DialogOptions = {
       isDisposable: false,
       titleAlign: 'center',
-      title: new Text( KeplersLawsStrings.a11y.orbitalInformationStringProperty, {
+      title: new Text( KeplersLawsStrings.orbitalDataStringProperty, {
         font: new PhetFont( 32 ),
         maxWidth: 800
       } )
