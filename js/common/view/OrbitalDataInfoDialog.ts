@@ -33,6 +33,8 @@ export default class OrbitalDataInfoDialog extends Dialog {
       align: 'left',
       spacing: 15,
       children: [
+
+        // Semi-major axis ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
@@ -40,6 +42,8 @@ export default class OrbitalDataInfoDialog extends Dialog {
             new RichText( KeplersLawsStrings.infoDialog.semiMajorAxisStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
           ]
         } ),
+
+        // Semi-minor axis ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
@@ -47,6 +51,8 @@ export default class OrbitalDataInfoDialog extends Dialog {
             new RichText( KeplersLawsStrings.infoDialog.semiMinorAxisStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
           ]
         } ),
+
+        // Focal distance ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
           children: [
