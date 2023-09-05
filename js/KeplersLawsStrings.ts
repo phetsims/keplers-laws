@@ -45,27 +45,18 @@ type StringsType = {
   };
   'units': {
     'AUStringProperty': LocalizedStringProperty;
-    'AU2StringProperty': LocalizedStringProperty;
     'yearsStringProperty': LocalizedStringProperty;
     'kmsStringProperty': LocalizedStringProperty;
   };
   'symbol': {
     'aStringProperty': LocalizedStringProperty;
-    'a2StringProperty': LocalizedStringProperty;
-    'a3StringProperty': LocalizedStringProperty;
     'bStringProperty': LocalizedStringProperty;
     'cStringProperty': LocalizedStringProperty;
-    'TStringProperty': LocalizedStringProperty;
-    'T2StringProperty': LocalizedStringProperty;
-    'T3StringProperty': LocalizedStringProperty;
+    'dStringProperty': LocalizedStringProperty;
+    'rStringProperty': LocalizedStringProperty;
     'RStringProperty': LocalizedStringProperty;
-    'positionMagnitudeStringProperty': LocalizedStringProperty;
-    'velocityMagnitudeStringProperty': LocalizedStringProperty;
-    'd1StringProperty': LocalizedStringProperty;
-    'd2StringProperty': LocalizedStringProperty;
-    'distanceAngleStringProperty': LocalizedStringProperty;
-    'velocityAngleStringProperty': LocalizedStringProperty;
-    'rvAngleStringProperty': LocalizedStringProperty;
+    'TStringProperty': LocalizedStringProperty;
+    'vStringProperty': LocalizedStringProperty;
   };
   'pattern': {
     'valueUnitsStringProperty': LocalizedStringProperty;

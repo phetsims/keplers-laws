@@ -27,6 +27,7 @@ import MoreOrbitalDataInfoDialog from './MoreOrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 
 export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
@@ -74,27 +75,27 @@ export default class MoreOrbitalDataPanel extends Panel {
       align: 'left',
       children: [
         createCustomEquation(
-          KeplersLawsStrings.symbol.positionMagnitudeStringProperty,
+          KeplersLawsDerivedStrings.rMagnitudeStringProperty,
           positionMagnitudeStringProperty,
           KeplersLawsColors.distancesColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbol.distanceAngleStringProperty,
+          KeplersLawsDerivedStrings.rAngleStringProperty,
           distanceAngleStringProperty,
           KeplersLawsColors.distancesColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbol.velocityMagnitudeStringProperty,
+          KeplersLawsDerivedStrings.vMagnitudeStringProperty,
           velocityMagnitudeStringProperty,
           KeplersLawsColors.velocityColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbol.velocityAngleStringProperty,
+          KeplersLawsDerivedStrings.vAngleStringProperty,
           velocityAngleStringProperty,
           KeplersLawsColors.velocityColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbol.rvAngleStringProperty,
+          KeplersLawsDerivedStrings.rvAngleStringProperty,
           rvAngleStringProperty,
           KeplersLawsColors.foregroundProperty
         )

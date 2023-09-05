@@ -25,6 +25,7 @@ import ThirdLawGraph from './ThirdLawGraph.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -53,18 +54,17 @@ export default class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel ) {
 
     const titleStringProperty = new DerivedProperty( [
-      KeplersLawsStrings.graph.titleStringProperty,
-      model.selectedAxisPowerProperty,
-      model.selectedPeriodPowerProperty
-    ], ( stringPattern, axisPower, periodPower ) => {
-      const axisString = axisPower === 1 ? '' : `<sup>${axisPower}</sup>`;
-      const periodString = periodPower === 1 ? '' : `<sup>${periodPower}</sup>`;
-
-      return StringUtils.fillIn( stringPattern, {
-        axisPower: axisString,
-        periodPower: periodString
-      } );
-    } );
+        KeplersLawsStrings.graph.titleStringProperty,
+        KeplersLawsStrings.symbol.aStringProperty,
+        KeplersLawsStrings.symbol.TStringProperty,
+        model.selectedAxisPowerProperty,
+        model.selectedPeriodPowerProperty
+      ], ( stringPattern, aString, TString, axisPower, periodPower ) =>
+        StringUtils.fillIn( stringPattern, {
+          period: ( periodPower === 1 ) ? TString : `${TString}<sup>${periodPower}</sup>`,
+          axis: ( axisPower === 1 ) ? aString : `${aString}<sup>${axisPower}</sup>`
+        } )
+    );
 
     const options = combineOptions<ThirdLawAccordionBoxOptions>( {
       titleNode: new RichText( titleStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
@@ -96,13 +96,13 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbol.T2StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsDerivedStrings.T2StringProperty,
+          createNode: () => new RichText( KeplersLawsDerivedStrings.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbol.T3StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsDerivedStrings.T3StringProperty,
+          createNode: () => new RichText( KeplersLawsDerivedStrings.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {
@@ -121,13 +121,13 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbol.a2StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsDerivedStrings.a2StringProperty,
+          createNode: () => new RichText( KeplersLawsDerivedStrings.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbol.a3StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsDerivedStrings.a3StringProperty,
+          createNode: () => new RichText( KeplersLawsDerivedStrings.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {

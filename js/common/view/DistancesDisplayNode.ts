@@ -25,6 +25,7 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 
 const FONT = new PhetFont( 24 );
 
@@ -77,13 +78,13 @@ export default class DistancesDisplayNode extends VBox {
     const d1StringProperty = new DerivedProperty( [
       this.orbit.isCircularProperty,
       KeplersLawsStrings.symbol.RStringProperty,
-      KeplersLawsStrings.symbol.d1StringProperty
+      KeplersLawsDerivedStrings.d1StringProperty
     ], ( orbitIsCircular, radiusString, distance1String ) =>
       orbitIsCircular ? radiusString : distance1String );
     const d2StringProperty = new DerivedProperty( [
       this.orbit.isCircularProperty,
       KeplersLawsStrings.symbol.RStringProperty,
-      KeplersLawsStrings.symbol.d2StringProperty
+      KeplersLawsDerivedStrings.d2StringProperty
     ], ( orbitIsCircular, radiusString, distance2String ) =>
       orbitIsCircular ? radiusString : distance2String );
     const d1LabelNode = new RichText( d1StringProperty, DISTANCE_LABEL_OPTIONS );
@@ -151,8 +152,8 @@ export default class DistancesDisplayNode extends VBox {
 
     Multilink.multilink( [
       KeplersLawsStrings.symbol.RStringProperty,
-      KeplersLawsStrings.symbol.d1StringProperty,
-      KeplersLawsStrings.symbol.d2StringProperty,
+      KeplersLawsDerivedStrings.d1StringProperty,
+      KeplersLawsDerivedStrings.d2StringProperty,
       model.zoomProperty
     ], updateDisplay );
 

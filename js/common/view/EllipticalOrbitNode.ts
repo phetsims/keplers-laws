@@ -29,6 +29,7 @@ import PeriodTrackerNode from './PeriodTrackerNode.js';
 import OrbitalSound from './OrbitalSound.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
@@ -113,8 +114,8 @@ export default class EllipticalOrbitNode extends Path {
       fill: KeplersLawsColors.distancesColorProperty,
       maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
     } );
-    const stringLabelNode1 = new RichText( KeplersLawsStrings.symbol.d1StringProperty, stringLabelOptions );
-    const stringLabelNode2 = new RichText( KeplersLawsStrings.symbol.d2StringProperty, stringLabelOptions );
+    const stringLabelNode1 = new RichText( KeplersLawsDerivedStrings.d1StringProperty, stringLabelOptions );
+    const stringLabelNode2 = new RichText( KeplersLawsDerivedStrings.d2StringProperty, stringLabelOptions );
     const radiusLabelNode = new Text( KeplersLawsStrings.symbol.RStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         visibleProperty: new DerivedProperty( [ model.stringVisibleProperty, model.engine.eccentricityProperty ],
@@ -216,7 +217,7 @@ export default class EllipticalOrbitNode extends Path {
         numberFormatter: ( value: number ) => {
           return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
             value: Utils.toFixed( value, 2 ),
-            units: KeplersLawsStrings.units.AU2StringProperty
+            units: KeplersLawsDerivedStrings.AU2StringProperty
           } );
         }
       } ) );
@@ -460,10 +461,10 @@ export default class EllipticalOrbitNode extends Path {
         KeplersLawsStrings.symbol.aStringProperty,
         KeplersLawsStrings.symbol.bStringProperty,
         KeplersLawsStrings.symbol.cStringProperty,
-        KeplersLawsStrings.symbol.d1StringProperty,
-        KeplersLawsStrings.symbol.d2StringProperty,
+        KeplersLawsDerivedStrings.d1StringProperty,
+        KeplersLawsDerivedStrings.d2StringProperty,
         KeplersLawsStrings.symbol.RStringProperty,
-        KeplersLawsStrings.units.AU2StringProperty,
+        KeplersLawsDerivedStrings.AU2StringProperty,
         KeplersLawsStrings.pattern.valueUnitsStringProperty,
         KeplersLawsStrings.units.yearsStringProperty
       ],
