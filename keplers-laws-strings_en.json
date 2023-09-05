@@ -95,9 +95,6 @@
   "units.kms": {
     "value": "km/s"
   },
-  "units.degrees": {
-    "value": "°"
-  },
   "symbols.a": {
     "value": "a"
   },

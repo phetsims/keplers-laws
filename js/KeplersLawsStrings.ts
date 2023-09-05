@@ -48,7 +48,6 @@ type StringsType = {
     'AU2StringProperty': LocalizedStringProperty;
     'yearsStringProperty': LocalizedStringProperty;
     'kmsStringProperty': LocalizedStringProperty;
-    'degreesStringProperty': LocalizedStringProperty;
   };
   'symbols': {
     'aStringProperty': LocalizedStringProperty;

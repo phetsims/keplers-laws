@@ -27,6 +27,7 @@ import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import InfoDialogMoreData from './InfoDialogMoreData.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 
 export default class FirstLawMoreDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
@@ -49,13 +50,13 @@ export default class FirstLawMoreDataPanel extends Panel {
       } )
     } );
     const distanceAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: KeplersLawsStrings.units.degreesStringProperty,
+      units: MathSymbols.DEGREES,
       value: new DerivedProperty( [ model.planet.positionProperty ], position => {
         return Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
       } )
     } );
     const velocityAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: KeplersLawsStrings.units.degreesStringProperty,
+      units: MathSymbols.DEGREES,
       value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
       } )
@@ -63,7 +64,7 @@ export default class FirstLawMoreDataPanel extends Panel {
 
     // rv angle is the angle from R to V
     const rvAngleStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
-      units: KeplersLawsStrings.units.degreesStringProperty,
+      units: MathSymbols.DEGREES,
       value: new DerivedProperty( [ model.planet.positionProperty, model.planet.velocityProperty ], ( position, velocity ) => {
         return Utils.toFixed( Utils.toDegrees( velocity.angle - position.angle ), 2 );
       } )
