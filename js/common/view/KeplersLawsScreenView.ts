@@ -318,6 +318,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
             stopwatchReleaseClip.play();
           }
         },
+        resetButtonSoundPlayer: stopwatchReleaseClip,
         numberDisplayOptions: {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
             showAsMinutesAndSeconds: false,
