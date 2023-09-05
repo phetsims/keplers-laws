@@ -56,9 +56,6 @@
   "period": {
     "value": "Period"
   },
-  "eraser": {
-    "value": "Eraser"
-  },
   "periodDivision": {
     "value": "Period Divisions"
   },
@@ -210,6 +207,9 @@
     "value": "Display information about the planet's position and velocity vectors in the First Law Screen."
   },
   "a11y": {
+    "eraser": {
+      "value": "Eraser"
+    },
     "targetOrbitSelector": {
       "value": "Target orbit selector"
     },

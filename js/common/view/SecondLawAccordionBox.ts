@@ -92,7 +92,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
       listener: () => model.engine.resetOrbitalAreas( true ),
       centerX: -labelDistance,
       centerY: labelDistance,
-      accessibleName: KeplersLawsStrings.eraserStringProperty,
+      accessibleName: KeplersLawsStrings.a11y.eraserStringProperty,
       touchAreaXDilation: 10,
       touchAreaYDilation: 10
     } );

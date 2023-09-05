@@ -32,7 +32,6 @@ type StringsType = {
   'starMassStringProperty': LocalizedStringProperty;
   'ourSunStringProperty': LocalizedStringProperty;
   'periodStringProperty': LocalizedStringProperty;
-  'eraserStringProperty': LocalizedStringProperty;
   'periodDivisionStringProperty': LocalizedStringProperty;
   'areaValuesStringProperty': LocalizedStringProperty;
   'timeValuesStringProperty': LocalizedStringProperty;
@@ -102,6 +101,7 @@ type StringsType = {
     }
   };
   'a11y': {
+    'eraserStringProperty': LocalizedStringProperty;
     'targetOrbitSelectorStringProperty': LocalizedStringProperty;
     'measurePeriodStringProperty': LocalizedStringProperty;
     'restartMeasurementStringProperty': LocalizedStringProperty;
