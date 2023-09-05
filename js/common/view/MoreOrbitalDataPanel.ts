@@ -23,7 +23,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import InfoDialogMoreData from './InfoDialogMoreData.js';
+import MoreOrbitalDataInfoDialog from './MoreOrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
@@ -102,7 +102,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     } );
 
     // Info button and associated dialog
-    const infoDialog = new InfoDialogMoreData();
+    const infoDialog = new MoreOrbitalDataInfoDialog();
     const infoButton = new InfoButton( {
       accessibleName: KeplersLawsStrings.a11y.extraInfoButtonStringProperty,
       scale: 0.5,

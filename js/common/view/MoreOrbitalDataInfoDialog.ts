@@ -16,7 +16,7 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
-export default class InfoDialogMoreData extends Dialog {
+export default class MoreOrbitalDataInfoDialog extends Dialog {
   public constructor() {
 
     const infoDialogTextOptions: RichTextOptions = {
@@ -64,4 +64,4 @@ export default class InfoDialogMoreData extends Dialog {
   }
 }
 
-keplersLaws.register( 'InfoDialogMoreData', InfoDialogMoreData );
+keplersLaws.register( 'InfoDialogMoreData', MoreOrbitalDataInfoDialog );

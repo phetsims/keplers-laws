@@ -17,7 +17,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 // horizontal spacing between images and text
 const IMAGE_TEXT_SPACING = 10;
 
-export default class InfoDialog extends Dialog {
+export default class OrbitalDataInfoDialog extends Dialog {
 
   public constructor() {
     
@@ -68,4 +68,4 @@ export default class InfoDialog extends Dialog {
   }
 }
 
-keplersLaws.register( 'InfoDialog', InfoDialog );
+keplersLaws.register( 'InfoDialog', OrbitalDataInfoDialog );

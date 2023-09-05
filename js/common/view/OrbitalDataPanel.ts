@@ -19,7 +19,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import InfoDialog from './InfoDialog.js';
+import OrbitalDataInfoDialog from './OrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -87,7 +87,7 @@ export default class OrbitalDataPanel extends Panel {
     } );
 
     // Info button and associated dialog
-    const infoDialog = new InfoDialog();
+    const infoDialog = new OrbitalDataInfoDialog();
     const infoButton = new InfoButton( {
       accessibleName: KeplersLawsStrings.a11y.infoButtonStringProperty,
       scale: 0.5,
