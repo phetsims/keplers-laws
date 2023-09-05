@@ -210,12 +210,6 @@
     "value": "Display information about the planet's position and velocity vectors in the First Law Screen."
   },
   "a11y": {
-    "decreaseDivisions": {
-      "value": "Decrease divisions"
-    },
-    "increaseDivisions": {
-      "value": "Increase divisions"
-    },
     "targetOrbitSelector": {
       "value": "Target orbit selector"
     },

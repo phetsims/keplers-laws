@@ -102,8 +102,6 @@ type StringsType = {
     }
   };
   'a11y': {
-    'decreaseDivisionsStringProperty': LocalizedStringProperty;
-    'increaseDivisionsStringProperty': LocalizedStringProperty;
     'targetOrbitSelectorStringProperty': LocalizedStringProperty;
     'measurePeriodStringProperty': LocalizedStringProperty;
     'restartMeasurementStringProperty': LocalizedStringProperty;
