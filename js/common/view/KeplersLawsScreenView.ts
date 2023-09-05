@@ -33,6 +33,8 @@ import soundManager from '../../../../tambo/js/soundManager.js';
 import Success_mp3 from '../../../sounds/Success_mp3.js';
 import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
 import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
+import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
+import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
@@ -293,11 +295,29 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       timeControlNode.bottom = this.layoutBounds.bottom - SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN;
     } );
 
+    const stopwatchGrabClip = new SoundClip( Grab_Sound_mp3 );
+    const stopwatchReleaseClip = new SoundClip( Release_Sound_mp3 );
+
+    soundManager.addSoundGenerator( stopwatchGrabClip, {
+      associatedViewNode: this
+    } );
+    soundManager.addSoundGenerator( stopwatchReleaseClip, {
+      associatedViewNode: this
+    } );
+
     model.stopwatch.positionProperty.value = new Vector2( this.resetAllButton.left - 200, timeControlNode.bottom - 75 );
     const stopwatchNode = new StopwatchNode(
       model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty,
         visibleProperty: model.stopwatchVisibleProperty,
+        dragListenerOptions: {
+          start: () => {
+            stopwatchGrabClip.play();
+          },
+          end: () => {
+            stopwatchReleaseClip.play();
+          }
+        },
         numberDisplayOptions: {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
             showAsMinutesAndSeconds: false,
