@@ -10,15 +10,15 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import keplersLaws from '../../keplersLaws.js';
 import EccentricityPanel from './EccentricityPanel.js';
-import FirstLawValuesPanel from './FirstLawValuesPanel.js';
-import FirstLawMoreDataPanel from './FirstLawMoreDataPanel.js';
+import OrbitalDataPanel from './OrbitalDataPanel.js';
+import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
 
     const eccentricityPanel = new EccentricityPanel( model );
-    const valuesPanel = new FirstLawValuesPanel( model );
-    const moreOrbitalDataPanel = new FirstLawMoreDataPanel( model );
+    const valuesPanel = new OrbitalDataPanel( model );
+    const moreOrbitalDataPanel = new MoreOrbitalDataPanel( model );
 
     super( {
       isDisposable: false,

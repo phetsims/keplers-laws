@@ -24,7 +24,7 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
-export default class FirstLawValuesPanel extends Panel {
+export default class OrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
@@ -129,4 +129,4 @@ function createCustomEquation( symbolStringProperty: TReadOnlyProperty<string>, 
   } );
 }
 
-keplersLaws.register( 'FirstLawValuesPanel', FirstLawValuesPanel );
+keplersLaws.register( 'FirstLawValuesPanel', OrbitalDataPanel );
