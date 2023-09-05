@@ -63,14 +63,14 @@ export default class FirstLawValuesPanel extends Panel {
 
         // a =
         createCustomEquation(
-          KeplersLawsStrings.symbols.aStringProperty,
+          KeplersLawsStrings.symbol.aStringProperty,
           semiMajorAxisStringProperty,
           KeplersLawsColors.semiMajorAxisColorProperty
         ),
 
         // b =
         createCustomEquation(
-          KeplersLawsStrings.symbols.bStringProperty,
+          KeplersLawsStrings.symbol.bStringProperty,
           semiMinorAxisStringProperty,
           KeplersLawsColors.semiMinorAxisColorProperty,
           model.semiaxisVisibleProperty
@@ -78,7 +78,7 @@ export default class FirstLawValuesPanel extends Panel {
 
         // c =
         createCustomEquation(
-          KeplersLawsStrings.symbols.cStringProperty,
+          KeplersLawsStrings.symbol.cStringProperty,
           focalDistanceStringProperty,
           KeplersLawsColors.focalDistanceColorProperty,
           model.eccentricityVisibleProperty

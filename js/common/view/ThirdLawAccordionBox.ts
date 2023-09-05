@@ -91,18 +91,18 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbols.TStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.TStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbols.T2StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.T2StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbols.T3StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.T3StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {
@@ -116,18 +116,18 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbols.aStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.aStringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 2,
-          labelContent: KeplersLawsStrings.symbols.a2StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.a2StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         },
         {
           value: 3,
-          labelContent: KeplersLawsStrings.symbols.a3StringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbols.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          labelContent: KeplersLawsStrings.symbol.a3StringProperty,
+          createNode: () => new RichText( KeplersLawsStrings.symbol.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
         }
       ],
       {
@@ -174,9 +174,9 @@ class EquationNode extends HBox {
 
     // T / a
     const fractionLeft = new FractionNode(
-      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.TStringProperty,
+      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbol.TStringProperty,
         model.selectedPeriodPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS ),
-      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbols.aStringProperty,
+      new RichText( ThirdLawTextUtils.createPowerStringProperty( KeplersLawsStrings.symbol.aStringProperty,
         model.selectedAxisPowerProperty, new TinyProperty<boolean>( true ) ), EQUATION_TEXT_OPTIONS )
     );
 

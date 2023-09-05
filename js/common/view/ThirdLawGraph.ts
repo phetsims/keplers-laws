@@ -102,14 +102,14 @@ export default class ThirdLawGraph extends Node {
 
     // a
     const xAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
-      KeplersLawsStrings.symbols.aStringProperty,
+      KeplersLawsStrings.symbol.aStringProperty,
       model.selectedAxisPowerProperty,
       new TinyProperty<boolean>( true )
     );
 
     // T
     const yAxisLabelStringProperty = ThirdLawTextUtils.createPowerStringProperty(
-      KeplersLawsStrings.symbols.TStringProperty,
+      KeplersLawsStrings.symbol.TStringProperty,
       model.selectedPeriodPowerProperty,
       new TinyProperty<boolean>( true )
     );

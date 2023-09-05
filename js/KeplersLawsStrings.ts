@@ -49,7 +49,7 @@ type StringsType = {
     'yearsStringProperty': LocalizedStringProperty;
     'kmsStringProperty': LocalizedStringProperty;
   };
-  'symbols': {
+  'symbol': {
     'aStringProperty': LocalizedStringProperty;
     'a2StringProperty': LocalizedStringProperty;
     'a3StringProperty': LocalizedStringProperty;

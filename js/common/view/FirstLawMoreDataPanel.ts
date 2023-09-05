@@ -75,27 +75,27 @@ export default class FirstLawMoreDataPanel extends Panel {
       align: 'left',
       children: [
         createCustomEquation(
-          KeplersLawsStrings.symbols.positionMagnitudeStringProperty,
+          KeplersLawsStrings.symbol.positionMagnitudeStringProperty,
           positionMagnitudeStringProperty,
           KeplersLawsColors.distancesColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbols.distanceAngleStringProperty,
+          KeplersLawsStrings.symbol.distanceAngleStringProperty,
           distanceAngleStringProperty,
           KeplersLawsColors.distancesColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbols.velocityMagnitudeStringProperty,
+          KeplersLawsStrings.symbol.velocityMagnitudeStringProperty,
           velocityMagnitudeStringProperty,
           KeplersLawsColors.velocityColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbols.velocityAngleStringProperty,
+          KeplersLawsStrings.symbol.velocityAngleStringProperty,
           velocityAngleStringProperty,
           KeplersLawsColors.velocityColorProperty
         ),
         createCustomEquation(
-          KeplersLawsStrings.symbols.rvAngleStringProperty,
+          KeplersLawsStrings.symbol.rvAngleStringProperty,
           rvAngleStringProperty,
           KeplersLawsColors.foregroundProperty
         )

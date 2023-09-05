@@ -45,12 +45,12 @@ export default class EccentricityPanel extends Panel {
           } ) ),
         new Text( ' = ', EQUATION_TEXT_OPTIONS ),
         new FractionNode(
-          new Text( KeplersLawsStrings.symbols.cStringProperty,
+          new Text( KeplersLawsStrings.symbol.cStringProperty,
             combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
               fill: KeplersLawsColors.focalDistanceColorProperty,
               maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
             } ) ),
-          new Text( KeplersLawsStrings.symbols.aStringProperty,
+          new Text( KeplersLawsStrings.symbol.aStringProperty,
             combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
               fill: KeplersLawsColors.semiMajorAxisColorProperty,
               maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
