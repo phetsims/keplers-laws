@@ -27,7 +27,7 @@ export default class OrbitalDataInfoDialog extends Dialog {
       titleAlign: 'center',
       title: new Text( KeplersLawsStrings.infoDialog.orbitalDataStringProperty, {
         font: new PhetFont( 32 ),
-        maxWidth: 800
+        maxWidth: 600
       } )
     };
 
