@@ -1,6 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
+
 /**
- * Contents of the Information Dialog in First Law Screen
+ * OrbitalDataInfoDialog is a dialog that displays info related to OrbitalDataPanel. It is relevant for the First Law.
  *
  * @author Agustín Vallejo
  */
