@@ -152,10 +152,10 @@
   "orbit.halley": {
     "value": "Halley"
   },
-  "orbitalData": {
+  "infoDialog.orbitalData": {
     "value": "Orbital Data"
   },
-  "moreOrbitalData": {
+  "infoDialog.moreOrbitalData": {
     "value": "More Orbital Data"
   },
   "infoDialog.semiMajorAxis": {

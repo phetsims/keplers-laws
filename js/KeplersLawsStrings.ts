@@ -76,9 +76,9 @@ type StringsType = {
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
   };
-  'orbitalDataStringProperty': LocalizedStringProperty;
-  'moreOrbitalDataStringProperty': LocalizedStringProperty;
   'infoDialog': {
+    'orbitalDataStringProperty': LocalizedStringProperty;
+    'moreOrbitalDataStringProperty': LocalizedStringProperty;
     'semiMajorAxisStringProperty': LocalizedStringProperty;
     'semiMinorAxisStringProperty': LocalizedStringProperty;
     'focalDistanceStringProperty': LocalizedStringProperty;
