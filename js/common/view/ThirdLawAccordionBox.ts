@@ -13,7 +13,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
@@ -26,6 +26,7 @@ import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -66,10 +67,17 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         } )
     );
 
+    const titleNode = new AlignBox( new RichText( titleStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
+      maxWidth: 200
+    } ) ), {
+      // Keeps the size effectively constant, so that the accordion box does not resize as the equation change.
+      // Value determined empirically. See https://github.com/phetsims/keplers-laws/issues/151
+      preferredSize: new Dimension2( 180, 25 ),
+      yAlign: 'bottom'
+    } );
+
     const options = combineOptions<ThirdLawAccordionBoxOptions>( {
-      titleNode: new RichText( titleStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
-        maxWidth: 200
-      } ) ),
+      titleNode: titleNode,
       accessibleName: titleStringProperty,
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
@@ -77,7 +85,12 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
 
     // Equation at the top of the accordion box: T/a = ...
-    const equationNode = new EquationNode( model );
+    const equationNode = new AlignBox( new EquationNode( model ), {
+      // Keeps the size effectively constant, so that the accordion box does not resize as the equation change.
+      // Value determined empirically. See https://github.com/phetsims/keplers-laws/issues/151
+      preferredSize: new Dimension2( 260, 52 ),
+      xAlign: 'left'
+    } );
 
     // Graph of a vs T
     const graphNode = new ThirdLawGraph( model, model.engine, {

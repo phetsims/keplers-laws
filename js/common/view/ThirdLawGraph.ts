@@ -8,7 +8,7 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import { Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -25,6 +25,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbits from '../model/TargetOrbits.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const AXIS_LABEL_MAX_WIDTH = 20;
@@ -118,12 +119,20 @@ export default class ThirdLawGraph extends Node {
     const axisLabelOptions = combineOptions<RichTextOptions>( {}, KeplersLawsConstants.AXIS_LABEL_OPTIONS, {
       maxWidth: AXIS_LABEL_MAX_WIDTH
     } );
-    const xAxisLabel = new RichText( xAxisLabelStringProperty, axisLabelOptions );
+    const xAxisLabel = new AlignBox( new RichText( xAxisLabelStringProperty, axisLabelOptions ), {
+      // Keeps the size effectively constant, so that ThirdLawAccordionBox does not resize as the equation change.
+      // Value determined empirically. See https://github.com/phetsims/keplers-laws/issues/151
+      preferredSize: new Dimension2( 25, 20 )
+    } );
     xAxisLabel.boundsProperty.link( () => {
       xAxisLabel.centerX = axisLength / 2;
       xAxisLabel.top = 5;
     } );
-    const yAxisLabel = new RichText( yAxisLabelStringProperty, axisLabelOptions );
+    const yAxisLabel = new AlignBox( new RichText( yAxisLabelStringProperty, axisLabelOptions ), {
+      // Keeps the size effectively constant, so that ThirdLawAccordionBox does not resize as the equation change.
+      // Value determined empirically. See https://github.com/phetsims/keplers-laws/issues/151
+      preferredSize: new Dimension2( 17, 20 )
+    } );
     yAxisLabel.boundsProperty.link( () => {
       yAxisLabel.right = -8;
       yAxisLabel.centerY = -axisLength / 2;
