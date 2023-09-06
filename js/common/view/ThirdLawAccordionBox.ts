@@ -13,7 +13,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { AlignBox, GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { Node, AlignBox, GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
@@ -37,14 +37,12 @@ const RADIO_BUTTON_TEXT_OPTIONS = {
 
 const UNITS_TEXT_OPTIONS = {
   font: new PhetFont( 12 ),
-  fill: SolarSystemCommonColors.foregroundProperty,
-  maxWidth: 35
+  fill: SolarSystemCommonColors.foregroundProperty
 };
 
 const EQUATION_TEXT_OPTIONS = {
   font: new PhetFont( 16 ),
-  fill: SolarSystemCommonColors.foregroundProperty,
-  maxWidth: 60
+  fill: SolarSystemCommonColors.foregroundProperty
 };
 
 type SelfOptions = EmptySelfOptions;
@@ -229,7 +227,7 @@ class EquationNode extends HBox {
       ), {
         font: new PhetFont( { weight: 'bold', size: 25 } ),
         fill: SolarSystemCommonColors.foregroundProperty,
-        maxWidth: 60
+        centerY: 0
       } );
     model.correctPowersSelectedProperty.link( correct => {
       decimalText.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
@@ -237,18 +235,24 @@ class EquationNode extends HBox {
 
     super( {
       spacing: 5,
-      layoutOptions: {
-        align: 'left'
-      },
+      align: 'origin',
+      maxWidth: 260,
       children: [
         fractionLeft,
-        new Text( '=', EQUATION_TEXT_OPTIONS ),
+        new Node( {
+          children: [ new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS,
+            { centerY: 0 } ) ) ]
+        } ),
         fractionRight,
         createUnitsFraction(),
-        new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
-          visibleProperty: model.engine.allowedOrbitProperty
-        } ) ),
-        decimalText,
+        new Node( {
+          children: [ new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
+            visibleProperty: model.engine.allowedOrbitProperty, centerY: 0
+          } ) ) ]
+        } ),
+        new Node( {
+          children: [ decimalText ]
+        } ),
         createUnitsFraction()
       ]
     } );
