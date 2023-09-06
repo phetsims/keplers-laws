@@ -219,7 +219,7 @@ class EquationNode extends HBox {
     };
 
     // The value in decimal format, e.g. 1.24
-    const decimalText = new RichText(
+    const resultTextNode = new RichText(
       new DerivedProperty( [ model.poweredSemiMajorAxisProperty, model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
         ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
           return allowedOrbit ? Utils.toFixed( poweredPeriod / poweredSemiMajorAxis, 2 ) : '';
@@ -230,8 +230,14 @@ class EquationNode extends HBox {
         centerY: 0
       } );
     model.correctPowersSelectedProperty.link( correct => {
-      decimalText.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
+      resultTextNode.fill = correct ? '#5c0' : SolarSystemCommonColors.foregroundProperty;
     } );
+
+    const createEquationTextNode = ( TextNode: Text | RichText ) => {
+      return new Node( {
+        children: [ TextNode ]
+      } );
+    };
 
     super( {
       spacing: 5,
@@ -239,20 +245,14 @@ class EquationNode extends HBox {
       maxWidth: 260,
       children: [
         fractionLeft,
-        new Node( {
-          children: [ new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS,
-            { centerY: 0 } ) ) ]
-        } ),
+        createEquationTextNode( new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS,
+            { centerY: 0 } ) ) ),
         fractionRight,
         createUnitsFraction(),
-        new Node( {
-          children: [ new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
+        createEquationTextNode( new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
             visibleProperty: model.engine.allowedOrbitProperty, centerY: 0
-          } ) ) ]
-        } ),
-        new Node( {
-          children: [ decimalText ]
-        } ),
+          } ) ) ),
+        createEquationTextNode( resultTextNode ),
         createUnitsFraction()
       ]
     } );
