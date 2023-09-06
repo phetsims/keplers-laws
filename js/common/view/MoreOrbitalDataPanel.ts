@@ -60,21 +60,46 @@ export default class MoreOrbitalDataPanel extends Panel {
     } );
 
     // rv angle is the angle from R to V
-    const rvAngleStringProperty = new DerivedStringProperty( [ model.planet.positionProperty, model.planet.velocityProperty ],
-      ( position, velocity ) => {
+    const rvAngleStringProperty = new DerivedStringProperty( [ model.planet.positionProperty, model.planet.velocityProperty, model.engine.eccentricityProperty ],
+      ( position, velocity, eccentricity ) => {
+        if ( eccentricity === 0 ) {
+          return `${90.00}${MathSymbols.DEGREES}`;
+        }
         const value = Utils.toFixed( Utils.toDegrees( velocity.angle - position.angle ), 2 );
         return `${value}${MathSymbols.DEGREES}`;
       } );
+
+    const distanceEquivalentSymbolStringProperty = new DerivedStringProperty(
+      [ KeplersLawsDerivedStrings.d1StringProperty, KeplersLawsStrings.symbol.RStringProperty, model.alwaysCircularProperty ], ( d1, R, alwaysCircular ) => {
+        return alwaysCircular ? R : d1;
+      }
+    );
 
     // Extra information: distance and velocity vector values
     const moreInfoNode = new VBox( {
       align: 'left',
       children: [
-        createCustomEquation(
-          KeplersLawsDerivedStrings.rMagnitudeStringProperty,
-          positionMagnitudeStringProperty,
-          KeplersLawsColors.distancesColorProperty
-        ),
+        // First item not using createCustomEquation because it's a special case of |r|=d=value
+        new HBox( {
+          spacing: 2,
+          children: [
+            new RichText( KeplersLawsDerivedStrings.rMagnitudeStringProperty, {
+              fill: KeplersLawsColors.distancesColorProperty,
+              font: new PhetFont( { size: 18, weight: 'bold' } ),
+              maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
+            } ),
+            new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+            new RichText( distanceEquivalentSymbolStringProperty, {
+              fill: KeplersLawsColors.distancesColorProperty,
+              font: new PhetFont( { size: 18, weight: 'bold' } ),
+              maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
+            } ),
+            new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
+            new RichText( positionMagnitudeStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+              maxWidth: KeplersLawsConstants.VALUE_MAX_WIDTH
+            } ) )
+          ]
+        } ),
         createCustomEquation(
           KeplersLawsDerivedStrings.rAngleStringProperty,
           distanceAngleStringProperty,
