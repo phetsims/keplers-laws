@@ -1,11 +1,11 @@
 {
-  "comment": "# keplers-laws 1.1.0-dev.4 Mon Aug 28 2023 14:02:54 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.1.0-dev.5 Thu Sep 07 2023 18:32:38 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "341a1ea19c78e594bf5e6498ab8be75450da85c2",
     "branch": "main"
   },
   "axon": {
-    "sha": "4f571cbc738bdcba5f9f49050c3f2a1eddde9110",
+    "sha": "b4844d83ea917c3fd59177f1cde06078768eaaa6",
     "branch": "main"
   },
   "bamboo": {
@@ -17,7 +17,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "dfb884868a0c4e8b3af38b43aa2ee57814a0ad25",
+    "sha": "d690293561ad49a60ef980edc416b12c93d45d6f",
     "branch": "main"
   },
   "dot": {
@@ -25,11 +25,11 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "3c8f2717688ca16889543fd2cc2766c59eec743a",
+    "sha": "821ae95078d8fa39b43a2cd3467e706f6fd577a4",
     "branch": "main"
   },
   "keplers-laws": {
-    "sha": "001a4b767ca39240e680e395e67803cf182351ee",
+    "sha": "c2dd8b73ef74d507d3384bbf02995beeab5ea278",
     "branch": "main"
   },
   "kite": {
@@ -37,11 +37,11 @@
     "branch": "main"
   },
   "my-solar-system": {
-    "sha": "5cad091d7ca9b1ea3b94bdce89c8188a4e5a18b1",
+    "sha": "4248c03aca1030bc26332ee5160802c0a2e44d61",
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "3ef009717117384ffb3482fa2b57670ce5c4868b",
+    "sha": "71498369f6dd5309583d959e5972181c570a364a",
     "branch": "main"
   },
   "phet-core": {
@@ -49,15 +49,15 @@
     "branch": "main"
   },
   "phet-io": {
-    "sha": "d6906d1f55c5d354174841e856acca963040d6f8",
+    "sha": "3f7e556a65ea4f3c4b5703f83c8bc5a9408c42fa",
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "826ec419868d57c5b8a2485c9e1ab0a1e6eaac45",
+    "sha": "9fd7f0b32f6d516ffaa6d0f912e8eb77da9a78d1",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "bb40fe485d6471d8f559fa3379f284968fe8d244",
+    "sha": "c13f023e02d44d26b65a206f378189937998c3a9",
     "branch": "main"
   },
   "phetcommon": {
@@ -65,7 +65,7 @@
     "branch": "main"
   },
   "phetmarks": {
-    "sha": "1b01d5fa2825b2e250d9eca6cceb98d626a423b0",
+    "sha": "83d9016ee5fb8443350448634ca293308cb7ada0",
     "branch": "main"
   },
   "query-string-machine": {
@@ -77,23 +77,23 @@
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "5bc641bb82c2a95841f923ab4ecf44f5d1c4eaa4",
+    "sha": "eb84decfa52264e97ebebb95d9a2a91414a11316",
     "branch": "main"
   },
   "sherpa": {
-    "sha": "1223db396fd736c9b06ef48bea361f52b597792f",
+    "sha": "8f5019d1dba6296d2dad06dc6261545519745f3f",
     "branch": "main"
   },
   "solar-system-common": {
-    "sha": "3da67ecc0a88b9242a3724852774c15db014fc78",
+    "sha": "fafb230fa8615174142c43cdef70340a4f29a589",
     "branch": "main"
   },
   "studio": {
-    "sha": "b28fbbf744437836771281f0b850933d50a3aaf7",
+    "sha": "f85e412625adbd7e2c1eb5abcde95d6de18b5a39",
     "branch": "main"
   },
   "sun": {
-    "sha": "036005add1db1fe57725e4e98dd469d1a8d97e35",
+    "sha": "0e3b6168256cce314867600eb099305a90e89c08",
     "branch": "main"
   },
   "tambo": {
@@ -101,11 +101,11 @@
     "branch": "main"
   },
   "tandem": {
-    "sha": "10b19cd8579375a495507000287d041bd2c4395f",
+    "sha": "89d6062621e3953727a12b7c667d87e4e4ee5c74",
     "branch": "main"
   },
   "twixt": {
-    "sha": "0cf85dfebab4ab2170b6b23ba6a89c16148e5cf0",
+    "sha": "01565e031c08e72c685d2887875dd866daa99cda",
     "branch": "main"
   },
   "utterance-queue": {
