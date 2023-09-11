@@ -359,7 +359,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       planetNode,
       draggableVelocityVectorNode,
-      this.periodTimerNode
+      this.periodTimerNode,
+      stopwatchNode
     ]; // decouple traversal order from rendering order
 
 
