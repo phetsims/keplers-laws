@@ -305,7 +305,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       associatedViewNode: this
     } );
 
-    model.stopwatch.positionProperty.value = new Vector2( this.resetAllButton.left - 200, timeControlNode.bottom - 75 );
+    model.stopwatch.positionProperty.setInitialValue( new Vector2( this.resetAllButton.left - 200, timeControlNode.bottom - 75 ) );
+    model.stopwatch.positionProperty.reset();
     const stopwatchNode = new StopwatchNode(
       model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty,

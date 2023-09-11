@@ -38,7 +38,7 @@ const UPSCALE = 1.3;
 
 export default class SecondLawAccordionBox extends AccordionBox {
 
-  public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor'> ) {
+  public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor' | 'secondLawAccordionBoxExpandedProperty'> ) {
 
     const options = combineOptions<AccordionBoxOptions>( {
       isDisposable: false,
@@ -48,7 +48,8 @@ export default class SecondLawAccordionBox extends AccordionBox {
           maxWidth: 200
         } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
-      useExpandedBoundsWhenCollapsed: false
+      useExpandedBoundsWhenCollapsed: false,
+      expandedProperty: model.secondLawAccordionBoxExpandedProperty
     }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {

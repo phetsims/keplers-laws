@@ -85,19 +85,23 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly periapsisVisibleProperty = new BooleanProperty( false );
   public readonly areaValuesVisibleProperty = new BooleanProperty( false );
   public readonly timeValuesVisibleProperty = new BooleanProperty( false );
+  public readonly secondLawAccordionBoxExpandedProperty = new BooleanProperty( true );
   public readonly secondLawVisibilities: BooleanProperty[] = [
     this.apoapsisVisibleProperty,
     this.periapsisVisibleProperty,
     this.areaValuesVisibleProperty,
-    this.timeValuesVisibleProperty
+    this.timeValuesVisibleProperty,
+    this.secondLawAccordionBoxExpandedProperty
   ];
 
   // Third law properties
   public readonly semiMajorAxisVisibleProperty = new BooleanProperty( true );
   public readonly periodVisibleProperty = new BooleanProperty( false );
+  public readonly thirdLawAccordionBoxExpandedProperty = new BooleanProperty( true );
   public readonly thirdLawVisibilities: BooleanProperty[] = [
     this.semiMajorAxisVisibleProperty,
-    this.periodVisibleProperty
+    this.periodVisibleProperty,
+    this.thirdLawAccordionBoxExpandedProperty
   ];
 
   // Graph exponents
@@ -277,9 +281,17 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       } );
     } );
 
-    // This property is the exception as it should be set to true by default
+    // This properties are the exception as they should be set to true by default
     this.semiMajorAxisVisibleProperty.setInitialValue( true );
     this.semiMajorAxisVisibleProperty.value = true;
+
+    this.secondLawAccordionBoxExpandedProperty.setInitialValue( true );
+    this.secondLawAccordionBoxExpandedProperty.value = true;
+
+    this.thirdLawAccordionBoxExpandedProperty.setInitialValue( true );
+    this.thirdLawAccordionBoxExpandedProperty.value = true;
+
+    this.stopwatchVisibleProperty.reset();
   }
 
   public override reset(): void {
@@ -292,6 +304,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.alwaysCircularProperty.reset();
     this.periodTracker.reset();
     this.targetOrbitProperty.reset();
+    this.stopwatch.reset();
 
     this.hardVisibilityReset();
     this.engine.reset();
@@ -322,16 +335,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
    */
   public getAreaColor( area: OrbitalArea ): Color {
     const orbitalAreaColors = KeplersLawsColors.ORBITAL_AREA_COLORS;
-
-    // Easter egg color palette
-    // const orbitalAreaColors = [
-    // '#FFB3BA', // Pastel Red
-    //   '#FFDFB9', // Pastel Orange
-    //   '#FFFFB3', // Pastel Yellow
-    //   '#B5FFB3', // Pastel Green
-    //   '#B3FFFF', // Pastel Blue
-    //   '#D1B3FF'  // Pastel Purple
-    // ];
     const numAreas = this.periodDivisionProperty.value;
     const activeAreaIndex = this.engine.activeAreaIndex;
 

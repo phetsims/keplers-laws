@@ -79,7 +79,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       accessibleName: titleStringProperty,
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
-      useExpandedBoundsWhenCollapsed: false
+      useExpandedBoundsWhenCollapsed: false,
+      expandedProperty: model.thirdLawAccordionBoxExpandedProperty
     }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
 
     // Equation at the top of the accordion box: T/a = ...
