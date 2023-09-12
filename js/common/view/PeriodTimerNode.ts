@@ -25,7 +25,6 @@ import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSy
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
@@ -194,13 +193,6 @@ export default class PeriodTimerNode extends Node {
       } );
     }
 
-    // Position multilink
-    Multilink.multilink(
-      [ periodTimer.positionProperty, modelViewTransformProperty ],
-      ( position, modelViewTransform ) => {
-        this.translation = modelViewTransform.modelToViewPosition( position );
-      } );
-
     const start = () => {
       this.grabClip.play();
     };
@@ -208,9 +200,18 @@ export default class PeriodTimerNode extends Node {
       this.releaseClip.play();
     };
 
+    periodTimer.positionProperty.link( position => {
+        this.translation = position;
+      } );
+
+    const derivedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty, this.localBoundsProperty ], ( dragBounds, localBounds ) => {
+      return dragBounds?.withOffsets( localBounds.left, localBounds.top, -localBounds.right, -localBounds.bottom );
+    } );
+
     const bodyDragListener = new DragListener( {
+      targetNode: this,
       positionProperty: periodTimer.positionProperty,
-      transform: modelViewTransformProperty,
+      dragBoundsProperty: derivedDragBoundsProperty,
       start: start,
       end: end
     } );
@@ -220,6 +221,7 @@ export default class PeriodTimerNode extends Node {
       {
         positionProperty: periodTimer.positionProperty,
         transform: modelViewTransformProperty,
+        dragBoundsProperty: derivedDragBoundsProperty,
         dragVelocity: 450,
         shiftDragVelocity: 100,
         start: start,

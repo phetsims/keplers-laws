@@ -54,7 +54,7 @@ export default class PeriodTracker {
     } );
 
     this.periodTimer = new Stopwatch( {
-      position: new Vector2( -50, 250 ),
+      position: new Vector2( 500, 50 ),
       timePropertyOptions: {
         range: periodRangeProperty
       }
@@ -117,6 +117,7 @@ export default class PeriodTracker {
     this.model.engine.tracingPathProperty.value = false;
     this.model.engine.periodTraceStart = 0;
     this.model.engine.periodTraceEnd = 0;
+    this.periodTimer.positionProperty.reset();
   }
 }
 
