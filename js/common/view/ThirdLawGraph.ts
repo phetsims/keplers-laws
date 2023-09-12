@@ -188,7 +188,6 @@ export default class ThirdLawGraph extends Node {
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
-      const dx = 5; // Threshold for being out of bounds
       let arrowX = maxSemiMajorAxis / 2; // X position of the out of bounds arrow
       let arrowPositionSet = false; // Whether the out of bounds arrow position has been set or is the default
 
@@ -208,17 +207,14 @@ export default class ThirdLawGraph extends Node {
         }
       }
 
-      // a is the semiMajor axis
+      // Draw a line between the minimum and maximum visited axis
       for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
         const pointToDraw = semiMajorAxisToViewPoint( a );
         shape.lineToPoint( pointToDraw );
 
-        if ( minVisitedAxis < maxSemiMajorAxis - dx && !arrowPositionSet ) {
-          if ( !arrowPositionSet && outOfBounds && pointToDraw.y < -axisLength + dx ) {
-            arrowX = a;
-            arrowPositionSet = true;
-          }
-          else if ( !arrowPositionSet && outOfBounds && pointToDraw.x > axisLength - dx ) {
+        // If the point is out of bounds and the arrow position has not been set, set it
+        if ( outOfBounds ) {
+          if ( pointToDraw.x < axisLength && pointToDraw.y > -axisLength ) {
             arrowX = a;
             arrowPositionSet = true;
           }
