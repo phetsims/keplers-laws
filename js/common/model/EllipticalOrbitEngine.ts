@@ -571,6 +571,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.orbitalAreas.forEach( area => {
       area.reset( eraseAreas );
     } );
+    this.calculateOrbitalDivisions( true );
     this.ranEmitter.emit();
   }
 
