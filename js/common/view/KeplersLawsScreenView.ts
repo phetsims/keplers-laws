@@ -360,6 +360,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       planetNode,
       draggableVelocityVectorNode,
       this.periodTimerNode,
+      this.measuringTapeNode,
       stopwatchNode
     ]; // decouple traversal order from rendering order
 
