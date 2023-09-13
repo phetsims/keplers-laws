@@ -148,6 +148,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.sun.massProperty.lazyLink( () => {
       // Pause the sim when the Sun's ( id = 0 ) mass is changed
       this.isPlayingProperty.value = false;
+      this.engine.update();
     } );
 
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
