@@ -72,14 +72,18 @@ export default class EllipticalOrbitEngine extends Engine {
   public readonly body: Body;
   public readonly sunMassProperty: Property<number>;
 
+  // Boolean that keeps track of the engine's state
+  public isRunning = false;
+
   // For changes that require changes in the shape of the orbit
   public readonly changedEmitter = new Emitter();
 
   // For changes that mostly track the body through its orbit
   public readonly ranEmitter = new Emitter();
-  public isRunning = false;
 
+  // For changes that require a reset of the orbit
   public readonly resetEmitter = new Emitter();
+
   public bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
   public orbitalAreas: OrbitalArea[] = [];
@@ -398,13 +402,12 @@ export default class EllipticalOrbitEngine extends Engine {
         orbitalArea.startAngle = startAngle;
         orbitalArea.endAngle = endAngle;
 
-        // Body inside the area
+        // When the sim is running, check if the body is inside an area and slice it accordingly
         if ( startAngle <= bodyAngle && bodyAngle < endAngle && this.isRunning ) {
           orbitalArea.insideProperty.value = true;
           orbitalArea.alreadyEntered = true;
           this.activeAreaIndex = orbitalArea.index;
 
-          // Map opacity from 0 to 1 based on BodyAngle from startAngle to endAngle (inside area)
           if ( this.retrograde ) {
             startAngle = bodyAngle;
           }
@@ -414,13 +417,8 @@ export default class EllipticalOrbitEngine extends Engine {
           orbitalArea.sweptArea = this.calculateSweptArea( startAngle, endAngle );
           orbitalArea.completion = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
         }
-        // OUTSIDE THE AREA
         else {
           orbitalArea.insideProperty.value = false;
-          // Map completion from 1 to 0 based on BodyAngle from startAngle to endAngle (outside area)
-          const completionFalloff = this.meanAnomalyDiff( bodyAngle, startAngle ) / ( TWOPI - angularSection );
-
-          orbitalArea.completion = this.retrograde ? ( 1 - completionFalloff ) : completionFalloff;
         }
 
         // Update orbital area properties
@@ -428,8 +426,11 @@ export default class EllipticalOrbitEngine extends Engine {
           orbitalArea.completion = 0; // Set it to 0 if it hasn't entered yet
         }
         orbitalArea.dotPosition = this.createPolar( nu ); // Position for the dots
+
+        // Position of the area section's start and end
         orbitalArea.startPosition = this.createPolar( startAngle );
         orbitalArea.endPosition = this.createPolar( endAngle );
+
         orbitalArea.active = true;
 
         previousNu = nu;
