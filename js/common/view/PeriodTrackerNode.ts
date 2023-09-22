@@ -46,7 +46,7 @@ export default class PeriodTrackerNode extends Path {
     } );
 
     this.model.engine.changedEmitter.addListener( () => {
-      this.periodTracker.reset();
+      this.periodTracker.softReset();
       this.periodTracker.periodTimer.timeProperty.set( 0 );
       this.periodTracker.periodTimer.isRunningProperty.value = false;
       this.updateShape();
