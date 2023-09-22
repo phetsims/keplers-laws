@@ -6,7 +6,7 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { AlignBox, DragListener, Image, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, DragListener, Image, InteractiveHighlighting, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
@@ -50,7 +50,7 @@ type SelfOptions = {
 
 type PeriodTimerNodeOptions = SelfOptions & NodeOptions;
 
-export default class PeriodTimerNode extends Node {
+export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
   public readonly grabClip: SoundClip;
   public readonly releaseClip: SoundClip;
 
@@ -84,7 +84,9 @@ export default class PeriodTimerNode extends Node {
       measureAccessibleName: KeplersLawsStrings.a11y.measurePeriodStringProperty,
       restartAccessibleName: KeplersLawsStrings.a11y.restartMeasurementStringProperty,
 
-      soundViewNode: null
+      soundViewNode: null,
+      focusable: true,
+      tagName: 'div'
     }, providedOptions );
 
     super( options );
@@ -220,7 +222,6 @@ export default class PeriodTimerNode extends Node {
     const keyboardDragListener = new KeyboardDragListener(
       {
         positionProperty: periodTimer.positionProperty,
-        transform: modelViewTransformProperty,
         dragBoundsProperty: derivedDragBoundsProperty,
         dragVelocity: 450,
         shiftDragVelocity: 100,
