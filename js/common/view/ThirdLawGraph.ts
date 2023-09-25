@@ -188,9 +188,10 @@ export default class ThirdLawGraph extends Node {
       dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
       const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
-      let arrowX = maxSemiMajorAxis / 2; // X position of the out of bounds arrow
-      let arrowPositionSet = false; // Whether the out of bounds arrow position has been set or is the default
+      let arrowX = maxSemiMajorAxis / 2; // X position of the out-of-bounds arrow
+      let arrowPositionSet = false; // Whether the out-of-bounds arrow position has been set or is the default
 
+      // Updates the limits of the graph line if the orbit is not out of bounds
       if ( !outOfBounds ) {
         if ( !model.sun.userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
           if ( orbit.a < minVisitedAxis ) {
@@ -208,15 +209,17 @@ export default class ThirdLawGraph extends Node {
       }
 
       // Draw a line between the minimum and maximum visited axis
-      for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
-        const pointToDraw = semiMajorAxisToViewPoint( a );
-        shape.lineToPoint( pointToDraw );
+      if ( minVisitedAxis !== maxVisitedAxis ) {
+        for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
+          const pointToDraw = semiMajorAxisToViewPoint( a );
+          shape.lineToPoint( pointToDraw );
 
-        // If the point is out of bounds and the arrow position has not been set, set it
-        if ( outOfBounds ) {
-          if ( pointToDraw.x < axisLength && pointToDraw.y > -axisLength ) {
-            arrowX = a;
-            arrowPositionSet = true;
+          // If the point is out of bounds and the arrow position has not been set, set it
+          if ( outOfBounds ) {
+            if ( pointToDraw.x < axisLength && pointToDraw.y > -axisLength ) {
+              arrowX = a;
+              arrowPositionSet = true;
+            }
           }
         }
       }
@@ -237,7 +240,7 @@ export default class ThirdLawGraph extends Node {
       outOfBoundsArrow.visible = outOfBounds;
     };
 
-    const resetAxisBoundaries = () => {
+    const resetGraph = () => {
       minVisitedAxis = orbit.a;
       maxVisitedAxis = orbit.a;
 
@@ -245,7 +248,7 @@ export default class ThirdLawGraph extends Node {
       orbitUpdated();
     };
 
-    resetAxisBoundaries();
+    resetGraph();
 
     Multilink.multilink(
       [
@@ -255,7 +258,7 @@ export default class ThirdLawGraph extends Node {
       ], orbitUpdated );
 
     orbit.changedEmitter.addListener( orbitUpdated );
-    orbit.resetEmitter.addListener( resetAxisBoundaries );
+    orbit.resetEmitter.addListener( resetGraph );
   }
 }
 
