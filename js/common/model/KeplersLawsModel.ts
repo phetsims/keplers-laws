@@ -205,7 +205,14 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.alwaysCircularProperty.link( alwaysCircular => {
       this.engine.alwaysCircles = alwaysCircular;
-      this.engine.update();
+      if ( alwaysCircular ) {
+        // Because toggling always circular alters the velocity of the body, reset the orbit
+        // This is done specially to avoid discountinous changes in the orbital shape
+        this.engine.reset();
+      }
+      else {
+        this.engine.update();
+      }
     } );
 
     this.periodTracker = new PeriodTracker( this );
@@ -306,11 +313,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.targetOrbitProperty.reset();
     this.stopwatch.reset();
 
+    this.loadBodyStates( this.defaultBodyState );
+
     this.hardVisibilityReset();
     this.engine.reset();
     this.engine.updateAllowedProperty.reset();
-
-    this.loadBodyStates( this.defaultBodyState );
     this.resetting = false;
   }
 
