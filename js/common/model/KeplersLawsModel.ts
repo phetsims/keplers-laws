@@ -252,6 +252,15 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.zoomProperty = new DerivedProperty( [ animatedZoomProperty ], zoom => zoom );
+
+    this.stopwatchVisibleProperty.link( visible => {
+      this.stopwatch.setTime( 0 );
+      this.stopwatch.isRunningProperty.value = false;
+    } );
+
+    this.periodVisibleProperty.link( visible => {
+      this.periodTracker.timerReset();
+    } );
   }
 
   /**
@@ -330,8 +339,12 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public override step( dt: number ): void {
     super.step( dt );
     this.periodTracker.step( dt );
+  }
 
-    if ( this.stopwatch.isRunningProperty.value && this.isPlayingProperty.value ) {
+  public override stepOnce( dt: number ): void {
+    super.stepOnce( dt );
+
+    if ( this.stopwatch.isRunningProperty.value ) {
       this.stopwatch.step( dt * this.timeFormatter.get( this.timeSpeedProperty.value )! * this.timeScale * this.modelToViewTime );
     }
   }
