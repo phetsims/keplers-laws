@@ -22,6 +22,7 @@ export default class PeriodTrackerNode extends Path {
   public radiusX = 1;
   public radiusY = 1;
 
+  // Circle that marks the start of the period
   public startCircle: Path;
 
   public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodVisibleProperty' | 'periodTracker'> ) {
@@ -32,7 +33,7 @@ export default class PeriodTrackerNode extends Path {
       visibleProperty: model.periodVisibleProperty
     } );
 
-    this.periodTracker = model.periodTracker;
+    this.periodTracker = model.periodTracker; // This object contains stopwatches for the timer and the fading effect
 
     this.periodTracker.fadingEmitter.addListener( () => {
       this.updateFade();
@@ -47,8 +48,7 @@ export default class PeriodTrackerNode extends Path {
 
     this.model.engine.changedEmitter.addListener( () => {
       this.periodTracker.softReset();
-      this.periodTracker.periodTimer.timeProperty.set( 0 );
-      this.periodTracker.periodTimer.isRunningProperty.value = false;
+      this.periodTracker.timerReset();
       this.updateShape();
     } );
 

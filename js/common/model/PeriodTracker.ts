@@ -108,6 +108,12 @@ export default class PeriodTracker {
     }
   }
 
+  public timerReset(): void {
+    // Reset the period timer but keep the period trace
+    this.periodTimer.isRunningProperty.value = false;
+    this.periodTimer.setTime( 0 );
+  }
+
   public softReset(): void {
     // Reset everything but the period timer. We want the time readout to stay most times
     this.trackingState = TrackingState.IDLE;
