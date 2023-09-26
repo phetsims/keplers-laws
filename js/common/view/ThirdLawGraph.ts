@@ -90,14 +90,12 @@ export default class ThirdLawGraph extends Node {
       stroke: SolarSystemCommonColors.secondBodyColorProperty,
       fill: SolarSystemCommonColors.secondBodyColorProperty,
       lineWidth: 2,
-      boundsMethod: 'none',
       visible: false
     } );
     const targetOrbitOutOfBounds = new ArrowNode( 0, 0, 1, 0, {
       stroke: KeplersLawsColors.targetOrbitColorProperty,
       fill: KeplersLawsColors.targetOrbitColorProperty,
       lineWidth: 2,
-      boundsMethod: 'none',
       visible: false
     } );
 
