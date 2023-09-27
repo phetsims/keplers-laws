@@ -11,6 +11,7 @@ import { VBox } from '../../../../scenery/js/imports.js';
 import SecondLawAccordionBox from './SecondLawAccordionBox.js';
 import keplersLaws from '../../keplersLaws.js';
 import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
+import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
 
 export default class SecondLawPanels extends VBox {
   public constructor( model: KeplersLawsModel ) {
@@ -19,7 +20,8 @@ export default class SecondLawPanels extends VBox {
       stretch: true,
       children: [
         new PeriodDivisionsPanel( model ),
-        new SecondLawAccordionBox( model )
+        new SecondLawAccordionBox( model ),
+        ...( model.isLab ? [] : [ new MoreOrbitalDataPanel( model ) ] )
       ],
       visibleProperty: model.isSecondLawProperty
     } );
