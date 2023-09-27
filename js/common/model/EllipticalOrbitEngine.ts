@@ -129,6 +129,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public totalArea = 1;
   public segmentArea = 1;
   public activeAreaIndex = 0;
+  public areasErased = false; // When areas were just erased. run() sets this to false
 
   // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
   public tracingPathProperty = new BooleanProperty( false );
@@ -232,6 +233,8 @@ export default class EllipticalOrbitEngine extends Engine {
     if ( this.tracingPathProperty.value ) {
       this.periodTraceEnd = Utils.moduloBetweenDown( this.nu, this.periodTraceStart, this.periodTraceStart + TWOPI );
     }
+
+    this.areasErased = false;
 
     this.isRunning = false;
   }
@@ -577,6 +580,7 @@ export default class EllipticalOrbitEngine extends Engine {
       area.reset( eraseAreas );
     } );
     this.calculateOrbitalDivisions();
+    this.areasErased = true;
     this.ranEmitter.emit();
   }
 
