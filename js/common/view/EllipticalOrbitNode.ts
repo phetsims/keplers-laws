@@ -30,6 +30,7 @@ import OrbitalSound from './OrbitalSound.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import soundManager from '../../../../tambo/js/soundManager.js';
 
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does
@@ -51,6 +52,7 @@ export default class EllipticalOrbitNode extends Path {
     this.orbit = model.engine;
 
     const orbitalSound = new OrbitalSound( this.orbit.semiMajorAxisProperty, this.orbit.eccentricityProperty );
+    soundManager.addSoundGenerator( orbitalSound );
 
     Multilink.multilink( [ this.orbit.allowedOrbitProperty, this.orbit.updateAllowedProperty ],
       ( orbitAllowed, updateAllowed ) => {
