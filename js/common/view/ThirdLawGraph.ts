@@ -191,17 +191,11 @@ export default class ThirdLawGraph extends Node {
 
       // Updates the limits of the graph line if the orbit is not out of bounds
       if ( !outOfBounds ) {
-        if ( !model.sun.userControlledMassProperty.value || minVisitedAxis !== maxVisitedAxis ) {
-          if ( orbit.a < minVisitedAxis ) {
-            minVisitedAxis = orbit.a;
-          }
-
-          if ( orbit.a > maxVisitedAxis ) {
-            maxVisitedAxis = orbit.a;
-          }
-        }
-        else {
+        if ( orbit.a < minVisitedAxis ) {
           minVisitedAxis = orbit.a;
+        }
+
+        if ( orbit.a > maxVisitedAxis ) {
           maxVisitedAxis = orbit.a;
         }
       }
