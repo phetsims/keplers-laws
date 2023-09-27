@@ -34,6 +34,7 @@ class AllLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
     super(
       () => new KeplersLawsModel( {
         initialLaw: LawMode.FIRST_LAW,
+        isLab: true,
         tandem: tandem.createTandem( 'model' )
       } ),
       model => new KeplersLawsScreenView( model, {

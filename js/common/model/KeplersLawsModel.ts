@@ -38,7 +38,7 @@ type SelfOptions = {
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'isLab'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' >;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly sun: Body;
