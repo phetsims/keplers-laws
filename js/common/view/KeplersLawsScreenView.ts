@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, HBox, Node, Text } from '../../../../scenery/js/imports.js';
+import { AlignBox, HBox, KeyboardDragListenerOptions, Node, Text } from '../../../../scenery/js/imports.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsPanels from './KeplersLawsPanels.js';
 import SecondLawPanels from './SecondLawPanels.js';
 import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsRadioButtonGroup from './LawsRadioButtonGroup.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -305,20 +305,26 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       associatedViewNode: this
     } );
 
+    const dragClipsOptions = {
+      start: () => {
+        stopwatchGrabClip.play();
+      },
+      end: () => {
+        stopwatchReleaseClip.play();
+      }
+    };
+
     model.stopwatch.positionProperty.setInitialValue( new Vector2( this.resetAllButton.left - 200, timeControlNode.bottom - 75 ) );
     model.stopwatch.positionProperty.reset();
     const stopwatchNode = new StopwatchNode(
       model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty,
         visibleProperty: model.stopwatchVisibleProperty,
-        dragListenerOptions: {
-          start: () => {
-            stopwatchGrabClip.play();
-          },
-          end: () => {
-            stopwatchReleaseClip.play();
-          }
-        },
+        dragListenerOptions: dragClipsOptions,
+        keyboardDragListenerOptions: combineOptions<KeyboardDragListenerOptions>( {
+          dragVelocity: 450,
+          shiftDragVelocity: 100
+        }, dragClipsOptions ),
         resetButtonSoundPlayer: stopwatchReleaseClip,
         numberDisplayOptions: {
           numberFormatter: StopwatchNode.createRichTextNumberFormatter( {
