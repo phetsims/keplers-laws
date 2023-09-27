@@ -229,6 +229,12 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
         end: end
       } );
     this.addInputListener( keyboardDragListener );
+
+    // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
+    this.addInputListener( {
+      down: () => this.moveToFront(),
+      focus: () => this.moveToFront()
+    } );
   }
 }
 
