@@ -19,7 +19,10 @@ const KeplersLawsColors = {
     projector: 'black'
   } ),
 
-  velocityColorProperty: PhetColorScheme.VELOCITY,
+  velocityColorProperty: new ProfileColorProperty( keplersLaws, 'velocity', {
+    default: PhetColorScheme.VELOCITY,
+    projector: '#2A7E2A'
+  } ),
 
   orbitColorProperty: SolarSystemCommonColors.orbitColorProperty,
 
