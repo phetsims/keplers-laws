@@ -136,7 +136,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     // The panel's content
     const content = new HBox( {
       align: 'top',
-      spacing: 5,
+      spacing: 10,
       children: [ moreInfoNode, infoButton ]
     } );
 
