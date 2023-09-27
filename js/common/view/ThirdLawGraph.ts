@@ -154,6 +154,7 @@ export default class ThirdLawGraph extends Node {
 
     const orbitUpdated = () => {
       const targetOrbit = model.targetOrbitProperty.value;
+      const boundsPadding = 20; // Threshold for the out-of-bounds arrow
 
       // If there's a selected target orbit and the star's mass is equal to 1 MSun
       if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
@@ -167,7 +168,7 @@ export default class ThirdLawGraph extends Node {
         }
         else {
           targetOrbitPoint.visible = false;
-          const tail = semiMajorAxisToViewPoint( maxSemiMajorAxis - 15 );
+          const tail = semiMajorAxisToViewPoint( maxSemiMajorAxis - boundsPadding );
           const tip = semiMajorAxisToViewPoint( maxSemiMajorAxis ).minus( tail ).setMagnitude( 20 );
           targetOrbitOutOfBounds.translation = tail;
           targetOrbitOutOfBounds.setTip( tip.x, tip.y );
@@ -183,9 +184,9 @@ export default class ThirdLawGraph extends Node {
 
       const pointPosition = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.translation = pointPosition;
-      dataPoint.visible = orbit.a < maxSemiMajorAxis;
 
-      const outOfBounds = pointPosition.x > axisLength || pointPosition.y < -axisLength;
+      const outOfBounds = pointPosition.x > axisLength - boundsPadding || pointPosition.y < -axisLength + boundsPadding;
+      dataPoint.visible = !outOfBounds;
       let arrowX = maxSemiMajorAxis / 2; // X position of the out-of-bounds arrow
       let arrowPositionSet = false; // Whether the out-of-bounds arrow position has been set or is the default
 
@@ -204,11 +205,11 @@ export default class ThirdLawGraph extends Node {
       if ( minVisitedAxis !== maxVisitedAxis ) {
         for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
           const pointToDraw = semiMajorAxisToViewPoint( a );
-          shape.lineToPoint( pointToDraw );
 
           // If the point is out of bounds and the arrow position has not been set, set it
-          if ( outOfBounds ) {
-            if ( pointToDraw.x < axisLength && pointToDraw.y > -axisLength ) {
+          if ( pointToDraw.x < axisLength - boundsPadding && pointToDraw.y > -axisLength + boundsPadding ) {
+            shape.lineToPoint( pointToDraw );
+            if ( outOfBounds ) {
               arrowX = a;
               arrowPositionSet = true;
             }
