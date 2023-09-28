@@ -86,7 +86,10 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
 
       soundViewNode: null,
       focusable: true,
-      tagName: 'div'
+      tagName: 'div',
+
+      // The group focus highlight makes it clear the timer is highlighted even if the children are focused
+      groupFocusHighlight: true
     }, providedOptions );
 
     super( options );
