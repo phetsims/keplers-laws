@@ -99,7 +99,7 @@ export default class OrbitalDataPanel extends Panel {
     // The panel's content
     const content = new HBox( {
       align: 'top',
-      spacing: 2,
+      spacing: 10,
       children: [
         equationsNode,
         infoButton
