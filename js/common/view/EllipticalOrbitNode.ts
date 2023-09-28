@@ -403,7 +403,7 @@ export default class EllipticalOrbitNode extends Path {
             numberDisplayPosition = model.engine.createPolar( ( area.startAngle + area.endAngle ) / 2 ).times( scale ).minus( center );
 
             if ( model.periodDivisionProperty.value === 2 ) {
-              numberDisplayPosition = new Vector2( 0, radiusY * Math.pow( -1, i ) );
+              numberDisplayPosition = new Vector2( 0, 0.8 * radiusY * Math.pow( -1, i ) );
             }
 
             const dy = 15; // Spacing between area and period values
