@@ -1,5 +1,5 @@
 {
-  "comment": "# keplers-laws 1.1.0-rc.1 Thu Sep 28 2023 13:07:13 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.1.0-rc.2 Thu Sep 28 2023 13:30:34 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "94831413cd4dd4dc27c2a1aebbcafd3987934a99",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "abc5afc41a6c11082539385cc97159ef8e221c6c",
+    "sha": "9d6b303f0d1ad765a2af4acd4dd910dc3a4edab7",
     "branch": "1.1"
   },
   "kite": {
@@ -78,7 +78,7 @@
   },
   "scenery-phet": {
     "sha": "ef5acdaf232935bc8a8e10d48731ab86713af838",
-    "branch": "keplers-laws-1.1"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "8551ef37e7bcc116f76cd10063cc9dc69e43f9a2",
@@ -86,7 +86,7 @@
   },
   "solar-system-common": {
     "sha": "609aa595ded5d8cb1f2b1d17abd114ea945b6084",
-    "branch": "keplers-laws-1.1"
+    "branch": "HEAD"
   },
   "studio": {
     "sha": "f85e412625adbd7e2c1eb5abcde95d6de18b5a39",
@@ -98,7 +98,7 @@
   },
   "tambo": {
     "sha": "0d057083795c2a97e343deb575d5267f0b61186b",
-    "branch": "keplers-laws-1.1"
+    "branch": "HEAD"
   },
   "tandem": {
     "sha": "8b679518c8f20b6ef06b4aa1febe5c6fc57e2736",
