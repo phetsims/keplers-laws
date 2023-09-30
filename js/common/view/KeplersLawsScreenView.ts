@@ -20,7 +20,6 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import FirstLawPanels from './FirstLawPanels.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import VectorNode from '../../../../solar-system-common/js/view/VectorNode.js';
-import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import OrbitalWarningMessage from './OrbitalWarningMessage.js';
 import DistancesDisplayNode from './DistancesDisplayNode.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -147,12 +146,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
       planet, this.modelViewTransformProperty, model.gravityVisibleProperty, planet.forceProperty,
-      model.forceScaleProperty, { fill: PhetColorScheme.GRAVITATIONAL_FORCE, baseMagnitude: 1000 }
+      model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
     ) );
 
     this.componentsLayer.addChild( new VectorNode(
       sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
-      model.forceScaleProperty, { fill: PhetColorScheme.GRAVITATIONAL_FORCE, baseMagnitude: 1000 }
+      model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
     ) );
 
     // Target orbit node
