@@ -9,7 +9,6 @@
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import keplersLaws from '../keplersLaws.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
-import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 
 const KeplersLawsColors = {
 
@@ -17,11 +16,6 @@ const KeplersLawsColors = {
   foregroundProperty: new ProfileColorProperty( keplersLaws, 'foreground', {
     default: 'white',
     projector: 'black'
-  } ),
-
-  velocityColorProperty: new ProfileColorProperty( keplersLaws, 'velocity', {
-    default: PhetColorScheme.VELOCITY,
-    projector: '#2A7E2A'
   } ),
 
   orbitColorProperty: SolarSystemCommonColors.orbitColorProperty,
@@ -51,10 +45,9 @@ const KeplersLawsColors = {
     default: 'cyan'
   } ),
 
-  // Period color
   distancesColorProperty: new ProfileColorProperty( keplersLaws, 'distance', {
     default: '#ccb285',
-    projector: '#B49C74'
+    projector: '#795f34'
   } ),
 
   fociColorProperty: new ProfileColorProperty( keplersLaws, 'foci', {

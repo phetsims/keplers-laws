@@ -29,6 +29,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 
 export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
@@ -108,12 +109,12 @@ export default class MoreOrbitalDataPanel extends Panel {
         createCustomEquation(
           KeplersLawsDerivedStrings.vMagnitudeStringProperty,
           velocityMagnitudeStringProperty,
-          KeplersLawsColors.velocityColorProperty
+          SolarSystemCommonColors.velocityColorProperty
         ),
         createCustomEquation(
           KeplersLawsDerivedStrings.vAngleStringProperty,
           velocityAngleStringProperty,
-          KeplersLawsColors.velocityColorProperty
+          SolarSystemCommonColors.velocityColorProperty
         ),
         createCustomEquation(
           KeplersLawsDerivedStrings.rvAngleStringProperty,
