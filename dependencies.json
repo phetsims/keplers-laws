@@ -1,5 +1,5 @@
 {
-  "comment": "# keplers-laws 1.1.0-rc.2 Thu Sep 28 2023 13:30:34 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.1.0-rc.2 Sun Oct 01 2023 15:51:47 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "94831413cd4dd4dc27c2a1aebbcafd3987934a99",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "9d6b303f0d1ad765a2af4acd4dd910dc3a4edab7",
+    "sha": "8671e42360ef1360bc167216aeab6336286c3c90",
     "branch": "1.1"
   },
   "kite": {
@@ -85,8 +85,8 @@
     "branch": "HEAD"
   },
   "solar-system-common": {
-    "sha": "609aa595ded5d8cb1f2b1d17abd114ea945b6084",
-    "branch": "HEAD"
+    "sha": "e7f29c6f72442f9b240dce5f011dd71973c8eb1c",
+    "branch": "keplers-laws-1.1"
   },
   "studio": {
     "sha": "f85e412625adbd7e2c1eb5abcde95d6de18b5a39",
