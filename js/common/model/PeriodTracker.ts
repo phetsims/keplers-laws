@@ -128,7 +128,7 @@ export default class PeriodTracker {
   public reset(): void {
     // Reset everything including the position of the period timer
     this.softReset();
-    this.periodTimer.positionProperty.reset();
+    this.periodTimer.reset();
   }
 }
 
