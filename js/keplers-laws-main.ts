@@ -34,8 +34,8 @@ simLauncher.launch( () => {
     credits: {
       leadDesign: 'Diana López Tavares',
       softwareDevelopment: 'Agustín Vallejo, Jonathan Olson',
-      team: 'Emily B. Moore, Sola Olateju, Kathy Perkins, Ariel Paul, Amy Rouinfar',
-      qualityAssurance: 'Jaron Droder, Clifford Hardin, Emily Miller, Nancy Salpepi, Kathryn Woessner',
+      team: 'Chris Malley, Emily B. Moore, Kathy Perkins, Ariel Paul, Amy Rouinfar',
+      qualityAssurance: 'Jaron Droder, Clifford Hardin, Nancy Salpepi, Kathryn Woessner',
       graphicArts: '',
       soundDesign: 'Ashton Morris',
       thanks: ''
