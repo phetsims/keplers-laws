@@ -28,7 +28,7 @@ class SecondLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
       homeScreenIcon: new SecondLawScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem,
-      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent()
+      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent( false )
     };
 
     super(
