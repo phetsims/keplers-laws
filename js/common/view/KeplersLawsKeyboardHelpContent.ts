@@ -23,17 +23,20 @@ export default class KeplersLawsKeyboardHelpContent extends TwoColumnKeyboardHel
     const basicActionsHelpSection = new BasicActionsKeyboardHelpSection( {
       withCheckboxContent: true
     } );
-    // Choose a Target Orbit
-    const comboBoxHelpSection = new ComboBoxKeyboardHelpSection( {
+
+    // optional 'Choose a Target Orbit' for combo box
+    const comboBoxHelpSection = hasComboBoxHelp ? new ComboBoxKeyboardHelpSection( {
       headingString: KeplersLawsStrings.keyboardHelpDialog.chooseATargetOribitStringProperty,
       thingAsLowerCaseSingular: KeplersLawsStrings.keyboardHelpDialog.targetOrbitStringProperty,
       thingAsLowerCasePlural: KeplersLawsStrings.keyboardHelpDialog.targetOrbitsStringProperty
-    } );
+    } ) : null;
 
-    super( [ draggableHelpSection, sliderHelpSection ], hasComboBoxHelp ?
-      [ comboBoxHelpSection, timeControlsHelpSection, basicActionsHelpSection ] :
-      [ timeControlsHelpSection, basicActionsHelpSection ]
-    );
+    const leftSection = comboBoxHelpSection ?
+      [ draggableHelpSection, sliderHelpSection, comboBoxHelpSection ] :
+      [ draggableHelpSection, sliderHelpSection ];
+    const rightSection = [ timeControlsHelpSection, basicActionsHelpSection ];
+
+    super( leftSection, rightSection );
   }
 }
 
