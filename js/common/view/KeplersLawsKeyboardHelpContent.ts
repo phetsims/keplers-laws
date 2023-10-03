@@ -16,7 +16,7 @@ import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/he
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class KeplersLawsKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
-  public constructor() {
+  public constructor( hasComboBoxHelp: boolean ) {
     const draggableHelpSection = new MoveDraggableItemsKeyboardHelpSection();
     const sliderHelpSection = new SliderControlsKeyboardHelpSection();
     const timeControlsHelpSection = new TimeControlKeyboardHelpSection();
@@ -30,7 +30,10 @@ export default class KeplersLawsKeyboardHelpContent extends TwoColumnKeyboardHel
       thingAsLowerCasePlural: KeplersLawsStrings.keyboardHelpDialog.targetOrbitsStringProperty
     } );
 
-    super( [ draggableHelpSection, sliderHelpSection, comboBoxHelpSection ], [ timeControlsHelpSection, basicActionsHelpSection ] );
+    super( [ draggableHelpSection, sliderHelpSection ], hasComboBoxHelp ?
+      [ comboBoxHelpSection, timeControlsHelpSection, basicActionsHelpSection ] :
+      [ timeControlsHelpSection, basicActionsHelpSection ]
+    );
   }
 }
 

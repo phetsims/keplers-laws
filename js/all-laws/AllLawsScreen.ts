@@ -28,7 +28,7 @@ class AllLawsScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
       homeScreenIcon: new AllLawsScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem,
-      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent()
+      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent( true )
     };
 
     super(

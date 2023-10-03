@@ -30,7 +30,7 @@ class ThirdLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
       homeScreenIcon: new ThirdLawScreenIcon(),
       backgroundColorProperty: SolarSystemCommonColors.backgroundProperty,
       tandem: tandem,
-      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent()
+      createKeyboardHelpNode: () => new KeplersLawsKeyboardHelpContent( true )
     };
 
     super(
