@@ -12,6 +12,8 @@ import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TimeControlKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlKeyboardHelpSection.js';
 import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
+import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class KeplersLawsKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   public constructor() {
@@ -21,8 +23,14 @@ export default class KeplersLawsKeyboardHelpContent extends TwoColumnKeyboardHel
     const basicActionsHelpSection = new BasicActionsKeyboardHelpSection( {
       withCheckboxContent: true
     } );
+    // Choose a Target Orbit
+    const comboBoxHelpSection = new ComboBoxKeyboardHelpSection( {
+      headingString: KeplersLawsStrings.keyboardHelpDialog.chooseATargetOribitStringProperty,
+      thingAsLowerCaseSingular: KeplersLawsStrings.keyboardHelpDialog.targetOrbitStringProperty,
+      thingAsLowerCasePlural: KeplersLawsStrings.keyboardHelpDialog.targetOrbitsStringProperty
+    } );
 
-    super( [ draggableHelpSection, sliderHelpSection ], [ timeControlsHelpSection, basicActionsHelpSection ] );
+    super( [ draggableHelpSection, sliderHelpSection, comboBoxHelpSection ], [ timeControlsHelpSection, basicActionsHelpSection ] );
   }
 }
 

@@ -76,6 +76,11 @@ type StringsType = {
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
   };
+  'keyboardHelpDialog': {
+    'chooseATargetOribitStringProperty': LocalizedStringProperty;
+    'targetOrbitsStringProperty': LocalizedStringProperty;
+    'targetOrbitStringProperty': LocalizedStringProperty;
+  };
   'infoDialog': {
     'orbitalDataStringProperty': LocalizedStringProperty;
     'moreOrbitalDataStringProperty': LocalizedStringProperty;
