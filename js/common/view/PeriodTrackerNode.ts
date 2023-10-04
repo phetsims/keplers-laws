@@ -14,7 +14,7 @@ import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 
 export default class PeriodTrackerNode extends Path {
-  private periodTracker: PeriodTracker;
+  private readonly periodTracker: PeriodTracker;
 
   // Initial values for the ellipse
   public orbitScale = 1;
@@ -23,7 +23,7 @@ export default class PeriodTrackerNode extends Path {
   public radiusY = 1;
 
   // Circle that marks the start of the period
-  public startCircle: Path;
+  public readonly startCircle: Path;
 
   public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodVisibleProperty' | 'periodTracker'> ) {
     super( null, {

@@ -21,7 +21,7 @@ export default class SecondLawPanels extends VBox {
       children: [
         new PeriodDivisionsPanel( model ),
         new SecondLawAccordionBox( model ),
-        ...( model.isLab ? [] : [ new MoreOrbitalDataPanel( model ) ] )
+        ...( model.isAllLaws ? [] : [ new MoreOrbitalDataPanel( model ) ] )
       ],
       visibleProperty: model.isSecondLawProperty
     } );

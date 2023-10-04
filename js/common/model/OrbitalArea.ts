@@ -13,6 +13,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalArea {
+
   public dotPosition = Vector2.ZERO; // Position of the dot in the orbital area
   public startPosition = Vector2.ZERO; // Start position of the orbital area
   public endPosition = Vector2.ZERO; // End position of the orbital area
