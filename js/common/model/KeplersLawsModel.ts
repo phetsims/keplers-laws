@@ -36,15 +36,18 @@ type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
 type SelfOptions = {
   initialLaw?: LawMode;
+  isAllLaws?: boolean; // whether the model is for the 'All Laws' screen
 };
 
 export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' >;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
+  
   public readonly sun: Body;
   public readonly planet: Body;
   
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
+  public readonly isAllLaws: boolean;
 
   public readonly targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE );
   public readonly isSolarSystemProperty: ReadOnlyProperty<boolean>;
@@ -121,7 +124,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
-      isLab: false,
+      isAllLaws: false,
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
       initialLaw: LawMode.FIRST_LAW
@@ -151,7 +154,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
-
+    this.isAllLaws = options.isAllLaws;
+    
     this.defaultBodyState = [
       { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
       { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
