@@ -39,7 +39,7 @@ export default class StarMassPanel extends Panel {
         maxWidth: 200
       } ) );
 
-    const thumbFillProperty = SolarSystemCommonColors.firstBodyColorProperty;
+    const thumbFillProperty = SolarSystemCommonColors.body1ColorProperty;
     const ourSunTickLabelValue = model.sun.massProperty.value;
     const massRange = new RangeWithValue( ourSunTickLabelValue / 2, 2 * ourSunTickLabelValue, ourSunTickLabelValue );
 

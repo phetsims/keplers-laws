@@ -74,7 +74,7 @@ export default class ThirdLawGraph extends Node {
     const maxPeriod = model.engine.thirdLaw( maxSemiMajorAxis );
 
     const dataPoint = new Circle( 5, {
-      fill: SolarSystemCommonColors.secondBodyColorProperty
+      fill: SolarSystemCommonColors.body2ColorProperty
     } );
     const targetOrbitPoint = new Circle( 5, {
       fill: KeplersLawsColors.targetOrbitColorProperty,
@@ -87,8 +87,8 @@ export default class ThirdLawGraph extends Node {
       lineWidth: 2
     } );
     const outOfBoundsArrow = new ArrowNode( 0, 0, 1, 0, {
-      stroke: SolarSystemCommonColors.secondBodyColorProperty,
-      fill: SolarSystemCommonColors.secondBodyColorProperty,
+      stroke: SolarSystemCommonColors.body2ColorProperty,
+      fill: SolarSystemCommonColors.body2ColorProperty,
       lineWidth: 2,
       visible: false
     } );

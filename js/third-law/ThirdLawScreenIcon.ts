@@ -39,7 +39,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
               lineWidth: 1
             } ),
           new ShadedSphereNode( 8, {
-            mainColor: SolarSystemCommonColors.firstBodyColorProperty,
+            mainColor: SolarSystemCommonColors.body1ColorProperty,
             x: -focalPoint
           } ),
           new Path(
@@ -51,7 +51,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
           ThirdLawScreenIcon.createPeriodTimerNode(),
           showPlanet ?
           new ShadedSphereNode( 3, {
-            mainColor: SolarSystemCommonColors.secondBodyColorProperty,
+            mainColor: SolarSystemCommonColors.body2ColorProperty,
             x: semiMajorAxis
           } ) : new Node()
         ]

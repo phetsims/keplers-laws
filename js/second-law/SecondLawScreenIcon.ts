@@ -48,7 +48,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
           0, 0, semiMajorAxis, semiMinorAxis, 0, startAngle, endAngle, false
         ).close(),
           {
-            fill: SolarSystemCommonColors.secondBodyColorProperty,
+            fill: SolarSystemCommonColors.body2ColorProperty,
             opacity: ( divisionAngles.length - i + 1 ) / ( divisionAngles.length + 1 )
           }
         )
@@ -60,7 +60,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
         ...areas,
         KeplersLawsScreenIcon.createCommonNode(),
         new ShadedSphereNode( 3, {
-          mainColor: SolarSystemCommonColors.secondBodyColorProperty,
+          mainColor: SolarSystemCommonColors.body2ColorProperty,
           x: bodyPosition.x + focalPoint,
           y: -bodyPosition.y
         } )

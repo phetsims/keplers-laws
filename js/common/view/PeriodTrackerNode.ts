@@ -28,7 +28,7 @@ export default class PeriodTrackerNode extends Path {
   public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodVisibleProperty' | 'periodTracker'> ) {
     super( null, {
       isDisposable: false,
-      stroke: SolarSystemCommonColors.thirdBodyColorProperty,
+      stroke: SolarSystemCommonColors.body3ColorProperty,
       lineWidth: 5,
       visibleProperty: model.periodVisibleProperty
     } );
@@ -53,7 +53,7 @@ export default class PeriodTrackerNode extends Path {
     } );
 
     this.startCircle = new Path( Shape.circle( 0, 0, 6 ), {
-      fill: SolarSystemCommonColors.thirdBodyColorProperty,
+      fill: SolarSystemCommonColors.body3ColorProperty,
       visible: false
     } );
     this.addChild( this.startCircle );

@@ -37,7 +37,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
     return new Node( {
         children: [
           new ShadedSphereNode( 8, {
-            mainColor: SolarSystemCommonColors.firstBodyColorProperty,
+            mainColor: SolarSystemCommonColors.body1ColorProperty,
             x: -focalPoint
           } ),
           new XNode( {
@@ -56,7 +56,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
           } ),
           showPlanet ?
           new ShadedSphereNode( 3, {
-            mainColor: SolarSystemCommonColors.secondBodyColorProperty,
+            mainColor: SolarSystemCommonColors.body2ColorProperty,
             x: semiMajorAxis
           } ) : new Node()
         ]
