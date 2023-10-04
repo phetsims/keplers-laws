@@ -30,9 +30,9 @@ const EQUATION_TEXT_OPTIONS = {
 export default class EccentricityPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
 
-    const options = combineOptions<PanelOptions>( {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       visibleProperty: model.eccentricityVisibleProperty
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    } );
 
     // Eccentricity = c / a
     const equationNode = new HBox( {

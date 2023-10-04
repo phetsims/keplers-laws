@@ -74,14 +74,14 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       yAlign: 'bottom'
     } );
 
-    const options = combineOptions<ThirdLawAccordionBoxOptions>( {
+    const options = combineOptions<ThirdLawAccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       titleNode: titleNode,
       accessibleName: titleStringProperty,
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false,
       expandedProperty: model.thirdLawAccordionBoxExpandedProperty
-    }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
+    } );
 
     // Equation at the top of the accordion box: T/a = ...
     const equationNode = new AlignBox( new EquationNode( model ), {

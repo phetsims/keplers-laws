@@ -166,9 +166,9 @@ function createCheckbox( property: Property<boolean>, stringProperty: TReadOnlyP
                          providedOptions: StrictOmit<WithRequired<CheckboxOptions, 'tandem'>, 'accessibleName'>
 ): Checkbox {
 
-  const options = combineOptions<CheckboxOptions>( {
+  const options = combineOptions<CheckboxOptions>( {}, SolarSystemCommonConstants.CHECKBOX_OPTIONS, {
     accessibleName: stringProperty
-  }, SolarSystemCommonConstants.CHECKBOX_OPTIONS, providedOptions );
+  }, providedOptions );
 
   const content = new HBox( {
     spacing: 10,

@@ -34,9 +34,9 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
-    } );
+    }, providedOptions );
 
     // Extra information: distance and velocity vector values
     const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {

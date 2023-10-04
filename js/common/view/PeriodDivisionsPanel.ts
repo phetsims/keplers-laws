@@ -27,10 +27,10 @@ const divisionsRangeProperty = new TinyProperty( new Range(
 
 export default class PeriodDivisionsPanel extends Panel {
   public constructor( model: KeplersLawsModel ) {
-    const options = combineOptions<PanelOptions>( {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       isDisposable: false,
       visibleProperty: model.isSecondLawProperty
-    }, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    } );
 
     const textOptions = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
       maxWidth: 200

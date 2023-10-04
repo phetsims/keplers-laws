@@ -40,7 +40,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
   public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor' | 'secondLawAccordionBoxExpandedProperty'> ) {
 
-    const options = combineOptions<AccordionBoxOptions>( {
+    const options = combineOptions<AccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
       visibleProperty: model.isSecondLawProperty,
       titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty,
@@ -50,7 +50,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       useExpandedBoundsWhenCollapsed: false,
       expandedProperty: model.secondLawAccordionBoxExpandedProperty
-    }, KeplersLawsConstants.ACCORDION_BOX_OPTIONS );
+    } );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
       fill: FOREGROUND_COLOR_PROPERTY,
