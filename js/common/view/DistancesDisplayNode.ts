@@ -59,7 +59,7 @@ export const MAJOR_AXIS_ARROW_OPTIONS: DimensionalArrowNodeOptions = {
 // look like a DimensionalArrowNode (which is not yet implemented in common code)
 
 export default class DistancesDisplayNode extends VBox {
-  public orbit: EllipticalOrbitEngine;
+  public readonly orbit: EllipticalOrbitEngine;
 
   public constructor(
     model: Pick<KeplersLawsModel, 'engine' | 'stringVisibleProperty' | 'semiaxisVisibleProperty' | 'zoomProperty'>,

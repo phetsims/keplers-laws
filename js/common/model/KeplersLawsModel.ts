@@ -63,7 +63,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly lawUpdatedEmitter = new Emitter();
 
   // Map that relates each law with its corresponding visible boolean properties
-  public lawVisibilitiesMap = new Map<LawMode, BooleanProperty[]>();
+  public readonly lawVisibilitiesMap = new Map<LawMode, BooleanProperty[]>();
 
   // First Law Properties
   public readonly axesVisibleProperty = new BooleanProperty( false );

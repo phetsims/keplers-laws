@@ -94,13 +94,13 @@ export default class EllipticalOrbitEngine extends Engine {
   // When the sim plays, the orbit won't be constantly updating, only on user interactions
   public updateAllowedProperty = new BooleanProperty( false );
 
-  public semiMajorAxisProperty = new NumberProperty( 1 );
-  public semiMinorAxisProperty = new NumberProperty( 1 );
-  public focalDistanceProperty = new NumberProperty( 1 );
-  public distance1Property = new NumberProperty( 1 );
-  public distance2Property = new NumberProperty( 1 );
-  public periodProperty = new NumberProperty( 1 );
-  public eccentricityProperty = new NumberProperty( 0 );
+  public readonly semiMajorAxisProperty = new NumberProperty( 1 );
+  public readonly semiMinorAxisProperty = new NumberProperty( 1 );
+  public readonly focalDistanceProperty = new NumberProperty( 1 );
+  public readonly distance1Property = new NumberProperty( 1 );
+  public readonly distance2Property = new NumberProperty( 1 );
+  public readonly periodProperty = new NumberProperty( 1 );
+  public readonly eccentricityProperty = new NumberProperty( 0 );
 
   // These variable names are letters to compare and read more easily the equations they are in
   public a = 1;  // semi-major axis
@@ -117,7 +117,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public d2 = 0; // distance from the secondary focus to the body
 
   // Keeps track of the validity of the orbit. True if elliptic, false either if parabolic or collision orbit.
-  public allowedOrbitProperty = new BooleanProperty( false );
+  public readonly allowedOrbitProperty = new BooleanProperty( false );
 
   // Stable, crash or escape orbit.
   public readonly orbitTypeProperty: EnumerationProperty<OrbitTypes>;
@@ -132,7 +132,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public areasErased = false; // When areas were just erased. run() sets this to false
 
   // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
-  public tracingPathProperty = new BooleanProperty( false );
+  public readonly tracingPathProperty = new BooleanProperty( false );
   public periodTraceStart = 0;
   public periodTraceEnd = 0;
 
