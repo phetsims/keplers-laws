@@ -124,7 +124,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       isLab: false,
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
-      initialLaw: LawMode.FIRST_LAW
+      initialLaw: LawMode.FIRST_LAW,
+      defaultBodyState: [
+        { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
+        { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
+      ]
     }, providedOptions );
     super( options );
 
@@ -152,10 +156,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
 
-    this.defaultBodyState = [
-      { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
-      { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
-    ];
     this.loadBodyStates( this.defaultBodyState );
 
     this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
