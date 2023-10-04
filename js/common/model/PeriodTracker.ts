@@ -67,7 +67,7 @@ export default class PeriodTracker {
       else if ( this.trackingState !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, softReset the period timer
         this.softReset();
-        this.periodTimer.timeProperty.set( 0 );
+        this.periodTimer.timeProperty.value = 0;
       }
       this.model.engine.tracingPathProperty.value = isRunning;
     } );

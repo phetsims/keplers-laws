@@ -31,7 +31,7 @@ export default class OrbitalSound extends SoundGenerator {
     // Create the amplitude modulator.
     this.amplitudeModulator = new AmplitudeModulator();
     this.amplitudeModulator.connect( this.soundSourceDestination );
-    this.amplitudeModulator.frequencyProperty.set( 7 );
+    this.amplitudeModulator.frequencyProperty.value = 7;
 
     this.orbitalSoundClip = new SoundClip( OrbitEccentricity_loop_wav, {
       initialOutputLevel: 0.2,
@@ -52,7 +52,7 @@ export default class OrbitalSound extends SoundGenerator {
         minPlaybackRate, maxPlaybackRate
       );
       this.orbitalSoundClip.setPlaybackRate( mapping );
-      this.amplitudeModulator.depthProperty.set( eccentricity );
+      this.amplitudeModulator.depthProperty.value = eccentricity;
     } );
   }
 
