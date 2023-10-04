@@ -9,7 +9,7 @@
 
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SolarSystemCommonModel, { BodyInfo, CommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
+import SolarSystemCommonModel, { BodyInfo, SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import LawMode from './LawMode.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
@@ -32,7 +32,7 @@ import Easing from '../../../../twixt/js/Easing.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
-type SuperTypeOptions = CommonModelOptions<EllipticalOrbitEngine>;
+type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
 type SelfOptions = {
   initialLaw?: LawMode;
