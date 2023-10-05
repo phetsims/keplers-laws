@@ -1,5 +1,5 @@
 {
-  "comment": "# keplers-laws 1.1.0 Thu Oct 05 2023 14:20:01 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.1.1-rc.1 Thu Oct 05 2023 15:41:33 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "94831413cd4dd4dc27c2a1aebbcafd3987934a99",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "c68a99cfda58e5ed4c34928c498bc6bf32d16492",
+    "sha": "878b53acfc9c78194f4c05fedc483b15de3bdd53",
     "branch": "1.1"
   },
   "kite": {
