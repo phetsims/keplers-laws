@@ -23,9 +23,10 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
+import VisibleProperties from '../../../../solar-system-common/js/view/VisibleProperties.js';
 
 export default class KeplersLawsPanels extends VBox {
-  public constructor( model: KeplersLawsModel, topLayer: Node, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: VisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
     const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
@@ -51,14 +52,14 @@ export default class KeplersLawsPanels extends VBox {
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
         // 'Speed', 'Velocity', and 'Gravity Force' checkboxes
-        ...createArrowsVisibilityCheckboxes( model, Tandem.OPT_OUT ),
+        ...createArrowsVisibilityCheckboxes( visibleProperties, Tandem.OPT_OUT ),
 
         // Gravity slider
-        new GravityScaleSlider( model.forceScaleProperty, model.gravityVisibleProperty ),
+        new GravityScaleSlider( model.forceScaleProperty, visibleProperties.gravityVisibleProperty ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
         // 'Grid' and 'Measuring Tape' checkboxes
-        ...createVisibilityInformationCheckboxes( model, Tandem.OPT_OUT, false ),
+        ...createVisibilityInformationCheckboxes( visibleProperties, model.pathVisibleProperty, Tandem.OPT_OUT, false ),
 
         // 'Stopwatch' checkbox
         new SolarSystemCommonCheckbox(

@@ -189,9 +189,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.stringVisibleProperty.value = fociVisible ? this.stringVisibleProperty.value : false;
     } );
 
-    this.velocityVisibleProperty.value = true;
-    this.velocityVisibleProperty.setInitialValue( true );
-
     // Powered values of semiMajor axis and period
     this.poweredSemiMajorAxisProperty = new DerivedProperty(
       [ this.selectedAxisPowerProperty, this.engine.semiMajorAxisProperty ],

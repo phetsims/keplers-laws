@@ -102,7 +102,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       useCueingArrows: true,
       showVelocityIndex: false,
       soundViewNode: this,
-      valuesVisibleProperty: model.valuesVisibleProperty,
+      valuesVisibleProperty: this.visibleProperties.valuesVisibleProperty,
       dragVelocity: 150,
       shiftDragVelocity: 50,
       mapPosition: ( point, radius ) => {
@@ -145,12 +145,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     // Gravity force vectors
     this.componentsLayer.addChild( new VectorNode(
-      planet, this.modelViewTransformProperty, model.gravityVisibleProperty, planet.forceProperty,
+      planet, this.modelViewTransformProperty, this.visibleProperties.gravityVisibleProperty, planet.forceProperty,
       model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
     ) );
 
     this.componentsLayer.addChild( new VectorNode(
-      sun, this.modelViewTransformProperty, model.gravityVisibleProperty, sun.forceProperty,
+      sun, this.modelViewTransformProperty, this.visibleProperties.gravityVisibleProperty, sun.forceProperty,
       model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
     ) );
 
@@ -167,6 +167,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
     this.bottomLayer.addChild( ellipticalOrbitNode );
     this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
+
+    this.visibleProperties.velocityVisibleProperty.value = true;
+    this.visibleProperties.velocityVisibleProperty.setInitialValue( true );
 
     // Sound ----------------------------------------------------------------------------------
     const crashSound = new SoundClip( BodiesCollide_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
@@ -223,7 +226,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    this.keplersLawsPanels = new KeplersLawsPanels( model, this.topLayer, options.tandem.createTandem( 'keplersLawsPanels' ) );
+    this.keplersLawsPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, options.tandem.createTandem( 'keplersLawsPanels' ) );
 
     const zoomButtons = new MagnifyingGlassZoomButtonGroup(
       model.zoomLevelProperty,
@@ -259,7 +262,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const offScaleMessage = new Text( SolarSystemCommonStrings.offscaleMessageStringProperty, {
       font: new PhetFont( 16 ),
       fill: SolarSystemCommonColors.foregroundProperty,
-      visibleProperty: DerivedProperty.and( [ model.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
+      visibleProperty: DerivedProperty.and( [ this.visibleProperties.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
       maxWidth: 400
     } );
     offScaleMessage.boundsProperty.link( bounds => {
