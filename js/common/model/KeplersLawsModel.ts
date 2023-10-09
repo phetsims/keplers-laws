@@ -31,15 +31,16 @@ import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
 type SelfOptions = {
-  initialLaw?: LawMode;
   isAllLaws?: boolean; // whether the model is for the 'All Laws' screen
+  initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' >;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
@@ -123,11 +124,16 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
-      engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
+
+      // SelfOptions
       isAllLaws: false,
+      initialLaw: LawMode.FIRST_LAW,
+
+      // SolarSystemCommonModelOptionsOptions
+      engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
+      zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
-      initialLaw: LawMode.FIRST_LAW,
       defaultBodyState: [
         { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
         { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
@@ -222,10 +228,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.forceScaleProperty.reset();
 
     const zoomRange = new Range( 0.45, 1 );
-    this.zoomLevelProperty = new NumberProperty( 2, {
-      range: new Range( 1, 2 ),
-      numberType: 'Integer'
-    } );
     const animatedZoomProperty = new NumberProperty( 1 );
     const zoomAnimationIn = new Animation( {
       property: animatedZoomProperty,
