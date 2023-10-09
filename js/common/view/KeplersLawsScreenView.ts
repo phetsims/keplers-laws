@@ -102,7 +102,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       useCueingArrows: true,
       showVelocityIndex: false,
       soundViewNode: this,
-      valuesVisibleProperty: this.visibleProperties.valuesVisibleProperty,
+      speedVisibleProperty: this.visibleProperties.speedVisibleProperty,
       dragVelocity: 150,
       shiftDragVelocity: 50,
       mapPosition: ( point, radius ) => {
