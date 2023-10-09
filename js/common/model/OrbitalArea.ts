@@ -24,7 +24,7 @@ export default class OrbitalArea {
   public insideProperty = new BooleanProperty( false );
   public alreadyEntered = true; // To properly display de filling out of area, this boolean
   public active = false; // Whether the shown areas include this one
-  public readonly index: number; // Index of the orbital area
+  public readonly index: number; // Index of the orbital area, 0-based.
 
   public constructor( index: number ) {
     this.index = index;
