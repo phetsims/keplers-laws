@@ -254,7 +254,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       }
     } );
 
-    this.zoomProperty = new DerivedProperty( [ animatedZoomProperty ], zoom => zoom );
+    this.zoomScaleProperty = new DerivedProperty( [ animatedZoomProperty ], animatedZoom => animatedZoom );
 
     this.stopwatchVisibleProperty.link( visible => {
       this.stopwatch.setTime( 0 );
