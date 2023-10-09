@@ -32,6 +32,7 @@ import Easing from '../../../../twixt/js/Easing.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -43,6 +44,9 @@ type SelfOptions = {
 export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
+
+  // abstract in SolarSystemCommonModel
+  public readonly zoomScaleProperty: TReadOnlyProperty<number>;
 
   public readonly sun: Body;
   public readonly planet: Body;
