@@ -227,18 +227,18 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.forceScaleProperty.setInitialValue( -0.25 );
     this.forceScaleProperty.reset();
 
-    const zoomRange = new Range( 0.45, 1 );
-    const animatedZoomProperty = new NumberProperty( 1 );
+    const animatedZoomScaleRange = new Range( 0.45, 1 );
+    const animatedZoomScaleProperty = new NumberProperty( 1 );
     const zoomAnimationIn = new Animation( {
-      property: animatedZoomProperty,
+      property: animatedZoomScaleProperty,
       duration: 0.5,
-      to: zoomRange.min,
+      to: animatedZoomScaleRange.min,
       easing: Easing.CUBIC_IN_OUT
     } );
     const zoomAnimationOut = new Animation( {
-      property: animatedZoomProperty,
+      property: animatedZoomScaleProperty,
       duration: 0.5,
-      to: zoomRange.max,
+      to: animatedZoomScaleRange.max,
       easing: Easing.CUBIC_IN_OUT
     } );
 
@@ -250,11 +250,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
         zoomAnimationOut.start();
       }
       else {
-        animatedZoomProperty.value = zoomRange.max;
+        animatedZoomScaleProperty.value = animatedZoomScaleRange.max;
       }
     } );
 
-    this.zoomScaleProperty = new DerivedProperty( [ animatedZoomProperty ], animatedZoom => animatedZoom );
+    this.zoomScaleProperty = new DerivedProperty( [ animatedZoomScaleProperty ], animatedZoomScale => animatedZoomScale );
 
     this.stopwatchVisibleProperty.link( visible => {
       this.stopwatch.setTime( 0 );
