@@ -13,6 +13,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
 import createVisibilityInformationCheckboxes from '../../../../solar-system-common/js/view/createVisibilityInformationCheckboxes.js';
+import PathCheckbox from '../../../../my-solar-system/js/common/view/PathCheckbox.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import OrbitalInformationPanel from './OrbitalInformationPanel.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -58,8 +59,11 @@ export default class KeplersLawsPanels extends VBox {
         new GravityScaleSlider( model.forceScaleProperty, visibleProperties.gravityVisibleProperty ),
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
+        // Path checkbox
+        new PathCheckbox( model.pathVisibleProperty, tandem.createTandem( 'pathCheckbox' ) ),
+
         // 'Grid' and 'Measuring Tape' checkboxes
-        ...createVisibilityInformationCheckboxes( visibleProperties, model.pathVisibleProperty, Tandem.OPT_OUT, false ),
+        ...createVisibilityInformationCheckboxes( visibleProperties, model.pathVisibleProperty, tandem ),
 
         // 'Stopwatch' checkbox
         new SolarSystemCommonCheckbox(
