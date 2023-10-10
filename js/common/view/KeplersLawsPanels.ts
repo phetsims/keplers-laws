@@ -17,12 +17,12 @@ import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
-import VisibleProperties from '../../../../solar-system-common/js/view/VisibleProperties.js';
+import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 
 export default class KeplersLawsPanels extends VBox {
 
-  public constructor( model: KeplersLawsModel, visibleProperties: VisibleProperties, topLayer: Node, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: SolarSystemCommonVisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
     const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
