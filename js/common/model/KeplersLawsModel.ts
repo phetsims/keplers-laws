@@ -41,7 +41,7 @@ type SelfOptions = {
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyState'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
@@ -139,8 +139,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
       defaultBodyState: [
-        { active: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
-        { active: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
+        { isActive: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
+        { isActive: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
       ]
     }, providedOptions );
     super( options );
