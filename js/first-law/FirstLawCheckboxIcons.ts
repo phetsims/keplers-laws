@@ -48,7 +48,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static createStringsCheckboxIcon(): Node {
+  public static createStringCheckboxIcon(): Node {
     return new Node( {
       scale: ICON_SCALE,
       children: [

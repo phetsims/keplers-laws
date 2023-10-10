@@ -44,15 +44,15 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.fociStringProperty,
         FirstLawCheckboxIcons.createFociCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'fociVisibleCheckbox' )
+          tandem: firstLawCheckboxesTandem.createTandem( 'fociCheckbox' )
         }
       ),
       createCheckbox(
         model.stringVisibleProperty,
         KeplersLawsStrings.stringStringProperty,
-        FirstLawCheckboxIcons.createStringsCheckboxIcon(),
+        FirstLawCheckboxIcons.createStringCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'stringVisibleCheckbox' ),
+          tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' ),
           enabledProperty: model.fociVisibleProperty,
           layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
         }
@@ -62,7 +62,7 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.axesStringProperty,
         FirstLawCheckboxIcons.createAxisCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'axesVisibleCheckbox' )
+          tandem: firstLawCheckboxesTandem.createTandem( 'axesCheckbox' )
         }
       ),
       createCheckbox(
@@ -70,7 +70,7 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.semiaxesStringProperty,
         FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'semiAxisVisibleCheckbox' ),
+          tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' ),
           enabledProperty: model.axesVisibleProperty,
           layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
         }
@@ -80,7 +80,7 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.eccentricityStringProperty,
         FirstLawCheckboxIcons.createEccentricityCheckboxIcon(),
         {
-          tandem: firstLawCheckboxesTandem.createTandem( 'eccentricityVisibleCheckbox' )
+          tandem: firstLawCheckboxesTandem.createTandem( 'eccentricityCheckbox' )
         }
       )
     ];
@@ -97,7 +97,7 @@ export default class OrbitalInformationPanel extends Panel {
           scale: 0.5
         } ),
         {
-          tandem: secondLawCheckboxesTandem.createTandem( 'apoapsisVisibleCheckbox' ),
+          tandem: secondLawCheckboxesTandem.createTandem( 'apoapsisCheckbox' ),
           enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
         }
       ),
@@ -110,7 +110,7 @@ export default class OrbitalInformationPanel extends Panel {
           scale: 0.5
         } ),
         {
-          tandem: secondLawCheckboxesTandem.createTandem( 'periapsisVisibleCheckbox' ),
+          tandem: secondLawCheckboxesTandem.createTandem( 'periapsisCheckbox' ),
           enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
         }
       )
@@ -124,7 +124,7 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.graph.aStringProperty,
         FirstLawCheckboxIcons.createSemiMajorAxisCheckboxIcon(),
         {
-          tandem: thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisVisibleCheckbox' )
+          tandem: thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisCheckbox' )
         }
       ),
       createCheckbox(
@@ -132,7 +132,7 @@ export default class OrbitalInformationPanel extends Panel {
         KeplersLawsStrings.graph.tStringProperty,
         new Image( periodTimerIcon_png, { scale: 0.6 } ),
         {
-          tandem: thirdLawCheckboxesTandem.createTandem( 'periodVisibleCheckbox' )
+          tandem: thirdLawCheckboxesTandem.createTandem( 'periodCheckbox' )
         }
       )
     ];
