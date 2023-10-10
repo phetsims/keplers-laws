@@ -45,7 +45,7 @@ export default class OrbitalInformationPanel extends Panel {
       KeplersLawsCheckbox.createAxesCheckbox( model.axesVisibleProperty, firstLawCheckboxesTandem.createTandem( 'axesCheckbox' ) ),
 
       // Semiaxes
-      KeplersLawsCheckbox.createSemiaxesCheckbox( model.semiaxisVisibleProperty, {
+      KeplersLawsCheckbox.createSemiaxesCheckbox( model.semiaxesVisibleProperty, {
         enabledProperty: model.axesVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' )

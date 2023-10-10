@@ -62,7 +62,7 @@ export default class DistancesDisplayNode extends VBox {
   public readonly orbit: EllipticalOrbitEngine;
 
   public constructor(
-    model: Pick<KeplersLawsModel, 'engine' | 'stringVisibleProperty' | 'semiaxisVisibleProperty' | 'zoomScaleProperty'>,
+    model: Pick<KeplersLawsModel, 'engine' | 'stringVisibleProperty' | 'semiaxesVisibleProperty' | 'zoomScaleProperty'>,
     public modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
   ) {
     super( {
@@ -118,7 +118,7 @@ export default class DistancesDisplayNode extends VBox {
     } );
     const majorAxisDisplayNode = new Node( {
       children: [ majorAxisArrowsNode, a1LabelNode, a2LabelNode ],
-      visibleProperty: model.semiaxisVisibleProperty
+      visibleProperty: model.semiaxesVisibleProperty
     } );
     Multilink.multilink( [ a1LabelNode.boundsProperty, a1ArrowNode.boundsProperty ], () => {
       a1LabelNode.centerX = a1ArrowNode.centerX;

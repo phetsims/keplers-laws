@@ -28,7 +28,7 @@ export default class OrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
-      visibleProperty: DerivedProperty.or( [ model.semiaxisVisibleProperty, model.eccentricityVisibleProperty ] )
+      visibleProperty: DerivedProperty.or( [ model.semiaxesVisibleProperty, model.eccentricityVisibleProperty ] )
     } );
 
     const conditionalAUStringProperty = new DerivedProperty(
@@ -73,7 +73,7 @@ export default class OrbitalDataPanel extends Panel {
           KeplersLawsStrings.symbol.bStringProperty,
           semiMinorAxisStringProperty,
           KeplersLawsColors.semiMinorAxisColorProperty,
-          model.semiaxisVisibleProperty
+          model.semiaxesVisibleProperty
         ),
 
         // c =

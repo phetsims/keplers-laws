@@ -75,13 +75,13 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // First Law Properties
   public readonly axesVisibleProperty = new BooleanProperty( false );
-  public readonly semiaxisVisibleProperty = new BooleanProperty( false );
+  public readonly semiaxesVisibleProperty = new BooleanProperty( false );
   public readonly fociVisibleProperty = new BooleanProperty( false );
   public readonly stringVisibleProperty = new BooleanProperty( false );
   public readonly eccentricityVisibleProperty = new BooleanProperty( false );
   public readonly firstLawVisibilities: BooleanProperty[] = [
     this.stringVisibleProperty,
-    this.semiaxisVisibleProperty,
+    this.semiaxesVisibleProperty,
     this.axesVisibleProperty,
     this.fociVisibleProperty,
     this.eccentricityVisibleProperty
@@ -193,7 +193,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.axesVisibleProperty.link( axesVisible => {
-      this.semiaxisVisibleProperty.value = axesVisible ? this.semiaxisVisibleProperty.value : false;
+      this.semiaxesVisibleProperty.value = axesVisible ? this.semiaxesVisibleProperty.value : false;
     } );
     this.fociVisibleProperty.link( fociVisible => {
       this.stringVisibleProperty.value = fociVisible ? this.stringVisibleProperty.value : false;

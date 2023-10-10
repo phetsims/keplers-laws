@@ -79,7 +79,7 @@ export default class EllipticalOrbitNode extends Path {
 
     // This is because the semiMajorAxis can be toggled by multiple cases
     const semiMajorAxisVisibleProperty = new DerivedProperty(
-      [ model.isThirdLawProperty, model.semiaxisVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ],
+      [ model.isThirdLawProperty, model.semiaxesVisibleProperty, model.semiMajorAxisVisibleProperty, model.eccentricityVisibleProperty ],
       ( isThirdLaw, semiaxisVisible, semiMajorAxisVisible, eccentricityVisible ) => {
         return ( isThirdLaw && semiMajorAxisVisible ) || semiaxisVisible || eccentricityVisible;
       }
@@ -95,7 +95,7 @@ export default class EllipticalOrbitNode extends Path {
       } ) );
     const bLabelNode = new Text( KeplersLawsStrings.symbol.bStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-        visibleProperty: model.semiaxisVisibleProperty,
+        visibleProperty: model.semiaxesVisibleProperty,
         scale: 1.5,
         fill: KeplersLawsColors.semiMinorAxisColorProperty,
         maxWidth: KeplersLawsConstants.SYMBOL_MAX_WIDTH
@@ -146,7 +146,7 @@ export default class EllipticalOrbitNode extends Path {
     const semiMinorAxisPath = new Path( null, {
       stroke: KeplersLawsColors.semiMinorAxisColorProperty,
       lineWidth: 3,
-      visibleProperty: model.semiaxisVisibleProperty
+      visibleProperty: model.semiaxesVisibleProperty
     } );
     const focalDistancePath = new Path( null, {
       stroke: KeplersLawsColors.focalDistanceColorProperty,
