@@ -40,13 +40,6 @@ const KeplersLawsConstants = {
     maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
   },
 
-  // options for Checkbox labels
-  CHECKBOX_TEXT_OPTIONS: {
-    font: new PhetFont( 16 ),
-    fill: SolarSystemCommonColors.foregroundProperty,
-    maxWidth: SolarSystemCommonConstants.CHECKBOX_TEXT_MAX_WIDTH
-  },
-
   ACCORDION_BOX_OPTIONS: {
     stroke: null,
     fill: SolarSystemCommonColors.controlPanelFillProperty,

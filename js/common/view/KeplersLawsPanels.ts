@@ -7,26 +7,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { HBox, HSeparator, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { HSeparator, Node, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import createArrowsVisibilityCheckboxes from '../../../../solar-system-common/js/view/createArrowsVisibilityCheckboxes.js';
-import createVisibilityInformationCheckboxes from '../../../../solar-system-common/js/view/createVisibilityInformationCheckboxes.js';
-import PathCheckbox from '../../../../my-solar-system/js/common/view/PathCheckbox.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import OrbitalInformationPanel from './OrbitalInformationPanel.js';
 import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
-import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
 import VisibleProperties from '../../../../solar-system-common/js/view/VisibleProperties.js';
+import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 
 export default class KeplersLawsPanels extends VBox {
+
   public constructor( model: KeplersLawsModel, visibleProperties: VisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
@@ -44,39 +39,26 @@ export default class KeplersLawsPanels extends VBox {
       children: [
 
         // 'Always circular' checkbox
-        new SolarSystemCommonCheckbox(
-          model.alwaysCircularProperty,
-          new Text( KeplersLawsStrings.alwaysCircularStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
-          {
-            accessibleName: KeplersLawsStrings.alwaysCircularStringProperty
-          } ),
+        KeplersLawsCheckbox.createAlwaysCircularCheckbox( model.alwaysCircularProperty, tandem.createTandem( 'alwaysCircularCheckbox' ) ),
+
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
         // 'Speed', 'Velocity', and 'Gravity Force' checkboxes
-        ...createArrowsVisibilityCheckboxes( visibleProperties, Tandem.OPT_OUT ),
+        SolarSystemCommonCheckbox.createSpeedCheckbox( visibleProperties.speedVisibleProperty, tandem.createTandem( 'speedCheckbox' ) ),
+        SolarSystemCommonCheckbox.createVelocityCheckbox( visibleProperties.velocityVisibleProperty, tandem.createTandem( 'velocityCheckbox' ) ),
+        SolarSystemCommonCheckbox.createGravityForceCheckbox( visibleProperties.gravityVisibleProperty, tandem.createTandem( 'gravityForceCheckbox' ) ),
 
-        // Gravity slider
+        // Gravity 'Zoom' slider
         new GravityScaleSlider( model.forceScaleProperty, visibleProperties.gravityVisibleProperty ),
+
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
-        // Path checkbox
-        new PathCheckbox( model.pathVisibleProperty, tandem.createTandem( 'pathCheckbox' ) ),
-
         // 'Grid' and 'Measuring Tape' checkboxes
-        ...createVisibilityInformationCheckboxes( visibleProperties, model.pathVisibleProperty, tandem ),
+        SolarSystemCommonCheckbox.createGridCheckbox( visibleProperties.gridVisibleProperty, tandem.createTandem( 'gridCheckbox' ) ),
+        SolarSystemCommonCheckbox.createMeasuringTapeCheckbox( visibleProperties.measuringTapeVisibleProperty, tandem.createTandem( 'measuringTapeCheckbox' ) ),
 
         // 'Stopwatch' checkbox
-        new SolarSystemCommonCheckbox(
-          model.stopwatchVisibleProperty,
-          new HBox( {
-            children: [
-              new Text( KeplersLawsStrings.stopwatchStringProperty, KeplersLawsConstants.CHECKBOX_TEXT_OPTIONS ),
-              createStopwatchIcon()
-            ]
-          } ),
-          {
-            accessibleName: KeplersLawsStrings.stopwatchStringProperty
-          } )
+        KeplersLawsCheckbox.createStopwatchCheckbox( model.stopwatchVisibleProperty, tandem.createTandem( 'stopwatchCheckbox' ) )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
@@ -90,28 +72,6 @@ export default class KeplersLawsPanels extends VBox {
       ]
     } );
   }
-}
-
-/**
- * Creates the icon for the stopwatch checkbox.
- */
-function createStopwatchIcon(): Node {
-  const stopwatchIcon = new StopwatchNode( new Stopwatch( {
-    isVisible: true
-  } ), {
-    numberDisplayOptions: {
-      textOptions: {
-        maxWidth: 100
-      }
-    }
-  } ).rasterized( {
-    resolution: 5,
-    imageOptions: {
-      cursor: 'pointer'
-    }
-  } );
-  stopwatchIcon.setScaleMagnitude( 0.3 );
-  return stopwatchIcon;
 }
 
 keplersLaws.register( 'KeplersLawsPanels', KeplersLawsPanels );
