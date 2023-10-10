@@ -153,8 +153,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.lawVisibilitiesMap.set( LawMode.SECOND_LAW, this.secondLawVisibilities );
     this.lawVisibilitiesMap.set( LawMode.THIRD_LAW, this.thirdLawVisibilities );
 
-    this.pathVisibleProperty.value = false;
-
     this.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
         this.userControlledProperty.value = true;
