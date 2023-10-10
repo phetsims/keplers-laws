@@ -15,10 +15,11 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import nullSoundPlayer from '../../../../tambo/js/shared-sound-players/nullSoundPlayer.js';
-import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import PeriodDivisionSoundManager from './PeriodDivisionSoundManager.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Range from '../../../../dot/js/Range.js';
+import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const divisionsRangeProperty = new TinyProperty( new Range(
   KeplersLawsConstants.MIN_ORBITAL_DIVISIONS,
@@ -26,21 +27,22 @@ const divisionsRangeProperty = new TinyProperty( new Range(
 ) );
 
 export default class PeriodDivisionsPanel extends Panel {
-  public constructor( model: KeplersLawsModel ) {
+
+  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       isDisposable: false,
-      visibleProperty: model.isSecondLawProperty
-    } );
-
-    const textOptions = combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-      maxWidth: 200
+      visibleProperty: model.isSecondLawProperty,
+      tandem: tandem
     } );
 
     super( new VBox( {
       spacing: SolarSystemCommonConstants.CHECKBOX_SPACING,
       align: 'left',
       children: [
-        new Text( KeplersLawsStrings.periodDivisionStringProperty, textOptions ),
+        new Text( KeplersLawsStrings.periodDivisionStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+          maxWidth: 200
+        } ) ),
         new NumberSpinner( model.periodDivisionProperty, divisionsRangeProperty, {
           arrowsPosition: 'leftRight',
           layoutOptions: {
@@ -51,12 +53,8 @@ export default class PeriodDivisionsPanel extends Panel {
           arrowsSoundPlayer: nullSoundPlayer,
           accessibleName: KeplersLawsStrings.periodDivisionStringProperty
         } ),
-        new SolarSystemCommonCheckbox( model.areaValuesVisibleProperty, new Text( KeplersLawsStrings.areaValuesStringProperty, textOptions ), {
-          accessibleName: KeplersLawsStrings.areaValuesStringProperty
-        } ),
-        new SolarSystemCommonCheckbox( model.timeValuesVisibleProperty, new Text( KeplersLawsStrings.timeValuesStringProperty, textOptions ), {
-          accessibleName: KeplersLawsStrings.timeValuesStringProperty
-        } )
+        KeplersLawsCheckbox.createAreaValuesCheckbox( model.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) ),
+        KeplersLawsCheckbox.createTimeValuesCheckbox( model.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) )
       ]
     } ), options );
 

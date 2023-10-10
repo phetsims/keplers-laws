@@ -6,25 +6,16 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import XNode from '../../../../scenery-phet/js/XNode.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
-import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
-import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 
 const CHECKBOX_INDENT = 20; // some checkboxes are indented by this amount
 
@@ -39,102 +30,55 @@ export default class OrbitalInformationPanel extends Panel {
     // Checkboxes for First Law
     const firstLawCheckboxesTandem = tandem.createTandem( 'firstLawCheckboxes' );
     const firstLawCheckboxes: Checkbox[] = [
-      createCheckbox(
-        model.fociVisibleProperty,
-        KeplersLawsStrings.fociStringProperty,
-        FirstLawCheckboxIcons.createFociCheckboxIcon(),
-        {
-          tandem: firstLawCheckboxesTandem.createTandem( 'fociCheckbox' )
-        }
-      ),
-      createCheckbox(
-        model.stringVisibleProperty,
-        KeplersLawsStrings.stringStringProperty,
-        FirstLawCheckboxIcons.createStringCheckboxIcon(),
-        {
-          tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' ),
-          enabledProperty: model.fociVisibleProperty,
-          layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
-        }
-      ),
-      createCheckbox(
-        model.axesVisibleProperty,
-        KeplersLawsStrings.axesStringProperty,
-        FirstLawCheckboxIcons.createAxisCheckboxIcon(),
-        {
-          tandem: firstLawCheckboxesTandem.createTandem( 'axesCheckbox' )
-        }
-      ),
-      createCheckbox(
-        model.semiaxisVisibleProperty,
-        KeplersLawsStrings.semiaxesStringProperty,
-        FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
-        {
-          tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' ),
-          enabledProperty: model.axesVisibleProperty,
-          layoutOptions: { leftMargin: CHECKBOX_INDENT } // to indent this checkbox
-        }
-      ),
-      createCheckbox(
-        model.eccentricityVisibleProperty,
-        KeplersLawsStrings.eccentricityStringProperty,
-        FirstLawCheckboxIcons.createEccentricityCheckboxIcon(),
-        {
-          tandem: firstLawCheckboxesTandem.createTandem( 'eccentricityCheckbox' )
-        }
-      )
+
+      // Foci
+      KeplersLawsCheckbox.createFociCheckbox( model.fociVisibleProperty, firstLawCheckboxesTandem.createTandem( 'fociCheckbox' ) ),
+
+      // String
+      KeplersLawsCheckbox.createStringCheckbox( model.stringVisibleProperty, {
+        enabledProperty: model.stringVisibleProperty,
+        layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
+        tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' )
+      } ),
+
+      // Axes
+      KeplersLawsCheckbox.createAxesCheckbox( model.axesVisibleProperty, firstLawCheckboxesTandem.createTandem( 'axesCheckbox' ) ),
+
+      // Semiaxes
+      KeplersLawsCheckbox.createSemiaxesCheckbox( model.semiaxisVisibleProperty, {
+        enabledProperty: model.axesVisibleProperty,
+        layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
+        tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' )
+      } ),
+      KeplersLawsCheckbox.createEccentricityCheckbox( model.eccentricityVisibleProperty, firstLawCheckboxesTandem.createTandem( 'eccentricityCheckbox' ) )
     ];
 
     // Checkboxes for Second Law
     const secondLawCheckboxesTandem = tandem.createTandem( 'secondLawCheckboxes' );
     const secondLawCheckboxes: Checkbox[] = [
-      createCheckbox(
-        model.apoapsisVisibleProperty,
-        KeplersLawsStrings.apoapsisStringProperty,
-        new XNode( {
-          fill: KeplersLawsColors.apoapsisColorProperty,
-          stroke: KeplersLawsColors.foregroundProperty,
-          scale: 0.5
-        } ),
-        {
-          tandem: secondLawCheckboxesTandem.createTandem( 'apoapsisCheckbox' ),
-          enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
-        }
-      ),
-      createCheckbox(
-        model.periapsisVisibleProperty,
-        KeplersLawsStrings.periapsisStringProperty,
-        new XNode( {
-          fill: KeplersLawsColors.periapsisColorProperty,
-          stroke: KeplersLawsColors.foregroundProperty,
-          scale: 0.5
-        } ),
-        {
-          tandem: secondLawCheckboxesTandem.createTandem( 'periapsisCheckbox' ),
-          enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
-        }
-      )
+
+      // Apoapsis
+      KeplersLawsCheckbox.createApoapsisCheckbox( model.apoapsisVisibleProperty, {
+        tandem: secondLawCheckboxesTandem.createTandem( 'apoapsisCheckbox' ),
+        enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
+      } ),
+
+      // Periapsis
+      KeplersLawsCheckbox.createPeriapsisCheckbox( model.periapsisVisibleProperty, {
+        tandem: secondLawCheckboxesTandem.createTandem( 'periapsisCheckbox' ),
+        enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
+      } )
     ];
 
     // Checkboxes for Third Law
     const thirdLawCheckboxesTandem = tandem.createTandem( 'thirdLawCheckboxes' );
     const thirdLawCheckboxes: Checkbox[] = [
-      createCheckbox(
-        model.semiMajorAxisVisibleProperty,
-        KeplersLawsStrings.graph.aStringProperty,
-        FirstLawCheckboxIcons.createSemiMajorAxisCheckboxIcon(),
-        {
-          tandem: thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisCheckbox' )
-        }
-      ),
-      createCheckbox(
-        model.periodVisibleProperty,
-        KeplersLawsStrings.graph.tStringProperty,
-        new Image( periodTimerIcon_png, { scale: 0.6 } ),
-        {
-          tandem: thirdLawCheckboxesTandem.createTandem( 'periodCheckbox' )
-        }
-      )
+
+      // Semi-Major Axis (a)
+      KeplersLawsCheckbox.createSemiMajorAxisCheckbox( model.semiMajorAxisVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisCheckbox' ) ),
+
+      // Period (T)
+      KeplersLawsCheckbox.createPeriodCheckbox( model.periodVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'periodCheckbox' ) )
     ];
 
     const content = new VBox( {
@@ -156,28 +100,6 @@ export default class OrbitalInformationPanel extends Panel {
 
     model.lawUpdatedEmitter.emit();
   }
-}
-
-/**
- * Creates a checkbox.
- */
-function createCheckbox( property: Property<boolean>, stringProperty: TReadOnlyProperty<string>, icon: Node,
-                         providedOptions: StrictOmit<WithRequired<CheckboxOptions, 'tandem'>, 'accessibleName'>
-): Checkbox {
-
-  const options = combineOptions<CheckboxOptions>( {}, SolarSystemCommonConstants.CHECKBOX_OPTIONS, {
-    accessibleName: stringProperty
-  }, providedOptions );
-
-  const content = new HBox( {
-    spacing: 10,
-    children: [
-      new Text( stringProperty, SolarSystemCommonCheckbox.TEXT_OPTIONS ),
-      icon
-    ]
-  } );
-
-  return new SolarSystemCommonCheckbox( property, content, options );
 }
 
 keplersLaws.register( 'OrbitalInformationPanel', OrbitalInformationPanel );

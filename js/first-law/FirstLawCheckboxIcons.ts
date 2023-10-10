@@ -120,7 +120,7 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 
-  public static createAxisCheckboxIcon(): Node {
+  public static createAxesCheckboxIcon(): Node {
 
     return new Node( {
       scale: ICON_SCALE,

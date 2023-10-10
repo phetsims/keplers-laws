@@ -204,9 +204,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.topLayer.addChild( new OrbitalWarningMessage( model.engine.orbitTypeProperty, model.engine.allowedOrbitProperty, this.modelViewTransformProperty ) );
 
-    this.firstLawPanels = new FirstLawPanels( model );
-    this.secondLawPanels = new SecondLawPanels( model );
-    this.thirdLawPanels = new ThirdLawPanels( model );
+    this.firstLawPanels = new FirstLawPanels( model, options.tandem.createTandem( 'firstLawPanels' ) );
+    this.secondLawPanels = new SecondLawPanels( model, options.tandem.createTandem( 'secondLawPanels' ) );
+    this.thirdLawPanels = new ThirdLawPanels( model, options.tandem.createTandem( 'thirdLawPanels' ) );
 
     const lawsPanelsBox = new AlignBox( new HBox( {
         children: [

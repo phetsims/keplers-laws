@@ -12,9 +12,10 @@ import keplersLaws from '../../keplersLaws.js';
 import EccentricityPanel from './EccentricityPanel.js';
 import OrbitalDataPanel from './OrbitalDataPanel.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class FirstLawPanels extends VBox {
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
     super( {
       isDisposable: false,
       visibleProperty: model.isFirstLawProperty,
@@ -23,7 +24,8 @@ export default class FirstLawPanels extends VBox {
         new EccentricityPanel( model ),
         new OrbitalDataPanel( model ),
         new MoreOrbitalDataPanel( model )
-      ]
+      ],
+      tandem: tandem
     } );
   }
 }

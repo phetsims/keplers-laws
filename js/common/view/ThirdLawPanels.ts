@@ -11,9 +11,10 @@ import { VBox } from '../../../../scenery/js/imports.js';
 import StarMassPanel from './StarMassPanel.js';
 import keplersLaws from '../../keplersLaws.js';
 import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ThirdLawPanels extends VBox {
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
     super( {
       margin: 5,
       stretch: true,
@@ -21,7 +22,8 @@ export default class ThirdLawPanels extends VBox {
         new ThirdLawAccordionBox( model ),
         new StarMassPanel( model )
       ],
-      visibleProperty: model.isThirdLawProperty
+      visibleProperty: model.isThirdLawProperty,
+      tandem: tandem
     } );
   }
 }
