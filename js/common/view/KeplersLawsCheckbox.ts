@@ -25,6 +25,9 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
     super( property, content, providedOptions );
   }
 
+  /**
+   * Creates the 'Always Circular' checkbox
+   */
   public static createAlwaysCircularCheckbox( alwaysCircularProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
 
     const text = new Text( KeplersLawsStrings.alwaysCircularStringProperty, SolarSystemCommonCheckbox.TEXT_OPTIONS );
@@ -35,6 +38,9 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
     } );
   }
 
+  /**
+   * Creates the 'Stopwatch' checkbox
+   */
   public static createStopwatchCheckbox( stopwatchVisibleProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
 
     const text = new Text( KeplersLawsStrings.stopwatchStringProperty, SolarSystemCommonCheckbox.TEXT_OPTIONS );
@@ -53,25 +59,31 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
 }
 
 /**
- * Creates the icon for the stopwatch checkbox.
+ * Creates the icon for the 'Stopwatch' checkbox.
  */
 function createStopwatchIcon(): Node {
-  const stopwatchIcon = new StopwatchNode( new Stopwatch( {
+
+  const stopwatch = new Stopwatch( {
     isVisible: true
-  } ), {
+  } );
+
+  const stopwatchNode = new StopwatchNode( stopwatch, {
     numberDisplayOptions: {
       textOptions: {
         maxWidth: 100
       }
     }
-  } ).rasterized( {
+  } );
+
+  const icon = stopwatchNode.rasterized( {
     resolution: 5,
     imageOptions: {
       cursor: 'pointer'
     }
   } );
-  stopwatchIcon.setScaleMagnitude( 0.3 );
-  return stopwatchIcon;
+  icon.setScaleMagnitude( 0.3 );
+
+  return icon;
 }
 
 keplersLaws.register( 'KeplersLawsCheckbox', KeplersLawsCheckbox );
