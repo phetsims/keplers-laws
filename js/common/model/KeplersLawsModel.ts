@@ -9,7 +9,7 @@
 
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SolarSystemCommonModel, { BodyInfo, SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
+import SolarSystemCommonModel, { SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import LawMode from './LawMode.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
@@ -29,7 +29,7 @@ import Range from '../../../../dot/js/Range.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import Body from '../../../../solar-system-common/js/model/Body.js';
+import Body, { BodyInfo } from '../../../../solar-system-common/js/model/Body.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
