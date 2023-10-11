@@ -26,6 +26,7 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 const FONT = new PhetFont( 24 );
 
@@ -62,13 +63,14 @@ export default class DistancesDisplayNode extends VBox {
   public readonly orbit: EllipticalOrbitEngine;
 
   public constructor(
-    model: Pick<KeplersLawsModel, 'engine' | 'stringVisibleProperty' | 'semiaxesVisibleProperty' | 'zoomScaleProperty'>,
+    model: KeplersLawsModel,
+    visibleProperties: KeplersLawsVisibleProperties,
     public modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>
   ) {
     super( {
       isDisposable: false,
       spacing: 10,
-      visibleProperty: DerivedProperty.and( [ model.stringVisibleProperty, model.engine.allowedOrbitProperty ] )
+      visibleProperty: DerivedProperty.and( [ visibleProperties.stringVisibleProperty, model.engine.allowedOrbitProperty ] )
     } );
 
     this.orbit = model.engine;
@@ -113,12 +115,12 @@ export default class DistancesDisplayNode extends VBox {
     const a1ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const a2ArrowNode = new DimensionalArrowNode( 0, 0, 1, 0, MAJOR_AXIS_ARROW_OPTIONS );
     const majorAxisArrowsNode = new HBox( {
-      visibleProperty: model.stringVisibleProperty,
+      visibleProperty: visibleProperties.stringVisibleProperty,
       children: [ a1ArrowNode, a2ArrowNode ]
     } );
     const majorAxisDisplayNode = new Node( {
       children: [ majorAxisArrowsNode, a1LabelNode, a2LabelNode ],
-      visibleProperty: model.semiaxesVisibleProperty
+      visibleProperty: visibleProperties.semiaxesVisibleProperty
     } );
     Multilink.multilink( [ a1LabelNode.boundsProperty, a1ArrowNode.boundsProperty ], () => {
       a1LabelNode.centerX = a1ArrowNode.centerX;

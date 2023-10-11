@@ -20,6 +20,7 @@ import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 const divisionsRangeProperty = new TinyProperty( new Range(
   KeplersLawsConstants.MIN_ORBITAL_DIVISIONS,
@@ -28,7 +29,7 @@ const divisionsRangeProperty = new TinyProperty( new Range(
 
 export default class PeriodDivisionsPanel extends Panel {
 
-  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       isDisposable: false,
@@ -53,8 +54,8 @@ export default class PeriodDivisionsPanel extends Panel {
           arrowsSoundPlayer: nullSoundPlayer,
           accessibleName: KeplersLawsStrings.periodDivisionStringProperty
         } ),
-        KeplersLawsCheckbox.createAreaValuesCheckbox( model.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) ),
-        KeplersLawsCheckbox.createTimeValuesCheckbox( model.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) )
+        KeplersLawsCheckbox.createAreaValuesCheckbox( visibleProperties.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) ),
+        KeplersLawsCheckbox.createTimeValuesCheckbox( visibleProperties.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) )
       ]
     } ), options );
 

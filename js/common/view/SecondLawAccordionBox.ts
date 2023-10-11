@@ -27,6 +27,7 @@ import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -38,7 +39,7 @@ const UPSCALE = 1.3;
 
 export default class SecondLawAccordionBox extends AccordionBox {
 
-  public constructor( public readonly model: Pick<KeplersLawsModel, 'engine' | 'isSecondLawProperty' | 'periodDivisionProperty' | 'getAreaColor' | 'secondLawAccordionBoxExpandedProperty'> ) {
+  public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty ) {
 
     const options = combineOptions<AccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
@@ -49,7 +50,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
         } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       useExpandedBoundsWhenCollapsed: false,
-      expandedProperty: model.secondLawAccordionBoxExpandedProperty
+      expandedProperty: secondLawAccordionBoxExpandedProperty
     } );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {

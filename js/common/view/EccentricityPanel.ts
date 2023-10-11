@@ -9,7 +9,6 @@
  */
 
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { HBox, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -21,6 +20,8 @@ import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const EQUATION_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -28,10 +29,10 @@ const EQUATION_TEXT_OPTIONS = {
 };
 
 export default class EccentricityPanel extends Panel {
-  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'eccentricityVisibleProperty'> ) {
+  public constructor( eccentricityProperty: NumberProperty, eccentricityVisibleProperty: BooleanProperty ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
-      visibleProperty: model.eccentricityVisibleProperty
+      visibleProperty: eccentricityVisibleProperty
     } );
 
     // Eccentricity = c / a
@@ -60,7 +61,7 @@ export default class EccentricityPanel extends Panel {
     } );
 
     // The graph that shows the eccentricity of the orbit, compared to other orbits.
-    const graphNode = new FirstLawGraph( model.engine.eccentricityProperty );
+    const graphNode = new FirstLawGraph( eccentricityProperty );
 
     const content = new VBox( {
       children: [ equationNode, graphNode ],

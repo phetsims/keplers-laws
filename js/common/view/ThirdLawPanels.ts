@@ -12,14 +12,15 @@ import StarMassPanel from './StarMassPanel.js';
 import keplersLaws from '../../keplersLaws.js';
 import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export default class ThirdLawPanels extends VBox {
-  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
     super( {
       margin: 5,
       stretch: true,
       children: [
-        new ThirdLawAccordionBox( model ),
+        new ThirdLawAccordionBox( model, thirdLawAccordionBoxExpandedProperty ),
         new StarMassPanel( model )
       ],
       visibleProperty: model.isThirdLawProperty,

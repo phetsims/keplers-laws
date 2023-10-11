@@ -13,15 +13,16 @@ import keplersLaws from '../../keplersLaws.js';
 import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 export default class SecondLawPanels extends VBox {
-  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
     super( {
       margin: 5,
       stretch: true,
       children: [
-        new PeriodDivisionsPanel( model, tandem.createTandem( 'periodDivisionsPanel' ) ),
-        new SecondLawAccordionBox( model ),
+        new PeriodDivisionsPanel( model, visibleProperties, tandem.createTandem( 'periodDivisionsPanel' ) ),
+        new SecondLawAccordionBox( model, visibleProperties.secondLawAccordionBoxExpandedProperty ),
         ...( model.isAllLaws ? [] : [ new MoreOrbitalDataPanel( model ) ] )
       ],
       visibleProperty: model.isSecondLawProperty,

@@ -16,12 +16,13 @@ import keplersLaws from '../../keplersLaws.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 const CHECKBOX_INDENT = 20; // some checkboxes are indented by this amount
 
 export default class OrbitalInformationPanel extends Panel {
 
-  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
       tandem: tandem
@@ -32,25 +33,25 @@ export default class OrbitalInformationPanel extends Panel {
     const firstLawCheckboxes: Checkbox[] = [
 
       // Foci
-      KeplersLawsCheckbox.createFociCheckbox( model.fociVisibleProperty, firstLawCheckboxesTandem.createTandem( 'fociCheckbox' ) ),
+      KeplersLawsCheckbox.createFociCheckbox( visibleProperties.fociVisibleProperty, firstLawCheckboxesTandem.createTandem( 'fociCheckbox' ) ),
 
       // String
-      KeplersLawsCheckbox.createStringCheckbox( model.stringVisibleProperty, {
-        enabledProperty: model.stringVisibleProperty,
+      KeplersLawsCheckbox.createStringCheckbox( visibleProperties.stringVisibleProperty, {
+        enabledProperty: visibleProperties.stringVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' )
       } ),
 
       // Axes
-      KeplersLawsCheckbox.createAxesCheckbox( model.axesVisibleProperty, firstLawCheckboxesTandem.createTandem( 'axesCheckbox' ) ),
+      KeplersLawsCheckbox.createAxesCheckbox( visibleProperties.axesVisibleProperty, firstLawCheckboxesTandem.createTandem( 'axesCheckbox' ) ),
 
       // Semiaxes
-      KeplersLawsCheckbox.createSemiaxesCheckbox( model.semiaxesVisibleProperty, {
-        enabledProperty: model.axesVisibleProperty,
+      KeplersLawsCheckbox.createSemiaxesCheckbox( visibleProperties.semiaxesVisibleProperty, {
+        enabledProperty: visibleProperties.axesVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' )
       } ),
-      KeplersLawsCheckbox.createEccentricityCheckbox( model.eccentricityVisibleProperty, firstLawCheckboxesTandem.createTandem( 'eccentricityCheckbox' ) )
+      KeplersLawsCheckbox.createEccentricityCheckbox( visibleProperties.eccentricityVisibleProperty, firstLawCheckboxesTandem.createTandem( 'eccentricityCheckbox' ) )
     ];
 
     // Checkboxes for Second Law
@@ -58,13 +59,13 @@ export default class OrbitalInformationPanel extends Panel {
     const secondLawCheckboxes: Checkbox[] = [
 
       // Apoapsis
-      KeplersLawsCheckbox.createApoapsisCheckbox( model.apoapsisVisibleProperty, {
+      KeplersLawsCheckbox.createApoapsisCheckbox( visibleProperties.apoapsisVisibleProperty, {
         tandem: secondLawCheckboxesTandem.createTandem( 'apoapsisCheckbox' ),
         enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
       } ),
 
       // Periapsis
-      KeplersLawsCheckbox.createPeriapsisCheckbox( model.periapsisVisibleProperty, {
+      KeplersLawsCheckbox.createPeriapsisCheckbox( visibleProperties.periapsisVisibleProperty, {
         tandem: secondLawCheckboxesTandem.createTandem( 'periapsisCheckbox' ),
         enabledProperty: new DerivedProperty( [ model.engine.eccentricityProperty ], e => e > 0 )
       } )
@@ -75,10 +76,10 @@ export default class OrbitalInformationPanel extends Panel {
     const thirdLawCheckboxes: Checkbox[] = [
 
       // Semi-Major Axis (a)
-      KeplersLawsCheckbox.createSemiMajorAxisCheckbox( model.semiMajorAxisVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisCheckbox' ) ),
+      KeplersLawsCheckbox.createSemiMajorAxisCheckbox( visibleProperties.semiMajorAxisVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'semiMajorAxisCheckbox' ) ),
 
       // Period (T)
-      KeplersLawsCheckbox.createPeriodCheckbox( model.periodVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'periodCheckbox' ) )
+      KeplersLawsCheckbox.createPeriodCheckbox( visibleProperties.periodVisibleProperty, thirdLawCheckboxesTandem.createTandem( 'periodCheckbox' ) )
     ];
 
     const content = new VBox( {

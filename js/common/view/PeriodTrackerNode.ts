@@ -12,6 +12,7 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export default class PeriodTrackerNode extends Path {
   private readonly periodTracker: PeriodTracker;
@@ -25,12 +26,12 @@ export default class PeriodTrackerNode extends Path {
   // Circle that marks the start of the period
   public readonly startCircle: Path;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodVisibleProperty' | 'periodTracker'> ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodTracker'>, periodVisibleProperty: BooleanProperty ) {
     super( null, {
       isDisposable: false,
       stroke: SolarSystemCommonColors.body3ColorProperty,
       lineWidth: 5,
-      visibleProperty: model.periodVisibleProperty
+      visibleProperty: periodVisibleProperty
     } );
 
     this.periodTracker = model.periodTracker; // This object contains stopwatches for the timer and the fading effect

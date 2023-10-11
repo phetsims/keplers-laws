@@ -42,6 +42,7 @@ import SolarSystemCommonTimeControlNode from '../../../../solar-system-common/js
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 // constants
 const MARGIN = 10;
@@ -52,7 +53,7 @@ type SelfOptions = {
 
 export type KeplersLawsScreenViewOptions = SelfOptions & StrictOmit<SolarSystemCommonScreenViewOptions, 'playingAllowedProperty'>;
 
-class KeplersLawsScreenView extends SolarSystemCommonScreenView {
+class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisibleProperties> {
   private readonly periodTimerNode: PeriodTimerNode;
 
   private readonly keplersLawsPanels: Node;
@@ -63,7 +64,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
   private readonly playBodySounds: () => void;
 
-  public constructor( model: KeplersLawsModel, providedOptions?: KeplersLawsScreenViewOptions ) {
+  public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsScreenViewOptions ) {
 
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
@@ -71,7 +72,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       isDisposable: false
     }, providedOptions );
 
-    super( model, options );
+    super( model, new KeplersLawsVisibleProperties( options.tandem.createTandem( 'visibleProperties' ) ), options );
 
     model.engine.orbitalAreas.forEach( ( area, index ) => {
       area.insideProperty.link( inside => {
@@ -131,6 +132,22 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       }
     };
 
+    this.visibleProperties.stopwatchVisibleProperty.link( visible => {
+      model.stopwatch.setTime( 0 );
+      model.stopwatch.isRunningProperty.value = false;
+    } );
+
+    this.visibleProperties.periodVisibleProperty.link( visible => {
+      model.periodTracker.timerReset();
+    } );
+
+    model.selectedLawProperty.link( law => {
+      this.visibleProperties.saveAndDisableVisibilityState( model.lastLaw );
+      this.visibleProperties.resetVisibilityState( law );
+      model.lastLaw = law;
+      model.lawUpdatedEmitter.emit();
+    } );
+
     // Draggable velocity vector
     const draggableVelocityVectorNode = this.createDraggableVectorNode( planet, {
       minimumMagnitude: 30,
@@ -164,7 +181,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
       } );
     this.bottomLayer.addChild( targetOrbitNode );
 
-    const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.modelViewTransformProperty );
+    const ellipticalOrbitNode = new EllipticalOrbitNode( model, this.visibleProperties, this.modelViewTransformProperty );
     this.bottomLayer.addChild( ellipticalOrbitNode );
     this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
 
@@ -204,9 +221,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.topLayer.addChild( new OrbitalWarningMessage( model.engine.orbitTypeProperty, model.engine.allowedOrbitProperty, this.modelViewTransformProperty ) );
 
-    this.firstLawPanels = new FirstLawPanels( model, options.tandem.createTandem( 'firstLawPanels' ) );
-    this.secondLawPanels = new SecondLawPanels( model, options.tandem.createTandem( 'secondLawPanels' ) );
-    this.thirdLawPanels = new ThirdLawPanels( model, options.tandem.createTandem( 'thirdLawPanels' ) );
+    this.firstLawPanels = new FirstLawPanels( model, this.visibleProperties.semiaxesVisibleProperty, this.visibleProperties.eccentricityVisibleProperty, options.tandem.createTandem( 'firstLawPanels' ) );
+    this.secondLawPanels = new SecondLawPanels( model, this.visibleProperties, options.tandem.createTandem( 'secondLawPanels' ) );
+    this.thirdLawPanels = new ThirdLawPanels( model, this.visibleProperties.thirdLawAccordionBoxExpandedProperty, options.tandem.createTandem( 'thirdLawPanels' ) );
 
     const lawsPanelsBox = new AlignBox( new HBox( {
         children: [
@@ -273,13 +290,13 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
 
     this.periodTimerNode = new PeriodTimerNode( model.periodTracker.periodTimer, this.modelViewTransformProperty, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      visibleProperty: model.periodVisibleProperty,
+      visibleProperty: this.visibleProperties.periodVisibleProperty,
       soundViewNode: this
     } );
 
     this.topLayer.addChild( this.periodTimerNode );
 
-    const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.modelViewTransformProperty ), {
+    const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.visibleProperties, this.modelViewTransformProperty ), {
       alignBoundsProperty: this.availableBoundsProperty,
       margin: SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN,
       xAlign: 'center',
@@ -321,7 +338,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
     const stopwatchNode = new StopwatchNode(
       model.stopwatch, {
         dragBoundsProperty: this.visibleBoundsProperty,
-        visibleProperty: model.stopwatchVisibleProperty,
+        visibleProperty: this.visibleProperties.stopwatchVisibleProperty,
         dragListenerOptions: dragClipsOptions,
         keyboardDragListenerOptions: combineOptions<KeyboardDragListenerOptions>( {
           dragVelocity: 450,
@@ -414,6 +431,11 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView {
   public override step( dt: number ): void {
     super.step( dt );
     this.playBodySounds();
+  }
+
+  public override reset(): void {
+    super.reset();
+    this.visibleProperties.hardVisibilityReset();
   }
 }
 

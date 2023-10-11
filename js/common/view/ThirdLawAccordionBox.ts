@@ -27,6 +27,7 @@ import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -50,7 +51,7 @@ type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
 export default class ThirdLawAccordionBox extends AccordionBox {
 
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty ) {
 
     const titleStringProperty = new DerivedProperty( [
         KeplersLawsStrings.graph.titleStringProperty,
@@ -80,7 +81,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false,
-      expandedProperty: model.thirdLawAccordionBoxExpandedProperty
+      expandedProperty: thirdLawAccordionBoxExpandedProperty
     } );
 
     // Equation at the top of the accordion box: T/a = ...

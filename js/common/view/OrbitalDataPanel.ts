@@ -23,12 +23,18 @@ import OrbitalDataInfoDialog from './OrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export default class OrbitalDataPanel extends Panel {
-  public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
+  public constructor(
+    model: KeplersLawsModel,
+    semiaxesVisibleProperty: BooleanProperty,
+    eccentricityVisibleProperty: BooleanProperty,
+    providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'>
+  ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
-      visibleProperty: DerivedProperty.or( [ model.semiaxesVisibleProperty, model.eccentricityVisibleProperty ] )
+      visibleProperty: DerivedProperty.or( [ semiaxesVisibleProperty, eccentricityVisibleProperty ] )
     } );
 
     const conditionalAUStringProperty = new DerivedProperty(
@@ -73,7 +79,7 @@ export default class OrbitalDataPanel extends Panel {
           KeplersLawsStrings.symbol.bStringProperty,
           semiMinorAxisStringProperty,
           KeplersLawsColors.semiMinorAxisColorProperty,
-          model.semiaxesVisibleProperty
+          semiaxesVisibleProperty
         ),
 
         // c =
@@ -81,7 +87,7 @@ export default class OrbitalDataPanel extends Panel {
           KeplersLawsStrings.symbol.cStringProperty,
           focalDistanceStringProperty,
           KeplersLawsColors.focalDistanceColorProperty,
-          model.eccentricityVisibleProperty
+          eccentricityVisibleProperty
         )
       ]
     } );

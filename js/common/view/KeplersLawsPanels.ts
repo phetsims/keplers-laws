@@ -17,19 +17,18 @@ import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
 import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
-import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
+import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 export default class KeplersLawsPanels extends VBox {
 
-  public constructor( model: KeplersLawsModel, visibleProperties: SolarSystemCommonVisibleProperties, topLayer: Node, tandem: Tandem ) {
+  public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
     const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
-    const orbitalInformationPanel = new OrbitalInformationPanel( model,
-      tandem.createTandem( 'orbitalInformationPanel' ) );
+    const orbitalInformationPanel = new OrbitalInformationPanel( model, visibleProperties, tandem.createTandem( 'orbitalInformationPanel' ) );
 
     // A bunch of unrelated controls, so we named the panel based on its position in the layout.
     const bottomPanel = new Panel( new VBox( {
@@ -58,7 +57,7 @@ export default class KeplersLawsPanels extends VBox {
         SolarSystemCommonCheckbox.createMeasuringTapeCheckbox( visibleProperties.measuringTapeVisibleProperty, tandem.createTandem( 'measuringTapeCheckbox' ) ),
 
         // 'Stopwatch' checkbox
-        KeplersLawsCheckbox.createStopwatchCheckbox( model.stopwatchVisibleProperty, tandem.createTandem( 'stopwatchCheckbox' ) )
+        KeplersLawsCheckbox.createStopwatchCheckbox( visibleProperties.stopwatchVisibleProperty, tandem.createTandem( 'stopwatchCheckbox' ) )
       ]
     } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
 
