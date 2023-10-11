@@ -41,7 +41,7 @@ type SelfOptions = {
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyState'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyInfo'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
@@ -101,7 +101,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
-      defaultBodyState: [
+      defaultBodyInfo: [
         { isActive: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ) },
         { isActive: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ) }
       ]
@@ -130,7 +130,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
     this.isAllLaws = options.isAllLaws;
 
-    this.loadBodyStates( this.defaultBodyState );
+    this.loadBodyInfo( this.defaultBodyInfo );
 
     this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
       selectedLaw => selectedLaw === LawMode.FIRST_LAW );
@@ -209,10 +209,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   }
 
   /**
-   * Simpler version of loadBodyStates than the one in SolarSystemCommonModel
+   * Simpler version of loadBodyInfo than the one in SolarSystemCommonModel
    */
-  public override loadBodyStates( bodiesInfo: BodyInfo[] ): void {
-    super.loadBodyStates( bodiesInfo );
+  public override loadBodyInfo( bodiesInfo: BodyInfo[] ): void {
+    super.loadBodyInfo( bodiesInfo );
 
     this.engine && this.engine.update();
   }
@@ -229,7 +229,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.targetOrbitProperty.reset();
     this.stopwatch.reset();
 
-    this.loadBodyStates( this.defaultBodyState );
+    this.loadBodyInfo( this.defaultBodyInfo );
 
     this.engine.reset();
     this.engine.updateAllowedProperty.reset();
