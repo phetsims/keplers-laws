@@ -30,30 +30,41 @@ export default class PeriodDivisionsPanel extends Panel {
       tandem: tandem
     } );
 
-    super( new VBox( {
+    const periodVisionsText = new Text( KeplersLawsStrings.periodDivisionStringProperty,
+      combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+        maxWidth: 200
+      } ) );
+
+    const periodDivisionsSpinner = new NumberSpinner( model.periodDivisionsProperty, model.periodDivisionsProperty.rangeProperty, {
+      arrowsPosition: 'leftRight',
+      layoutOptions: {
+        align: 'center'
+      },
+      touchAreaXDilation: 15,
+      touchAreaYDilation: 5,
+      arrowsSoundPlayer: nullSoundPlayer,
+      accessibleName: KeplersLawsStrings.periodDivisionStringProperty,
+      tandem: tandem.createTandem( 'periodDivisionsSpinner' )
+    } );
+
+    const areaValuesCheckbox = KeplersLawsCheckbox.createAreaValuesCheckbox( visibleProperties.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) );
+
+    const timeValuesCheckbox = KeplersLawsCheckbox.createTimeValuesCheckbox( visibleProperties.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) );
+
+    const content = new VBox( {
       spacing: SolarSystemCommonConstants.VBOX_SPACING,
       align: 'left',
       children: [
-        new Text( KeplersLawsStrings.periodDivisionStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-          maxWidth: 200
-        } ) ),
-        new NumberSpinner( model.periodDivisionsProperty, model.periodDivisionsProperty.rangeProperty, {
-          arrowsPosition: 'leftRight',
-          layoutOptions: {
-            align: 'center'
-          },
-          touchAreaXDilation: 15,
-          touchAreaYDilation: 5,
-          arrowsSoundPlayer: nullSoundPlayer,
-          accessibleName: KeplersLawsStrings.periodDivisionStringProperty
-        } ),
-        KeplersLawsCheckbox.createAreaValuesCheckbox( visibleProperties.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) ),
-        KeplersLawsCheckbox.createTimeValuesCheckbox( visibleProperties.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) )
+        periodVisionsText,
+        periodDivisionsSpinner,
+        areaValuesCheckbox,
+        timeValuesCheckbox
       ]
-    } ), options );
+    } );
+
+    super( content, options );
 
     const periodDivisionSounds = new PeriodDivisionSoundManager();
-
     model.periodDivisionsProperty.lazyLink( periodDivision => {
       if ( !model.resetting ) {
         periodDivisionSounds.playPeriodDivisionSound( periodDivision );
