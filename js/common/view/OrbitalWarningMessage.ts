@@ -6,7 +6,7 @@
  * @author Agustín Vallejo
  */
 
-import { Node, RichText, TextOptions } from '../../../../scenery/js/imports.js';
+import { Node, RichText } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -14,9 +14,15 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+
+const WARNING_TEXT_OPTIONS = {
+  font: new PhetFont( { size: 18, weight: 'bold' } ),
+  fill: SolarSystemCommonColors.foregroundProperty,
+  maxWidth: 410
+};
 
 export default class OrbitalWarningMessage extends Node {
 
@@ -36,15 +42,12 @@ export default class OrbitalWarningMessage extends Node {
       ( orbitType, warningString, crashOrbitString, escapeOrbitString ) => {
         return StringUtils.fillIn( warningString, {
           message: orbitType === OrbitTypes.CRASH_ORBIT ? crashOrbitString :
-                    orbitType === OrbitTypes.ESCAPE_ORBIT ? escapeOrbitString : ''
+                   orbitType === OrbitTypes.ESCAPE_ORBIT ? escapeOrbitString : ''
         } );
       }
     );
 
-    const warningText = new RichText( messageProperty,
-      combineOptions<TextOptions>( {}, SolarSystemCommonConstants.TITLE_OPTIONS, {
-        maxWidth: 410
-      } ) );
+    const warningText = new RichText( messageProperty, WARNING_TEXT_OPTIONS );
 
     messageProperty.link( () => {
       warningText.center = center;
