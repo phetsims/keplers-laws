@@ -91,12 +91,16 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     const sun = model.sun;
     const planet = model.planet;
-    const sunNode = new BodyNode( model.sun, this.modelViewTransformProperty, {
+
+    // BodyNode for each Body
+    const sunNode = new BodyNode( sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
       pickable: false,
       tandem: options.tandem.createTandem( 'sunNode' )
     } );
+    this.bodiesLayer.addChild( sunNode );
+
     const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
       useCueingArrows: true,
       showVelocityIndex: false,
@@ -106,48 +110,18 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       shiftDragVelocity: 50,
       mapPosition: ( point, radius ) => {
         point = modelDragBoundsProperty.value.eroded( radius ).closestPointTo( point );
-
         const escapeRadius = model.engine.escapeRadiusProperty.value;
-
         if ( point.magnitude > escapeRadius ) {
           point = point.normalized().times( escapeRadius );
         }
-
         point = this.constrainBoundaryViewPoint( point, radius );
-
         return point;
       },
       tandem: options.tandem.createTandem( 'planetNode' )
     } );
-    this.bodiesLayer.addChild( sunNode );
     this.bodiesLayer.addChild( planetNode );
 
-    this.playBodySounds = () => {
-      if ( this.model.isPlayingProperty.value ) {
-        planetNode.playSound();
-      }
-      else {
-        planetNode.stopSound();
-      }
-    };
-
-    this.visibleProperties.stopwatchVisibleProperty.link( visible => {
-      model.stopwatch.setTime( 0 );
-      model.stopwatch.isRunningProperty.value = false;
-    } );
-
-    this.visibleProperties.periodVisibleProperty.link( visible => {
-      model.periodTracker.timerReset();
-    } );
-
-    model.selectedLawProperty.link( law => {
-      this.visibleProperties.saveAndDisableVisibilityState( model.lastLaw );
-      this.visibleProperties.resetVisibilityState( law );
-      model.lastLaw = law;
-      model.lawUpdatedEmitter.emit();
-    } );
-
-    // Draggable velocity vector
+    // Draggable velocity vector for the planet
     const planetVelocityVectorNode = new DraggableVelocityVectorNode( planet, this.modelViewTransformProperty, {
       visibleProperty: this.visibleProperties.velocityVisibleProperty,
       minimumMagnitude: 30,
@@ -170,6 +144,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       tandem: options.tandem.createTandem( 'sunGravityForceVectorNode' )
     } );
     this.componentsLayer.addChild( sunGravityForceVectorNode );
+
     const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.forceProperty, model.forceScaleProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
@@ -178,7 +153,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.componentsLayer.addChild( planetGravityForceVectorNode );
 
-    // Target orbit node
     const targetOrbitNode = new TargetOrbitNode(
       model.targetOrbitProperty,
       this.modelViewTransformProperty,
@@ -192,10 +166,36 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.bottomLayer.addChild( ellipticalOrbitNode );
     this.bodiesLayer.addChild( ellipticalOrbitNode.topLayer );
 
+    this.visibleProperties.stopwatchVisibleProperty.link( visible => {
+      model.stopwatch.setTime( 0 );
+      model.stopwatch.isRunningProperty.value = false;
+    } );
+
+    this.visibleProperties.periodVisibleProperty.link( visible => {
+      model.periodTracker.timerReset();
+    } );
+
+    model.selectedLawProperty.link( law => {
+      this.visibleProperties.saveAndDisableVisibilityState( model.lastLaw );
+      this.visibleProperties.resetVisibilityState( law );
+      model.lastLaw = law;
+      model.lawUpdatedEmitter.emit();
+    } );
+
     this.visibleProperties.velocityVisibleProperty.value = true;
     this.visibleProperties.velocityVisibleProperty.setInitialValue( true );
 
     // Sound ----------------------------------------------------------------------------------
+
+    this.playBodySounds = () => {
+      if ( this.model.isPlayingProperty.value ) {
+        planetNode.playSound();
+      }
+      else {
+        planetNode.stopSound();
+      }
+    };
+
     const crashSound = new SoundClip( BodiesCollide_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
     const escapeSound = new SoundClip( ObjectWillEscape_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
     const correctPowersSound = new SoundClip( Success_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
