@@ -230,9 +230,12 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     this.topLayer.addChild( new OrbitalWarningMessage( model.engine.orbitTypeProperty, model.engine.allowedOrbitProperty, this.modelViewTransformProperty ) );
 
-    this.firstLawPanels = new FirstLawPanels( model, this.visibleProperties.semiaxesVisibleProperty, this.visibleProperties.eccentricityVisibleProperty, options.tandem.createTandem( 'firstLawPanels' ) );
-    this.secondLawPanels = new SecondLawPanels( model, this.visibleProperties, options.tandem.createTandem( 'secondLawPanels' ) );
-    this.thirdLawPanels = new ThirdLawPanels( model, this.visibleProperties.thirdLawAccordionBoxExpandedProperty, options.tandem.createTandem( 'thirdLawPanels' ) );
+    // Group all panels under this tandem
+    const panelsTandem = options.tandem.createTandem( 'panels' );
+
+    this.firstLawPanels = new FirstLawPanels( model, this.visibleProperties.semiaxesVisibleProperty, this.visibleProperties.eccentricityVisibleProperty, panelsTandem.createTandem( 'firstLawPanels' ) );
+    this.secondLawPanels = new SecondLawPanels( model, this.visibleProperties, panelsTandem.createTandem( 'secondLawPanels' ) );
+    this.thirdLawPanels = new ThirdLawPanels( model, this.visibleProperties.thirdLawAccordionBoxExpandedProperty, panelsTandem.createTandem( 'thirdLawPanels' ) );
 
     const lawsPanelsBox = new AlignBox( new HBox( {
         children: [
@@ -252,7 +255,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    this.topRightPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, options.tandem.createTandem( 'topRightPanels' ) );
+    this.topRightPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, panelsTandem.createTandem( 'topRightPanels' ) );
 
     const zoomButtonGroup = new MagnifyingGlassZoomButtonGroup( model.zoomLevelProperty, {
       orientation: 'horizontal',
