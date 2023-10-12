@@ -11,7 +11,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import Utils from '../../../../dot/js/Utils.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
@@ -30,8 +29,10 @@ import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
 import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
+const FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
 type SelfOptions = {
   iconColor?: string;
@@ -72,7 +73,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       numberDisplayOptions: {
         useRichText: true,
         textOptions: {
-          font: SolarSystemCommonConstants.TITLE_FONT
+          font: FONT
         },
         align: 'right',
         cornerRadius: 4,
@@ -161,7 +162,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       align: 'center',
       children: [
         new Text( KeplersLawsStrings.periodStringProperty, {
-          font: SolarSystemCommonConstants.TITLE_FONT,
+          font: FONT,
           pickable: false,
           maxWidth: playPauseButton.width
         } ),

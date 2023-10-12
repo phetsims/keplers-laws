@@ -51,7 +51,7 @@ function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>
   return {
     value: mode,
     createNode: () => new Text( nameProperty, {
-      font: SolarSystemCommonConstants.PANEL_FONT,
+      font: SolarSystemCommonConstants.COMBO_BOX_ITEM_FONT,
       maxWidth: 100
     } ),
     a11yName: nameProperty
