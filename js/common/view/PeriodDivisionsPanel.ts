@@ -47,9 +47,11 @@ export default class PeriodDivisionsPanel extends Panel {
       tandem: tandem.createTandem( 'periodDivisionsSpinner' )
     } );
 
-    const areaValuesCheckbox = KeplersLawsCheckbox.createAreaValuesCheckbox( visibleProperties.areaValuesVisibleProperty, tandem.createTandem( 'areaValuesCheckbox' ) );
+    const areaValuesCheckbox = KeplersLawsCheckbox.createAreaValuesCheckbox( visibleProperties.areaValuesVisibleProperty,
+      tandem.createTandem( 'areaValuesCheckbox' ) );
 
-    const timeValuesCheckbox = KeplersLawsCheckbox.createTimeValuesCheckbox( visibleProperties.timeValuesVisibleProperty, tandem.createTandem( 'timeValuesCheckbox' ) );
+    const timeValuesCheckbox = KeplersLawsCheckbox.createTimeValuesCheckbox( visibleProperties.timeValuesVisibleProperty,
+      tandem.createTandem( 'timeValuesCheckbox' ) );
 
     const content = new VBox( {
       spacing: SolarSystemCommonConstants.VBOX_SPACING,
