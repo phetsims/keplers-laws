@@ -34,6 +34,7 @@ import KeplersLawsColors from '../KeplersLawsColors.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import Property from '../../../../axon/js/Property.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -55,11 +56,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
   public readonly isAllLaws: boolean;
 
-  public readonly targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE );
+  public readonly targetOrbitProperty: EnumerationProperty<TargetOrbits>;
   public readonly isSolarSystemProperty: ReadOnlyProperty<boolean>;
 
   // Will enforce that the orbit is always circular
-  public readonly alwaysCircularProperty = new BooleanProperty( false );
+  public readonly alwaysCircularProperty: Property<boolean>;
 
   // Stopwatch visibility
   public readonly stopwatch: Stopwatch;
@@ -75,8 +76,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Graph exponents
   public readonly correctPowersSelectedProperty: ReadOnlyProperty<boolean>;
-  public readonly selectedAxisPowerProperty = new NumberProperty( 1 );
-  public readonly selectedPeriodPowerProperty = new NumberProperty( 1 );
+  public readonly selectedAxisPowerProperty: NumberProperty;
+  public readonly selectedPeriodPowerProperty: NumberProperty;
 
   public readonly poweredSemiMajorAxisProperty: ReadOnlyProperty<number>;
   public readonly poweredPeriodProperty: ReadOnlyProperty<number>;
@@ -117,7 +118,15 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: options.tandem.createTandem( 'periodDivisionsProperty' )
     } );
 
+    this.targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE, {
+      tandem: options.tandem.createTandem( 'targetOrbitProperty' )
+    } );
+
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
+
+    this.alwaysCircularProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'alwaysCircularProperty' )
+    } );
 
     this.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
@@ -150,6 +159,18 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.resetOrbitalAreas( this.isPlayingProperty.value );
     } );
 
+    this.selectedAxisPowerProperty = new NumberProperty( 1, {
+      numberType: 'Integer',
+      range: new Range( 1, 3 ),
+      tandem: options.tandem.createTandem( 'selectedAxisPowerProperty' )
+    } );
+
+    this.selectedPeriodPowerProperty = new NumberProperty( 1, {
+      numberType: 'Integer',
+      range: new Range( 1, 3 ),
+      tandem: options.tandem.createTandem( 'selectedPeriodPowerProperty' )
+    } );
+
     // Powered values of semiMajor axis and period
     this.poweredSemiMajorAxisProperty = new DerivedProperty(
       [ this.selectedAxisPowerProperty, this.engine.semiMajorAxisProperty ],
@@ -160,6 +181,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       [ this.selectedPeriodPowerProperty, this.engine.periodProperty ],
       ( power, period ) => Math.pow( period, power )
     );
+
     this.correctPowersSelectedProperty = new DerivedProperty(
       [ this.selectedAxisPowerProperty, this.selectedPeriodPowerProperty ],
       ( axisPower, periodPower ) => axisPower === 3 && periodPower === 2
