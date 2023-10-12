@@ -38,7 +38,7 @@ export default class PeriodDivisionsPanel extends Panel {
     } );
 
     super( new VBox( {
-      spacing: SolarSystemCommonConstants.CHECKBOX_SPACING,
+      spacing: SolarSystemCommonConstants.VBOX_SPACING,
       align: 'left',
       children: [
         new Text( KeplersLawsStrings.periodDivisionStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
