@@ -27,7 +27,7 @@ simLauncher.launch( () => {
     new FirstLawScreen( Tandem.ROOT.createTandem( 'firstLawScreen' ) ),
     new SecondLawScreen( Tandem.ROOT.createTandem( 'secondLawScreen' ) ),
     new ThirdLawScreen( Tandem.ROOT.createTandem( 'thirdLawScreen' ) ),
-    new AllLawsScreen( Tandem.ROOT.createTandem( 'labScreen' ) )
+    new AllLawsScreen( Tandem.ROOT.createTandem( 'allLawsScreen' ) )
   ];
 
   const options: SimOptions = {
