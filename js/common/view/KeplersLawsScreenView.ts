@@ -43,6 +43,7 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
+import DraggableVelocityVectorNode from '../../../../solar-system-common/js/view/DraggableVelocityVectorNode.js';
 
 // constants
 const MARGIN = 10;
@@ -149,15 +150,19 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
 
     // Draggable velocity vector
-    const draggableVelocityVectorNode = this.createDraggableVelocityVectorNode( planet, {
-      minimumMagnitude: 30,
-      snapToZero: false,
-      maxMagnitudeProperty: model.engine.escapeSpeedProperty,
-      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
-
-      dragVelocity: 150,
-      shiftDragVelocity: 50
-    } );
+    const draggableVelocityVectorNode = new DraggableVelocityVectorNode(
+      planet,
+      this.modelViewTransformProperty,
+      this.visibleProperties.velocityVisibleProperty, {
+        minimumMagnitude: 30,
+        snapToZero: false,
+        maxMagnitudeProperty: model.engine.escapeSpeedProperty,
+        enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
+        dragVelocity: 150,
+        shiftDragVelocity: 50,
+        mapPosition: this.constrainBoundaryViewPoint.bind( this ),
+        soundViewNode: this
+      } );
     this.componentsLayer.addChild( draggableVelocityVectorNode );
 
     // Gravity force vectors
