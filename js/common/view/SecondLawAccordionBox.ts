@@ -114,7 +114,7 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
 class AreasBarPlot extends Node {
 
-  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'periodDivisionProperty' | 'getAreaColor'> ) {
+  public constructor( model: Pick<KeplersLawsModel, 'engine' | 'periodDivisionsProperty' | 'getAreaColor'> ) {
     super();
 
     // -1 is so that the first bar is not inside the Y axis
@@ -145,7 +145,7 @@ class AreasBarPlot extends Node {
       activeAreas.forEach( ( area, index ) => {
         // Setting all the bar's height and pushing them to the dataSet
         const height = area.alreadyEntered && !area.insideProperty.value ? model.engine.segmentArea : area.sweptArea;
-        const realIndex = model.engine.retrograde ? model.periodDivisionProperty.value - index - 1 : index;
+        const realIndex = model.engine.retrograde ? model.periodDivisionsProperty.value - index - 1 : index;
         dataSet.push( new Vector2( realIndex, height ) );
       } );
       barPlot.setDataSet( dataSet ); // BarPlot creates the rectangles here
@@ -250,7 +250,7 @@ class AreasBarPlot extends Node {
     };
 
     // Linking the period division to modify the chart ranges and labels
-    model.periodDivisionProperty.link( periodDivision => {
+    model.periodDivisionsProperty.link( periodDivision => {
       modelXRange = new Range( -1, periodDivision );
       chartTransform.setModelXRange( modelXRange );
       barPlot.update();

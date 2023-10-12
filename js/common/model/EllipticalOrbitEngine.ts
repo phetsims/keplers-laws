@@ -147,7 +147,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.sunMassProperty = bodies[ 0 ].massProperty;
 
     // Populate the orbital areas
-    for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
+    for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
       this.orbitalAreas.push( new OrbitalArea( i ) );
     }
 

@@ -201,7 +201,7 @@ export default class EllipticalOrbitNode extends Path {
     const areaValueRange = new Range( 0, 1 );
     const timeValueRange = new Range( 0, 1 );
 
-    for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
+    for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
       orbitDivisions.push( new Circle( 4, {
         fill: 'black',
         stroke: SolarSystemCommonColors.orbitColorProperty,
@@ -390,7 +390,7 @@ export default class EllipticalOrbitNode extends Path {
           let numberDisplayPosition = new Vector2( 0, 0 );
           let numberDisplayScaling = 1;
 
-          if ( i < model.periodDivisionProperty.value ) {
+          if ( i < model.periodDivisionsProperty.value ) {
             // Set the center of the orbit's divisions dot
             const dotPosition = area.dotPosition.times( scale ).minus( center );
             orbitDivisions[ i ].center = dotPosition;
@@ -404,7 +404,7 @@ export default class EllipticalOrbitNode extends Path {
             // Mean value between start and end
             numberDisplayPosition = model.engine.createPolar( ( area.startAngle + area.endAngle ) / 2 ).times( scale ).minus( center );
 
-            if ( model.periodDivisionProperty.value === 2 ) {
+            if ( model.periodDivisionsProperty.value === 2 ) {
               numberDisplayPosition = new Vector2( 0, 0.8 * radiusY * Math.pow( -1, i ) );
             }
 
@@ -420,7 +420,7 @@ export default class EllipticalOrbitNode extends Path {
             areaValueProperties[ i ].value = area.alreadyEntered ?
                                              ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
                                                                  : 0;
-            const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionProperty.value;
+            const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionsProperty.value;
             timeValueProperties[ i ].value = area.alreadyEntered ?
                                              ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
                                                                  : 0;
@@ -434,7 +434,7 @@ export default class EllipticalOrbitNode extends Path {
         } );
       }
       else {
-        for ( let i = 0; i < KeplersLawsConstants.MAX_ORBITAL_DIVISIONS; i++ ) {
+        for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
           orbitDivisions[ i ].visible = false;
           areaPaths[ i ].visible = false;
         }
@@ -461,7 +461,7 @@ export default class EllipticalOrbitNode extends Path {
     Multilink.multilink(
       [
         modelViewTransformProperty,
-        model.periodDivisionProperty,
+        model.periodDivisionsProperty,
         model.selectedLawProperty,
         KeplersLawsStrings.symbol.aStringProperty,
         KeplersLawsStrings.symbol.bStringProperty,

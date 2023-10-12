@@ -16,16 +16,9 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import nullSoundPlayer from '../../../../tambo/js/shared-sound-players/nullSoundPlayer.js';
 import PeriodDivisionSoundManager from './PeriodDivisionSoundManager.js';
-import TinyProperty from '../../../../axon/js/TinyProperty.js';
-import Range from '../../../../dot/js/Range.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
-
-const divisionsRangeProperty = new TinyProperty( new Range(
-  KeplersLawsConstants.MIN_ORBITAL_DIVISIONS,
-  KeplersLawsConstants.MAX_ORBITAL_DIVISIONS
-) );
 
 export default class PeriodDivisionsPanel extends Panel {
 
@@ -44,7 +37,7 @@ export default class PeriodDivisionsPanel extends Panel {
         new Text( KeplersLawsStrings.periodDivisionStringProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
           maxWidth: 200
         } ) ),
-        new NumberSpinner( model.periodDivisionProperty, divisionsRangeProperty, {
+        new NumberSpinner( model.periodDivisionsProperty, model.periodDivisionsProperty.rangeProperty, {
           arrowsPosition: 'leftRight',
           layoutOptions: {
             align: 'center'
@@ -61,7 +54,7 @@ export default class PeriodDivisionsPanel extends Panel {
 
     const periodDivisionSounds = new PeriodDivisionSoundManager();
 
-    model.periodDivisionProperty.lazyLink( periodDivision => {
+    model.periodDivisionsProperty.lazyLink( periodDivision => {
       if ( !model.resetting ) {
         periodDivisionSounds.playPeriodDivisionSound( periodDivision );
       }

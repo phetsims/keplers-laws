@@ -9,11 +9,12 @@
 import keplersLaws from '../keplersLaws.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 
 const KeplersLawsConstants = {
 
-  MAX_ORBITAL_DIVISIONS: 6,
-  MIN_ORBITAL_DIVISIONS: 2,
+  // Range and default value for periodDivisionsProperty
+  PERIOD_DIVISIONS_RANGE: new RangeWithValue( 2, 6, 4 ),
 
   TITLE_OPTIONS: {
     font: new PhetFont( { size: 18, weight: 'bold' } ),

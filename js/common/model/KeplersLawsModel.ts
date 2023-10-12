@@ -33,6 +33,7 @@ import Body, { BodyInfo } from '../../../../solar-system-common/js/model/Body.js
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -70,7 +71,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly lawUpdatedEmitter = new Emitter();
 
   // Number of divisions of the orbital area
-  public readonly periodDivisionProperty: NumberProperty;
+  public readonly periodDivisionsProperty: NumberProperty;
 
   // Graph exponents
   public readonly correctPowersSelectedProperty: ReadOnlyProperty<boolean>;
@@ -111,7 +112,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.sun = this.bodies[ 0 ];
     this.planet = this.bodies[ 1 ];
 
-    this.periodDivisionProperty = new NumberProperty( 4 );
+    this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
+      range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
+      tandem: options.tandem.createTandem( 'periodDivisionsProperty' )
+    } );
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
 
@@ -141,7 +145,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.lastLaw = this.selectedLawProperty.value;
 
-    this.periodDivisionProperty.link( divisions => {
+    this.periodDivisionsProperty.link( divisions => {
       this.engine.periodDivisions = divisions;
       this.engine.resetOrbitalAreas( this.isPlayingProperty.value );
     } );
@@ -221,7 +225,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.resetting = true;
     super.reset();
     this.selectedLawProperty.reset();
-    this.periodDivisionProperty.reset();
+    this.periodDivisionsProperty.reset();
     this.selectedAxisPowerProperty.reset();
     this.selectedPeriodPowerProperty.reset();
     this.alwaysCircularProperty.reset();
@@ -261,7 +265,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
    */
   public getAreaColor( area: OrbitalArea ): Color {
     const orbitalAreaColors = KeplersLawsColors.ORBITAL_AREA_COLORS;
-    const numAreas = this.periodDivisionProperty.value;
+    const numAreas = this.periodDivisionsProperty.value;
     const activeAreaIndex = this.engine.activeAreaIndex;
 
     let colorIndex;
