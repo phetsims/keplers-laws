@@ -22,19 +22,20 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import OrbitalDataInfoDialog from './OrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class OrbitalDataPanel extends Panel {
   public constructor(
     model: KeplersLawsModel,
     semiaxesVisibleProperty: BooleanProperty,
     eccentricityVisibleProperty: BooleanProperty,
-    providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'>
+    tandem: Tandem
   ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, providedOptions, {
-      visibleProperty: DerivedProperty.or( [ semiaxesVisibleProperty, eccentricityVisibleProperty ] )
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
+      visibleProperty: DerivedProperty.or( [ semiaxesVisibleProperty, eccentricityVisibleProperty ] ),
+      tandem: tandem
     } );
 
     const conditionalAUStringProperty = new DerivedProperty(
@@ -93,13 +94,14 @@ export default class OrbitalDataPanel extends Panel {
     } );
 
     // Info button and associated dialog
-    const infoDialog = new OrbitalDataInfoDialog();
+    const infoDialog = new OrbitalDataInfoDialog( tandem.createTandem( 'infoDialog' ) );
     const infoButton = new InfoButton( {
       accessibleName: KeplersLawsStrings.a11y.infoButtonForOrbitalDataStringProperty,
       scale: 0.5,
       iconFill: 'rgb( 41, 106, 163 )',
       touchAreaDilation: 20,
-      listener: () => infoDialog.show()
+      listener: () => infoDialog.show(),
+      tandem: tandem.createTandem( 'infoButton' )
     } );
 
     // The panel's content

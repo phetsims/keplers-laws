@@ -26,9 +26,9 @@ export default class FirstLawPanels extends VBox {
       visibleProperty: model.isFirstLawProperty,
       margin: 5,
       children: [
-        new EccentricityPanel( model.engine.eccentricityProperty, eccentricityVisibleProperty ),
-        new OrbitalDataPanel( model, semiaxesVisibleProperty, eccentricityVisibleProperty ),
-        new MoreOrbitalDataPanel( model )
+        new EccentricityPanel( model.engine.eccentricityProperty, eccentricityVisibleProperty, tandem.createTandem( 'eccentricityPanel' ) ),
+        new OrbitalDataPanel( model, semiaxesVisibleProperty, eccentricityVisibleProperty, tandem.createTandem( 'orbitalDataPanel' ) ),
+        new MoreOrbitalDataPanel( model, tandem.createTandem( 'moreOrbitalDataPanel' ) )
       ],
       tandem: tandem
     } );

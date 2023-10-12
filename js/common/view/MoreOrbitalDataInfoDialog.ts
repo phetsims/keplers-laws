@@ -16,10 +16,11 @@ import rvAngle_png from '../../../images/rvAngle_png.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class MoreOrbitalDataInfoDialog extends Dialog {
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
 
     const options: DialogOptions = {
       isDisposable: false,
@@ -27,7 +28,8 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
       title: new Text( KeplersLawsStrings.infoDialog.moreOrbitalDataStringProperty, {
         font: new PhetFont( 32 ),
         maxWidth: 600
-      } )
+      } ),
+      tandem: tandem
     };
 
     const content = new VBox( {

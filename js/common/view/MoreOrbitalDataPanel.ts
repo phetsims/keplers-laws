@@ -25,18 +25,19 @@ import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
 import MoreOrbitalDataInfoDialog from './MoreOrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class MoreOrbitalDataPanel extends Panel {
-  public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
+  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
-      visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
-    }, providedOptions );
+      visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+      tandem: tandem
+    } );
 
     // Extra information: distance and velocity vector values
     const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
@@ -125,13 +126,14 @@ export default class MoreOrbitalDataPanel extends Panel {
     } );
 
     // Info button and associated dialog
-    const infoDialog = new MoreOrbitalDataInfoDialog();
+    const infoDialog = new MoreOrbitalDataInfoDialog( tandem.createTandem( 'infoDialog' ) );
     const infoButton = new InfoButton( {
       accessibleName: KeplersLawsStrings.a11y.infoButtonForMoreOrbitalDataStringProperty,
       scale: 0.5,
       iconFill: 'rgb( 41, 106, 163 )',
       touchAreaDilation: 20,
-      listener: () => infoDialog.show()
+      listener: () => infoDialog.show(),
+      tandem: tandem.createTandem( 'infoButton' )
     } );
 
     // The panel's content

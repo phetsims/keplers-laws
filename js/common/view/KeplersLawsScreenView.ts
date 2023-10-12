@@ -61,7 +61,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
   private readonly firstLawPanels: Node;
   private readonly secondLawPanels: Node;
   private readonly thirdLawPanels: Node;
-  private readonly lawsButtons?: Node;
+  private readonly lawsRadioButtonGroup?: Node;
 
   private readonly playBodySounds: () => void;
 
@@ -368,10 +368,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.interfaceLayer.addChild( lawsPanelsBox );
     this.interfaceLayer.addChild( topRightAlignBox );
     if ( options.allowLawSelection ) {
-      this.lawsButtons = new LawsRadioButtonGroup( model.selectedLawProperty );
+      this.lawsRadioButtonGroup = new LawsRadioButtonGroup( model.selectedLawProperty, options.tandem.createTandem( 'lawsRadioButtonGroup' ) );
       this.interfaceLayer.addChild( new AlignBox( new HBox( {
           children: [
-            this.lawsButtons
+            this.lawsRadioButtonGroup
           ],
           spacing: 20
         } ),
@@ -398,7 +398,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
 
     this.pdomControlAreaNode.pdomOrder = [
-      this.lawsButtons ? this.lawsButtons : null,
+      this.lawsRadioButtonGroup ? this.lawsRadioButtonGroup : null,
       this.keplersLawsPanels,
       this.firstLawPanels,
       this.secondLawPanels,
@@ -425,9 +425,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         expandX: 'right',
         expandY: 'top'
       },
-      ...( this.lawsButtons ? [
+      ...( this.lawsRadioButtonGroup ? [
         {
-          node: this.lawsButtons,
+          node: this.lawsRadioButtonGroup,
           expandX: 'left' as const,
           expandY: 'bottom' as const
         }
