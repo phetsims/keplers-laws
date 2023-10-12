@@ -6,7 +6,7 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { AlignBox, DragListener, Image, InteractiveHighlighting, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, DragListener, Image, InteractiveHighlighting, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
@@ -21,7 +21,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
@@ -33,6 +32,11 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );
+const READOUT_TEXT_OPTIONS: TextOptions = {
+  font: new PhetFont( { size: 18 } ),
+  fill: 'black',
+  maxWidth: 100
+};
 
 type SelfOptions = {
   iconColor?: string;
@@ -145,7 +149,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
           value: Utils.toFixed( time, 2 ),
           units: KeplersLawsStrings.units.yearsStringProperty
         } );
-      } ), KeplersLawsConstants.TIMER_READOUT_OPTIONS );
+      } ), READOUT_TEXT_OPTIONS );
     readoutText.boundsProperty.link( bounds => {
       readoutText.center = new Vector2( 0, 0 );
     } );

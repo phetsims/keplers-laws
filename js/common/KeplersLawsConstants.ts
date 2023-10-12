@@ -15,12 +15,6 @@ const KeplersLawsConstants = {
   MAX_ORBITAL_DIVISIONS: 6,
   MIN_ORBITAL_DIVISIONS: 2,
 
-  TIMER_READOUT_OPTIONS: {
-    font: new PhetFont( { size: 18 } ),
-    fill: 'black',
-    maxWidth: 100
-  },
-
   TITLE_OPTIONS: {
     font: new PhetFont( { size: 18, weight: 'bold' } ),
     fill: SolarSystemCommonColors.foregroundProperty
