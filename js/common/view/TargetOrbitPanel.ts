@@ -25,7 +25,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 export default class TargetOrbitPanel extends Panel {
   public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>, topLayer: Node ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
     } );
 

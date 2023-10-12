@@ -33,7 +33,7 @@ export default class OrbitalDataPanel extends Panel {
     providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'>
   ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, providedOptions, {
       visibleProperty: DerivedProperty.or( [ semiaxesVisibleProperty, eccentricityVisibleProperty ] )
     } );
 

@@ -60,7 +60,7 @@ export default class KeplersLawsPanels extends VBox {
         // 'Stopwatch' checkbox
         KeplersLawsCheckbox.createStopwatchCheckbox( visibleProperties.stopwatchVisibleProperty, tandem.createTandem( 'stopwatchCheckbox' ) )
       ]
-    } ), SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS );
+    } ), SolarSystemCommonConstants.PANEL_OPTIONS );
 
     super( {
       isDisposable: false,

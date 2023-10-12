@@ -31,7 +31,7 @@ export default class PeriodDivisionsPanel extends Panel {
 
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       isDisposable: false,
       visibleProperty: model.isSecondLawProperty,
       tandem: tandem

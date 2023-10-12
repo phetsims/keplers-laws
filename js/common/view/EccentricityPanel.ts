@@ -31,7 +31,7 @@ const EQUATION_TEXT_OPTIONS = {
 export default class EccentricityPanel extends Panel {
   public constructor( eccentricityProperty: NumberProperty, eccentricityVisibleProperty: BooleanProperty ) {
 
-    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       visibleProperty: eccentricityVisibleProperty
     } );
 
