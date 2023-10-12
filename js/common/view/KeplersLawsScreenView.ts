@@ -57,7 +57,7 @@ export type KeplersLawsScreenViewOptions = SelfOptions & StrictOmit<SolarSystemC
 class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisibleProperties> {
   private readonly periodTimerNode: PeriodTimerNode;
 
-  private readonly keplersLawsPanels: Node;
+  private readonly topRightPanels: Node;
   private readonly firstLawPanels: Node;
   private readonly secondLawPanels: Node;
   private readonly thirdLawPanels: Node;
@@ -252,7 +252,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     );
 
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
-    this.keplersLawsPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, options.tandem.createTandem( 'keplersLawsPanels' ) );
+    this.topRightPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, options.tandem.createTandem( 'topRightPanels' ) );
 
     const zoomButtonGroup = new MagnifyingGlassZoomButtonGroup( model.zoomLevelProperty, {
       orientation: 'horizontal',
@@ -273,7 +273,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         align: 'top',
         children: [
           zoomButtonGroup,
-          this.keplersLawsPanels
+          this.topRightPanels
         ]
       } ),
       {
@@ -400,7 +400,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     this.pdomControlAreaNode.pdomOrder = [
       this.lawsRadioButtonGroup ? this.lawsRadioButtonGroup : null,
-      this.keplersLawsPanels,
+      this.topRightPanels,
       this.firstLawPanels,
       this.secondLawPanels,
       this.thirdLawPanels,
@@ -422,7 +422,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         };
       } ),
       {
-        node: this.keplersLawsPanels,
+        node: this.topRightPanels,
         expandX: 'right',
         expandY: 'top'
       },

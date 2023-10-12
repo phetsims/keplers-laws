@@ -21,12 +21,16 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class TargetOrbitPanel extends Panel {
-  public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>, topLayer: Node ) {
+  public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>,
+                      topLayer: Node, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
-      visibleProperty: DerivedProperty.not( model.isSecondLawProperty )
+      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     } );
 
     const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty,
@@ -39,11 +43,12 @@ export default class TargetOrbitPanel extends Panel {
       lineWidth: 2
     } );
 
-    const comboBox = new TargetOrbitComboBox( model.targetOrbitProperty, topLayer, {
+    const targetOrbitComboBox = new TargetOrbitComboBox( model.targetOrbitProperty, topLayer, {
       enabledProperty: model.isSolarSystemProperty,
       layoutOptions: {
         align: 'center'
-      }
+      },
+      tandem: tandem.createTandem( 'targetOrbitComboBox' )
     } );
 
     const content = new VBox( {
@@ -54,7 +59,7 @@ export default class TargetOrbitPanel extends Panel {
           layoutOptions: { stretch: true },
           children: [ targetOrbitText, targetOrbitIcon ]
         } ),
-        comboBox
+        targetOrbitComboBox
       ]
     } );
 

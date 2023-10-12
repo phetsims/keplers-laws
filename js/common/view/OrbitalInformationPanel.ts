@@ -25,7 +25,8 @@ export default class OrbitalInformationPanel extends Panel {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
-      tandem: tandem
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     } );
 
     // Checkboxes for First Law

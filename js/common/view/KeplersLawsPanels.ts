@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * KeplersLawsPanels is the collection of panels that appears in the upper-right corner of all screens.
+ * KeplersLawsPanels is the collection of panels that appears in the top-right corner of all screens.
  *
  * @author Agustín Vallejo
  * @author Chris Malley (PixelZoom, Inc.)
@@ -25,41 +25,44 @@ export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
-    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer );
+    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer, tandem.createTandem( 'targetOrbitPanel' ) );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
     const orbitalInformationPanel = new OrbitalInformationPanel( model, visibleProperties, tandem.createTandem( 'orbitalInformationPanel' ) );
 
     // A bunch of unrelated controls, so we named the panel based on its position in the layout.
-    const bottomPanel = new Panel( new VBox( {
+    const visibilityPanelTandem = tandem.createTandem( 'visibilityPanel' );
+    const visibilityPanel = new Panel( new VBox( {
       spacing: 5,
       align: 'left',
       stretch: true,
       children: [
 
         // 'Always circular' checkbox
-        KeplersLawsCheckbox.createAlwaysCircularCheckbox( model.alwaysCircularProperty, tandem.createTandem( 'alwaysCircularCheckbox' ) ),
+        KeplersLawsCheckbox.createAlwaysCircularCheckbox( model.alwaysCircularProperty, visibilityPanelTandem.createTandem( 'alwaysCircularCheckbox' ) ),
 
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
         // 'Speed', 'Velocity', and 'Gravity Force' checkboxes
-        SolarSystemCommonCheckbox.createSpeedCheckbox( visibleProperties.speedVisibleProperty, tandem.createTandem( 'speedCheckbox' ) ),
-        SolarSystemCommonCheckbox.createVelocityCheckbox( visibleProperties.velocityVisibleProperty, tandem.createTandem( 'velocityCheckbox' ) ),
-        SolarSystemCommonCheckbox.createGravityForceCheckbox( visibleProperties.gravityVisibleProperty, tandem.createTandem( 'gravityForceCheckbox' ) ),
+        SolarSystemCommonCheckbox.createSpeedCheckbox( visibleProperties.speedVisibleProperty, visibilityPanelTandem.createTandem( 'speedCheckbox' ) ),
+        SolarSystemCommonCheckbox.createVelocityCheckbox( visibleProperties.velocityVisibleProperty, visibilityPanelTandem.createTandem( 'velocityCheckbox' ) ),
+        SolarSystemCommonCheckbox.createGravityForceCheckbox( visibleProperties.gravityVisibleProperty, visibilityPanelTandem.createTandem( 'gravityForceCheckbox' ) ),
 
         // Gravity 'Zoom' control (labeled slider)
         new GravityZoomControl( model.forceScaleProperty, visibleProperties.gravityVisibleProperty,
-          tandem.createTandem( 'gravityZoomControl' ) ),
+          visibilityPanelTandem.createTandem( 'gravityZoomControl' ) ),
 
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
 
         // 'Grid' and 'Measuring Tape' checkboxes
-        SolarSystemCommonCheckbox.createGridCheckbox( visibleProperties.gridVisibleProperty, tandem.createTandem( 'gridCheckbox' ) ),
-        SolarSystemCommonCheckbox.createMeasuringTapeCheckbox( visibleProperties.measuringTapeVisibleProperty, tandem.createTandem( 'measuringTapeCheckbox' ) ),
+        SolarSystemCommonCheckbox.createGridCheckbox( visibleProperties.gridVisibleProperty, visibilityPanelTandem.createTandem( 'gridCheckbox' ) ),
+        SolarSystemCommonCheckbox.createMeasuringTapeCheckbox( visibleProperties.measuringTapeVisibleProperty, visibilityPanelTandem.createTandem( 'measuringTapeCheckbox' ) ),
 
         // 'Stopwatch' checkbox
-        KeplersLawsCheckbox.createStopwatchCheckbox( visibleProperties.stopwatchVisibleProperty, tandem.createTandem( 'stopwatchCheckbox' ) )
-      ]
+        KeplersLawsCheckbox.createStopwatchCheckbox( visibleProperties.stopwatchVisibleProperty, visibilityPanelTandem.createTandem( 'stopwatchCheckbox' ) )
+      ],
+      tandem: visibilityPanelTandem,
+      phetioVisiblePropertyInstrumented: true
     } ), SolarSystemCommonConstants.PANEL_OPTIONS );
 
     super( {
@@ -68,7 +71,7 @@ export default class KeplersLawsPanels extends VBox {
       children: [
         targetOrbitPanel,
         orbitalInformationPanel,
-        bottomPanel
+        visibilityPanel
       ]
     } );
   }
