@@ -252,17 +252,16 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     // Temporarily set the selected law to the first one, so that the first law panel defines the height of the controls
     this.keplersLawsPanels = new KeplersLawsPanels( model, this.visibleProperties, this.topLayer, options.tandem.createTandem( 'keplersLawsPanels' ) );
 
-    const zoomButtons = new MagnifyingGlassZoomButtonGroup(
-      model.zoomLevelProperty,
-      {
-        orientation: 'horizontal',
-        spacing: 5,
-        magnifyingGlassNodeOptions: {
-          glassRadius: 8
-        },
-        touchAreaXDilation: 5,
-        touchAreaYDilation: 5
-      } );
+    const zoomButtonGroup = new MagnifyingGlassZoomButtonGroup( model.zoomLevelProperty, {
+      orientation: 'horizontal',
+      spacing: 5,
+      magnifyingGlassNodeOptions: {
+        glassRadius: 8
+      },
+      touchAreaXDilation: 5,
+      touchAreaYDilation: 5,
+      tandem: options.tandem.createTandem( 'zoomButtonGroup' )
+    } );
 
     // Add the control panel on top of the canvases
     // Visibility checkboxes for sim elements
@@ -271,7 +270,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         spacing: 10,
         align: 'top',
         children: [
-          zoomButtons,
+          zoomButtonGroup,
           this.keplersLawsPanels
         ]
       } ),
@@ -404,7 +403,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       this.secondLawPanels,
       this.thirdLawPanels,
       timeControlNode,
-      zoomButtons,
+      zoomButtonGroup,
       this.resetAllButton
     ]; // decouple traversal order from rendering order
   }
