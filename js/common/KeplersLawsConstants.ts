@@ -28,8 +28,7 @@ const KeplersLawsConstants = {
 
   TEXT_OPTIONS: {
     font: new PhetFont( 16 ),
-    fill: SolarSystemCommonColors.foregroundProperty,
-    lineWidth: 0.1
+    fill: SolarSystemCommonColors.foregroundProperty
   },
 
   ACCORDION_BOX_OPTIONS: {
