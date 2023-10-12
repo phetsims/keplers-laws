@@ -28,6 +28,7 @@ import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
 import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -39,7 +40,7 @@ const UPSCALE = 1.3;
 
 export default class SecondLawAccordionBox extends AccordionBox {
 
-  public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty ) {
+  public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
     const options = combineOptions<AccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
@@ -50,7 +51,9 @@ export default class SecondLawAccordionBox extends AccordionBox {
         } ) ),
       accessibleName: KeplersLawsStrings.sweptAreaStringProperty,
       useExpandedBoundsWhenCollapsed: false,
-      expandedProperty: secondLawAccordionBoxExpandedProperty
+      expandedProperty: secondLawAccordionBoxExpandedProperty,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     } );
 
     const xAxis = new ArrowNode( 0, 0, xAxisLength, 0, {
@@ -96,7 +99,8 @@ export default class SecondLawAccordionBox extends AccordionBox {
       centerY: labelDistance,
       accessibleName: KeplersLawsStrings.a11y.eraserStringProperty,
       touchAreaXDilation: 10,
-      touchAreaYDilation: 10
+      touchAreaYDilation: 10,
+      tandem: tandem.createTandem( 'eraserButton' )
     } );
 
     super( new Node( {

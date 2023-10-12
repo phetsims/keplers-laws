@@ -28,6 +28,7 @@ import FractionNode from './FractionNode.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -51,7 +52,7 @@ type ThirdLawAccordionBoxOptions = AccordionBoxOptions & SelfOptions;
 
 export default class ThirdLawAccordionBox extends AccordionBox {
 
-  public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty ) {
+  public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
     const titleStringProperty = new DerivedProperty( [
         KeplersLawsStrings.graph.titleStringProperty,
@@ -81,7 +82,9 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       visibleProperty: model.isThirdLawProperty,
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false,
-      expandedProperty: thirdLawAccordionBoxExpandedProperty
+      expandedProperty: thirdLawAccordionBoxExpandedProperty,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     } );
 
     // Equation at the top of the accordion box: T/a = ...
@@ -105,21 +108,25 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         {
           value: 1,
           labelContent: KeplersLawsStrings.symbol.TStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsStrings.symbol.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'TRadioButton'
         },
         {
           value: 2,
           labelContent: KeplersLawsDerivedStrings.T2StringProperty,
-          createNode: () => new RichText( KeplersLawsDerivedStrings.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsDerivedStrings.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'T2RadioButton'
         },
         {
           value: 3,
           labelContent: KeplersLawsDerivedStrings.T3StringProperty,
-          createNode: () => new RichText( KeplersLawsDerivedStrings.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsDerivedStrings.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'T3RadioButton'
         }
       ],
       {
-        layoutOptions: { column: 0, row: 0 }
+        layoutOptions: { column: 0, row: 0 },
+        tandem: tandem.createTandem( 'periodPowerRadioButtonGroup' )
       }
     );
 
@@ -130,22 +137,26 @@ export default class ThirdLawAccordionBox extends AccordionBox {
         {
           value: 1,
           labelContent: KeplersLawsStrings.symbol.aStringProperty,
-          createNode: () => new RichText( KeplersLawsStrings.symbol.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsStrings.symbol.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'aRadioButton'
         },
         {
           value: 2,
           labelContent: KeplersLawsDerivedStrings.a2StringProperty,
-          createNode: () => new RichText( KeplersLawsDerivedStrings.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsDerivedStrings.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'a2RadioButton'
         },
         {
           value: 3,
           labelContent: KeplersLawsDerivedStrings.a3StringProperty,
-          createNode: () => new RichText( KeplersLawsDerivedStrings.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS )
+          createNode: () => new RichText( KeplersLawsDerivedStrings.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
+          tandemName: 'a3RadioButton'
         }
       ],
       {
         layoutOptions: { column: 1, row: 1 },
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        tandem: tandem.createTandem( 'semiMajorAxisPowerRadioButtonGroup' )
       }
     );
 
@@ -154,7 +165,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       layoutOptions: { column: 0, row: 1 },
       accessibleName: KeplersLawsStrings.a11y.eraserStringProperty,
       touchAreaXDilation: 10,
-      touchAreaYDilation: 10
+      touchAreaYDilation: 10,
+      tandem: tandem.createTandem( 'eraserButton' )
     } );
 
     // Accordion box content

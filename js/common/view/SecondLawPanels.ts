@@ -22,7 +22,8 @@ export default class SecondLawPanels extends VBox {
       stretch: true,
       children: [
         new PeriodDivisionsPanel( model, visibleProperties, tandem.createTandem( 'periodDivisionsPanel' ) ),
-        new SecondLawAccordionBox( model, visibleProperties.secondLawAccordionBoxExpandedProperty ),
+        new SecondLawAccordionBox( model, visibleProperties.secondLawAccordionBoxExpandedProperty,
+          tandem.createTandem( 'sweptAreaAccordionBox' ) ),
         ...( model.isAllLaws ? [] : [ new MoreOrbitalDataPanel( model, tandem.createTandem( 'moreOrbitalDataPanel' ) ) ] )
       ],
       visibleProperty: model.isSecondLawProperty,

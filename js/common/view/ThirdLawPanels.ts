@@ -20,8 +20,8 @@ export default class ThirdLawPanels extends VBox {
       margin: 5,
       stretch: true,
       children: [
-        new ThirdLawAccordionBox( model, thirdLawAccordionBoxExpandedProperty ),
-        new StarMassPanel( model )
+        new ThirdLawAccordionBox( model, thirdLawAccordionBoxExpandedProperty, tandem.createTandem( 'graphAccordionBox' ) ),
+        new StarMassPanel( model, tandem.createTandem( 'starMassPanel' ) )
       ],
       visibleProperty: model.isThirdLawProperty,
       tandem: tandem

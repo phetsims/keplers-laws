@@ -20,18 +20,21 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
 const THUMB_SIZE = new Dimension2( 14, 24 );
 
 export default class StarMassPanel extends Panel {
-  public constructor( model: KeplersLawsModel ) {
+  public constructor( model: KeplersLawsModel, tandem: Tandem ) {
 
     const options = {
       isDisposable: false,
       fill: SolarSystemCommonColors.controlPanelFillProperty,
-      stroke: null
+      stroke: null,
+      tandem: tandem,
+      phetioVisiblePropertyInstrumented: true
     };
 
     const titleText = new Text( KeplersLawsStrings.starMassStringProperty,
@@ -43,7 +46,7 @@ export default class StarMassPanel extends Panel {
     const ourSunTickLabelValue = model.sun.massProperty.value;
     const massRange = new RangeWithValue( ourSunTickLabelValue / 2, 2 * ourSunTickLabelValue, ourSunTickLabelValue );
 
-    const numberControl = new SolarSystemCommonNumberControl( model.sun.massProperty, massRange, {
+    const massNumberControl = new SolarSystemCommonNumberControl( model.sun.massProperty, massRange, {
       sliderOptions: {
         constrainValue: ( mass: number ) => Math.abs( mass - ourSunTickLabelValue ) / ourSunTickLabelValue < SNAP_TOLERANCE ? ourSunTickLabelValue : mass,
 
@@ -67,7 +70,8 @@ export default class StarMassPanel extends Panel {
       startCallback: () => { model.sun.userControlledMassProperty.value = true; },
       endCallback: () => {
         model.sun.userControlledMassProperty.value = false;
-      }
+      },
+      tandem: tandem.createTandem( 'massNumberControl' )
     } );
 
     // 'Our Sun' tick label
@@ -81,14 +85,14 @@ export default class StarMassPanel extends Panel {
     const tickLabels = [ createTickLabel( '0.5' ), ourSunTickLabel, createTickLabel( '1.5' ), createTickLabel( '2.0' ) ];
     for ( let i = 0; i < tickLabels.length; i++ ) {
       const tickValue = ( i + 1 ) / tickLabels.length * massRange.max;
-      numberControl.slider.addMajorTick( tickValue, tickLabels[ i ] );
+      massNumberControl.slider.addMajorTick( tickValue, tickLabels[ i ] );
     }
 
     const content = new VBox( {
       spacing: 10,
       children: [
         titleText,
-        numberControl
+        massNumberControl
       ]
     } );
 
