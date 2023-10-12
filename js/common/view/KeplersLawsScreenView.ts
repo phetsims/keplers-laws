@@ -142,16 +142,16 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.forceProperty, model.forceScaleProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
-      baseMagnitude: 1000,
-      tandem: planetarySystemNodesTandem.createTandem( 'sunGravityForceVectorNode' )
+      baseMagnitude: 1000
+      // tandem: Do not instrument, nothing interesting here.
     } );
     this.componentsLayer.addChild( sunGravityForceVectorNode );
 
     const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.forceProperty, model.forceScaleProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
-      baseMagnitude: 1000,
-      tandem: planetarySystemNodesTandem.createTandem( 'planetGravityForceVectorNode' )
+      baseMagnitude: 1000
+      // tandem: Do not instrument, nothing interesting here.
     } );
     this.componentsLayer.addChild( planetGravityForceVectorNode );
 
