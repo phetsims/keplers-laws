@@ -189,9 +189,9 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.visibleProperties.velocityVisibleProperty.setInitialValue( true );
 
     // Sound ----------------------------------------------------------------------------------
-    const crashSound = new SoundClip( BodiesCollide_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
-    const escapeSound = new SoundClip( ObjectWillEscape_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
-    const correctPowersSound = new SoundClip( Success_mp3, { initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL * 2 } );
+    const crashSound = new SoundClip( BodiesCollide_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
+    const escapeSound = new SoundClip( ObjectWillEscape_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
+    const correctPowersSound = new SoundClip( Success_mp3, { initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL } );
     soundManager.addSoundGenerator( crashSound );
     soundManager.addSoundGenerator( escapeSound );
     soundManager.addSoundGenerator( correctPowersSound );
