@@ -35,7 +35,7 @@ export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
-      visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+      visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty,
       tandem: tandem
     } );
 
