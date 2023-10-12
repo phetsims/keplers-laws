@@ -16,7 +16,7 @@ import OrbitalInformationPanel from './OrbitalInformationPanel.js';
 import keplersLaws from '../../keplersLaws.js';
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import TargetOrbitPanel from './TargetOrbitPanel.js';
-import GravityScaleSlider from '../../../../solar-system-common/js/view/GravityScaleSlider.js';
+import GravityZoomControl from '../../../../solar-system-common/js/view/GravityZoomControl.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
@@ -48,7 +48,7 @@ export default class KeplersLawsPanels extends VBox {
         SolarSystemCommonCheckbox.createGravityForceCheckbox( visibleProperties.gravityVisibleProperty, tandem.createTandem( 'gravityForceCheckbox' ) ),
 
         // Gravity 'Zoom' control (labeled slider)
-        new GravityScaleSlider( model.forceScaleProperty, visibleProperties.gravityVisibleProperty,
+        new GravityZoomControl( model.forceScaleProperty, visibleProperties.gravityVisibleProperty,
           tandem.createTandem( 'gravityZoomControl' ) ),
 
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),
