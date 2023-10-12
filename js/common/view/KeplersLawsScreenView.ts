@@ -92,12 +92,14 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const sun = model.sun;
     const planet = model.planet;
 
+    const planetarySystemNodesTandem = options.tandem.createTandem( 'planetarySystemNodes' );
+
     // BodyNode for each Body
     const sunNode = new BodyNode( sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
       pickable: false,
-      tandem: options.tandem.createTandem( 'sunNode' )
+      tandem: planetarySystemNodesTandem.createTandem( 'sunNode' )
     } );
     this.bodiesLayer.addChild( sunNode );
 
@@ -117,7 +119,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         point = this.constrainBoundaryViewPoint( point, radius );
         return point;
       },
-      tandem: options.tandem.createTandem( 'planetNode' )
+      tandem: planetarySystemNodesTandem.createTandem( 'planetNode' )
     } );
     this.bodiesLayer.addChild( planetNode );
 
@@ -132,7 +134,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       shiftDragVelocity: 50,
       mapPosition: this.constrainBoundaryViewPoint.bind( this ),
       soundViewNode: this,
-      tandem: options.tandem.createTandem( 'planetVelocityVectorNode' )
+      tandem: planetarySystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
     } );
     this.componentsLayer.addChild( planetVelocityVectorNode );
 
@@ -141,7 +143,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
       baseMagnitude: 1000,
-      tandem: options.tandem.createTandem( 'sunGravityForceVectorNode' )
+      tandem: planetarySystemNodesTandem.createTandem( 'sunGravityForceVectorNode' )
     } );
     this.componentsLayer.addChild( sunGravityForceVectorNode );
 
@@ -149,7 +151,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
       baseMagnitude: 1000,
-      tandem: options.tandem.createTandem( 'planetGravityForceVectorNode' )
+      tandem: planetarySystemNodesTandem.createTandem( 'planetGravityForceVectorNode' )
     } );
     this.componentsLayer.addChild( planetGravityForceVectorNode );
 
