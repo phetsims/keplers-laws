@@ -45,9 +45,9 @@ simLauncher.launch( () => {
         supportsProjectorMode: true
       },
       simulationOptions: {
-        customPreferences: [
-          { createContent: tandem => new KeplersLawsPreferencesNode() }
-        ]
+        customPreferences: [ {
+          createContent: tandem => new KeplersLawsPreferencesNode( tandem.createTandem( 'simPreferences' ) )
+        } ]
       }
     } )
   };
