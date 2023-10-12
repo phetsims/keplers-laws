@@ -84,14 +84,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       } );
     } );
 
-    const modelDragBoundsProperty = new DerivedProperty( [
-      this.visibleBoundsProperty,
-      this.modelViewTransformProperty
-    ], ( visibleBounds, modelViewTransform ) => {
-      const viewBounds = modelViewTransform.viewToModelBounds( visibleBounds );
-
-      return viewBounds;
-    } );
+    const modelDragBoundsProperty = new DerivedProperty(
+      [ this.modelViewTransformProperty, this.visibleBoundsProperty ],
+      ( modelViewTransform, visibleBounds ) => modelViewTransform.viewToModelBounds( visibleBounds )
+    );
 
     const sun = model.sun;
     const planet = model.planet;
