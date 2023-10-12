@@ -98,7 +98,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const sunNode = new BodyNode( model.sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
-      pickable: false
+      pickable: false,
+      tandem: options.tandem.createTandem( 'sunNode' )
     } );
     const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
       useCueingArrows: true,
@@ -119,7 +120,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         point = this.constrainBoundaryViewPoint( point, radius );
 
         return point;
-      }
+      },
+      tandem: options.tandem.createTandem( 'planetNode' )
     } );
     this.bodiesLayer.addChild( sunNode );
     this.bodiesLayer.addChild( planetNode );
@@ -150,31 +152,35 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
 
     // Draggable velocity vector
-    const draggableVelocityVectorNode = new DraggableVelocityVectorNode(
-      planet,
-      this.modelViewTransformProperty,
-      this.visibleProperties.velocityVisibleProperty, {
-        minimumMagnitude: 30,
-        snapToZero: false,
-        maxMagnitudeProperty: model.engine.escapeSpeedProperty,
-        enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
-        dragVelocity: 150,
-        shiftDragVelocity: 50,
-        mapPosition: this.constrainBoundaryViewPoint.bind( this ),
-        soundViewNode: this
-      } );
-    this.componentsLayer.addChild( draggableVelocityVectorNode );
+    const planetVelocityVectorNode = new DraggableVelocityVectorNode( planet, this.modelViewTransformProperty, {
+      visibleProperty: this.visibleProperties.velocityVisibleProperty,
+      minimumMagnitude: 30,
+      snapToZero: false,
+      maxMagnitudeProperty: model.engine.escapeSpeedProperty,
+      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
+      dragVelocity: 150,
+      shiftDragVelocity: 50,
+      mapPosition: this.constrainBoundaryViewPoint.bind( this ),
+      soundViewNode: this,
+      tandem: options.tandem.createTandem( 'planetVelocityVectorNode' )
+    } );
+    this.componentsLayer.addChild( planetVelocityVectorNode );
 
     // Gravity force vectors
-    this.componentsLayer.addChild( new VectorNode(
-      planet, this.modelViewTransformProperty, this.visibleProperties.gravityVisibleProperty, planet.forceProperty,
-      model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
-    ) );
-
-    this.componentsLayer.addChild( new VectorNode(
-      sun, this.modelViewTransformProperty, this.visibleProperties.gravityVisibleProperty, sun.forceProperty,
-      model.forceScaleProperty, { fill: SolarSystemCommonColors.gravityColorProperty, baseMagnitude: 1000 }
-    ) );
+    const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.forceProperty, model.forceScaleProperty, {
+      visibleProperty: this.visibleProperties.gravityVisibleProperty,
+      fill: SolarSystemCommonColors.gravityColorProperty,
+      baseMagnitude: 1000,
+      tandem: options.tandem.createTandem( 'sunGravityForceVectorNode' )
+    } );
+    this.componentsLayer.addChild( sunGravityForceVectorNode );
+    const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.forceProperty, model.forceScaleProperty, {
+      visibleProperty: this.visibleProperties.gravityVisibleProperty,
+      fill: SolarSystemCommonColors.gravityColorProperty,
+      baseMagnitude: 1000,
+      tandem: options.tandem.createTandem( 'planetGravityForceVectorNode' )
+    } );
+    this.componentsLayer.addChild( planetGravityForceVectorNode );
 
     // Target orbit node
     const targetOrbitNode = new TargetOrbitNode(
@@ -388,7 +394,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     this.pdomPlayAreaNode.pdomOrder = [
       planetNode,
-      draggableVelocityVectorNode,
+      planetVelocityVectorNode,
       this.periodTimerNode,
       this.measuringTapeNode,
       stopwatchNode
