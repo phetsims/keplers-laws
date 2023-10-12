@@ -363,7 +363,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
             valueUnitsPattern: KeplersLawsStrings.pattern.valueUnitsStringProperty,
             units: KeplersLawsStrings.units.yearsStringProperty
           } )
-        }
+        },
+        tandem: options.tandem.createTandem( 'stopwatchNode' )
       }
     );
     this.topLayer.addChild( stopwatchNode );

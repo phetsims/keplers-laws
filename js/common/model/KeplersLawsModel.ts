@@ -51,7 +51,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   public readonly sun: Body;
   public readonly planet: Body;
-  
+
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
   public readonly isAllLaws: boolean;
 
@@ -62,7 +62,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly alwaysCircularProperty = new BooleanProperty( false );
 
   // Stopwatch visibility
-  public readonly stopwatch = new Stopwatch();
+  public readonly stopwatch: Stopwatch;
 
   // Booleans to keep track of which law is selected
   public readonly isFirstLawProperty: ReadOnlyProperty<boolean>;
@@ -175,6 +175,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       else {
         this.engine.update();
       }
+    } );
+
+    this.stopwatch = new Stopwatch( {
+      tandem: options.tandem.createTandem( 'stopwatch' )
     } );
 
     this.periodTracker = new PeriodTracker( this );
