@@ -9,7 +9,6 @@
 import keplersLaws from '../keplersLaws.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
-import SolarSystemCommonConstants from '../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
 const KeplersLawsConstants = {
 
@@ -36,8 +35,7 @@ const KeplersLawsConstants = {
   TEXT_OPTIONS: {
     font: new PhetFont( 16 ),
     fill: SolarSystemCommonColors.foregroundProperty,
-    lineWidth: 0.1,
-    maxWidth: SolarSystemCommonConstants.TEXT_MAX_WIDTH
+    lineWidth: 0.1
   },
 
   ACCORDION_BOX_OPTIONS: {

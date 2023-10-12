@@ -80,7 +80,8 @@ export default class FirstLawGraph extends AlignBox {
         new NumberDisplay( eccentricityProperty, MODEL_Y_RANGE, {
           decimalPlaces: 2,
           textOptions: combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
-            fill: 'fuchsia'
+            fill: 'fuchsia',
+            maxWidth: 200
           } ),
           backgroundFill: null,
           backgroundStroke: null
