@@ -92,14 +92,14 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const sun = model.sun;
     const planet = model.planet;
 
-    const planetarySystemNodesTandem = options.tandem.createTandem( 'planetarySystemNodes' );
+    const orbitalSystemNodesTandem = options.tandem.createTandem( 'orbitalSystemNodes' );
 
     // BodyNode for each Body
     const sunNode = new BodyNode( sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
       pickable: false,
-      tandem: planetarySystemNodesTandem.createTandem( 'sunNode' )
+      tandem: orbitalSystemNodesTandem.createTandem( 'sunNode' )
     } );
     this.bodiesLayer.addChild( sunNode );
 
@@ -119,7 +119,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         point = this.constrainBoundaryViewPoint( point, radius );
         return point;
       },
-      tandem: planetarySystemNodesTandem.createTandem( 'planetNode' )
+      tandem: orbitalSystemNodesTandem.createTandem( 'planetNode' )
     } );
     this.bodiesLayer.addChild( planetNode );
 
@@ -134,7 +134,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       shiftDragVelocity: 50,
       mapPosition: this.constrainBoundaryViewPoint.bind( this ),
       soundViewNode: this,
-      tandem: planetarySystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
+      tandem: orbitalSystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
     } );
     this.componentsLayer.addChild( planetVelocityVectorNode );
 
