@@ -110,9 +110,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     }, providedOptions );
     super( options );
 
-    //TODO https://github.com/phetsims/my-solar-system/issues/240 should be obtained from this.bodies?
-    this.sun = this.activeBodies[ 0 ];
-    this.planet = this.activeBodies[ 1 ];
+    this.sun = this.bodies[ 0 ];
+    this.planet = this.bodies[ 1 ];
 
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
