@@ -281,7 +281,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     super.stepOnce( dt );
 
     if ( this.stopwatch.isRunningProperty.value ) {
-      this.stopwatch.step( dt * this.timeFormatter.get( this.timeSpeedProperty.value )! * this.timeScale * this.modelToViewTime );
+      this.stopwatch.step( dt * this.timeSpeedMap.get( this.timeSpeedProperty.value )! * this.timeScale * this.modelToViewTime );
     }
   }
 
