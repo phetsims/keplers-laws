@@ -29,12 +29,13 @@ import Range from '../../../../dot/js/Range.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import Body, { BodyInfo } from '../../../../solar-system-common/js/model/Body.js';
+import Body from '../../../../solar-system-common/js/model/Body.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Property from '../../../../axon/js/Property.js';
+import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -104,8 +105,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       timeScale: 2,
       modelToViewTime: 1 / 12.7,
       defaultBodyInfo: [
-        { isActive: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ), tandemName: 'sun' },
-        { isActive: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ), tandemName: 'planet' }
+        new BodyInfo( { isActive: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ), tandemName: 'sun' } ),
+        new BodyInfo( { isActive: true, mass: 50, position: new Vector2( 200, 0 ), velocity: new Vector2( 0, 81.6 ), tandemName: 'planet' } )
       ]
     }, providedOptions );
     super( options );
