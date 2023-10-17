@@ -153,14 +153,6 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Multilink to update the escape speed and distance based on the bodies position and velocity
     Multilink.multilink(
-      [ this.sun.userIsControllingMassProperty, this.body.userIsControllingPositionProperty, this.body.userIsControllingVelocityProperty ],
-      ( userIsControllingMass, userIsControllingPosition, userIsControllingVelocity ) => {
-        this.updateAllowedProperty.value = userIsControllingMass || userIsControllingPosition || userIsControllingVelocity;
-        this.resetOrbitalAreas();
-        this.update();
-      } );
-
-    Multilink.multilink(
       [
         this.body.positionProperty,
         this.body.velocityProperty,
@@ -179,7 +171,15 @@ export default class EllipticalOrbitEngine extends Engine {
         this.escapeRadiusProperty.value = 2 * this.mu / ( vMagnitude * vMagnitude ) * epsilon * epsilon;
         this.escapeSpeedProperty.value = Math.sqrt( 2 * this.mu / rMagnitude ) * epsilon;
       } );
+
     // Multilink to release orbital updates when the user is controlling the body
+    Multilink.multilink(
+      [ this.body.userIsControllingPositionProperty, this.body.userIsControllingVelocityProperty, this.sun.userIsControllingMassProperty ],
+      ( userIsControllingPosition, userIsControllingVelocity, userIsControllingMass ) => {
+        this.updateAllowedProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
+        this.resetOrbitalAreas();
+        this.update();
+      } );
 
     this.tracingPathProperty.lazyLink( tracing => {
       if ( tracing ) {
