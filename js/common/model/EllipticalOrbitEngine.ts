@@ -41,7 +41,7 @@ import OrbitalArea from './OrbitalArea.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
-const TWOPI = 2 * Math.PI;
+const TWO_PI = 2 * Math.PI;
 
 // Scaling down factor for the escape velocity to avoid unwanted errors
 const epsilon = 0.99;
@@ -216,7 +216,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.ranEmitter.emit();
 
     if ( this.tracingPathProperty.value ) {
-      this.periodTraceEnd = Utils.moduloBetweenDown( this.nu, this.periodTraceStart, this.periodTraceStart + TWOPI );
+      this.periodTraceEnd = Utils.moduloBetweenDown( this.nu, this.periodTraceStart, this.periodTraceStart + TWO_PI );
     }
 
     this.areasErased = false;
@@ -375,19 +375,19 @@ export default class EllipticalOrbitEngine extends Engine {
     this.segmentArea = this.totalArea / this.periodDivisions;
 
     // The angle of one section of the ellipse
-    const angularSection = TWOPI / this.periodDivisions;
+    const angularSection = TWO_PI / this.periodDivisions;
 
     this.orbitalAreas.forEach( ( orbitalArea, i ) => {
       if ( i < this.periodDivisions && this.allowedOrbitProperty.value ) {
         // Calculate true anomaly
         // ( i + 1 ) because first angle is always nu = 0
-        const M = ( i + 1 ) * TWOPI / this.periodDivisions;
+        const M = ( i + 1 ) * TWO_PI / this.periodDivisions;
         const nu = this.getTrueAnomaly( M );
 
         // Update orbital areas angles, constrained by the startAngle
         let startAngle = previousNu;
-        let endAngle = Utils.moduloBetweenDown( nu, startAngle, startAngle + TWOPI );
-        bodyAngle = Utils.moduloBetweenDown( bodyAngle, startAngle, startAngle + TWOPI );
+        let endAngle = Utils.moduloBetweenDown( nu, startAngle, startAngle + TWO_PI );
+        bodyAngle = Utils.moduloBetweenDown( bodyAngle, startAngle, startAngle + TWO_PI );
 
         orbitalArea.startAngle = startAngle;
         orbitalArea.endAngle = endAngle;
@@ -437,7 +437,7 @@ export default class EllipticalOrbitEngine extends Engine {
    * Angular difference as calculated by the mean anomaly, i.e. independent of the eccentricity.
    */
   private meanAnomalyDiff( startAngle: number, endAngle: number ): number {
-    return Utils.moduloBetweenDown( this.getMeanAnomaly( endAngle, this.e ) - this.getMeanAnomaly( startAngle, this.e ), 0, TWOPI );
+    return Utils.moduloBetweenDown( this.getMeanAnomaly( endAngle, this.e ) - this.getMeanAnomaly( startAngle, this.e ), 0, TWO_PI );
   }
 
   private calculateSweptArea( startAngle: number, endAngle: number ): number {
@@ -547,7 +547,7 @@ export default class EllipticalOrbitEngine extends Engine {
       Math.cos( E ) - this.e
     );
 
-    return Utils.moduloBetweenDown( nu, 0, TWOPI );
+    return Utils.moduloBetweenDown( nu, 0, TWO_PI );
   }
 
   private getMeanAnomaly( nu: number, e: number ): number {
