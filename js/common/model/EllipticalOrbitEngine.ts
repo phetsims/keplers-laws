@@ -30,7 +30,6 @@ import Body from '../../../../solar-system-common/js/model/Body.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Engine from '../../../../solar-system-common/js/model/Engine.js';
-import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
@@ -138,7 +137,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public periodTraceStart = 0;
   public periodTraceEnd = 0;
 
-  public constructor( bodies: ObservableArray<Body> ) {
+  public constructor( bodies: Body[] ) {
     super( bodies );
 
     this.orbitTypeProperty = new EnumerationProperty( OrbitTypes.STABLE_ORBIT );
