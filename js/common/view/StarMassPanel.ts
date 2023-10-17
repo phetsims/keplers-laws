@@ -67,9 +67,9 @@ export default class StarMassPanel extends Panel {
       },
 
       // snap to default value if close
-      startCallback: () => { model.sun.userControlledMassProperty.value = true; },
+      startCallback: () => { model.sun.userIsControllingMassProperty.value = true; },
       endCallback: () => {
-        model.sun.userControlledMassProperty.value = false;
+        model.sun.userIsControllingMassProperty.value = false;
       },
       tandem: tandem.createTandem( 'massNumberControl' )
     } );
