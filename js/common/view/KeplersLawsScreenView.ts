@@ -98,7 +98,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const orbitalSystemNodesTandem = options.tandem.createTandem( 'orbitalSystemNodes' );
 
     // BodyNode for each Body
-    const sunNode = new BodyNode( sun, this.modelViewTransformProperty, {
+    const sunNode = new BodyNode( sun, this.modelViewTransformProperty, model.userControlledProperty, {
       draggable: false,
       focusable: false,
       pickable: false,
@@ -106,7 +106,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.bodiesLayer.addChild( sunNode );
 
-    const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
+    const planetNode = new BodyNode( planet, this.modelViewTransformProperty, model.userControlledProperty, {
       useCueingArrows: true,
       showVelocityIndex: false,
       soundViewNode: this,
