@@ -65,7 +65,9 @@ const KeplersLawsConstants = {
     font: new PhetFont( 18 ),
     fill: 'black',
     lineWrap: 450
-  }
+  },
+
+  INITIAL_VECTOR_OFFSCALE: -1.55 // The initial offscale value for the gravity vector arrows
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );

@@ -45,6 +45,7 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 import DraggableVelocityVectorNode from '../../../../solar-system-common/js/view/DraggableVelocityVectorNode.js';
 import MetronomeSoundManager from './MetronomeSoundManager.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
 // constants
 const MARGIN = 10;
@@ -142,18 +143,18 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.componentsLayer.addChild( planetVelocityVectorNode );
 
     // Gravity force vectors
-    const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.forceProperty, model.forceScaleProperty, {
+    const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.forceProperty, model.forceScalePowerProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
-      baseMagnitude: 1000
+      scalingOffset: KeplersLawsConstants.INITIAL_VECTOR_OFFSCALE
       // tandem: Do not instrument, nothing interesting here.
     } );
     this.componentsLayer.addChild( sunGravityForceVectorNode );
 
-    const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.forceProperty, model.forceScaleProperty, {
+    const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.forceProperty, model.forceScalePowerProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
-      baseMagnitude: 1000
+      scalingOffset: KeplersLawsConstants.INITIAL_VECTOR_OFFSCALE
       // tandem: Do not instrument, nothing interesting here.
     } );
     this.componentsLayer.addChild( planetGravityForceVectorNode );

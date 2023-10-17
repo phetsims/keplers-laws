@@ -206,9 +206,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.periodTracker = new PeriodTracker( this );
 
-    this.forceScaleProperty.setInitialValue( -0.25 );
-    this.forceScaleProperty.reset();
-
     const animatedZoomScaleRange = new Range( 0.45, 1 );
     const animatedZoomScaleProperty = new NumberProperty( 1 );
     const zoomAnimationIn = new Animation( {
