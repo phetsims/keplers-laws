@@ -44,6 +44,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 import DraggableVelocityVectorNode from '../../../../solar-system-common/js/view/DraggableVelocityVectorNode.js';
+import MetronomeSoundManager from './MetronomeSoundManager.js';
 
 // constants
 const MARGIN = 10;
@@ -75,11 +76,13 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     super( model, new KeplersLawsVisibleProperties( options.tandem.createTandem( 'visibleProperties' ) ), options );
 
+    const metronomeSoundManager = new MetronomeSoundManager();
+
     model.engine.orbitalAreas.forEach( ( area, index ) => {
       area.insideProperty.link( inside => {
         if ( inside && model.isPlayingProperty.value && model.isSecondLawProperty.value && !model.engine.areasErased ) {
           const soundIndex = model.engine.retrograde ? model.periodDivisionsProperty.value - index - 1 : index;
-          this.bodySoundManager.playOrbitalMetronome( soundIndex, model.engine.a, model.periodDivisionsProperty.value );
+          metronomeSoundManager.playOrbitalMetronome( soundIndex, model.engine.a, model.periodDivisionsProperty.value );
         }
       } );
     } );
