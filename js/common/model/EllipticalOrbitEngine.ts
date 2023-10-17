@@ -67,13 +67,14 @@ const INITIAL_MU = 2e6;
 
 export default class EllipticalOrbitEngine extends Engine {
 
-  public readonly sun: Body;
+  private readonly sun: Body;
   private readonly planet: Body;
 
-  public mu = INITIAL_MU; // mu = G * Mass_sun, and G in this sim is 1e4
+  // mu = G * Mass_sun, and G in this sim is 1e4
+  private mu = INITIAL_MU;
 
   // Boolean that keeps track of the engine's state
-  public isRunning = false;
+  private isRunning = false;
 
   // For changes that require changes in the shape of the orbit
   public readonly changedEmitter = new Emitter();
@@ -84,15 +85,16 @@ export default class EllipticalOrbitEngine extends Engine {
   // For changes that require a reset of the orbit
   public readonly resetEmitter = new Emitter();
 
-  public bodyPolarPosition = new Vector2( 1, 0 );
+  private bodyPolarPosition = new Vector2( 1, 0 );
   public periodDivisions = 4;
-  public orbitalAreas: OrbitalArea[] = [];
   public retrograde = false;
   public alwaysCircles = false;
-  public isCircularProperty = new BooleanProperty( true );
+
+  public orbitalAreas: OrbitalArea[] = [];
+  public readonly isCircularProperty = new BooleanProperty( true );
 
   // When the sim plays, the orbit won't be constantly updating, only on user interactions
-  public updateAllowedProperty = new BooleanProperty( false );
+  public readonly updateAllowedProperty = new BooleanProperty( false );
 
   public readonly semiMajorAxisProperty = new NumberProperty( 1 );
   public readonly semiMinorAxisProperty = new NumberProperty( 1 );
@@ -108,11 +110,11 @@ export default class EllipticalOrbitEngine extends Engine {
   public c = 0;  // focal distance
   public e = 0;  // eccentricity
   public w = 0;  // argument of periapsis
-  public M = 0;  // mean anomaly
-  public W = 0;  // angular velocity
-  public T = 1;  // period
+  private M = 0;  // mean anomaly
+  private W = 0;  // angular velocity
+  private T = 1;  // period
   public nu = 0; // true anomaly
-  public L = 0;  // angular momentum
+  private L = 0;  // angular momentum
   public d1 = 0; // distance from the main focus to the body
   public d2 = 0; // distance from the secondary focus to the body
 
