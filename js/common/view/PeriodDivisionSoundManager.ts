@@ -27,7 +27,7 @@ export default class PeriodDivisionSoundManager {
   private readonly periodDivisionSoundClips: SoundClip[];
   public constructor() {
     this.periodDivisionSoundClips = periodDivisionSounds.map( sound => new SoundClip( sound, {
-      initialOutputLevel: 2 * SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL
+      initialOutputLevel: SolarSystemCommonConstants.DEFAULT_SOUND_OUTPUT_LEVEL
     } ) );
 
     this.periodDivisionSoundClips.forEach( sound => soundManager.addSoundGenerator( sound ) );
