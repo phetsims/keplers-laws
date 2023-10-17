@@ -143,7 +143,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.orbitTypeProperty = new EnumerationProperty( OrbitTypes.STABLE_ORBIT );
 
     // In the case of this sim, the body0 is the sun, and body1 is the planet
-    assert && assert( bodies.length === 2, 'This sim requires exactly 2 bodies.' );
+    assert && assert( bodies.length === 2, 'This engine requires exactly 2 bodies.' );
     this.sun = bodies[ 0 ];
     this.planet = bodies[ 1 ];
 
@@ -171,7 +171,7 @@ export default class EllipticalOrbitEngine extends Engine {
       ( userIsControllingPosition, userIsControllingVelocity, userIsControllingMass ) => {
         this.updateAllowedProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
         this.resetOrbitalAreas();
-        this.update();
+        this.update( this.bodies );
       } );
 
     this.tracingPathProperty.lazyLink( tracing => {
@@ -247,7 +247,9 @@ export default class EllipticalOrbitEngine extends Engine {
    * Based on the current position and velocity of the body
    * Updates the orbital elements of the body using Orbital Mechanics Analytic Equations
    */
-  public override update(): void {
+  public override update( bodies: Body[] ): void {
+    assert && assert( bodies === this.bodies, 'This engine expects the set of bodies to remain constant.' );
+
     this.resetOrbitalAreas();
     this.periodTraceStart = 0;
     this.periodTraceEnd = 0;
@@ -578,7 +580,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.W = 0; // angular velocity
     this.T = 1; // period
     this.nu = 0; // true anomaly
-    this.update();
+    this.update( this.bodies );
     this.resetEmitter.emit();
   }
 }
