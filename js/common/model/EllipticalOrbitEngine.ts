@@ -155,16 +155,8 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Multilink to update the escape speed and distance based on the bodies position and velocity
     Multilink.multilink(
-      [
-        this.planet.positionProperty,
-        this.planet.velocityProperty,
-        this.sun.massProperty
-      ],
-      (
-        position: Vector2,
-        velocity: Vector2,
-        mass: number
-      ) => {
+      [ this.planet.positionProperty, this.planet.velocityProperty, this.sun.massProperty ],
+      ( position, velocity, mass ) => {
         const rMagnitude = position.magnitude;
         const vMagnitude = velocity.magnitude;
 
