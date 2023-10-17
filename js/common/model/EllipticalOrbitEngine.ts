@@ -235,7 +235,7 @@ export default class EllipticalOrbitEngine extends Engine {
   /**
    * Updates the distances from the foci to the body
    */
-  public updateBodyDistances(): void {
+  private updateBodyDistances(): void {
     this.bodyPolarPosition = this.createPolar( this.nu );
     this.d1 = this.bodyPolarPosition.magnitude;
     this.d2 = 2 * this.a - this.d1;
@@ -244,7 +244,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.distance2Property.value = this.d2 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
   }
 
-  public updateForces( position: Vector2 ): void {
+  private updateForces( position: Vector2 ): void {
     const force = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
     this.planet.forceProperty.value = force;
     this.planet.accelerationProperty.value = force.timesScalar( 1 / this.planet.massProperty.value );
