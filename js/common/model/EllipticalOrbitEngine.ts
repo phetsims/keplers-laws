@@ -39,7 +39,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import OrbitTypes from './OrbitTypes.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import OrbitalArea from './OrbitalArea.js';
-import Property from '../../../../axon/js/Property.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
@@ -70,7 +69,6 @@ export default class EllipticalOrbitEngine extends Engine {
   public mu = INITIAL_MU; // mu = G * Mass_sun, and G in this sim is 1e4
   public readonly sun: Body;
   public readonly body: Body;
-  public readonly sunMassProperty: Property<number>;
 
   // Boolean that keeps track of the engine's state
   public isRunning = false;
@@ -144,7 +142,6 @@ export default class EllipticalOrbitEngine extends Engine {
     // In the case of this screen, the body 0 is the sun, and the body 1 is the planet
     this.sun = bodies[ 0 ];
     this.body = bodies[ 1 ];
-    this.sunMassProperty = bodies[ 0 ].massProperty;
 
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
