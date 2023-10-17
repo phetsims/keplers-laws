@@ -66,9 +66,11 @@ class Ellipse {
 const INITIAL_MU = 2e6;
 
 export default class EllipticalOrbitEngine extends Engine {
-  public mu = INITIAL_MU; // mu = G * Mass_sun, and G in this sim is 1e4
+
   public readonly sun: Body;
-  public readonly body: Body;
+  private readonly planet: Body;
+
+  public mu = INITIAL_MU; // mu = G * Mass_sun, and G in this sim is 1e4
 
   // Boolean that keeps track of the engine's state
   public isRunning = false;
@@ -139,9 +141,9 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.orbitTypeProperty = new EnumerationProperty( OrbitTypes.STABLE_ORBIT );
 
-    // In the case of this screen, the body 0 is the sun, and the body 1 is the planet
+    // In the case of this screen, the body0 is the sun, and body1 is the planet
     this.sun = bodies[ 0 ];
-    this.body = bodies[ 1 ];
+    this.planet = bodies[ 1 ];
 
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
@@ -151,8 +153,8 @@ export default class EllipticalOrbitEngine extends Engine {
     // Multilink to update the escape speed and distance based on the bodies position and velocity
     Multilink.multilink(
       [
-        this.body.positionProperty,
-        this.body.velocityProperty,
+        this.planet.positionProperty,
+        this.planet.velocityProperty,
         this.sun.massProperty
       ],
       (
@@ -171,7 +173,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Multilink to release orbital updates when the user is controlling the body
     Multilink.multilink(
-      [ this.body.userIsControllingPositionProperty, this.body.userIsControllingVelocityProperty, this.sun.userIsControllingMassProperty ],
+      [ this.planet.userIsControllingPositionProperty, this.planet.userIsControllingVelocityProperty, this.sun.userIsControllingMassProperty ],
       ( userIsControllingPosition, userIsControllingVelocity, userIsControllingMass ) => {
         this.updateAllowedProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
         this.resetOrbitalAreas();
@@ -180,7 +182,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.tracingPathProperty.lazyLink( tracing => {
       if ( tracing ) {
-        // Sets the beggining of the period trace to the planet's current angular position
+        // Sets the beginning of the period trace to the planet's current angular position
         this.periodTraceStart = this.nu;
       }
     } );
@@ -204,14 +206,14 @@ export default class EllipticalOrbitEngine extends Engine {
     this.nu = this.getTrueAnomaly( this.M );
 
     // Update the position and velocity of the body
-    const currentPosition = this.body.positionProperty.value;
+    const currentPosition = this.planet.positionProperty.value;
     const newPosition = this.createPolar( this.nu, this.w );
     const newVelocity = newPosition.minus( currentPosition ).normalize();
     const newAngularMomentum = newPosition.crossScalar( newVelocity );
     newVelocity.multiplyScalar( this.L / newAngularMomentum );
 
-    this.body.positionProperty.value = newPosition;
-    this.body.velocityProperty.value = newVelocity;
+    this.planet.positionProperty.value = newPosition;
+    this.planet.velocityProperty.value = newVelocity;
 
     this.updateBodyDistances();
     this.updateForces( newPosition );
@@ -241,9 +243,9 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   public updateForces( position: Vector2 ): void {
-    const force = position.timesScalar( -this.mu * this.body.massProperty.value / Math.pow( position.magnitude, 3 ) );
-    this.body.forceProperty.value = force;
-    this.body.accelerationProperty.value = force.timesScalar( 1 / this.body.massProperty.value );
+    const force = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
+    this.planet.forceProperty.value = force;
+    this.planet.accelerationProperty.value = force.timesScalar( 1 / this.planet.massProperty.value );
     this.sun.forceProperty.value = force.timesScalar( -1 );
   }
 
@@ -256,7 +258,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.periodTraceStart = 0;
     this.periodTraceEnd = 0;
 
-    const r = this.body.positionProperty.value;
+    const r = this.planet.positionProperty.value;
     this.updateForces( r );
 
     let escaped = false;
@@ -265,7 +267,7 @@ export default class EllipticalOrbitEngine extends Engine {
     }
     else {
       const escapeSpeed = this.escapeSpeedProperty.value;
-      const currentSpeed = this.body.velocityProperty.value.magnitude;
+      const currentSpeed = this.planet.velocityProperty.value.magnitude;
       if ( currentSpeed >= escapeSpeed ) {
         this.enforceEscapeSpeed();
       }
@@ -278,7 +280,7 @@ export default class EllipticalOrbitEngine extends Engine {
       }
     }
 
-    const v = this.body.velocityProperty.value;
+    const v = this.planet.velocityProperty.value;
 
     // Angular momentum
     this.L = r.crossScalar( v );
@@ -334,7 +336,7 @@ export default class EllipticalOrbitEngine extends Engine {
    */
   private enforceCircularOrbit( position: Vector2 ): void {
     const direction = this.retrograde ? -1 : 1;
-    this.body.velocityProperty.value =
+    this.planet.velocityProperty.value =
       position.perpendicular.normalize().multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
   }
 
@@ -342,7 +344,7 @@ export default class EllipticalOrbitEngine extends Engine {
    * Makes sure the velocity is never greater than the escape speed
    */
   private enforceEscapeSpeed(): void {
-    this.body.velocityProperty.value = this.body.velocityProperty.value.normalized().multiplyScalar( this.escapeSpeedProperty.value );
+    this.planet.velocityProperty.value = this.planet.velocityProperty.value.normalized().multiplyScalar( this.escapeSpeedProperty.value );
   }
 
   private collidedWithSun( a: number, e: number ): boolean {
