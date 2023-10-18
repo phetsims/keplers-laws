@@ -102,7 +102,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       // SolarSystemCommonModelOptionsOptions
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
       zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
-      timeScale: 2,
+      timeScale: 0.005,
       modelToViewTime: 1 / 12.7,
       defaultBodyInfo: [
         new BodyInfo( { isActive: true, mass: 200, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ), tandemName: 'sun' } ),
