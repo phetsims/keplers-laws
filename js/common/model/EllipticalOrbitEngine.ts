@@ -32,7 +32,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import Engine from '../../../../solar-system-common/js/model/Engine.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import OrbitTypes from './OrbitTypes.js';
@@ -61,8 +60,11 @@ class Ellipse {
   ) {}
 }
 
+// Initial G for the sim
+const INITIAL_G = 4.45669;
+
 // Equal to G*M in model units.
-const INITIAL_MU = 2e6;
+const INITIAL_MU = 891.34;
 
 export default class EllipticalOrbitEngine extends Engine {
 
@@ -70,7 +72,7 @@ export default class EllipticalOrbitEngine extends Engine {
   private readonly planet: Body;
 
   // mu = G * Mass_sun, and G in this sim is 1e4
-  private mu = INITIAL_MU;
+  private mu;
 
   // Boolean that keeps track of the engine's state
   private isRunning = false;
@@ -139,6 +141,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public constructor( bodies: Body[] ) {
     super( bodies );
+    this.mu = INITIAL_MU;
 
     this.orbitTypeProperty = new EnumerationProperty( OrbitTypes.STABLE_ORBIT );
 
@@ -159,7 +162,7 @@ export default class EllipticalOrbitEngine extends Engine {
         const rMagnitude = position.magnitude;
         const vMagnitude = velocity.magnitude;
 
-        this.mu = 1e4 * mass;
+        this.mu = INITIAL_G * mass;
 
         this.escapeRadiusProperty.value = 2 * this.mu / ( vMagnitude * vMagnitude ) * epsilon * epsilon;
         this.escapeSpeedProperty.value = Math.sqrt( 2 * this.mu / rMagnitude ) * epsilon;
@@ -232,8 +235,8 @@ export default class EllipticalOrbitEngine extends Engine {
     this.d1 = this.bodyPolarPosition.magnitude;
     this.d2 = 2 * this.a - this.d1;
 
-    this.distance1Property.value = this.d1 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.distance2Property.value = this.d2 * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+    this.distance1Property.value = this.d1;
+    this.distance2Property.value = this.d2;
   }
 
   private updateForces( position: Vector2 ): void {
@@ -297,10 +300,10 @@ export default class EllipticalOrbitEngine extends Engine {
     this.totalArea = Math.PI * this.a * this.b;
     this.segmentArea = this.totalArea / this.periodDivisions;
 
-    this.semiMajorAxisProperty.value = this.a * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.semiMinorAxisProperty.value = this.b * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.focalDistanceProperty.value = this.c * SolarSystemCommonConstants.POSITION_MULTIPLIER;
-    this.periodProperty.value = this.T * Math.pow( SolarSystemCommonConstants.POSITION_MULTIPLIER, 3 / 2 );
+    this.semiMajorAxisProperty.value = this.a;
+    this.semiMinorAxisProperty.value = this.b;
+    this.focalDistanceProperty.value = this.c;
+    this.periodProperty.value = this.T;
 
     if ( this.collidedWithSun( a, e ) ) {
       this.allowedOrbitProperty.value = false;

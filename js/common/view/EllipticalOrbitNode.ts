@@ -16,7 +16,6 @@ import XNode from '../../../../scenery-phet/js/XNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import keplersLaws from '../../keplersLaws.js';
@@ -416,7 +415,7 @@ export default class EllipticalOrbitNode extends Path {
             timeValueNumberDisplays[ i ].rotation = this.orbit.w;
 
             // Calculates the total area of the ellipse / the number of divisions
-            const fullSegmentArea = this.orbit.segmentArea * SolarSystemCommonConstants.POSITION_MULTIPLIER * SolarSystemCommonConstants.POSITION_MULTIPLIER;
+            const fullSegmentArea = this.orbit.segmentArea;
             areaValueProperties[ i ].value = area.alreadyEntered ?
                                              ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
                                                                  : 0;
