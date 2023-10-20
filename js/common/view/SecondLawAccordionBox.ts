@@ -170,9 +170,6 @@ class AreasBarPlot extends Node {
     } );
 
     // y tick marks
-    // This is the default spacing between normal ticks. It's big because initial area values are on this same order of magnitude.
-    const YSpacing = 1e4;
-
     const entries = [
       { scale: 0.001 },
       { scale: 0.01 },
@@ -182,17 +179,17 @@ class AreasBarPlot extends Node {
       { scale: 100 },
       { scale: 1000 } ];
     const yTickMarkSets = entries.map( entry =>
-      new LimitedTickMarkSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+      new LimitedTickMarkSet( chartTransform, Orientation.VERTICAL, entry.scale, {
         edge: 'min',
         stroke: FOREGROUND_COLOR_PROPERTY,
         // The tickmarks get a little smaller as you zoom out
         extent: 13 - 2 * Math.log10( entry.scale )
       } ) );
     const yTickLabelSets = entries.map( entry =>
-      new LimitedTickLabelSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+      new LimitedTickLabelSet( chartTransform, Orientation.VERTICAL, entry.scale, {
         edge: 'min',
         createLabel: ( value: number ) => {
-          return new Text( value / 10000, { fill: SolarSystemCommonColors.foregroundProperty } );
+          return new Text( Utils.roundSymmetric( value * 1000 ) / 1000, { fill: SolarSystemCommonColors.foregroundProperty } );
         },
         positionLabel: ( label: Node, tickBounds: Bounds2, axisOrientation: Orientation ) => {
           label.rightCenter = tickBounds.leftCenter.plusXY( -5, 0 );
@@ -200,7 +197,7 @@ class AreasBarPlot extends Node {
         }
       } ) );
     const yGridLineSets = entries.map( entry =>
-      new LimitedGridLineSet( chartTransform, Orientation.VERTICAL, YSpacing * entry.scale, {
+      new LimitedGridLineSet( chartTransform, Orientation.VERTICAL, entry.scale, {
         stroke: FOREGROUND_COLOR_PROPERTY
       } ) );
 
