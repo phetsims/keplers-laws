@@ -88,12 +88,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       } );
     } );
 
-    // TODO: Look into this method, it's not scaling properly with modelViewTransform, see https://github.com/phetsims/my-solar-system/issues/252
-    // const modelDragBoundsProperty = new DerivedProperty(
-    //   [ this.modelViewTransformProperty, this.visibleBoundsProperty ],
-    //   ( modelViewTransform, visibleBounds ) => modelViewTransform.viewToModelBounds( visibleBounds )
-    // );
-
     const sun = model.sun;
     const planet = model.planet;
 
@@ -116,8 +110,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       dragVelocity: 150,
       shiftDragVelocity: 50,
       mapPosition: ( point, radius ) => {
-        // TODO: Look into this method, it's not scaling properly with modelViewTransform, see https://github.com/phetsims/my-solar-system/issues/252
-        // point = modelDragBoundsProperty.value.eroded( radius ).closestPointTo( point );
         const escapeRadius = model.engine.escapeRadiusProperty.value;
         if ( point.magnitude > escapeRadius ) {
           point = point.normalized().times( escapeRadius );
