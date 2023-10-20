@@ -41,6 +41,9 @@ export default class ThirdLawGraph extends Node {
 
     const axisLength = 160;
 
+    const maxSemiMajorAxis = 2;
+    const maxPeriod = model.engine.thirdLaw( maxSemiMajorAxis );
+
     const semiMajorAxisToViewPoint = ( semiMajorAxis: number ) => {
       const period = model.engine.thirdLaw( semiMajorAxis );
       const periodPower = model.selectedPeriodPowerProperty.value;
@@ -69,9 +72,6 @@ export default class ThirdLawGraph extends Node {
       stroke: FOREGROUND_COLOR_PROPERTY,
       tailWidth: 1
     } );
-
-    const maxSemiMajorAxis = 200;
-    const maxPeriod = model.engine.thirdLaw( maxSemiMajorAxis );
 
     const dataPoint = new Circle( 5, {
       fill: SolarSystemCommonColors.body2ColorProperty
@@ -158,7 +158,7 @@ export default class ThirdLawGraph extends Node {
 
       // If there's a selected target orbit and the star's mass is equal to 1 MSun
       if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
-        const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis * 100 );
+        const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis );
 
         // If the target orbit is inside the graph
         if ( targetOrbitPosition.x < axisLength ) {
@@ -168,7 +168,7 @@ export default class ThirdLawGraph extends Node {
         }
         else {
           targetOrbitPoint.visible = false;
-          const tail = semiMajorAxisToViewPoint( maxSemiMajorAxis - boundsPadding );
+          const tail = semiMajorAxisToViewPoint( maxSemiMajorAxis - 0.2 );
           const tip = semiMajorAxisToViewPoint( maxSemiMajorAxis ).minus( tail ).setMagnitude( 20 );
           targetOrbitOutOfBounds.translation = tail;
           targetOrbitOutOfBounds.setTip( tip.x, tip.y );
@@ -203,7 +203,7 @@ export default class ThirdLawGraph extends Node {
 
       // Draw a line between the minimum and maximum visited axis
       if ( minVisitedAxis !== maxVisitedAxis ) {
-        for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 1 ) {
+        for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 0.01 ) {
           const pointToDraw = semiMajorAxisToViewPoint( a );
 
           // If the point is out of bounds and the arrow position has not been set, set it
@@ -222,7 +222,7 @@ export default class ThirdLawGraph extends Node {
 
       if ( arrowPositionSet ) {
         const tail = semiMajorAxisToViewPoint( arrowX );
-        const tip = semiMajorAxisToViewPoint( arrowX + 15 ).minus( tail ).setMagnitude( 20 );
+        const tip = semiMajorAxisToViewPoint( arrowX + 0.2 ).minus( tail ).setMagnitude( 20 );
         outOfBoundsArrow.translation = tail;
         outOfBoundsArrow.setTip( tip.x, tip.y );
       }

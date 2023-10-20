@@ -42,7 +42,7 @@ export default class TargetOrbitNode extends Path {
     else {
       this.translation = this.modelViewTransformProperty.value.modelToViewPosition( Vector2.ZERO );
       const scale = this.modelViewTransformProperty.value.modelToViewDeltaX( 1 );
-      const a = 100 * scale * this.targetOrbitProperty.value.semiMajorAxis;
+      const a = scale * this.targetOrbitProperty.value.semiMajorAxis;
       const e = this.targetOrbitProperty.value.eccentricity;
       const b = a * Math.sqrt( 1 - e * e );
       this.shape = new Shape().ellipse( new Vector2( -a * e, 0 ), a, b, 0 );
