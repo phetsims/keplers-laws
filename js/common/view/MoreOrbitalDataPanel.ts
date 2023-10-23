@@ -48,9 +48,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.kmsStringProperty,
-      value: new DerivedProperty( [ model.planet.velocityProperty ], velocity => {
-        return Utils.toFixed( velocity.magnitude, 2 );
-      } )
+      value: new DerivedProperty( [ model.planet.speedProperty ], speed => Utils.toFixed( speed, 2 ) )
     } );
     const distanceAngleStringProperty = new DerivedStringProperty( [ model.planet.positionProperty ], position => {
       const value = Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
