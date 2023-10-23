@@ -49,7 +49,7 @@ export default class KeplersLawsPanels extends VBox {
         SolarSystemCommonCheckbox.createGravityForceCheckbox( visibleProperties.gravityVisibleProperty, visibilityPanelTandem.createTandem( 'gravityForceCheckbox' ) ),
 
         // Gravity 'Zoom' control (labeled slider)
-        new GravityZoomControl( model.forceScalePowerProperty, visibleProperties.gravityVisibleProperty,
+        new GravityZoomControl( model.gravityForceScalePowerProperty, visibleProperties.gravityVisibleProperty,
           visibilityPanelTandem.createTandem( 'gravityZoomControl' ) ),
 
         new HSeparator( SolarSystemCommonConstants.HSEPARATOR_OPTIONS ),

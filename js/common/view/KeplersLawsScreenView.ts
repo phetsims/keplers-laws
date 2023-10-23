@@ -137,7 +137,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.componentsLayer.addChild( planetVelocityVectorNode );
 
     // Gravity force vectors
-    const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.gravityForceProperty, model.forceScalePowerProperty, {
+    const sunGravityForceVectorNode = new VectorNode( sun, this.modelViewTransformProperty, sun.gravityForceProperty, model.gravityForceScalePowerProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
       scalingOffset: KeplersLawsConstants.INITIAL_VECTOR_OFFSCALE
@@ -145,7 +145,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.componentsLayer.addChild( sunGravityForceVectorNode );
 
-    const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.gravityForceProperty, model.forceScalePowerProperty, {
+    const planetGravityForceVectorNode = new VectorNode( planet, this.modelViewTransformProperty, planet.gravityForceProperty, model.gravityForceScalePowerProperty, {
       visibleProperty: this.visibleProperties.gravityVisibleProperty,
       fill: SolarSystemCommonColors.gravityColorProperty,
       scalingOffset: KeplersLawsConstants.INITIAL_VECTOR_OFFSCALE

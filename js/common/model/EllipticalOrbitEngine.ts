@@ -240,10 +240,10 @@ export default class EllipticalOrbitEngine extends Engine {
   }
 
   private updateForces( position: Vector2 ): void {
-    const force = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
-    this.planet.gravityForceProperty.value = force;
-    this.planet.accelerationProperty.value = force.timesScalar( 1 / this.planet.massProperty.value );
-    this.sun.gravityForceProperty.value = force.timesScalar( -1 );
+    const gravityForce = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
+    this.planet.gravityForceProperty.value = gravityForce;
+    this.planet.accelerationProperty.value = gravityForce.timesScalar( 1 / this.planet.massProperty.value );
+    this.sun.gravityForceProperty.value = gravityForce.timesScalar( -1 );
   }
 
   /**
