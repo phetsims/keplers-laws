@@ -40,11 +40,10 @@ export default class MoreOrbitalDataPanel extends Panel {
     } );
 
     // Extra information: distance and velocity vector values
-    const positionMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
+    const distanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.AUStringProperty,
-      value: new DerivedProperty( [ model.planet.positionProperty ], position => {
-        return Utils.toFixed( position.magnitude, 2 );
-      } )
+      value: new DerivedProperty( [ model.planet.positionProperty, model.sun.positionProperty ],
+        ( planetPosition, sunPosition ) => Utils.toFixed( planetPosition.distance( sunPosition ), 2 ) )
     } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.kmsStringProperty,
@@ -95,7 +94,7 @@ export default class MoreOrbitalDataPanel extends Panel {
               maxWidth: KeplersLawsConstants.ABSOLUTE_SYMBOL_MAX_WIDTH
             } ),
             new RichText( ' = ', KeplersLawsConstants.TEXT_OPTIONS ),
-            new RichText( positionMagnitudeStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
+            new RichText( distanceStringProperty, combineOptions<RichTextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
               maxWidth: KeplersLawsConstants.VALUE_MAX_WIDTH
             } ) )
           ]
