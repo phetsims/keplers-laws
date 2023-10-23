@@ -131,7 +131,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
     this.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
-        this.userControlledProperty.value = true;
+        this.userHasInteractedProperty.value = true;
       }
     } );
 
