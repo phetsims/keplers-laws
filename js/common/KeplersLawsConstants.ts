@@ -67,7 +67,9 @@ const KeplersLawsConstants = {
     lineWrap: 450
   },
 
-  INITIAL_VECTOR_OFFSCALE: -3.0 // The initial offscale value for the gravity vector arrows
+  INITIAL_VECTOR_OFFSCALE: -3.0, // The initial offscale value for the gravity vector arrows
+
+  MASS_OF_OUR_SUN: 200
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );

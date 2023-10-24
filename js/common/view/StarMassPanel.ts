@@ -44,12 +44,15 @@ export default class StarMassPanel extends Panel {
 
     const thumbFillProperty = SolarSystemCommonColors.body1ColorProperty;
 
-    const initialSunMass = model.sun.massProperty.value;
-    const massRange = new Range( 0.5 * initialSunMass, 2 * initialSunMass );
+    // Range of the star mass slider, relative to the mass of our sun
+    const massRange = new Range( 0.5 * KeplersLawsConstants.MASS_OF_OUR_SUN, 2 * KeplersLawsConstants.MASS_OF_OUR_SUN );
 
     const massNumberControl = new SolarSystemCommonNumberControl( model.sun.massProperty, massRange, {
       sliderOptions: {
-        constrainValue: ( mass: number ) => Math.abs( mass - initialSunMass ) / initialSunMass < SNAP_TOLERANCE ? initialSunMass : mass,
+
+        // Snap to 'Our Sun' tick mark
+        constrainValue: mass => ( Math.abs( mass - KeplersLawsConstants.MASS_OF_OUR_SUN ) / KeplersLawsConstants.MASS_OF_OUR_SUN ) < SNAP_TOLERANCE ?
+                                KeplersLawsConstants.MASS_OF_OUR_SUN : mass,
 
         trackSize: new Dimension2( 150, 1 ),
         thumbSize: THUMB_SIZE,
