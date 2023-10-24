@@ -69,7 +69,7 @@ const KeplersLawsConstants = {
 
   INITIAL_VECTOR_OFFSCALE: -3.0, // The initial offscale value for the gravity vector arrows
 
-  MASS_OF_OUR_SUN: 200
+  MASS_OF_OUR_SUN: 200 // x 10^28 kg
 };
 
 keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );
