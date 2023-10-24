@@ -268,6 +268,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     if ( this.engine.updateAllowedProperty.value ) {
       this.engine.update( this.activeBodies );
     }
+    this.checkForOffscaleForces();
   }
 
   public override step( dt: number ): void {
