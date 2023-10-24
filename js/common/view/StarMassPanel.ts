@@ -10,7 +10,7 @@
 import Panel from '../../../../sun/js/Panel.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
+import Range from '../../../../dot/js/Range.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -43,12 +43,12 @@ export default class StarMassPanel extends Panel {
       } ) );
 
     const thumbFillProperty = SolarSystemCommonColors.body1ColorProperty;
-    const ourSunTickLabelValue = model.sun.massProperty.value;
-    const massRange = new RangeWithValue( ourSunTickLabelValue / 2, 2 * ourSunTickLabelValue, ourSunTickLabelValue );
+    const sunMass = model.sun.massProperty.value;
+    const massRange = new Range( sunMass / 2, 2 * sunMass );
 
     const massNumberControl = new SolarSystemCommonNumberControl( model.sun.massProperty, massRange, {
       sliderOptions: {
-        constrainValue: ( mass: number ) => Math.abs( mass - ourSunTickLabelValue ) / ourSunTickLabelValue < SNAP_TOLERANCE ? ourSunTickLabelValue : mass,
+        constrainValue: ( mass: number ) => Math.abs( mass - sunMass ) / sunMass < SNAP_TOLERANCE ? sunMass : mass,
 
         trackSize: new Dimension2( 150, 1 ),
         thumbSize: THUMB_SIZE,
