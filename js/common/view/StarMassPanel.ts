@@ -43,12 +43,12 @@ export default class StarMassPanel extends Panel {
       } ) );
 
     const thumbFillProperty = SolarSystemCommonColors.body1ColorProperty;
-    const sunMass = model.sun.massProperty.value;
-    const massRange = new Range( sunMass / 2, 2 * sunMass );
+    const initialSunMass = model.sun.massProperty.value;
+    const massRange = new Range( initialSunMass / 2, 2 * initialSunMass );
 
     const massNumberControl = new SolarSystemCommonNumberControl( model.sun.massProperty, massRange, {
       sliderOptions: {
-        constrainValue: ( mass: number ) => Math.abs( mass - sunMass ) / sunMass < SNAP_TOLERANCE ? sunMass : mass,
+        constrainValue: ( mass: number ) => Math.abs( mass - initialSunMass ) / initialSunMass < SNAP_TOLERANCE ? initialSunMass : mass,
 
         trackSize: new Dimension2( 150, 1 ),
         thumbSize: THUMB_SIZE,
