@@ -288,7 +288,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const offScaleMessage = new Text( SolarSystemCommonStrings.offscaleMessageStringProperty, {
       font: new PhetFont( 16 ),
       fill: SolarSystemCommonColors.foregroundProperty,
-      visibleProperty: DerivedProperty.and( [ this.visibleProperties.gravityVisibleProperty, model.isAnyForceOffscaleProperty ] ),
+      visibleProperty: DerivedProperty.and( [ this.visibleProperties.gravityVisibleProperty, model.isAnyGravityForceOffscaleProperty ] ),
       maxWidth: 400
     } );
     offScaleMessage.boundsProperty.link( bounds => {
