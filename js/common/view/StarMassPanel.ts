@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
 import Range from '../../../../dot/js/Range.js';
@@ -21,6 +21,7 @@ import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
@@ -29,13 +30,11 @@ const THUMB_SIZE = new Dimension2( 14, 24 );
 export default class StarMassPanel extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {
 
-    const options = {
+    const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       isDisposable: false,
-      fill: SolarSystemCommonColors.controlPanelFillProperty,
-      stroke: null,
       tandem: tandem,
       phetioVisiblePropertyInstrumented: true
-    };
+    } );
 
     const titleText = new Text( KeplersLawsStrings.starMassStringProperty,
       combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
