@@ -33,8 +33,8 @@ const KeplersLawsConstants = {
   },
 
   ACCORDION_BOX_OPTIONS: {
-    stroke: null,
-    fill: SolarSystemCommonColors.controlPanelFillProperty,
+    fill: SolarSystemCommonColors.panelFillProperty,
+    stroke: SolarSystemCommonColors.panelStrokeProperty,
     cornerRadius: 5,
     margin: 5,
     padding: 5,
