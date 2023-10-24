@@ -105,8 +105,22 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       timeScale: 0.005,
       modelToViewTime: 1000 / 12.6,
       defaultBodyInfo: [
-        new BodyInfo( { isActive: true, mass: KeplersLawsConstants.MASS_OF_OUR_SUN, position: new Vector2( 0, 0 ), velocity: new Vector2( 0, 0 ), tandemName: 'sun' } ),
-        new BodyInfo( { isActive: true, mass: 50, position: new Vector2( 2.00, 0 ), velocity: new Vector2( 0, 17.2358 ), tandemName: 'planet' } )
+        new BodyInfo( {
+          isActive: true,
+          mass: KeplersLawsConstants.MASS_OF_OUR_SUN,
+          massRange: new Range( 0.5 * KeplersLawsConstants.MASS_OF_OUR_SUN, 2 * KeplersLawsConstants.MASS_OF_OUR_SUN ),
+          position: new Vector2( 0, 0 ),
+          velocity: new Vector2( 0, 0 ),
+          tandemName: 'sun'
+        } ),
+        new BodyInfo( {
+          isActive: true,
+          mass: KeplersLawsConstants.PLANET_MASS,
+          massRange: new Range( KeplersLawsConstants.PLANET_MASS, KeplersLawsConstants.PLANET_MASS ),
+          position: new Vector2( 2.00, 0 ),
+          velocity: new Vector2( 0, 17.2358 ),
+          tandemName: 'planet'
+        } )
       ]
     }, providedOptions );
     super( options );
