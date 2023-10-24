@@ -73,16 +73,19 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
   // Map that relates each law with its corresponding visible boolean properties
   public readonly lawVisibilitiesMap = new Map<LawMode, BooleanProperty[]>();
 
-  public constructor( tandem: Tandem ) {
+  public constructor( isAllLaws: boolean, specificLaw: LawMode, tandem: Tandem ) {
     super( tandem );
 
     this.stopwatchVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'stopwatchVisibleProperty' ) } );
 
-    this.axesVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'axesVisibleProperty' ) } );
-    this.semiaxesVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'semiaxesVisibleProperty' ) } );
-    this.fociVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'fociVisibleProperty' ) } );
-    this.stringVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'stringVisibleProperty' ) } );
-    this.eccentricityVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'eccentricityVisibleProperty' ) } );
+    const firstLawTandem = tandem.createTandem( 'firstLawVisibleProperties' );
+    const includeFirstLaw = isAllLaws || specificLaw === LawMode.FIRST_LAW;
+
+    this.axesVisibleProperty = new BooleanProperty( false, { tandem: includeFirstLaw ? firstLawTandem.createTandem( 'axesVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.semiaxesVisibleProperty = new BooleanProperty( false, { tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.fociVisibleProperty = new BooleanProperty( false, { tandem: includeFirstLaw ? firstLawTandem.createTandem( 'fociVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.stringVisibleProperty = new BooleanProperty( false, { tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.eccentricityVisibleProperty = new BooleanProperty( false, { tandem: includeFirstLaw ? firstLawTandem.createTandem( 'eccentricityVisibleProperty' ) : Tandem.OPT_OUT } );
     this.firstLawVisibilities = [
       this.stringVisibleProperty,
       this.semiaxesVisibleProperty,
@@ -91,11 +94,14 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       this.eccentricityVisibleProperty
     ];
 
-    this.apoapsisVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'apoapsisVisibleProperty' ) } );
-    this.periapsisVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'periapsisVisibleProperty' ) } );
-    this.areaValuesVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'areaValuesVisibleProperty' ) } );
-    this.timeValuesVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'timeValuesVisibleProperty' ) } );
-    this.secondLawAccordionBoxExpandedProperty = new BooleanProperty( true, { tandem: tandem.createTandem( 'secondLawAccordionBoxExpandedProperty' ) } );
+    const secondLawTandem = tandem.createTandem( 'secondLawVisibleProperties' );
+    const includeSecondLaw = isAllLaws || specificLaw === LawMode.SECOND_LAW;
+
+    this.apoapsisVisibleProperty = new BooleanProperty( false, { tandem: includeSecondLaw ? secondLawTandem.createTandem( 'apoapsisVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.periapsisVisibleProperty = new BooleanProperty( false, { tandem: includeSecondLaw ? secondLawTandem.createTandem( 'periapsisVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.areaValuesVisibleProperty = new BooleanProperty( false, { tandem: includeSecondLaw ? secondLawTandem.createTandem( 'areaValuesVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.timeValuesVisibleProperty = new BooleanProperty( false, { tandem: includeSecondLaw ? secondLawTandem.createTandem( 'timeValuesVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.secondLawAccordionBoxExpandedProperty = new BooleanProperty( true, { tandem: includeSecondLaw ? secondLawTandem.createTandem( 'secondLawAccordionBoxExpandedProperty' ) : Tandem.OPT_OUT } );
     this.secondLawVisibilities = [
       this.apoapsisVisibleProperty,
       this.periapsisVisibleProperty,
@@ -104,9 +110,12 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       this.secondLawAccordionBoxExpandedProperty
     ];
 
-    this.semiMajorAxisVisibleProperty = new BooleanProperty( true, { tandem: tandem.createTandem( 'semiMajorAxisVisibleProperty' ) } );
-    this.periodVisibleProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'periodVisibleProperty' ) } );
-    this.thirdLawAccordionBoxExpandedProperty = new BooleanProperty( true, { tandem: tandem.createTandem( 'thirdLawAccordionBoxExpandedProperty' ) } );
+    const thirdLawTandem = tandem.createTandem( 'thirdLawVisibleProperties' );
+    const includeThirdLaw = isAllLaws || specificLaw === LawMode.THIRD_LAW;
+
+    this.semiMajorAxisVisibleProperty = new BooleanProperty( true, { tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'semiMajorAxisVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.periodVisibleProperty = new BooleanProperty( false, { tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'periodVisibleProperty' ) : Tandem.OPT_OUT } );
+    this.thirdLawAccordionBoxExpandedProperty = new BooleanProperty( true, { tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'thirdLawAccordionBoxExpandedProperty' ) : Tandem.OPT_OUT } );
     this.thirdLawVisibilities = [
       this.semiMajorAxisVisibleProperty,
       this.periodVisibleProperty,

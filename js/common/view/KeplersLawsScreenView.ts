@@ -75,7 +75,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       isDisposable: false
     }, providedOptions );
 
-    super( model, new KeplersLawsVisibleProperties( options.tandem.createTandem( 'visibleProperties' ) ), options );
+    super( model, new KeplersLawsVisibleProperties( model.isAllLaws, model.selectedLawProperty.value, options.tandem.createTandem( 'visibleProperties' ) ), options );
 
     const metronomeSoundManager = new MetronomeSoundManager();
 
