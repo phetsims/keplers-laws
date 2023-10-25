@@ -10,13 +10,14 @@
 import keplersLaws from '../../keplersLaws.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import KeplersLawsQueryParameters from '../../KeplersLawsQueryParameters.js';
 
 const KeplersLawsPreferences = {
 
   // Toggles whether the First Law panel will additional orbital data:
   // Velocity magnitude and direction, as well as planet's position magnitude and direction.
   // Those values might be useful for angular momentum calculations.
-  moreOrbitalDataVisibleProperty: new BooleanProperty( false, {
+  moreOrbitalDataVisibleProperty: new BooleanProperty( KeplersLawsQueryParameters.moreOrbitalData, {
     tandem: Tandem.PREFERENCES.createTandem( 'moreOrbitalDataVisibleProperty' )
   } )
 };
