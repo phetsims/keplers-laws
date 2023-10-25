@@ -38,7 +38,7 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
         // Planet's position vector ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
-          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty,
           children: [
             new Image( planetPosition_png, { scale: 0.315 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetsPositionVectorStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
@@ -48,7 +48,7 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
         // Planet's velocity vector ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
-          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty,
           children: [
             new Image( planetVelocity_png, { scale: 1 } ),
             new RichText( KeplersLawsStrings.infoDialog.planetsVelocityVectorStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )
@@ -58,7 +58,7 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
         // Angle between vectors ...
         new HBox( {
           spacing: KeplersLawsConstants.INFO_DIALOG_IMAGE_TEXT_SPACING,
-          visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty,
+          visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty,
           children: [
             new Image( rvAngle_png, { scale: 1 } ),
             new RichText( KeplersLawsStrings.infoDialog.angleBetweenVectorsStringProperty, KeplersLawsConstants.INFO_DIALOG_RICH_TEXT_OPTIONS )

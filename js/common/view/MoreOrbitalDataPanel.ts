@@ -35,7 +35,7 @@ export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, providedOptions?: StrictOmit<PanelOptions, 'visibleProperty'> ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.CONTROL_PANEL_OPTIONS, providedOptions, {
-      visibleProperty: KeplersLawsPreferences.moreOrbitalDataEnabledProperty
+      visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty
     } );
 
     // Extra information: distance and velocity vector values

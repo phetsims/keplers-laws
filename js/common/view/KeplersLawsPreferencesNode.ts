@@ -24,7 +24,7 @@ export default class KeplersLawsPreferencesNode extends PreferencesControl {
       labelNode: new Text( KeplersLawsStrings.preferences.moreOrbitalData.titleStringProperty, PreferencesDialogConstants.CONTROL_LABEL_OPTIONS ),
       descriptionNode: new RichText( KeplersLawsStrings.preferences.moreOrbitalData.descriptionStringProperty,
         PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS ),
-      controlNode: new ToggleSwitch( KeplersLawsPreferences.moreOrbitalDataEnabledProperty, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
+      controlNode: new ToggleSwitch( KeplersLawsPreferences.moreOrbitalDataVisibleProperty, false, true, PreferencesDialogConstants.TOGGLE_SWITCH_OPTIONS )
     } );
   }
 }

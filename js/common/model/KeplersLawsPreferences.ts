@@ -1,5 +1,10 @@
 // Copyright 2023, University of Colorado Boulder
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import KeplersLawsQueryParameters from '../../KeplersLawsQueryParameters.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+
 /**
  * KeplersLawsPreferences is the model for sim-specific preferences.  The values declared here can be updated via
  * the Preferences dialog.
@@ -7,15 +12,12 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-
 const KeplersLawsPreferences = {
 
-  // Toggles whether the First Law panel will show extra information:
-  // Velocity magnitude and direction, as well as planet's position magnitude and direction.
-  // Those values might be useful for angular momentum calculations.
-  moreOrbitalDataEnabledProperty: new BooleanProperty( false )
+  // Toggles whether More Orbital Data panel will be shown in the screens that support it.
+  moreOrbitalDataVisibleProperty: new BooleanProperty( KeplersLawsQueryParameters.moreOrbitalData, {
+    tandem: Tandem.PREFERENCES.createTandem( 'moreOrbitalDataVisibleProperty' )
+  } )
 };
 
 keplersLaws.register( 'KeplersLawsPreferences', KeplersLawsPreferences );
