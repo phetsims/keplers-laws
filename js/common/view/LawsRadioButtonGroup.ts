@@ -19,11 +19,10 @@ import Property from '../../../../axon/js/Property.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-export type LawsRadioButtonGroupOptions = RectangularRadioButtonGroupOptions;
-
 export default class LawsRadioButtonGroup extends RectangularRadioButtonGroup<LawMode> {
   public constructor( selectedLawProperty: Property<LawMode>, tandem: Tandem ) {
-    const options = combineOptions<LawsRadioButtonGroupOptions>( {
+
+    const options = combineOptions<RectangularRadioButtonGroupOptions>( {
       orientation: 'horizontal',
       radioButtonOptions: {
         baseColor: null,
@@ -40,7 +39,6 @@ export default class LawsRadioButtonGroup extends RectangularRadioButtonGroup<La
       isDisposable: false,
       tandem: tandem
     } );
-
 
     // Intentionally left without KeplersLawsStrings because this buttons will have icons
     super( selectedLawProperty, [

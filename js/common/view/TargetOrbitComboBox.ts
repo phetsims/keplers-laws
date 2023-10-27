@@ -12,7 +12,7 @@ import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/Comb
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Property from '../../../../axon/js/Property.js';
 
@@ -25,11 +25,15 @@ const TARGET_ORBITS = [
   TargetOrbits.JUPITER
 ];
 
+type SelfOptions = EmptySelfOptions;
+
+type TargetOrbitComboBoxOptions = SelfOptions & ComboBoxOptions;
+
 export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 
-  public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: ComboBoxOptions ) {
+  public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: TargetOrbitComboBoxOptions ) {
 
-    const options = combineOptions<ComboBoxOptions>( {
+    const options = optionize<TargetOrbitComboBoxOptions, SelfOptions, ComboBoxOptions>()( {
       isDisposable: false,
       buttonTouchAreaXDilation: 10,
       buttonTouchAreaYDilation: 10,

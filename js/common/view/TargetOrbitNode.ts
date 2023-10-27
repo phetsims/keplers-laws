@@ -13,16 +13,20 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type TargetOrbitNodeOptions = SelfOptions & PathOptions;
 
 export default class TargetOrbitNode extends Path {
   public constructor(
     private readonly targetOrbitProperty: TReadOnlyProperty<TargetOrbits>,
     private readonly modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>,
-    providedOptions?: PathOptions
+    providedOptions?: TargetOrbitNodeOptions
   ) {
-    const options = combineOptions<PathOptions>( {
+    const options = optionize<TargetOrbitNodeOptions, SelfOptions, PathOptions>()( {
       isDisposable: false,
       stroke: KeplersLawsColors.targetOrbitColorProperty,
       lineWidth: 3
