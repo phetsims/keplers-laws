@@ -191,7 +191,8 @@ export default class EllipticalOrbitEngine extends Engine {
     return Math.pow( a * a * a * INITIAL_MU / this.mu, 1 / 2 );
   }
 
-  public override run( dt: number ): void {
+  public override run( dt: number, notifyPropertyListeners: boolean /* not supported! */ ): void {
+
     // Prevent the orbit from updating if the body is orbiting
     this.updateAllowedProperty.value = false;
 
