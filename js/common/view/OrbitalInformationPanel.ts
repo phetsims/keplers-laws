@@ -38,7 +38,7 @@ export default class OrbitalInformationPanel extends Panel {
 
       // String
       KeplersLawsCheckbox.createStringCheckbox( visibleProperties.stringVisibleProperty, {
-        enabledProperty: visibleProperties.stringVisibleProperty,
+        enabledProperty: visibleProperties.fociVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' )
       } ),
