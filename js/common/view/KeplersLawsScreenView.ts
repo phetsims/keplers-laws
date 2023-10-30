@@ -128,8 +128,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
       enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
-      dragVelocity: 150,
-      shiftDragVelocity: 50,
       mapPosition: this.constrainBoundaryViewPoint.bind( this ),
       soundViewNode: this,
       tandem: orbitalSystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
