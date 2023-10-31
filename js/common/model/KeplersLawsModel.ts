@@ -292,10 +292,17 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   }
 
   public override stepOnce( dt: number ): void {
-    super.stepOnce( dt );
+    // Scaling dt according to the speeds of the sim
+    dt *= this.timeSpeedMap.get( this.timeSpeedProperty.value )! * this.timeScale;
 
+    this.engine.run( dt, true );
+
+    // Scale dt again to convert it to view time
+    dt *= this.modelToViewTime;
+
+    this.timeProperty.value += dt;
     if ( this.stopwatch.isRunningProperty.value ) {
-      this.stopwatch.step( dt * this.timeSpeedMap.get( this.timeSpeedProperty.value )! * this.timeScale * this.modelToViewTime );
+      this.stopwatch.step( dt );
     }
   }
 
