@@ -245,7 +245,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         align: 'top'
       } ),
       {
-        alignBoundsProperty: this.availableBoundsProperty,
+        alignBoundsProperty: this.interfaceBoundsProperty,
         margin: MARGIN,
         xAlign: 'left',
         yAlign: 'top'
@@ -278,7 +278,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         ]
       } ),
       {
-        alignBoundsProperty: this.availableBoundsProperty,
+        alignBoundsProperty: this.interfaceBoundsProperty,
         margin: MARGIN,
         xAlign: 'right',
         yAlign: 'top'
@@ -306,7 +306,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     this.topLayer.addChild( this.periodTimerNode );
 
     const distancesDisplayBox = new AlignBox( new DistancesDisplayNode( model, this.visibleProperties, this.modelViewTransformProperty ), {
-      alignBoundsProperty: this.availableBoundsProperty,
+      alignBoundsProperty: this.interfaceBoundsProperty,
       margin: SolarSystemCommonConstants.SCREEN_VIEW_Y_MARGIN,
       xAlign: 'center',
       yAlign: 'top'
@@ -379,7 +379,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
           spacing: 20
         } ),
         {
-          alignBoundsProperty: this.availableBoundsProperty,
+          alignBoundsProperty: this.interfaceBoundsProperty,
           margin: MARGIN,
           xAlign: 'left',
           yAlign: 'bottom'
