@@ -14,7 +14,7 @@ import BodyNode from '../../../../solar-system-common/js/view/BodyNode.js';
 import EllipticalOrbitNode from './EllipticalOrbitNode.js';
 import ThirdLawPanels from './ThirdLawPanels.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import SolarSystemCommonScreenView, { BodyBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
+import SolarSystemCommonScreenView, { DragBoundsItem, SolarSystemCommonScreenViewOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonScreenView.js';
 import LawsRadioButtonGroup from './LawsRadioButtonGroup.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import FirstLawPanels from './FirstLawPanels.js';
@@ -114,7 +114,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         if ( point.magnitude > escapeRadius ) {
           point = point.normalized().times( escapeRadius );
         }
-        point = this.constrainBoundaryViewPoint( point, radius );
+        point = this.constrainDragPoint( point, radius );
         return point;
       },
       tandem: orbitalSystemNodesTandem.createTandem( 'planetNode' )
@@ -130,7 +130,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
       dragVelocity: 2000,
       shiftDragVelocity: 700,
-      mapPosition: this.constrainBoundaryViewPoint.bind( this ),
+      mapPosition: this.constrainDragPoint.bind( this ),
       soundViewNode: this,
       tandem: orbitalSystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
     } );
@@ -412,22 +412,25 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     ]; // decouple traversal order from rendering order
   }
 
-  public override getBodyBoundsItems(): BodyBoundsItem[] {
+  public override getDragBoundsItems(): DragBoundsItem[] {
     return [
-      ...super.getBodyBoundsItems(),
-      // Top-left controls, all with individual scopes (all expanded top-left)
-      ...[ this.firstLawPanels, this.secondLawPanels, this.thirdLawPanels ].map( ( node: Node ): BodyBoundsItem => {
+      ...super.getDragBoundsItems(),
+      {
+        node: this.topRightPanels,
+        expandX: 'right',
+        expandY: 'top'
+      },
+
+      // All of these Nodes are aligned at left-top
+      ...[ this.firstLawPanels, this.secondLawPanels, this.thirdLawPanels ].map( ( node: Node ): DragBoundsItem => {
         return {
           node: node,
           expandX: 'left',
           expandY: 'top'
         };
       } ),
-      {
-        node: this.topRightPanels,
-        expandX: 'right',
-        expandY: 'top'
-      },
+
+      // This Node is optional
       ...( this.lawsRadioButtonGroup ? [
         {
           node: this.lawsRadioButtonGroup,
