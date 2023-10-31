@@ -128,6 +128,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.sun = this.bodies[ 0 ];
     this.planet = this.bodies[ 1 ];
 
+    this.sun.positionProperty.link( position => {
+      assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
+    } );
+
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
       tandem: options.tandem.createTandem( 'periodDivisionsProperty' )
