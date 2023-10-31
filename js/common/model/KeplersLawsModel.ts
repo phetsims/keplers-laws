@@ -44,7 +44,7 @@ type SelfOptions = {
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyInfo'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyInfo' | 'engineTimeScale'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
@@ -101,8 +101,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
       // SolarSystemCommonModelOptionsOptions
       engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
+      engineTimeScale: 0.002,  // This value works well for EllipticalOrbitEngine
       zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
-      timeScale: 0.002,
       modelToViewTime: 1000 / 12.6,
       defaultBodyInfo: [
         new BodyInfo( {
@@ -293,7 +293,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   public override stepOnce( dt: number ): void {
     // Scaling dt according to the speeds of the sim
-    dt *= this.timeSpeedMap.get( this.timeSpeedProperty.value )! * this.timeScale;
+    dt *= this.timeSpeedMap.get( this.timeSpeedProperty.value )!;
+
+    // Scaling dt to the engine time
+    dt *= this.engineTimeScale;
 
     this.engine.run( dt, true );
 
