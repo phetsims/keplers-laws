@@ -219,24 +219,25 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       return dragBounds?.withOffsets( localBounds.left, localBounds.top, -localBounds.right, -localBounds.bottom );
     } );
 
-    const bodyDragListener = new DragListener( {
+    const dragListener = new DragListener( {
       targetNode: this,
       positionProperty: periodTimer.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       start: start,
-      end: end
+      end: end,
+      tandem: options.tandem.createTandem( 'dragListener' )
     } );
-    this.addInputListener( bodyDragListener );
+    this.addInputListener( dragListener );
 
-    const keyboardDragListener = new KeyboardDragListener(
-      {
-        positionProperty: periodTimer.positionProperty,
-        dragBoundsProperty: derivedDragBoundsProperty,
-        dragVelocity: 450,
-        shiftDragVelocity: 100,
-        start: start,
-        end: end
-      } );
+    const keyboardDragListener = new KeyboardDragListener( {
+      positionProperty: periodTimer.positionProperty,
+      dragBoundsProperty: derivedDragBoundsProperty,
+      dragVelocity: 450,
+      shiftDragVelocity: 100,
+      start: start,
+      end: end,
+      tandem: options.tandem.createTandem( 'keyboardDragListener' )
+    } );
     this.addInputListener( keyboardDragListener );
 
     // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
