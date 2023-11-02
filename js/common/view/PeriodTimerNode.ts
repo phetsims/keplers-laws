@@ -29,6 +29,7 @@ import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp
 import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );
@@ -53,7 +54,7 @@ type SelfOptions = {
   restartAccessibleName?: TReadOnlyProperty<string> | string;
 };
 
-type PeriodTimerNodeOptions = SelfOptions & NodeOptions;
+type PeriodTimerNodeOptions = SelfOptions & NodeOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
   public readonly grabClip: SoundClip;
@@ -113,21 +114,24 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       .getOffsetShape( -playOffset );
 
     // creates playPauseButton
-    const playPauseButton = new BooleanRectangularToggleButton( periodTimer.isRunningProperty, new Path( uArrowShape, {
+    const uArrowPath = new Path( uArrowShape, {
       fill: options.iconColor,
       center: Vector2.ZERO,
       pickable: false
-    } ), new Path( playShape, {
+    } );
+    const playPath = new Path( playShape, {
       pickable: false,
       stroke: options.iconColor,
       fill: '#eef',
       lineWidth: halfPlayStroke * 2,
       center: Vector2.ZERO
-    } ), {
+    } );
+    const playPauseButton = new BooleanRectangularToggleButton( periodTimer.isRunningProperty, uArrowPath, playPath, {
       baseColor: options.buttonBaseColor,
       minWidth: 40,
       touchAreaXDilation: 10,
-      touchAreaYDilation: 10
+      touchAreaYDilation: 10,
+      tandem: options.tandem.createTandem( 'playPauseButton' )
     } );
     playPauseButton.touchArea = playPauseButton.localBounds.dilated( 5 );
 
@@ -211,8 +215,8 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     };
 
     periodTimer.positionProperty.link( position => {
-        this.translation = position;
-      } );
+      this.translation = position;
+    } );
 
     const derivedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty, this.localBoundsProperty ], ( dragBounds, localBounds ) => {
       return dragBounds?.withOffsets( localBounds.left, localBounds.top, -localBounds.right, -localBounds.bottom );
