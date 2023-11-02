@@ -31,8 +31,8 @@ export default class PeriodTracker {
   public beganPeriodTimerAt = 0;
   public trackingState: TrackingState;
   public afterPeriodThreshold = false; // Whether the body has passed some percentage of the period
-  public readonly periodTimer: Stopwatch;
-  public readonly fadingTimer: Stopwatch;
+  public readonly periodStopwatch: Stopwatch;
+  public readonly fadingStopwatch: Stopwatch;
 
   // This emitter tells the PeriodTrackerNode when to update the fade
   public readonly fadingEmitter = new Emitter();
@@ -44,6 +44,7 @@ export default class PeriodTracker {
 
     const periodRangeProperty = new Property<Range>( new Range( 0, 1 ), {
       tandem: tandem.createTandem( 'periodRangeProperty' ),
+      phetioValueType: Range.RangeIO,
       phetioReadOnly: true
     } );
 
@@ -51,22 +52,22 @@ export default class PeriodTracker {
       periodRangeProperty.value.max = period;
     } );
 
-    this.fadingTimer = new Stopwatch( {
+    this.fadingStopwatch = new Stopwatch( {
       position: Vector2.ZERO,
       timePropertyOptions: {
         range: new Range( 0, this.fadingDuration )
       },
-      tandem: tandem.createTandem( 'fadingTimer' )
+      tandem: tandem.createTandem( 'fadingStopwatch' )
     } );
 
-    this.periodTimer = new Stopwatch( {
+    this.periodStopwatch = new Stopwatch( {
       position: new Vector2( 500, 50 ),
       timePropertyOptions: {
         range: periodRangeProperty
       },
-      tandem: tandem.createTandem( 'periodTimer' )
+      tandem: tandem.createTandem( 'periodStopwatch' )
     } );
-    this.periodTimer.isRunningProperty.link( isRunning => {
+    this.periodStopwatch.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
         this.beganPeriodTimerAt = this.model.timeProperty.value;
@@ -74,7 +75,7 @@ export default class PeriodTracker {
       else if ( this.trackingState !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, softReset the period timer
         this.softReset();
-        this.periodTimer.timeProperty.value = 0;
+        this.periodStopwatch.timeProperty.value = 0;
       }
       this.model.engine.tracingPathProperty.value = isRunning;
     } );
@@ -83,8 +84,8 @@ export default class PeriodTracker {
     const beginFade = () => {
       this.model.engine.tracingPathProperty.value = false;
       this.trackingState = TrackingState.FADING;
-      this.fadingTimer.reset();
-      this.fadingTimer.isRunningProperty.value = true;
+      this.fadingStopwatch.reset();
+      this.fadingStopwatch.isRunningProperty.value = true;
     };
 
     this.model.timeProperty.link( time => {
@@ -95,11 +96,11 @@ export default class PeriodTracker {
         }
         const measuredTime = time - this.beganPeriodTimerAt;
         this.afterPeriodThreshold = measuredTime > periodRangeProperty.value.max * 0.8;
-        if ( this.periodTimer.isRunningProperty.value ) {
+        if ( this.periodStopwatch.isRunningProperty.value ) {
           if ( measuredTime >= periodRangeProperty.value.max ) {
             beginFade();
           }
-          this.periodTimer.setTime( measuredTime );
+          this.periodStopwatch.setTime( measuredTime );
         }
       }
     } );
@@ -107,9 +108,9 @@ export default class PeriodTracker {
 
   public step( dt: number ): void {
     if ( this.trackingState === TrackingState.FADING ) {
-      this.fadingTimer.step( dt );
+      this.fadingStopwatch.step( dt );
       this.fadingEmitter.emit();
-      if ( !this.fadingTimer.isRunningProperty.value ) {
+      if ( !this.fadingStopwatch.isRunningProperty.value ) {
         this.softReset();
       }
     }
@@ -117,15 +118,15 @@ export default class PeriodTracker {
 
   public timerReset(): void {
     // Reset the period timer but keep the period trace
-    this.periodTimer.isRunningProperty.value = false;
-    this.periodTimer.setTime( 0 );
+    this.periodStopwatch.isRunningProperty.value = false;
+    this.periodStopwatch.setTime( 0 );
   }
 
   public softReset(): void {
     // Reset everything but the period timer. We want the time readout to stay most times
     this.trackingState = TrackingState.IDLE;
     this.beganPeriodTimerAt = 0;
-    this.fadingTimer.reset();
+    this.fadingStopwatch.reset();
     this.afterPeriodThreshold = false;
     this.model.engine.tracingPathProperty.value = false;
     this.model.engine.periodTraceStart = 0;
@@ -135,7 +136,7 @@ export default class PeriodTracker {
   public reset(): void {
     // Reset everything including the position of the period timer
     this.softReset();
-    this.periodTimer.reset();
+    this.periodStopwatch.reset();
   }
 }
 

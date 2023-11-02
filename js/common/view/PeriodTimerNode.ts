@@ -61,7 +61,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
   public readonly releaseClip: SoundClip;
 
   public constructor(
-    periodTimer: Stopwatch,
+    periodStopwatch: Stopwatch,
     modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>,
     layoutBounds: Bounds2,
     providedOptions: PeriodTimerNodeOptions
@@ -126,7 +126,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       lineWidth: halfPlayStroke * 2,
       center: Vector2.ZERO
     } );
-    const playPauseButton = new BooleanRectangularToggleButton( periodTimer.isRunningProperty, uArrowPath, playPath, {
+    const playPauseButton = new BooleanRectangularToggleButton( periodStopwatch.isRunningProperty, uArrowPath, playPath, {
       baseColor: options.buttonBaseColor,
       minWidth: 40,
       touchAreaXDilation: 10,
@@ -139,12 +139,12 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       // pdom - accessible name for the button
       playPauseButton.innerContent = isRunning ? options.restartAccessibleName : options.measureAccessibleName;
     };
-    periodTimer.isRunningProperty.link( isRunningListener );
+    periodStopwatch.isRunningProperty.link( isRunningListener );
 
 
     // Creates time text inside period timer tool.
     const readoutText = new Text( new DerivedProperty(
-      [ periodTimer.timeProperty, KeplersLawsStrings.units.yearsStringProperty ],
+      [ periodStopwatch.timeProperty, KeplersLawsStrings.units.yearsStringProperty ],
       ( time, units ) => {
         return StringUtils.fillIn( secondsPatternString, {
           value: Utils.toFixed( time, 2 ),
@@ -211,7 +211,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       this.releaseClip.play();
     };
 
-    periodTimer.positionProperty.link( position => {
+    periodStopwatch.positionProperty.link( position => {
       this.translation = position;
     } );
 
@@ -221,7 +221,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
 
     const dragListener = new DragListener( {
       targetNode: this,
-      positionProperty: periodTimer.positionProperty,
+      positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       start: start,
       end: end,
@@ -230,7 +230,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     this.addInputListener( dragListener );
 
     const keyboardDragListener = new KeyboardDragListener( {
-      positionProperty: periodTimer.positionProperty,
+      positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       dragVelocity: 450,
       shiftDragVelocity: 100,

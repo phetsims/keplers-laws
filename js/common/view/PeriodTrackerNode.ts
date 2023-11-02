@@ -40,7 +40,7 @@ export default class PeriodTrackerNode extends Path {
       this.updateFade();
     } );
 
-    this.periodTracker.periodTimer.isRunningProperty.lazyLink( isRunning => {
+    this.periodTracker.periodStopwatch.isRunningProperty.lazyLink( isRunning => {
       if ( isRunning ) {
         this.model.engine.periodTraceEnd = this.model.engine.periodTraceStart;
         this.updateShape();
@@ -90,12 +90,12 @@ export default class PeriodTrackerNode extends Path {
       this.shape = new Shape().ellipticalArc( 0, 0, this.radiusX, this.radiusY, 0, startAngle, endAngle, retrograde );
     }
     this.startCircle.translation = startTracePosition;
-    this.startCircle.visible = startAngle !== endAngle || this.periodTracker.periodTimer.isRunningProperty.value;
+    this.startCircle.visible = startAngle !== endAngle || this.periodTracker.periodStopwatch.isRunningProperty.value;
   }
 
   public updateFade(): void {
     this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
-    this.opacity = 1 - this.periodTracker.fadingTimer.timeProperty.value / this.periodTracker.fadingDuration;
+    this.opacity = 1 - this.periodTracker.fadingStopwatch.timeProperty.value / this.periodTracker.fadingDuration;
   }
 }
 
