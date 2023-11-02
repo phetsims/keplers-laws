@@ -46,6 +46,7 @@ import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 import DraggableVelocityVectorNode from '../../../../solar-system-common/js/view/DraggableVelocityVectorNode.js';
 import MetronomeSoundManager from './MetronomeSoundManager.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 // constants
 const MARGIN = 10;
@@ -94,7 +95,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const orbitalSystemNodesTandem = options.tandem.createTandem( 'orbitalSystemNodes' );
 
     // BodyNode for each Body
-    const sunNode = new BodyNode( sun, this.modelViewTransformProperty, model.userHasInteractedProperty, {
+    const sunNode = new BodyNode( sun, this.modelViewTransformProperty, {
       draggable: false,
       focusable: false,
       pickable: false,
@@ -102,8 +103,18 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.bodiesLayer.addChild( sunNode );
 
-    const planetNode = new BodyNode( planet, this.modelViewTransformProperty, model.userHasInteractedProperty, {
-      useCueingArrows: true,
+    const userHasInteractedProperty = new BooleanProperty( false );
+    model.isPlayingProperty.link( isPlaying => {
+      if ( isPlaying ) {
+        userHasInteractedProperty.value = true;
+      }
+    } );
+    model.userInteractingEmitter.addListener( () => {
+      userHasInteractedProperty.value = true;
+    } );
+
+    const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
+      cueingArrowsVisibleProperty: DerivedProperty.not( userHasInteractedProperty ),
       showVelocityIndex: false,
       soundViewNode: this,
       speedVisibleProperty: this.visibleProperties.speedVisibleProperty,

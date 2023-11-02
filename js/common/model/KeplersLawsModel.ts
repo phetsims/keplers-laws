@@ -147,12 +147,6 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: options.tandem.createTandem( 'alwaysCircularProperty' )
     } );
 
-    this.isPlayingProperty.link( isPlaying => {
-      if ( isPlaying ) {
-        this.userHasInteractedProperty.value = true;
-      }
-    } );
-
     this.sun.massProperty.lazyLink( () => {
       // Pause the sim when the Sun's ( id = 0 ) mass is changed
       this.isPlayingProperty.value = false;
