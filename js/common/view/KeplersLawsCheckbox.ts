@@ -175,7 +175,8 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
 function createStopwatchIcon(): Node {
 
   const stopwatch = new Stopwatch( {
-    isVisible: true
+    isVisible: true,
+    tandem: Tandem.OPT_OUT
   } );
 
   const stopwatchNode = new StopwatchNode( stopwatch, {
