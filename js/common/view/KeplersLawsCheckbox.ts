@@ -184,7 +184,8 @@ function createStopwatchIcon(): Node {
       textOptions: {
         maxWidth: 100
       }
-    }
+    },
+    tandem: Tandem.OPT_OUT
   } );
 
   const icon = stopwatchNode.rasterized( {
