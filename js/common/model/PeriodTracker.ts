@@ -14,6 +14,7 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import KeplersLawsModel from './KeplersLawsModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
@@ -38,10 +39,14 @@ export default class PeriodTracker {
 
   public readonly fadingDuration = 3;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty' | 'isPlayingProperty'> ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty' | 'isPlayingProperty'>, tandem: Tandem ) {
     this.trackingState = TrackingState.IDLE;
 
-    const periodRangeProperty = new Property<Range>( new Range( 0, 1 ) );
+    const periodRangeProperty = new Property<Range>( new Range( 0, 1 ), {
+      tandem: tandem.createTandem( 'periodRangeProperty' ),
+      phetioReadOnly: true
+    } );
+
     this.model.engine.periodProperty.link( period => {
       periodRangeProperty.value.max = period;
     } );
@@ -50,14 +55,16 @@ export default class PeriodTracker {
       position: Vector2.ZERO,
       timePropertyOptions: {
         range: new Range( 0, this.fadingDuration )
-      }
+      },
+      tandem: tandem.createTandem( 'fadingTimer' )
     } );
 
     this.periodTimer = new Stopwatch( {
       position: new Vector2( 500, 50 ),
       timePropertyOptions: {
         range: periodRangeProperty
-      }
+      },
+      tandem: tandem.createTandem( 'periodTimer' )
     } );
     this.periodTimer.isRunningProperty.link( isRunning => {
       if ( isRunning ) {

@@ -216,7 +216,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: options.tandem.createTandem( 'stopwatch' )
     } );
 
-    this.periodTracker = new PeriodTracker( this );
+    this.periodTracker = new PeriodTracker( this, options.tandem.createTandem( 'periodTracker' ) );
 
     const animatedZoomScaleRange = new Range( 45, 100 );
     const animatedZoomScaleProperty = new NumberProperty( animatedZoomScaleRange.min, {
