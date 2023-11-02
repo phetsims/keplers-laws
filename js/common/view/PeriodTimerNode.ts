@@ -144,10 +144,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
 
     // Creates time text inside period timer tool.
     const readoutText = new Text( new DerivedProperty(
-      [
-        periodTimer.timeProperty,
-        KeplersLawsStrings.units.yearsStringProperty
-      ],
+      [ periodTimer.timeProperty, KeplersLawsStrings.units.yearsStringProperty ],
       ( time, units ) => {
         return StringUtils.fillIn( secondsPatternString, {
           value: Utils.toFixed( time, 2 ),
