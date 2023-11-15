@@ -138,7 +138,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
     } );
 
-    this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
+    this.selectedLawProperty = new EnumerationProperty( options.initialLaw, {
+      tandem: options.tandem.createTandem( 'selectedLawProperty' ),
+      phetioReadOnly: !options.isAllLaws // Only allow the law to be changed via studio in the 'All Laws' screen
+    } );
     this.isAllLaws = options.isAllLaws;
 
     this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
