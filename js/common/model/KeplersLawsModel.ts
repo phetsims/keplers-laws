@@ -36,6 +36,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Property from '../../../../axon/js/Property.js';
 import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -71,6 +72,11 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly isSecondLawProperty: ReadOnlyProperty<boolean>;
   public readonly isThirdLawProperty: ReadOnlyProperty<boolean>;
   public readonly lawUpdatedEmitter = new Emitter();
+
+  // Booleans to keep track of features that are only available in certain laws and their tandems
+  public readonly hasFirstLawFeatures: boolean;
+  public readonly hasSecondLawFeatures: boolean;
+  public readonly hasThirdLawFeatures: boolean;
 
   // Number of divisions of the orbital area
   public readonly periodDivisionsProperty: NumberProperty;
@@ -132,13 +138,28 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
     } );
 
+    this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
+    this.isAllLaws = options.isAllLaws;
+
+    this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.FIRST_LAW );
+    this.isSecondLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.SECOND_LAW );
+    this.isThirdLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
+      selectedLaw => selectedLaw === LawMode.THIRD_LAW );
+
+    // Boolean used to determine what goes in the sim
+    this.hasFirstLawFeatures = this.isAllLaws || options.initialLaw === LawMode.FIRST_LAW;
+    this.hasSecondLawFeatures = this.isAllLaws || options.initialLaw === LawMode.SECOND_LAW;
+    this.hasThirdLawFeatures = this.isAllLaws || options.initialLaw === LawMode.THIRD_LAW;
+
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
-      tandem: options.tandem.createTandem( 'periodDivisionsProperty' )
+      tandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'periodDivisionsProperty' ) : Tandem.OPT_OUT
     } );
 
     this.targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE, {
-      tandem: options.tandem.createTandem( 'targetOrbitProperty' )
+      tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
     } );
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
@@ -153,17 +174,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       this.engine.update( this.activeBodies );
     } );
 
-    this.selectedLawProperty = new EnumerationProperty( options.initialLaw );
-    this.isAllLaws = options.isAllLaws;
-
     this.loadBodyInfo( this.defaultBodyInfo );
-
-    this.isFirstLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
-      selectedLaw => selectedLaw === LawMode.FIRST_LAW );
-    this.isSecondLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
-      selectedLaw => selectedLaw === LawMode.SECOND_LAW );
-    this.isThirdLawProperty = new DerivedProperty( [ this.selectedLawProperty ],
-      selectedLaw => selectedLaw === LawMode.THIRD_LAW );
 
     this.lastLaw = this.selectedLawProperty.value;
 
@@ -175,13 +186,13 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.selectedAxisPowerProperty = new NumberProperty( 1, {
       numberType: 'Integer',
       range: new Range( 1, 3 ),
-      tandem: options.tandem.createTandem( 'selectedAxisPowerProperty' )
+      tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'selectedAxisPowerProperty' ) : Tandem.OPT_OUT
     } );
 
     this.selectedPeriodPowerProperty = new NumberProperty( 1, {
       numberType: 'Integer',
       range: new Range( 1, 3 ),
-      tandem: options.tandem.createTandem( 'selectedPeriodPowerProperty' )
+      tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'selectedPeriodPowerProperty' ) : Tandem.OPT_OUT
     } );
 
     // Powered values of semiMajor axis and period
@@ -216,7 +227,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: options.tandem.createTandem( 'stopwatch' )
     } );
 
-    this.periodTracker = new PeriodTracker( this, options.tandem.createTandem( 'periodTracker' ) );
+    this.periodTracker = new PeriodTracker( this, this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
 
     const animatedZoomScaleRange = new Range( 45, 100 );
     const animatedZoomScaleProperty = new NumberProperty( animatedZoomScaleRange.min, {

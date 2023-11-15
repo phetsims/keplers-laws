@@ -47,6 +47,7 @@ import DraggableVelocityVectorNode from '../../../../solar-system-common/js/view
 import MetronomeSoundManager from './MetronomeSoundManager.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const MARGIN = 10;
@@ -242,9 +243,22 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     // Group all panels under this tandem
     const panelsTandem = options.tandem.createTandem( 'panels' );
 
-    this.firstLawPanels = new FirstLawPanels( model, this.visibleProperties.semiaxesVisibleProperty, this.visibleProperties.eccentricityVisibleProperty, panelsTandem.createTandem( 'firstLawPanels' ) );
-    this.secondLawPanels = new SecondLawPanels( model, this.visibleProperties, panelsTandem.createTandem( 'secondLawPanels' ) );
-    this.thirdLawPanels = new ThirdLawPanels( model, this.visibleProperties.thirdLawAccordionBoxExpandedProperty, panelsTandem.createTandem( 'thirdLawPanels' ) );
+    this.firstLawPanels = new FirstLawPanels(
+      model,
+      this.visibleProperties.semiaxesVisibleProperty,
+      this.visibleProperties.eccentricityVisibleProperty,
+      model.hasFirstLawFeatures ? panelsTandem.createTandem( 'firstLawPanels' ) : Tandem.OPT_OUT
+    );
+    this.secondLawPanels = new SecondLawPanels(
+      model,
+      this.visibleProperties,
+      model.hasSecondLawFeatures ? panelsTandem.createTandem( 'secondLawPanels' ) : Tandem.OPT_OUT
+    );
+    this.thirdLawPanels = new ThirdLawPanels(
+      model,
+      this.visibleProperties.thirdLawAccordionBoxExpandedProperty,
+      model.hasThirdLawFeatures ? panelsTandem.createTandem( 'thirdLawPanels' ) : Tandem.OPT_OUT
+    );
 
     const lawsPanelsBox = new AlignBox( new HBox( {
         children: [
@@ -312,7 +326,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       dragBoundsProperty: this.visibleBoundsProperty,
       visibleProperty: this.visibleProperties.periodVisibleProperty,
       soundViewNode: this,
-      tandem: options.tandem.createTandem( 'periodTimerNode' )
+      tandem: model.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTimerNode' ) : Tandem.OPT_OUT
     } );
 
     this.topLayer.addChild( this.periodTimerNode );
