@@ -136,7 +136,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     // Draggable velocity vector for the planet
     const planetVelocityVectorNode = new DraggableVelocityVectorNode( planet, this.modelViewTransformProperty, {
       visibleProperty: this.visibleProperties.velocityVisibleProperty,
-      minimumMagnitude: 5,
+      minimumMagnitude: 1.055,
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
       enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
