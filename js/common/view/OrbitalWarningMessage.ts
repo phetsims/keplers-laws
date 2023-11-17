@@ -30,7 +30,7 @@ export default class OrbitalWarningMessage extends Node {
                       allowedOrbitProperty: TReadOnlyProperty<boolean>,
                       modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2> ) {
 
-    const center = modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -50 ) );
+    const center = modelViewTransformProperty.value.modelToViewPosition( new Vector2( 0, -0.5 ) );
 
     const messageProperty = new DerivedProperty(
       [
