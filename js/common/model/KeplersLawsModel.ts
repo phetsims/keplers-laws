@@ -106,7 +106,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       initialLaw: LawMode.FIRST_LAW,
 
       // SolarSystemCommonModelOptionsOptions
-      engineFactory: bodies => new EllipticalOrbitEngine( bodies ),
+      engineFactory: bodies => new EllipticalOrbitEngine( bodies, providedOptions.tandem ),
       engineTimeScale: 0.002,  // This value works well for EllipticalOrbitEngine
       zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
       modelToViewTime: 1000 / 12.6,

@@ -39,6 +39,7 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import OrbitalArea from './OrbitalArea.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const TWO_PI = 2 * Math.PI;
 
@@ -97,13 +98,13 @@ export default class EllipticalOrbitEngine extends Engine {
   // When the sim plays, the orbit won't be constantly updating, only on user interactions
   public readonly updateAllowedProperty = new BooleanProperty( false );
 
-  public readonly semiMajorAxisProperty = new NumberProperty( 1 );
-  public readonly semiMinorAxisProperty = new NumberProperty( 1 );
-  public readonly focalDistanceProperty = new NumberProperty( 1 );
-  public readonly distance1Property = new NumberProperty( 1 );
-  public readonly distance2Property = new NumberProperty( 1 );
-  public readonly periodProperty = new NumberProperty( 1 );
-  public readonly eccentricityProperty = new NumberProperty( 0 );
+  public readonly semiMajorAxisProperty: NumberProperty;
+  public readonly semiMinorAxisProperty: NumberProperty;
+  public readonly focalDistanceProperty: NumberProperty;
+  public readonly distance1Property: NumberProperty;
+  public readonly distance2Property: NumberProperty;
+  public readonly periodProperty: NumberProperty;
+  public readonly eccentricityProperty: NumberProperty;
 
   // These variable names are letters to compare and read more easily the equations they are in
   public a = 1;  // semi-major axis
@@ -139,7 +140,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public periodTraceStart = 0;
   public periodTraceEnd = 0;
 
-  public constructor( bodies: Body[] ) {
+  public constructor( bodies: Body[], tandem: Tandem ) {
     super( bodies );
     this.mu = INITIAL_MU;
 
@@ -149,6 +150,36 @@ export default class EllipticalOrbitEngine extends Engine {
     assert && assert( bodies.length === 2, 'This engine requires exactly 2 bodies.' );
     this.sun = bodies[ 0 ];
     this.planet = bodies[ 1 ];
+
+    const orbitalPropertiesTandem = tandem.createTandem( 'orbitalProperties' );
+    this.semiMajorAxisProperty = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'semiMajorAxisProperty' )
+    } );
+    this.semiMinorAxisProperty = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'semiMinorAxisProperty' )
+    } );
+    this.focalDistanceProperty = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'focalDistanceProperty' )
+    } );
+    this.distance1Property = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'distance1Property' )
+    } );
+    this.distance2Property = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'distance2Property' )
+    } );
+    this.periodProperty = new NumberProperty( 1, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'periodProperty' )
+    } );
+    this.eccentricityProperty = new NumberProperty( 0, {
+      phetioReadOnly: true,
+      tandem: orbitalPropertiesTandem.createTandem( 'eccentricityProperty' )
+    } );
 
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
