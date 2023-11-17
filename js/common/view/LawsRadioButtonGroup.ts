@@ -25,6 +25,7 @@ export default class LawsRadioButtonGroup extends RectangularRadioButtonGroup<La
     const options = combineOptions<RectangularRadioButtonGroupOptions>( {
       orientation: 'horizontal',
       radioButtonOptions: {
+        phetioEnabledPropertyInstrumented: false,
         baseColor: null,
         buttonAppearanceStrategyOptions: {
           selectedStroke: '#60a9dd',
