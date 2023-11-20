@@ -24,7 +24,7 @@ import PeriodTracker from './PeriodTracker.js';
 import OrbitalArea from './OrbitalArea.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import Utils from '../../../../dot/js/Utils.js';
-import TargetOrbits from './TargetOrbits.js';
+import TargetOrbit from './TargetOrbit.js';
 import Range from '../../../../dot/js/Range.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Animation from '../../../../twixt/js/Animation.js';
@@ -37,6 +37,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Property from '../../../../axon/js/Property.js';
 import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 
 type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
 
@@ -58,7 +59,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
   public readonly isAllLaws: boolean;
 
-  public readonly targetOrbitProperty: EnumerationProperty<TargetOrbits>;
+  public readonly targetOrbitProperty: EnumerationProperty<TargetOrbit>;
   public readonly isSolarSystemProperty: ReadOnlyProperty<boolean>;
 
   // Will enforce that the orbit is always circular
@@ -97,6 +98,13 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // The last law that was selected
   public lastLaw: LawMode;
+
+  // Client-configurable target orbits. They are private because they can be accessed only via PhET-iO API or Studio.
+  // See https://github.com/phetsims/keplers-laws/issues/210
+  private readonly targetOrbit1Property: TargetOrbitInfoProperty;
+  private readonly targetOrbit2Property: TargetOrbitInfoProperty;
+  private readonly targetOrbit3Property: TargetOrbitInfoProperty;
+  private readonly targetOrbit4Property: TargetOrbitInfoProperty;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
@@ -161,21 +169,31 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'periodDivisionsProperty' ) : Tandem.OPT_OUT
     } );
 
-    this.targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE, {
+    this.targetOrbitProperty = new EnumerationProperty( TargetOrbit.NONE, {
       validValues: [
-        TargetOrbits.NONE,
-        TargetOrbits.MERCURY,
-        TargetOrbits.VENUS,
-        TargetOrbits.EARTH,
-        TargetOrbits.MARS,
-        TargetOrbits.JUPITER,
-        TargetOrbits.TARGET_ORBIT_1,
-        TargetOrbits.TARGET_ORBIT_2,
-        TargetOrbits.TARGET_ORBIT_3,
-        TargetOrbits.TARGET_ORBIT_4
+        TargetOrbit.NONE,
+        TargetOrbit.MERCURY,
+        TargetOrbit.VENUS,
+        TargetOrbit.EARTH,
+        TargetOrbit.MARS,
+        TargetOrbit.JUPITER,
+        TargetOrbit.TARGET_ORBIT_1,
+        TargetOrbit.TARGET_ORBIT_2,
+        TargetOrbit.TARGET_ORBIT_3,
+        TargetOrbit.TARGET_ORBIT_4
       ],
       tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
     } );
+
+    const phetioTargetOrbitsTandem = options.tandem.createTandem( 'phetioTargetOrbits' );
+    this.targetOrbit1Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_1, this.targetOrbitProperty,
+      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit1Property' ) : Tandem.OPT_OUT );
+    this.targetOrbit2Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_2, this.targetOrbitProperty,
+      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit2Property' ) : Tandem.OPT_OUT );
+    this.targetOrbit3Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_3, this.targetOrbitProperty,
+      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit3Property' ) : Tandem.OPT_OUT );
+    this.targetOrbit4Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4, this.targetOrbitProperty,
+      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit4Property' ) : Tandem.OPT_OUT );
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
 
@@ -302,6 +320,8 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.engine.reset();
     this.engine.updateAllowedProperty.reset();
     this.resetting = false;
+
+    // Do not reset targetOrbit*Property, since they are for PhET-iO only.
   }
 
   public override update(): void {

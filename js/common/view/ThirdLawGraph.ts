@@ -22,7 +22,7 @@ import keplersLaws from '../../keplersLaws.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import TargetOrbits from '../model/TargetOrbits.js';
+import TargetOrbit from '../model/TargetOrbit.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -157,7 +157,7 @@ export default class ThirdLawGraph extends Node {
       const boundsPadding = 20; // Threshold for the out-of-bounds arrow
 
       // If there's a selected target orbit and the star's mass is equal to 1 MSun
-      if ( targetOrbit !== TargetOrbits.NONE && model.isSolarSystemProperty.value ) {
+      if ( targetOrbit !== TargetOrbit.NONE && model.isSolarSystemProperty.value ) {
         const targetOrbitPosition = semiMajorAxisToViewPoint( targetOrbit.semiMajorAxis );
 
         // If the target orbit is inside the graph

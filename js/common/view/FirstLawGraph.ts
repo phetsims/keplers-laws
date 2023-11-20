@@ -19,7 +19,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import TargetOrbits from '../model/TargetOrbits.js';
+import TargetOrbit from '../model/TargetOrbit.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
@@ -45,14 +45,14 @@ export default class FirstLawGraph extends AlignBox {
     const orbitAndValues: HBox[] = [];
 
     const shownEccentricities = [
-      TargetOrbits.MERCURY,
-      TargetOrbits.EARTH,
-      TargetOrbits.ERIS,
-      TargetOrbits.NEREID,
-      TargetOrbits.HALLEY
+      TargetOrbit.MERCURY,
+      TargetOrbit.EARTH,
+      TargetOrbit.ERIS,
+      TargetOrbit.NEREID,
+      TargetOrbit.HALLEY
     ];
 
-    shownEccentricities.forEach( ( exampleOrbit: TargetOrbits ) => {
+    shownEccentricities.forEach( ( exampleOrbit: TargetOrbit ) => {
       const orbitNameProperty = exampleOrbit.nameProperty;
       const eccentricity = exampleOrbit.eccentricity;
       const orbitNameText = new Text( orbitNameProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {

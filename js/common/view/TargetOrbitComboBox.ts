@@ -7,7 +7,7 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import TargetOrbits from '../model/TargetOrbits.js';
+import TargetOrbit from '../model/TargetOrbit.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
@@ -20,9 +20,9 @@ type SelfOptions = EmptySelfOptions;
 
 type TargetOrbitComboBoxOptions = SelfOptions & ComboBoxOptions;
 
-export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
+export default class TargetOrbitComboBox extends ComboBox<TargetOrbit> {
 
-  public constructor( targetOrbitProperty: Property<TargetOrbits>, listParent: Node, providedOptions: TargetOrbitComboBoxOptions ) {
+  public constructor( targetOrbitProperty: Property<TargetOrbit>, listParent: Node, providedOptions: TargetOrbitComboBoxOptions ) {
 
     const options = optionize<TargetOrbitComboBoxOptions, SelfOptions, ComboBoxOptions>()( {
       isDisposable: false,
@@ -44,7 +44,7 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 /**
  * Creates and item for the combo box.
  */
-function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>, tandemName: string, isPhetioConfigurable: boolean ): ComboBoxItem<TargetOrbits> {
+function createItem( mode: TargetOrbit, nameProperty: TReadOnlyProperty<string>, tandemName: string, isPhetioConfigurable: boolean ): ComboBoxItem<TargetOrbit> {
   return {
     value: mode,
     createNode: () => new Text( nameProperty, {
