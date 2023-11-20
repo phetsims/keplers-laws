@@ -22,7 +22,12 @@ const TARGET_ORBITS = [
   TargetOrbits.VENUS,
   TargetOrbits.EARTH,
   TargetOrbits.MARS,
-  TargetOrbits.JUPITER
+  TargetOrbits.JUPITER,
+  TargetOrbits.ERIS,
+  TargetOrbits.NEREID,
+  TargetOrbits.HALLEY,
+  TargetOrbits.ORBITAL_SYSTEM_1,
+  TargetOrbits.ORBITAL_SYSTEM_2
 ];
 
 type SelfOptions = EmptySelfOptions;
@@ -42,7 +47,7 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
       accessibleName: KeplersLawsStrings.a11y.targetOrbitSelectorStringProperty
     }, providedOptions );
 
-    const items = TARGET_ORBITS.map( targetOrbit => createItem( targetOrbit, targetOrbit.stringProperty ) );
+    const items = TARGET_ORBITS.map( targetOrbit => createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.visibleOnComboBox ) );
 
     super( targetOrbitProperty, items, listParent, options );
   }
@@ -51,14 +56,18 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 /**
  * Creates and item for the combo box.
  */
-function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string> ): ComboBoxItem<TargetOrbits> {
+function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>, tandemName: string, visible = true ): ComboBoxItem<TargetOrbits> {
   return {
     value: mode,
     createNode: () => new Text( nameProperty, {
       font: SolarSystemCommonConstants.COMBO_BOX_ITEM_FONT,
       maxWidth: 100
     } ),
-    a11yName: nameProperty
+    comboBoxListItemNodeOptions: {
+      visible: visible
+    },
+    a11yName: nameProperty,
+    tandemName: tandemName
   };
 }
 

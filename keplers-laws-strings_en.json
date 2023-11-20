@@ -152,6 +152,12 @@
   "orbit.halley": {
     "value": "Halley"
   },
+  "orbit.orbitalSystem1": {
+    "value": "Orbital System 1"
+  },
+  "orbit.orbitalSystem2": {
+    "value": "Orbital System 2"
+  },
   "keyboardHelpDialog.chooseATargetOribit": {
     "value": "Choose a Target Orbit"
   },
