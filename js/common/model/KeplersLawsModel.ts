@@ -162,6 +162,18 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     } );
 
     this.targetOrbitProperty = new EnumerationProperty( TargetOrbits.NONE, {
+      validValues: [
+        TargetOrbits.NONE,
+        TargetOrbits.MERCURY,
+        TargetOrbits.VENUS,
+        TargetOrbits.EARTH,
+        TargetOrbits.MARS,
+        TargetOrbits.JUPITER,
+        TargetOrbits.TARGET_ORBIT_1,
+        TargetOrbits.TARGET_ORBIT_2,
+        TargetOrbits.TARGET_ORBIT_3,
+        TargetOrbits.TARGET_ORBIT_4
+      ],
       tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
     } );
 

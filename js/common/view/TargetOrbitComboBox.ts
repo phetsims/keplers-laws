@@ -16,20 +16,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import Property from '../../../../axon/js/Property.js';
 
-const TARGET_ORBITS = [
-  TargetOrbits.NONE,
-  TargetOrbits.MERCURY,
-  TargetOrbits.VENUS,
-  TargetOrbits.EARTH,
-  TargetOrbits.MARS,
-  TargetOrbits.JUPITER,
-  TargetOrbits.ERIS,
-  TargetOrbits.NEREID,
-  TargetOrbits.HALLEY,
-  TargetOrbits.ORBITAL_SYSTEM_1,
-  TargetOrbits.ORBITAL_SYSTEM_2
-];
-
 type SelfOptions = EmptySelfOptions;
 
 type TargetOrbitComboBoxOptions = SelfOptions & ComboBoxOptions;
@@ -47,7 +33,9 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
       accessibleName: KeplersLawsStrings.a11y.targetOrbitSelectorStringProperty
     }, providedOptions );
 
-    const items = TARGET_ORBITS.map( targetOrbit => createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.visibleOnComboBox ) );
+    assert && assert( targetOrbitProperty.validValues );
+    const items = targetOrbitProperty.validValues!.map( targetOrbit =>
+      createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.visibleOnComboBox ) );
 
     super( targetOrbitProperty, items, listParent, options );
   }
@@ -61,7 +49,7 @@ function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>
     value: mode,
     createNode: () => new Text( nameProperty, {
       font: SolarSystemCommonConstants.COMBO_BOX_ITEM_FONT,
-      maxWidth: 100
+      maxWidth: 120
     } ),
     comboBoxListItemNodeOptions: {
       visible: visible

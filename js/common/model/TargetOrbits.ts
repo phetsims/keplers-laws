@@ -23,8 +23,10 @@ export default class TargetOrbits extends EnumerationValue {
   public static readonly HALLEY = new TargetOrbits( 0.967, 18.5, KeplersLawsStrings.orbit.halleyStringProperty, 'halleyOrbitItem', false );
 
   // PhET-iO client-configurable presets, which can be viewed and customized only via PhET-iO
-  public static readonly ORBITAL_SYSTEM_1 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.orbitalSystem1StringProperty, 'orbitalSystem1OrbitItem', false );
-  public static readonly ORBITAL_SYSTEM_2 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.orbitalSystem2StringProperty, 'orbitalSystem2OrbitItem', false );
+  public static readonly TARGET_ORBIT_1 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.targetOrbit1StringProperty, 'targetOrbit1Item', false );
+  public static readonly TARGET_ORBIT_2 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.targetOrbit2StringProperty, 'targetOrbit2Item', false );
+  public static readonly TARGET_ORBIT_3 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.targetOrbit3StringProperty, 'targetOrbit3Item', false );
+  public static readonly TARGET_ORBIT_4 = new TargetOrbits( 0.0, 1.0, KeplersLawsStrings.orbit.targetOrbit4StringProperty, 'targetOrbit4Item', false );
 
   public static readonly enumeration = new Enumeration( TargetOrbits );
 

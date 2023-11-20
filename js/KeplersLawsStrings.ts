@@ -75,8 +75,10 @@ type StringsType = {
     'erisStringProperty': LocalizedStringProperty;
     'nereidStringProperty': LocalizedStringProperty;
     'halleyStringProperty': LocalizedStringProperty;
-    'orbitalSystem1StringProperty': LocalizedStringProperty;
-    'orbitalSystem2StringProperty': LocalizedStringProperty;
+    'targetOrbit1StringProperty': LocalizedStringProperty;
+    'targetOrbit2StringProperty': LocalizedStringProperty;
+    'targetOrbit3StringProperty': LocalizedStringProperty;
+    'targetOrbit4StringProperty': LocalizedStringProperty;
   };
   'keyboardHelpDialog': {
     'chooseATargetOribitStringProperty': LocalizedStringProperty;
