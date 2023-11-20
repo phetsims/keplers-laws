@@ -101,10 +101,10 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   // Client-configurable target orbits. They are private because they can be accessed only via PhET-iO API or Studio.
   // See https://github.com/phetsims/keplers-laws/issues/210
-  private readonly targetOrbit1Property: TargetOrbitInfoProperty;
-  private readonly targetOrbit2Property: TargetOrbitInfoProperty;
-  private readonly targetOrbit3Property: TargetOrbitInfoProperty;
-  private readonly targetOrbit4Property: TargetOrbitInfoProperty;
+  private readonly targetOrbit1Property?: TargetOrbitInfoProperty;
+  private readonly targetOrbit2Property?: TargetOrbitInfoProperty;
+  private readonly targetOrbit3Property?: TargetOrbitInfoProperty;
+  private readonly targetOrbit4Property?: TargetOrbitInfoProperty;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
@@ -185,15 +185,17 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
       tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
     } );
 
-    const phetioTargetOrbitsTandem = options.tandem.createTandem( 'phetioTargetOrbits' );
-    this.targetOrbit1Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_1, this.targetOrbitProperty,
-      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit1Property' ) : Tandem.OPT_OUT );
-    this.targetOrbit2Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_2, this.targetOrbitProperty,
-      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit2Property' ) : Tandem.OPT_OUT );
-    this.targetOrbit3Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_3, this.targetOrbitProperty,
-      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit3Property' ) : Tandem.OPT_OUT );
-    this.targetOrbit4Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4, this.targetOrbitProperty,
-      options.initialLaw !== LawMode.SECOND_LAW ? phetioTargetOrbitsTandem.createTandem( 'targetOrbit4Property' ) : Tandem.OPT_OUT );
+    if ( options.initialLaw !== LawMode.SECOND_LAW ) {
+      const phetioTargetOrbitsTandem = options.tandem.createTandem( 'phetioTargetOrbits' );
+      this.targetOrbit1Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_1, this.targetOrbitProperty,
+        phetioTargetOrbitsTandem.createTandem( 'targetOrbit1Property' ) );
+      this.targetOrbit2Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_2, this.targetOrbitProperty,
+        phetioTargetOrbitsTandem.createTandem( 'targetOrbit2Property' ) );
+      this.targetOrbit3Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_3, this.targetOrbitProperty,
+        phetioTargetOrbitsTandem.createTandem( 'targetOrbit3Property' ) );
+      this.targetOrbit4Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4, this.targetOrbitProperty,
+        phetioTargetOrbitsTandem.createTandem( 'targetOrbit4Property' ) );
+    }
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
 
