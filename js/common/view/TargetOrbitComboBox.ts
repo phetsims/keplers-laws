@@ -35,7 +35,7 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 
     assert && assert( targetOrbitProperty.validValues );
     const items = targetOrbitProperty.validValues!.map( targetOrbit =>
-      createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.visibleOnComboBox ) );
+      createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.isPhetioConfigurable ) );
 
     super( targetOrbitProperty, items, listParent, options );
   }
@@ -44,7 +44,7 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 /**
  * Creates and item for the combo box.
  */
-function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>, tandemName: string, visible = true ): ComboBoxItem<TargetOrbits> {
+function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>, tandemName: string, isPhetioConfigurable: boolean ): ComboBoxItem<TargetOrbits> {
   return {
     value: mode,
     createNode: () => new Text( nameProperty, {
@@ -52,7 +52,7 @@ function createItem( mode: TargetOrbits, nameProperty: TReadOnlyProperty<string>
       maxWidth: 120
     } ),
     comboBoxListItemNodeOptions: {
-      visible: visible
+      visible: !isPhetioConfigurable
     },
     a11yName: nameProperty,
     tandemName: tandemName
