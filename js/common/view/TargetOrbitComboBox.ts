@@ -35,7 +35,7 @@ export default class TargetOrbitComboBox extends ComboBox<TargetOrbits> {
 
     assert && assert( targetOrbitProperty.validValues );
     const items = targetOrbitProperty.validValues!.map( targetOrbit =>
-      createItem( targetOrbit, targetOrbit.stringProperty, targetOrbit.tandemName, targetOrbit.isPhetioConfigurable ) );
+      createItem( targetOrbit, targetOrbit.nameProperty, targetOrbit.tandemName, targetOrbit.isPhetioConfigurable ) );
 
     super( targetOrbitProperty, items, listParent, options );
   }

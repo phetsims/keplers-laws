@@ -37,7 +37,7 @@ export default class TargetOrbits extends EnumerationValue {
   public constructor(
     public readonly eccentricity: number,
     public readonly semiMajorAxis: number,
-    public readonly stringProperty: TReadOnlyProperty<string>, // The text that contains the name of the orbit
+    public readonly nameProperty: TReadOnlyProperty<string>, // The text that contains the name of the orbit
     public readonly tandemName: string,
     public readonly isPhetioConfigurable = false
   ) {

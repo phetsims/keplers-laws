@@ -53,7 +53,7 @@ export default class FirstLawGraph extends AlignBox {
     ];
 
     shownEccentricities.forEach( ( exampleOrbit: TargetOrbits ) => {
-      const orbitNameProperty = exampleOrbit.stringProperty;
+      const orbitNameProperty = exampleOrbit.nameProperty;
       const eccentricity = exampleOrbit.eccentricity;
       const orbitNameText = new Text( orbitNameProperty, combineOptions<TextOptions>( {}, KeplersLawsConstants.TEXT_OPTIONS, {
         maxWidth: 120
