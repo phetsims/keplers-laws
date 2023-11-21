@@ -38,6 +38,7 @@ import Property from '../../../../axon/js/Property.js';
 import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 type SelfOptions = {
   isAllLaws?: boolean; // whether the model is for the 'All Laws' screen
@@ -297,6 +298,22 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     } );
 
     this.zoomScaleProperty = new DerivedProperty( [ animatedZoomScaleProperty ], animatedZoomScale => animatedZoomScale );
+
+    this.bodies.forEach( body => {
+      Multilink.lazyMultilink(
+        [ body.userIsControllingPositionProperty, body.userIsControllingVelocityProperty, body.userIsControllingMassProperty ],
+        ( userIsControllingPosition: boolean, userIsControllingVelocity: boolean, userIsControllingMass: boolean ) => {
+          // It's OK to keep playing when the user is changing mass.
+          if ( userIsControllingPosition || userIsControllingVelocity ) {
+            this.isPlayingProperty.value = false;
+          }
+
+          if ( userIsControllingPosition || userIsControllingVelocity || userIsControllingMass ) {
+            // The user has started changing one or more of the body Properties.
+            this.userInteractingEmitter.emit();
+          }
+        } );
+    } );
   }
 
   /**
