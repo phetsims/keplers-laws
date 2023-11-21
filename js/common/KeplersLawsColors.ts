@@ -4,11 +4,13 @@
  * Colors used throughout this simulation.
  *
  * @author Jonathan Olson (PhET Interactive Simulations)
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import keplersLaws from '../keplersLaws.js';
-import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import solarSystemCommon from '../../../solar-system-common/js/solarSystemCommon.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 
 const KeplersLawsColors = {
 
@@ -18,10 +20,29 @@ const KeplersLawsColors = {
     projector: 'black'
   } ),
 
-  orbitColorProperty: SolarSystemCommonColors.orbitColorProperty,
+  orbitColorProperty: new ProfileColorProperty( solarSystemCommon, 'orbitColor', {
+    default: 'fuchsia'
+  } ),
 
   // Color for the base fuchsia of the areas
-  areaColorProperty: SolarSystemCommonColors.orbitColorProperty,
+  areaColorProperty: new ProfileColorProperty( solarSystemCommon, 'areaColor', {
+    default: 'fuchsia'
+  } ),
+
+  sunColorProperty: new ProfileColorProperty( solarSystemCommon, 'sunColor', {
+    default: 'yellow',
+    projector: '#FFAE00'
+  }, {
+    tandem: Tandem.COLORS.createTandem( 'sunColorProperty' ),
+    phetioFeatured: true
+  } ),
+
+  planetColorProperty: new ProfileColorProperty( solarSystemCommon, 'planetColor', {
+    default: 'magenta'
+  }, {
+    tandem: Tandem.COLORS.createTandem( 'planetColorProperty' ),
+    phetioFeatured: true
+  } ),
 
   // Semi-major axis color
   semiMajorAxisColorProperty: new ProfileColorProperty( keplersLaws, 'semiMajorAxis', {

@@ -7,12 +7,12 @@
 
 import keplersLaws from '../../keplersLaws.js';
 import { Path } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 export default class PeriodTrackerNode extends Path {
   private readonly periodTracker: PeriodTracker;
@@ -29,7 +29,7 @@ export default class PeriodTrackerNode extends Path {
   public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodTracker'>, periodVisibleProperty: BooleanProperty ) {
     super( null, {
       isDisposable: false,
-      stroke: SolarSystemCommonColors.body3ColorProperty,
+      stroke: KeplersLawsColors.timeDisplayBackgroundColorProperty,
       lineWidth: 5,
       visibleProperty: periodVisibleProperty
     } );
@@ -54,7 +54,7 @@ export default class PeriodTrackerNode extends Path {
     } );
 
     this.startCircle = new Path( Shape.circle( 0, 0, 6 ), {
-      fill: SolarSystemCommonColors.body3ColorProperty,
+      fill: KeplersLawsColors.timeDisplayBackgroundColorProperty,
       visible: false
     } );
     this.addChild( this.startCircle );

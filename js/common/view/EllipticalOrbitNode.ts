@@ -47,7 +47,7 @@ export default class EllipticalOrbitNode extends Path {
     // Passing in a null shape, since it will be updated later
     super( null, {
       lineWidth: 3,
-      stroke: SolarSystemCommonColors.orbitColorProperty
+      stroke: KeplersLawsColors.orbitColorProperty
     } );
 
     this.orbit = model.engine;
@@ -203,7 +203,7 @@ export default class EllipticalOrbitNode extends Path {
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
       orbitDivisions.push( new Circle( 4, {
         fill: 'black',
-        stroke: SolarSystemCommonColors.orbitColorProperty,
+        stroke: KeplersLawsColors.orbitColorProperty,
         lineWidth: 3,
         center: Vector2.ZERO,
         visible: false

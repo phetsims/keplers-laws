@@ -22,6 +22,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;
@@ -41,7 +42,7 @@ export default class StarMassPanel extends Panel {
         maxWidth: 200
       } ) );
 
-    const thumbFillProperty = SolarSystemCommonColors.body1ColorProperty;
+    const thumbFillProperty = KeplersLawsColors.sunColorProperty;
 
     // Range of the star mass slider, relative to the mass of our sun
     const massRange = new Range( 0.5 * KeplersLawsConstants.MASS_OF_OUR_SUN, 2 * KeplersLawsConstants.MASS_OF_OUR_SUN );

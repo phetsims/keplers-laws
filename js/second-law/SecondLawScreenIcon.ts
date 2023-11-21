@@ -10,10 +10,10 @@
 import { Node, Path } from '../../../scenery/js/imports.js';
 import { Shape } from '../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../keplersLaws.js';
-import KeplersLawsScreenIcon, { semiMajorAxis, semiMinorAxis, focalPoint } from '../common/view/KeplersLawsScreenIcon.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
+import KeplersLawsColors from '../common/KeplersLawsColors.js';
 
 export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
@@ -48,7 +48,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
           0, 0, semiMajorAxis, semiMinorAxis, 0, startAngle, endAngle, false
         ).close(),
           {
-            fill: SolarSystemCommonColors.body2ColorProperty,
+            fill: KeplersLawsColors.planetColorProperty,
             opacity: ( divisionAngles.length - i + 1 ) / ( divisionAngles.length + 1 )
           }
         )
@@ -60,7 +60,7 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
         ...areas,
         KeplersLawsScreenIcon.createCommonNode(),
         new ShadedSphereNode( 3, {
-          mainColor: SolarSystemCommonColors.body2ColorProperty,
+          mainColor: KeplersLawsColors.planetColorProperty,
           x: bodyPosition.x + focalPoint,
           y: -bodyPosition.y
         } )

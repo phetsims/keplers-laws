@@ -10,7 +10,6 @@
 import keplersLaws from '../keplersLaws.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path, Text } from '../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import { Shape } from '../../../kite/js/imports.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
@@ -35,11 +34,11 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
           new Path(
             new Shape().ellipse( 0, 0, semiMajorAxis, semiMinorAxis, 0 ),
             {
-              stroke: SolarSystemCommonColors.orbitColorProperty,
+              stroke: KeplersLawsColors.orbitColorProperty,
               lineWidth: 1
             } ),
           new ShadedSphereNode( 8, {
-            mainColor: SolarSystemCommonColors.body1ColorProperty,
+            mainColor: KeplersLawsColors.sunColorProperty,
             x: -focalPoint
           } ),
           new Path(
@@ -51,7 +50,7 @@ export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
           ThirdLawScreenIcon.createPeriodTimerNode(),
           showPlanet ?
           new ShadedSphereNode( 3, {
-            mainColor: SolarSystemCommonColors.body2ColorProperty,
+            mainColor: KeplersLawsColors.planetColorProperty,
             x: semiMajorAxis
           } ) : new Node()
         ]

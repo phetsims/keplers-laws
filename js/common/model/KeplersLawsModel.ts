@@ -45,7 +45,7 @@ type SelfOptions = {
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SolarSystemCommonModelOptions, 'zoomLevelRange' | 'defaultBodyInfo' | 'engineTimeScale'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SolarSystemCommonModelOptions, 'zoomLevelRange' | 'defaultBodyInfo' | 'engineTimeScale' | 'bodyColors'>;
 
 class KeplersLawsModel extends SolarSystemCommonModel {
 
@@ -136,6 +136,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
           velocity: new Vector2( 0, 17.2358 ),
           tandemName: 'planet'
         } )
+      ],
+      bodyColors: [
+        KeplersLawsColors.sunColorProperty,
+        KeplersLawsColors.planetColorProperty
       ]
     }, providedOptions );
     super( options );

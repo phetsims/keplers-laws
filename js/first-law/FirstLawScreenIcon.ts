@@ -10,7 +10,6 @@
 import keplersLaws from '../keplersLaws.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node } from '../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
 import XNode from '../../../scenery-phet/js/XNode.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis } from '../common/view/KeplersLawsScreenIcon.js';
@@ -37,7 +36,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
     return new Node( {
         children: [
           new ShadedSphereNode( 8, {
-            mainColor: SolarSystemCommonColors.body1ColorProperty,
+            mainColor: KeplersLawsColors.sunColorProperty,
             x: -focalPoint
           } ),
           new XNode( {
@@ -56,7 +55,7 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
           } ),
           showPlanet ?
           new ShadedSphereNode( 3, {
-            mainColor: SolarSystemCommonColors.body2ColorProperty,
+            mainColor: KeplersLawsColors.planetColorProperty,
             x: semiMajorAxis
           } ) : new Node()
         ]

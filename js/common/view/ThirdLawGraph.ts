@@ -74,7 +74,7 @@ export default class ThirdLawGraph extends Node {
     } );
 
     const dataPoint = new Circle( 5, {
-      fill: SolarSystemCommonColors.body2ColorProperty
+      fill: KeplersLawsColors.planetColorProperty
     } );
     const targetOrbitPoint = new Circle( 5, {
       fill: KeplersLawsColors.targetOrbitColorProperty,
@@ -87,8 +87,8 @@ export default class ThirdLawGraph extends Node {
       lineWidth: 2
     } );
     const outOfBoundsArrow = new ArrowNode( 0, 0, 1, 0, {
-      stroke: SolarSystemCommonColors.body2ColorProperty,
-      fill: SolarSystemCommonColors.body2ColorProperty,
+      stroke: KeplersLawsColors.planetColorProperty,
+      fill: KeplersLawsColors.planetColorProperty,
       lineWidth: 2,
       visible: false
     } );

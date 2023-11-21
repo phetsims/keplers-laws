@@ -46,7 +46,7 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
             lineWidth: 1
           } ),
         new ShadedSphereNode( 8, {
-          mainColor: SolarSystemCommonColors.body1ColorProperty,
+          mainColor: KeplersLawsColors.sunColorProperty,
           x: -focalPoint
         } )
       ]
