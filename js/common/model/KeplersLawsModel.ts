@@ -39,22 +39,23 @@ import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 
-type SuperTypeOptions = SolarSystemCommonModelOptions<EllipticalOrbitEngine>;
-
 type SelfOptions = {
   isAllLaws?: boolean; // whether the model is for the 'All Laws' screen
   initialLaw?: LawMode;
 };
 
-export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SuperTypeOptions, 'engineFactory' | 'zoomLevelRange' | 'defaultBodyInfo' | 'engineTimeScale'>;
+export type KeplersLawsModelOptions = SelfOptions & StrictOmit<SolarSystemCommonModelOptions, 'zoomLevelRange' | 'defaultBodyInfo' | 'engineTimeScale'>;
 
-class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
+class KeplersLawsModel extends SolarSystemCommonModel {
 
   // abstract in SolarSystemCommonModel
   public readonly zoomScaleProperty: TReadOnlyProperty<number>;
 
   public readonly sun: Body;
   public readonly planet: Body;
+
+  // This is abstract in the base class, so make it concrete here.
+  public readonly engine: EllipticalOrbitEngine;
 
   public readonly selectedLawProperty: EnumerationProperty<LawMode>;
   public readonly isAllLaws: boolean;
@@ -107,14 +108,13 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   private readonly targetOrbit4Property?: TargetOrbitInfoProperty;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
-    const options = optionize<KeplersLawsModelOptions, SelfOptions, SuperTypeOptions>()( {
+    const options = optionize<KeplersLawsModelOptions, SelfOptions, SolarSystemCommonModelOptions>()( {
 
       // SelfOptions
       isAllLaws: false,
       initialLaw: LawMode.FIRST_LAW,
 
       // SolarSystemCommonModelOptionsOptions
-      engineFactory: bodies => new EllipticalOrbitEngine( bodies, providedOptions.tandem ),
       engineTimeScale: 0.002,  // This value works well for EllipticalOrbitEngine
       zoomLevelRange: new RangeWithValue( 1, 2, 2 ),
       modelToViewTime: 1000 / 12.6,
@@ -145,6 +145,9 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.sun.positionProperty.link( position => {
       assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
     } );
+
+    this.engine = new EllipticalOrbitEngine( this.bodies, providedOptions.tandem );
+    this.engine.reset();
 
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw, {
       tandem: options.tandem.createTandem( 'selectedLawProperty' ),
