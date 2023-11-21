@@ -206,7 +206,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
     this.sun.massProperty.lazyLink( () => {
       // Pause the sim when the Sun's ( id = 0 ) mass is changed
       this.isPlayingProperty.value = false;
-      this.engine.update( this.activeBodies );
+      this.engine.update( this.bodies );
     } );
 
     this.loadBodyInfo( this.defaultBodyInfo );
@@ -254,7 +254,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
         this.engine.reset();
       }
       else {
-        this.engine.update( this.activeBodies );
+        this.engine.update( this.bodies );
       }
     } );
 
@@ -302,7 +302,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
   public override loadBodyInfo( bodiesInfo: BodyInfo[] ): void {
     super.loadBodyInfo( bodiesInfo );
 
-    this.engine && this.engine.update( this.activeBodies );
+    this.engine && this.engine.update( this.bodies );
   }
 
   public override reset(): void {
@@ -328,7 +328,7 @@ class KeplersLawsModel extends SolarSystemCommonModel<EllipticalOrbitEngine> {
 
   public override update(): void {
     if ( this.engine.updateAllowedProperty.value ) {
-      this.engine.update( this.activeBodies );
+      this.engine.update( this.bodies );
     }
   }
 

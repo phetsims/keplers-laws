@@ -285,7 +285,7 @@ export default class EllipticalOrbitEngine extends Engine {
    * Updates the orbital elements of the body using Orbital Mechanics Analytic Equations
    */
   public override update( bodies: Body[] ): void {
-    assert && assert( bodies === this.bodies, 'This engine expects the set of bodies to remain constant.' );
+    assert && assert( _.isEqual( bodies, this.bodies ), 'This engine expects the set of bodies to remain constant.' );
 
     this.resetOrbitalAreas();
     this.periodTraceStart = 0;
