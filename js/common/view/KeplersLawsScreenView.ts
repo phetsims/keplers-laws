@@ -104,7 +104,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.bodiesLayer.addChild( sunNode );
 
-    const userHasInteractedProperty = new BooleanProperty( false );
+    const userHasInteractedProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'userHasInteractedProperty' )
+    } );
+
     model.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
         userHasInteractedProperty.value = true;

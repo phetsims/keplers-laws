@@ -154,6 +154,12 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.engine = new EllipticalOrbitEngine( this.bodies, providedOptions.tandem );
     this.engine.reset();
 
+    Multilink.multilink( [ this.planet.positionProperty, this.planet.velocityProperty ], () => {
+      if ( this.engine.updateAllowedProperty.value || !this.isPlayingProperty.value ) {
+        this.engine.update( this.bodies );
+      }
+    } );
+
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw, {
       tandem: options.tandem.createTandem( 'selectedLawProperty' ),
       phetioReadOnly: !options.isAllLaws // Only allow the law to be changed via studio in the 'All Laws' screen
