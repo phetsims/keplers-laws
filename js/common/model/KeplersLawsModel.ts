@@ -290,11 +290,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     } );
 
     this.zoomLevelProperty.link( zoomLevel => {
-      if ( zoomLevel === 1 && !this.resetting ) {
-        zoomAnimationIn.start();
-      }
-      else if ( !this.resetting ) {
-        zoomAnimationOut.start();
+      if ( !this.resetting ) {
+        zoomLevel === 1 ? zoomAnimationIn.start() : zoomAnimationOut.start();
       }
       else {
         animatedZoomScaleProperty.value = animatedZoomScaleRange.max;
