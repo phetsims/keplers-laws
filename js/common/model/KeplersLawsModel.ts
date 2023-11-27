@@ -104,6 +104,12 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   // The last law that was selected
   public lastLaw: LawMode;
 
+  // Property that tells the EllipticalOrbitNode to play the sound or not
+  public userIsInteractingProperty: BooleanProperty;
+
+  // Stepping forward manually (toggled with the UI button), used to avoid updating the orbit
+  private steppingForward = false;
+
   // Client-configurable target orbits. Private because these Properties can be accessed only via PhET-iO API or Studio.
   // Static because there must be 1 instance of each Property for the entire sim, since each Property modifies 1 value
   // of the TargetOrbit enumeration. See https://github.com/phetsims/keplers-laws/issues/210
@@ -225,11 +231,16 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       tandem: options.tandem.createTandem( 'alwaysCircularProperty' )
     } );
 
-    this.sun.massProperty.lazyLink( () => {
-      // Pause the sim when the Sun's ( id = 0 ) mass is changed
-      this.isPlayingProperty.value = false;
-      this.engine.update( this.bodies );
-    } );
+    Multilink.lazyMultilink( [
+        this.sun.massProperty,
+        this.planet.positionProperty,
+        this.planet.velocityProperty
+      ],
+      () => {
+        if ( !this.isPlayingProperty.value && !this.steppingForward && !this.engine.isMutatingVelocity ) {
+          this.engine.update( this.bodies );
+        }
+      } );
 
     this.loadBodyInfo( this.defaultBodyInfo );
 
@@ -314,6 +325,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
 
     this.zoomScaleProperty = new DerivedProperty( [ animatedZoomScaleProperty ], animatedZoomScale => animatedZoomScale );
 
+    this.userIsInteractingProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'userIsInteractingProperty' )
+    } );
+
     this.bodies.forEach( body => {
       Multilink.lazyMultilink(
         [ body.userIsControllingPositionProperty, body.userIsControllingVelocityProperty, body.userIsControllingMassProperty ],
@@ -327,6 +342,9 @@ class KeplersLawsModel extends SolarSystemCommonModel {
             // The user has started changing one or more of the body Properties.
             this.userInteractingEmitter.emit();
           }
+
+          // Will tell the EllipticalOrbitNode to play the sound or not
+          this.userIsInteractingProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
         } );
     } );
 
@@ -395,31 +413,37 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.loadBodyInfo( this.defaultBodyInfo );
 
     this.engine.reset();
-    this.engine.updateAllowedProperty.reset();
     this.resetting = false;
 
     // Do not reset targetOrbit*Property, since they are for PhET-iO only.
   }
 
   public override update(): void {
-    if ( this.engine.updateAllowedProperty.value ) {
-      this.engine.update( this.bodies );
-    }
+    // no op
   }
 
   public override step( dt: number ): void {
-    super.step( dt );
+    if ( this.isPlayingProperty.value ) {
+      this.stepOnce( dt );
+    }
+    else {
+      this.update();
+    }
+
     this.periodTracker.step( dt );
+
   }
 
-  public override stepOnce( dt: number ): void {
+  public override stepOnce( dt: number, usingStepForwardButton = false ): void {
+    this.steppingForward = usingStepForwardButton;
+
     // Scaling dt according to the speeds of the sim
     dt *= this.timeSpeedMap.get( this.timeSpeedProperty.value )!;
 
     // Scaling dt to the engine time
     dt *= this.engineTimeScale;
 
-    this.engine.run( dt, true );
+    this.engine.run( dt );
 
     // Scale dt again to convert it to view time
     dt *= this.modelToViewTime;
@@ -428,6 +452,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     if ( this.stopwatch.isRunningProperty.value ) {
       this.stopwatch.step( dt );
     }
+
+    this.steppingForward = false;
   }
 
   /**

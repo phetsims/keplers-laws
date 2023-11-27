@@ -55,9 +55,9 @@ export default class EllipticalOrbitNode extends Path {
     const orbitalSound = new OrbitalSound( this.orbit.semiMajorAxisProperty, this.orbit.eccentricityProperty );
     soundManager.addSoundGenerator( orbitalSound );
 
-    Multilink.multilink( [ this.orbit.allowedOrbitProperty, this.orbit.updateAllowedProperty ],
-      ( orbitAllowed, updateAllowed ) => {
-        if ( orbitAllowed && updateAllowed ) {
+    Multilink.multilink( [ this.orbit.allowedOrbitProperty, model.userIsInteractingProperty ],
+      ( orbitAllowed, userIsInteracting ) => {
+        if ( orbitAllowed && userIsInteracting ) {
           orbitalSound.playOrbitalSound();
         }
         else {

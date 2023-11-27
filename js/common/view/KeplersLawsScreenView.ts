@@ -344,7 +344,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     const timeControlNode = new SolarSystemCommonTimeControlNode( model, {
       enabledProperty: options.playingAllowedProperty || null,
       restartListener: () => model.restart(),
-      stepForwardListener: () => model.stepOnce( 1 / 8 ),
+      stepForwardListener: () => model.stepOnce( 1 / 8, true ),
       tandem: options.tandem.createTandem( 'timeControlNode' )
     } );
     timeControlNode.boundsProperty.link( bounds => {

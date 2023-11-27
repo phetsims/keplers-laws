@@ -78,6 +78,9 @@ export default class EllipticalOrbitEngine extends Engine {
   // Boolean that keeps track of the engine's state
   private isRunning = false;
 
+  // Flag that warns of changes in the velocity caused by the engine
+  public isMutatingVelocity = false;
+
   // For changes that require changes in the shape of the orbit
   public readonly changedEmitter = new Emitter();
 
@@ -94,9 +97,6 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public orbitalAreas: OrbitalArea[] = [];
   public readonly isCircularProperty = new BooleanProperty( true );
-
-  // When the sim plays, the orbit won't be constantly updating, only on user interactions
-  public readonly updateAllowedProperty = new BooleanProperty( false );
 
   public readonly semiMajorAxisProperty: NumberProperty;
   public readonly semiMinorAxisProperty: NumberProperty;
@@ -203,7 +203,6 @@ export default class EllipticalOrbitEngine extends Engine {
     Multilink.multilink(
       [ this.planet.userIsControllingPositionProperty, this.planet.userIsControllingVelocityProperty, this.sun.userIsControllingMassProperty ],
       ( userIsControllingPosition, userIsControllingVelocity, userIsControllingMass ) => {
-        this.updateAllowedProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
         this.resetOrbitalAreas();
         this.update( this.bodies );
       } );
@@ -216,15 +215,13 @@ export default class EllipticalOrbitEngine extends Engine {
     } );
   }
 
-  public override run( dt: number, notifyPropertyListeners: boolean ): void {
+  public override run( dt: number, notifyPropertyListeners = true ): void {
     // Note that the notifyPropertyListeners optimization is not needed here, because the engine only needs to run
     // once, and there is only 1 body that is changed.
 
-    // Prevent the orbit from updating if the body is orbiting
-    this.updateAllowedProperty.value = false;
-
     // Set the engine to running
     this.isRunning = true;
+    this.isMutatingVelocity = true;
 
     // Calculate the new position and velocity of the body
     this.M += dt * this.W;
@@ -251,8 +248,8 @@ export default class EllipticalOrbitEngine extends Engine {
     }
 
     this.areasErased = false;
-
     this.isRunning = false;
+    this.isMutatingVelocity = false;
   }
 
   /**
@@ -369,16 +366,20 @@ export default class EllipticalOrbitEngine extends Engine {
    * Always set the velocity to be perpendicular to the position and circular
    */
   private enforceCircularOrbit( position: Vector2 ): void {
+    this.isMutatingVelocity = true;
     const direction = this.retrograde ? -1 : 1;
     this.planet.velocityProperty.value =
-      position.perpendicular.normalize().multiplyScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
+      position.perpendicular.normalized().timesScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
+    this.isMutatingVelocity = false;
   }
 
   /**
    * Makes sure the velocity is never greater than the escape speed
    */
   private enforceEscapeSpeed(): void {
-    this.planet.velocityProperty.value = this.planet.velocityProperty.value.normalized().multiplyScalar( this.escapeSpeedProperty.value );
+    this.isMutatingVelocity = true;
+    this.planet.velocityProperty.value = this.planet.velocityProperty.value.normalized().timesScalar( this.escapeSpeedProperty.value );
+    this.isMutatingVelocity = false;
   }
 
   private collidedWithSun( a: number, e: number ): boolean {
