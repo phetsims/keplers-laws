@@ -39,6 +39,7 @@ import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 
 const PHET_IO_TARGET_ORBITS_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'phetioTargetOrbits' );
 
@@ -116,6 +117,12 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4,
       PHET_IO_TARGET_ORBITS_TANDEM.createTandem( 'targetOrbit4Property' ) )
   ];
+
+  // More orbital data derived properties
+  public readonly distanceProperty: TReadOnlyProperty<number>;
+  public readonly distanceAngleProperty: TReadOnlyProperty<number>;
+  public readonly velocityAngleProperty: TReadOnlyProperty<number>;
+  public readonly rvAngleProperty: TReadOnlyProperty<number>;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SolarSystemCommonModelOptions>()( {
@@ -322,6 +329,46 @@ class KeplersLawsModel extends SolarSystemCommonModel {
           }
         } );
     } );
+
+    // More orbital data number properties
+    const moreOrbitalDataTandem = options.tandem.createTandem( 'moreOrbitalData' );
+
+    this.distanceProperty = new DerivedProperty( [ this.planet.positionProperty, this.sun.positionProperty ],
+      ( planetPosition, sunPosition ) => planetPosition.distance( sunPosition ),
+      {
+        tandem: moreOrbitalDataTandem.createTandem( 'distanceProperty' ),
+        units: 'AU',
+        phetioValueType: NumberIO
+      } );
+
+    this.distanceAngleProperty = new DerivedProperty( [ this.planet.positionProperty ],
+      position => Utils.toDegrees( position.angle ),
+      {
+        tandem: moreOrbitalDataTandem.createTandem( 'distanceAngleProperty' ),
+        units: '\u00B0',
+        phetioValueType: NumberIO
+      } );
+
+    this.velocityAngleProperty = new DerivedProperty( [ this.planet.velocityProperty ],
+      velocity => Utils.toDegrees( velocity.angle ),
+      {
+        tandem: moreOrbitalDataTandem.createTandem( 'velocityAngleProperty' ),
+        units: '\u00B0',
+        phetioValueType: NumberIO
+      } );
+
+    this.rvAngleProperty = new DerivedProperty( [ this.planet.positionProperty, this.planet.velocityProperty, this.engine.eccentricityProperty ],
+      ( position, velocity, eccentricity ) => {
+        if ( eccentricity === 0 ) {
+          return 90;
+        }
+        return Utils.toDegrees( velocity.angle - position.angle );
+      },
+      {
+        tandem: moreOrbitalDataTandem.createTandem( 'rvAngleProperty' ),
+        units: '\u00B0',
+        phetioValueType: NumberIO
+      } );
   }
 
   /**

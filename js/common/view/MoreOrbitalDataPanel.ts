@@ -42,31 +42,28 @@ export default class MoreOrbitalDataPanel extends Panel {
     // Extra information: distance and velocity vector values
     const distanceStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.AUStringProperty,
-      value: new DerivedProperty( [ model.planet.positionProperty, model.sun.positionProperty ],
-        ( planetPosition, sunPosition ) => Utils.toFixed( planetPosition.distance( sunPosition ), 2 ) )
+      value: new DerivedProperty( [ model.distanceProperty ],
+        distance => Utils.toFixed( distance, 2 ) )
     } );
     const velocityMagnitudeStringProperty = new PatternStringProperty( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
       units: KeplersLawsStrings.units.kmsStringProperty,
-      value: new DerivedProperty( [ model.planet.speedProperty ], speed => Utils.toFixed( speed, 2 ) )
+      value: new DerivedProperty( [ model.planet.speedProperty ],
+        speed => Utils.toFixed( speed, 2 ) )
     } );
-    const distanceAngleStringProperty = new DerivedStringProperty( [ model.planet.positionProperty ], position => {
-      const value = Utils.toFixed( Utils.toDegrees( position.angle ), 2 );
+    const distanceAngleStringProperty = new DerivedStringProperty( [ model.distanceAngleProperty ], distanceAngle => {
+      const value = Utils.toFixed( distanceAngle, 2 );
       return `${value}${MathSymbols.DEGREES}`;
     } );
-    const velocityAngleStringProperty = new DerivedStringProperty( [ model.planet.velocityProperty ], velocity => {
-      const value = Utils.toFixed( Utils.toDegrees( velocity.angle ), 2 );
+    const velocityAngleStringProperty = new DerivedStringProperty( [ model.velocityAngleProperty ], velocityAngle => {
+      const value = Utils.toFixed( velocityAngle, 2 );
       return `${value}${MathSymbols.DEGREES}`;
     } );
 
     // rv angle is the angle from R to V
-    const rvAngleStringProperty = new DerivedStringProperty( [ model.planet.positionProperty, model.planet.velocityProperty, model.engine.eccentricityProperty ],
-      ( position, velocity, eccentricity ) => {
-        if ( eccentricity === 0 ) {
-          return `${90.00}${MathSymbols.DEGREES}`;
-        }
-        const value = Utils.toFixed( Utils.toDegrees( velocity.angle - position.angle ), 2 );
-        return `${value}${MathSymbols.DEGREES}`;
-      } );
+    const rvAngleStringProperty = new DerivedStringProperty( [ model.rvAngleProperty ], rvAngle => {
+      const value = Utils.toFixed( rvAngle, 2 );
+      return `${value}${MathSymbols.DEGREES}`;
+    } );
 
     const distanceEquivalentSymbolStringProperty = new DerivedStringProperty(
       [ KeplersLawsDerivedStrings.d1StringProperty, KeplersLawsStrings.symbol.RStringProperty, model.alwaysCircularProperty ], ( d1, R, alwaysCircular ) => {
