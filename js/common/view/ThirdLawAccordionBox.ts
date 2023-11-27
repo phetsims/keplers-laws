@@ -98,7 +98,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     // Graph of a vs T
     const graphNode = new ThirdLawGraph( model, model.engine, {
       layoutOptions: { column: 1, row: 0 },
-      excludeInvisibleChildrenFromBounds: true
+      excludeInvisibleChildrenFromBounds: true,
+      tandem: tandem.createTandem( 'graphNode' )
     } );
 
     // Radio buttons to the left of the graph
@@ -260,12 +261,12 @@ class EquationNode extends HBox {
       children: [
         fractionLeft,
         createEquationTextNode( new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS,
-            { centerY: 0 } ) ) ),
+          { centerY: 0 } ) ) ),
         fractionRight,
         createUnitsFraction(),
         createEquationTextNode( new Text( '=', combineOptions<TextOptions>( {}, EQUATION_TEXT_OPTIONS, {
-            visibleProperty: model.engine.allowedOrbitProperty, centerY: 0
-          } ) ) ),
+          visibleProperty: model.engine.allowedOrbitProperty, centerY: 0
+        } ) ) ),
         createEquationTextNode( resultTextNode ),
         createUnitsFraction()
       ]

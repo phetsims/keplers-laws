@@ -26,6 +26,7 @@ import TargetOrbit from '../model/TargetOrbit.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const AXIS_LABEL_MAX_WIDTH = 20;
@@ -149,8 +150,8 @@ export default class ThirdLawGraph extends Node {
       outOfBoundsArrow
     ];
 
-    let minVisitedAxis: number;
-    let maxVisitedAxis: number;
+    const minVisitedAxisProperty = new NumberProperty( 0, { tandem: options.tandem?.createTandem( 'minVisitedAxisProperty' ) } );
+    const maxVisitedAxisProperty = new NumberProperty( 0, { tandem: options.tandem?.createTandem( 'maxVisitedAxisProperty' ) } );
 
     const orbitUpdated = () => {
       const targetOrbit = model.targetOrbitProperty.value;
@@ -192,18 +193,18 @@ export default class ThirdLawGraph extends Node {
 
       // Updates the limits of the graph line if the orbit is not out of bounds
       if ( !outOfBounds ) {
-        if ( orbit.a < minVisitedAxis ) {
-          minVisitedAxis = orbit.a;
+        if ( orbit.a < minVisitedAxisProperty.value ) {
+          minVisitedAxisProperty.value = orbit.a;
         }
 
-        if ( orbit.a > maxVisitedAxis ) {
-          maxVisitedAxis = orbit.a;
+        if ( orbit.a > maxVisitedAxisProperty.value ) {
+          maxVisitedAxisProperty.value = orbit.a;
         }
       }
 
       // Draw a line between the minimum and maximum visited axis
-      if ( minVisitedAxis !== maxVisitedAxis ) {
-        for ( let a = minVisitedAxis; a <= maxVisitedAxis; a += 0.01 ) {
+      if ( minVisitedAxisProperty.value !== maxVisitedAxisProperty.value ) {
+        for ( let a = minVisitedAxisProperty.value; a <= maxVisitedAxisProperty.value; a += 0.01 ) {
           const pointToDraw = semiMajorAxisToViewPoint( a );
 
           // If the point is out of bounds and the arrow position has not been set, set it
@@ -234,8 +235,8 @@ export default class ThirdLawGraph extends Node {
     };
 
     const resetGraph = () => {
-      minVisitedAxis = orbit.a;
-      maxVisitedAxis = orbit.a;
+      minVisitedAxisProperty.value = orbit.a;
+      maxVisitedAxisProperty.value = orbit.a;
 
       // Calling the draw function again to update (delete) the line
       orbitUpdated();
@@ -247,7 +248,9 @@ export default class ThirdLawGraph extends Node {
       [
         model.selectedAxisPowerProperty,
         model.selectedPeriodPowerProperty,
-        model.targetOrbitProperty
+        model.targetOrbitProperty,
+        minVisitedAxisProperty,
+        maxVisitedAxisProperty
       ], orbitUpdated );
 
     orbit.changedEmitter.addListener( orbitUpdated );
