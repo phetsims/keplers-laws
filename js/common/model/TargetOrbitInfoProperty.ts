@@ -73,7 +73,8 @@ export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
     super( new TargetOrbitInfo( targetOrbit.eccentricity, targetOrbit.semiMajorAxis ), {
       isValidValue: targetOrbitInfo => ( targetOrbitInfo.eccentricity >= 0 && targetOrbitInfo.eccentricity < 1 ),
       tandem: tandem,
-      phetioValueType: TargetOrbitInfo.TargetOrbitInfoIO
+      phetioValueType: TargetOrbitInfo.TargetOrbitInfoIO,
+      phetioDocumentation: 'Client-configurable preset for Target Orbit, available only via PhET-iO'
     } );
 
     this.targetOrbit = targetOrbit;
