@@ -40,6 +40,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 
+const PHET_IO_TARGET_ORBITS_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'phetioTargetOrbits' );
+
 type SelfOptions = {
   isAllLaws?: boolean; // whether the model is for the 'All Laws' screen
   initialLaw?: LawMode;
@@ -101,12 +103,19 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   // The last law that was selected
   public lastLaw: LawMode;
 
-  // Client-configurable target orbits. They are private because they can be accessed only via PhET-iO API or Studio.
-  // See https://github.com/phetsims/keplers-laws/issues/210
-  private readonly targetOrbit1Property?: TargetOrbitInfoProperty;
-  private readonly targetOrbit2Property?: TargetOrbitInfoProperty;
-  private readonly targetOrbit3Property?: TargetOrbitInfoProperty;
-  private readonly targetOrbit4Property?: TargetOrbitInfoProperty;
+  // Client-configurable target orbits. Private because these Properties can be accessed only via PhET-iO API or Studio.
+  // Static because there must be 1 instance of each Property for the entire sim, since each Property modifies 1 value
+  // of the TargetOrbit enumeration. See https://github.com/phetsims/keplers-laws/issues/210
+  private static readonly targetOrbitInfoProperties = [
+    new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_1,
+      PHET_IO_TARGET_ORBITS_TANDEM.createTandem( 'targetOrbit1Property' ) ),
+    new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_2,
+      PHET_IO_TARGET_ORBITS_TANDEM.createTandem( 'targetOrbit2Property' ) ),
+    new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_3,
+      PHET_IO_TARGET_ORBITS_TANDEM.createTandem( 'targetOrbit3Property' ) ),
+    new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4,
+      PHET_IO_TARGET_ORBITS_TANDEM.createTandem( 'targetOrbit4Property' ) )
+  ];
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SolarSystemCommonModelOptions>()( {
@@ -193,17 +202,15 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
     } );
 
-    if ( options.initialLaw !== LawMode.SECOND_LAW ) {
-      const phetioTargetOrbitsTandem = options.tandem.createTandem( 'phetioTargetOrbits' );
-      this.targetOrbit1Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_1, this.targetOrbitProperty,
-        phetioTargetOrbitsTandem.createTandem( 'targetOrbit1Property' ) );
-      this.targetOrbit2Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_2, this.targetOrbitProperty,
-        phetioTargetOrbitsTandem.createTandem( 'targetOrbit2Property' ) );
-      this.targetOrbit3Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_3, this.targetOrbitProperty,
-        phetioTargetOrbitsTandem.createTandem( 'targetOrbit3Property' ) );
-      this.targetOrbit4Property = new TargetOrbitInfoProperty( TargetOrbit.TARGET_ORBIT_4, this.targetOrbitProperty,
-        phetioTargetOrbitsTandem.createTandem( 'targetOrbit4Property' ) );
-    }
+    // If the selected target orbit is modified, force an update by switching to 'None', then back.
+    KeplersLawsModel.targetOrbitInfoProperties.forEach( targetOrbitInfoProperty => {
+      targetOrbitInfoProperty.link( () => {
+        if ( targetOrbitInfoProperty.targetOrbit === this.targetOrbitProperty.value ) {
+          this.targetOrbitProperty.value = TargetOrbit.NONE;
+          this.targetOrbitProperty.value = targetOrbitInfoProperty.targetOrbit;
+        }
+      } );
+    } );
 
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
 

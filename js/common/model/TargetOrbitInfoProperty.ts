@@ -65,7 +65,10 @@ class TargetOrbitInfo {
  */
 export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
 
-  public constructor( targetOrbit: TargetOrbit, targetOrbitProperty: Property<TargetOrbit>, tandem: Tandem ) {
+  // TargetOrbit enumeration value that this Property will modify.
+  public readonly targetOrbit: TargetOrbit;
+
+  public constructor( targetOrbit: TargetOrbit, tandem: Tandem ) {
 
     super( new TargetOrbitInfo( targetOrbit.eccentricity, targetOrbit.semiMajorAxis ), {
       isValidValue: targetOrbitInfo => ( targetOrbitInfo.eccentricity >= 0 && targetOrbitInfo.eccentricity < 1 ),
@@ -73,17 +76,13 @@ export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
       phetioValueType: TargetOrbitInfo.TargetOrbitInfoIO
     } );
 
+    this.targetOrbit = targetOrbit;
+
     this.lazyLink( targetOrbitInfo => {
 
       // Update the targetOrbit with the new values.
       targetOrbit.eccentricity = targetOrbitInfo.eccentricity;
       targetOrbit.semiMajorAxis = targetOrbitInfo.semiMajorAxis;
-
-      // Force the view to refresh if the target orbit that was changed is the selected target orbit.
-      if ( targetOrbitProperty.value === targetOrbit ) {
-        targetOrbitProperty.value = TargetOrbit.NONE;
-        targetOrbitProperty.value = targetOrbit;
-      }
     } );
   }
 }
