@@ -216,12 +216,6 @@ export default class EllipticalOrbitEngine extends Engine {
     } );
   }
 
-  // Kepler's Third Law, when this.mu == INITIAL_MU (solar system), then it's T = a^(3/2)
-  // Returns the period in model units
-  public thirdLaw( a: number ): number {
-    return Math.pow( a * a * a * INITIAL_MU / this.mu, 1 / 2 );
-  }
-
   public override run( dt: number, notifyPropertyListeners: boolean ): void {
     // Note that the notifyPropertyListeners optimization is not needed here, because the engine only needs to run
     // once, and there is only 1 body that is changed.
@@ -259,25 +253,6 @@ export default class EllipticalOrbitEngine extends Engine {
     this.areasErased = false;
 
     this.isRunning = false;
-  }
-
-  /**
-   * Updates the distances from the foci to the body
-   */
-  private updateBodyDistances(): void {
-    this.bodyPolarPosition = this.createPolar( this.nu );
-    this.d1 = this.bodyPolarPosition.magnitude;
-    this.d2 = 2 * this.a - this.d1;
-
-    this.distance1Property.value = this.d1;
-    this.distance2Property.value = this.d2;
-  }
-
-  private updateForces( position: Vector2 ): void {
-    const gravityForce = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
-    this.planet.gravityForceProperty.value = gravityForce;
-    this.planet.accelerationProperty.value = gravityForce.timesScalar( 1 / this.planet.massProperty.value );
-    this.sun.gravityForceProperty.value = gravityForce.timesScalar( -1 );
   }
 
   /**
@@ -362,6 +337,32 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.changedEmitter.emit();
     this.ranEmitter.emit();
+  }
+
+  /**
+   * Updates the distances from the foci to the body
+   */
+  private updateBodyDistances(): void {
+    this.bodyPolarPosition = this.createPolar( this.nu );
+    this.d1 = this.bodyPolarPosition.magnitude;
+    this.d2 = 2 * this.a - this.d1;
+
+    this.distance1Property.value = this.d1;
+    this.distance2Property.value = this.d2;
+  }
+
+  private updateForces( position: Vector2 ): void {
+    const gravityForce = position.timesScalar( -this.mu * this.planet.massProperty.value / Math.pow( position.magnitude, 3 ) );
+    this.planet.gravityForceProperty.value = gravityForce;
+    this.planet.accelerationProperty.value = gravityForce.timesScalar( 1 / this.planet.massProperty.value );
+    this.sun.gravityForceProperty.value = gravityForce.timesScalar( -1 );
+  }
+
+
+  // Kepler's Third Law, when this.mu == INITIAL_MU (solar system), then it's T = a^(3/2)
+  // Returns the period in model units
+  public thirdLaw( a: number ): number {
+    return Math.pow( a * a * a * INITIAL_MU / this.mu, 1 / 2 );
   }
 
   /**
