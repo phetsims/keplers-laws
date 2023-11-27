@@ -333,13 +333,9 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       Multilink.lazyMultilink(
         [ body.userIsControllingPositionProperty, body.userIsControllingVelocityProperty, body.userIsControllingMassProperty ],
         ( userIsControllingPosition: boolean, userIsControllingVelocity: boolean, userIsControllingMass: boolean ) => {
-          // It's OK to keep playing when the user is changing mass.
-          if ( userIsControllingPosition || userIsControllingVelocity ) {
-            this.isPlayingProperty.value = false;
-          }
-
           if ( userIsControllingPosition || userIsControllingVelocity || userIsControllingMass ) {
             // The user has started changing one or more of the body Properties.
+            this.isPlayingProperty.value = false;
             this.userInteractingEmitter.emit();
           }
 
