@@ -13,7 +13,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Node, AlignBox, GridBox, HBox, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, GridBox, HBox, Node, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import ThirdLawTextUtils from './ThirdLawTextUtils.js';
@@ -92,7 +92,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       // Keeps the size effectively constant, so that the accordion box does not resize as the equation change.
       // Value determined empirically. See https://github.com/phetsims/keplers-laws/issues/151
       preferredSize: new Dimension2( 260, 52 ),
-      xAlign: 'left'
+      xAlign: 'left',
+      tandem: tandem.createTandem( 'equationNode' )
     } );
 
     // Graph of a vs T
@@ -235,9 +236,9 @@ class EquationNode extends HBox {
 
     // The value in decimal format, e.g. 1.24
     const resultTextNode = new RichText(
-      new DerivedProperty( [ model.poweredSemiMajorAxisProperty, model.poweredPeriodProperty, model.engine.allowedOrbitProperty ],
-        ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
-          return allowedOrbit ? Utils.toFixed( poweredPeriod / poweredSemiMajorAxis, 2 ) : '';
+      new DerivedProperty( [ model.thirdLawEquationResultProperty, model.engine.allowedOrbitProperty ],
+        ( thirdLawEquationResultProperty, allowedOrbit ) => {
+          return allowedOrbit ? Utils.toFixed( thirdLawEquationResultProperty ? thirdLawEquationResultProperty : 0, 2 ) : '';
         }
       ), {
         font: new PhetFont( { weight: 'bold', size: 25 } ),

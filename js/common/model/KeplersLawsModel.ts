@@ -40,6 +40,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 
 const PHET_IO_TARGET_ORBITS_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'phetioTargetOrbits' );
 
@@ -129,6 +130,9 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   public readonly distanceAngleProperty: TReadOnlyProperty<number>;
   public readonly velocityAngleProperty: TReadOnlyProperty<number>;
   public readonly rvAngleProperty: TReadOnlyProperty<number>;
+
+  // Third law's equation result ( T^x / a^y )
+  public readonly thirdLawEquationResultProperty: TReadOnlyProperty<number | null>;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SolarSystemCommonModelOptions>()( {
@@ -382,6 +386,14 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         tandem: moreOrbitalDataTandem.createTandem( 'rvAngleProperty' ),
         units: '\u00B0',
         phetioValueType: NumberIO
+      } );
+
+    this.thirdLawEquationResultProperty = new DerivedProperty( [ this.poweredSemiMajorAxisProperty, this.poweredPeriodProperty, this.engine.allowedOrbitProperty ],
+      ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
+        return allowedOrbit ? poweredPeriod / poweredSemiMajorAxis : null;
+      }, {
+        tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'thirdLawEquationResultProperty' ) : Tandem.OPT_OUT,
+        phetioValueType: NullableIO( NumberIO )
       } );
   }
 
