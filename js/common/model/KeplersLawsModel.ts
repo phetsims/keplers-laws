@@ -132,7 +132,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   public readonly rvAngleProperty: TReadOnlyProperty<number>;
 
   // Third law's equation result ( T^x / a^y )
-  public readonly thirdLawEquationResultProperty: TReadOnlyProperty<number | null>;
+  public readonly thirdLawEquationResultProperty: ReadOnlyProperty<number | null>;
 
   public constructor( providedOptions: KeplersLawsModelOptions ) {
     const options = optionize<KeplersLawsModelOptions, SelfOptions, SolarSystemCommonModelOptions>()( {

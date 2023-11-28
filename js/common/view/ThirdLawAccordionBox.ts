@@ -95,6 +95,9 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       xAlign: 'left',
       tandem: tandem.createTandem( 'equationNode' )
     } );
+    equationNode.addLinkedElement( model.thirdLawEquationResultProperty, {
+      tandemName: 'thirdLawEquationResultProperty'
+    } );
 
     // Graph of a vs T
     const graphNode = new ThirdLawGraph( model, model.engine, {
