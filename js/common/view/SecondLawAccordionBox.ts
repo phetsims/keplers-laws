@@ -141,14 +141,14 @@ class AreasBarPlot extends Node {
     barPlot.barWidth = 20;
 
     const orbitChangedListener = () => {
-      const activeAreas = model.engine.orbitalAreas.filter( area => area.active );
+      const activeAreas = model.engine.orbitalAreas.filter( area => area.activeProperty.value );
       dataSet = [];
 
       // First forEach is for updating the dataset, which will create the rectangles
       // Second forEach is for updating the color of the rectangles
       activeAreas.forEach( ( area, index ) => {
         // Setting all the bar's height and pushing them to the dataSet
-        const height = area.alreadyEntered && !area.insideProperty.value ? model.engine.segmentArea : area.sweptArea;
+        const height = area.alreadyEnteredProperty.value && !area.insideProperty.value ? model.engine.segmentArea : area.sweptAreaProperty.value;
         const realIndex = model.engine.retrograde ? model.periodDivisionsProperty.value - index - 1 : index;
         dataSet.push( new Vector2( realIndex, height ) );
       } );
