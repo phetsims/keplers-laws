@@ -3,7 +3,7 @@
 /**
  *
  * Class that handles the internal logic of the orbital areas.
- * It keeps track of the position of the dot in the orbital area, the start and end positions, the angles, the completion, etc.
+ * It keeps track of the position of the dot in the orbital area, the start and end positions, the angles, the completionProperty, etc.
  *
  * @author Agustín Vallejo
  */
@@ -11,6 +11,8 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import keplersLaws from '../../keplersLaws.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 export default class OrbitalArea {
 
@@ -19,15 +21,40 @@ export default class OrbitalArea {
   public endPosition = Vector2.ZERO; // End position of the orbital area
   public startAngle = 0;
   public endAngle = 0;
-  public completion = 0; // Proportional completion of the orbital area, goes up to 1
-  public sweptArea = 0; // Total area the section will have when completion = 1
-  public insideProperty = new BooleanProperty( false );
-  public alreadyEntered = true; // To properly display de filling out of area, this boolean
-  public active = false; // Whether the shown areas include this one
+
   public readonly index: number; // Index of the orbital area, 0-based.
 
-  public constructor( index: number ) {
+  public completionProperty: NumberProperty; // Proportional completion of the orbital area, goes up to 1
+  public sweptAreaProperty: NumberProperty; // Total area the section will have when completionProperty = 1
+  public insideProperty: BooleanProperty;
+  public alreadyEnteredProperty: BooleanProperty; // To properly display de filling out of area, this boolean
+  public activeProperty: BooleanProperty; // Whether the shown areas include this one
+
+  public constructor( index: number, tandem: Tandem ) {
     this.index = index;
+
+    const individualAreaTandem = tandem.createTandem( 'orbitalArea' + this.index );
+
+    this.completionProperty = new NumberProperty( 0, {
+      tandem: individualAreaTandem.createTandem( 'completionProperty' ),
+      phetioReadOnly: true
+    } );
+    this.sweptAreaProperty = new NumberProperty( 0, {
+      tandem: individualAreaTandem.createTandem( 'sweptAreaProperty' ),
+      phetioReadOnly: true
+    } );
+    this.insideProperty = new BooleanProperty( false, {
+      tandem: individualAreaTandem.createTandem( 'insideProperty' ),
+      phetioReadOnly: true
+    } );
+    this.alreadyEnteredProperty = new BooleanProperty( true, {
+      tandem: individualAreaTandem.createTandem( 'alreadyEnteredProperty' ),
+      phetioReadOnly: true
+    } );
+    this.activeProperty = new BooleanProperty( false, {
+      tandem: individualAreaTandem.createTandem( 'activeProperty' ),
+      phetioReadOnly: true
+    } );
   }
 
   /**
@@ -42,10 +69,10 @@ export default class OrbitalArea {
     this.endPosition = Vector2.ZERO;
     this.startAngle = 0;
     this.endAngle = 0;
-    this.completion = 0;
-    this.sweptArea = 0;
-    this.alreadyEntered = !eraseAreas;
-    this.active = false;
+    this.completionProperty.reset();
+    this.sweptAreaProperty.reset();
+    this.alreadyEnteredProperty.value = !eraseAreas;
+    this.activeProperty.reset();
   }
 }
 

@@ -170,16 +170,6 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     }, providedOptions );
     super( options );
 
-    this.sun = this.bodies[ 0 ];
-    this.planet = this.bodies[ 1 ];
-
-    this.sun.positionProperty.link( position => {
-      assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
-    } );
-
-    this.engine = new EllipticalOrbitEngine( this.bodies, providedOptions.tandem );
-    this.engine.reset();
-
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw, {
       tandem: options.tandem.createTandem( 'selectedLawProperty' ),
       phetioReadOnly: !options.isAllLaws // Only allow the law to be changed via studio in the 'All Laws' screen
@@ -197,6 +187,19 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.hasFirstLawFeatures = this.isAllLaws || options.initialLaw === LawMode.FIRST_LAW;
     this.hasSecondLawFeatures = this.isAllLaws || options.initialLaw === LawMode.SECOND_LAW;
     this.hasThirdLawFeatures = this.isAllLaws || options.initialLaw === LawMode.THIRD_LAW;
+
+    this.sun = this.bodies[ 0 ];
+    this.planet = this.bodies[ 1 ];
+
+    this.sun.positionProperty.link( position => {
+      assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
+    } );
+
+    this.engine = new EllipticalOrbitEngine( this.bodies, {
+      tandem: options.tandem,
+      orbitalAreasTandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'orbitalAreas' ) : Tandem.OPT_OUT
+    } );
+    this.engine.reset();
 
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,

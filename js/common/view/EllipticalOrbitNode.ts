@@ -381,10 +381,10 @@ export default class EllipticalOrbitNode extends Path {
 
         // Drawing orbital divisions and areas
         this.orbit.orbitalAreas.forEach( ( area, i ) => {
-          orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.active;
-          areaPaths[ i ].visible = model.isSecondLawProperty.value && area.active;
-          areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
-          timeValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.active;
+          orbitDivisions[ i ].visible = model.isSecondLawProperty.value && area.activeProperty.value;
+          areaPaths[ i ].visible = model.isSecondLawProperty.value && area.activeProperty.value;
+          areaValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.activeProperty.value;
+          timeValueNumberDisplays[ i ].visible = model.isSecondLawProperty.value && area.activeProperty.value;
 
           let numberDisplayPosition = new Vector2( 0, 0 );
           let numberDisplayScaling = 1;
@@ -416,16 +416,16 @@ export default class EllipticalOrbitNode extends Path {
 
             // Calculates the total area of the ellipse / the number of divisions
             const fullSegmentArea = this.orbit.segmentArea;
-            areaValueProperties[ i ].value = area.alreadyEntered ?
-                                             ( area.insideProperty.value ? fullSegmentArea * area.completion : fullSegmentArea )
+            areaValueProperties[ i ].value = area.alreadyEnteredProperty.value ?
+                                             ( area.insideProperty.value ? fullSegmentArea * area.completionProperty.value : fullSegmentArea )
                                                                  : 0;
             const fullSegmentDuration = this.orbit.periodProperty.value / model.periodDivisionsProperty.value;
-            timeValueProperties[ i ].value = area.alreadyEntered ?
-                                             ( area.insideProperty.value ? fullSegmentDuration * area.completion : fullSegmentDuration )
+            timeValueProperties[ i ].value = area.alreadyEnteredProperty.value ?
+                                             ( area.insideProperty.value ? fullSegmentDuration * area.completionProperty.value : fullSegmentDuration )
                                                                  : 0;
 
             // Activate area path
-            areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEntered ? 1 : 0 );
+            areaPaths[ i ].fill = model.getAreaColor( area ).setAlpha( area.alreadyEnteredProperty.value ? 1 : 0 );
             areaPaths[ i ].shape = new Shape().moveTo( radiusC, 0 ).ellipticalArc(
               0, 0, radiusX, radiusY, 0, startAngle, endAngle, false
             ).close();

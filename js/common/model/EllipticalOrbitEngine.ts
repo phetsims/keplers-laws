@@ -40,6 +40,8 @@ import OrbitalArea from './OrbitalArea.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { NodeOptions } from '../../../../scenery/js/imports.js';
 
 const TWO_PI = 2 * Math.PI;
 
@@ -60,6 +62,12 @@ class Ellipse {
     public nu: number
   ) {}
 }
+
+type SelfOptions = {
+  orbitalAreasTandem: Tandem;
+};
+
+type EllipticalOrbitEngineOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 // Initial G for the sim
 const INITIAL_G = 4.45669;
@@ -140,7 +148,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public periodTraceStart = 0;
   public periodTraceEnd = 0;
 
-  public constructor( bodies: Body[], tandem: Tandem ) {
+  public constructor( bodies: Body[], providedOptions: EllipticalOrbitEngineOptions ) {
     super( bodies );
     this.mu = INITIAL_MU;
 
@@ -151,7 +159,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.sun = bodies[ 0 ];
     this.planet = bodies[ 1 ];
 
-    const orbitalPropertiesTandem = tandem.createTandem( 'orbitalProperties' );
+    const orbitalPropertiesTandem = providedOptions.tandem.createTandem( 'orbitalProperties' );
     this.semiMajorAxisProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
       tandem: orbitalPropertiesTandem.createTandem( 'semiMajorAxisProperty' )
@@ -183,7 +191,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
-      this.orbitalAreas.push( new OrbitalArea( i ) );
+      this.orbitalAreas.push( new OrbitalArea( i, providedOptions.orbitalAreasTandem ) );
     }
 
     // Multilink to update the escape speed and distance based on the bodies position and velocity
@@ -434,7 +442,7 @@ export default class EllipticalOrbitEngine extends Engine {
         // When the sim is running, check if the body is inside an area and slice it accordingly
         if ( startAngle <= bodyAngle && bodyAngle < endAngle && this.isRunning ) {
           orbitalArea.insideProperty.value = true;
-          orbitalArea.alreadyEntered = true;
+          orbitalArea.alreadyEnteredProperty.value = true;
           this.activeAreaIndex = orbitalArea.index;
 
           if ( this.retrograde ) {
@@ -443,16 +451,16 @@ export default class EllipticalOrbitEngine extends Engine {
           else {
             endAngle = bodyAngle;
           }
-          orbitalArea.sweptArea = this.calculateSweptArea( startAngle, endAngle );
-          orbitalArea.completion = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
+          orbitalArea.sweptAreaProperty.value = this.calculateSweptArea( startAngle, endAngle );
+          orbitalArea.completionProperty.value = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
         }
         else {
           orbitalArea.insideProperty.value = false;
         }
 
         // Update orbital area properties
-        if ( !orbitalArea.alreadyEntered ) {
-          orbitalArea.completion = 0; // Set it to 0 if it hasn't entered yet
+        if ( !orbitalArea.alreadyEnteredProperty.value ) {
+          orbitalArea.completionProperty.value = 0; // Set it to 0 if it hasn't entered yet
         }
         orbitalArea.dotPosition = this.createPolar( nu ); // Position for the dots
 
@@ -460,13 +468,13 @@ export default class EllipticalOrbitEngine extends Engine {
         orbitalArea.startPosition = this.createPolar( startAngle );
         orbitalArea.endPosition = this.createPolar( endAngle );
 
-        orbitalArea.active = true;
+        orbitalArea.activeProperty.value = true;
 
         previousNu = nu;
       }
       else {
-        orbitalArea.completion = 0;
-        orbitalArea.active = false;
+        orbitalArea.completionProperty.value = 0;
+        orbitalArea.activeProperty.value = false;
         orbitalArea.insideProperty.value = false;
       }
     } );
