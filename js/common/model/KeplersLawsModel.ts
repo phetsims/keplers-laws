@@ -172,6 +172,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
 
     this.selectedLawProperty = new EnumerationProperty( options.initialLaw, {
       tandem: options.tandem.createTandem( 'selectedLawProperty' ),
+      phetioFeatured: true,
       phetioReadOnly: !options.isAllLaws // Only allow the law to be changed via studio in the 'All Laws' screen
     } );
     this.isAllLaws = options.isAllLaws;
@@ -203,7 +204,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
 
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
-      tandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'periodDivisionsProperty' ) : Tandem.OPT_OUT
+      tandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'periodDivisionsProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
     } );
 
     this.targetOrbitProperty = new EnumerationProperty( TargetOrbit.NONE, {
@@ -219,7 +221,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         TargetOrbit.TARGET_ORBIT_3,
         TargetOrbit.TARGET_ORBIT_4
       ],
-      tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT
+      tandem: options.initialLaw !== LawMode.SECOND_LAW ? options.tandem.createTandem( 'targetOrbitProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
     } );
 
     // If the selected target orbit is modified, force an update by switching to 'None', then back.
@@ -235,7 +238,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.isSolarSystemProperty = new DerivedProperty( [ this.sun.massProperty ], sunMass => sunMass === 200 );
 
     this.alwaysCircularProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'alwaysCircularProperty' )
+      tandem: options.tandem.createTandem( 'alwaysCircularProperty' ),
+      phetioFeatured: true
     } );
 
     Multilink.lazyMultilink( [
@@ -271,7 +275,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     } );
 
     this.stopwatch = new Stopwatch( {
-      tandem: options.tandem.createTandem( 'stopwatch' )
+      tandem: options.tandem.createTandem( 'stopwatch' ),
+      phetioFeatured: true
     } );
 
     this.periodTracker = new PeriodTracker( this, this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
@@ -331,6 +336,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       ( planetPosition, sunPosition ) => planetPosition.distance( sunPosition ),
       {
         tandem: moreOrbitalDataTandem.createTandem( 'distanceProperty' ),
+        phetioFeatured: true,
         units: 'AU',
         phetioValueType: NumberIO
       } );
@@ -339,6 +345,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       position => Utils.toDegrees( position.angle ),
       {
         tandem: moreOrbitalDataTandem.createTandem( 'distanceAngleProperty' ),
+        phetioFeatured: true,
         units: '\u00B0',
         phetioValueType: NumberIO
       } );
@@ -347,6 +354,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       velocity => Utils.toDegrees( velocity.angle ),
       {
         tandem: moreOrbitalDataTandem.createTandem( 'velocityAngleProperty' ),
+        phetioFeatured: true,
         units: '\u00B0',
         phetioValueType: NumberIO
       } );
@@ -360,6 +368,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       },
       {
         tandem: moreOrbitalDataTandem.createTandem( 'rvAngleProperty' ),
+        phetioFeatured: true,
         units: '\u00B0',
         phetioValueType: NumberIO
       } );

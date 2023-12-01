@@ -162,31 +162,38 @@ export default class EllipticalOrbitEngine extends Engine {
     const orbitalPropertiesTandem = providedOptions.tandem.createTandem( 'orbitalProperties' );
     this.semiMajorAxisProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'semiMajorAxisProperty' )
+      tandem: orbitalPropertiesTandem.createTandem( 'semiMajorAxisProperty' ),
+      phetioFeatured: true
     } );
     this.semiMinorAxisProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'semiMinorAxisProperty' )
+      tandem: orbitalPropertiesTandem.createTandem( 'semiMinorAxisProperty' ),
+      phetioFeatured: true
     } );
     this.focalDistanceProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'focalDistanceProperty' )
+      tandem: orbitalPropertiesTandem.createTandem( 'focalDistanceProperty' ),
+      phetioFeatured: true
     } );
     this.distance1Property = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'distance1Property' )
+      tandem: orbitalPropertiesTandem.createTandem( 'distance1Property' ),
+      phetioFeatured: true
     } );
     this.distance2Property = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'distance2Property' )
+      tandem: orbitalPropertiesTandem.createTandem( 'distance2Property' ),
+      phetioFeatured: true
     } );
     this.periodProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'periodProperty' )
+      tandem: orbitalPropertiesTandem.createTandem( 'periodProperty' ),
+      phetioFeatured: true
     } );
     this.eccentricityProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'eccentricityProperty' )
+      tandem: orbitalPropertiesTandem.createTandem( 'eccentricityProperty' ),
+      phetioFeatured: true
     } );
 
     // Populate the orbital areas
