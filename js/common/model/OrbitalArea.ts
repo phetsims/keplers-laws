@@ -13,12 +13,13 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import keplersLaws from '../../keplersLaws.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 
 export default class OrbitalArea {
 
-  public dotPosition = Vector2.ZERO; // Position of the dot in the orbital area
-  public startPosition = Vector2.ZERO; // Start position of the orbital area
-  public endPosition = Vector2.ZERO; // End position of the orbital area
+  public dotPositionProperty: Vector2Property; // Position of the dot in the orbital area
+  public startPositionProperty: Vector2Property; // Start position of the orbital area
+  public endPositionProperty: Vector2Property; // End position of the orbital area
   public startAngle = 0;
   public endAngle = 0;
 
@@ -35,25 +36,45 @@ export default class OrbitalArea {
 
     const individualAreaTandem = tandem.createTandem( 'orbitalArea' + this.index );
 
+    this.dotPositionProperty = new Vector2Property( Vector2.ZERO, {
+      tandem: individualAreaTandem.createTandem( 'dotPositionProperty' ),
+      phetioReadOnly: true,
+      phetioFeatured: false
+    } );
+    this.startPositionProperty = new Vector2Property( Vector2.ZERO, {
+      tandem: individualAreaTandem.createTandem( 'startPositionProperty' ),
+      phetioReadOnly: true,
+      phetioFeatured: false
+    } );
+    this.endPositionProperty = new Vector2Property( Vector2.ZERO, {
+      tandem: individualAreaTandem.createTandem( 'endPositionProperty' ),
+      phetioReadOnly: true,
+      phetioFeatured: false
+    } );
     this.completionProperty = new NumberProperty( 0, {
       tandem: individualAreaTandem.createTandem( 'completionProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
     this.sweptAreaProperty = new NumberProperty( 0, {
       tandem: individualAreaTandem.createTandem( 'sweptAreaProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
     this.insideProperty = new BooleanProperty( false, {
       tandem: individualAreaTandem.createTandem( 'insideProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
     this.alreadyEnteredProperty = new BooleanProperty( true, {
       tandem: individualAreaTandem.createTandem( 'alreadyEnteredProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
     this.activeProperty = new BooleanProperty( false, {
       tandem: individualAreaTandem.createTandem( 'activeProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
   }
 
@@ -64,9 +85,9 @@ export default class OrbitalArea {
    * @param eraseAreas - determines if all the areas are going to be empty or not.
    */
   public reset( eraseAreas = false ): void {
-    this.dotPosition = Vector2.ZERO;
-    this.startPosition = Vector2.ZERO;
-    this.endPosition = Vector2.ZERO;
+    this.dotPositionProperty.reset();
+    this.startPositionProperty.reset();
+    this.endPositionProperty.reset();
     this.startAngle = 0;
     this.endAngle = 0;
     this.completionProperty.reset();

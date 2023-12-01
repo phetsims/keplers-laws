@@ -391,12 +391,12 @@ export default class EllipticalOrbitNode extends Path {
 
           if ( i < model.periodDivisionsProperty.value ) {
             // Set the center of the orbit's divisions dot
-            const dotPosition = area.dotPosition.times( scale ).minus( center );
+            const dotPosition = area.dotPositionProperty.value.times( scale ).minus( center );
             orbitDivisions[ i ].center = dotPosition;
             orbitDivisions[ i ].fill = KeplersLawsColors.areaColorProperty;
 
-            const start = area.startPosition.times( scale ).minus( center );
-            const end = area.endPosition.times( scale ).minus( center );
+            const start = area.startPositionProperty.value.times( scale ).minus( center );
+            const end = area.endPositionProperty.value.times( scale ).minus( center );
             const startAngle = Math.atan2( start.y / radiusY, start.x / radiusX );
             const endAngle = Math.atan2( end.y / radiusY, end.x / radiusX );
 
