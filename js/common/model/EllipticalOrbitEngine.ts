@@ -455,6 +455,7 @@ export default class EllipticalOrbitEngine extends Engine {
           orbitalArea.completionProperty.value = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
         }
         else {
+          orbitalArea.sweptAreaProperty.value = this.segmentArea;
           orbitalArea.insideProperty.value = false;
         }
 
