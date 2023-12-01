@@ -333,7 +333,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.zoomScaleProperty = new DerivedProperty( [ animatedZoomScaleProperty ], animatedZoomScale => animatedZoomScale );
 
     this.userIsInteractingProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'userIsInteractingProperty' )
+      tandem: options.tandem.createTandem( 'userIsInteractingProperty' ),
+      phetioReadOnly: true
     } );
 
     this.bodies.forEach( body => {
