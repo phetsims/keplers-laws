@@ -258,34 +258,6 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       this.engine.resetOrbitalAreas( this.isPlayingProperty.value );
     } );
 
-    this.selectedAxisPowerProperty = new NumberProperty( 1, {
-      numberType: 'Integer',
-      range: new Range( 1, 3 ),
-      tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'selectedAxisPowerProperty' ) : Tandem.OPT_OUT
-    } );
-
-    this.selectedPeriodPowerProperty = new NumberProperty( 1, {
-      numberType: 'Integer',
-      range: new Range( 1, 3 ),
-      tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'selectedPeriodPowerProperty' ) : Tandem.OPT_OUT
-    } );
-
-    // Powered values of semiMajor axis and period
-    this.poweredSemiMajorAxisProperty = new DerivedProperty(
-      [ this.selectedAxisPowerProperty, this.engine.semiMajorAxisProperty ],
-      ( power, semiMajorAxis ) => Math.pow( semiMajorAxis, power )
-    );
-
-    this.poweredPeriodProperty = new DerivedProperty(
-      [ this.selectedPeriodPowerProperty, this.engine.periodProperty ],
-      ( power, period ) => Math.pow( period, power )
-    );
-
-    this.correctPowersSelectedProperty = new DerivedProperty(
-      [ this.selectedAxisPowerProperty, this.selectedPeriodPowerProperty ],
-      ( axisPower, periodPower ) => axisPower === 3 && periodPower === 2
-    );
-
     this.alwaysCircularProperty.link( alwaysCircular => {
       this.engine.alwaysCircles = alwaysCircular;
       if ( alwaysCircular ) {
@@ -392,12 +364,44 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         phetioValueType: NumberIO
       } );
 
+    const thirdLawGraphTandem = options.tandem.createTandem( 'thirdLawGraph' );
+    this.selectedAxisPowerProperty = new NumberProperty( 1, {
+      numberType: 'Integer',
+      range: new Range( 1, 3 ),
+      tandem: this.hasThirdLawFeatures ? thirdLawGraphTandem.createTandem( 'selectedAxisPowerProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
+    } );
+
+    this.selectedPeriodPowerProperty = new NumberProperty( 1, {
+      numberType: 'Integer',
+      range: new Range( 1, 3 ),
+      tandem: this.hasThirdLawFeatures ? thirdLawGraphTandem.createTandem( 'selectedPeriodPowerProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
+    } );
+
+    // Powered values of semiMajor axis and period
+    this.poweredSemiMajorAxisProperty = new DerivedProperty(
+      [ this.selectedAxisPowerProperty, this.engine.semiMajorAxisProperty ],
+      ( power, semiMajorAxis ) => Math.pow( semiMajorAxis, power )
+    );
+
+    this.poweredPeriodProperty = new DerivedProperty(
+      [ this.selectedPeriodPowerProperty, this.engine.periodProperty ],
+      ( power, period ) => Math.pow( period, power )
+    );
+
+    this.correctPowersSelectedProperty = new DerivedProperty(
+      [ this.selectedAxisPowerProperty, this.selectedPeriodPowerProperty ],
+      ( axisPower, periodPower ) => axisPower === 3 && periodPower === 2
+    );
+
     this.thirdLawEquationResultProperty = new DerivedProperty( [ this.poweredSemiMajorAxisProperty, this.poweredPeriodProperty, this.engine.allowedOrbitProperty ],
       ( poweredSemiMajorAxis, poweredPeriod, allowedOrbit ) => {
         return allowedOrbit ? poweredPeriod / poweredSemiMajorAxis : null;
       }, {
-        tandem: this.hasThirdLawFeatures ? options.tandem.createTandem( 'thirdLawEquationResultProperty' ) : Tandem.OPT_OUT,
-        phetioValueType: NullableIO( NumberIO )
+        tandem: this.hasThirdLawFeatures ? thirdLawGraphTandem.createTandem( 'thirdLawEquationResultProperty' ) : Tandem.OPT_OUT,
+        phetioValueType: NullableIO( NumberIO ),
+        phetioFeatured: true
       } );
   }
 
