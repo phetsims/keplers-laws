@@ -35,7 +35,7 @@ export default class OrbitalArea {
     this.index = index;
 
     // Tandem for the orbital area, using 1 based index for consistency with the graph
-    const individualAreaTandem = tandem.createTandem( 'orbitalArea' + this.index + 1 );
+    const individualAreaTandem = tandem.createTandem( 'orbitalArea' + ( this.index + 1 ) );
 
     this.dotPositionProperty = new Vector2Property( Vector2.ZERO, {
       tandem: individualAreaTandem.createTandem( 'dotPositionProperty' ),
