@@ -462,6 +462,7 @@ export default class EllipticalOrbitEngine extends Engine {
         // Update orbital area properties
         if ( !orbitalArea.alreadyEnteredProperty.value ) {
           orbitalArea.completionProperty.value = 0; // Set it to 0 if it hasn't entered yet
+          orbitalArea.sweptAreaProperty.value = 0;
         }
         orbitalArea.dotPositionProperty.value = this.createPolar( nu ); // Position for the dots
 

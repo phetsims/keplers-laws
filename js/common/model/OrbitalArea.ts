@@ -37,51 +37,45 @@ export default class OrbitalArea {
     // Tandem for the orbital area, using 1 based index for consistency with the graph
     const individualAreaTandem = tandem.createTandem( 'orbitalArea' + ( this.index + 1 ) );
 
+    this.sweptAreaProperty = new NumberProperty( 0, {
+      tandem: individualAreaTandem.createTandem( 'sweptAreaProperty' ),
+      phetioReadOnly: true,
+      phetioFeatured: true,
+      phetioDocumentation: 'For internal use only'
+    } );
     this.dotPositionProperty = new Vector2Property( Vector2.ZERO, {
       tandem: individualAreaTandem.createTandem( 'dotPositionProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
     this.startPositionProperty = new Vector2Property( Vector2.ZERO, {
       tandem: individualAreaTandem.createTandem( 'startPositionProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
     this.endPositionProperty = new Vector2Property( Vector2.ZERO, {
       tandem: individualAreaTandem.createTandem( 'endPositionProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
     this.completionProperty = new NumberProperty( 0, {
       tandem: individualAreaTandem.createTandem( 'completionProperty' ),
-      phetioReadOnly: true,
-      phetioFeatured: false,
-      phetioDocumentation: 'For internal use only'
-    } );
-    this.sweptAreaProperty = new NumberProperty( 0, {
-      tandem: individualAreaTandem.createTandem( 'sweptAreaProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'For internal use only'
     } );
     this.insideProperty = new BooleanProperty( false, {
       tandem: individualAreaTandem.createTandem( 'insideProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
     this.alreadyEnteredProperty = new BooleanProperty( true, {
       tandem: individualAreaTandem.createTandem( 'alreadyEnteredProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
     this.activeProperty = new BooleanProperty( false, {
       tandem: individualAreaTandem.createTandem( 'activeProperty' ),
       phetioReadOnly: true,
-      phetioFeatured: false,
       phetioDocumentation: 'For internal use only'
     } );
   }
