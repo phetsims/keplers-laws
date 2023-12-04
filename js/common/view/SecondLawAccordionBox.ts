@@ -146,11 +146,10 @@ class AreasBarPlot extends Node {
 
       // First forEach is for updating the dataset, which will create the rectangles
       // Second forEach is for updating the color of the rectangles
-      activeAreas.forEach( ( area, index ) => {
+      activeAreas.forEach( area => {
         // Setting all the bar's height and pushing them to the dataSet
         const height = area.alreadyEnteredProperty.value && !area.insideProperty.value ? model.engine.segmentArea : area.sweptAreaProperty.value;
-        const realIndex = model.engine.retrograde ? model.periodDivisionsProperty.value - index - 1 : index;
-        dataSet.push( new Vector2( realIndex, height ) );
+        dataSet.push( new Vector2( area.index, height ) );
       } );
       barPlot.setDataSet( dataSet ); // BarPlot creates the rectangles here
 

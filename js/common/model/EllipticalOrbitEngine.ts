@@ -447,19 +447,21 @@ export default class EllipticalOrbitEngine extends Engine {
         orbitalArea.endAngle = endAngle;
 
         // When the sim is running, check if the body is inside an area and slice it accordingly
-        if ( startAngle <= bodyAngle && bodyAngle < endAngle && this.isRunning ) {
-          orbitalArea.insideProperty.value = true;
-          orbitalArea.alreadyEnteredProperty.value = true;
-          this.activeAreaIndex = orbitalArea.index;
+        if ( startAngle <= bodyAngle && bodyAngle < endAngle ) {
+          if ( this.isRunning ) {
+            orbitalArea.insideProperty.value = true;
+            orbitalArea.alreadyEnteredProperty.value = true;
+            this.activeAreaIndex = orbitalArea.index;
 
-          if ( this.retrograde ) {
-            startAngle = bodyAngle;
+            if ( this.retrograde ) {
+              startAngle = bodyAngle;
+            }
+            else {
+              endAngle = bodyAngle;
+            }
+            orbitalArea.sweptAreaProperty.value = this.calculateSweptArea( startAngle, endAngle );
+            orbitalArea.completionProperty.value = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
           }
-          else {
-            endAngle = bodyAngle;
-          }
-          orbitalArea.sweptAreaProperty.value = this.calculateSweptArea( startAngle, endAngle );
-          orbitalArea.completionProperty.value = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
         }
         else {
           orbitalArea.sweptAreaProperty.value = this.segmentArea;
