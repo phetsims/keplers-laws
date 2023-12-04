@@ -323,6 +323,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
             this.isPlayingProperty.value = false;
             this.userInteractingEmitter.emit();
           }
+          else {
+            // When the user stops the interaction, save the starting body info
+            this.saveStartingBodyInfo();
+          }
 
           // Will tell the EllipticalOrbitNode to play the sound or not
           this.userIsInteractingProperty.value = userIsControllingPosition || userIsControllingVelocity || userIsControllingMass;
