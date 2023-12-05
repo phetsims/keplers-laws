@@ -281,6 +281,7 @@ export default class EllipticalOrbitEngine extends Engine {
     const r = this.planet.positionProperty.value;
     this.updateForces( r );
 
+    this.enforceValidVelocity();
     let escaped = false;
     if ( this.alwaysCircles ) {
       this.enforceCircularOrbit( r );
@@ -395,6 +396,20 @@ export default class EllipticalOrbitEngine extends Engine {
     this.isMutatingVelocity = true;
     this.planet.velocityProperty.value = this.planet.velocityProperty.value.normalized().timesScalar( this.escapeSpeedProperty.value );
     this.isMutatingVelocity = false;
+  }
+
+  /**
+   * Makes sure the velocity will not cause an equation breakdown (v=0 or v perfectly aligned with r)
+   */
+  private enforceValidVelocity(): void {
+    // 1. Make sure v is not 0 (Shouldn't be possible by dragging, but it is with PhET-iO)
+    assert && assert( this.planet.velocityProperty.value.magnitude !== 0, 'Velocity cannot be 0' );
+
+    // 2. Make sure v is not perfectly aligned with r (Extremely unlikely by dragging, but it is possible to do with PhET-iO)
+    if ( Math.sin( this.planet.velocityProperty.value.angleBetween( this.planet.positionProperty.value ) ) === 0 ) {
+      // Slightly spin the velocity vector
+      this.planet.velocityProperty.value = this.planet.velocityProperty.value.rotated( 0.01 );
+    }
   }
 
   private collidedWithSun( a: number, e: number ): boolean {
