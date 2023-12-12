@@ -150,8 +150,14 @@ export default class ThirdLawGraph extends Node {
       outOfBoundsArrow
     ];
 
-    const minVisitedAxisProperty = new NumberProperty( 0, { tandem: options.tandem?.createTandem( 'minVisitedAxisProperty' ) } );
-    const maxVisitedAxisProperty = new NumberProperty( 0, { tandem: options.tandem?.createTandem( 'maxVisitedAxisProperty' ) } );
+    const minVisitedAxisProperty = new NumberProperty( 0, {
+      tandem: options.tandem?.createTandem( 'minVisitedAxisProperty' ),
+      phetioReadOnly: true
+    } );
+    const maxVisitedAxisProperty = new NumberProperty( 0, {
+      tandem: options.tandem?.createTandem( 'maxVisitedAxisProperty' ),
+      phetioReadOnly: true
+    } );
 
     const orbitUpdated = () => {
       const targetOrbit = model.targetOrbitProperty.value;

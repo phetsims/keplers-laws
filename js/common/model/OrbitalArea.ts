@@ -41,7 +41,6 @@ export default class OrbitalArea {
       tandem: individualAreaTandem.createTandem( 'sweptAreaProperty' ),
       phetioReadOnly: true,
       phetioFeatured: true,
-      phetioDocumentation: 'For internal use only',
       units: 'AU^2'
     } );
     this.dotPositionProperty = new Vector2Property( Vector2.ZERO, {

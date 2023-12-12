@@ -159,40 +159,46 @@ export default class EllipticalOrbitEngine extends Engine {
     this.sun = bodies[ 0 ];
     this.planet = bodies[ 1 ];
 
-    const orbitalPropertiesTandem = providedOptions.tandem.createTandem( 'orbitalProperties' );
+    const orbitalDataTandem = providedOptions.tandem.createTandem( 'orbitalData' );
     this.semiMajorAxisProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'semiMajorAxisProperty' ),
+      tandem: orbitalDataTandem.createTandem( 'semiMajorAxisProperty' ),
+      units: 'AU',
       phetioFeatured: true
     } );
     this.semiMinorAxisProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'semiMinorAxisProperty' ),
+      tandem: orbitalDataTandem.createTandem( 'semiMinorAxisProperty' ),
+      units: 'AU',
       phetioFeatured: true
     } );
     this.focalDistanceProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'focalDistanceProperty' ),
+      tandem: orbitalDataTandem.createTandem( 'focalDistanceProperty' ),
+      units: 'AU',
       phetioFeatured: true
     } );
     this.distance1Property = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'distance1Property' ),
+      tandem: orbitalDataTandem.createTandem( 'distance1Property' ),
+      units: 'AU',
       phetioFeatured: true
     } );
     this.distance2Property = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'distance2Property' ),
+      tandem: orbitalDataTandem.createTandem( 'distance2Property' ),
+      units: 'AU',
       phetioFeatured: true
     } );
     this.periodProperty = new NumberProperty( 1, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'periodProperty' ),
+      tandem: orbitalDataTandem.createTandem( 'periodProperty' ),
+      units: 'years',
       phetioFeatured: true
     } );
     this.eccentricityProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
-      tandem: orbitalPropertiesTandem.createTandem( 'eccentricityProperty' ),
+      tandem: orbitalDataTandem.createTandem( 'eccentricityProperty' ),
       phetioFeatured: true
     } );
 
