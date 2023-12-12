@@ -391,6 +391,18 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
             units: KeplersLawsStrings.units.yearsStringProperty
           } )
         },
+
+        // See https://github.com/phetsims/keplers-laws/issues/220
+        playPauseButtonOptions: {
+          phetioVisiblePropertyInstrumented: false,
+          phetioEnabledPropertyInstrumented: false
+        },
+
+        // See https://github.com/phetsims/keplers-laws/issues/220
+        resetButtonOptions: {
+          phetioVisiblePropertyInstrumented: false,
+          phetioEnabledPropertyInstrumented: false
+        },
         tandem: options.tandem.createTandem( 'stopwatchNode' )
       }
     );
