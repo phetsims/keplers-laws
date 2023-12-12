@@ -29,6 +29,7 @@ import GridLineSet from '../../../../bamboo/js/GridLineSet.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const xAxisLength = 180;
 const yAxisLength = 180;
@@ -42,9 +43,13 @@ export default class SecondLawAccordionBox extends AccordionBox {
 
   public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'visibleProperty' )
+    } );
+
     const options = combineOptions<AccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       isDisposable: false,
-      visibleProperty: model.isSecondLawProperty,
+      visibleProperty: DerivedProperty.and( [ model.isSecondLawProperty, visibleProperty ] ),
       titleNode: new Text( KeplersLawsStrings.sweptAreaStringProperty,
         combineOptions<TextOptions>( {}, KeplersLawsConstants.TITLE_OPTIONS, {
           maxWidth: 200
