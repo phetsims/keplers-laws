@@ -103,7 +103,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     const graphNode = new ThirdLawGraph( model, model.engine, {
       layoutOptions: { column: 1, row: 0 },
       excludeInvisibleChildrenFromBounds: true,
-      tandem: tandem.createTandem( 'graphNode' )
+      tandem: tandem.createTandem( 'graphNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // Radio buttons to the left of the graph
