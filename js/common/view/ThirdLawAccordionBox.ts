@@ -54,6 +54,10 @@ export default class ThirdLawAccordionBox extends AccordionBox {
 
   public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'visibleProperty' )
+    } );
+
     const titleStringProperty = new DerivedProperty( [
         KeplersLawsStrings.graph.titleStringProperty,
         KeplersLawsStrings.symbol.aStringProperty,
@@ -79,7 +83,7 @@ export default class ThirdLawAccordionBox extends AccordionBox {
     const options = combineOptions<ThirdLawAccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {
       titleNode: titleNode,
       accessibleName: titleStringProperty,
-      visibleProperty: model.isThirdLawProperty,
+      visibleProperty: DerivedProperty.and( [ model.isThirdLawProperty, visibleProperty ] ),
       isDisposable: false,
       useExpandedBoundsWhenCollapsed: false,
       expandedProperty: thirdLawAccordionBoxExpandedProperty,
