@@ -131,7 +131,9 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       minWidth: 40,
       touchAreaXDilation: 10,
       touchAreaYDilation: 10,
-      tandem: options.tandem.createTandem( 'playPauseButton' )
+      tandem: options.tandem.createTandem( 'playPauseButton' ),
+      phetioVisiblePropertyInstrumented: false,
+      phetioEnabledPropertyInstrumented: false
     } );
     playPauseButton.touchArea = playPauseButton.localBounds.dilated( 5 );
 
