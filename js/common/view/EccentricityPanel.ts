@@ -20,9 +20,9 @@ import keplersLaws from '../../keplersLaws.js';
 import FractionNode from './FractionNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const EQUATION_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -30,7 +30,7 @@ const EQUATION_TEXT_OPTIONS = {
 };
 
 export default class EccentricityPanel extends Panel {
-  public constructor( eccentricityProperty: NumberProperty, eccentricityVisibleProperty: BooleanProperty, tandem: Tandem ) {
+  public constructor( eccentricityProperty: NumberProperty, eccentricityVisibleProperty: TReadOnlyProperty<boolean>, tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       visibleProperty: eccentricityVisibleProperty,

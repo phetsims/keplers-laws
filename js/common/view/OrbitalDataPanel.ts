@@ -22,14 +22,13 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import OrbitalDataInfoDialog from './OrbitalDataInfoDialog.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class OrbitalDataPanel extends Panel {
   public constructor(
     model: KeplersLawsModel,
-    semiaxesVisibleProperty: BooleanProperty,
-    eccentricityVisibleProperty: BooleanProperty,
+    semiaxesVisibleProperty: TReadOnlyProperty<boolean>,
+    eccentricityVisibleProperty: TReadOnlyProperty<boolean>,
     tandem: Tandem
   ) {
 

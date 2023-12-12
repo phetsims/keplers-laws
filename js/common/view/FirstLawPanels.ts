@@ -13,13 +13,13 @@ import EccentricityPanel from './EccentricityPanel.js';
 import OrbitalDataPanel from './OrbitalDataPanel.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor(
     model: KeplersLawsModel,
-    semiaxesVisibleProperty: BooleanProperty,
-    eccentricityVisibleProperty: BooleanProperty,
+    semiaxesVisibleProperty: TReadOnlyProperty<boolean>,
+    eccentricityVisibleProperty: TReadOnlyProperty<boolean>,
     tandem: Tandem ) {
     super( {
       isDisposable: false,

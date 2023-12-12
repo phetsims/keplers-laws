@@ -11,8 +11,8 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class PeriodTrackerNode extends Path {
   private readonly periodTracker: PeriodTracker;
@@ -26,7 +26,7 @@ export default class PeriodTrackerNode extends Path {
   // Circle that marks the start of the period
   public readonly startCircle: Path;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodTracker'>, periodVisibleProperty: BooleanProperty ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodTracker'>, periodVisibleProperty: TReadOnlyProperty<boolean> ) {
     super( null, {
       isDisposable: false,
       stroke: KeplersLawsColors.timeDisplayBackgroundColorProperty,
