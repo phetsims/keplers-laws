@@ -93,7 +93,7 @@ export default class PeriodTrackerNode extends Path {
     this.startCircle.visible = startAngle !== endAngle || this.periodTracker.periodStopwatch.isRunningProperty.value;
   }
 
-  public updateFade(): void {
+  private updateFade(): void {
     this.shape = new Shape().ellipse( 0, 0, this.radiusX, this.radiusY, 0 );
     this.opacity = 1 - this.periodTracker.fadingStopwatch.timeProperty.value / this.periodTracker.fadingDuration;
   }
