@@ -19,14 +19,20 @@ import PeriodDivisionSoundManager from './PeriodDivisionSoundManager.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class PeriodDivisionsPanel extends Panel {
 
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
+    const visibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'visibleProperty' )
+    } );
+
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       isDisposable: false,
-      visibleProperty: model.isSecondLawProperty,
+      visibleProperty: DerivedProperty.and( [ model.isSecondLawProperty, visibleProperty ] ),
       tandem: tandem
     } );
 
