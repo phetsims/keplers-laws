@@ -37,7 +37,7 @@ export default class OrbitalInformationPanel extends Panel {
       KeplersLawsCheckbox.createFociCheckbox( visibleProperties.fociVisibleProperty, firstLawCheckboxesTandem.createTandem( 'fociCheckbox' ) ),
 
       // String
-      KeplersLawsCheckbox.createStringCheckbox( visibleProperties.stringVisibleProperty, {
+      KeplersLawsCheckbox.createStringCheckbox( visibleProperties.stringCheckedProperty, {
         enabledProperty: visibleProperties.fociVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'stringCheckbox' )
@@ -47,7 +47,7 @@ export default class OrbitalInformationPanel extends Panel {
       KeplersLawsCheckbox.createAxesCheckbox( visibleProperties.axesVisibleProperty, firstLawCheckboxesTandem.createTandem( 'axesCheckbox' ) ),
 
       // Semiaxes
-      KeplersLawsCheckbox.createSemiaxesCheckbox( visibleProperties.semiaxesVisibleProperty, {
+      KeplersLawsCheckbox.createSemiaxesCheckbox( visibleProperties.semiaxesCheckedProperty, {
         enabledProperty: visibleProperties.axesVisibleProperty,
         layoutOptions: { leftMargin: CHECKBOX_INDENT }, // to indent this checkbox
         tandem: firstLawCheckboxesTandem.createTandem( 'semiaxesCheckbox' )

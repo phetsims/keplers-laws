@@ -11,6 +11,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import LawMode from '../model/LawMode.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisibleProperties {
 
@@ -21,14 +24,20 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
   // Indicates if the axes are visible.
   public readonly axesVisibleProperty: BooleanProperty;
 
+  // Indicates if the 'Semiaxes' checkbox is checked.
+  public readonly semiaxesCheckedProperty: BooleanProperty;
+
   // Indicates if the semiaxes are visible.
-  public readonly semiaxesVisibleProperty: BooleanProperty;
+  public readonly semiaxesVisibleProperty: TReadOnlyProperty<boolean>;
 
   // Indicates if the foci are visible.
   public readonly fociVisibleProperty: BooleanProperty;
 
+  // Indicates if the 'String' checkbox is checked.
+  public readonly stringCheckedProperty: BooleanProperty;
+
   // Indicates if the focal string is visible
-  public readonly stringVisibleProperty: BooleanProperty;
+  public readonly stringVisibleProperty: TReadOnlyProperty<boolean>;
 
   // Indicates if the eccentricity panel and indicators are visible
   public readonly eccentricityVisibleProperty: BooleanProperty;
@@ -88,25 +97,34 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       tandem: includeFirstLaw ? firstLawTandem.createTandem( 'axesVisibleProperty' ) : Tandem.OPT_OUT,
       phetioFeatured: true
     } );
-    this.semiaxesVisibleProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesVisibleProperty' ) : Tandem.OPT_OUT,
+    this.semiaxesCheckedProperty = new BooleanProperty( false, {
+      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesCheckedProperty' ) : Tandem.OPT_OUT,
       phetioFeatured: true
+    } );
+    this.semiaxesVisibleProperty = DerivedProperty.and( [ this.axesVisibleProperty, this.semiaxesCheckedProperty ], {
+      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesVisibleProperty' ) : Tandem.OPT_OUT,
+      phetioValueType: BooleanIO
     } );
     this.fociVisibleProperty = new BooleanProperty( false, {
       tandem: includeFirstLaw ? firstLawTandem.createTandem( 'fociVisibleProperty' ) : Tandem.OPT_OUT,
       phetioFeatured: true
     } );
-    this.stringVisibleProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringVisibleProperty' ) : Tandem.OPT_OUT,
+    this.stringCheckedProperty = new BooleanProperty( false, {
+      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringCheckedProperty' ) : Tandem.OPT_OUT,
       phetioFeatured: true
+    } );
+    this.stringVisibleProperty = DerivedProperty.and( [ this.fociVisibleProperty, this.stringCheckedProperty ], {
+      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringVisibleProperty' ) : Tandem.OPT_OUT,
+      phetioValueType: BooleanIO
     } );
     this.eccentricityVisibleProperty = new BooleanProperty( false, {
       tandem: includeFirstLaw ? firstLawTandem.createTandem( 'eccentricityVisibleProperty' ) : Tandem.OPT_OUT,
       phetioFeatured: true
     } );
+
     this.firstLawVisibilities = [
-      this.stringVisibleProperty,
-      this.semiaxesVisibleProperty,
+      this.stringCheckedProperty,
+      this.semiaxesCheckedProperty,
       this.axesVisibleProperty,
       this.fociVisibleProperty,
       this.eccentricityVisibleProperty
@@ -195,7 +213,7 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       } );
     } );
 
-    // This properties are the exception as they should be set to true by default
+    // These Properties are the exception as they should be set to true by default.
     this.semiMajorAxisVisibleProperty.setInitialValue( true );
     this.semiMajorAxisVisibleProperty.value = true;
 
