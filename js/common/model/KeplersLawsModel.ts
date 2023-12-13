@@ -41,6 +41,7 @@ import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const PHET_IO_TARGET_ORBITS_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'phetioTargetOrbits' );
 
@@ -249,6 +250,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       ],
       () => {
         if ( !this.isPlayingProperty.value && !this.steppingForward && !this.engine.isMutatingVelocity ) {
+          this.engine.update( this.bodies );
+        }
+        if ( isSettingPhetioStateProperty.value ) {
+          // Update the engine properties when initializing with PhET-iO
           this.engine.update( this.bodies );
         }
       } );
