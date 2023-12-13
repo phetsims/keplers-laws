@@ -129,8 +129,8 @@ export default class PeriodTracker {
     this.fadingStopwatch.reset();
     this.afterPeriodThreshold = false;
     this.model.engine.tracingPathProperty.value = false;
-    this.model.engine.periodTraceStart = 0;
-    this.model.engine.periodTraceEnd = 0;
+    this.model.engine.periodTraceStartProperty.value = 0;
+    this.model.engine.periodTraceEndProperty.value = 0;
   }
 
   public reset(): void {

@@ -144,9 +144,9 @@ export default class EllipticalOrbitEngine extends Engine {
   public areasErased = false; // When areas were just erased. run() sets this to false
 
   // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
-  public readonly tracingPathProperty = new BooleanProperty( false );
-  public periodTraceStart = 0;
-  public periodTraceEnd = 0;
+  public readonly tracingPathProperty: BooleanProperty;
+  public periodTraceStartProperty: NumberProperty;
+  public periodTraceEndProperty: NumberProperty;
 
   public constructor( bodies: Body[], providedOptions: EllipticalOrbitEngineOptions ) {
     super( bodies );
@@ -202,6 +202,20 @@ export default class EllipticalOrbitEngine extends Engine {
       phetioFeatured: true
     } );
 
+    const periodTrackerTandem = providedOptions.tandem.createTandem( 'periodTracker' );
+    this.tracingPathProperty = new BooleanProperty( false, {
+      tandem: periodTrackerTandem.createTandem( 'tracingPathProperty' ),
+      phetioReadOnly: true
+    } );
+    this.periodTraceStartProperty = new NumberProperty( 0, {
+      tandem: periodTrackerTandem.createTandem( 'periodTraceStartProperty' ),
+      phetioReadOnly: true
+    } );
+    this.periodTraceEndProperty = new NumberProperty( 0, {
+      tandem: periodTrackerTandem.createTandem( 'periodTraceEndProperty' ),
+      phetioReadOnly: true
+    } );
+
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
       this.orbitalAreas.push( new OrbitalArea( i, providedOptions.orbitalAreasTandem ) );
@@ -231,7 +245,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.tracingPathProperty.lazyLink( tracing => {
       if ( tracing ) {
         // Sets the beginning of the period trace to the planet's current angular position
-        this.periodTraceStart = this.nu;
+        this.periodTraceStartProperty.value = this.nu;
       }
     } );
   }
@@ -265,7 +279,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.ranEmitter.emit();
 
     if ( this.tracingPathProperty.value ) {
-      this.periodTraceEnd = Utils.moduloBetweenDown( this.nu, this.periodTraceStart, this.periodTraceStart + TWO_PI );
+      this.periodTraceEndProperty.value = Utils.moduloBetweenDown( this.nu, this.periodTraceStartProperty.value, this.periodTraceStartProperty.value + TWO_PI );
     }
 
     this.areasErased = false;
@@ -281,8 +295,8 @@ export default class EllipticalOrbitEngine extends Engine {
     assert && assert( _.isEqual( bodies, this.bodies ), 'This engine expects the set of bodies to remain constant.' );
 
     this.resetOrbitalAreas();
-    this.periodTraceStart = 0;
-    this.periodTraceEnd = 0;
+    this.periodTraceStartProperty.value = 0;
+    this.periodTraceEndProperty.value = 0;
 
     const r = this.planet.positionProperty.value;
     this.updateForces( r );
