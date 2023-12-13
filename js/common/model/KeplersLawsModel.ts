@@ -249,11 +249,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         this.planet.velocityProperty
       ],
       () => {
-        if ( !this.isPlayingProperty.value && !this.steppingForward && !this.engine.isMutatingVelocity ) {
-          this.engine.update( this.bodies );
-        }
-        if ( isSettingPhetioStateProperty.value ) {
-          // Update the engine properties when initializing with PhET-iO
+        if ( ( !this.isPlayingProperty.value || isSettingPhetioStateProperty.value ) && !this.steppingForward && !this.engine.isMutatingVelocity ) {
           this.engine.update( this.bodies );
         }
       } );
