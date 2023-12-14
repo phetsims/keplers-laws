@@ -42,6 +42,7 @@ import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { NodeOptions } from '../../../../scenery/js/imports.js';
+import PeriodTracker from './PeriodTracker.js';
 
 const TWO_PI = 2 * Math.PI;
 
@@ -143,10 +144,8 @@ export default class EllipticalOrbitEngine extends Engine {
   public activeAreaIndex = 0;
   public areasErased = false; // When areas were just erased. run() sets this to false
 
-  // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
-  public readonly tracingPathProperty: BooleanProperty;
-  public periodTraceStartProperty: NumberProperty;
-  public periodTraceEndProperty: NumberProperty;
+  // Object which will keep track of the measured period on the orbit
+  public periodTracker: PeriodTracker | null;
 
   public constructor( bodies: Body[], providedOptions: EllipticalOrbitEngineOptions ) {
     super( bodies );
@@ -202,20 +201,6 @@ export default class EllipticalOrbitEngine extends Engine {
       phetioFeatured: true
     } );
 
-    const periodTrackerTandem = providedOptions.tandem.createTandem( 'periodTracker' );
-    this.tracingPathProperty = new BooleanProperty( false, {
-      tandem: periodTrackerTandem.createTandem( 'tracingPathProperty' ),
-      phetioReadOnly: true
-    } );
-    this.periodTraceStartProperty = new NumberProperty( 0, {
-      tandem: periodTrackerTandem.createTandem( 'periodTraceStartProperty' ),
-      phetioReadOnly: true
-    } );
-    this.periodTraceEndProperty = new NumberProperty( 0, {
-      tandem: periodTrackerTandem.createTandem( 'periodTraceEndProperty' ),
-      phetioReadOnly: true
-    } );
-
     // Populate the orbital areas
     for ( let i = 0; i < KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.max; i++ ) {
       this.orbitalAreas.push( new OrbitalArea( i, providedOptions.orbitalAreasTandem ) );
@@ -242,12 +227,8 @@ export default class EllipticalOrbitEngine extends Engine {
         this.update( this.bodies );
       } );
 
-    this.tracingPathProperty.lazyLink( tracing => {
-      if ( tracing ) {
-        // Sets the beginning of the period trace to the planet's current angular position
-        this.periodTraceStartProperty.value = this.nu;
-      }
-    } );
+    // Originally set this to null. The model's Period Tracker will take its place after initialization.
+    this.periodTracker = null;
   }
 
   public override run( dt: number, notifyPropertyListeners = true ): void {
@@ -278,8 +259,8 @@ export default class EllipticalOrbitEngine extends Engine {
     this.calculateOrbitalDivisions();
     this.ranEmitter.emit();
 
-    if ( this.tracingPathProperty.value ) {
-      this.periodTraceEndProperty.value = Utils.moduloBetweenDown( this.nu, this.periodTraceStartProperty.value, this.periodTraceStartProperty.value + TWO_PI );
+    if ( this.periodTracker && this.periodTracker.tracingPathProperty.value ) {
+      this.periodTracker.periodTraceEndProperty.value = Utils.moduloBetweenDown( this.nu, this.periodTracker.periodTraceStartProperty.value, this.periodTracker.periodTraceStartProperty.value + TWO_PI );
     }
 
     this.areasErased = false;
@@ -295,8 +276,10 @@ export default class EllipticalOrbitEngine extends Engine {
     assert && assert( _.isEqual( bodies, this.bodies ), 'This engine expects the set of bodies to remain constant.' );
 
     this.resetOrbitalAreas();
-    this.periodTraceStartProperty.value = 0;
-    this.periodTraceEndProperty.value = 0;
+    if ( this.periodTracker ) {
+      this.periodTracker.periodTraceStartProperty.value = 0;
+      this.periodTracker.periodTraceEndProperty.value = 0;
+    }
 
     const r = this.planet.positionProperty.value;
     this.updateForces( r );

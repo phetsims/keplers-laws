@@ -197,11 +197,14 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
     } );
 
+
     this.engine = new EllipticalOrbitEngine( this.bodies, {
       tandem: options.tandem,
       orbitalAreasTandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'orbitalAreas' ) : Tandem.OPT_OUT
     } );
     this.engine.reset();
+
+    this.periodTracker = new PeriodTracker( this, this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
 
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,
@@ -279,8 +282,6 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       tandem: options.tandem.createTandem( 'stopwatch' ),
       phetioFeatured: true
     } );
-
-    this.periodTracker = new PeriodTracker( this, this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
 
     const animatedZoomScaleRange = new Range( 45, 100 );
     const animatedZoomScaleProperty = new NumberProperty( animatedZoomScaleRange.min, {

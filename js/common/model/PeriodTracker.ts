@@ -15,6 +15,8 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import KeplersLawsModel from './KeplersLawsModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
@@ -34,13 +36,42 @@ export default class PeriodTracker {
   public readonly periodStopwatch: Stopwatch;
   public readonly fadingStopwatch: Stopwatch;
 
+  // These variables keep track of the period trace on Third Law (When the user measures period, a blue line will be traced)
+  public readonly tracingPathProperty: BooleanProperty;
+  public periodTraceStartProperty: NumberProperty;
+  public periodTraceEndProperty: NumberProperty;
+
   // This emitter tells the PeriodTrackerNode when to update the fade
   public readonly fadingEmitter = new Emitter();
 
   public readonly fadingDuration = 3;
 
   public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty' | 'isPlayingProperty'>, tandem: Tandem ) {
+
+    // Setting the engine's period tracker to this object here to avoid circular dependencies
+    this.model.engine.periodTracker = this;
+
     this.trackingState = TrackingState.IDLE;
+
+    this.tracingPathProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'tracingPathProperty' ),
+      phetioReadOnly: true
+    } );
+    this.periodTraceStartProperty = new NumberProperty( 0, {
+      tandem: tandem.createTandem( 'periodTraceStartProperty' ),
+      phetioReadOnly: true
+    } );
+    this.periodTraceEndProperty = new NumberProperty( 0, {
+      tandem: tandem.createTandem( 'periodTraceEndProperty' ),
+      phetioReadOnly: true
+    } );
+
+    this.tracingPathProperty.lazyLink( tracing => {
+      if ( tracing ) {
+        // Sets the beginning of the period trace to the planet's current angular position
+        this.periodTraceStartProperty.value = this.model.engine.nu;
+      }
+    } );
 
     const periodRangeProperty = new Property<Range>( new Range( 0, 1 ), {
       tandem: tandem.createTandem( 'periodRangeProperty' ),
@@ -77,12 +108,12 @@ export default class PeriodTracker {
         this.softReset();
         this.periodStopwatch.timeProperty.value = 0;
       }
-      this.model.engine.tracingPathProperty.value = isRunning;
+      this.tracingPathProperty.value = isRunning;
     } );
 
     // Begging fading with a diff between start and end angles
     const beginFade = () => {
-      this.model.engine.tracingPathProperty.value = false;
+      this.tracingPathProperty.value = false;
       this.trackingState = TrackingState.FADING;
       this.fadingStopwatch.reset();
       this.fadingStopwatch.isRunningProperty.value = true;
@@ -128,9 +159,9 @@ export default class PeriodTracker {
     this.beganPeriodTimerAt = 0;
     this.fadingStopwatch.reset();
     this.afterPeriodThreshold = false;
-    this.model.engine.tracingPathProperty.value = false;
-    this.model.engine.periodTraceStartProperty.value = 0;
-    this.model.engine.periodTraceEndProperty.value = 0;
+    this.tracingPathProperty.value = false;
+    this.periodTraceStartProperty.value = 0;
+    this.periodTraceEndProperty.value = 0;
   }
 
   public reset(): void {

@@ -42,7 +42,7 @@ export default class PeriodTrackerNode extends Path {
 
     this.periodTracker.periodStopwatch.isRunningProperty.lazyLink( isRunning => {
       if ( isRunning ) {
-        this.model.engine.periodTraceEndProperty.value = this.model.engine.periodTraceStartProperty.value;
+        this.periodTracker.periodTraceEndProperty.value = this.periodTracker.periodTraceStartProperty.value;
         this.updateShape();
       }
     } );
@@ -73,13 +73,13 @@ export default class PeriodTrackerNode extends Path {
 
   public updateShape(): void {
     this.opacity = 1;
-    const startTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceStartProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
-    const endTracePosition = this.model.engine.createPolar( -this.model.engine.periodTraceEndProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
+    const startTracePosition = this.model.engine.createPolar( -this.periodTracker.periodTraceStartProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
+    const endTracePosition = this.model.engine.createPolar( -this.periodTracker.periodTraceEndProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
     const startAngle = Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
     const endAngle = Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
 
     const retrograde = this.model.engine.retrograde;
-    const angleDiff = this.model.engine.periodTraceEndProperty.value - this.model.engine.periodTraceStartProperty.value;
+    const angleDiff = this.periodTracker.periodTraceEndProperty.value - this.periodTracker.periodTraceStartProperty.value;
     const angleThreshold = Math.PI / 10;
     if ( this.periodTracker.afterPeriodThreshold && (
       ( retrograde && angleDiff <= angleThreshold ) ||
