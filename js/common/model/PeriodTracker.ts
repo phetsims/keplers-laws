@@ -46,7 +46,7 @@ export default class PeriodTracker {
 
   public readonly fadingDuration = 3;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty' | 'isPlayingProperty'>, tandem: Tandem ) {
+  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty'>, tandem: Tandem ) {
 
     // Setting the engine's period tracker to this object here to avoid circular dependencies
     this.model.engine.periodTracker = this;
