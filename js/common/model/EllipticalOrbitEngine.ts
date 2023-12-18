@@ -284,6 +284,9 @@ export default class EllipticalOrbitEngine extends Engine {
     const r = this.planet.positionProperty.value;
     this.updateForces( r );
 
+    // Calculate again the escape speed based on the position of the body
+    this.escapeSpeedProperty.value = Math.sqrt( 2 * this.mu / r.magnitude ) * epsilon;
+
     this.enforceValidVelocity();
     let escaped = false;
     if ( this.alwaysCircles ) {
@@ -320,7 +323,7 @@ export default class EllipticalOrbitEngine extends Engine {
     this.nu = nu;
 
     // TODO: Temporary alert trying to track https://github.com/phetsims/keplers-laws/issues/218
-    assert && assert( !isNaN( this.a ), `a is NaN, \n r=${r},\n v=${v}` );
+    assert && assert( !isNaN( this.a ) && this.a > 0, `a is invalid, \n r=${r},\n v=${v}` );
 
     this.T = this.thirdLaw( this.a );
 
