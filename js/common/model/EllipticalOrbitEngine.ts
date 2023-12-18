@@ -145,7 +145,7 @@ export default class EllipticalOrbitEngine extends Engine {
   public areasErased = false; // When areas were just erased. run() sets this to false
 
   // Object which will keep track of the measured period on the orbit
-  public periodTracker: PeriodTracker | null;
+  private periodTracker: PeriodTracker | null;
 
   public constructor( bodies: Body[], providedOptions: EllipticalOrbitEngineOptions ) {
     super( bodies );
@@ -227,8 +227,13 @@ export default class EllipticalOrbitEngine extends Engine {
         this.update( this.bodies );
       } );
 
-    // Originally set this to null. The model's Period Tracker will take its place after initialization.
+    // Initially set this to null. EllipticalOrbitEngine and PeriodTracker need to know about each other. So
+    // call setPeriodTracker after construction.
     this.periodTracker = null;
+  }
+
+  public setPeriodTracker( periodTracker: PeriodTracker ): void {
+    this.periodTracker = periodTracker;
   }
 
   public override run( dt: number, notifyPropertyListeners = true ): void {

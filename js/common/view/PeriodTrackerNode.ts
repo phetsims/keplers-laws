@@ -7,15 +7,17 @@
 
 import keplersLaws from '../../keplersLaws.js';
 import { Path } from '../../../../scenery/js/imports.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 
 export default class PeriodTrackerNode extends Path {
+
   private readonly periodTracker: PeriodTracker;
+  private readonly engine: EllipticalOrbitEngine;
 
   // Initial values for the ellipse
   public orbitScale = 1;
@@ -26,7 +28,9 @@ export default class PeriodTrackerNode extends Path {
   // Circle that marks the start of the period
   public readonly startCircle: Path;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'periodTracker'>, periodVisibleProperty: TReadOnlyProperty<boolean> ) {
+  public constructor( periodTracker: PeriodTracker,
+                      engine: EllipticalOrbitEngine,
+                      periodVisibleProperty: TReadOnlyProperty<boolean> ) {
     super( null, {
       isDisposable: false,
       stroke: KeplersLawsColors.timeDisplayBackgroundColorProperty,
@@ -34,7 +38,8 @@ export default class PeriodTrackerNode extends Path {
       visibleProperty: periodVisibleProperty
     } );
 
-    this.periodTracker = model.periodTracker; // This object contains stopwatches for the timer and the fading effect
+    this.periodTracker = periodTracker; // This object contains stopwatches for the timer and the fading effect
+    this.engine = engine;
 
     this.periodTracker.fadingEmitter.addListener( () => {
       this.updateFade();
@@ -47,7 +52,7 @@ export default class PeriodTrackerNode extends Path {
       }
     } );
 
-    this.model.engine.changedEmitter.addListener( () => {
+    this.engine.changedEmitter.addListener( () => {
       this.periodTracker.softReset();
       this.periodTracker.timerReset();
       this.updateShape();
@@ -73,12 +78,12 @@ export default class PeriodTrackerNode extends Path {
 
   public updateShape(): void {
     this.opacity = 1;
-    const startTracePosition = this.model.engine.createPolar( -this.periodTracker.periodTraceStartProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
-    const endTracePosition = this.model.engine.createPolar( -this.periodTracker.periodTraceEndProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
+    const startTracePosition = this.engine.createPolar( -this.periodTracker.periodTraceStartProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
+    const endTracePosition = this.engine.createPolar( -this.periodTracker.periodTraceEndProperty.value ).times( this.orbitScale ).minus( this.orbitCenter );
     const startAngle = Math.atan2( startTracePosition.y / this.radiusY, startTracePosition.x / this.radiusX );
     const endAngle = Math.atan2( endTracePosition.y / this.radiusY, endTracePosition.x / this.radiusX );
 
-    const retrograde = this.model.engine.retrograde;
+    const retrograde = this.engine.retrograde;
     const angleDiff = this.periodTracker.periodTraceEndProperty.value - this.periodTracker.periodTraceStartProperty.value;
     const angleThreshold = Math.PI / 10;
     if ( this.periodTracker.afterPeriodThreshold && (

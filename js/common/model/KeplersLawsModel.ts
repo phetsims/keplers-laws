@@ -197,14 +197,18 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       assert && assert( position.equals( Vector2.ZERO ), 'This sim requires the sun to be at the origin always!' );
     } );
 
-
     this.engine = new EllipticalOrbitEngine( this.bodies, {
       tandem: options.tandem,
       orbitalAreasTandem: this.hasSecondLawFeatures ? options.tandem.createTandem( 'orbitalAreas' ) : Tandem.OPT_OUT
     } );
     this.engine.reset();
 
-    this.periodTracker = new PeriodTracker( this, this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
+    this.periodTracker = new PeriodTracker( this.engine, this.timeProperty,
+      this.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTracker' ) : Tandem.OPT_OUT );
+
+    // EllipticalOrbitEngine and PeriodTracker need to know about each other, so we need to call this after they have
+    // both been instantiated.
+    this.engine.setPeriodTracker( this.periodTracker );
 
     this.periodDivisionsProperty = new NumberProperty( KeplersLawsConstants.PERIOD_DIVISIONS_RANGE.defaultValue, {
       range: KeplersLawsConstants.PERIOD_DIVISIONS_RANGE,

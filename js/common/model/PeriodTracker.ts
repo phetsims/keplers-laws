@@ -12,11 +12,12 @@ import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import KeplersLawsModel from './KeplersLawsModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
@@ -46,10 +47,9 @@ export default class PeriodTracker {
 
   public readonly fadingDuration = 3;
 
-  public constructor( private readonly model: Pick<KeplersLawsModel, 'engine' | 'timeProperty'>, tandem: Tandem ) {
-
-    // Setting the engine's period tracker to this object here to avoid circular dependencies
-    this.model.engine.periodTracker = this;
+  public constructor( private readonly engine: EllipticalOrbitEngine,
+                      private readonly timeProperty: TReadOnlyProperty<number>,
+                      tandem: Tandem ) {
 
     this.trackingState = TrackingState.IDLE;
 
@@ -69,7 +69,7 @@ export default class PeriodTracker {
     this.tracingPathProperty.lazyLink( tracing => {
       if ( tracing ) {
         // Sets the beginning of the period trace to the planet's current angular position
-        this.periodTraceStartProperty.value = this.model.engine.nu;
+        this.periodTraceStartProperty.value = this.engine.nu;
       }
     } );
 
@@ -79,7 +79,7 @@ export default class PeriodTracker {
       phetioReadOnly: true
     } );
 
-    this.model.engine.periodProperty.link( period => {
+    this.engine.periodProperty.link( period => {
       periodRangeProperty.value.max = period;
     } );
 
@@ -101,7 +101,7 @@ export default class PeriodTracker {
     this.periodStopwatch.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
-        this.beganPeriodTimerAt = this.model.timeProperty.value;
+        this.beganPeriodTimerAt = this.timeProperty.value;
       }
       else if ( this.trackingState !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, softReset the period timer
@@ -119,7 +119,7 @@ export default class PeriodTracker {
       this.fadingStopwatch.isRunningProperty.value = true;
     };
 
-    this.model.timeProperty.link( time => {
+    this.timeProperty.link( time => {
       if ( this.trackingState === TrackingState.RUNNING ) {
         if ( this.beganPeriodTimerAt > time ) {
           // Avoid negative times by softResetting the timer

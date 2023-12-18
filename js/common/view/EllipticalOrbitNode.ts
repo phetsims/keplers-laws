@@ -255,7 +255,7 @@ export default class EllipticalOrbitNode extends Path {
     timeValueNumberDisplays.forEach( node => { timeValuesNode.addChild( node ); } );
 
     // THIRD LAW: Period Tracker
-    const periodTrackerNode = new PeriodTrackerNode( model, visibleProperties.periodVisibleProperty );
+    const periodTrackerNode = new PeriodTrackerNode( model.periodTracker, model.engine, visibleProperties.periodVisibleProperty );
 
     // Text Nodes
     labelsLayer.addChild( aLabelNode );
