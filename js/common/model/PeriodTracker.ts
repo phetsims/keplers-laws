@@ -55,15 +55,18 @@ export default class PeriodTracker {
 
     this.tracingPathProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'tracingPathProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
     } );
     this.periodTraceStartProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'periodTraceStartProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
     } );
     this.periodTraceEndProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'periodTraceEndProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
     } );
 
     this.tracingPathProperty.lazyLink( tracing => {
@@ -76,7 +79,8 @@ export default class PeriodTracker {
     const periodRangeProperty = new Property<Range>( new Range( 0, 1 ), {
       tandem: tandem.createTandem( 'periodRangeProperty' ),
       phetioValueType: Range.RangeIO,
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only.'
     } );
 
     this.engine.periodProperty.link( period => {
@@ -88,7 +92,8 @@ export default class PeriodTracker {
       timePropertyOptions: {
         range: new Range( 0, this.fadingDuration )
       },
-      tandem: tandem.createTandem( 'fadingStopwatch' )
+      tandem: tandem.createTandem( 'fadingStopwatch' ),
+      phetioDocumentation: 'For internal use only.'
     } );
 
     this.periodStopwatch = new Stopwatch( {
@@ -96,7 +101,8 @@ export default class PeriodTracker {
       timePropertyOptions: {
         range: periodRangeProperty
       },
-      tandem: tandem.createTandem( 'periodStopwatch' )
+      tandem: tandem.createTandem( 'periodStopwatch' ),
+      phetioDocumentation: 'For internal use only.'
     } );
     this.periodStopwatch.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
