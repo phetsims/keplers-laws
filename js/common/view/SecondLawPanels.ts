@@ -8,7 +8,7 @@
 
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import SecondLawAccordionBox from './SecondLawAccordionBox.js';
+import SweptAreaAccordionBox from './SweptAreaAccordionBox.js';
 import keplersLaws from '../../keplersLaws.js';
 import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
@@ -22,7 +22,7 @@ export default class SecondLawPanels extends VBox {
       stretch: true,
       children: [
         new PeriodDivisionsPanel( model, visibleProperties, tandem.createTandem( 'periodDivisionsPanel' ) ),
-        new SecondLawAccordionBox( model, visibleProperties.secondLawAccordionBoxExpandedProperty,
+        new SweptAreaAccordionBox( model, visibleProperties.secondLawAccordionBoxExpandedProperty,
           tandem.createTandem( 'sweptAreaAccordionBox' ) ),
         ...( model.isAllLaws ? [] : [ new MoreOrbitalDataPanel( model, tandem.createTandem( 'moreOrbitalDataPanel' ) ) ] )
       ],

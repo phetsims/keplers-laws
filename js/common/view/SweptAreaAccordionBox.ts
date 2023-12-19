@@ -39,7 +39,7 @@ const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 // How much bigger is the top of the graph compared to the total area
 const UPSCALE = 1.3;
 
-export default class SecondLawAccordionBox extends AccordionBox {
+export default class SweptAreaAccordionBox extends AccordionBox {
 
   public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
@@ -346,4 +346,4 @@ function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
   return true;
 }
 
-keplersLaws.register( 'SecondLawAccordionBox', SecondLawAccordionBox );
+keplersLaws.register( 'SweptAreaAccordionBox', SweptAreaAccordionBox );
