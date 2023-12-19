@@ -30,7 +30,7 @@ export default class OrbitalInformationPanel extends Panel {
     } );
 
     // Checkboxes for First Law
-    const firstLawCheckboxesTandem = tandem.createTandem( 'firstLawCheckboxes' );
+    const firstLawCheckboxesTandem = model.hasFirstLawFeatures ? tandem.createTandem( 'firstLawCheckboxes' ) : Tandem.OPT_OUT;
     const firstLawCheckboxes: Checkbox[] = [
 
       // Foci
@@ -56,7 +56,7 @@ export default class OrbitalInformationPanel extends Panel {
     ];
 
     // Checkboxes for Second Law
-    const secondLawCheckboxesTandem = tandem.createTandem( 'secondLawCheckboxes' );
+    const secondLawCheckboxesTandem = model.hasSecondLawFeatures ? tandem.createTandem( 'secondLawCheckboxes' ) : Tandem.OPT_OUT;
     const secondLawCheckboxes: Checkbox[] = [
 
       // Apoapsis
@@ -73,7 +73,7 @@ export default class OrbitalInformationPanel extends Panel {
     ];
 
     // Checkboxes for Third Law
-    const thirdLawCheckboxesTandem = tandem.createTandem( 'thirdLawCheckboxes' );
+    const thirdLawCheckboxesTandem = model.hasThirdLawFeatures ? tandem.createTandem( 'thirdLawCheckboxes' ) : Tandem.OPT_OUT;
     const thirdLawCheckboxes: Checkbox[] = [
 
       // Semi-Major Axis (a)

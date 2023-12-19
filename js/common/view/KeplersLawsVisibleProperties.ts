@@ -90,35 +90,39 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       phetioFeatured: true
     } );
 
-    const firstLawTandem = tandem.createTandem( 'firstLawVisibleProperties' );
+    // Booleans to wether include content from each Law
     const includeFirstLaw = isAllLaws || specificLaw === LawMode.FIRST_LAW;
+    const includeSecondLaw = isAllLaws || specificLaw === LawMode.SECOND_LAW;
+    const includeThirdLaw = isAllLaws || specificLaw === LawMode.THIRD_LAW;
+
+    const firstLawTandem = includeFirstLaw ? tandem.createTandem( 'firstLawVisibleProperties' ) : Tandem.OPT_OUT;
 
     this.axesVisibleProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'axesVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'axesVisibleProperty' ),
       phetioFeatured: true
     } );
     this.semiaxesCheckedProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesCheckedProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'semiaxesCheckedProperty' ),
       phetioFeatured: true
     } );
     this.semiaxesVisibleProperty = DerivedProperty.and( [ this.axesVisibleProperty, this.semiaxesCheckedProperty ], {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'semiaxesVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'semiaxesVisibleProperty' ),
       phetioValueType: BooleanIO
     } );
     this.fociVisibleProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'fociVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'fociVisibleProperty' ),
       phetioFeatured: true
     } );
     this.stringCheckedProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringCheckedProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'stringCheckedProperty' ),
       phetioFeatured: true
     } );
     this.stringVisibleProperty = DerivedProperty.and( [ this.fociVisibleProperty, this.stringCheckedProperty ], {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'stringVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'stringVisibleProperty' ),
       phetioValueType: BooleanIO
     } );
     this.eccentricityVisibleProperty = new BooleanProperty( false, {
-      tandem: includeFirstLaw ? firstLawTandem.createTandem( 'eccentricityVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: firstLawTandem.createTandem( 'eccentricityVisibleProperty' ),
       phetioFeatured: true
     } );
 
@@ -130,27 +134,26 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       this.eccentricityVisibleProperty
     ];
 
-    const secondLawTandem = tandem.createTandem( 'secondLawVisibleProperties' );
-    const includeSecondLaw = isAllLaws || specificLaw === LawMode.SECOND_LAW;
+    const secondLawTandem = includeSecondLaw ? tandem.createTandem( 'secondLawVisibleProperties' ) : Tandem.OPT_OUT;
 
     this.apoapsisVisibleProperty = new BooleanProperty( false, {
-      tandem: includeSecondLaw ? secondLawTandem.createTandem( 'apoapsisVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: secondLawTandem.createTandem( 'apoapsisVisibleProperty' ),
       phetioFeatured: true
     } );
     this.periapsisVisibleProperty = new BooleanProperty( false, {
-      tandem: includeSecondLaw ? secondLawTandem.createTandem( 'periapsisVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: secondLawTandem.createTandem( 'periapsisVisibleProperty' ),
       phetioFeatured: true
     } );
     this.areaValuesVisibleProperty = new BooleanProperty( false, {
-      tandem: includeSecondLaw ? secondLawTandem.createTandem( 'areaValuesVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: secondLawTandem.createTandem( 'areaValuesVisibleProperty' ),
       phetioFeatured: true
     } );
     this.timeValuesVisibleProperty = new BooleanProperty( false, {
-      tandem: includeSecondLaw ? secondLawTandem.createTandem( 'timeValuesVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: secondLawTandem.createTandem( 'timeValuesVisibleProperty' ),
       phetioFeatured: true
     } );
     this.secondLawAccordionBoxExpandedProperty = new BooleanProperty( true, {
-      tandem: includeSecondLaw ? secondLawTandem.createTandem( 'secondLawAccordionBoxExpandedProperty' ) : Tandem.OPT_OUT,
+      tandem: secondLawTandem.createTandem( 'secondLawAccordionBoxExpandedProperty' ),
       phetioFeatured: true
     } );
     this.secondLawVisibilities = [
@@ -161,19 +164,18 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       this.secondLawAccordionBoxExpandedProperty
     ];
 
-    const thirdLawTandem = tandem.createTandem( 'thirdLawVisibleProperties' );
-    const includeThirdLaw = isAllLaws || specificLaw === LawMode.THIRD_LAW;
+    const thirdLawTandem = includeThirdLaw ? tandem.createTandem( 'thirdLawVisibleProperties' ) : Tandem.OPT_OUT;
 
     this.semiMajorAxisVisibleProperty = new BooleanProperty( true, {
-      tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'semiMajorAxisVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: thirdLawTandem.createTandem( 'semiMajorAxisVisibleProperty' ),
       phetioFeatured: true
     } );
     this.periodVisibleProperty = new BooleanProperty( false, {
-      tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'periodVisibleProperty' ) : Tandem.OPT_OUT,
+      tandem: thirdLawTandem.createTandem( 'periodVisibleProperty' ),
       phetioFeatured: true
     } );
     this.thirdLawAccordionBoxExpandedProperty = new BooleanProperty( true, {
-      tandem: includeThirdLaw ? thirdLawTandem.createTandem( 'thirdLawAccordionBoxExpandedProperty' ) : Tandem.OPT_OUT,
+      tandem: thirdLawTandem.createTandem( 'thirdLawAccordionBoxExpandedProperty' ),
       phetioFeatured: true
     } );
     this.thirdLawVisibilities = [
