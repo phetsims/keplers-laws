@@ -75,8 +75,11 @@ export default class StarMassPanel extends Panel {
       endCallback: () => {
         model.sun.userIsControllingMassProperty.value = false;
       },
-      tandem: Tandem.OPT_OUT
+      tandem: tandem.createTandem( 'massNumberControl' ),
+      phetioVisiblePropertyInstrumented: false
     } );
+
+    massNumberControl.addLinkedElement( model.bodies[ 0 ].massProperty );
 
     // 'Our Sun' tick label
     const ourSunTickLabel = new Text( KeplersLawsStrings.ourSunStringProperty, {
