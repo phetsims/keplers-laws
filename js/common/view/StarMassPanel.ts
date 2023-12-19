@@ -76,7 +76,8 @@ export default class StarMassPanel extends Panel {
         model.sun.userIsControllingMassProperty.value = false;
       },
       tandem: tandem.createTandem( 'massNumberControl' ),
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      phetioFeatured: true
     } );
 
     massNumberControl.addLinkedElement( model.bodies[ 0 ].massProperty );

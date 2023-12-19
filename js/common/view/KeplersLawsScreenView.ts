@@ -291,7 +291,10 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       },
       touchAreaXDilation: 5,
       touchAreaYDilation: 5,
-      tandem: options.tandem.createTandem( 'zoomButtonGroup' )
+      tandem: options.tandem.createTandem( 'zoomButtonGroup' ),
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     // Add the control panel on top of the canvases
@@ -329,7 +332,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       dragBoundsProperty: this.visibleBoundsProperty,
       visibleProperty: this.visibleProperties.periodVisibleProperty,
       soundViewNode: this,
-      tandem: model.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTimerNode' ) : Tandem.OPT_OUT
+      tandem: model.hasThirdLawFeatures ? options.tandem.createTandem( 'periodTimerNode' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
     } );
 
     this.topLayer.addChild( this.periodTimerNode );

@@ -55,7 +55,8 @@ export default class ThirdLawAccordionBox extends AccordionBox {
   public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
     const visibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'visibleProperty' )
+      tandem: tandem.createTandem( 'visibleProperty' ),
+      phetioFeatured: true
     } );
 
     const titleStringProperty = new DerivedProperty( [

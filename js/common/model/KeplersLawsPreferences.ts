@@ -16,7 +16,8 @@ const KeplersLawsPreferences = {
 
   // Toggles whether More Orbital Data panel will be shown in the screens that support it.
   moreOrbitalDataVisibleProperty: new BooleanProperty( KeplersLawsQueryParameters.moreOrbitalData, {
-    tandem: Tandem.PREFERENCES.createTandem( 'moreOrbitalDataVisibleProperty' )
+    tandem: Tandem.PREFERENCES.createTandem( 'moreOrbitalDataVisibleProperty' ),
+    phetioFeatured: true
   } )
 };
 

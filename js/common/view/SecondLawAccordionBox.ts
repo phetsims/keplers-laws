@@ -44,7 +44,8 @@ export default class SecondLawAccordionBox extends AccordionBox {
   public constructor( public readonly model: KeplersLawsModel, secondLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {
 
     const visibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'visibleProperty' )
+      tandem: tandem.createTandem( 'visibleProperty' ),
+      phetioFeatured: true
     } );
 
     const options = combineOptions<AccordionBoxOptions>( {}, KeplersLawsConstants.ACCORDION_BOX_OPTIONS, {

@@ -74,7 +74,8 @@ export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
       isValidValue: targetOrbitInfo => ( targetOrbitInfo.eccentricity >= 0 && targetOrbitInfo.eccentricity < 1 ),
       tandem: tandem,
       phetioValueType: TargetOrbitInfo.TargetOrbitInfoIO,
-      phetioDocumentation: 'Client-configurable preset for Target Orbit, available only via PhET-iO'
+      phetioDocumentation: 'Client-configurable preset for Target Orbit, available only via PhET-iO',
+      phetioFeatured: true
     } );
 
     this.targetOrbit = targetOrbit;

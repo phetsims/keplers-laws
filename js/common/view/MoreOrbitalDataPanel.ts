@@ -36,7 +36,8 @@ export default class MoreOrbitalDataPanel extends Panel {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
       visibleProperty: KeplersLawsPreferences.moreOrbitalDataVisibleProperty,
-      tandem: tandem
+      tandem: tandem,
+      phetioFeatured: true
     } );
 
     // Extra information: distance and velocity vector values

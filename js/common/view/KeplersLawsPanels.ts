@@ -62,7 +62,11 @@ export default class KeplersLawsPanels extends VBox {
         KeplersLawsCheckbox.createStopwatchCheckbox( visibleProperties.stopwatchVisibleProperty, visibilityPanelTandem.createTandem( 'stopwatchCheckbox' ) )
       ],
       tandem: visibilityPanelTandem,
-      phetioVisiblePropertyInstrumented: true
+      phetioVisiblePropertyInstrumented: true,
+
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } ), SolarSystemCommonConstants.PANEL_OPTIONS );
 
     super( {

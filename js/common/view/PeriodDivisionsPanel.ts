@@ -27,7 +27,8 @@ export default class PeriodDivisionsPanel extends Panel {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {
 
     const visibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'visibleProperty' )
+      tandem: tandem.createTandem( 'visibleProperty' ),
+      phetioFeatured: true
     } );
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
