@@ -167,7 +167,8 @@ class KeplersLawsModel extends SolarSystemCommonModel {
       bodyColors: [
         KeplersLawsColors.sunColorProperty,
         KeplersLawsColors.planetColorProperty
-      ]
+      ],
+      phetioFeaturedTimeProperty: false
     }, providedOptions );
     super( options );
 
