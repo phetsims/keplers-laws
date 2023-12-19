@@ -75,7 +75,7 @@ export default class StarMassPanel extends Panel {
       endCallback: () => {
         model.sun.userIsControllingMassProperty.value = false;
       },
-      tandem: tandem.createTandem( 'massNumberControl' )
+      tandem: Tandem.OPT_OUT
     } );
 
     // 'Our Sun' tick label
