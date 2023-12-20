@@ -286,6 +286,8 @@ export default class EllipticalOrbitEngine extends Engine {
       this.periodTracker.periodTraceEndProperty.value = 0;
     }
 
+    this.enforceValidPosition();
+
     const r = this.planet.positionProperty.value;
     this.updateForces( r );
 
@@ -423,6 +425,14 @@ export default class EllipticalOrbitEngine extends Engine {
     if ( Math.sin( this.planet.velocityProperty.value.angleBetween( this.planet.positionProperty.value ) ) === 0 ) {
       // Slightly spin the velocity vector
       this.planet.velocityProperty.value = this.planet.velocityProperty.value.rotated( 0.01 );
+    }
+  }
+
+  private enforceValidPosition(): void {
+    // 1. Make sure r is not 0 (Extremely unlikely by dragging, but it is possible to do with PhET-iO)
+    if ( this.planet.positionProperty.value.magnitude === 0 ) {
+      // Slightly change the position vector
+      this.planet.positionProperty.value = new Vector2( 0.01, 0 );
     }
   }
 
