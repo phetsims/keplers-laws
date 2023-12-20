@@ -21,7 +21,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
@@ -62,7 +61,6 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
 
   public constructor(
     periodStopwatch: Stopwatch,
-    modelViewTransformProperty: TReadOnlyProperty<ModelViewTransform2>,
     layoutBounds: Bounds2,
     providedOptions: PeriodTimerNodeOptions
   ) {
