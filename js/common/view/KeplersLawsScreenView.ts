@@ -328,7 +328,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.topLayer.addChild( offScaleMessage );
 
-    this.periodTimerNode = new PeriodTimerNode( model.periodTracker.periodStopwatch, this.modelViewTransformProperty, this.layoutBounds, {
+    this.periodTimerNode = new PeriodTimerNode( model.periodTracker.periodStopwatch, this.layoutBounds, {
       dragBoundsProperty: this.visibleBoundsProperty,
       visibleProperty: this.visibleProperties.periodVisibleProperty,
       soundViewNode: this,
