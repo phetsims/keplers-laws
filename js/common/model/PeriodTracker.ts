@@ -93,7 +93,9 @@ export default class PeriodTracker {
         range: new Range( 0, this.fadingDuration )
       },
       tandem: tandem.createTandem( 'fadingStopwatch' ),
-      phetioDocumentation: 'For internal use only.'
+      phetioDocumentation: 'For internal use only.',
+      phetioFeatured: false,
+      phetioReadOnly: true
     } );
 
     this.periodStopwatch = new Stopwatch( {
