@@ -448,7 +448,10 @@ export default class EllipticalOrbitEngine extends Engine {
    * When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
    */
   public createPolar( nu: number, w = 0 ): Vector2 {
-    return EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
+    // TODO: This is a temporary assertion for https://github.com/phetsims/keplers-laws/issues/198
+    const returnVector = EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
+    assert && assert( !isNaN( returnVector.x ) && !isNaN( returnVector.y ), `createPolar returned NaN, \n a=${this.a}, e=${this.e}, nu=${nu}, w=${w}` );
+    return returnVector;
   }
 
   public static staticCreatePolar( a: number, e: number, nu: number, w = 0 ): Vector2 {
