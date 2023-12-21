@@ -422,7 +422,7 @@ export default class EllipticalOrbitEngine extends Engine {
     assert && assert( this.planet.velocityProperty.value.magnitude !== 0, 'Velocity cannot be 0' );
 
     // 2. Make sure v is not perfectly aligned with r (Extremely unlikely by dragging, but it is possible to do with PhET-iO)
-    if ( Math.sin( this.planet.velocityProperty.value.angleBetween( this.planet.positionProperty.value ) ) === 0 ) {
+    if ( Math.abs( Math.sin( this.planet.velocityProperty.value.angleBetween( this.planet.positionProperty.value ) ) ) <= 1e-6 ) {
       // Slightly spin the velocity vector
       this.planet.velocityProperty.value = this.planet.velocityProperty.value.rotated( 0.01 );
     }
@@ -448,10 +448,7 @@ export default class EllipticalOrbitEngine extends Engine {
    * When w is not provided (0), we're using local orbital coordinates. When provided, the result is in global coordinates.
    */
   public createPolar( nu: number, w = 0 ): Vector2 {
-    // TODO: This is a temporary assertion for https://github.com/phetsims/keplers-laws/issues/198
-    const returnVector = EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
-    assert && assert( !isNaN( returnVector.x ) && !isNaN( returnVector.y ), `createPolar returned NaN, \n a=${this.a}, e=${this.e}, nu=${nu}, w=${w}` );
-    return returnVector;
+    return EllipticalOrbitEngine.staticCreatePolar( this.a, this.e, nu, w );
   }
 
   public static staticCreatePolar( a: number, e: number, nu: number, w = 0 ): Vector2 {
