@@ -40,6 +40,7 @@ simLauncher.launch( () => {
       soundDesign: 'Ashton Morris',
       thanks: ''
     },
+
     preferencesModel: new PreferencesModel( {
       visualOptions: {
         supportsProjectorMode: true
@@ -49,7 +50,9 @@ simLauncher.launch( () => {
           createContent: tandem => new KeplersLawsPreferencesNode( tandem.createTandem( 'simPreferences' ) )
         } ]
       }
-    } )
+    } ),
+
+    phetioDesigned: true
   };
 
   const sim = new Sim( titleStringProperty, screens, options );

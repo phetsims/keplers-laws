@@ -23,6 +23,9 @@
       "my-solar-system",
       "solar-system-common"
     ],
+    "phet-io": {
+      "compareDesignedAPIChanges": true
+    },
     "supportsOutputJS": true,
     "simFeatures": {
       "supportsDynamicLocale": true,
