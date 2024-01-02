@@ -329,7 +329,6 @@ export default class EllipticalOrbitEngine extends Engine {
     this.W = W;
     this.nu = nu;
 
-    // TODO: Temporary alert trying to track https://github.com/phetsims/keplers-laws/issues/218
     assert && assert( !isNaN( this.a ) && this.a > 0, `a is invalid, \n r=${r},\n v=${v}` );
 
     this.T = this.thirdLaw( this.a );
