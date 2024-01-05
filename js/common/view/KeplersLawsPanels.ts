@@ -25,7 +25,10 @@ export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
-    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer, tandem.createTandem( 'targetOrbitPanel' ) );
+    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer, visibleProperties.targetOrbitPanelVisibleProperty, tandem.createTandem( 'targetOrbitPanel' ) );
+    targetOrbitPanel.addLinkedElement( visibleProperties.targetOrbitPanelVisibleProperty, {
+      tandemName: 'visibleProperty'
+    } );
 
     // Panel that contains checkboxes related to Foci, Axes, and Eccentricity
     const orbitalInformationPanel = new OrbitalInformationPanel( model, visibleProperties, tandem.createTandem( 'orbitalInformationPanel' ) );

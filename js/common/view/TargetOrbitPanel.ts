@@ -22,13 +22,19 @@ import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class TargetOrbitPanel extends Panel {
-  public constructor( model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>,
-                      topLayer: Node, tandem: Tandem ) {
+  public constructor(
+    model: Pick<KeplersLawsModel, 'isSecondLawProperty' | 'targetOrbitProperty' | 'isSolarSystemProperty'>,
+    topLayer: Node,
+    isTargetOrbitPanelVisibleProperty: TReadOnlyProperty<boolean>,
+    tandem: Tandem ) {
 
     const options = combineOptions<PanelOptions>( {}, SolarSystemCommonConstants.PANEL_OPTIONS, {
-      visibleProperty: DerivedProperty.not( model.isSecondLawProperty ),
+      visibleProperty: new DerivedProperty( [ model.isSecondLawProperty, isTargetOrbitPanelVisibleProperty ], ( isSecondLaw, isTargetOrbitPanelVisible ) => {
+        return !isSecondLaw && isTargetOrbitPanelVisible;
+      } ),
       tandem: tandem,
       phetioVisiblePropertyInstrumented: true
     } );

@@ -20,6 +20,9 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
   // Indicates if the stopwatch is visible.
   public readonly stopwatchVisibleProperty: BooleanProperty;
 
+  // Indicates if the target orbit panel is visible.
+  public readonly targetOrbitPanelVisibleProperty: BooleanProperty;
+
   // FIRST LAW VISIBLE PROPERTIES ######################################################################################
   // Indicates if the axes are visible.
   public readonly axesVisibleProperty: BooleanProperty;
@@ -87,6 +90,11 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
 
     this.stopwatchVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'stopwatchVisibleProperty' ),
+      phetioFeatured: true
+    } );
+
+    this.targetOrbitPanelVisibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'targetOrbitPanelVisibleProperty' ),
       phetioFeatured: true
     } );
 
