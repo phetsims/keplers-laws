@@ -100,7 +100,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       draggable: false,
       focusable: false,
       pickable: false,
-      tandem: orbitalSystemNodesTandem.createTandem( 'sunNode' )
+      tandem: orbitalSystemNodesTandem.createTandem( 'sunNode' ),
+      phetioInputEnabledPropertyInstrumented: false
     } );
     this.bodiesLayer.addChild( sunNode );
 

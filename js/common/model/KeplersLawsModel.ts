@@ -152,7 +152,15 @@ class KeplersLawsModel extends SolarSystemCommonModel {
           mass: KeplersLawsConstants.MASS_OF_OUR_SUN,
           massRange: new Range( 0.5 * KeplersLawsConstants.MASS_OF_OUR_SUN, 2 * KeplersLawsConstants.MASS_OF_OUR_SUN ),
           position: new Vector2( 0, 0 ),
+          positionPropertyOptions: {
+            phetioReadOnly: true,
+            phetioFeatured: false
+          },
           velocity: new Vector2( 0, 0 ),
+          velocityPropertyOptions: {
+            phetioReadOnly: true,
+            phetioFeatured: false
+          },
           tandemName: 'sun'
         } ),
         new BodyInfo( {
