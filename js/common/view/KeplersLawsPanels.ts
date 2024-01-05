@@ -25,7 +25,8 @@ export default class KeplersLawsPanels extends VBox {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, topLayer: Node, tandem: Tandem ) {
 
     // Panel that contains the combo box for selecting a target orbit
-    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer, visibleProperties.targetOrbitPanelVisibleProperty, tandem.createTandem( 'targetOrbitPanel' ) );
+    const targetOrbitPanel = new TargetOrbitPanel( model, topLayer, visibleProperties.targetOrbitPanelVisibleProperty,
+      model.hasFirstLawFeatures || model.hasThirdLawFeatures ? tandem.createTandem( 'targetOrbitPanel' ) : Tandem.OPT_OUT );
     targetOrbitPanel.addLinkedElement( visibleProperties.targetOrbitPanelVisibleProperty, {
       tandemName: 'visibleProperty'
     } );
