@@ -36,7 +36,8 @@ export default class TargetOrbitPanel extends Panel {
         return !isSecondLaw && isTargetOrbitPanelVisible;
       } ),
       tandem: tandem,
-      phetioVisiblePropertyInstrumented: true
+      phetioVisiblePropertyInstrumented: true,
+      phetioFeatured: true
     } );
 
     const targetOrbitText = new Text( KeplersLawsStrings.targetOrbitStringProperty,
