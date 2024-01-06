@@ -93,15 +93,15 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
       phetioFeatured: true
     } );
 
-    this.targetOrbitPanelVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'targetOrbitPanelVisibleProperty' ),
-      phetioFeatured: true
-    } );
-
     // Booleans to wether include content from each Law
     const includeFirstLaw = isAllLaws || specificLaw === LawMode.FIRST_LAW;
     const includeSecondLaw = isAllLaws || specificLaw === LawMode.SECOND_LAW;
     const includeThirdLaw = isAllLaws || specificLaw === LawMode.THIRD_LAW;
+
+    this.targetOrbitPanelVisibleProperty = new BooleanProperty( true, {
+      tandem: includeFirstLaw || includeThirdLaw ? tandem.createTandem( 'targetOrbitPanelVisibleProperty' ) : Tandem.OPT_OUT,
+      phetioFeatured: true
+    } );
 
     const firstLawTandem = includeFirstLaw ? tandem.createTandem( 'firstLawVisibleProperties' ) : Tandem.OPT_OUT;
 
