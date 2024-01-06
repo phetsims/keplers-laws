@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * KeplersLawsVisibleProperties is an abstract class that each law will use to define the visible properties
