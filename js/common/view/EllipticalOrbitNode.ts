@@ -217,6 +217,9 @@ export default class EllipticalOrbitNode extends Path {
         scale: 0.7,
         opacity: 0.8,
         useRichText: true,
+        numberFormatterDependencies: [
+          KeplersLawsStrings.pattern.valueUnitsStringProperty,
+          KeplersLawsDerivedStrings.AU2StringProperty ],
         numberFormatter: ( value: number ) => {
           return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
             value: Utils.toFixed( value, 2 ),
@@ -228,6 +231,10 @@ export default class EllipticalOrbitNode extends Path {
         scale: 0.7,
         opacity: 0.8,
         backgroundFill: KeplersLawsColors.timeDisplayBackgroundColorProperty,
+        numberFormatterDependencies: [
+          KeplersLawsStrings.pattern.valueUnitsStringProperty,
+          KeplersLawsStrings.units.yearsStringProperty
+        ],
         numberFormatter: ( value: number ) => {
           return StringUtils.fillIn( KeplersLawsStrings.pattern.valueUnitsStringProperty, {
             value: Utils.toFixed( value, 2 ),
