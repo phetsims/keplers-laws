@@ -84,7 +84,7 @@ export default class OrbitalInformationPanel extends Panel {
     ];
 
     const content = new VBox( {
-      spacing: 5,
+      spacing: SolarSystemCommonConstants.VBOX_SPACING,
       align: 'left',
       stretch: true
       // children: set by model.lawUpdatedEmitter listener below

@@ -37,7 +37,7 @@ export default class KeplersLawsPanels extends VBox {
     // A bunch of unrelated controls, so we named the panel based on its position in the layout.
     const visibilityPanelTandem = tandem.createTandem( 'visibilityPanel' );
     const visibilityPanel = new Panel( new VBox( {
-      spacing: 5,
+      spacing: SolarSystemCommonConstants.VBOX_SPACING,
       align: 'left',
       stretch: true,
       children: [
