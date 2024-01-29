@@ -234,8 +234,8 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     const keyboardDragListener = new KeyboardDragListener( {
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
-      dragVelocity: 450,
-      shiftDragVelocity: 100,
+      dragSpeed: 450,
+      shiftDragSpeed: 100,
       start: start,
       end: end,
       tandem: options.tandem.createTandem( 'keyboardDragListener' )

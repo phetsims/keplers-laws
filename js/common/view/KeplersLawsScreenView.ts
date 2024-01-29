@@ -123,8 +123,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       showVelocityIndex: false,
       soundViewNode: this,
       speedVisibleProperty: this.visibleProperties.speedVisibleProperty,
-      dragVelocity: 150,
-      shiftDragVelocity: 50,
+      dragSpeed: 150,
+      shiftDragSpeed: 50,
       mapPosition: ( point, radius ) => {
         const escapeRadius = model.engine.escapeRadiusProperty.value;
         if ( point.magnitude > escapeRadius ) {
@@ -144,8 +144,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
       enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
-      dragVelocity: 200,
-      shiftDragVelocity: 70,
+      dragSpeed: 200,
+      shiftDragSpeed: 70,
       mapPosition: this.constrainDragPoint.bind( this ),
       soundViewNode: this,
       tandem: orbitalSystemNodesTandem.createTandem( 'planetVelocityVectorNode' )
@@ -384,8 +384,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
         visibleProperty: this.visibleProperties.stopwatchVisibleProperty,
         dragListenerOptions: dragClipsOptions,
         keyboardDragListenerOptions: combineOptions<KeyboardDragListenerOptions>( {
-          dragVelocity: 450,
-          shiftDragVelocity: 100
+          dragSpeed: 450,
+          shiftDragSpeed: 100
         }, dragClipsOptions ),
         resetButtonSoundPlayer: stopwatchReleaseClip,
         numberDisplayOptions: {
