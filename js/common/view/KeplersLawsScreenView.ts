@@ -67,6 +67,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
   private readonly thirdLawPanels: Node;
   private readonly lawsRadioButtonGroup?: Node;
 
+  private readonly userHasInteractedProperty: BooleanProperty;
+
   private readonly playBodySounds: () => void;
 
   public constructor( model: KeplersLawsModel, providedOptions: KeplersLawsScreenViewOptions ) {
@@ -105,21 +107,21 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
     } );
     this.bodiesLayer.addChild( sunNode );
 
-    const userHasInteractedProperty = new BooleanProperty( false, {
+    this.userHasInteractedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'userHasInteractedProperty' )
     } );
 
     model.isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
-        userHasInteractedProperty.value = true;
+        this.userHasInteractedProperty.value = true;
       }
     } );
     model.userInteractingEmitter.addListener( () => {
-      userHasInteractedProperty.value = true;
+      this.userHasInteractedProperty.value = true;
     } );
 
     const planetNode = new BodyNode( planet, this.modelViewTransformProperty, {
-      cueingArrowsVisibleProperty: DerivedProperty.not( userHasInteractedProperty ),
+      cueingArrowsVisibleProperty: DerivedProperty.not( this.userHasInteractedProperty ),
       showVelocityIndex: false,
       soundViewNode: this,
       speedVisibleProperty: this.visibleProperties.speedVisibleProperty,
@@ -487,6 +489,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
   public override reset(): void {
     super.reset();
     this.visibleProperties.hardVisibilityReset();
+    this.userHasInteractedProperty.reset();
   }
 }
 
