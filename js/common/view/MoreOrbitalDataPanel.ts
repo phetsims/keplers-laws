@@ -75,7 +75,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     // Extra information: distance and velocity vector values
     const moreInfoNode = new VBox( {
       align: 'left',
-      minContentWidth: 2 * KeplersLawsConstants.VALUE_MAX_WIDTH,
+      minContentWidth: KeplersLawsConstants.VALUE_MAX_WIDTH,
       children: [
         // First item not using createCustomEquation because it's a special case of |r|=d=value
         new HBox( {
@@ -137,7 +137,7 @@ export default class MoreOrbitalDataPanel extends Panel {
     // The panel's content
     const content = new HBox( {
       align: 'top',
-      spacing: 50,
+      spacing: 10,
       children: [ moreInfoNode, infoButton ]
     } );
 
