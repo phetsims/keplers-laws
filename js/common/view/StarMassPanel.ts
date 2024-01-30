@@ -56,7 +56,7 @@ export default class StarMassPanel extends Panel {
 
         trackSize: new Dimension2( 150, 1 ),
         thumbSize: THUMB_SIZE,
-        thumbTouchAreaXDilation: THUMB_SIZE.width,
+        thumbTouchAreaXDilation: THUMB_SIZE.width * 0.7,
         thumbTouchAreaYDilation: THUMB_SIZE.height,
         trackStroke: SolarSystemCommonColors.foregroundProperty,
 

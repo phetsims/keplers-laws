@@ -48,7 +48,7 @@ export default class PeriodDivisionsPanel extends Panel {
         align: 'center'
       },
       touchAreaXDilation: 15,
-      touchAreaYDilation: 5,
+      touchAreaYDilation: 2,
       arrowsSoundPlayer: nullSoundPlayer,
       accessibleName: KeplersLawsStrings.periodDivisionStringProperty,
       tandem: tandem.createTandem( 'periodDivisionsSpinner' )
