@@ -31,7 +31,7 @@ export class TrackingState extends EnumerationValue {
 }
 
 export default class PeriodTracker {
-  public beganPeriodTimerAt = 0;
+  public periodTimerStartTimeProperty: NumberProperty;
   public trackingState: TrackingState;
   public afterPeriodThreshold = false; // Whether the body has passed some percentage of the period
   public readonly periodStopwatch: Stopwatch;
@@ -53,6 +53,11 @@ export default class PeriodTracker {
 
     this.trackingState = TrackingState.IDLE;
 
+    this.periodTimerStartTimeProperty = new NumberProperty( 0, {
+      tandem: tandem.createTandem( 'periodTimerStartTimeProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only'
+    } );
     this.tracingPathProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'tracingPathProperty' ),
       phetioReadOnly: true,
@@ -109,7 +114,7 @@ export default class PeriodTracker {
     this.periodStopwatch.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
         this.trackingState = TrackingState.RUNNING;
-        this.beganPeriodTimerAt = this.timeProperty.value;
+        this.periodTimerStartTimeProperty.value = this.timeProperty.value;
       }
       else if ( this.trackingState !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, softReset the period timer
@@ -129,11 +134,11 @@ export default class PeriodTracker {
 
     this.timeProperty.link( time => {
       if ( this.trackingState === TrackingState.RUNNING ) {
-        if ( this.beganPeriodTimerAt > time ) {
+        if ( this.periodTimerStartTimeProperty.value > time ) {
           // Avoid negative times by softResetting the timer
-          this.beganPeriodTimerAt = time;
+          this.periodTimerStartTimeProperty.value = time;
         }
-        const measuredTime = time - this.beganPeriodTimerAt;
+        const measuredTime = time - this.periodTimerStartTimeProperty.value;
         this.afterPeriodThreshold = measuredTime > periodRangeProperty.value.max * 0.8;
         if ( this.periodStopwatch.isRunningProperty.value ) {
           if ( measuredTime >= periodRangeProperty.value.max ) {
@@ -164,7 +169,7 @@ export default class PeriodTracker {
   public softReset(): void {
     // Reset everything but the period timer. We want the time readout to stay most times
     this.trackingState = TrackingState.IDLE;
-    this.beganPeriodTimerAt = 0;
+    this.periodTimerStartTimeProperty.value = 0;
     this.fadingStopwatch.reset();
     this.afterPeriodThreshold = false;
     this.tracingPathProperty.value = false;
