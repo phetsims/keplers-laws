@@ -501,6 +501,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     }
 
     this.steppingForward = false;
+
+    if ( usingStepForwardButton ) {
+      this.userInteractingEmitter.emit();
+    }
   }
 
   /**
