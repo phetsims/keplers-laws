@@ -297,8 +297,11 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     } );
 
     const animatedZoomScaleRange = new Range( 45, 100 );
-    const animatedZoomScaleProperty = new NumberProperty( animatedZoomScaleRange.min, {
-      range: animatedZoomScaleRange
+    const animatedZoomScaleProperty = new NumberProperty( animatedZoomScaleRange.max, {
+      range: animatedZoomScaleRange,
+      tandem: options.tandem.createTandem( 'animatedZoomScaleProperty' ),
+      phetioDocumentation: 'For internal use only',
+      phetioReadOnly: true
     } );
     const zoomAnimationIn = new Animation( {
       property: animatedZoomScaleProperty,
