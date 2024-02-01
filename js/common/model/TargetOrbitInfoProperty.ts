@@ -71,7 +71,13 @@ export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
   public constructor( targetOrbit: TargetOrbit, tandem: Tandem ) {
 
     super( new TargetOrbitInfo( targetOrbit.eccentricity, targetOrbit.semiMajorAxis ), {
-      isValidValue: targetOrbitInfo => ( targetOrbitInfo.eccentricity >= 0 && targetOrbitInfo.eccentricity < 1 ),
+      validators: [ {
+        isValidValue: targetOrbitInfo => ( targetOrbitInfo.eccentricity >= 0 &&
+                                           targetOrbitInfo.eccentricity < 1 &&
+                                           targetOrbitInfo.semiMajorAxis >= 0 ),
+        validationMessage: 'eccentricity must be [0,1) and semiMajorAxis must (0,inf)'
+      } ],
+
       tandem: tandem,
       phetioValueType: TargetOrbitInfo.TargetOrbitInfoIO,
       phetioDocumentation: 'Client-configurable preset for Target Orbit, available only via PhET-iO',

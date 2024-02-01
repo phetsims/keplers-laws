@@ -390,6 +390,7 @@ export default class EllipticalOrbitEngine extends Engine {
   // Kepler's Third Law, when this.mu == INITIAL_MU (solar system), then it's T = a^(3/2)
   // Returns the period in model units
   public thirdLaw( a: number ): number {
+    assert && assert( a > 0, 'Axis needs to be positive' );
     return Math.pow( a * a * a * INITIAL_MU / this.mu, 1 / 2 );
   }
 

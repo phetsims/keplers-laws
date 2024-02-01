@@ -50,7 +50,7 @@ export default class ThirdLawGraph extends Node {
       const periodPower = model.selectedPeriodPowerProperty.value;
       const axisPower = model.selectedAxisPowerProperty.value;
 
-      return new Vector2(
+      const viewPoint = new Vector2(
         axisLength * Math.pow( Utils.linear(
                      0, maxSemiMajorAxis,
                      0, 1,
@@ -61,6 +61,8 @@ export default class ThirdLawGraph extends Node {
                       period
                     ), periodPower )
       );
+      assert && assert( viewPoint.isFinite(), `should be a finite position given axis: ${semiMajorAxis}` );
+      return viewPoint;
     };
 
     const xAxis = new ArrowNode( 0, 0, axisLength, 0, {
