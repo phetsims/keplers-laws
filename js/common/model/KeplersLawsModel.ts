@@ -514,7 +514,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   public getAreaColor( area: OrbitalArea ): Color {
     const orbitalAreaColors = KeplersLawsColors.ORBITAL_AREA_COLORS;
     const numAreas = this.periodDivisionsProperty.value;
-    const activeAreaIndex = this.engine.activeAreaIndex;
+    const activeAreaIndex = this.engine.activeAreaIndexProperty.value;
 
     let colorIndex;
 

@@ -141,7 +141,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public totalArea = 1;
   public segmentArea = 1;
-  public activeAreaIndex = 0;
+  public activeAreaIndexProperty: NumberProperty;
   public areasErased = false; // When areas were just erased. run() sets this to false
 
   // Object which will keep track of the measured period on the orbit
@@ -230,6 +230,12 @@ export default class EllipticalOrbitEngine extends Engine {
     // Initially set this to null. EllipticalOrbitEngine and PeriodTracker need to know about each other. So
     // call setPeriodTracker after construction.
     this.periodTracker = null;
+
+    this.activeAreaIndexProperty = new NumberProperty( 0, {
+      tandem: providedOptions.tandem.createTandem( 'activeAreaIndexProperty' ),
+      phetioReadOnly: true,
+      phetioFeatured: true
+    } );
   }
 
   public setPeriodTracker( periodTracker: PeriodTracker ): void {
@@ -490,7 +496,7 @@ export default class EllipticalOrbitEngine extends Engine {
           if ( this.isRunning ) {
             orbitalArea.insideProperty.value = true;
             orbitalArea.alreadyEnteredProperty.value = true;
-            this.activeAreaIndex = orbitalArea.index;
+            this.activeAreaIndexProperty.value = orbitalArea.index;
 
             if ( this.retrograde ) {
               startAngle = bodyAngle;
