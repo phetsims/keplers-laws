@@ -103,6 +103,9 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   // Boolean for properties to know if the change is being toggled by a reset of the model
   public resetting = false;
 
+  // Boolean for properties to know if the change is being toggled by a restart (back to last interacted state) of the model
+  public restarting = false;
+
   // The last law that was selected
   public lastLaw: LawMode;
 
@@ -445,9 +448,14 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.engine && this.engine.update( this.bodies );
   }
 
+  public override restart(): void {
+    this.restarting = true;
+    super.restart();
+    this.restarting = false;
+  }
+
   public override reset(): void {
     this.resetting = true;
-    this.engine.isModelResetting = true;
     super.reset();
     this.selectedLawProperty.reset();
     this.periodDivisionsProperty.reset();
@@ -461,7 +469,6 @@ class KeplersLawsModel extends SolarSystemCommonModel {
     this.loadBodyInfo( this.defaultBodyInfo );
 
     this.resetting = false;
-    this.engine.isModelResetting = false;
     this.engine.reset();
 
     // Do not reset targetOrbit*Property, since they are for PhET-iO only.

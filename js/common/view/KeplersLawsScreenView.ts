@@ -227,9 +227,8 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       }
     } );
 
-    let previousOrbitType: OrbitTypes = OrbitTypes.STABLE_ORBIT;
-    model.engine.orbitTypeProperty.lazyLink( orbitType => {
-      if ( previousOrbitType === OrbitTypes.STABLE_ORBIT ) {
+    model.engine.orbitTypeProperty.lazyLink( ( orbitType, previousOrbitType ) => {
+      if ( previousOrbitType === OrbitTypes.STABLE_ORBIT && !model.restarting ) {
         if ( orbitType === OrbitTypes.CRASH_ORBIT ) {
           crashSound.play();
         }
@@ -237,8 +236,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
           escapeSound.play();
         }
       }
-
-      previousOrbitType = orbitType;
     } );
 
     // UI ----------------------------------------------------------------------------------
