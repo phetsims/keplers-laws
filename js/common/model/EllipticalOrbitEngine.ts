@@ -147,6 +147,8 @@ export default class EllipticalOrbitEngine extends Engine {
   // Object which will keep track of the measured period on the orbit
   private periodTracker: PeriodTracker | null;
 
+  public isModelResetting = false;
+
   public constructor( bodies: Body[], providedOptions: EllipticalOrbitEngineOptions ) {
     super( bodies );
     this.mu = INITIAL_MU;
@@ -285,6 +287,10 @@ export default class EllipticalOrbitEngine extends Engine {
    */
   public override update( bodies: Body[] ): void {
     assert && assert( _.isEqual( bodies, this.bodies ), 'This engine expects the set of bodies to remain constant.' );
+
+    if ( this.isModelResetting ) {
+      return;
+    }
 
     this.resetOrbitalAreas();
     if ( this.periodTracker ) {
