@@ -255,9 +255,8 @@ export default class EllipticalOrbitEngine extends Engine {
     this.nu = this.getTrueAnomaly( this.M );
 
     // Update the position and velocity of the body
-    const currentPosition = this.planet.positionProperty.value;
     const newPosition = this.createPolar( this.nu, this.w );
-    const newVelocity = newPosition.minus( currentPosition ).normalize();
+    const newVelocity = this.calculateOrbitalVelocity( this.nu, this.w );
     const newAngularMomentum = newPosition.crossScalar( newVelocity );
     newVelocity.multiplyScalar( this.L / newAngularMomentum );
 
@@ -459,6 +458,13 @@ export default class EllipticalOrbitEngine extends Engine {
 
   public static staticCreatePolar( a: number, e: number, nu: number, w = 0 ): Vector2 {
     return Vector2.createPolar( EllipticalOrbitEngine.calculateR( a, e, nu ), nu + w );
+  }
+
+  public calculateOrbitalVelocity( nu: number, w = 0 ): Vector2 {
+    const V_theta = 2 * Math.PI * this.a * ( 1 + this.e * Math.cos( nu ) ) / ( this.T * Math.sqrt( 1 - this.e * this.e ) );
+    const V_r = -2 * Math.PI * this.a * this.e * Math.sin( nu ) / ( this.T * Math.sqrt( 1 - this.e * this.e ) );
+
+    return this.createPolar( nu, w ).perpendicular.normalized().timesScalar( V_theta ).plus( this.createPolar( nu, w ).normalized().timesScalar( V_r ) );
   }
 
   /**
