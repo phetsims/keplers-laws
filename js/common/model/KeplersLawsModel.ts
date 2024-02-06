@@ -343,6 +343,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
             // The user has started changing one or more of the body Properties.
             this.isPlayingProperty.value = false;
             this.userInteractingEmitter.emit();
+            this.hasPlayedProperty.reset(); // This will disable rewind (restart) button because a new state will be saved shortly after
           }
           else {
             // When the user stops the interaction, save the starting body info
