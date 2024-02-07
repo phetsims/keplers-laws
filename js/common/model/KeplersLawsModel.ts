@@ -169,6 +169,9 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         new BodyInfo( {
           isActive: true,
           mass: KeplersLawsConstants.PLANET_MASS,
+          massPropertyOptions: {
+            phetioReadOnly: true
+          },
           massRange: new Range( KeplersLawsConstants.PLANET_MASS, KeplersLawsConstants.PLANET_MASS ),
           position: new Vector2( 2.00, 0 ),
           velocity: new Vector2( 0, 17.2358 ),
