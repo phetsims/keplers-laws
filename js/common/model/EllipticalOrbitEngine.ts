@@ -87,8 +87,8 @@ export default class EllipticalOrbitEngine extends Engine {
   // Boolean that keeps track of the engine's state
   private isRunning = false;
 
-  // Flag that warns of changes in the velocity caused by the engine
-  public isMutatingVelocity = false;
+  // Flag that warns of internal changes caused by the engine that should not trigger a new update
+  public internalPropertyMutation = false;
 
   // For changes that require changes in the shape of the orbit
   public readonly changedEmitter = new Emitter();
@@ -248,7 +248,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     // Set the engine to running
     this.isRunning = true;
-    this.isMutatingVelocity = true;
+    this.internalPropertyMutation = true;
 
     // Calculate the new position and velocity of the body
     this.M += dt * this.W;
@@ -276,7 +276,7 @@ export default class EllipticalOrbitEngine extends Engine {
 
     this.areasErased = false;
     this.isRunning = false;
-    this.isMutatingVelocity = false;
+    this.internalPropertyMutation = false;
   }
 
   /**
@@ -404,20 +404,20 @@ export default class EllipticalOrbitEngine extends Engine {
    * Always set the velocity to be perpendicular to the position and circular
    */
   private enforceCircularOrbit( position: Vector2 ): void {
-    this.isMutatingVelocity = true;
+    this.internalPropertyMutation = true;
     const direction = this.retrograde ? -1 : 1;
     this.planet.velocityProperty.value =
       position.perpendicular.normalized().timesScalar( direction * 1.0001 * Math.sqrt( this.mu / position.magnitude ) );
-    this.isMutatingVelocity = false;
+    this.internalPropertyMutation = false;
   }
 
   /**
    * Makes sure the velocity is never greater than the escape speed
    */
   private enforceEscapeSpeed(): void {
-    this.isMutatingVelocity = true;
+    this.internalPropertyMutation = true;
     this.planet.velocityProperty.value = this.planet.velocityProperty.value.normalized().timesScalar( this.escapeSpeedProperty.value );
-    this.isMutatingVelocity = false;
+    this.internalPropertyMutation = false;
   }
 
   /**

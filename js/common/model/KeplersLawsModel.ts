@@ -268,7 +268,7 @@ class KeplersLawsModel extends SolarSystemCommonModel {
         this.planet.velocityProperty
       ],
       () => {
-        if ( ( !this.isPlayingProperty.value || isSettingPhetioStateProperty.value ) && !this.steppingForward && !this.engine.isMutatingVelocity ) {
+        if ( ( !this.isPlayingProperty.value || isSettingPhetioStateProperty.value ) && !this.steppingForward && !this.engine.internalPropertyMutation ) {
           this.engine.update( this.bodies );
         }
       } );
@@ -443,9 +443,10 @@ class KeplersLawsModel extends SolarSystemCommonModel {
    * Simpler version of loadBodyInfo than the one in SolarSystemCommonModel
    */
   public override loadBodyInfo( bodiesInfo: BodyInfo[] ): void {
+    this.engine.internalPropertyMutation = true; // Disable automatic udpates of the engine
     super.loadBodyInfo( bodiesInfo );
-
-    this.engine && this.engine.update( this.bodies );
+    this.engine.update( this.bodies );
+    this.engine.internalPropertyMutation = false;
   }
 
   public override restart(): void {
