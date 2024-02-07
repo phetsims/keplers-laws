@@ -6,7 +6,7 @@
  */
 
 import keplersLaws from '../../keplersLaws.js';
-import { AlignBox, DragListener, Image, InteractiveHighlighting, KeyboardDragListener, Node, NodeOptions, Path, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, Image, InteractiveHighlighting, Node, NodeOptions, Path, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
@@ -29,6 +29,8 @@ import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_So
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import RichDragListener from '../../../../sun/js/RichDragListener.js';
+import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );
@@ -195,6 +197,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     this.grabClip = new SoundClip( Grab_Sound_mp3 );
     this.releaseClip = new SoundClip( Release_Sound_mp3 );
 
+    // TODO: https://github.com/phetsims/scenery/issues/1592 how to handle associatedViewNode here?
     if ( options.soundViewNode ) {
       soundManager.addSoundGenerator( this.grabClip, {
         associatedViewNode: options.soundViewNode
@@ -204,12 +207,6 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       } );
     }
 
-    const start = () => {
-      this.grabClip.play();
-    };
-    const end = () => {
-      this.releaseClip.play();
-    };
 
     periodStopwatch.positionProperty.link( position => {
       this.translation = position;
@@ -221,23 +218,19 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       strictAxonDependencies: false
     } );
 
-    const dragListener = new DragListener( {
+    const dragListener = new RichDragListener( {
       targetNode: this,
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
-      start: start,
-      end: end,
       tandem: options.tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( dragListener );
 
-    const keyboardDragListener = new KeyboardDragListener( {
+    const keyboardDragListener = new RichKeyboardDragListener( {
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       dragSpeed: 450,
       shiftDragSpeed: 100,
-      start: start,
-      end: end,
       tandem: options.tandem.createTandem( 'keyboardDragListener' )
     } );
     this.addInputListener( keyboardDragListener );
