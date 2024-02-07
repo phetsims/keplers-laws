@@ -100,6 +100,21 @@ trajectory, almost a parabola. This is done to avoid the orbit calculations from
 change shapes from ellipse to parabola. You might notice this in some edge cases, but most of the time, the escape orbit
 will look like a parabola.
 
+## Target Orbits
+
+There's a feature where you can try to imitate real orbits from the Solar System. The orbital parameters used for such orbits are:
+
+| Orbit   | Semi-major axis (AU) | Eccentricity |
+|---------| --- | --- |
+| MERCURY | 0.4 | 0.2056 |
+| VENUS   | 0.7 | 0.0068 |
+| EARTH   | 1.0 | 0.0167 |
+| MARS    | 1.5 | 0.0934 |
+| JUPITER | 5.2 | 0.0484 |
+| ERIS    | 67.6 | 0.44 |
+| NEREID  | 30.11 | 0.75 |
+| HALLEY  | 18.5 | 0.967 |
+
 ## References
 
 1. https://pwg.gsfc.nasa.gov/stargaze/Kep3laws.htm
