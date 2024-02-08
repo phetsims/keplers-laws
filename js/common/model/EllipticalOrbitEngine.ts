@@ -633,7 +633,7 @@ export default class EllipticalOrbitEngine extends Engine {
   // Numerical solution to Kepler's Equations for Eccentric Anomaly (E) and then True Anomaly (nu)
   private getTrueAnomaly( M: number ): number {
     let E = M;
-    const epsilon = 1e-1;  // Set a desired level of accuracy
+    const epsilon = 1e-2;  // Set a desired level of accuracy
     let delta = 1;
 
     // Newton-Raphson method to solve Kepler's equation
