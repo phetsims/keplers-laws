@@ -111,9 +111,7 @@ There's a feature where you can try to imitate real orbits from the Solar System
 | EARTH   | 1.0 | 0.0167 |
 | MARS    | 1.5 | 0.0934 |
 | JUPITER | 5.2 | 0.0484 |
-| ERIS    | 67.6 | 0.44 |
-| NEREID  | 30.11 | 0.75 |
-| HALLEY  | 18.5 | 0.967 |
+
 
 ## References
 
