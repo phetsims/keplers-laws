@@ -79,7 +79,7 @@ export default class ThirdLawGraph extends Node {
     const dataPoint = new Circle( 5, {
       fill: KeplersLawsColors.planetColorProperty
     } );
-    const targetOrbitPoint = new Circle( 5, {
+    const targetOrbitPoint = new Circle( 8, {
       fill: KeplersLawsColors.targetOrbitColorProperty,
       x: undefined,
       y: undefined
