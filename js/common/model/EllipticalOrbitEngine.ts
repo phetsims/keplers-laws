@@ -491,6 +491,12 @@ export default class EllipticalOrbitEngine extends Engine {
         orbitalArea.startAngle = startAngle;
         orbitalArea.endAngle = endAngle;
 
+        // Set the default values with this function in the else{} cases to not trigger a listener update on the properties
+        const setDefaultAreaValues = ( orbitalArea: OrbitalArea ) => {
+          orbitalArea.sweptAreaProperty.value = this.segmentArea;
+          orbitalArea.insideProperty.value = false;
+        };
+
         // When the sim is running, check if the body is inside an area and slice it accordingly
         if ( startAngle <= bodyAngle && bodyAngle < endAngle ) {
           if ( this.isRunning ) {
@@ -507,10 +513,12 @@ export default class EllipticalOrbitEngine extends Engine {
             orbitalArea.sweptAreaProperty.value = this.calculateSweptArea( startAngle, endAngle );
             orbitalArea.completionProperty.value = this.meanAnomalyDiff( startAngle, endAngle ) / angularSection;
           }
+          else {
+            setDefaultAreaValues( orbitalArea );
+          }
         }
         else {
-          orbitalArea.sweptAreaProperty.value = this.segmentArea;
-          orbitalArea.insideProperty.value = false;
+          setDefaultAreaValues( orbitalArea );
         }
 
         // Update orbital area properties
