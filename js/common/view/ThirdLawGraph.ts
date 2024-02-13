@@ -79,7 +79,7 @@ export default class ThirdLawGraph extends Node {
     const dataPoint = new Circle( 5, {
       fill: KeplersLawsColors.planetColorProperty
     } );
-    const targetOrbitPoint = new Circle( 8, {
+    const targetOrbitPoint = new Circle( 5, {
       fill: KeplersLawsColors.targetOrbitColorProperty,
       x: undefined,
       y: undefined
@@ -193,6 +193,9 @@ export default class ThirdLawGraph extends Node {
 
       const pointPosition = semiMajorAxisToViewPoint( orbit.a );
       dataPoint.translation = pointPosition;
+
+      // Enlarge the target orbit marker if it's close to the current orbit
+      targetOrbitPoint.radius = ( Math.abs( pointPosition.x - targetOrbitPoint.translation.x ) < 5 ) ? 8 : 5;
 
       const outOfBounds = pointPosition.x > axisLength - boundsPadding || pointPosition.y < -axisLength + boundsPadding;
       dataPoint.visible = !outOfBounds;
