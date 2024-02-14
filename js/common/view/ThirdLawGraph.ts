@@ -195,7 +195,7 @@ export default class ThirdLawGraph extends Node {
       dataPoint.translation = pointPosition;
 
       // Enlarge the target orbit marker if it's close to the current orbit
-      targetOrbitPoint.radius = ( Math.abs( pointPosition.x - targetOrbitPoint.translation.x ) < 5 ) ? 8 : 5;
+      targetOrbitPoint.radius = ( Math.abs( pointPosition.x - targetOrbitPoint.translation.x ) < 1 ) ? 8 : 5;
 
       const outOfBounds = pointPosition.x > axisLength - boundsPadding || pointPosition.y < -axisLength + boundsPadding;
       dataPoint.visible = !outOfBounds;
