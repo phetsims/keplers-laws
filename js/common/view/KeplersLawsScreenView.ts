@@ -145,7 +145,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       minimumMagnitude: 1.055,
       snapToZero: false,
       maxMagnitudeProperty: model.engine.escapeSpeedProperty,
-      enabledProperty: DerivedProperty.not( model.alwaysCircularProperty ),
+      isVelocityInteractiveProperty: DerivedProperty.not( model.alwaysCircularProperty ),
       dragSpeed: 200,
       shiftDragSpeed: 70,
       mapPosition: this.constrainDragPoint.bind( this ),
