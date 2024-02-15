@@ -1,12 +1,12 @@
 {
-  "comment": "# keplers-laws 1.2.0-rc.1 Thu Feb 15 2024 15:51:15 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.2.0-rc.2 Thu Feb 15 2024 16:03:11 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "dd61947e1ba2c0655a242bebad9b887b397b01dd",
     "branch": "HEAD"
   },
   "axon": {
     "sha": "fd5cdf19b46b30f5fee09062f97671596b6fd4ae",
-    "branch": "keplers-laws-1.2"
+    "branch": "HEAD"
   },
   "bamboo": {
     "sha": "2bb06a2fda7cb3d001a8ef1df903ed12ab3496a1",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "d6e938bd40bcdfe1ee728fa8246d6f640df8b0e1",
+    "sha": "1ed5834cc9f11340b7f660518ac67e3548fd8fa1",
     "branch": "1.2"
   },
   "kite": {
@@ -54,7 +54,7 @@
   },
   "phet-io-sim-specific": {
     "sha": "32c533b65350a67532e946df4e856b538081df39",
-    "branch": "keplers-laws-1.2"
+    "branch": "HEAD"
   },
   "phet-io-wrappers": {
     "sha": "f49272efdfbd0ee0618c8037c6020acc2acf2344",
@@ -86,7 +86,7 @@
   },
   "solar-system-common": {
     "sha": "dc46f5a0e0391cd76a7f4dee88b6586f93f88861",
-    "branch": "keplers-laws-1.2"
+    "branch": "HEAD"
   },
   "studio": {
     "sha": "ea41b45429265bf5a2a8946334cf33b12a97480b",
