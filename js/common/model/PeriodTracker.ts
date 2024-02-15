@@ -18,6 +18,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { EnumerationProperty } from '../../../../axon/js/imports.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
@@ -32,7 +33,7 @@ export class TrackingState extends EnumerationValue {
 
 export default class PeriodTracker {
   public periodTimerStartTimeProperty: NumberProperty;
-  public trackingState: TrackingState;
+  public trackingStateProperty: EnumerationProperty<TrackingState>;
   public afterPeriodThreshold = false; // Whether the body has passed some percentage of the period
   public readonly periodStopwatch: Stopwatch;
   public readonly fadingStopwatch: Stopwatch;
@@ -51,7 +52,11 @@ export default class PeriodTracker {
                       private readonly timeProperty: TReadOnlyProperty<number>,
                       tandem: Tandem ) {
 
-    this.trackingState = TrackingState.IDLE;
+    this.trackingStateProperty = new EnumerationProperty( TrackingState.IDLE, {
+      tandem: tandem.createTandem( 'trackingStateProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'For internal use only'
+    } );
 
     this.periodTimerStartTimeProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'periodTimerStartTimeProperty' ),
@@ -113,10 +118,10 @@ export default class PeriodTracker {
     } );
     this.periodStopwatch.isRunningProperty.link( isRunning => {
       if ( isRunning ) {
-        this.trackingState = TrackingState.RUNNING;
+        this.trackingStateProperty.value = TrackingState.RUNNING;
         this.periodTimerStartTimeProperty.value = this.timeProperty.value;
       }
-      else if ( this.trackingState !== TrackingState.FADING ) {
+      else if ( this.trackingStateProperty.value !== TrackingState.FADING ) {
         // If the period track is not fading and it's stopped, softReset the period timer
         this.softReset();
         this.periodStopwatch.timeProperty.value = 0;
@@ -127,13 +132,13 @@ export default class PeriodTracker {
     // Begging fading with a diff between start and end angles
     const beginFade = () => {
       this.tracingPathProperty.value = false;
-      this.trackingState = TrackingState.FADING;
+      this.trackingStateProperty.value = TrackingState.FADING;
       this.fadingStopwatch.reset();
       this.fadingStopwatch.isRunningProperty.value = true;
     };
 
     this.timeProperty.link( time => {
-      if ( this.trackingState === TrackingState.RUNNING ) {
+      if ( this.trackingStateProperty.value === TrackingState.RUNNING ) {
         if ( this.periodTimerStartTimeProperty.value > time ) {
           // Avoid negative times by softResetting the timer
           this.periodTimerStartTimeProperty.value = time;
@@ -151,7 +156,7 @@ export default class PeriodTracker {
   }
 
   public step( dt: number ): void {
-    if ( this.trackingState === TrackingState.FADING ) {
+    if ( this.trackingStateProperty.value === TrackingState.FADING ) {
       this.fadingStopwatch.step( dt );
       this.fadingEmitter.emit();
       if ( !this.fadingStopwatch.isRunningProperty.value ) {
@@ -168,7 +173,7 @@ export default class PeriodTracker {
 
   public softReset(): void {
     // Reset everything but the period timer. We want the time readout to stay most times
-    this.trackingState = TrackingState.IDLE;
+    this.trackingStateProperty.value = TrackingState.IDLE;
     this.periodTimerStartTimeProperty.value = 0;
     this.fadingStopwatch.reset();
     this.afterPeriodThreshold = false;
