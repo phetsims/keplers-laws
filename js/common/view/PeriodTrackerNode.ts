@@ -71,7 +71,7 @@ export default class PeriodTrackerNode extends Path {
     this.radiusX = radiusX;
     this.radiusY = radiusY;
 
-    if ( this.periodTracker.trackingState === TrackingState.RUNNING ) {
+    if ( this.periodTracker.trackingStateProperty.value === TrackingState.RUNNING ) {
       this.updateShape();
     }
   }
