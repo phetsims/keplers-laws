@@ -1,12 +1,12 @@
 {
-  "comment": "# keplers-laws 1.2.0-rc.1 Fri Feb 02 2024 17:28:18 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.2.0-rc.1 Thu Feb 15 2024 15:51:15 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "dd61947e1ba2c0655a242bebad9b887b397b01dd",
     "branch": "HEAD"
   },
   "axon": {
-    "sha": "eeefe91a6bb54acafebe15bdf0fd122009772791",
-    "branch": "HEAD"
+    "sha": "fd5cdf19b46b30f5fee09062f97671596b6fd4ae",
+    "branch": "keplers-laws-1.2"
   },
   "bamboo": {
     "sha": "2bb06a2fda7cb3d001a8ef1df903ed12ab3496a1",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "b6002cef723a6812b258f094cf4e05476ee5317d",
+    "sha": "d6e938bd40bcdfe1ee728fa8246d6f640df8b0e1",
     "branch": "1.2"
   },
   "kite": {
@@ -53,8 +53,8 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "172b994f62357a70d5b80b556bcaef4c7e09acf1",
-    "branch": "HEAD"
+    "sha": "32c533b65350a67532e946df4e856b538081df39",
+    "branch": "keplers-laws-1.2"
   },
   "phet-io-wrappers": {
     "sha": "f49272efdfbd0ee0618c8037c6020acc2acf2344",
@@ -85,8 +85,8 @@
     "branch": "HEAD"
   },
   "solar-system-common": {
-    "sha": "9365bec3c79c4f2caf36df9f8a379ac2bda9dbc9",
-    "branch": "HEAD"
+    "sha": "dc46f5a0e0391cd76a7f4dee88b6586f93f88861",
+    "branch": "keplers-laws-1.2"
   },
   "studio": {
     "sha": "ea41b45429265bf5a2a8946334cf33b12a97480b",
