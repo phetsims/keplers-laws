@@ -1,5 +1,5 @@
 {
-  "comment": "# keplers-laws 1.2.0-rc.2 Fri Feb 16 2024 15:40:47 GMT-0500 (Colombia Standard Time)",
+  "comment": "# keplers-laws 1.2.0-rc.3 Fri Feb 16 2024 15:55:18 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "dd61947e1ba2c0655a242bebad9b887b397b01dd",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "ddad61e8011479ee641716bd6b574a26841dc74b",
+    "sha": "5b67e05db20564e538fb84e4eda703d6a779748a",
     "branch": "1.2"
   },
   "kite": {
@@ -74,7 +74,7 @@
   },
   "scenery": {
     "sha": "a83ee4b13b20dfeab3a20ab2cfedb261af9ce046",
-    "branch": "keplers-laws-1.2"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "d6d9bff503f5b432a42bdf5af67c53875103b072",
