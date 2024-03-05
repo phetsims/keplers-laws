@@ -18,7 +18,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { EnumerationProperty } from '../../../../axon/js/imports.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();
