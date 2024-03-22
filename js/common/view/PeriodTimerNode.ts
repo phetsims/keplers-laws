@@ -29,8 +29,8 @@ import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_So
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import RichDragListener from '../../../../sun/js/RichDragListener.js';
-import RichKeyboardDragListener from '../../../../sun/js/RichKeyboardDragListener.js';
+import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
+import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );
