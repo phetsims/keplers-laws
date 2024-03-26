@@ -18,17 +18,15 @@ import Property from '../../../../axon/js/Property.js';
 import periodTimerBackground_png from '../../../images/periodTimerBackground_png.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Grab_Sound_mp3 from '../../../../solar-system-common/sounds/Grab_Sound_mp3.js';
-import Release_Sound_mp3 from '../../../../solar-system-common/sounds/Release_Sound_mp3.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import RichDragListener, { RichDragListenerOptions } from '../../../../scenery-phet/js/RichDragListener.js';
-import RichKeyboardDragListener, { RichKeyboardDragListenerOptions } from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
+import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
+import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );
@@ -188,16 +186,6 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       alignBounds: background.bounds
     } ) );
 
-    const soundOptions = options.soundViewNode ? {
-      grabSound: Grab_Sound_mp3,
-      releaseSound: Release_Sound_mp3,
-      grabSoundGeneratorAddOptions: { associatedViewNode: options.soundViewNode },
-      releaseSoundGeneratorAddOptions: { associatedViewNode: options.soundViewNode }
-    } : {
-      grabSound: null,
-      releaseSound: null
-    };
-
     periodStopwatch.positionProperty.link( position => {
       this.translation = position;
     } );
@@ -208,21 +196,21 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       strictAxonDependencies: false
     } );
 
-    const dragListener = new RichDragListener( combineOptions<RichDragListenerOptions>( {
+    const dragListener = new RichDragListener( {
       targetNode: this,
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       tandem: options.tandem.createTandem( 'dragListener' )
-    }, soundOptions ) );
+    } );
     this.addInputListener( dragListener );
 
-    const keyboardDragListener = new RichKeyboardDragListener( combineOptions<RichKeyboardDragListenerOptions>( {
+    const keyboardDragListener = new RichKeyboardDragListener( {
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
       dragSpeed: 450,
       shiftDragSpeed: 100,
       tandem: options.tandem.createTandem( 'keyboardDragListener' )
-    }, soundOptions ) );
+    } );
     this.addInputListener( keyboardDragListener );
 
     // Move to front on pointer down, anywhere on this Node, including interactive subcomponents.
