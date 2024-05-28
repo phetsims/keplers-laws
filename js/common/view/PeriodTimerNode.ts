@@ -25,7 +25,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import RichDragListener from '../../../../scenery-phet/js/RichDragListener.js';
+import RichPointerDragListener from '../../../../scenery-phet/js/RichPointerDragListener.js';
 import RichKeyboardDragListener from '../../../../scenery-phet/js/RichKeyboardDragListener.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
@@ -196,7 +196,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       strictAxonDependencies: false
     } );
 
-    const dragListener = new RichDragListener( {
+    const dragListener = new RichPointerDragListener( {
       targetNode: this,
       positionProperty: periodStopwatch.positionProperty,
       dragBoundsProperty: derivedDragBoundsProperty,
