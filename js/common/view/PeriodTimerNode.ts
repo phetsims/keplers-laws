@@ -192,8 +192,6 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
 
     const derivedDragBoundsProperty = new DerivedProperty( [ options.dragBoundsProperty, this.localBoundsProperty ], ( dragBounds, localBounds ) => {
       return dragBounds?.withOffsets( localBounds.left, localBounds.top, -localBounds.right, -localBounds.bottom );
-    }, {
-      strictAxonDependencies: false
     } );
 
     const dragListener = new RichPointerDragListener( {
