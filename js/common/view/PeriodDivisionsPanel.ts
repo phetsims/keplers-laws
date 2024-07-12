@@ -14,7 +14,7 @@ import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
-import nullSoundPlayer from '../../../../tambo/js/shared-sound-players/nullSoundPlayer.js';
+import nullSoundPlayer from '../../../../tambo/js/nullSoundPlayer.js';
 import PeriodDivisionSoundManager from './PeriodDivisionSoundManager.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
