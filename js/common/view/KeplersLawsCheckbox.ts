@@ -190,7 +190,7 @@ function createStopwatchIcon(): Node {
 
   const icon = stopwatchNode.rasterized( {
     resolution: 5,
-    imageOptions: {
+    nodeOptions: {
       cursor: 'pointer'
     }
   } );
