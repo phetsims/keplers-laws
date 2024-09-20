@@ -61,6 +61,11 @@
               "ts-nocheck": true
             }
           ]
+        },
+        "parserOptions": {
+          "project": [
+            "../keplers-laws/tsconfig.json"
+          ]
         }
       }
     ]
