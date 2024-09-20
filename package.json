@@ -64,7 +64,7 @@
         },
         "parserOptions": {
           "project": [
-            "../keplers-laws/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
