@@ -7,28 +7,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { AlignBox, GridBox, HBox, Node, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import ThirdLawTextUtils from './ThirdLawTextUtils.js';
-import TinyProperty from '../../../../axon/js/TinyProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import ThirdLawGraph from './ThirdLawGraph.js';
-import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
-import keplersLaws from '../../keplersLaws.js';
-import FractionNode from './FractionNode.js';
-import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import EraserButton from '../../../../scenery-phet/js/buttons/EraserButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { AlignBox, GridBox, HBox, Node, RichText, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import FractionNode from './FractionNode.js';
+import ThirdLawGraph from './ThirdLawGraph.js';
+import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 
 const RADIO_BUTTON_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),
@@ -118,21 +118,27 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbol.TStringProperty,
           createNode: () => new RichText( KeplersLawsStrings.symbol.TStringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'TRadioButton'
+          tandemName: 'TRadioButton',
+          options: {
+            accessibleName: KeplersLawsStrings.symbol.TStringProperty
+          }
         },
         {
           value: 2,
-          labelContent: KeplersLawsDerivedStrings.T2StringProperty,
           createNode: () => new RichText( KeplersLawsDerivedStrings.T2StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'T2RadioButton'
+          tandemName: 'T2RadioButton',
+          options: {
+            accessibleName: KeplersLawsDerivedStrings.T2StringProperty
+          }
         },
         {
           value: 3,
-          labelContent: KeplersLawsDerivedStrings.T3StringProperty,
           createNode: () => new RichText( KeplersLawsDerivedStrings.T3StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'T3RadioButton'
+          tandemName: 'T3RadioButton',
+          options: {
+            accessibleName: KeplersLawsDerivedStrings.T3StringProperty
+          }
         }
       ],
       {
@@ -147,21 +153,27 @@ export default class ThirdLawAccordionBox extends AccordionBox {
       [
         {
           value: 1,
-          labelContent: KeplersLawsStrings.symbol.aStringProperty,
           createNode: () => new RichText( KeplersLawsStrings.symbol.aStringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'aRadioButton'
+          tandemName: 'aRadioButton',
+          options: {
+            accessibleName: KeplersLawsStrings.symbol.aStringProperty
+          }
         },
         {
           value: 2,
-          labelContent: KeplersLawsDerivedStrings.a2StringProperty,
           createNode: () => new RichText( KeplersLawsDerivedStrings.a2StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'a2RadioButton'
+          tandemName: 'a2RadioButton',
+          options: {
+            accessibleName: KeplersLawsDerivedStrings.a2StringProperty
+          }
         },
         {
           value: 3,
-          labelContent: KeplersLawsDerivedStrings.a3StringProperty,
           createNode: () => new RichText( KeplersLawsDerivedStrings.a3StringProperty, RADIO_BUTTON_TEXT_OPTIONS ),
-          tandemName: 'a3RadioButton'
+          tandemName: 'a3RadioButton',
+          options: {
+            accessibleName: KeplersLawsDerivedStrings.a3StringProperty
+          }
         }
       ],
       {
