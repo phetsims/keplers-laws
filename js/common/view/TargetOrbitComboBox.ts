@@ -54,7 +54,7 @@ function createItem( mode: TargetOrbit, nameProperty: TReadOnlyProperty<string>,
     comboBoxListItemNodeOptions: {
       visible: !isPhetioConfigurable
     },
-    a11yName: nameProperty,
+    accessibleName: nameProperty,
     tandemName: tandemName
   };
 }
