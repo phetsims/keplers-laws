@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * ThirdLawAccordionBox contains the equation display and controls for the ThirdLawGraph class.
