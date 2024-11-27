@@ -6,15 +6,15 @@
  * @author Agustín Vallejo
  */
 
-import { VBox } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import keplersLaws from '../../keplersLaws.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 

@@ -9,23 +9,23 @@
  * @author Agustín Vallejo
  */
 
-import { HBox, Line, Node, RichText, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import LineArrowNode, { LineArrowNodeOptions } from '../../../../scenery-phet/js/LineArrowNode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import keplersLaws from '../../keplersLaws.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import LineArrowNode, { LineArrowNodeOptions } from '../../../../scenery-phet/js/LineArrowNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { HBox, Line, Node, RichText, VBox } from '../../../../scenery/js/imports.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 
 const FONT = new PhetFont( 24 );

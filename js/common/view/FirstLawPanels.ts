@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import keplersLaws from '../../keplersLaws.js';
-import EccentricityPanel from './EccentricityPanel.js';
-import OrbitalDataPanel from './OrbitalDataPanel.js';
-import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import EccentricityPanel from './EccentricityPanel.js';
+import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
+import OrbitalDataPanel from './OrbitalDataPanel.js';
 
 export default class FirstLawPanels extends VBox {
   public constructor(

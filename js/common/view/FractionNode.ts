@@ -5,12 +5,12 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import { Line, Node, NodeOptions, VBoxOptions } from '../../../../scenery/js/imports.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { Line, Node, NodeOptions, VBoxOptions } from '../../../../scenery/js/imports.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FRACTION_LINE_MARGIN = 5;
 

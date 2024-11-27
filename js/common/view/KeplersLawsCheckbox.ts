@@ -7,20 +7,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import SolarSystemCommonCheckbox, { SolarSystemCommonCheckboxOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
-import keplersLaws from '../../keplersLaws.js';
 import Property from '../../../../axon/js/Property.js';
-import { Image, Node } from '../../../../scenery/js/imports.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonCheckbox, { SolarSystemCommonCheckboxOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
+import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 type SelfOptions = EmptySelfOptions;
 type KeplersLawsCheckboxOptions = SelfOptions & SolarSystemCommonCheckboxOptions;

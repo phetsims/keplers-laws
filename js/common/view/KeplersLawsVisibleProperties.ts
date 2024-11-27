@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import LawMode from '../model/LawMode.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import keplersLaws from '../../keplersLaws.js';
+import LawMode from '../model/LawMode.js';
 
 export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisibleProperties {
 

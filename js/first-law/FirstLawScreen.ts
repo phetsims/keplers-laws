@@ -8,15 +8,15 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import KeplersLawsModel from '../common/model/KeplersLawsModel.js';
 import LawMode from '../common/model/LawMode.js';
+import KeplersLawsKeyboardHelpContent from '../common/view/KeplersLawsKeyboardHelpContent.js';
 import KeplersLawsScreenView from '../common/view/KeplersLawsScreenView.js';
 import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
 import FirstLawScreenIcon from './FirstLawScreenIcon.js';
-import KeplersLawsKeyboardHelpContent from '../common/view/KeplersLawsKeyboardHelpContent.js';
 
 class FirstLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
 

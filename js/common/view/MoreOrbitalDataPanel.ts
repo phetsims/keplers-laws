@@ -8,28 +8,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
-import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import MoreOrbitalDataInfoDialog from './MoreOrbitalDataInfoDialog.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
-import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
-import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
+import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { HBox, Node, RichText, RichTextOptions, TPaint, VBox } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
+import MoreOrbitalDataInfoDialog from './MoreOrbitalDataInfoDialog.js';
 
 export default class MoreOrbitalDataPanel extends Panel {
   public constructor( model: KeplersLawsModel, tandem: Tandem ) {

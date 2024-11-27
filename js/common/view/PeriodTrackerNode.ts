@@ -5,14 +5,14 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import { Path } from '../../../../scenery/js/imports.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
+import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
 
 export default class PeriodTrackerNode extends Path {
 

@@ -7,13 +7,13 @@
  * @author Agustín Vallejo
  */
 
-import { Node, Path } from '../../../scenery/js/imports.js';
 import { Shape } from '../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import keplersLaws from '../keplersLaws.js';
-import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
-import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
+import { Node, Path } from '../../../scenery/js/imports.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
+import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import keplersLaws from '../keplersLaws.js';
 
 export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {

@@ -5,7 +5,7 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
 import PeriodDivisionSelection_2_mp3 from '../../../sounds/PeriodDivisionSelection_2_mp3.js';
@@ -13,7 +13,7 @@ import PeriodDivisionSelection_3_mp3 from '../../../sounds/PeriodDivisionSelecti
 import PeriodDivisionSelection_4_mp3 from '../../../sounds/PeriodDivisionSelection_4_mp3.js';
 import PeriodDivisionSelection_5_mp3 from '../../../sounds/PeriodDivisionSelection_5_mp3.js';
 import PeriodDivisionSelection_6_mp3 from '../../../sounds/PeriodDivisionSelection_6_mp3.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import keplersLaws from '../../keplersLaws.js';
 
 const periodDivisionSounds = [
   PeriodDivisionSelection_2_mp3,

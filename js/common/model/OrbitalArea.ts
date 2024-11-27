@@ -8,12 +8,12 @@
  * @author Agustín Vallejo
  */
 
-import Vector2 from '../../../../dot/js/Vector2.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import keplersLaws from '../../keplersLaws.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalArea {
 

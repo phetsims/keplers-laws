@@ -6,15 +6,15 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../../keplersLaws.js';
+import Utils from '../../../../dot/js/Utils.js';
 import Metronome_Sound_1_mp3 from '../../../../keplers-laws/sounds/Metronome_Sound_1_mp3.js';
 import Metronome_Sound_2_mp3 from '../../../../keplers-laws/sounds/Metronome_Sound_2_mp3.js';
 import Metronome_Sound_Reverb_1_mp3 from '../../../../keplers-laws/sounds/Metronome_Sound_Reverb_1_mp3.js';
 import Metronome_Sound_Reverb_2_mp3 from '../../../../keplers-laws/sounds/Metronome_Sound_Reverb_2_mp3.js';
-import Utils from '../../../../dot/js/Utils.js';
+import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundConstants from '../../../../tambo/js/soundConstants.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
-import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
+import keplersLaws from '../../keplersLaws.js';
 
 
 const metronomeSounds = [

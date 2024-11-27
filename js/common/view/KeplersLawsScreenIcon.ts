@@ -7,13 +7,13 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../../keplersLaws.js';
 import ScreenIcon from '../../../../joist/js/ScreenIcon.js';
+import { Shape } from '../../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path } from '../../../../scenery/js/imports.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
 
 // constants
 // Ellipse parameters

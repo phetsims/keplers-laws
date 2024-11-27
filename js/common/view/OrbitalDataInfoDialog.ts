@@ -6,16 +6,16 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import { HBox, Image, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { HBox, Image, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import focalDistance_png from '../../../images/focalDistance_png.js';
 import infoSemiMajorAxis_png from '../../../images/infoSemiMajorAxis_png.js';
 import infoSemiMinorAxis_png from '../../../images/infoSemiMinorAxis_png.js';
-import focalDistance_png from '../../../images/focalDistance_png.js';
+import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class OrbitalDataInfoDialog extends Dialog {
 

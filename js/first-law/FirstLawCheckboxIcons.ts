@@ -7,10 +7,10 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../keplersLaws.js';
-import { Node, Path } from '../../../scenery/js/imports.js';
 import { Shape } from '../../../kite/js/imports.js';
+import { Node, Path } from '../../../scenery/js/imports.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
+import keplersLaws from '../keplersLaws.js';
 
 // constants
 const ICON_SCALE = 1.2;

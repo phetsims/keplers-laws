@@ -8,21 +8,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import { HBox, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
-import FirstLawGraph from './FirstLawGraph.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import keplersLaws from '../../keplersLaws.js';
-import FractionNode from './FractionNode.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { HBox, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import FirstLawGraph from './FirstLawGraph.js';
+import FractionNode from './FractionNode.js';
 
 const EQUATION_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),

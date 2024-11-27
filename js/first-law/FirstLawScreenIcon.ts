@@ -7,13 +7,13 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../keplersLaws.js';
-import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import { Node } from '../../../scenery/js/imports.js';
-import XNode from '../../../scenery-phet/js/XNode.js';
 import Vector2 from '../../../dot/js/Vector2.js';
-import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
+import XNode from '../../../scenery-phet/js/XNode.js';
+import { Node } from '../../../scenery/js/imports.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import keplersLaws from '../keplersLaws.js';
 
 // constants
 const FOCI_SCALE = 0.25;

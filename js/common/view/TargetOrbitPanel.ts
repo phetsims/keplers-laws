@@ -8,21 +8,21 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import { HBox, Node, Path, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import TargetOrbitComboBox from './TargetOrbitComboBox.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { HBox, Node, Path, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import TargetOrbitComboBox from './TargetOrbitComboBox.js';
 
 export default class TargetOrbitPanel extends Panel {
   public constructor(

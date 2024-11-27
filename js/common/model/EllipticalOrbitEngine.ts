@@ -26,22 +26,22 @@
  * @author Agustín Vallejo
  */
 
-import Body from '../../../../solar-system-common/js/model/Body.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Utils from '../../../../dot/js/Utils.js';
-import Engine from '../../../../solar-system-common/js/model/Engine.js';
-import Emitter from '../../../../axon/js/Emitter.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import OrbitTypes from './OrbitTypes.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import OrbitalArea from './OrbitalArea.js';
-import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { NodeOptions } from '../../../../scenery/js/imports.js';
+import Body from '../../../../solar-system-common/js/model/Body.js';
+import Engine from '../../../../solar-system-common/js/model/Engine.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import OrbitalArea from './OrbitalArea.js';
+import OrbitTypes from './OrbitTypes.js';
 import PeriodTracker from './PeriodTracker.js';
 
 const TWO_PI = 2 * Math.PI;

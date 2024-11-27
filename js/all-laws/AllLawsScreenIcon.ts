@@ -8,11 +8,11 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../keplersLaws.js';
-import KeplersLawsScreenIcon from '../common/view/KeplersLawsScreenIcon.js';
-import SecondLawScreenIcon from '../second-law/SecondLawScreenIcon.js';
-import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
 import { Node } from '../../../scenery/js/imports.js';
+import KeplersLawsScreenIcon from '../common/view/KeplersLawsScreenIcon.js';
+import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
+import keplersLaws from '../keplersLaws.js';
+import SecondLawScreenIcon from '../second-law/SecondLawScreenIcon.js';
 import ThirdLawScreenIcon from '../third-law/ThirdLawScreenIcon.js';
 
 export default class AllLawsScreenIcon extends KeplersLawsScreenIcon {

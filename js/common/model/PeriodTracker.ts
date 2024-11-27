@@ -5,20 +5,20 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Emitter from '../../../../axon/js/Emitter.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import keplersLaws from '../../keplersLaws.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 
 export class TrackingState extends EnumerationValue {
   public static readonly IDLE = new TrackingState();

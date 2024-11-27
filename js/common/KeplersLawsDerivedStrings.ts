@@ -1,9 +1,9 @@
 // Copyright 2023, University of Colorado Boulder
 
-import keplersLaws from '../keplersLaws.js';
 import DerivedStringProperty from '../../../axon/js/DerivedStringProperty.js';
-import KeplersLawsStrings from '../KeplersLawsStrings.js';
 import MathSymbols from '../../../scenery-phet/js/MathSymbols.js';
+import keplersLaws from '../keplersLaws.js';
+import KeplersLawsStrings from '../KeplersLawsStrings.js';
 
 /**
  * Derived strings used throughout this simulation.

@@ -5,14 +5,14 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
-import OrbitEccentricity_loop_wav from '../../../sounds/OrbitEccentricity_loop_wav.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import SoundGenerator from '../../../../tambo/js/sound-generators/SoundGenerator.js';
 import AmplitudeModulator from '../../../../tambo/js/AmplitudeModulator.js';
+import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
+import SoundGenerator from '../../../../tambo/js/sound-generators/SoundGenerator.js';
+import OrbitEccentricity_loop_wav from '../../../sounds/OrbitEccentricity_loop_wav.js';
+import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalSound extends SoundGenerator {
   private readonly orbitalSoundClip: SoundClip;

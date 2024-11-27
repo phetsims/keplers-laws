@@ -6,14 +6,14 @@
  * @author Agustín Vallejo
  */
 
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import SweptAreaAccordionBox from './SweptAreaAccordionBox.js';
-import keplersLaws from '../../keplersLaws.js';
-import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
-import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
+import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
+import PeriodDivisionsPanel from './PeriodDivisionsPanel.js';
+import SweptAreaAccordionBox from './SweptAreaAccordionBox.js';
 
 export default class SecondLawPanels extends VBox {
   public constructor( model: KeplersLawsModel, visibleProperties: KeplersLawsVisibleProperties, tandem: Tandem ) {

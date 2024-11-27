@@ -5,28 +5,28 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import { AlignBox, Image, InteractiveHighlighting, Node, NodeOptions, Path, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import { Shape } from '../../../../kite/js/imports.js';
-import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
-import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import Utils from '../../../../dot/js/Utils.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import Property from '../../../../axon/js/Property.js';
-import periodTimerBackground_png from '../../../images/periodTimerBackground_png.js';
-import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
-import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import UTurnArrowShape from '../../../../scenery-phet/js/UTurnArrowShape.js';
+import { AlignBox, Image, InteractiveHighlighting, Node, NodeOptions, Path, Rectangle, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
+import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
+import periodTimerBackground_png from '../../../images/periodTimerBackground_png.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
 const FONT = new PhetFont( { size: 16, weight: 'bold' } );

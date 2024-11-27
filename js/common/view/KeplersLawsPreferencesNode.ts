@@ -9,14 +9,14 @@
  * @author Agustín Vallejo
  */
 
-import keplersLaws from '../../keplersLaws.js';
-import { RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
-import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
 import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import { RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
 export default class KeplersLawsPreferencesNode extends VBox {
   public constructor( tandem: Tandem ) {

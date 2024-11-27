@@ -6,13 +6,13 @@
  * @author Agustín Vallejo
  */
 
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import StarMassPanel from './StarMassPanel.js';
-import keplersLaws from '../../keplersLaws.js';
-import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import StarMassPanel from './StarMassPanel.js';
+import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
 
 export default class ThirdLawPanels extends VBox {
   public constructor( model: KeplersLawsModel, thirdLawAccordionBoxExpandedProperty: BooleanProperty, tandem: Tandem ) {

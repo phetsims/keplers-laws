@@ -6,21 +6,21 @@
  * @author Agustín Vallejo
  */
 
-import { AlignBox, AlignBoxOptions, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import Range from '../../../../dot/js/Range.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ChartTransform from '../../../../bamboo/js/ChartTransform.js';
-import Orientation from '../../../../phet-core/js/Orientation.js';
 import TickMarkSet from '../../../../bamboo/js/TickMarkSet.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Range from '../../../../dot/js/Range.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import Orientation from '../../../../phet-core/js/Orientation.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
+import { AlignBox, AlignBoxOptions, HBox, Node, Path, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbit from '../model/TargetOrbit.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 

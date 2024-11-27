@@ -7,12 +7,12 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../keplersLaws.js';
+import { Shape } from '../../../kite/js/imports.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Node, Path, Text } from '../../../scenery/js/imports.js';
-import { Shape } from '../../../kite/js/imports.js';
-import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
+import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
+import keplersLaws from '../keplersLaws.js';
 
 export default class ThirdLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {

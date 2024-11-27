@@ -7,41 +7,41 @@
  * @author Agustín Vallejo
  */
 
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import SolarSystemCommonModel, { SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import LawMode from './LawMode.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Emitter from '../../../../axon/js/Emitter.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import keplersLaws from '../../keplersLaws.js';
-import PeriodTracker from './PeriodTracker.js';
-import OrbitalArea from './OrbitalArea.js';
-import { Color } from '../../../../scenery/js/imports.js';
-import Utils from '../../../../dot/js/Utils.js';
-import TargetOrbit from './TargetOrbit.js';
+import Emitter from '../../../../axon/js/Emitter.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
+import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import { Color } from '../../../../scenery/js/imports.js';
+import Body from '../../../../solar-system-common/js/model/Body.js';
+import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
+import SolarSystemCommonModel, { SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import Body from '../../../../solar-system-common/js/model/Body.js';
+import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import Property from '../../../../axon/js/Property.js';
-import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
+import LawMode from './LawMode.js';
+import OrbitalArea from './OrbitalArea.js';
+import PeriodTracker from './PeriodTracker.js';
+import TargetOrbit from './TargetOrbit.js';
 import TargetOrbitInfoProperty from './TargetOrbitInfoProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const PHET_IO_TARGET_ORBITS_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'phetioTargetOrbits' );
 

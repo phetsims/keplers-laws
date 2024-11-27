@@ -8,17 +8,17 @@
  */
 
 import { HSeparator, Node, VBox } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import GravityForceZoomControl from '../../../../solar-system-common/js/view/GravityForceZoomControl.js';
+import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import OrbitalInformationPanel from './OrbitalInformationPanel.js';
 import keplersLaws from '../../keplersLaws.js';
-import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
-import TargetOrbitPanel from './TargetOrbitPanel.js';
-import GravityForceZoomControl from '../../../../solar-system-common/js/view/GravityForceZoomControl.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
+import OrbitalInformationPanel from './OrbitalInformationPanel.js';
+import TargetOrbitPanel from './TargetOrbitPanel.js';
 
 export default class KeplersLawsPanels extends VBox {
 

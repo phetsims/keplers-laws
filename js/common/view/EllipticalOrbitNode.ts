@@ -5,32 +5,32 @@
  * @author Agustín Vallejo
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
-import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import { Circle, Node, Path, RichText, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Multilink from '../../../../axon/js/Multilink.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import XNode from '../../../../scenery-phet/js/XNode.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import keplersLaws from '../../keplersLaws.js';
-import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import PeriodTrackerNode from './PeriodTrackerNode.js';
-import OrbitalSound from './OrbitalSound.js';
-import KeplersLawsColors from '../KeplersLawsColors.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import NumberDisplay from '../../../../scenery-phet/js/NumberDisplay.js';
+import XNode from '../../../../scenery-phet/js/XNode.js';
+import { Circle, Node, Path, RichText, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
+import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
+import OrbitalSound from './OrbitalSound.js';
+import PeriodTrackerNode from './PeriodTrackerNode.js';
 
 export default class EllipticalOrbitNode extends Path {
   private readonly orbit: EllipticalOrbitEngine; // Kepler's Laws uses EllipticalOrbitEngine instead of a NumericalOrbitEngine, as My Solar System does

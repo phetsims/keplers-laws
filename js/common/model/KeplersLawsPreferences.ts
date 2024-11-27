@@ -7,9 +7,9 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import keplersLaws from '../../keplersLaws.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsQueryParameters from '../../KeplersLawsQueryParameters.js';
 
 const KeplersLawsPreferences = {

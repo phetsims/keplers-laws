@@ -6,17 +6,17 @@
  * @author Agustín Vallejo
  */
 
-import { Node, RichText } from '../../../../scenery/js/imports.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import OrbitTypes from '../model/OrbitTypes.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import keplersLaws from '../../keplersLaws.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import { Node, RichText } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import OrbitTypes from '../model/OrbitTypes.js';
 
 const WARNING_TEXT_OPTIONS = {
   font: new PhetFont( { size: 18, weight: 'bold' } ),

@@ -7,22 +7,22 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
-import Range from '../../../../dot/js/Range.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
+import Range from '../../../../dot/js/Range.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import keplersLaws from '../../keplersLaws.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
+import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import keplersLaws from '../../keplersLaws.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
 
 // constants
 const SNAP_TOLERANCE = 0.05;

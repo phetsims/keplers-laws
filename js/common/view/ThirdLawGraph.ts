@@ -6,27 +6,27 @@
  * @author Agustín Vallejo
  */
 
-import KeplersLawsModel from '../model/KeplersLawsModel.js';
-import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
-import { AlignBox, Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Utils from '../../../../dot/js/Utils.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import KeplersLawsStrings from '../../KeplersLawsStrings.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import { AlignBox, Circle, Node, NodeOptions, Path, RichText, RichTextOptions } from '../../../../scenery/js/imports.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import keplersLaws from '../../keplersLaws.js';
-import ThirdLawTextUtils from './ThirdLawTextUtils.js';
-import TinyProperty from '../../../../axon/js/TinyProperty.js';
-import KeplersLawsConstants from '../KeplersLawsConstants.js';
-import TargetOrbit from '../model/TargetOrbit.js';
+import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import KeplersLawsConstants from '../KeplersLawsConstants.js';
+import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
+import KeplersLawsModel from '../model/KeplersLawsModel.js';
+import TargetOrbit from '../model/TargetOrbit.js';
+import ThirdLawTextUtils from './ThirdLawTextUtils.js';
 
 const FOREGROUND_COLOR_PROPERTY = SolarSystemCommonColors.foregroundProperty;
 const AXIS_LABEL_MAX_WIDTH = 20;

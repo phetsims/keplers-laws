@@ -8,9 +8,9 @@
  */
 
 import { ProfileColorProperty } from '../../../scenery/js/imports.js';
-import keplersLaws from '../keplersLaws.js';
 import solarSystemCommon from '../../../solar-system-common/js/solarSystemCommon.js';
 import Tandem from '../../../tandem/js/Tandem.js';
+import keplersLaws from '../keplersLaws.js';
 
 const KeplersLawsColors = {
 
