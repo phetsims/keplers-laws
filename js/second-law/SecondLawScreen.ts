@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * Second Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit.

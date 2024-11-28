@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 import DerivedStringProperty from '../../../axon/js/DerivedStringProperty.js';
 import MathSymbols from '../../../scenery-phet/js/MathSymbols.js';

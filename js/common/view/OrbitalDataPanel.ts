@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 /**
  * Panel with the basic orbital values: semi-major and semi-minor axes and focal distance (a,b,c).
  *

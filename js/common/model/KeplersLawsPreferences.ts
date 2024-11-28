@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * KeplersLawsPreferences is the model for sim-specific preferences.  The values declared here can be updated via
