@@ -37,6 +37,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
   public static createFociCheckbox( fociVisibleProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( fociVisibleProperty, KeplersLawsStrings.fociStringProperty, {
       icon: FirstLawCheckboxIcons.createFociCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true,
       tandem: tandem
     } );
   }
@@ -46,7 +47,8 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
    */
   public static createStringCheckbox( stringVisibleProperty: Property<boolean>, providedOptions: KeplersLawsCheckboxOptions ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( stringVisibleProperty, KeplersLawsStrings.stringStringProperty, combineOptions<KeplersLawsCheckboxOptions>( {
-      icon: FirstLawCheckboxIcons.createStringCheckboxIcon()
+      icon: FirstLawCheckboxIcons.createStringCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true
     }, providedOptions ) );
   }
 
@@ -56,6 +58,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
   public static createAxesCheckbox( axesVisibleProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( axesVisibleProperty, KeplersLawsStrings.axesStringProperty, {
       icon: FirstLawCheckboxIcons.createAxesCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true,
       tandem: tandem
     } );
   }
@@ -65,7 +68,8 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
    */
   public static createSemiaxesCheckbox( semiaxesVisibleProperty: Property<boolean>, providedOptions: KeplersLawsCheckboxOptions ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( semiaxesVisibleProperty, KeplersLawsStrings.semiaxesStringProperty, combineOptions<KeplersLawsCheckboxOptions>( {
-      icon: FirstLawCheckboxIcons.createSemiaxesCheckboxIcon()
+      icon: FirstLawCheckboxIcons.createSemiaxesCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true
     }, providedOptions ) );
   }
 
@@ -74,6 +78,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
    */
   public static createApoapsisCheckbox( apoapsisVisibleProperty: Property<boolean>, providedOptions: KeplersLawsCheckboxOptions ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( apoapsisVisibleProperty, KeplersLawsStrings.apoapsisStringProperty, combineOptions<KeplersLawsCheckboxOptions>( {
+      phetioDisplayOnlyPropertyInstrumented: true,
       icon: new XNode( {
         fill: KeplersLawsColors.apoapsisColorProperty,
         stroke: KeplersLawsColors.foregroundProperty,
@@ -87,6 +92,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
    */
   public static createPeriapsisCheckbox( periapsisVisibleProperty: Property<boolean>, providedOptions: KeplersLawsCheckboxOptions ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( periapsisVisibleProperty, KeplersLawsStrings.periapsisStringProperty, combineOptions<KeplersLawsCheckboxOptions>( {
+      phetioDisplayOnlyPropertyInstrumented: true,
       icon: new XNode( {
         fill: KeplersLawsColors.periapsisColorProperty,
         stroke: KeplersLawsColors.foregroundProperty,
@@ -101,6 +107,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
   public static createSemiMajorAxisCheckbox( semiMajorAxisVisibleProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( semiMajorAxisVisibleProperty, KeplersLawsStrings.graph.aStringProperty, {
       icon: FirstLawCheckboxIcons.createSemiMajorAxisCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true,
       tandem: tandem
     } );
   }
@@ -145,6 +152,7 @@ export default class KeplersLawsCheckbox extends SolarSystemCommonCheckbox {
   public static createEccentricityCheckbox( eccentricityVisibleProperty: Property<boolean>, tandem: Tandem ): KeplersLawsCheckbox {
     return new KeplersLawsCheckbox( eccentricityVisibleProperty, KeplersLawsStrings.eccentricityStringProperty, {
       icon: FirstLawCheckboxIcons.createEccentricityCheckboxIcon(),
+      phetioDisplayOnlyPropertyInstrumented: true,
       tandem: tandem
     } );
   }
