@@ -348,7 +348,6 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
       restartListener: () => model.restart(),
       stepForwardListener: () => model.stepOnce( 1 / 8, true ),
       tandem: options.tandem.createTandem( 'timeControlNode' ),
-      flowBoxOrientation: 'horizontal',
       flowBoxAlign: 'center',
       buttonGroupXSpacing: 20
     } );
