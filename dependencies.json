@@ -17,7 +17,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "f1c65d5ecd773d0f057494523750a42e2850b531",
+    "sha": "52845ab3cf29de387ebfdfce0154f8a11c404c6b",
     "branch": "HEAD"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "535270bda2f9d91a5916dd1e22efc7cacfd54cae",
+    "sha": "5ccf201b651921cb856c4ec9af0a6a0daad73929",
     "branch": "1.2"
   },
   "kite": {
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
-    "sha": "f49272efdfbd0ee0618c8037c6020acc2acf2344",
+    "sha": "36ffc5c41cd140e8f7724123fa3fc9fa5ac05139",
     "branch": "HEAD"
   },
   "phetcommon": {
