@@ -25,11 +25,11 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "ddd7f1a2a5fc6e914cca8b2297e25e60c90e5028",
+    "sha": "aaa8d39edfcf19fcb4933a1a9a17c5f57717b9d6",
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "c44f9a069ddde40cf1fdd74949488048ae4ef24f",
+    "sha": "9f562de7aafa8667f4c76d66bb70aa261cfb61b4",
     "branch": "1.2"
   },
   "kite": {
