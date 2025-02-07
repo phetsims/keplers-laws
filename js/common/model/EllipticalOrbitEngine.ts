@@ -34,7 +34,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { NodeOptions } from '../../../../scenery/js/imports.js';
+import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import Engine from '../../../../solar-system-common/js/model/Engine.js';
 import Tandem from '../../../../tandem/js/Tandem.js';

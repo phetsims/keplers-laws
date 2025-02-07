@@ -23,7 +23,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import BodyInfo from '../../../../solar-system-common/js/model/BodyInfo.js';
 import SolarSystemCommonModel, { SolarSystemCommonModelOptions } from '../../../../solar-system-common/js/model/SolarSystemCommonModel.js';

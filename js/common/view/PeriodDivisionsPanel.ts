@@ -8,7 +8,8 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';

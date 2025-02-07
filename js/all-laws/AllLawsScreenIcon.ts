@@ -8,7 +8,7 @@
  * @author Agustín Vallejo
  */
 
-import { Node } from '../../../scenery/js/imports.js';
+import Node from '../../../scenery/js/nodes/Node.js';
 import KeplersLawsScreenIcon from '../common/view/KeplersLawsScreenIcon.js';
 import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
 import keplersLaws from '../keplersLaws.js';
