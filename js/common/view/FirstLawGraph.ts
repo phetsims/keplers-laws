@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * FirstLawGraph graphs the Eccentricity of the orbit, compared to other orbits of the Solar System.

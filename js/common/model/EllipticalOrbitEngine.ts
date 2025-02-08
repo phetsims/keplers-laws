@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 /**
  * The Elliptical Orbit model element. Evolves the body and keeps track of orbital elements.
  * Serves as the Engine for the Kepler's Laws Model

@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * KeplersLawsPanels is the collection of panels that appears in the top-right corner of all screens.

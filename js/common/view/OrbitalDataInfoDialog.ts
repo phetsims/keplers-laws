@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * OrbitalDataInfoDialog is a dialog that displays info related to OrbitalDataPanel. It is relevant for the First Law.
