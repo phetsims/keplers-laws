@@ -15,7 +15,7 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import XNode from '../../../../scenery-phet/js/XNode.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import { rasterized } from '../../../../scenery/js/util/rasterized.js';
+import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import SolarSystemCommonCheckbox, { SolarSystemCommonCheckboxOptions } from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
@@ -198,7 +198,7 @@ function createStopwatchIcon(): Node {
     tandem: Tandem.OPT_OUT
   } );
 
-  const icon = rasterized( stopwatchNode, {
+  const icon = rasterizeNode( stopwatchNode, {
     resolution: 5,
     nodeOptions: {
       cursor: 'pointer'
