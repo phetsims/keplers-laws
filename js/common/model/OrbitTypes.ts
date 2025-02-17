@@ -1,4 +1,5 @@
 // Copyright 2023-2024, University of Colorado Boulder
+
 /**
  * EnumerationValue to keep track of the Law that's currently selected
  *

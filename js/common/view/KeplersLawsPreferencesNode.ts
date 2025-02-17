@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * KeplersLawsPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.

@@ -1,4 +1,5 @@
 // Copyright 2023-2024, University of Colorado Boulder
+
 /**
  * Handles the sound the Number Control will make when changing period divisions.
  *

@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * Node that displays a fraction that grows dynamically based on the contents.
  *

@@ -1,4 +1,5 @@
 // Copyright 2023-2024, University of Colorado Boulder
+
 /**
  * EnumerationValue of the different types of orbits that can be selected and shown
  *

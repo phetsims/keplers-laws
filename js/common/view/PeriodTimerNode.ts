@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * PeriodTimer for the Kepler's Third Law screen.
  *

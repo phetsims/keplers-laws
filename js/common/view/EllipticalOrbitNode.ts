@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * Visual Node for the Elliptical Orbit based on the Orbital Parameters
  *

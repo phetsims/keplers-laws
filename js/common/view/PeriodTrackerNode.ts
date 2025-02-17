@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * Visual representation of the period blue track line
  *

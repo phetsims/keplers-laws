@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * Panel that contains the Period Divisions number spinner.
  *

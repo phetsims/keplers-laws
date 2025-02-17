@@ -1,4 +1,5 @@
 // Copyright 2023-2025, University of Colorado Boulder
+
 /**
  * Panel that displays more data for the orbit, such as position and velocity vector values and directions.
  *
