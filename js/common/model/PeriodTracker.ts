@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * Keeps track of the state of the blue line tracking the body when the PeriodTimerNode is set to run.
