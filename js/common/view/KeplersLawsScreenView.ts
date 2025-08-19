@@ -76,8 +76,7 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
 
     const options = optionize<KeplersLawsScreenViewOptions, SelfOptions, SolarSystemCommonScreenViewOptions>()( {
       playingAllowedProperty: model.engine.allowedOrbitProperty,
-      allowLawSelection: false,
-      isDisposable: false
+      allowLawSelection: false
     }, providedOptions );
 
     super( model, new KeplersLawsVisibleProperties( model.isAllLaws, model.selectedLawProperty.value, options.tandem.createTandem( 'visibleProperties' ) ), options );
