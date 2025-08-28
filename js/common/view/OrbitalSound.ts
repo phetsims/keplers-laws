@@ -7,7 +7,7 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import AmplitudeModulator from '../../../../tambo/js/AmplitudeModulator.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
