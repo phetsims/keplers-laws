@@ -13,9 +13,10 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import { optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
@@ -68,7 +69,7 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     providedOptions: PeriodTimerNodeOptions
   ) {
 
-    const options = optionize<PeriodTimerNodeOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize4<PeriodTimerNodeOptions, SelfOptions, NodeOptions>()( {}, AccessibleDraggableOptions, {
       isDisposable: false,
       iconColor: '#333',
       buttonBaseColor: '#DFE0E1',
@@ -92,8 +93,6 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
       restartAccessibleName: KeplersLawsStrings.a11y.restartMeasurementStringProperty,
 
       soundViewNode: null,
-      focusable: true,
-      tagName: 'div',
 
       // The group focus highlight makes it clear the timer is highlighted even if the children are focused
       groupFocusHighlight: true
