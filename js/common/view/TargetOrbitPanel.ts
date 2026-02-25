@@ -6,7 +6,7 @@
  * Contains a title text node, the grey target orbit symbol, and the target orbit selector.
  * Available orbits are: Mercury, Venus, Earth, Mars, Jupiter.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

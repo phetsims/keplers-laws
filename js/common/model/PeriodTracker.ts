@@ -3,7 +3,7 @@
 /**
  * Keeps track of the state of the blue line tracking the body when the PeriodTimerNode is set to run.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

@@ -3,7 +3,7 @@
 /**
  * Screen view for Kepler's Laws screen
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

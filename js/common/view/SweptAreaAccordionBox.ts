@@ -3,7 +3,7 @@
 /**
  * Panel that shows the graph of the swept area under the curve of the orbit.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

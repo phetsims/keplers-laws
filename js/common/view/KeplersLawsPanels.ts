@@ -3,7 +3,7 @@
 /**
  * KeplersLawsPanels is the collection of panels that appears in the top-right corner of all screens.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

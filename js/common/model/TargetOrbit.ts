@@ -3,7 +3,7 @@
 /**
  * EnumerationValue of the different types of orbits that can be selected and shown
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';

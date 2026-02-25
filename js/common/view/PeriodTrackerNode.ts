@@ -3,7 +3,7 @@
 /**
  * Visual representation of the period blue track line
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';

@@ -3,7 +3,7 @@
 /**
  * Shows a graph of a vs. T with the data from the orbit
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

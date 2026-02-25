@@ -3,7 +3,7 @@
 /**
  * Panel with the basic orbital values: semi-major and semi-minor axes and focal distance (a,b,c).
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

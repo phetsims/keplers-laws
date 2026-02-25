@@ -3,7 +3,7 @@
 /**
  * FirstLawGraph graphs the Eccentricity of the orbit, compared to other orbits of the Solar System.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';

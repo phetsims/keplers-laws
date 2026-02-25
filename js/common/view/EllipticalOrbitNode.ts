@@ -3,7 +3,7 @@
 /**
  * Visual Node for the Elliptical Orbit based on the Orbital Parameters
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

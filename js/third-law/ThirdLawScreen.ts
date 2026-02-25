@@ -7,7 +7,7 @@
  *
  * For that learning goal, there's a T vs 'a' graph that shows the relationship between those two variables.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Screen from '../../../joist/js/Screen.js';

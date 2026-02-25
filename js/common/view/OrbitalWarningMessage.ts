@@ -3,7 +3,7 @@
 /**
  * A simple warning that appears when the user tries to make a forbidden orbit.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

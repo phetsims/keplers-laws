@@ -3,7 +3,7 @@
 /**
  * Handles the sound the Number Control will make when changing period divisions.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';

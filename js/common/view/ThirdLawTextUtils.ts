@@ -4,7 +4,7 @@
  * Class for handling special text cases in the Third Law.
  * i.e. for placing the correct powers on symbols and units, depending on the value of the power.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

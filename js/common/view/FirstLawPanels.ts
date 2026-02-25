@@ -3,7 +3,7 @@
 /**
  * FirstLawPanels is the set of control panels for the First Law.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';

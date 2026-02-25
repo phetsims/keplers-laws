@@ -5,7 +5,7 @@
  * Class that handles the internal logic of the orbital areas.
  * It keeps track of the position of the dot in the orbital area, the start and end positions, the angles, the completionProperty, etc.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

@@ -5,7 +5,7 @@
  * All Laws Screen Icons: This screen allows you to analyze a single orbit through the lens of
  * all three of Kepler's Laws. The law is selected via the buttons on the bottom left.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Node from '../../../scenery/js/nodes/Node.js';

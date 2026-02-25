@@ -7,7 +7,7 @@
  * The Preferences dialog is created on demand by joist, using a PhetioCapsule. So KeplersLawsPreferencesNode must
  * implement dispose, and all elements of KeplersLawsPreferencesNode that have tandems must be disposed.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import PreferencesControl from '../../../../joist/js/preferences/PreferencesControl.js';

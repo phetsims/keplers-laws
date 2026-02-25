@@ -3,7 +3,7 @@
 /**
  * The elliptical shape for the target orbit
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

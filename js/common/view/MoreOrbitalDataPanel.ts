@@ -5,7 +5,7 @@
  *
  * Only visibile when Preferences > Visual > More Orbital Data is turned on.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

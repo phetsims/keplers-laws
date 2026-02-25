@@ -3,7 +3,7 @@
 /**
  * Panel that contains the Period Divisions number spinner.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

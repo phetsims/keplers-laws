@@ -5,7 +5,7 @@
  * This screen is the combination of the three previous ones, and allows the user to select
  * which law to visualize on the same orbit.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Screen from '../../../joist/js/Screen.js';

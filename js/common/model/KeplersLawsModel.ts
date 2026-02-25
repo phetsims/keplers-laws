@@ -4,7 +4,7 @@
  * The model in charge of the Kepler's Laws Screen components.
  * It extends the SolarSystemCommonModel, and adds the necessary properties and logic to handle the laws functionalities.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

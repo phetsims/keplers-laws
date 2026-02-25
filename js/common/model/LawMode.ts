@@ -3,7 +3,7 @@
 /**
  * EnumerationValue to keep track of the Law that's currently selected
  * 
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';

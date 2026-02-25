@@ -4,7 +4,7 @@
  *
  * Second Law Screen Icon: multiple elliptical segments that represent area filling
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Shape from '../../../kite/js/Shape.js';

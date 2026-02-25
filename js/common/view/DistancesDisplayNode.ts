@@ -6,7 +6,7 @@
  *  - R: Distance from the sun to the planet (circular orbit)
  *  - a: Semi-major axis of the ellipse
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

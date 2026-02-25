@@ -3,7 +3,7 @@
 /**
  * OrbitalInformationPanel is the panel that contains controls related to the display of orbital information.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

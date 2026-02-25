@@ -7,7 +7,7 @@
  *
  * See https://github.com/phetsims/keplers-laws/issues/210 for requirements, design, and history.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

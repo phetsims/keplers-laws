@@ -5,7 +5,7 @@
  * In this screen, the orbit is divided in equal area sections, and the user can learn that
  * to cover each of those areas, equals amounts of time are needed.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Screen from '../../../joist/js/Screen.js';

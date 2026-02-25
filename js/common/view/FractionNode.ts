@@ -3,7 +3,7 @@
 /**
  * Node that displays a fraction that grows dynamically based on the contents.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

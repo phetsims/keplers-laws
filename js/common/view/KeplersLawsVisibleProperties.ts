@@ -3,7 +3,7 @@
 /**
  * KeplersLawsVisibleProperties is an abstract class that each law will use to define the visible properties
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

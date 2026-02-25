@@ -3,7 +3,7 @@
 /**
  * MoreOrbitalDataInfoDialog is a dialog that displays info related to MoreOrbitalDataPanel. It is relevant for the First Law.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';

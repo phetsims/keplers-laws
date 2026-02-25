@@ -3,7 +3,7 @@
 /**
  * PeriodTimer for the Kepler's Third Law screen.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';

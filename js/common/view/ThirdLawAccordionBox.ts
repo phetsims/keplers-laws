@@ -3,7 +3,7 @@
 /**
  * ThirdLawAccordionBox contains the equation display and controls for the ThirdLawGraph class.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

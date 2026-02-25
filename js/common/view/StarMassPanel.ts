@@ -3,7 +3,7 @@
 /**
  * StarMassPanel contains a slider that controls the main body mass for the Third Law.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

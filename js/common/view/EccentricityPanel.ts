@@ -4,7 +4,7 @@
  * Panel that displays the different possible eccentricities within 0 and 1, as well as the
  * current orbital eccentricity and the equation e = c/a .
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

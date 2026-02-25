@@ -4,7 +4,7 @@
  * Provides a specific class for handling the buttons that
  * coordinate the specific Kepler's Law being seen in the screen.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

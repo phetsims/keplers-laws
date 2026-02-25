@@ -3,7 +3,7 @@
 /**
  * Object that controls the sound variations of the orbital changes.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

@@ -24,7 +24,7 @@
  * M: Initial mean anomaly ( angular position of the body seen from the center of the ellipse )
  * W: angular velocity
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

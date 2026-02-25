@@ -4,7 +4,7 @@
  * First Law Screen, where the user can learn about Kepler's Laws via an elliptical orbit.
  * In this screen, the user can visualize some properties of the ellipse: foci, eccentricity, semi-major axis, etc.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Screen from '../../../joist/js/Screen.js';

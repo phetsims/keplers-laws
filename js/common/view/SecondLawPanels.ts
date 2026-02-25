@@ -3,7 +3,7 @@
 /**
  * SecondLawPanels is the set of control panels for the Second Law.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
