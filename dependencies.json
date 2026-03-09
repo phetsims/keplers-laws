@@ -17,7 +17,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "27de88f5a9694ba43e36ed9867b1b22c18d24b73",
+    "sha": "da6fd0db5059b1c7295e4a49e46195c4075521d8",
     "branch": "HEAD"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "0c9043735b9c809ebf3f1f35c46e0da6b5e842d6",
+    "sha": "4f1a0846701416c30325f22f855ecb22e77c5248",
     "branch": "1.2"
   },
   "kite": {
