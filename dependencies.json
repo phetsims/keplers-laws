@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "f37c964f58bc4e7ae0c78a26b4f750112d177f4c",
+    "sha": "ea6da0f172d18bcc67bd456518c13940120bdfaa",
     "branch": "HEAD"
   },
   "chipper": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "dd926580909af66aa34489fc28bb8896280baf20",
+    "sha": "bedf3d484dedaeaea039f611def1eba46690c0d1",
     "branch": "1.2"
   },
   "kite": {
