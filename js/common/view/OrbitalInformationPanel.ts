@@ -13,7 +13,6 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
@@ -103,5 +102,3 @@ export default class OrbitalInformationPanel extends Panel {
     model.lawUpdatedEmitter.emit();
   }
 }
-
-keplersLaws.register( 'OrbitalInformationPanel', OrbitalInformationPanel );

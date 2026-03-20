@@ -7,7 +7,6 @@
  */
 
 import { QueryStringMachine } from '../../query-string-machine/js/QueryStringMachineModule.js';
-import keplersLaws from './keplersLaws.js';
 
 const KeplersLawsQueryParameters = QueryStringMachine.getAll( {
 
@@ -18,7 +17,5 @@ const KeplersLawsQueryParameters = QueryStringMachine.getAll( {
     public: true
   }
 } );
-
-keplersLaws.register( 'KeplersLawsQueryParameters', KeplersLawsQueryParameters );
 
 export default KeplersLawsQueryParameters;

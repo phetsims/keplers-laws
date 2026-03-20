@@ -16,7 +16,6 @@ import NumberSpinner from '../../../../sun/js/NumberSpinner.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import nullSoundPlayer from '../../../../tambo/js/nullSoundPlayer.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
@@ -83,5 +82,3 @@ export default class PeriodDivisionsPanel extends Panel {
     } );
   }
 }
-
-keplersLaws.register( 'PeriodDivisionsPanel', PeriodDivisionsPanel );

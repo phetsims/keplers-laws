@@ -20,7 +20,6 @@ import SolarSystemCommonCheckbox, { SolarSystemCommonCheckboxOptions } from '../
 import Tandem from '../../../../tandem/js/Tandem.js';
 import periodTimerIcon_png from '../../../images/periodTimerIcon_png.js';
 import FirstLawCheckboxIcons from '../../first-law/FirstLawCheckboxIcons.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
@@ -208,5 +207,3 @@ function createStopwatchIcon(): Node {
 
   return icon;
 }
-
-keplersLaws.register( 'KeplersLawsCheckbox', KeplersLawsCheckbox );

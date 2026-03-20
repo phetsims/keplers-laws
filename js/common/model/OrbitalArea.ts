@@ -13,7 +13,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalArea {
 
@@ -98,5 +97,3 @@ export default class OrbitalArea {
     this.activeProperty.reset();
   }
 }
-
-keplersLaws.register( 'OrbitalArea', OrbitalArea );

@@ -14,7 +14,6 @@ import PeriodDivisionSelection_3_mp3 from '../../../sounds/PeriodDivisionSelecti
 import PeriodDivisionSelection_4_mp3 from '../../../sounds/PeriodDivisionSelection_4_mp3.js';
 import PeriodDivisionSelection_5_mp3 from '../../../sounds/PeriodDivisionSelection_5_mp3.js';
 import PeriodDivisionSelection_6_mp3 from '../../../sounds/PeriodDivisionSelection_6_mp3.js';
-import keplersLaws from '../../keplersLaws.js';
 
 const periodDivisionSounds = [
   PeriodDivisionSelection_2_mp3,
@@ -40,5 +39,3 @@ export default class PeriodDivisionSoundManager {
     }
   }
 }
-
-keplersLaws.register( 'PeriodDivisionSoundManager', PeriodDivisionSoundManager );

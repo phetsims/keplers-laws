@@ -22,7 +22,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import TargetOrbit from '../model/TargetOrbit.js';
 
@@ -127,5 +126,3 @@ export default class FirstLawGraph extends AlignBox {
     super( content, options );
   }
 }
-
-keplersLaws.register( 'FirstLawGraph', FirstLawGraph );

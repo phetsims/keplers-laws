@@ -19,7 +19,6 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -77,5 +76,3 @@ export default class EccentricityPanel extends Panel {
     super( content, options );
   }
 }
-
-keplersLaws.register( 'EccentricityPanel', EccentricityPanel );

@@ -10,7 +10,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import EllipticalOrbitEngine from '../model/EllipticalOrbitEngine.js';
 import PeriodTracker, { TrackingState } from '../model/PeriodTracker.js';
@@ -104,5 +103,3 @@ export default class PeriodTrackerNode extends Path {
     this.opacity = 1 - this.periodTracker.fadingStopwatch.timeProperty.value / this.periodTracker.fadingDuration;
   }
 }
-
-keplersLaws.register( 'PeriodTrackerNode', PeriodTrackerNode );

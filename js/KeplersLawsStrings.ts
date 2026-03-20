@@ -119,6 +119,4 @@ type StringsType = {
 
 const KeplersLawsStrings = getStringModule( 'KEPLERS_LAWS' ) as StringsType;
 
-keplersLaws.register( 'KeplersLawsStrings', KeplersLawsStrings );
-
 export default KeplersLawsStrings;

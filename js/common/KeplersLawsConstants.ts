@@ -9,7 +9,6 @@
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import SolarSystemCommonColors from '../../../solar-system-common/js/SolarSystemCommonColors.js';
-import keplersLaws from '../keplersLaws.js';
 
 const KeplersLawsConstants = {
 
@@ -73,5 +72,4 @@ const KeplersLawsConstants = {
   PLANET_MASS: 50 // x 10^28 kg
 };
 
-keplersLaws.register( 'KeplersLawsConstants', KeplersLawsConstants );
 export default KeplersLawsConstants;

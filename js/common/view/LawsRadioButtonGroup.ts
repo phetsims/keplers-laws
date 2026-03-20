@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import FirstLawScreenIcon from '../../first-law/FirstLawScreenIcon.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import SecondLawScreenIcon from '../../second-law/SecondLawScreenIcon.js';
 import ThirdLawScreenIcon from '../../third-law/ThirdLawScreenIcon.js';
@@ -70,5 +69,3 @@ export default class LawsRadioButtonGroup extends RectangularRadioButtonGroup<La
     ], options );
   }
 }
-
-keplersLaws.register( 'LawsRadioButtonGroup', LawsRadioButtonGroup );

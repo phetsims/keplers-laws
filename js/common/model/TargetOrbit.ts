@@ -9,7 +9,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 export default class TargetOrbit extends EnumerationValue {
@@ -45,5 +44,3 @@ export default class TargetOrbit extends EnumerationValue {
     super();
   }
 }
-
-keplersLaws.register( 'TargetOrbit', TargetOrbit );

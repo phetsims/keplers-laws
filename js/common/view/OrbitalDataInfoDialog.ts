@@ -17,7 +17,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import focalDistance_png from '../../../images/focalDistance_png.js';
 import infoSemiMajorAxis_png from '../../../images/infoSemiMajorAxis_png.js';
 import infoSemiMinorAxis_png from '../../../images/infoSemiMinorAxis_png.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 
@@ -72,5 +71,3 @@ export default class OrbitalDataInfoDialog extends Dialog {
     super( content, options );
   }
 }
-
-keplersLaws.register( 'OrbitalDataInfoDialog', OrbitalDataInfoDialog );

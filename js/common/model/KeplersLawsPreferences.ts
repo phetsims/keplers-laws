@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsQueryParameters from '../../KeplersLawsQueryParameters.js';
 
 const KeplersLawsPreferences = {
@@ -21,5 +20,4 @@ const KeplersLawsPreferences = {
   } )
 };
 
-keplersLaws.register( 'KeplersLawsPreferences', KeplersLawsPreferences );
 export default KeplersLawsPreferences;

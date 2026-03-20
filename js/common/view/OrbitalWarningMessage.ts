@@ -15,7 +15,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import OrbitTypes from '../model/OrbitTypes.js';
 
@@ -62,5 +61,3 @@ export default class OrbitalWarningMessage extends Node {
     } );
   }
 }
-
-keplersLaws.register( 'OrbitalWarningMessage', OrbitalWarningMessage );

@@ -8,7 +8,6 @@
 
 import DerivedStringProperty from '../../../axon/js/DerivedStringProperty.js';
 import MathSymbols from '../../../scenery-phet/js/MathSymbols.js';
-import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
 
 const KeplersLawsDerivedStrings = {
@@ -54,5 +53,4 @@ const KeplersLawsDerivedStrings = {
     ( r, v ) => `${MathSymbols.THETA}<sub>${r}${v}</sub>` )
 };
 
-keplersLaws.register( 'KeplersLawsDerivedStrings', KeplersLawsDerivedStrings );
 export default KeplersLawsDerivedStrings;

@@ -17,7 +17,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
 
@@ -46,5 +45,3 @@ class MoreOrbitalDataControl extends PreferencesControl {
     } );
   }
 }
-
-keplersLaws.register( 'KeplersLawsPreferencesNode', KeplersLawsPreferencesNode );

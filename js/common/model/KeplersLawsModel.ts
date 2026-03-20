@@ -33,7 +33,6 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Animation from '../../../../twixt/js/Animation.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
@@ -546,5 +545,4 @@ class KeplersLawsModel extends SolarSystemCommonModel {
   }
 }
 
-keplersLaws.register( 'KeplersLawsModel', KeplersLawsModel );
 export default KeplersLawsModel;

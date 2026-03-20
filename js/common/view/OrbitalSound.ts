@@ -13,7 +13,6 @@ import AmplitudeModulator from '../../../../tambo/js/AmplitudeModulator.js';
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import SoundGenerator from '../../../../tambo/js/sound-generators/SoundGenerator.js';
 import OrbitEccentricity_loop_wav from '../../../sounds/OrbitEccentricity_loop_wav.js';
-import keplersLaws from '../../keplersLaws.js';
 
 export default class OrbitalSound extends SoundGenerator {
   private readonly orbitalSoundClip: SoundClip;
@@ -65,5 +64,3 @@ export default class OrbitalSound extends SoundGenerator {
     this.orbitalSoundClip.stop();
   }
 }
-
-keplersLaws.register( 'OrbitalSound', OrbitalSound );

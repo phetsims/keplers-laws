@@ -39,7 +39,6 @@ import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Body from '../../../../solar-system-common/js/model/Body.js';
 import Engine from '../../../../solar-system-common/js/model/Engine.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import OrbitalArea from './OrbitalArea.js';
 import OrbitTypes from './OrbitTypes.js';
@@ -702,5 +701,3 @@ export default class EllipticalOrbitEngine extends Engine {
     this.resetEmitter.emit();
   }
 }
-
-keplersLaws.register( 'EllipticalOrbitEngine', EllipticalOrbitEngine );

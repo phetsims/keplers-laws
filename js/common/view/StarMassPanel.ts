@@ -19,7 +19,6 @@ import SolarSystemCommonConstants from '../../../../solar-system-common/js/Solar
 import SolarSystemCommonNumberControl from '../../../../solar-system-common/js/view/SolarSystemCommonNumberControl.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -117,5 +116,3 @@ const createTickLabel = ( value: string ) => new Text( value, {
   fill: SolarSystemCommonColors.foregroundProperty,
   maxWidth: 110
 } );
-
-keplersLaws.register( 'StarMassPanel', StarMassPanel );

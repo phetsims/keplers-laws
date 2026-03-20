@@ -11,7 +11,6 @@
 import Node from '../../../scenery/js/nodes/Node.js';
 import KeplersLawsScreenIcon from '../common/view/KeplersLawsScreenIcon.js';
 import FirstLawScreenIcon from '../first-law/FirstLawScreenIcon.js';
-import keplersLaws from '../keplersLaws.js';
 import SecondLawScreenIcon from '../second-law/SecondLawScreenIcon.js';
 import ThirdLawScreenIcon from '../third-law/ThirdLawScreenIcon.js';
 
@@ -27,5 +26,3 @@ export default class AllLawsScreenIcon extends KeplersLawsScreenIcon {
     } ) );
   }
 }
-
-keplersLaws.register( 'AllLawsScreenIcon', AllLawsScreenIcon );

@@ -23,7 +23,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText, { RichTextOptions } from '../../../../scenery/js/nodes/RichText.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -272,5 +271,3 @@ export default class ThirdLawGraph extends Node {
     orbit.resetEmitter.addListener( resetGraph );
   }
 }
-
-keplersLaws.register( 'ThirdLawGraph', ThirdLawGraph );

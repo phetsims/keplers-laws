@@ -15,7 +15,6 @@ import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import keplersLaws from '../../keplersLaws.js';
 import TargetOrbit from './TargetOrbit.js';
 
 type TargetOrbitInfoStateObject = {
@@ -94,5 +93,3 @@ export default class TargetOrbitInfoProperty extends Property<TargetOrbitInfo> {
     } );
   }
 }
-
-keplersLaws.register( 'TargetOrbitInfoProperty', TargetOrbitInfoProperty );

@@ -8,7 +8,6 @@
 
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
@@ -31,5 +30,3 @@ export default class SecondLawPanels extends VBox {
     } );
   }
 }
-
-keplersLaws.register( 'SecondLawPanels', SecondLawPanels );

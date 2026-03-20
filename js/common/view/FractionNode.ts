@@ -12,7 +12,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
 const FRACTION_LINE_MARGIN = 5;
@@ -45,5 +44,3 @@ export default class FractionNode extends Node {
       } );
   }
 }
-
-keplersLaws.register( 'FractionNode', FractionNode );

@@ -102,5 +102,4 @@ const KeplersLawsColors = {
   ]
 };
 
-keplersLaws.register( 'KeplersLawsColors', KeplersLawsColors );
 export default KeplersLawsColors;

@@ -34,7 +34,6 @@ import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonStrings from '../../../../solar-system-common/js/SolarSystemCommonStrings.js';
 import BooleanRectangularToggleButton from '../../../../sun/js/buttons/BooleanRectangularToggleButton.js';
 import periodTimerBackground_png from '../../../images/periodTimerBackground_png.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 
 const secondsPatternString = SolarSystemCommonStrings.pattern.labelUnits;
@@ -225,5 +224,3 @@ export default class PeriodTimerNode extends InteractiveHighlighting( Node ) {
     } );
   }
 }
-
-keplersLaws.register( 'PeriodTimerNode', PeriodTimerNode );

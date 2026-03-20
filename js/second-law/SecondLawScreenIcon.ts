@@ -14,7 +14,6 @@ import Path from '../../../scenery/js/nodes/Path.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 import EllipticalOrbitEngine from '../common/model/EllipticalOrbitEngine.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis, semiMinorAxis } from '../common/view/KeplersLawsScreenIcon.js';
-import keplersLaws from '../keplersLaws.js';
 
 export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
   public constructor() {
@@ -69,5 +68,3 @@ export default class SecondLawScreenIcon extends KeplersLawsScreenIcon {
     } );
   }
 }
-
-keplersLaws.register( 'SecondLawScreenIcon', SecondLawScreenIcon );

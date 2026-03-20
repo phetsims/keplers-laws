@@ -29,7 +29,6 @@ import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
@@ -348,5 +347,3 @@ function shallowCompare( arr1: Node[], arr2: Node[] ): boolean {
 
   return true;
 }
-
-keplersLaws.register( 'SweptAreaAccordionBox', SweptAreaAccordionBox );

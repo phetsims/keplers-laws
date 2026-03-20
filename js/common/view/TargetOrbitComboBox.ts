@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonConstants from '../../../../solar-system-common/js/SolarSystemCommonConstants.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import TargetOrbit from '../model/TargetOrbit.js';
 
@@ -59,5 +58,3 @@ function createItem( mode: TargetOrbit, nameProperty: TReadOnlyProperty<string>,
     tandemName: tandemName
   };
 }
-
-keplersLaws.register( 'TargetOrbitComboBox', TargetOrbitComboBox );

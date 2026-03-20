@@ -26,7 +26,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -487,5 +486,3 @@ export default class EllipticalOrbitNode extends Path {
       () => updatedOrbit() );
   }
 }
-
-keplersLaws.register( 'EllipticalOrbitNode', EllipticalOrbitNode );

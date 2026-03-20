@@ -15,7 +15,6 @@ import KeplersLawsModel from '../common/model/KeplersLawsModel.js';
 import LawMode from '../common/model/LawMode.js';
 import KeplersLawsKeyboardHelpContent from '../common/view/KeplersLawsKeyboardHelpContent.js';
 import KeplersLawsScreenView from '../common/view/KeplersLawsScreenView.js';
-import keplersLaws from '../keplersLaws.js';
 import KeplersLawsStrings from '../KeplersLawsStrings.js';
 import SecondLawScreenIcon from './SecondLawScreenIcon.js';
 
@@ -44,5 +43,4 @@ class SecondLawScreen extends Screen<KeplersLawsModel, KeplersLawsScreenView> {
   }
 }
 
-keplersLaws.register( 'SecondLawScreen', SecondLawScreen );
 export default SecondLawScreen;

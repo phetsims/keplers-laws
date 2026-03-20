@@ -17,7 +17,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import planetPosition_png from '../../../images/planetPosition_png.js';
 import planetVelocity_png from '../../../images/planetVelocity_png.js';
 import rvAngle_png from '../../../images/rvAngle_png.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsPreferences from '../model/KeplersLawsPreferences.js';
@@ -76,5 +75,3 @@ export default class MoreOrbitalDataInfoDialog extends Dialog {
     super( content, options );
   }
 }
-
-keplersLaws.register( 'MoreOrbitalDataInfoDialog', MoreOrbitalDataInfoDialog );

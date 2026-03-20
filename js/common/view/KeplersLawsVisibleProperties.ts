@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import SolarSystemCommonVisibleProperties from '../../../../solar-system-common/js/view/SolarSystemCommonVisibleProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import keplersLaws from '../../keplersLaws.js';
 import LawMode from '../model/LawMode.js';
 
 export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisibleProperties {
@@ -236,5 +235,3 @@ export default class KeplersLawsVisibleProperties extends SolarSystemCommonVisib
     this.stopwatchVisibleProperty.reset();
   }
 }
-
-keplersLaws.register( 'KeplersLawsVisibleProperties', KeplersLawsVisibleProperties );

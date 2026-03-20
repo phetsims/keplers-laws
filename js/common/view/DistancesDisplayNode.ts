@@ -23,7 +23,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
@@ -206,5 +205,3 @@ class DimensionalArrowNode extends LineArrowNode {
     this.addChild( verticalLine );
   }
 }
-
-keplersLaws.register( 'DistancesDisplayNode', DistancesDisplayNode );

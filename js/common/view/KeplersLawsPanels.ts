@@ -15,7 +15,6 @@ import GravityForceZoomControl from '../../../../solar-system-common/js/view/Gra
 import SolarSystemCommonCheckbox from '../../../../solar-system-common/js/view/SolarSystemCommonCheckbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import KeplersLawsCheckbox from './KeplersLawsCheckbox.js';
 import KeplersLawsVisibleProperties from './KeplersLawsVisibleProperties.js';
@@ -86,5 +85,3 @@ export default class KeplersLawsPanels extends VBox {
     } );
   }
 }
-
-keplersLaws.register( 'KeplersLawsPanels', KeplersLawsPanels );

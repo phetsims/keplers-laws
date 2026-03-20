@@ -13,7 +13,6 @@ import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSystemCommonColors.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 
 // constants
@@ -54,5 +53,3 @@ export default class KeplersLawsScreenIcon extends ScreenIcon {
     } );
   }
 }
-
-keplersLaws.register( 'KeplersLawsScreenIcon', KeplersLawsScreenIcon );

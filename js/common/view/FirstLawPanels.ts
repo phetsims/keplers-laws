@@ -9,7 +9,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import EccentricityPanel from './EccentricityPanel.js';
 import MoreOrbitalDataPanel from './MoreOrbitalDataPanel.js';
@@ -34,5 +33,3 @@ export default class FirstLawPanels extends VBox {
     } );
   }
 }
-
-keplersLaws.register( 'FirstLawPanels', FirstLawPanels );

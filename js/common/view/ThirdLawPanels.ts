@@ -9,7 +9,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
 import StarMassPanel from './StarMassPanel.js';
 import ThirdLawAccordionBox from './ThirdLawAccordionBox.js';
@@ -28,5 +27,3 @@ export default class ThirdLawPanels extends VBox {
     } );
   }
 }
-
-keplersLaws.register( 'ThirdLawPanels', ThirdLawPanels );

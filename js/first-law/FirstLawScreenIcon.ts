@@ -13,7 +13,6 @@ import XNode from '../../../scenery-phet/js/XNode.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
 import KeplersLawsScreenIcon, { focalPoint, semiMajorAxis } from '../common/view/KeplersLawsScreenIcon.js';
-import keplersLaws from '../keplersLaws.js';
 
 // constants
 const FOCI_SCALE = 0.25;
@@ -63,5 +62,3 @@ export default class FirstLawScreenIcon extends KeplersLawsScreenIcon {
     );
   }
 }
-
-keplersLaws.register( 'FirstLawScreenIcon', FirstLawScreenIcon );

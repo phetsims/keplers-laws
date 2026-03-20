@@ -18,7 +18,6 @@ import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import EllipticalOrbitEngine from './EllipticalOrbitEngine.js';
 
 export class TrackingState extends EnumerationValue {
@@ -189,5 +188,3 @@ export default class PeriodTracker {
     this.periodStopwatch.reset();
   }
 }
-
-keplersLaws.register( 'PeriodTracker', PeriodTracker );

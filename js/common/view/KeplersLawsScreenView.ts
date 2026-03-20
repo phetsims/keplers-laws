@@ -32,7 +32,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BodiesCollide_mp3 from '../../../sounds/BodiesCollide_mp3.js';
 import ObjectWillEscape_mp3 from '../../../sounds/ObjectWillEscape_mp3.js';
 import Success_mp3 from '../../../sounds/Success_mp3.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsModel from '../model/KeplersLawsModel.js';
@@ -472,5 +471,4 @@ class KeplersLawsScreenView extends SolarSystemCommonScreenView<KeplersLawsVisib
   }
 }
 
-keplersLaws.register( 'KeplersLawsScreenView', KeplersLawsScreenView );
 export default KeplersLawsScreenView;

@@ -27,7 +27,6 @@ import SolarSystemCommonColors from '../../../../solar-system-common/js/SolarSys
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsStrings from '../../KeplersLawsStrings.js';
 import KeplersLawsConstants from '../KeplersLawsConstants.js';
 import KeplersLawsDerivedStrings from '../KeplersLawsDerivedStrings.js';
@@ -301,5 +300,3 @@ class EquationNode extends HBox {
     } );
   }
 }
-
-keplersLaws.register( 'ThirdLawAccordionBox', ThirdLawAccordionBox );

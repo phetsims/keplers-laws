@@ -13,7 +13,6 @@ import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import keplersLaws from '../../keplersLaws.js';
 import KeplersLawsColors from '../KeplersLawsColors.js';
 import TargetOrbit from '../model/TargetOrbit.js';
 
@@ -54,5 +53,3 @@ export default class TargetOrbitNode extends Path {
     }
   }
 }
-
-keplersLaws.register( 'TargetOrbitNode', TargetOrbitNode );

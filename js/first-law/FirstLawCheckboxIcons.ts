@@ -11,7 +11,6 @@ import Shape from '../../../kite/js/Shape.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Path from '../../../scenery/js/nodes/Path.js';
 import KeplersLawsColors from '../common/KeplersLawsColors.js';
-import keplersLaws from '../keplersLaws.js';
 
 // constants
 const ICON_SCALE = 1.2;
@@ -135,5 +134,3 @@ export default class FirstLawCheckboxIcons {
     } );
   }
 }
-
-keplersLaws.register( 'FirstLawCheckboxIcons', FirstLawCheckboxIcons );

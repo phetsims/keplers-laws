@@ -14,7 +14,6 @@ import Metronome_Sound_Reverb_2_mp3 from '../../../../keplers-laws/sounds/Metron
 import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
 import soundConstants from '../../../../tambo/js/soundConstants.js';
 import soundManager from '../../../../tambo/js/soundManager.js';
-import keplersLaws from '../../keplersLaws.js';
 
 
 const metronomeSounds = [
@@ -68,6 +67,3 @@ export default class MetronomeSoundManager {
     bigSound.play();
   }
 }
-
-
-keplersLaws.register( 'MetronomeSoundManager', MetronomeSoundManager );
