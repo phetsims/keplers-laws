@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "daddf866550c61278fc942ed280ed6d3e4911540",
+    "sha": "530555413390b9eb80cbb5fcb8cf790e7d9bad93",
     "branch": "1.2"
   },
   "kite": {
@@ -73,7 +73,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "5d2f0d2d432cf2b5cd4ee0bcc712775f83166517",
+    "sha": "d8d4ebedf1724085824c75c4bed88525a89bff32",
     "branch": "HEAD"
   },
   "scenery-phet": {
