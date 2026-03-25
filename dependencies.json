@@ -1,5 +1,5 @@
 {
-  "comment": "# keplers-laws 1.2.11-rc.1 Sat Mar 21 2026 08:50:54 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# keplers-laws 1.2.11-rc.2 Wed Mar 25 2026 10:35:59 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "dd61947e1ba2c0655a242bebad9b887b397b01dd",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "keplers-laws": {
-    "sha": "2b45ff79838a604162963595f3ac40eb02cc4568",
+    "sha": "d7a3cfc93facd2ad46209854122d2d16c973a115",
     "branch": "1.2"
   },
   "kite": {
