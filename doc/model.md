@@ -61,7 +61,7 @@ correct form of the Law. Besides, the line in the graph will become linear.
 
 To properly calculate the orbit, a series of equations are used to determine the orbital parameters at any moment in
 time. If you're interested in finding out more about the math behind the simulation, you can check out
-the [implementation notes](https://github.com/phetsims/keplers-laws/blob/main/doc/implementation-notes.md).
+the [implementation notes](implementation-notes.md).
 
 ### Types of orbit
 
